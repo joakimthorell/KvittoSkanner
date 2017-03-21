@@ -2,3 +2,5 @@
 */DS_Store
 SKAJ/.idea/
 SKAJ/out/
+.idea/
+*/.idea/
