@@ -8,3 +8,5 @@ local.properties
 /build
 /captures
 .externalNativeBuild
+/app/app.iml
+app/app.iml
