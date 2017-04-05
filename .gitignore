@@ -1,9 +1,1 @@
 .DS_Store
-*/DS_Store
-SKAJ/.idea/
-SKAJ/out/
-.idea/
-*/.idea/
-foretagskvitton/.gradle/*
-foretagskvitton/local.properties
-foretagskvitton/app/app.iml
