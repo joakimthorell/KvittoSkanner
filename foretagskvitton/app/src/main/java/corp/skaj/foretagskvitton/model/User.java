@@ -1,23 +1,33 @@
 package corp.skaj.foretagskvitton.model;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 /**
  * Created by annekeller on 2017-04-05.
  */
 
-public class User extends Employee {
-    private static User user = new User();
+public class User  {
+   private Map<Company, Employee> listOfCompanies;
 
-    private User () {
-       //TODO
-        //Here we have to collect saved data, when app is closed and we reopen... We always want the same user.
+    public User () {
+        listOfCompanies = new HashMap<>();
     }
 
-    /**
-     * This method returns the user
-    * @return the only user
-     */
-    public static User getUser() {
-        return user;
+    public void addCompany (Company company) {
+    listOfCompanies.put(company, company.getEmployee("User"));
+    }
+
+    public void removeUser () {
+
+    }
+
+    public List<Company> getListOfCompanies () {
+        List<Company> list = new ArrayList<>();
+        list.addAll(listOfCompanies.keySet());
+        return list;
     }
 
 }
