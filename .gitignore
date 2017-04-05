@@ -4,3 +4,6 @@ SKAJ/.idea/
 SKAJ/out/
 .idea/
 */.idea/
+foretagskvitton/.gradle/*
+foretagskvitton/local.properties
+foretagskvitton/app/app.iml
