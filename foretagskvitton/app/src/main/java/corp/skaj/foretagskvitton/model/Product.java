@@ -68,5 +68,5 @@ public class Product {
     public double getTax() {
         return tax;
     }
-    
+
 }

@@ -35,6 +35,11 @@ public class Company {
         listOfSuppliers = new ArrayList<>();
     }
 
+    /**
+     *
+     * @param name
+     * @throws IllegalInputException
+     */
     public void addNewEmployee (String name) throws IllegalInputException{
         if (containsEmployee(name)) {
             listOfEmployees.add(new Employee(name));
@@ -43,6 +48,11 @@ public class Company {
         }
     }
 
+    /**
+     *
+     * @param employee
+     * @throws IllegalInputException
+     */
     public void addNewEmployee (Employee employee) throws IllegalInputException {
         if(containsEmployee(employee)) {
             listOfEmployees.add(employee);
@@ -51,6 +61,11 @@ public class Company {
         }
     }
 
+    /**
+     *
+     * @param name
+     * @throws NoSuchEmployeeException
+     */
     public void removeEmployee (String name) throws NoSuchEmployeeException{
         for (int i = 0; i < listOfEmployees.size(); i++) {
             Employee temp = listOfEmployees.get(i);
@@ -61,6 +76,12 @@ public class Company {
             }
         }
     }
+
+    /**
+     *
+     * @param employee
+     * @throws NoSuchEmployeeException
+     */
     public void removeEmployee (Employee employee) throws NoSuchEmployeeException{
         for (int i = 0; i < listOfEmployees.size(); i++) {
             Employee temp = listOfEmployees.get(i);
@@ -72,6 +93,11 @@ public class Company {
         }
     }
 
+    /**
+     *
+     * @param cardNumber
+     * @throws IllegalInputException
+     */
     public void addNewCard (int cardNumber) throws IllegalInputException {
         if (containsCard(cardNumber)) {
             listOfCards.add(new Card(cardNumber));
@@ -80,6 +106,11 @@ public class Company {
         }
     }
 
+    /**
+     *
+     * @param card
+     * @throws NoSuchCardException
+     */
     public void removeCard (Card card) throws NoSuchCardException {
         for (int i = 0; i < listOfCards.size(); i++) {
             Card temp = listOfCards.get(i);
@@ -91,6 +122,11 @@ public class Company {
         }
     }
 
+    /**
+     *
+     * @param supplierName
+     * @throws IllegalInputException
+     */
     public void addSupplier (String supplierName) throws IllegalInputException {
         if(containsSupplier(supplierName)) {
             listOfSuppliers.add(new Supplier(supplierName));
@@ -99,6 +135,11 @@ public class Company {
         }
     }
 
+    /**
+     *
+     * @param supplierName
+     * @throws NoSuchSupplierException
+     */
     public void removeSupplier (String supplierName) throws NoSuchSupplierException {
         for (int i = 0; i < listOfSuppliers.size(); i++) {
             Supplier temp = listOfSuppliers.get(i);
@@ -111,6 +152,12 @@ public class Company {
 
     }
 
+    /**
+     *
+     * @param employee
+     * @return <code>true</code> if listOfEmployees already contains employee
+     *          <code>false</code> otherwise
+     */
     public boolean containsEmployee(Employee employee) {
         for (int i = 0; i < listOfEmployees.size(); i++) {
             if (listOfEmployees.get(i).equals(employee)) {
@@ -120,6 +167,12 @@ public class Company {
         return false;
     }
 
+    /**
+     *
+     * @param name
+     * @return <code>true</code> if listOfEmployees already contains name
+     *           <code>false</code> otherwise
+     */
     public boolean containsEmployee(String name) {
         for (int i = 0; i < listOfEmployees.size(); i++) {
             if(listOfEmployees.get(i).getName().equals(name)) {
@@ -129,6 +182,13 @@ public class Company {
         return false;
     }
 
+    /**
+     *
+     * @param name
+     * @return <code>true</code> if listOfSuppliers already contains name
+     *           <code>false</code> otherwise
+     *
+     */
     public boolean containsSupplier(String name) {
         for(int i = 0; i < listOfSuppliers.size(); i++) {
             if(listOfSuppliers.get(i).toString().equals(name)) {
@@ -138,6 +198,12 @@ public class Company {
         return false;
     }
 
+    /**
+     *
+     * @param cardNumber
+     * @return <code>true</code> if listOfCards already contains cardNumber
+     *          <code>false</code> otherwise
+     */
     public boolean containsCard (int cardNumber) {
         for(int i = 0; i < listOfCards.size(); i++) {
             if(listOfCards.get(i).getLastFourDigits() == cardNumber) {
@@ -147,26 +213,50 @@ public class Company {
         return false;
     }
 
+    /**
+     *
+     * @return companyName
+     */
     public String getName () {
         return companyName;
     }
 
+    /**
+     *
+     * @return listOfEmployees
+     */
     public List<Employee> getListOfEmployees() {
         return listOfEmployees;
     }
 
+    /**
+     *
+     * @return listOfCards
+     */
     public List<Card> getListOfCards() {
         return listOfCards;
     }
 
+    /**
+     *
+     * @return listOfComments
+     */
     public List<Comment> getCompanyComment () {
         return listOfComments;
     }
 
+    /**
+     *
+     * @return listOfSuppliers
+     */
     public List<Supplier> getListOfSuppliers () {
         return listOfSuppliers;
     }
 
+    /**
+     *
+     * @return amount of employees in listOfEmployees
+     */
     public int getAmountOfEmployees () {
         int count = 0;
         for (int i = 0; i < listOfEmployees.size(); i++) {
@@ -175,6 +265,10 @@ public class Company {
         return count;
     }
 
+    /**
+     *
+     * @return amount of cards in listOfCards
+     */
     public int getAmountOfCards () {
         int count = 0;
         for (int i = 0; i < listOfCards.size(); i++) {
@@ -183,6 +277,10 @@ public class Company {
         return count;
     }
 
+    /**
+     *
+     * @return amount of cards in listOfComments
+     */
     public int getAmountOfComments () {
         int count = 0;
         for (int i = 0; i < listOfComments.size(); i++) {
@@ -191,6 +289,10 @@ public class Company {
         return count;
     }
 
+    /**
+     *
+     * @return amount of suppliers in listOfSuppliers
+     */
     public int getAmountOfSuppliers () {
         int count = 0;
         for (int i = 0; i < listOfSuppliers.size(); i++) {
