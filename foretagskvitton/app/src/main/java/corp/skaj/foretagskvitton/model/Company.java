@@ -63,7 +63,6 @@ public class Company {
     //Kolla så att vi inte lägger till dubletter
     public void addNewCard (int cardNumber) {
 
-
     }
 
     //Kolla så att vi inte tar bort något som inte finns i listan
