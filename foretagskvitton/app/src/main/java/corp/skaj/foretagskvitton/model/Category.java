@@ -5,4 +5,8 @@ package corp.skaj.foretagskvitton.model;
  */
 
 public class Category {
+    public enum Categories {
+    COMMUNICATIONS, REPRESENTATION, HOTEL_BILLS, OFFICE_SUPPLIES, TRANSPORTATION, TRAVEL, FOOD, POSTAGE
+    }
+
 }
