@@ -50,5 +50,9 @@ public class Receipt {
     public void setTotal(double total) {
         this.total = total;
     }
+
+    public int getAmountOfProducts (List<Product> listOfProducts){
+        return listOfProducts.size();
+    }
 }
 
