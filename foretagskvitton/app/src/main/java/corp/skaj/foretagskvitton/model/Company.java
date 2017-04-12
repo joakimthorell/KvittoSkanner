@@ -19,6 +19,7 @@ public class Company {
     private List<Comment> listOfComments;
     private List<Supplier> listOfSuppliers;
 
+
     public Company (String companyName, List<Employee> listOfEmployees, List<Card> listOfCards, List<Comment> listOfComments, List<Supplier> listOfSuppliers) {
         this.companyName = companyName;
         this.listOfEmployees = listOfEmployees;
@@ -34,7 +35,6 @@ public class Company {
         listOfComments = new ArrayList<>();
         listOfSuppliers = new ArrayList<>();
     }
-
     /**
      *
      * @param name
@@ -47,7 +47,6 @@ public class Company {
             throw new IllegalInputException(this);
         }
     }
-
     /**
      *
      * @param employee
@@ -60,7 +59,6 @@ public class Company {
             throw new IllegalInputException(this);
         }
     }
-
     /**
      *
      * @param name
@@ -76,7 +74,6 @@ public class Company {
             }
         }
     }
-
     /**
      *
      * @param employee
@@ -92,7 +89,6 @@ public class Company {
             }
         }
     }
-
     /**
      *
      * @param cardNumber
@@ -105,7 +101,6 @@ public class Company {
             throw new IllegalInputException(this);
         }
     }
-
     /**
      *
      * @param card
@@ -121,7 +116,6 @@ public class Company {
             }
         }
     }
-
     /**
      *
      * @param supplierName
@@ -134,7 +128,6 @@ public class Company {
             throw new IllegalInputException(this);
         }
     }
-
     /**
      *
      * @param supplierName
@@ -149,9 +142,7 @@ public class Company {
                 throw new NoSuchSupplierException();
             }
         }
-
     }
-
     /**
      *
      * @param employee
@@ -166,7 +157,6 @@ public class Company {
         }
         return false;
     }
-
     /**
      *
      * @param name
@@ -181,7 +171,6 @@ public class Company {
         }
         return false;
     }
-
     /**
      *
      * @param name
@@ -197,7 +186,6 @@ public class Company {
         }
         return false;
     }
-
     /**
      *
      * @param cardNumber
@@ -212,7 +200,6 @@ public class Company {
         }
         return false;
     }
-
     /**
      *
      * @return companyName
@@ -220,7 +207,6 @@ public class Company {
     public String getName () {
         return companyName;
     }
-
     /**
      *
      * @return listOfEmployees
@@ -228,7 +214,6 @@ public class Company {
     public List<Employee> getListOfEmployees() {
         return listOfEmployees;
     }
-
     /**
      *
      * @return listOfCards
@@ -236,7 +221,6 @@ public class Company {
     public List<Card> getListOfCards() {
         return listOfCards;
     }
-
     /**
      *
      * @return listOfComments
@@ -252,52 +236,32 @@ public class Company {
     public List<Supplier> getListOfSuppliers () {
         return listOfSuppliers;
     }
-
     /**
      *
      * @return amount of employees in listOfEmployees
      */
     public int getAmountOfEmployees () {
-        int count = 0;
-        for (int i = 0; i < listOfEmployees.size(); i++) {
-            count++;
-        }
-        return count;
+        return listOfEmployees.size();
     }
-
     /**
      *
      * @return amount of cards in listOfCards
      */
     public int getAmountOfCards () {
-        int count = 0;
-        for (int i = 0; i < listOfCards.size(); i++) {
-            count++;
-        }
-        return count;
+        return listOfCards.size();
     }
-
     /**
      *
      * @return amount of cards in listOfComments
      */
     public int getAmountOfComments () {
-        int count = 0;
-        for (int i = 0; i < listOfComments.size(); i++) {
-            count++;
-        }
-        return count;
+        return listOfComments.size();
     }
-
     /**
      *
      * @return amount of suppliers in listOfSuppliers
      */
     public int getAmountOfSuppliers () {
-        int count = 0;
-        for (int i = 0; i < listOfSuppliers.size(); i++) {
-            count++;
-        }
-        return count;
+        return listOfSuppliers.size();
     }
 }
