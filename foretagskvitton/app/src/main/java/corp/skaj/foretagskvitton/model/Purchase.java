@@ -10,12 +10,12 @@ public abstract class Purchase {
     private Employee employee;
 
 
-    public Purchase(Receipt receipt, Supplier supplier, Employee employee) {
+    protected Purchase(Receipt receipt, Supplier supplier, Employee employee) {
         this(receipt, employee);
         this.supplier = supplier;
     }
 
-    public Purchase(Receipt receipt, Employee employee) {
+    protected Purchase(Receipt receipt, Employee employee) {
         this.receipt = receipt;
         this.employee = employee;
     }

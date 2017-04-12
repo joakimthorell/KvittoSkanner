@@ -24,7 +24,7 @@ public class Employee {
         this(other.getName());
     }
 
-    public void addNewPurchase(Purchase purchase) {
+    public void addPurchase(Purchase purchase) {
         listOfPurchases.add(purchase);
     }
 

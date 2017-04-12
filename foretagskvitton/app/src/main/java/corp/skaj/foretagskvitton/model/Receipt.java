@@ -51,7 +51,7 @@ public class Receipt {
         this.total = total;
     }
 
-    public int getAmountOfProducts (List<Product> listOfProducts){
+    public int getAmountOfProducts (){
         return listOfProducts.size();
     }
 }
