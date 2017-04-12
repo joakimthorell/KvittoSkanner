@@ -35,12 +35,15 @@ public class Company {
     //Kolla så att vi inte lägger till dubletter
     public void addNewEmployee (String name) {
 
-
     }
 
     //Kolla så att vi inte lägger till dubletter
     public void addNewEmployee (Employee employee){
-        listOfEmployees.add(employee);
+        if(containsEmployee(employee)) {
+            listOfEmployees.add(employee);
+        } else {
+
+        }
     }
 
     //Kolla så att vi inte tar bort något som inte finns i listan
@@ -53,11 +56,24 @@ public class Company {
     }
     //Kolla så att vi inte tar bort något som inte finns i listan
     public void removeEmployee (Employee employee) {
+
         for (int i = 0; i < listOfEmployees.size(); i++) {
-            if (listOfEmployees.get(i).equals(employee)) {
+            Employee temp = listOfEmployees.get(i);
+            if (temp.equals(employee)) {
                 listOfEmployees.remove(i);
+            } else {
+                throw new NoSuchEmployeeExeption();
             }
         }
+    }
+
+    public boolean containsEmployee(Employee employee) {
+        for (int i = 0; i < listOfEmployees.size(); i++) {
+            if (listOfEmployees.get(i).equals(employee)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     //Kolla så att vi inte lägger till dubletter
