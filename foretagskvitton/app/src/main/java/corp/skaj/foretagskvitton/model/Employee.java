@@ -31,9 +31,9 @@ public class Employee {
     public void removePurchase(Purchase purchase) throws NoSuchPurchaseException {
         if (listOfPurchases.contains(purchase)) {
             listOfPurchases.remove(purchase);
-            return;
+        } else {
+            throw new NoSuchPurchaseException();
         }
-        throw new NoSuchPurchaseException();
     }
 
     public void setName(String employeeName) {
