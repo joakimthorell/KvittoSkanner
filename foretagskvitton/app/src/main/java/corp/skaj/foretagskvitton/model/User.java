@@ -1,33 +1,51 @@
 package corp.skaj.foretagskvitton.model;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-/**
- * Created by annekeller on 2017-04-05.
- */
+public class User {
+    private String name;
+    private List<Company> listOfCompanies;
 
-public class User  {
-   private Map<Company, Employee> listOfCompanies;
-
-    public User () {
-        listOfCompanies = new HashMap<>();
-    }
-
-    public void addCompany (Company company) {
-    listOfCompanies.put(company, company.getEmployee("User"));
-    }
-
-    public void removeUser () {
+    public User() {
+        listOfCompanies = new ArrayList<>();
 
     }
 
-    public List<Company> getListOfCompanies () {
-        List<Company> list = new ArrayList<>();
-        list.addAll(listOfCompanies.keySet());
-        return list;
+    public void addNewCompany(String companyName) {
+        if (!containsCompany(companyName)) {
+            Company company = new Company(companyName);
+        }
+    }
+
+    private boolean containsCompany(String companyName) {
+        for (int i = 0; i < listOfCompanies.size(); i++) {
+            Company company = listOfCompanies.get(i);
+            if (companyName == company.getName()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void removeCompany(Company company) {
+        
+    }
+
+    public List<Company> getListOfCompanies() {
+
+    }
+
+    public Company getCompany(String companyName) {
+        return null;
+    }
+
+    public Company getCompany(Receipt receipt) {
+        return null;
+    }
+
+    public Company getCompany(Card card) {
+        return null;
     }
 
 }
