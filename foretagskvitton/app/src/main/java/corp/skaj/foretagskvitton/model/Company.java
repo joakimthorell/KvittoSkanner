@@ -35,30 +35,32 @@ public class Company {
         listOfSuppliers = new ArrayList<>();
     }
 
-    //Kolla så att vi inte lägger till dubletter
-    public void addNewEmployee (String name) {
-
+    public void addNewEmployee (String name) throws IllegalInputException{
+        if (containsEmployee(name)) {
+            listOfEmployees.add(new Employee(name));
+        } else {
+            throw new IllegalInputException(this);
+        }
     }
-
-    //Kolla så att vi inte lägger till dubletter
+    
     public void addNewEmployee (Employee employee) throws IllegalInputException {
         if(containsEmployee(employee)) {
             listOfEmployees.add(employee);
         } else {
             throw new IllegalInputException(this);
-
         }
     }
 
-    //Kolla så att vi inte tar bort något som inte finns i listan
-    public void removeEmployee (String name) {
+    public void removeEmployee (String name) throws NoSuchEmployeeException{
         for (int i = 0; i < listOfEmployees.size(); i++) {
-            if (listOfEmployees.get(i).equals(name)) {
+            Employee temp = listOfEmployees.get(i);
+            if (temp.getName().equals(name)) {
                 listOfEmployees.remove(i);
+            } else {
+                throw new NoSuchEmployeeException();
             }
         }
     }
-    //Kolla så att vi inte tar bort något som inte finns i listan
     public void removeEmployee (Employee employee) throws NoSuchEmployeeException{
         for (int i = 0; i < listOfEmployees.size(); i++) {
             Employee temp = listOfEmployees.get(i);
@@ -73,6 +75,15 @@ public class Company {
     public boolean containsEmployee(Employee employee) {
         for (int i = 0; i < listOfEmployees.size(); i++) {
             if (listOfEmployees.get(i).equals(employee)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean containsEmployee(String name) {
+        for (int i = 0; i < listOfEmployees.size(); i++) {
+            if(listOfEmployees.get(i).getName().equals(name)) {
                 return true;
             }
         }
