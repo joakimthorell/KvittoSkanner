@@ -11,10 +11,18 @@ public class Card {
         this.lastFourDigits = lastFourDigits;
     }
 
+    /**
+     *
+     * @return lastFourDigits
+     */
     public int getLastFourDigits() {
         return lastFourDigits;
     }
 
+    /**
+     *
+     * @param lastFourDigits
+     */
     public void setLastFourDigits(int lastFourDigits) {
         this.lastFourDigits = lastFourDigits;
     }

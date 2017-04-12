@@ -15,6 +15,10 @@ public class CompanyPurchase extends Purchase {
         super(receipt);
     }
 
+    /**
+     *
+     * @return payment
+     */
     public Card getPayment() {
         return payment;
     }

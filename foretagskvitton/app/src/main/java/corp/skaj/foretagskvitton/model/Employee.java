@@ -21,10 +21,19 @@ public class Employee {
         this(other.getName());
     }
 
+    /**
+     *
+     * @param purchase
+     */
     public void addPurchase(Purchase purchase) {
         listOfPurchases.add(purchase);
     }
 
+    /**
+     *
+     * @param purchase
+     * @throws NoSuchPurchaseException
+     */
     public void removePurchase(Purchase purchase) throws NoSuchPurchaseException {
         if (listOfPurchases.contains(purchase)) {
             listOfPurchases.remove(purchase);
@@ -33,10 +42,19 @@ public class Employee {
         }
     }
 
+    /**
+     *
+     * @param comment
+     */
     public void addComment(Comment comment) {
         listOfComments.add(comment);
     }
 
+    /**
+     *
+     * @param comment
+     * @throws NoSuchCommentException
+     */
     public void removeComment(Comment comment) throws NoSuchCommentException {
         if (listOfComments.contains(comment)) {
             listOfComments.remove(comment);
@@ -45,22 +63,42 @@ public class Employee {
         }
     }
 
+    /**
+     *
+     * @param employeeName
+     */
     public void setName(String employeeName) {
         name = employeeName;
     }
 
+    /**
+     *
+     * @return name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     *
+     * @return listOfPurchases
+     */
     public List<Purchase> getListOfPurchases() {
         return listOfPurchases;
     }
 
+    /**
+     *
+     * @return listOfComments
+     */
     public List<Comment> getListOfComments() {
         return listOfComments;
     }
 
+    /**
+     *
+     * @return amount of purchases in list of Purchases
+     */
     public int getAmountOfPurchases() {
         return listOfPurchases.size();
     }
