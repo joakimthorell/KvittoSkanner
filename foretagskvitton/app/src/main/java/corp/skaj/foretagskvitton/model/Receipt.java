@@ -1,5 +1,7 @@
 package corp.skaj.foretagskvitton.model;
 
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -9,11 +11,18 @@ import java.util.List;
 
 public class Receipt {
     private List<Product> listOfProducts;
-    private Date date;
-    private Double total;
+    private Calendar date;
+    private double total;
 
-    public Receipt(List<Product> listOfProducts, Date date, Double total) {
+    public Receipt(List<Product> listOfProducts, Calendar date, double total) {
         this.listOfProducts = listOfProducts;
+        this.date = date;
+        this.total = total;
+    }
+
+    public Receipt(Product product, Calendar date, double total) {
+        listOfProducts = new ArrayList<>();
+        listOfProducts.add(product);
         this.date = date;
         this.total = total;
     }
@@ -22,11 +31,11 @@ public class Receipt {
         return listOfProducts;
     }
 
-    public Date getDate() {
+    public Calendar getDate() {
         return date;
     }
 
-    public Double getTotal() {
+    public double getTotal() {
         return total;
     }
 
@@ -34,12 +43,16 @@ public class Receipt {
         this.listOfProducts = listOfProducts;
     }
 
-    public void setDate(Date date) {
+    public void setDate(Calendar date) {
         this.date = date;
     }
 
-    public void setTotal(Double total) {
+    public void setTotal(double total) {
         this.total = total;
+    }
+
+    public int getAmountOfProducts (List<Product> listOfProducts){
+        return listOfProducts.size();
     }
 }
 

@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.concurrent.ConcurrentMap;
 
 import corp.skaj.foretagskvitton.exceptions.IllegalInputException;
+import corp.skaj.foretagskvitton.exceptions.NoSuchCardException;
 import corp.skaj.foretagskvitton.exceptions.NoSuchEmployeeException;
 
 /**
@@ -42,7 +43,7 @@ public class Company {
             throw new IllegalInputException(this);
         }
     }
-    
+
     public void addNewEmployee (Employee employee) throws IllegalInputException {
         if(containsEmployee(employee)) {
             listOfEmployees.add(employee);
@@ -72,6 +73,40 @@ public class Company {
         }
     }
 
+    public void addNewCard (int cardNumber) throws IllegalInputException {
+        if (containsCard(cardNumber)) {
+            listOfCards.add(new Card(cardNumber));
+        } else {
+            throw new IllegalInputException(this);
+        }
+    }
+
+    //Kolla så att vi inte tar bort något som inte finns i listan
+    public void removeCard (Card card) throws NoSuchCardException {
+        for (int i = 0; i < listOfCards.size(); i++) {
+            Card temp = listOfCards.get(i);
+            if(temp.equals(card)) {
+                listOfCards.remove(i);
+            } else {
+                throw new NoSuchCardException();
+            }
+        }
+    }
+
+    //Kolla så att vi inte lägger till dubletter
+    public void addSupplier (String supplierName) {
+        if(containsSupplier(supplierName)) {
+
+        }
+
+    }
+
+    //Kolla så att vi inte tar bort något som inte finns i listan
+    public void removeSupplier (String supplierName) {
+
+    }
+
+
     public boolean containsEmployee(Employee employee) {
         for (int i = 0; i < listOfEmployees.size(); i++) {
             if (listOfEmployees.get(i).equals(employee)) {
@@ -90,24 +125,22 @@ public class Company {
         return false;
     }
 
-    //Kolla så att vi inte lägger till dubletter
-    public void addNewCard (int cardNumber) {
-
+    public boolean containsSupplier(String name) {
+        for(int i = 0; i < listOfSuppliers.size(); i++) {
+            if(listOfSuppliers.get(i).toString().equals(name)) {
+                return true;
+            }
+        }
+        return false;
     }
 
-    //Kolla så att vi inte tar bort något som inte finns i listan
-    public void removeCard (Card card) {
-
-    }
-
-    //Kolla så att vi inte lägger till dubletter
-    public void addSupplier (String supplierName) {
-
-    }
-
-    //Kolla så att vi inte tar bort något som inte finns i listan
-    public void removeSupplier (String supplierName) {
-
+    public boolean containsCard (int cardNumber) {
+        for(int i = 0; i < listOfCards.size(); i++) {
+            if(listOfCards.get(i).getLastFourDigits() == cardNumber) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public String getName () {
