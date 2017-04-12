@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ConcurrentMap;
 
+import corp.skaj.foretagskvitton.exceptions.IllegalInputException;
+import corp.skaj.foretagskvitton.exceptions.NoSuchEmployeeException;
+
 /**
  * Created by annekeller on 2017-04-05.
  */
@@ -38,10 +41,11 @@ public class Company {
     }
 
     //Kolla så att vi inte lägger till dubletter
-    public void addNewEmployee (Employee employee){
+    public void addNewEmployee (Employee employee) throws IllegalInputException {
         if(containsEmployee(employee)) {
             listOfEmployees.add(employee);
         } else {
+            throw new IllegalInputException(this);
 
         }
     }
@@ -55,14 +59,13 @@ public class Company {
         }
     }
     //Kolla så att vi inte tar bort något som inte finns i listan
-    public void removeEmployee (Employee employee) {
-
+    public void removeEmployee (Employee employee) throws NoSuchEmployeeException{
         for (int i = 0; i < listOfEmployees.size(); i++) {
             Employee temp = listOfEmployees.get(i);
             if (temp.equals(employee)) {
                 listOfEmployees.remove(i);
             } else {
-                throw new NoSuchEmployeeExeption();
+                throw new NoSuchEmployeeException();
             }
         }
     }
