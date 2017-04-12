@@ -8,6 +8,10 @@ public class Card {
     
     private int lastFourDigits;
 
+    public Card (int lastFourDigits) {
+        this.lastFourDigits = lastFourDigits;
+    }
+
     public int getLastFourDigits() {
         return lastFourDigits;
     }
