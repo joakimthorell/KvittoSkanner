@@ -3,6 +3,7 @@ package corp.skaj.foretagskvitton.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import corp.skaj.foretagskvitton.exceptions.NoSuchCommentException;
 import corp.skaj.foretagskvitton.exceptions.NoSuchPurchaseException;
 
 public class Employee {
@@ -32,6 +33,18 @@ public class Employee {
         }
     }
 
+    public void addComment(Comment comment) {
+        listOfComments.add(comment);
+    }
+
+    public void removeComment(Comment comment) throws NoSuchCommentException {
+        if (listOfComments.contains(comment)) {
+            listOfComments.remove(comment);
+        } else {
+            throw new NoSuchCommentException();
+        }
+    }
+
     public void setName(String employeeName) {
         name = employeeName;
     }
@@ -46,5 +59,9 @@ public class Employee {
 
     public List<Comment> getListOfComments() {
         return listOfComments;
+    }
+
+    public int getAmountOfPurchases() {
+        return listOfPurchases.size();
     }
 }
