@@ -1,5 +1,8 @@
 package corp.skaj.foretagskvitton.model;
 
+import corp.skaj.foretagskvitton.exceptions.IllegalInputException;
+import corp.skaj.foretagskvitton.exceptions.NoSuchCompanyException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,16 +16,32 @@ public class User {
     public User(String name) {
         this.name = name;
         listOfCompanies = new ArrayList<>();
-
     }
 
     /**
      *
      * @param companyName
+     * @throws IllegalInputException
      */
-    public void addNewCompany(String companyName) {
+    public void addNewCompany(String companyName) throws IllegalInputException {
         if (!containsCompany(companyName)) {
             Company company = new Company(companyName);
+        } else {
+            throw new IllegalInputException(this);
+        }
+    }
+
+    /**
+     *
+     * @param companyName
+     * @throws NoSuchCompanyException
+     */
+    public void removeCompany(String companyName) throws NoSuchCompanyException {
+        if (containsCompany(companyName)) {
+            Company company = getCompany(companyName);
+            listOfCompanies.remove(company);
+        } else {
+            throw new NoSuchCompanyException(companyName);
         }
     }
 
@@ -34,7 +53,22 @@ public class User {
     private boolean containsCompany(String companyName) {
         for (int i = 0; i < listOfCompanies.size(); i++) {
             Company company = listOfCompanies.get(i);
-            if (companyName == company.getName()) {
+            if (companyName.contains(company.getName())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * @param listOfCards
+     * @param card
+     * @return
+     */
+    private boolean containsCard(List<Card> listOfCards, Card card) {
+        for (int i = 0; i < listOfCards.size(); i++) {
+            Card temp = listOfCards.get(i);
+            if (card == temp) {
                 return true;
             }
         }
@@ -43,32 +77,46 @@ public class User {
 
     /**
      *
-     * @param companyName
-     */
-    public void removeCompany(String companyName) {
-        if (containsCompany(companyName)) {
-            Company company = getCompany(companyName);
-            listOfCompanies.remove(company);
-        }
-    }
-
-    /**
-     *
+     * @param listofEmployees
+     * @param receipt
      * @return
      */
-    public List<Company> getListOfCompanies() {
-        return listOfCompanies;
+    private boolean containsPurchase(List<Employee> listofEmployees, Receipt receipt) {
+        for (int i = 0; i< listofEmployees.size(); i++) {
+            Employee employee = listofEmployees.get(i);
+            List<Purchase> listOfPurchases = employee.getPurchases();
+            if (containsReceipt(listOfPurchases, receipt)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
      *
+     * @param listOfPurchases
+     * @param receipt
+     * @return
+     */
+    private boolean containsReceipt(List<Purchase> listOfPurchases, Receipt receipt) {
+        for (int i = 0; i < listOfPurchases.size(); i++) {
+            Purchase purchase = listOfPurchases.get(i);
+            Receipt temp = purchase.getReceipt();
+            if (receipt == temp) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * @param companyName
      * @return
      */
     public Company getCompany(String companyName) {
         for (int i = 0; i < listOfCompanies.size(); i++) {
             Company company = listOfCompanies.get(i);
-            if (companyName == company.getName()) {
+            if (companyName.contains(company.getName())) {
                 return company;
             }
         }
@@ -83,9 +131,8 @@ public class User {
     public Company getCompany(Receipt receipt) {
         for (int i = 0; i < listOfCompanies.size(); i++) {
             Company company = listOfCompanies.get(i);
-            Purchase purchase = company.getPurchases();
-            Receipt temp = purchase.getReceipt();
-            if (receipt == temp) {
+            List<Employee> listOfEmployees = company.getListOfEmployees();
+            if (containsPurchase(listOfEmployees, receipt)) {
                 return company;
             }
         }
@@ -93,7 +140,6 @@ public class User {
     }
 
     /**
-     *
      * @param card
      * @return
      */
@@ -110,18 +156,10 @@ public class User {
 
     /**
      *
-     * @param listOfCards
-     * @param card
      * @return
      */
-    private boolean containsCard(List<Card> listOfCards, Card card) {
-        for(int i = 0; i < listOfCards.size(); i++) {
-            Card temp = listOfCards.get(i);
-            if (card == temp) {
-                return true;
-            }
-        }
-        return false;
+    public List<Company> getListOfCompanies() {
+        return listOfCompanies;
     }
 
 }
