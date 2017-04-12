@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ConcurrentMap;
 
+import corp.skaj.foretagskvitton.exceptions.IllegalInputException;
+import corp.skaj.foretagskvitton.exceptions.NoSuchEmployeeException;
+
 /**
  * Created by annekeller on 2017-04-05.
  */
@@ -32,32 +35,59 @@ public class Company {
         listOfSuppliers = new ArrayList<>();
     }
 
-    //Kolla så att vi inte lägger till dubletter
-    public void addNewEmployee (String name) {
-
-
+    public void addNewEmployee (String name) throws IllegalInputException{
+        if (containsEmployee(name)) {
+            listOfEmployees.add(new Employee(name));
+        } else {
+            throw new IllegalInputException(this);
+        }
+    }
+    
+    public void addNewEmployee (Employee employee) throws IllegalInputException {
+        if(containsEmployee(employee)) {
+            listOfEmployees.add(employee);
+        } else {
+            throw new IllegalInputException(this);
+        }
     }
 
-    //Kolla så att vi inte lägger till dubletter
-    public void addNewEmployee (Employee employee){
-        listOfEmployees.add(employee);
-    }
-
-    //Kolla så att vi inte tar bort något som inte finns i listan
-    public void removeEmployee (String name) {
+    public void removeEmployee (String name) throws NoSuchEmployeeException{
         for (int i = 0; i < listOfEmployees.size(); i++) {
-            if (listOfEmployees.get(i).equals(name)) {
+            Employee temp = listOfEmployees.get(i);
+            if (temp.getName().equals(name)) {
                 listOfEmployees.remove(i);
+            } else {
+                throw new NoSuchEmployeeException();
             }
         }
     }
-    //Kolla så att vi inte tar bort något som inte finns i listan
-    public void removeEmployee (Employee employee) {
+    public void removeEmployee (Employee employee) throws NoSuchEmployeeException{
+        for (int i = 0; i < listOfEmployees.size(); i++) {
+            Employee temp = listOfEmployees.get(i);
+            if (temp.equals(employee)) {
+                listOfEmployees.remove(i);
+            } else {
+                throw new NoSuchEmployeeException();
+            }
+        }
+    }
+
+    public boolean containsEmployee(Employee employee) {
         for (int i = 0; i < listOfEmployees.size(); i++) {
             if (listOfEmployees.get(i).equals(employee)) {
-                listOfEmployees.remove(i);
+                return true;
             }
         }
+        return false;
+    }
+
+    public boolean containsEmployee(String name) {
+        for (int i = 0; i < listOfEmployees.size(); i++) {
+            if(listOfEmployees.get(i).getName().equals(name)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     //Kolla så att vi inte lägger till dubletter
