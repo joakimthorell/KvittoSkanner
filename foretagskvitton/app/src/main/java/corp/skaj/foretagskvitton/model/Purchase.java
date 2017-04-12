@@ -6,17 +6,14 @@ package corp.skaj.foretagskvitton.model;
 public abstract class Purchase {
     private Receipt receipt;
     private Supplier supplier;
-    private Employee employee;
 
-
-    protected Purchase(Receipt receipt, Supplier supplier, Employee employee) {
-        this(receipt, employee);
+    protected Purchase(Receipt receipt, Supplier supplier) {
+        this(receipt);
         this.supplier = supplier;
     }
 
-    protected Purchase(Receipt receipt, Employee employee) {
+    protected Purchase(Receipt receipt) {
         this.receipt = receipt;
-        this.employee = employee;
     }
 
     public Receipt getReceipt() {
@@ -27,10 +24,6 @@ public abstract class Purchase {
         return supplier;
     }
 
-    public Employee getEmployee() {
-        return employee;
-    }
-
     public void setReceipt(Receipt receipt) {
         this.receipt = receipt;
     }
@@ -39,7 +32,4 @@ public abstract class Purchase {
         this.supplier = supplier;
     }
 
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
-    }
 }

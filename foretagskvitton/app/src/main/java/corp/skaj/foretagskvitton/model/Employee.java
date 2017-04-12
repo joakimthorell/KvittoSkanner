@@ -5,10 +5,6 @@ import java.util.List;
 
 import corp.skaj.foretagskvitton.exceptions.NoSuchPurchaseException;
 
-/**
- * Created by annekeller on 2017-04-05.
- */
-
 public class Employee {
     private String name;
     private List<Purchase> listOfPurchases;

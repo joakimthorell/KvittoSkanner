@@ -7,12 +7,12 @@ package corp.skaj.foretagskvitton.model;
 public class CompanyPurchase extends Purchase {
    private Card payment;
 
-    public CompanyPurchase(Receipt receipt, Supplier supplier, Employee employee) {
-        super(receipt, supplier, employee);
+    public CompanyPurchase(Receipt receipt, Supplier supplier) {
+        super(receipt, supplier);
     }
 
-    public CompanyPurchase(Receipt receipt, Employee employee) {
-        super(receipt, employee);
+    public CompanyPurchase(Receipt receipt) {
+        super(receipt);
     }
 
     public Card getPayment() {

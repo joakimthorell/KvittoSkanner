@@ -5,11 +5,11 @@ package corp.skaj.foretagskvitton.model;
  */
 
 public class PrivatePurchase extends Purchase {
-    public PrivatePurchase(Receipt receipt, Supplier supplier, Employee employee) {
-        super(receipt, supplier, employee);
+    public PrivatePurchase(Receipt receipt, Supplier supplier) {
+        super(receipt, supplier);
     }
 
-    public PrivatePurchase(Receipt receipt, Employee employee) {
-        super(receipt, employee);
+    public PrivatePurchase(Receipt receipt) {
+        super(receipt);
     }
 }
