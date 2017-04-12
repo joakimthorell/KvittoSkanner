@@ -165,5 +165,4 @@ public class User {
     public List<Company> getListOfCompanies() {
         return listOfCompanies;
     }
-
 }
