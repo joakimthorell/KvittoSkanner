@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * User class contains
+ * User class.
  */
 public class User {
     private String name;
@@ -48,7 +48,8 @@ public class User {
     /**
      *
      * @param companyName
-     * @return
+     * @return  <code>true</code> if User contains Company;
+     *          <code>false</code> otherwise
      */
     private boolean containsCompany(String companyName) {
         for (int i = 0; i < listOfCompanies.size(); i++) {
@@ -63,7 +64,8 @@ public class User {
     /**
      * @param listOfCards
      * @param card
-     * @return
+     * @return  <code>true</code> if Company contains Card;
+     *          <code>false</code> otherwise
      */
     private boolean containsCard(List<Card> listOfCards, Card card) {
         for (int i = 0; i < listOfCards.size(); i++) {
@@ -79,7 +81,8 @@ public class User {
      *
      * @param listofEmployees
      * @param receipt
-     * @return
+     * @return  <code>true</code> if Employee contains Purchase;
+     *          <code>false</code> otherwise
      */
     private boolean containsPurchase(List<Employee> listofEmployees, Receipt receipt) {
         for (int i = 0; i< listofEmployees.size(); i++) {
@@ -96,7 +99,8 @@ public class User {
      *
      * @param listOfPurchases
      * @param receipt
-     * @return
+     * @return  <code>true</code> if Purchase contains Receipt;
+     *          <code>false</code> otherwise
      */
     private boolean containsReceipt(List<Purchase> listOfPurchases, Receipt receipt) {
         for (int i = 0; i < listOfPurchases.size(); i++) {
@@ -111,7 +115,7 @@ public class User {
 
     /**
      * @param companyName
-     * @return
+     * @return Company
      */
     public Company getCompany(String companyName) {
         for (int i = 0; i < listOfCompanies.size(); i++) {
@@ -126,7 +130,7 @@ public class User {
     /**
      *
      * @param receipt
-     * @return
+     * @return Company
      */
     public Company getCompany(Receipt receipt) {
         for (int i = 0; i < listOfCompanies.size(); i++) {
@@ -141,7 +145,7 @@ public class User {
 
     /**
      * @param card
-     * @return
+     * @return Company
      */
     public Company getCompany(Card card) {
         for (int i = 0; i < listOfCompanies.size(); i++) {
@@ -156,7 +160,7 @@ public class User {
 
     /**
      *
-     * @return
+     * @return List<Company>
      */
     public List<Company> getListOfCompanies() {
         return listOfCompanies;
