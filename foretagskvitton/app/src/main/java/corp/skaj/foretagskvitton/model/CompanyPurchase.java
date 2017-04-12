@@ -5,4 +5,9 @@ package corp.skaj.foretagskvitton.model;
  */
 
 public class CompanyPurchase extends Purchase {
+   private Card payment;
+
+    public Card getPayment() {
+        return payment;
+    }
 }

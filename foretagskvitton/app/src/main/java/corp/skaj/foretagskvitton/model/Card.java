@@ -5,4 +5,13 @@ package corp.skaj.foretagskvitton.model;
  */
 
 public class Card {
+    private int lastFourDigits;
+
+    public int getLastFourDigits() {
+        return lastFourDigits;
+    }
+
+    public void setLastFourDigits(int lastFourDigits) {
+        this.lastFourDigits = lastFourDigits;
+    }
 }
