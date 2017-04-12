@@ -1,13 +1,12 @@
 package corp.skaj.foretagskvitton.model;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.concurrent.ConcurrentMap;
 
 import corp.skaj.foretagskvitton.exceptions.IllegalInputException;
 import corp.skaj.foretagskvitton.exceptions.NoSuchCardException;
 import corp.skaj.foretagskvitton.exceptions.NoSuchEmployeeException;
+import corp.skaj.foretagskvitton.exceptions.NoSuchSupplierException;
 
 /**
  * Created by annekeller on 2017-04-05.
@@ -81,7 +80,6 @@ public class Company {
         }
     }
 
-    //Kolla så att vi inte tar bort något som inte finns i listan
     public void removeCard (Card card) throws NoSuchCardException {
         for (int i = 0; i < listOfCards.size(); i++) {
             Card temp = listOfCards.get(i);
@@ -93,19 +91,25 @@ public class Company {
         }
     }
 
-    //Kolla så att vi inte lägger till dubletter
-    public void addSupplier (String supplierName) {
+    public void addSupplier (String supplierName) throws IllegalInputException {
         if(containsSupplier(supplierName)) {
+            listOfSuppliers.add(new Supplier(supplierName));
+        } else {
+            throw new IllegalInputException(this);
+        }
+    }
 
+    public void removeSupplier (String supplierName) throws NoSuchSupplierException {
+        for (int i = 0; i < listOfSuppliers.size(); i++) {
+            Supplier temp = listOfSuppliers.get(i);
+            if (temp.equals(supplierName)) {
+                listOfSuppliers.remove(i);
+            } else {
+                throw new NoSuchSupplierException();
+            }
         }
 
     }
-
-    //Kolla så att vi inte tar bort något som inte finns i listan
-    public void removeSupplier (String supplierName) {
-
-    }
-
 
     public boolean containsEmployee(Employee employee) {
         for (int i = 0; i < listOfEmployees.size(); i++) {
