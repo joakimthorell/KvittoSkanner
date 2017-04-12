@@ -5,7 +5,6 @@ package corp.skaj.foretagskvitton.model;
  */
 
 public class Card {
-    
     private int lastFourDigits;
 
     public Card (int lastFourDigits) {

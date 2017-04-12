@@ -37,8 +37,8 @@ public class Product {
         this.category = category;
     }
 
-    public void setLstOfComments(List<Comment> lstOfComments) {
-        this.listOfComments = lstOfComments;
+    public void setListOfComments(List<Comment> listOfComments) {
+        this.listOfComments = listOfComments;
     }
 
     public void setPrice(double price) {
@@ -57,7 +57,7 @@ public class Product {
         return category;
     }
 
-    public List<Comment> getLstOfComments() {
+    public List<Comment> getListOfComments() {
         return listOfComments;
     }
 
