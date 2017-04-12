@@ -9,6 +9,17 @@ public abstract class Purchase {
     private Supplier supplier;
     private Employee employee;
 
+
+    public Purchase(Receipt receipt, Supplier supplier, Employee employee) {
+        this(receipt, employee);
+        this.supplier = supplier;
+    }
+
+    public Purchase(Receipt receipt, Employee employee) {
+        this.receipt = receipt;
+        this.employee = employee;
+    }
+
     public Receipt getReceipt() {
         return receipt;
     }
