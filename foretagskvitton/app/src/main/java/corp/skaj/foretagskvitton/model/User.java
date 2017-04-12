@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * User class contains...
+ * User class contains
  */
 public class User {
     private String name;
@@ -84,7 +84,7 @@ public class User {
     private boolean containsPurchase(List<Employee> listofEmployees, Receipt receipt) {
         for (int i = 0; i< listofEmployees.size(); i++) {
             Employee employee = listofEmployees.get(i);
-            List<Purchase> listOfPurchases = employee.getPurchases();
+            List<Purchase> listOfPurchases = employee.getListOfPurchases();
             if (containsReceipt(listOfPurchases, receipt)) {
                 return true;
             }
