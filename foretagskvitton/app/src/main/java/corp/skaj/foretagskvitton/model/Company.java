@@ -166,4 +166,36 @@ public class Company {
     public List<Supplier> getListOfSuppliers () {
         return listOfSuppliers;
     }
+
+    public int getAmountOfEmployees () {
+        int count = 0;
+        for (int i = 0; i < listOfEmployees.size(); i++) {
+            count++;
+        }
+        return count;
+    }
+
+    public int getAmountOfCards () {
+        int count = 0;
+        for (int i = 0; i < listOfCards.size(); i++) {
+            count++;
+        }
+        return count;
+    }
+
+    public int getAmountOfComments () {
+        int count = 0;
+        for (int i = 0; i < listOfComments.size(); i++) {
+            count++;
+        }
+        return count;
+    }
+
+    public int getAmountOfSuppliers () {
+        int count = 0;
+        for (int i = 0; i < listOfSuppliers.size(); i++) {
+            count++;
+        }
+        return count;
+    }
 }
