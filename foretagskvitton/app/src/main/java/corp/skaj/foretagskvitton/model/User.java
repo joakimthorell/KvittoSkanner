@@ -34,7 +34,7 @@ public class User {
     private boolean containsCompany(String companyName) {
         for (int i = 0; i < listOfCompanies.size(); i++) {
             Company company = listOfCompanies.get(i);
-            if (companyName == company.getName()) {
+            if (companyName.contains(company.getName())) {
                 return true;
             }
         }
@@ -68,7 +68,7 @@ public class User {
     public Company getCompany(String companyName) {
         for (int i = 0; i < listOfCompanies.size(); i++) {
             Company company = listOfCompanies.get(i);
-            if (companyName == company.getName()) {
+            if (companyName.contains(company.getName())) {
                 return company;
             }
         }
