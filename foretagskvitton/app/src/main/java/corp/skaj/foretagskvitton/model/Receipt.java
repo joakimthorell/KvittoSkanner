@@ -12,6 +12,12 @@ public class Receipt {
     private Date date;
     private Double total;
 
+    public Receipt(List<Product> listOfProducts, Date date, Double total) {
+        this.listOfProducts = listOfProducts;
+        this.date = date;
+        this.total = total;
+    }
+
     public List<Product> getListOfProducts() {
         return listOfProducts;
     }
@@ -22,6 +28,18 @@ public class Receipt {
 
     public Double getTotal() {
         return total;
+    }
+
+    public void setListOfProducts(List<Product> listOfProducts) {
+        this.listOfProducts = listOfProducts;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public void setTotal(Double total) {
+        this.total = total;
     }
 }
 
