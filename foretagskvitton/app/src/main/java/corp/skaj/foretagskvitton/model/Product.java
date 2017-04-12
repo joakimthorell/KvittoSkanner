@@ -1,5 +1,6 @@
 package corp.skaj.foretagskvitton.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -9,16 +10,23 @@ import java.util.List;
 public class Product {
     private String name;
     private Category category;
-    private List<Comment> lstOfComments;
-    private Double price;
-    private Double tax;
+    private List<Comment> listOfComments;
+    private double price;
+    private double tax;
 
-    public Product(String name, Category category, List<Comment> lstOfComments, Double price, Double tax) {
+    public Product(String name, Category category, List<Comment> listOfComments, Double price, Double tax) {
         this.name = name;
         this.category = category;
-        this.lstOfComments = lstOfComments;
+        this.listOfComments = listOfComments;
         this.price = price;
         this.tax = tax;
+    }
+
+    public Product(String name, double price, double tax) {
+        this.name = name;
+        this.price = price;
+        this.tax = tax;
+        listOfComments = new ArrayList<>();
     }
 
     public void setName(String name) {
@@ -30,14 +38,14 @@ public class Product {
     }
 
     public void setLstOfComments(List<Comment> lstOfComments) {
-        this.lstOfComments = lstOfComments;
+        this.listOfComments = lstOfComments;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
-    public void setTax(Double tax) {
+    public void setTax(double tax) {
         this.tax = tax;
     }
 
@@ -50,14 +58,14 @@ public class Product {
     }
 
     public List<Comment> getLstOfComments() {
-        return lstOfComments;
+        return listOfComments;
     }
 
-    public Double getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public Double getTax() {
+    public double getTax() {
         return tax;
     }
 }
