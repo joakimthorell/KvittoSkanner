@@ -144,6 +144,7 @@ public class User {
     }
 
     /**
+     *
      * @param card
      * @return Company
      */
