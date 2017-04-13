@@ -42,7 +42,7 @@ public class Company {
      * @throws IllegalInputException
      */
     public void addNewEmployee (String name) throws IllegalInputException{
-        if (containsEmployee(name)) {
+        if (!containsEmployee(name)) {
             listOfEmployees.add(new Employee(name));
         } else {
             throw new IllegalInputException(this);
@@ -260,7 +260,7 @@ public class Company {
 
     /**
      *
-     * @return listOfCards
+     * @return List<Card>
      */
     public List<Card> getListOfCards() {
         return listOfCards;
