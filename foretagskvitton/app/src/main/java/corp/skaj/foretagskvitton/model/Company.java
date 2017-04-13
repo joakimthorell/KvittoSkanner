@@ -55,7 +55,7 @@ public class Company {
      * @throws IllegalInputException
      */
     public void addNewEmployee (Employee employee) throws IllegalInputException {
-        if(containsEmployee(employee)) {
+        if(!containsEmployee(employee)) {
             listOfEmployees.add(employee);
         } else {
             throw new IllegalInputException(this);
@@ -100,7 +100,7 @@ public class Company {
      * @throws IllegalInputException
      */
     public void addNewCard (int cardNumber) throws IllegalInputException {
-        if (containsCard(cardNumber)) {
+        if (!containsCard(cardNumber)) {
             listOfCards.add(new Card(cardNumber));
         } else {
             throw new IllegalInputException(this);
@@ -129,7 +129,7 @@ public class Company {
      * @throws IllegalInputException
      */
     public void addSupplier (String supplierName) throws IllegalInputException {
-        if(containsSupplier(supplierName)) {
+        if(!containsSupplier(supplierName)) {
             listOfSuppliers.add(new Supplier(supplierName));
         } else {
             throw new IllegalInputException(this);
@@ -160,7 +160,8 @@ public class Company {
      */
     private boolean containsEmployee(Employee employee) {
         for (int i = 0; i < listOfEmployees.size(); i++) {
-            if (listOfEmployees.get(i).equals(employee)) {
+            Employee temp = listOfEmployees.get(i);
+            if (temp == employee) {
                 return true;
             }
         }
@@ -192,7 +193,8 @@ public class Company {
      */
     private boolean containsSupplier(String name) {
         for(int i = 0; i < listOfSuppliers.size(); i++) {
-            if(listOfSuppliers.get(i).toString().equals(name)) {
+            Supplier temp = listOfSuppliers.get(i);
+            if(temp.toString() == name) {
                 return true;
             }
         }
@@ -207,7 +209,8 @@ public class Company {
      */
     private boolean containsCard (int cardNumber) {
         for(int i = 0; i < listOfCards.size(); i++) {
-            if(listOfCards.get(i).getLastFourDigits() == cardNumber) {
+            Card temp = listOfCards.get(i);
+            if(temp.getLastFourDigits() == cardNumber) {
                 return true;
             }
         }
@@ -260,7 +263,7 @@ public class Company {
 
     /**
      *
-     * @return List<Card>
+     * @return listOfCards
      */
     public List<Card> getListOfCards() {
         return listOfCards;
