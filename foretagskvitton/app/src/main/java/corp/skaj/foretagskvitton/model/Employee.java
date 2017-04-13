@@ -44,6 +44,20 @@ public class Employee {
 
     /**
      *
+     * @param purchase
+     * @return
+     */
+    public boolean containsPurchase(Purchase purchase) {
+        for (Purchase pur : listOfPurchases) {
+            if (pur == purchase) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     *
      * @param comment
      */
     public void addComment(Comment comment) {

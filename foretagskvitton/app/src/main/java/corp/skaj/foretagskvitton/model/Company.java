@@ -232,16 +232,29 @@ public class Company {
     /**
      *
      * @param employeeName
-     * @return
-     * @throws NoSuchEmployeeException
+     * @return returns employee with given name, else null
      */
-    public Employee getEmployee(String employeeName) throws NoSuchEmployeeException {
+    public Employee getEmployee(String employeeName) {
         for (Employee employee : listOfEmployees) {
             if (employee.getName().equals(employeeName)) {
                 return employee;
             }
         }
-        throw new NoSuchEmployeeException();
+        return null;
+    }
+
+    /**
+     *
+     * @param purchase
+     * @return employee containing given Purchase
+     */
+    public Employee getEmployee(Purchase purchase) {
+        for (Employee employee : listOfEmployees) {
+            if (employee.containsPurchase(purchase)) {
+                return employee;
+            }
+        }
+        return null;
     }
 
     /**
