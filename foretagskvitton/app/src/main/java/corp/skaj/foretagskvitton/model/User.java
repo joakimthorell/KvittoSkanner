@@ -27,7 +27,7 @@ public class User {
         if (!containsCompany(companyName)) {
             Company company = new Company(companyName);
             listOfCompanies.add(company);
-            company.addNewEmployee(name);
+            setUserAsEmpolyee(company, name);
         } else {
             throw new IllegalInputException(this);
         }
@@ -113,6 +113,19 @@ public class User {
             }
         }
         return false;
+    }
+
+    /**
+     *
+     * @param company
+     * @param name
+     */
+    public void setUserAsEmpolyee(Company company, String name) {
+        try {
+            company.addNewEmployee(name);
+        } catch (IllegalInputException iie) {
+            iie.printStackTrace();
+        }
     }
 
     /**

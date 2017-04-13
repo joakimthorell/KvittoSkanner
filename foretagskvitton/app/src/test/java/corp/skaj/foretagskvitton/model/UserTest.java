@@ -31,16 +31,6 @@ public class UserTest {
         */
     }
 
-    private void setupReceipt() {
-        Product product = new Product("Apelsin", 10, 12.5);
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(2017, 4, 20);
-        receipt = new Receipt(product, calendar, 10);
-        Purchase purchase = new PrivatePurchase(receipt);
-        //purchase.setReceipt(receipt);
-        user.getCompany("Company1").getEmployee("User").addPurchase(purchase);
-    }
-
     @Test
     public void testAddNewCompany() {
         try {
@@ -49,6 +39,16 @@ public class UserTest {
             assertTrue(false);
         }
         assertTrue(true);
+    }
+
+    private void setupReceipt() {
+        Product product = new Product("Apelsin", 10, 12.5);
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(2017, 4, 20);
+        receipt = new Receipt(product, calendar, 10);
+        Purchase purchase = new PrivatePurchase(receipt);
+        //purchase.setReceipt(receipt);
+        user.getCompany("Company1").getEmployee("User").addPurchase(purchase);
     }
 
     public void testGetCompanyReceipt() {
