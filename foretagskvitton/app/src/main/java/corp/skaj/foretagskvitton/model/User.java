@@ -26,6 +26,7 @@ public class User {
     public void addNewCompany(String companyName) throws IllegalInputException {
         if (!containsCompany(companyName)) {
             Company company = new Company(companyName);
+            listOfCompanies.add(company);
             company.addNewEmployee(name);
         } else {
             throw new IllegalInputException(this);
@@ -55,7 +56,7 @@ public class User {
     private boolean containsCompany(String companyName) {
         for (int i = 0; i < listOfCompanies.size(); i++) {
             Company company = listOfCompanies.get(i);
-            if (companyName.contains(company.getName())) {
+            if (companyName == company.getName()) {
                 return true;
             }
         }
@@ -121,7 +122,7 @@ public class User {
     public Company getCompany(String companyName) {
         for (int i = 0; i < listOfCompanies.size(); i++) {
             Company company = listOfCompanies.get(i);
-            if (companyName.contains(company.getName())) {
+            if (companyName == company.getName()) {
                 return company;
             }
         }
