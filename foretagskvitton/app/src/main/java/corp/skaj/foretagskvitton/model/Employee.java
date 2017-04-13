@@ -6,6 +6,9 @@ import java.util.List;
 import corp.skaj.foretagskvitton.exceptions.NoSuchCommentException;
 import corp.skaj.foretagskvitton.exceptions.NoSuchPurchaseException;
 
+/**
+ *
+ */
 public class Employee {
     private String name;
     private List<Purchase> listOfPurchases;
