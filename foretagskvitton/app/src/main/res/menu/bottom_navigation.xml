@@ -4,9 +4,32 @@
 
     <item
         android:id="@+id/action_archive"
-        android:enabled="true"
-        android:icon="@drawable/ic_favorite_white_24dp"
-        android:title="@string/text_favorites"
+        android:icon="@drawable/ic_folder"
+        android:title="@string/menu_archive"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_charts"
+        android:icon="@drawable/ic_chart"
+        android:title="@string/menu_charts"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_add"
+        android:icon="@drawable/ic_add"
+        android:title="@string/menu_add"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_business"
+        android:icon="@drawable/ic_business"
+        android:title="@string/menu_business"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_user"
+        android:icon="@drawable/ic_user"
+        android:title="@string/menu_user"
         app:showAsAction="ifRoom" />
 
 

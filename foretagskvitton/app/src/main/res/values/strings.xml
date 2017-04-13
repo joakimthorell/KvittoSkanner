@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">foretagskvitton</string>
+    <string name="menu_archive">Arkiv</string>
+    <string name="menu_charts">Grafer</string>
+    <string name="menu_add">Skapa ny</string>
+    <string name="menu_business">Företag</string>
+    <string name="menu_user">Profil</string>
 </resources>
