@@ -149,7 +149,7 @@ public class Company {
      * @return <code>true</code> if listOfEmployees already contains employee
      *          <code>false</code> otherwise
      */
-    public boolean containsEmployee(Employee employee) {
+    private boolean containsEmployee(Employee employee) {
         for (int i = 0; i < listOfEmployees.size(); i++) {
             if (listOfEmployees.get(i).equals(employee)) {
                 return true;
@@ -163,7 +163,7 @@ public class Company {
      * @return <code>true</code> if listOfEmployees already contains name
      *           <code>false</code> otherwise
      */
-    public boolean containsEmployee(String name) {
+    private boolean containsEmployee(String name) {
         for (int i = 0; i < listOfEmployees.size(); i++) {
             if(listOfEmployees.get(i).getName().equals(name)) {
                 return true;
@@ -178,7 +178,7 @@ public class Company {
      *           <code>false</code> otherwise
      *
      */
-    public boolean containsSupplier(String name) {
+    private boolean containsSupplier(String name) {
         for(int i = 0; i < listOfSuppliers.size(); i++) {
             if(listOfSuppliers.get(i).toString().equals(name)) {
                 return true;
@@ -192,7 +192,7 @@ public class Company {
      * @return <code>true</code> if listOfCards already contains cardNumber
      *          <code>false</code> otherwise
      */
-    public boolean containsCard (int cardNumber) {
+    private boolean containsCard (int cardNumber) {
         for(int i = 0; i < listOfCards.size(); i++) {
             if(listOfCards.get(i).getLastFourDigits() == cardNumber) {
                 return true;
