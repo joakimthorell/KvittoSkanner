@@ -175,7 +175,8 @@ public class Company {
      */
     private boolean containsEmployee(String name) {
         for (int i = 0; i < listOfEmployees.size(); i++) {
-            if(listOfEmployees.get(i).getName().equals(name)) {
+            Employee temp = listOfEmployees.get(i);
+            if(temp.getName() == name) {
                 return true;
             }
         }
