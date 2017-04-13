@@ -104,6 +104,18 @@ public class Company {
 
     /**
      * @param card
+     * @throws IllegalInputException
+     */
+    public void addNewCard(Card card) throws IllegalInputException {
+        if (!containsCard(card.getCard())) {
+            listOfCards.add(card);
+        } else {
+            throw new IllegalInputException(this);
+        }
+    }
+
+    /**
+     * @param card
      * @throws NoSuchCardException
      */
     public void removeCard(Card card) throws NoSuchCardException {
@@ -146,8 +158,8 @@ public class Company {
 
     /**
      * @param employee
-     * @return <code>true</code> if listOfEmployees already contains employee
-     * <code>false</code> otherwise
+     * @return  <code>true</code> if listOfEmployees already contains employee
+     *          <code>false</code> otherwise
      */
     private boolean containsEmployee(Employee employee) {
         for (int i = 0; i < listOfEmployees.size(); i++) {
@@ -161,8 +173,8 @@ public class Company {
 
     /**
      * @param name
-     * @return <code>true</code> if listOfEmployees already contains name
-     * <code>false</code> otherwise
+     * @return  <code>true</code> if listOfEmployees already contains name
+     *          <code>false</code> otherwise
      */
     private boolean containsEmployee(String name) {
         for (int i = 0; i < listOfEmployees.size(); i++) {
@@ -176,8 +188,8 @@ public class Company {
 
     /**
      * @param name
-     * @return <code>true</code> if listOfSuppliers already contains name
-     * <code>false</code> otherwise
+     * @return  <code>true</code> if listOfSuppliers already contains name
+     *          <code>false</code> otherwise
      */
     private boolean containsSupplier(String name) {
         for (int i = 0; i < listOfSuppliers.size(); i++) {
@@ -191,13 +203,13 @@ public class Company {
 
     /**
      * @param cardNumber
-     * @return <code>true</code> if listOfCards already contains cardNumber
-     * <code>false</code> otherwise
+     * @return  <code>true</code> if listOfCards already contains cardNumber
+     *          <code>false</code> otherwise
      */
     private boolean containsCard(int cardNumber) {
         for (int i = 0; i < listOfCards.size(); i++) {
             Card temp = listOfCards.get(i);
-            if (temp.getLastFourDigits() == cardNumber) {
+            if (temp.getCard() == cardNumber) {
                 return true;
             }
         }
@@ -262,27 +274,23 @@ public class Company {
         return null;
     }
 
-        /**
-         *
-         * @return listOfComments
-         */
-        public List<Comment> getCompanyComment () {
-            return listOfComments;
-        }
+    /**
+     * @return listOfComments
+     */
+    public List<Comment> getCompanyComment() {
+        return listOfComments;
+    }
 
-        /**
-         *
-         * @return listOfSuppliers
-         */
-        public List<Supplier> getListOfSuppliers () {
-            return listOfSuppliers;
-        }
+    /**
+     * @return listOfSuppliers
+     */
+    public List<Supplier> getListOfSuppliers() {
+        return listOfSuppliers;
+    }
 
-        /**
-         *
-         * @return amount of employees in listOfEmployees
-         */
-
+    /**
+     * @return amount of employees in listOfEmployees
+     */
     public int getAmountOfEmployees() {
         return listOfEmployees.size();
     }

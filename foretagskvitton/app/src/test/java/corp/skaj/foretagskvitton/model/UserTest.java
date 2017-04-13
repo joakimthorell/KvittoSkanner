@@ -6,6 +6,7 @@ import org.junit.Test;
 import java.util.Calendar;
 
 import corp.skaj.foretagskvitton.exceptions.IllegalInputException;
+import corp.skaj.foretagskvitton.exceptions.NoSuchCardException;
 import corp.skaj.foretagskvitton.exceptions.NoSuchCompanyException;
 
 import static org.junit.Assert.*;
@@ -15,43 +16,80 @@ import static org.junit.Assert.*;
  */
 public class UserTest {
     User user;
-    Receipt receipt;
+    String companyName;
 
     @Before
     public void setup() {
         user = new User("User");
-        /*
-        try {
-            user.addNewCompany("Company1");
-            user.addNewCompany("Company2");
-        } catch (IllegalInputException iie) {
-            iie.printStackTrace();
-        }
-        setupReceipt();
-        */
+        companyName = "Company";
     }
 
     @Test
     public void testAddNewCompany() {
         try {
-            user.addNewCompany("Company1");
+            user.addNewCompany(companyName);
         } catch (IllegalInputException iie) {
             assertTrue(false);
         }
         assertTrue(true);
     }
 
-    private void setupReceipt() {
+    @Test
+    public void testRemoveCompany() {
+        addNewCompany();
+        try {
+            user.removeCompany(companyName);
+        } catch (NoSuchCompanyException nsce) {
+            assertTrue(false);
+        }
+        assertTrue(true);
+    }
+
+    @Test
+    public void testGetCompanyWithString() {
+        addNewCompany();
+        assertEquals(companyName, user.getCompany(companyName).getName());
+    }
+
+    @Test
+    public void testGetCompanyWithCard() {
+        addNewCompany();
+        Card card = setupCard(1234);
+        assertEquals(companyName, user.getCompany(card).getName());
+    }
+
+    @Test
+    public void testGetCompanyWithPurchase() {
+        Purchase purchase = setupPurchase();
+        assertEquals(companyName, user.getCompany(purchase).getName());
+    }
+
+    private Card setupCard(int cardNumber) {
+        addNewCompany();
+        Card card = new Card(cardNumber);
+        try {
+            user.getCompany(companyName).addNewCard(card);
+        } catch (IllegalInputException iie) {
+        }
+        return card;
+    }
+
+    private void addNewCompany() {
+        try {
+            user.addNewCompany(companyName);
+        } catch (IllegalInputException iie) {
+            iie.getCause();
+        }
+    }
+
+    private Purchase setupPurchase() {
         Product product = new Product("Apelsin", 10, 12.5);
         Calendar calendar = Calendar.getInstance();
         calendar.set(2017, 4, 20);
-        receipt = new Receipt(product, calendar, 10);
+        Receipt receipt = new Receipt(product, calendar, 10);
         Purchase purchase = new PrivatePurchase(receipt);
-        //purchase.setReceipt(receipt);
-        user.getCompany("Company1").getEmployee("User").addPurchase(purchase);
-    }
-
-    public void testGetCompanyReceipt() {
-        assertEquals("Company1", user.getCompany(receipt));
+        addNewCompany();
+        user.getCompany(companyName).getEmployee(user.getName()).addPurchase(purchase);
+        return purchase;
     }
 }

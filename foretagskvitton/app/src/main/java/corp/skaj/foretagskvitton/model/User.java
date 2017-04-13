@@ -19,7 +19,6 @@ public class User {
     }
 
     /**
-     *
      * @param companyName
      * @throws IllegalInputException
      */
@@ -34,7 +33,6 @@ public class User {
     }
 
     /**
-     *
      * @param companyName
      * @throws NoSuchCompanyException
      */
@@ -48,10 +46,9 @@ public class User {
     }
 
     /**
-     *
      * @param companyName
-     * @return  <code>true</code> if User contains Company;
-     *          <code>false</code> otherwise
+     * @return <code>true</code> if User contains Company;
+     * <code>false</code> otherwise
      */
     private boolean containsCompany(String companyName) {
         for (int i = 0; i < listOfCompanies.size(); i++) {
@@ -66,8 +63,8 @@ public class User {
     /**
      * @param listOfCards
      * @param card
-     * @return  <code>true</code> if Company contains Card;
-     *          <code>false</code> otherwise
+     * @return <code>true</code> if Company contains Card;
+     * <code>false</code> otherwise
      */
     private boolean containsCard(List<Card> listOfCards, Card card) {
         for (int i = 0; i < listOfCards.size(); i++) {
@@ -80,17 +77,16 @@ public class User {
     }
 
     /**
-     *
      * @param listofEmployees
-     * @param receipt
-     * @return  <code>true</code> if Employee contains Purchase;
-     *          <code>false</code> otherwise
+     * @param purchase
+     * @return <code>true</code> if Employee contains Purchase;
+     * <code>false</code> otherwise
      */
-    private boolean containsPurchase(List<Employee> listofEmployees, Receipt receipt) {
-        for (int i = 0; i< listofEmployees.size(); i++) {
+    private boolean containsPurchase(List<Employee> listofEmployees, Purchase purchase) {
+        for (int i = 0; i < listofEmployees.size(); i++) {
             Employee employee = listofEmployees.get(i);
             List<Purchase> listOfPurchases = employee.getListOfPurchases();
-            if (containsReceipt(listOfPurchases, receipt)) {
+            if (containsReceipt(listOfPurchases, purchase)) {
                 return true;
             }
         }
@@ -98,16 +94,15 @@ public class User {
     }
 
     /**
-     *
      * @param listOfPurchases
-     * @param receipt
-     * @return  <code>true</code> if Purchase contains Receipt;
-     *          <code>false</code> otherwise
+     * @param purchase
+     * @return <code>true</code> if Purchase contains Receipt;
+     * <code>false</code> otherwise
      */
-    private boolean containsReceipt(List<Purchase> listOfPurchases, Receipt receipt) {
+    private boolean containsReceipt(List<Purchase> listOfPurchases, Purchase purchase) {
         for (int i = 0; i < listOfPurchases.size(); i++) {
-            Purchase purchase = listOfPurchases.get(i);
-            Receipt temp = purchase.getReceipt();
+            Receipt temp = listOfPurchases.get(i).getReceipt();
+            Receipt receipt = purchase.getReceipt();
             if (receipt == temp) {
                 return true;
             }
@@ -116,7 +111,6 @@ public class User {
     }
 
     /**
-     *
      * @param company
      * @param name
      */
@@ -125,6 +119,21 @@ public class User {
             company.addNewEmployee(name);
         } catch (IllegalInputException iie) {
             iie.printStackTrace();
+        }
+    }
+
+    /**
+     *
+     * @param name
+     */
+    public void setName(String name) {
+        this.name = name;
+        for (int i = 0; i < listOfCompanies.size(); i++) {
+            Company company = listOfCompanies.get(i);
+            Employee temp = company.getEmployee(name);
+            if (temp != null) {
+                temp.setName(name);
+            }
         }
     }
 
@@ -143,15 +152,14 @@ public class User {
     }
 
     /**
-     *
-     * @param receipt
+     * @param purchase
      * @return Company
      */
-    public Company getCompany(Receipt receipt) {
+    public Company getCompany(Purchase purchase) {
         for (int i = 0; i < listOfCompanies.size(); i++) {
             Company company = listOfCompanies.get(i);
             List<Employee> listOfEmployees = company.getListOfEmployees();
-            if (containsPurchase(listOfEmployees, receipt)) {
+            if (containsPurchase(listOfEmployees, purchase)) {
                 return company;
             }
         }
@@ -159,7 +167,6 @@ public class User {
     }
 
     /**
-     *
      * @param card
      * @return Company
      */
@@ -175,10 +182,16 @@ public class User {
     }
 
     /**
-     *
      * @return List<Company>
      */
     public List<Company> getListOfCompanies() {
         return listOfCompanies;
+    }
+
+    /**
+     * @return
+     */
+    public String getName() {
+        return name;
     }
 }
