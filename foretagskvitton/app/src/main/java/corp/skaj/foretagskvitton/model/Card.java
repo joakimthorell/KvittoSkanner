@@ -12,15 +12,15 @@ public class Card {
 
     /**
      *
-     * @param lastFourDigits
+     * @param card
      */
-    public void setCard (int lastFourDigits) {
+    public void setCard (int card) {
         this.card = card;
     }
 
     /**
      *
-     * @return lastFourDigits
+     * @return card
      */
     public int getCard () {
         return card;
