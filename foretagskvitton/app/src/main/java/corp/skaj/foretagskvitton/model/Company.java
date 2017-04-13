@@ -35,6 +35,7 @@ public class Company {
         listOfComments = new ArrayList<>();
         listOfSuppliers = new ArrayList<>();
     }
+
     /**
      *
      * @param name
@@ -47,6 +48,7 @@ public class Company {
             throw new IllegalInputException(this);
         }
     }
+
     /**
      *
      * @param employee
@@ -59,6 +61,7 @@ public class Company {
             throw new IllegalInputException(this);
         }
     }
+
     /**
      *
      * @param name
@@ -74,6 +77,7 @@ public class Company {
             }
         }
     }
+
     /**
      *
      * @param employee
@@ -89,6 +93,7 @@ public class Company {
             }
         }
     }
+
     /**
      *
      * @param cardNumber
@@ -101,6 +106,7 @@ public class Company {
             throw new IllegalInputException(this);
         }
     }
+
     /**
      *
      * @param card
@@ -116,6 +122,7 @@ public class Company {
             }
         }
     }
+
     /**
      *
      * @param supplierName
@@ -128,6 +135,7 @@ public class Company {
             throw new IllegalInputException(this);
         }
     }
+
     /**
      *
      * @param supplierName
@@ -143,6 +151,7 @@ public class Company {
             }
         }
     }
+
     /**
      *
      * @param employee
@@ -157,6 +166,7 @@ public class Company {
         }
         return false;
     }
+
     /**
      *
      * @param name
@@ -171,6 +181,7 @@ public class Company {
         }
         return false;
     }
+
     /**
      *
      * @param name
@@ -186,6 +197,7 @@ public class Company {
         }
         return false;
     }
+
     /**
      *
      * @param cardNumber
@@ -200,6 +212,7 @@ public class Company {
         }
         return false;
     }
+
     /**
      *
      * @return companyName
@@ -207,6 +220,7 @@ public class Company {
     public String getName () {
         return companyName;
     }
+
     /**
      *
      * @return listOfEmployees
@@ -214,6 +228,22 @@ public class Company {
     public List<Employee> getListOfEmployees() {
         return listOfEmployees;
     }
+
+    /**
+     *
+     * @param employeeName
+     * @return
+     * @throws NoSuchEmployeeException
+     */
+    public Employee getEmployee(String employeeName) throws NoSuchEmployeeException {
+        for (Employee employee : listOfEmployees) {
+            if (employee.getName().equals(employeeName)) {
+                return employee;
+            }
+        }
+        throw new NoSuchEmployeeException();
+    }
+
     /**
      *
      * @return listOfCards
@@ -221,6 +251,7 @@ public class Company {
     public List<Card> getListOfCards() {
         return listOfCards;
     }
+
     /**
      *
      * @return listOfComments
@@ -236,6 +267,7 @@ public class Company {
     public List<Supplier> getListOfSuppliers () {
         return listOfSuppliers;
     }
+
     /**
      *
      * @return amount of employees in listOfEmployees
@@ -243,6 +275,7 @@ public class Company {
     public int getAmountOfEmployees () {
         return listOfEmployees.size();
     }
+
     /**
      *
      * @return amount of cards in listOfCards
@@ -250,6 +283,7 @@ public class Company {
     public int getAmountOfCards () {
         return listOfCards.size();
     }
+
     /**
      *
      * @return amount of cards in listOfComments
@@ -257,6 +291,7 @@ public class Company {
     public int getAmountOfComments () {
         return listOfComments.size();
     }
+
     /**
      *
      * @return amount of suppliers in listOfSuppliers
