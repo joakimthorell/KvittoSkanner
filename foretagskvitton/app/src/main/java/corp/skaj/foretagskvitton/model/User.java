@@ -1,6 +1,7 @@
 package corp.skaj.foretagskvitton.model;
 
 import corp.skaj.foretagskvitton.exceptions.IllegalInputException;
+import corp.skaj.foretagskvitton.exceptions.NoSuchCardException;
 import corp.skaj.foretagskvitton.exceptions.NoSuchCompanyException;
 
 import java.util.ArrayList;
@@ -54,22 +55,6 @@ public class User {
         for (int i = 0; i < listOfCompanies.size(); i++) {
             Company temp = listOfCompanies.get(i);
             if (companyName == temp.getName()) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
-     * @param listOfCards
-     * @param card
-     * @return <code>true</code> if Company contains Card;
-     * <code>false</code> otherwise
-     */
-    private boolean containsCard(List<Card> listOfCards, Card card) {
-        for (int i = 0; i < listOfCards.size(); i++) {
-            Card temp = listOfCards.get(i);
-            if (card == temp) {
                 return true;
             }
         }
@@ -171,9 +156,13 @@ public class User {
     public Company getCompany(Card card) {
         for (int i = 0; i < listOfCompanies.size(); i++) {
             Company temp = listOfCompanies.get(i);
-            List<Card> listOfCards = temp.getListOfCards();
-            if (containsCard(listOfCards, card)) {
-                return temp;
+            try {
+                Card tempCard = temp.getCard(card.getCard());
+                if (tempCard.getCard() == card.getCard()){
+                    return temp;
+                }
+            } catch (NoSuchCardException nsce) {
+                nsce.getCause();
             }
         }
         return null;
@@ -187,7 +176,7 @@ public class User {
     }
 
     /**
-     * @return
+     * @return name of User
      */
     public String getName() {
         return name;
