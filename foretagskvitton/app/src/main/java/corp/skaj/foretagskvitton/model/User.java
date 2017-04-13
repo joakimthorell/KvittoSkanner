@@ -24,9 +24,9 @@ public class User {
      */
     public void addNewCompany(String companyName) throws IllegalInputException {
         if (!containsCompany(companyName)) {
-            Company company = new Company(companyName);
-            listOfCompanies.add(company);
-            setUserAsEmpolyee(company, name);
+            Company newCompany = new Company(companyName);
+            listOfCompanies.add(newCompany);
+            setUserAsEmpolyee(newCompany, name);
         } else {
             throw new IllegalInputException(this);
         }
@@ -52,8 +52,8 @@ public class User {
      */
     private boolean containsCompany(String companyName) {
         for (int i = 0; i < listOfCompanies.size(); i++) {
-            Company company = listOfCompanies.get(i);
-            if (companyName == company.getName()) {
+            Company temp = listOfCompanies.get(i);
+            if (companyName == temp.getName()) {
                 return true;
             }
         }
@@ -84,8 +84,8 @@ public class User {
      */
     private boolean containsPurchase(List<Employee> listofEmployees, Purchase purchase) {
         for (int i = 0; i < listofEmployees.size(); i++) {
-            Employee employee = listofEmployees.get(i);
-            List<Purchase> listOfPurchases = employee.getListOfPurchases();
+            Employee temp = listofEmployees.get(i);
+            List<Purchase> listOfPurchases = temp.getListOfPurchases();
             if (containsReceipt(listOfPurchases, purchase)) {
                 return true;
             }
@@ -102,8 +102,7 @@ public class User {
     private boolean containsReceipt(List<Purchase> listOfPurchases, Purchase purchase) {
         for (int i = 0; i < listOfPurchases.size(); i++) {
             Receipt temp = listOfPurchases.get(i).getReceipt();
-            Receipt receipt = purchase.getReceipt();
-            if (receipt == temp) {
+            if (purchase.getReceipt() == temp) {
                 return true;
             }
         }
@@ -123,16 +122,15 @@ public class User {
     }
 
     /**
-     *
      * @param name
      */
     public void setName(String name) {
         this.name = name;
         for (int i = 0; i < listOfCompanies.size(); i++) {
             Company company = listOfCompanies.get(i);
-            Employee temp = company.getEmployee(name);
-            if (temp != null) {
-                temp.setName(name);
+            Employee employee = company.getEmployee(name);
+            if (employee != null) {
+                employee.setName(name);
             }
         }
     }
@@ -143,9 +141,9 @@ public class User {
      */
     public Company getCompany(String companyName) {
         for (int i = 0; i < listOfCompanies.size(); i++) {
-            Company company = listOfCompanies.get(i);
-            if (companyName == company.getName()) {
-                return company;
+            Company temp = listOfCompanies.get(i);
+            if (companyName == temp.getName()) {
+                return temp;
             }
         }
         return null;
@@ -157,10 +155,10 @@ public class User {
      */
     public Company getCompany(Purchase purchase) {
         for (int i = 0; i < listOfCompanies.size(); i++) {
-            Company company = listOfCompanies.get(i);
-            List<Employee> listOfEmployees = company.getListOfEmployees();
+            Company temp = listOfCompanies.get(i);
+            List<Employee> listOfEmployees = temp.getListOfEmployees();
             if (containsPurchase(listOfEmployees, purchase)) {
-                return company;
+                return temp;
             }
         }
         return null;
@@ -172,10 +170,10 @@ public class User {
      */
     public Company getCompany(Card card) {
         for (int i = 0; i < listOfCompanies.size(); i++) {
-            Company company = listOfCompanies.get(i);
-            List<Card> listOfCards = company.getListOfCards();
+            Company temp = listOfCompanies.get(i);
+            List<Card> listOfCards = temp.getListOfCards();
             if (containsCard(listOfCards, card)) {
-                return company;
+                return temp;
             }
         }
         return null;

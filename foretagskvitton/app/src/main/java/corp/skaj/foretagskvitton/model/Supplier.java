@@ -1,13 +1,28 @@
 package corp.skaj.foretagskvitton.model;
 
 /**
- * Created by annekeller on 2017-04-05.
+ *
  */
-
 public class Supplier {
     private String name;
 
     public Supplier(String name) {
         this.name = name;
+    }
+
+    /**
+     *
+     * @param newName
+     */
+    public void setName(String newName) {
+        this.name = newName;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public String getName() {
+        return name;
     }
 }

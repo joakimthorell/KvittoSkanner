@@ -67,12 +67,12 @@ public class Company {
     public void removeEmployee(String name) throws NoSuchEmployeeException {
         for (int i = 0; i < listOfEmployees.size(); i++) {
             Employee temp = listOfEmployees.get(i);
-            if (temp.getName().equals(name)) {
+            if (temp.getName() == name) {
                 listOfEmployees.remove(i);
-            } else {
-                throw new NoSuchEmployeeException();
+                return;
             }
         }
+        throw new NoSuchEmployeeException();
     }
 
     /**
@@ -80,13 +80,10 @@ public class Company {
      * @throws NoSuchEmployeeException
      */
     public void removeEmployee(Employee employee) throws NoSuchEmployeeException {
-        for (int i = 0; i < listOfEmployees.size(); i++) {
-            Employee temp = listOfEmployees.get(i);
-            if (temp.equals(employee)) {
-                listOfEmployees.remove(i);
-            } else {
-                throw new NoSuchEmployeeException();
-            }
+        if (containsEmployee(employee)) {
+            listOfEmployees.remove(employee);
+        } else {
+            throw new NoSuchEmployeeException();
         }
     }
 
@@ -119,13 +116,10 @@ public class Company {
      * @throws NoSuchCardException
      */
     public void removeCard(Card card) throws NoSuchCardException {
-        for (int i = 0; i < listOfCards.size(); i++) {
-            Card temp = listOfCards.get(i);
-            if (temp.equals(card)) {
-                listOfCards.remove(i);
-            } else {
-                throw new NoSuchCardException();
-            }
+        if (containsCard(card.getCard())) {
+            listOfCards.remove(card);
+        } else {
+            throw new NoSuchCardException();
         }
     }
 
@@ -148,18 +142,18 @@ public class Company {
     public void removeSupplier(String supplierName) throws NoSuchSupplierException {
         for (int i = 0; i < listOfSuppliers.size(); i++) {
             Supplier temp = listOfSuppliers.get(i);
-            if (temp.equals(supplierName)) {
+            if (temp.getName() == supplierName) {
                 listOfSuppliers.remove(i);
-            } else {
-                throw new NoSuchSupplierException();
+                return;
             }
         }
+        throw new NoSuchSupplierException();
     }
 
     /**
      * @param employee
-     * @return  <code>true</code> if listOfEmployees already contains employee
-     *          <code>false</code> otherwise
+     * @return <code>true</code> if listOfEmployees already contains employee
+     * <code>false</code> otherwise
      */
     private boolean containsEmployee(Employee employee) {
         for (int i = 0; i < listOfEmployees.size(); i++) {
@@ -173,8 +167,8 @@ public class Company {
 
     /**
      * @param name
-     * @return  <code>true</code> if listOfEmployees already contains name
-     *          <code>false</code> otherwise
+     * @return <code>true</code> if listOfEmployees already contains name
+     * <code>false</code> otherwise
      */
     private boolean containsEmployee(String name) {
         for (int i = 0; i < listOfEmployees.size(); i++) {
@@ -188,8 +182,8 @@ public class Company {
 
     /**
      * @param name
-     * @return  <code>true</code> if listOfSuppliers already contains name
-     *          <code>false</code> otherwise
+     * @return <code>true</code> if listOfSuppliers already contains name
+     * <code>false</code> otherwise
      */
     private boolean containsSupplier(String name) {
         for (int i = 0; i < listOfSuppliers.size(); i++) {
@@ -203,8 +197,8 @@ public class Company {
 
     /**
      * @param cardNumber
-     * @return  <code>true</code> if listOfCards already contains cardNumber
-     *          <code>false</code> otherwise
+     * @return <code>true</code> if listOfCards already contains cardNumber
+     * <code>false</code> otherwise
      */
     private boolean containsCard(int cardNumber) {
         for (int i = 0; i < listOfCards.size(); i++) {
@@ -236,7 +230,7 @@ public class Company {
      */
     public Employee getEmployee(String employeeName) {
         for (Employee employee : listOfEmployees) {
-            if (employee.getName().equals(employeeName)) {
+            if (employee.getName() == employeeName) {
                 return employee;
             }
         }
@@ -257,13 +251,10 @@ public class Company {
     }
 
     /**
-     * @return listOfCards
+     * @param cardNumber
+     * @return
+     * @throws NoSuchCardException
      */
-    public List<Card> getListOfCards() {
-        return listOfCards;
-    }
-
-
     public Card getCard(int cardNumber) throws NoSuchCardException {
         for (int i = 0; i < listOfCards.size(); i++) {
             Card temp = listOfCards.get(i);
@@ -272,6 +263,13 @@ public class Company {
             }
         }
         return null;
+    }
+
+    /**
+     * @return listOfCards
+     */
+    public List<Card> getListOfCards() {
+        return listOfCards;
     }
 
     /**
