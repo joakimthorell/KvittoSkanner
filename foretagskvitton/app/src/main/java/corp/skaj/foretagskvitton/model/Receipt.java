@@ -5,9 +5,8 @@ import java.util.Calendar;
 import java.util.List;
 
 /**
- * Created by lasanjin on 4/5/17.
+ *
  */
-
 public class Receipt {
     private List<Product> listOfProducts;
     private Calendar date;

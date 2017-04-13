@@ -26,6 +26,7 @@ public class User {
     public void addNewCompany(String companyName) throws IllegalInputException {
         if (!containsCompany(companyName)) {
             Company company = new Company(companyName);
+            company.addNewEmployee(name);
         } else {
             throw new IllegalInputException(this);
         }

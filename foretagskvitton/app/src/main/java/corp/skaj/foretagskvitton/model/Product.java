@@ -4,9 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by lasanjin on 4/5/17.
+ *
  */
-
 public class Product {
     private String name;
     private Category category;
