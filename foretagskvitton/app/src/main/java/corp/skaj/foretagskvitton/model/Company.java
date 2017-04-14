@@ -52,7 +52,7 @@ public class Company {
      * @throws IllegalInputException
      */
     public void addNewEmployee(Employee employee) throws IllegalInputException {
-        if (!containsEmployee(employee)) {
+        if (!containsEmployee(employee.getName())) {
             listOfEmployees.add(employee);
         } else {
             throw new IllegalInputException(this);
@@ -79,7 +79,7 @@ public class Company {
      * @throws NoSuchEmployeeException
      */
     public void removeEmployee(Employee employee) throws NoSuchEmployeeException {
-        if (containsEmployee(employee)) {
+        if (containsEmployee(employee.getName())) {
             listOfEmployees.remove(employee);
         } else {
             throw new NoSuchEmployeeException();
@@ -147,21 +147,6 @@ public class Company {
             }
         }
         throw new NoSuchSupplierException();
-    }
-
-    /**
-     * @param employee
-     * @return <code>true</code> if listOfEmployees already contains employee
-     * <code>false</code> otherwise
-     */
-    private boolean containsEmployee(Employee employee) {
-        for (int i = 0; i < listOfEmployees.size(); i++) {
-            Employee temp = listOfEmployees.get(i);
-            if (temp == employee) {
-                return true;
-            }
-        }
-        return false;
     }
 
     /**

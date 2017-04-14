@@ -107,7 +107,6 @@ public class User {
     }
 
     /**
-     *
      * @param name
      */
     public void setName(String name) {
@@ -152,7 +151,7 @@ public class User {
 
     /**
      * @param card
-     * @return Company
+     * @return
      */
     public Company getCompany(Card card) {
         for (int i = 0; i < listOfCompanies.size(); i++) {
