@@ -107,6 +107,7 @@ public class User {
     }
 
     /**
+     *
      * @param name
      */
     public void setName(String name) {

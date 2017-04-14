@@ -9,9 +9,8 @@ import corp.skaj.foretagskvitton.exceptions.NoSuchEmployeeException;
 import corp.skaj.foretagskvitton.exceptions.NoSuchSupplierException;
 
 /**
- * Created by annekeller on 2017-04-05.
+ * 
  */
-
 public class Company {
     private String companyName;
     private List<Employee> listOfEmployees;
