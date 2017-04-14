@@ -62,23 +62,6 @@ public class User {
     }
 
     /**
-     * @param listofEmployees
-     * @param purchase
-     * @return <code>true</code> if Employee contains Purchase;
-     * <code>false</code> otherwise
-     */
-    private boolean containsPurchase(List<Employee> listofEmployees, Purchase purchase) {
-        for (int i = 0; i < listofEmployees.size(); i++) {
-            Employee temp = listofEmployees.get(i);
-            List<Purchase> listOfPurchases = temp.getListOfPurchases();
-            if (containsReceipt(listOfPurchases, purchase)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
      * @param listOfPurchases
      * @param purchase
      * @return <code>true</code> if Purchase contains Receipt;
@@ -141,8 +124,8 @@ public class User {
     public Company getCompany(Purchase purchase) {
         for (int i = 0; i < listOfCompanies.size(); i++) {
             Company temp = listOfCompanies.get(i);
-            List<Employee> listOfEmployees = temp.getListOfEmployees();
-            if (containsPurchase(listOfEmployees, purchase)) {
+            List<Purchase> listOfReceipts = temp.getEmployee(purchase).getListOfPurchases();
+            if (containsReceipt(listOfReceipts, purchase)) {
                 return temp;
             }
         }
