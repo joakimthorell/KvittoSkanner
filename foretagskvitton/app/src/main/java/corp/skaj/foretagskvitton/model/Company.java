@@ -9,7 +9,7 @@ import corp.skaj.foretagskvitton.exceptions.NoSuchEmployeeException;
 import corp.skaj.foretagskvitton.exceptions.NoSuchSupplierException;
 
 /**
- * 
+ *
  */
 public class Company {
     private String companyName;
