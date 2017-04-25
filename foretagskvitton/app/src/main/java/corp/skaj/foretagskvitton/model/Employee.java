@@ -51,8 +51,8 @@ public class Employee {
      * @return
      */
     public boolean containsPurchase(Purchase purchase) {
-        for (Purchase pur : listOfPurchases) {
-            if (pur == purchase) {
+        for (Purchase p : listOfPurchases) {
+            if (p == purchase) {
                 return true;
             }
         }

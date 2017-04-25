@@ -36,12 +36,12 @@ public class Company {
     }
 
     /**
-     * @param name
+     * @param employee
      * @throws IllegalInputException
      */
-    public void addNewEmployee(String name) throws IllegalInputException {
-        if (!containsEmployee(name)) {
-            listOfEmployees.add(new Employee(name));
+    public void addEmployee(Employee employee) throws IllegalInputException {
+        if (!containsEmployee(employee.getName())) {
+            listOfEmployees.add(employee);
         } else {
             throw new IllegalInputException(this);
         }
@@ -49,13 +49,13 @@ public class Company {
 
     /**
      * @param employee
-     * @throws IllegalInputException
+     * @throws NoSuchEmployeeException
      */
-    public void addNewEmployee(Employee employee) throws IllegalInputException {
-        if (!containsEmployee(employee.getName())) {
-            listOfEmployees.add(employee);
+    public void removeEmployee(Employee employee) throws NoSuchEmployeeException {
+        if (containsEmployee(employee.getName())) {
+            listOfEmployees.remove(employee);
         } else {
-            throw new IllegalInputException(this);
+            throw new NoSuchEmployeeException();
         }
     }
 
@@ -75,34 +75,10 @@ public class Company {
     }
 
     /**
-     * @param employee
-     * @throws NoSuchEmployeeException
-     */
-    public void removeEmployee(Employee employee) throws NoSuchEmployeeException {
-        if (containsEmployee(employee.getName())) {
-            listOfEmployees.remove(employee);
-        } else {
-            throw new NoSuchEmployeeException();
-        }
-    }
-
-    /**
-     * @param cardNumber
-     * @throws IllegalInputException
-     */
-    public void addNewCard(int cardNumber) throws IllegalInputException {
-        if (!containsCard(cardNumber)) {
-            listOfCards.add(new Card(cardNumber));
-        } else {
-            throw new IllegalInputException(this);
-        }
-    }
-
-    /**
      * @param card
      * @throws IllegalInputException
      */
-    public void addNewCard(Card card) throws IllegalInputException {
+    public void addCard(Card card) throws IllegalInputException {
         if (!containsCard(card.getCard())) {
             listOfCards.add(card);
         } else {
@@ -123,25 +99,25 @@ public class Company {
     }
 
     /**
-     * @param supplierName
+     * @param supplier
      * @throws IllegalInputException
      */
-    public void addSupplier(String supplierName) throws IllegalInputException {
-        if (!containsSupplier(supplierName)) {
-            listOfSuppliers.add(new Supplier(supplierName));
+    public void addSupplier(Supplier supplier) throws IllegalInputException {
+        if (!containsSupplier(supplier.getName())) {
+            listOfSuppliers.add(supplier);
         } else {
             throw new IllegalInputException(this);
         }
     }
 
     /**
-     * @param supplierName
+     * @param supplier
      * @throws NoSuchSupplierException
      */
-    public void removeSupplier(String supplierName) throws NoSuchSupplierException {
+    public void removeSupplier(Supplier supplier) throws NoSuchSupplierException {
         for (int i = 0; i < listOfSuppliers.size(); i++) {
             Supplier temp = listOfSuppliers.get(i);
-            if (temp.getName() == supplierName) {
+            if (temp.getName() == supplier.getName()) {
                 listOfSuppliers.remove(i);
                 return;
             }

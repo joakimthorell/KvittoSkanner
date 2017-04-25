@@ -20,14 +20,12 @@ public class User {
     }
 
     /**
-     * @param companyName
+     * @param company
      * @throws IllegalInputException
      */
-    public void addNewCompany(String companyName) throws IllegalInputException {
-        if (!containsCompany(companyName)) {
-            Company newCompany = new Company(companyName);
-            listOfCompanies.add(newCompany);
-            setUserAsEmpolyee(newCompany, name);
+    public void addCompany(Company company) throws IllegalInputException {
+        if (!containsCompany(company.getName())) {
+            listOfCompanies.add(company);
         } else {
             throw new IllegalInputException(this);
         }
@@ -79,11 +77,11 @@ public class User {
 
     /**
      * @param company
-     * @param name
+     * @param employee
      */
-    public void setUserAsEmpolyee(Company company, String name) {
+    public void addUserToCompany(Company company, Employee employee) {
         try {
-            company.addNewEmployee(name);
+            company.addEmployee(employee);
         } catch (IllegalInputException iie) {
             iie.printStackTrace();
         }
