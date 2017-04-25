@@ -18,7 +18,7 @@ public class Company {
     private List<Comment> listOfComments;
     private List<Supplier> listOfSuppliers;
 
-
+    //TODO check if constructor is needed
     public Company(String companyName, List<Employee> listOfEmployees, List<Card> listOfCards, List<Comment> listOfComments, List<Supplier> listOfSuppliers) {
         this.companyName = companyName;
         this.listOfEmployees = listOfEmployees;
