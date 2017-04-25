@@ -16,18 +16,18 @@ import static org.junit.Assert.*;
  */
 public class UserTest {
     User user;
-    String companyName;
+    Company company;
 
     @Before
     public void setup() {
         user = new User("User");
-        companyName = "Company";
+        company = new Company("Company");
     }
 
     @Test
     public void testAddNewCompany() {
         try {
-            user.addNewCompany(companyName);
+            user.addCompany();
         } catch (IllegalInputException iie) {
             assertTrue(false);
         }
@@ -38,7 +38,7 @@ public class UserTest {
     public void testRemoveCompany() {
         addNewCompany();
         try {
-            user.removeCompany(companyName);
+            user.removeCompany(company);
         } catch (NoSuchCompanyException nsce) {
             assertTrue(false);
         }
@@ -48,27 +48,27 @@ public class UserTest {
     @Test
     public void testGetCompanyWithString() {
         addNewCompany();
-        assertEquals(companyName, user.getCompany(companyName).getName());
+        assertEquals(company.getName(), user.getCompany(company).getName());
     }
 
     @Test
     public void testGetCompanyWithCard() {
         addNewCompany();
         Card card = setupCard(1234);
-        assertEquals(companyName, user.getCompany(card).getName());
+        assertEquals(company.getName(), user.getCompany(card).getName());
     }
 
     @Test
     public void testGetCompanyWithPurchase() {
         Purchase purchase = setupPurchase();
-        assertEquals(companyName, user.getCompany(purchase).getName());
+        assertEquals(company.getName(), user.getCompany(purchase).getName());
     }
 
     private Card setupCard(int cardNumber) {
         addNewCompany();
         Card card = new Card(cardNumber);
         try {
-            user.getCompany(companyName).addNewCard(card);
+            user.getCompany(company).addCard(card);
         } catch (IllegalInputException iie) {
         }
         return card;
@@ -76,7 +76,7 @@ public class UserTest {
 
     private void addNewCompany() {
         try {
-            user.addNewCompany(companyName);
+            user.addCompany(company);
         } catch (IllegalInputException iie) {
             iie.getCause();
         }
@@ -89,7 +89,7 @@ public class UserTest {
         Receipt receipt = new Receipt(product, calendar, 10);
         Purchase purchase = new PrivatePurchase(receipt);
         addNewCompany();
-        user.getCompany(companyName).getEmployee(user.getName()).addPurchase(purchase);
+        user.getCompany(company).getEmployee(user.getName()).addPurchase(purchase);
         return purchase;
     }
 }
