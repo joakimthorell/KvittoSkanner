@@ -5,6 +5,6 @@ package corp.skaj.foretagskvitton.exceptions;
  */
 public class NoSuchCommentException extends RuntimeException {
     public NoSuchCommentException() {
-        System.out.println("No comment matching arguments found in listOfComments");
+        System.out.println("No such comment in listOfComments");
     }
 }

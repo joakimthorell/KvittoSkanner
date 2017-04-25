@@ -5,6 +5,6 @@ package corp.skaj.foretagskvitton.exceptions;
  */
 public class IllegalInputException extends Exception{
     public IllegalInputException (Object object) {
-        System.out.println("Input not accepted. Exception throw by" + object.getClass());
+        System.out.println("Illegal Input. Exception throw by" + object.getClass());
     }
 }
