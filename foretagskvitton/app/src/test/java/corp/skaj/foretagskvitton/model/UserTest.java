@@ -22,12 +22,17 @@ public class UserTest {
     public void setup() {
         user = new User("User");
         company = new Company("Company");
+        try {
+            company.addEmployee(new Employee(user.getName()));
+        } catch (IllegalInputException iie) {
+            iie.getCause();
+        }
     }
 
     @Test
     public void testAddNewCompany() {
         try {
-            user.addCompany();
+            user.addCompany(company);
         } catch (IllegalInputException iie) {
             assertTrue(false);
         }
@@ -89,7 +94,7 @@ public class UserTest {
         Receipt receipt = new Receipt(product, calendar, 10);
         Purchase purchase = new PrivatePurchase(receipt);
         addNewCompany();
-        user.getCompany(company).getEmployee(user.getName()).addPurchase(purchase);
+        company.getEmployee(user.getName()).addPurchase(purchase);
         return purchase;
     }
 }
