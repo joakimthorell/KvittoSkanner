@@ -32,15 +32,14 @@ public class User {
     }
 
     /**
-     * @param companyName
+     * @param company
      * @throws NoSuchCompanyException
      */
-    public void removeCompany(String companyName) throws NoSuchCompanyException {
-        if (containsCompany(companyName)) {
-            Company company = getCompany(companyName);
+    public void removeCompany(Company company) throws NoSuchCompanyException {
+        if (containsCompany(company.getName())) {
             listOfCompanies.remove(company);
         } else {
-            throw new NoSuchCompanyException(companyName);
+            throw new NoSuchCompanyException(company.getName());
         }
     }
 
@@ -102,13 +101,13 @@ public class User {
     }
 
     /**
-     * @param companyName
+     * @param company
      * @return Company
      */
-    public Company getCompany(String companyName) {
+    public Company getCompany(Company company) {
         for (int i = 0; i < listOfCompanies.size(); i++) {
             Company temp = listOfCompanies.get(i);
-            if (companyName == temp.getName()) {
+            if (temp.getName() == company.getName()) {
                 return temp;
             }
         }
