@@ -8,7 +8,7 @@ public abstract class Purchase {
     private Supplier supplier;
 
     protected Purchase(Receipt receipt, Supplier supplier) {
-        this(receipt);
+        this.receipt = receipt;
         this.supplier = supplier;
     }
 

@@ -59,22 +59,6 @@ public class User {
     }
 
     /**
-     * @param listOfPurchases
-     * @param purchase
-     * @return <code>true</code> if Purchase contains Receipt;
-     * <code>false</code> otherwise
-     */
-    private boolean containsReceipt(List<Purchase> listOfPurchases, Purchase purchase) {
-        for (int i = 0; i < listOfPurchases.size(); i++) {
-            Receipt temp = listOfPurchases.get(i).getReceipt();
-            if (purchase.getReceipt() == temp) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
      * @param company
      * @param employee
      */
@@ -115,21 +99,6 @@ public class User {
     }
 
     /**
-     * @param purchase
-     * @return Company
-     */
-    public Company getCompany(Purchase purchase) {
-        for (int i = 0; i < listOfCompanies.size(); i++) {
-            Company temp = listOfCompanies.get(i);
-            List<Purchase> listOfReceipts = temp.getEmployee(purchase).getListOfPurchases();
-            if (containsReceipt(listOfReceipts, purchase)) {
-                return temp;
-            }
-        }
-        return null;
-    }
-
-    /**
      * @param card
      * @return
      */
@@ -146,6 +115,37 @@ public class User {
             }
         }
         return null;
+    }
+
+    /**
+     * @param purchase
+     * @return Company
+     */
+    public Company getCompany(Purchase purchase) {
+        for (int i = 0; i < listOfCompanies.size(); i++) {
+            Company temp = listOfCompanies.get(i);
+            List<Purchase> listOfReceipts = temp.getEmployee(purchase).getListOfPurchases();
+            if (containsReceipt(listOfReceipts, purchase)) {
+                return temp;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * @param listOfPurchases
+     * @param purchase
+     * @return <code>true</code> if Purchase contains Receipt;
+     * <code>false</code> otherwise
+     */
+    private boolean containsReceipt(List<Purchase> listOfPurchases, Purchase purchase) {
+        for (int i = 0; i < listOfPurchases.size(); i++) {
+            Receipt temp = listOfPurchases.get(i).getReceipt();
+            if (purchase.getReceipt() == temp) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
