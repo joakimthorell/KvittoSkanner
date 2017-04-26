@@ -6,7 +6,4 @@
     <string name="menu_business">Företag</string>
     <string name="menu_user">Profil</string>
     <string name="title_activity_add_new_post">AddNewPost</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
 </resources>
