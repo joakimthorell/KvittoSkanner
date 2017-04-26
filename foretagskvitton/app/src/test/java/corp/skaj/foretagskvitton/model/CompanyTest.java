@@ -3,11 +3,6 @@ package corp.skaj.foretagskvitton.model;
 import org.junit.Before;
 import org.junit.Test;
 
-import corp.skaj.foretagskvitton.exceptions.IllegalInputException;
-import corp.skaj.foretagskvitton.exceptions.NoSuchCardException;
-import corp.skaj.foretagskvitton.exceptions.NoSuchEmployeeException;
-import corp.skaj.foretagskvitton.exceptions.NoSuchSupplierException;
-
 import static org.junit.Assert.*;
 
 /**
@@ -32,7 +27,7 @@ public class CompanyTest {
     public void testAddEmployee() {
         try {
             company.addEmployee(employee);
-        } catch (IllegalInputException iie) {
+        } catch (IllegalArgumentException iae) {
             assertTrue(false);
         }
         assertTrue(true);
@@ -43,7 +38,7 @@ public class CompanyTest {
         addNewEmployee();
         try {
             company.removeEmployee(employee);
-        } catch (NoSuchEmployeeException nsee) {
+        } catch (IllegalArgumentException iae) {
             assertTrue(false);
         }
         assertTrue(true);
@@ -56,7 +51,7 @@ public class CompanyTest {
             company.removeEmployee("testEmployee"); {
 
             }
-        } catch (NoSuchEmployeeException nsee) {
+        } catch (IllegalArgumentException iae) {
             assertTrue(false);
         }
         assertTrue(true);
@@ -66,7 +61,7 @@ public class CompanyTest {
     public void testAddCard () {
         try {
             company.addCard(new Card(1111));
-        } catch (IllegalInputException iie) {
+        } catch (IllegalArgumentException iae) {
             assertTrue(false);
         }
         assertTrue(true);
@@ -76,7 +71,7 @@ public class CompanyTest {
         addNewCard();
         try {
             company.removeCard(card);
-        } catch (NoSuchCardException nsce) {
+        } catch (IllegalArgumentException iae) {
             assertTrue(false);
         }
         assertTrue(true);
@@ -86,7 +81,7 @@ public class CompanyTest {
     public void testAddASupplier () {
         try {
             company.addSupplier(new Supplier("testSupplier"));
-        } catch (IllegalInputException iie) {
+        } catch (IllegalArgumentException iae) {
             assertTrue(false);
         }
         assertTrue(true);
@@ -97,7 +92,7 @@ public class CompanyTest {
         addNewSupplier();
         try {
             company.removeSupplier(supplier);
-        } catch (NoSuchSupplierException nsse) {
+        } catch (IllegalArgumentException iae) {
             assertTrue(false);
         }
         assertTrue(true);
@@ -106,23 +101,23 @@ public class CompanyTest {
     public void addNewEmployee () {
         try {
             company.addEmployee(employee);
-        } catch (IllegalInputException iie) {
-            iie.getCause();
+        } catch (IllegalArgumentException iae) {
+            iae.getCause();
         }
     }
 
     public void addNewCard () {
         try {
             company.addCard(new Card(5678));
-        } catch (IllegalInputException iie) {
-            iie.getCause();
+        } catch (IllegalArgumentException iae) {
+            iae.getCause();
         }
     }
     public void addNewSupplier () {
         try {
             company.addSupplier(new Supplier("testSupplier"));
-        } catch (IllegalInputException iie) {
-            iie.getCause();
+        } catch (IllegalArgumentException iae) {
+            iae.getCause();
         }
     }
 

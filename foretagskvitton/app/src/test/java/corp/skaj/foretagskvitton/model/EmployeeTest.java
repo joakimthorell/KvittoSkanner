@@ -6,9 +6,6 @@ import org.junit.Test;
 import java.util.Calendar;
 import java.util.Random;
 
-import corp.skaj.foretagskvitton.exceptions.NoSuchCommentException;
-import corp.skaj.foretagskvitton.exceptions.NoSuchPurchaseException;
-
 import static org.junit.Assert.*;
 
 /**
@@ -50,8 +47,8 @@ public class EmployeeTest {
 
         try {
             employee.removePurchase(purchase);
-        } catch (NoSuchPurchaseException e) {
-            e.printStackTrace();
+        } catch (IllegalArgumentException iae) {
+            iae.printStackTrace();
         }
 
         assertEquals(0, employee.getAmountOfPurchases());
@@ -67,12 +64,12 @@ public class EmployeeTest {
         try {
             employee.removePurchase(pur2);
             assertTrue(false);
-        } catch (NoSuchPurchaseException e) {
+        } catch (IllegalArgumentException iae) {
             assertTrue(true);
         }
     }
 
-    @Test(expected = NoSuchCommentException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void testRemoveCommentFromEmployee() {
         Comment comment = new Comment("Hej");
         employee.addComment(comment);
