@@ -100,7 +100,7 @@ public class Employee {
      *
      * @return listOfPurchases
      */
-    public List<Purchase> getListOfPurchases() {
+    public List<Purchase> getPurchases() {
         return listOfPurchases;
     }
 
@@ -108,7 +108,7 @@ public class Employee {
      *
      * @return listOfComments
      */
-    public List<Comment> getListOfComments() {
+    public List<Comment> getComments() {
         return listOfComments;
     }
 
