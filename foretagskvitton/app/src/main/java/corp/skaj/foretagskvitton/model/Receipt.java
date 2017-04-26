@@ -25,6 +25,20 @@ public class Receipt {
         this.total = total;
     }
 
+    public void removeProduct(Product product) throws IllegalArgumentException {
+        for (Product p : listOfProducts) {
+            if (product == p) {
+                listOfProducts.remove(p);
+                return;
+            }
+        }
+        throw new IllegalArgumentException("That product does not exist");
+    }
+
+    public void addProduct(Product product) {
+        listOfProducts.add(product);
+    }
+
     /**
      *
      * @return listOfProducts

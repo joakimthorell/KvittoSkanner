@@ -67,7 +67,7 @@ public class Company {
     public void removeEmployee(String name) throws NoSuchEmployeeException {
         for (int i = 0; i < listOfEmployees.size(); i++) {
             Employee temp = listOfEmployees.get(i);
-            if (temp.getName() == name) {
+            if (temp.getName().equals(name)) {
                 listOfEmployees.remove(i);
                 return;
             }
@@ -118,7 +118,7 @@ public class Company {
     public void removeSupplier(Supplier supplier) throws NoSuchSupplierException {
         for (int i = 0; i < listOfSuppliers.size(); i++) {
             Supplier temp = listOfSuppliers.get(i);
-            if (temp.getName() == supplier.getName()) {
+            if (temp.getName().equals(supplier.getName())) {
                 listOfSuppliers.remove(i);
                 return;
             }
@@ -134,7 +134,7 @@ public class Company {
     private boolean containsEmployee(String name) {
         for (int i = 0; i < listOfEmployees.size(); i++) {
             Employee temp = listOfEmployees.get(i);
-            if (temp.getName() == name) {
+            if (temp.getName().equals(name)) {
                 return true;
             }
         }
@@ -164,7 +164,7 @@ public class Company {
     private boolean containsSupplier(String name) {
         for (int i = 0; i < listOfSuppliers.size(); i++) {
             Supplier temp = listOfSuppliers.get(i);
-            if (temp.toString() == name) {
+            if (temp.getName().equals(name)) {
                 return true;
             }
         }
@@ -184,7 +184,7 @@ public class Company {
      */
     public Employee getEmployee(String employeeName) {
         for (Employee employee : listOfEmployees) {
-            if (employee.getName() == employeeName) {
+            if (employee.getName().equals(employeeName)) {
                 return employee;
             }
         }

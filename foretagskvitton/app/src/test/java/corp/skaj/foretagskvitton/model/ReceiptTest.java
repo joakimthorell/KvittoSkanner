@@ -28,18 +28,10 @@ public class ReceiptTest {
     }
 
     @Test
-    public void testPrice(){
+    public void testPrice() {
         double price = receipt.getTotal();
 
         Assert.assertEquals(15.90, price);
-    }
-
-    @Test
-    public void testTime() {
-        Calendar time = Calendar.getInstance();
-        time.set(2017, 04, 10);
-
-        Assert.assertEquals(receipt.getDate(), time);
     }
 
     @Test
@@ -50,9 +42,27 @@ public class ReceiptTest {
     }
 
     @Test
-    public void testTax(){
+    public void testTax() {
         double tax = receipt.getListOfProducts().get(0).getTax();
 
         Assert.assertEquals(25.0, tax);
+    }
+
+    @Test
+    public void testRemoveProduct() {
+        Product product = new Product("Banan paj", 25.00, 12);
+        receipt.addProduct(product);
+        receipt.setTotal(receipt.getTotal() + product.getPrice());
+
+        receipt.removeProduct(receipt.getListOfProducts().get(0));
+
+        Assert.assertEquals(1, receipt.getAmountOfProducts());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testRemoveProductException() {
+        Product product = new Product("Banan", 15, 12);
+
+        receipt.removeProduct(product);
     }
 }
