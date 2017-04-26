@@ -18,7 +18,7 @@ public class Company {
     private List<Comment> listOfComments;
     private List<Supplier> listOfSuppliers;
 
-    //TODO check if constructor is needed
+    //TODO Check if constructor is needed
     public Company(String companyName, List<Employee> listOfEmployees, List<Card> listOfCards, List<Comment> listOfComments, List<Supplier> listOfSuppliers) {
         this.companyName = companyName;
         this.listOfEmployees = listOfEmployees;
@@ -59,6 +59,7 @@ public class Company {
         }
     }
 
+    //TODO Använder vi nedanstående metod? Kommer vi använda den när vi har ovanstående?
     /**
      * @param name
      * @throws NoSuchEmployeeException
@@ -141,21 +142,6 @@ public class Company {
     }
 
     /**
-     * @param name
-     * @return <code>true</code> if listOfSuppliers already contains name
-     * <code>false</code> otherwise
-     */
-    private boolean containsSupplier(String name) {
-        for (int i = 0; i < listOfSuppliers.size(); i++) {
-            Supplier temp = listOfSuppliers.get(i);
-            if (temp.toString() == name) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
      * @param cardNumber
      * @return <code>true</code> if listOfCards already contains cardNumber
      * <code>false</code> otherwise
@@ -171,10 +157,18 @@ public class Company {
     }
 
     /**
-     * @return companyName
+     * @param name
+     * @return <code>true</code> if listOfSuppliers already contains name
+     * <code>false</code> otherwise
      */
-    public String getName() {
-        return companyName;
+    private boolean containsSupplier(String name) {
+        for (int i = 0; i < listOfSuppliers.size(); i++) {
+            Supplier temp = listOfSuppliers.get(i);
+            if (temp.toString() == name) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -226,23 +220,30 @@ public class Company {
     }
 
     /**
+     * @return companyName
+     */
+    public String getName() {
+        return companyName;
+    }
+
+    /**
      * @return listOfCards
      */
-    public List<Card> getListOfCards() {
+    public List<Card> getCards() {
         return listOfCards;
     }
 
     /**
      * @return listOfComments
      */
-    public List<Comment> getCompanyComment() {
+    public List<Comment> getComments() {
         return listOfComments;
     }
 
     /**
      * @return listOfSuppliers
      */
-    public List<Supplier> getListOfSuppliers() {
+    public List<Supplier> getSuppliers() {
         return listOfSuppliers;
     }
 
