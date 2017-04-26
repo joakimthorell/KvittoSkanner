@@ -3,16 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
-    android:background="@drawable/backround_xxxhdpi"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/backround_xxxhdpi"
     android:orientation="vertical"
     tools:context="corp.skaj.foretagskvitton.controllers.AddNewPost">
 
     <GridView
         android:layout_width="0dp"
-        android:layout_height="472dp"
-        android:layout_marginBottom="100dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="20dp"
         android:layout_marginTop="150dp"
         android:background="#99FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
@@ -25,11 +25,10 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
+        android:background="?android:attr/windowBackground"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:background="?android:attr/windowBackground"
-        app:menu="@menu/navigation"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="8dp" />
+        app:menu="@menu/bottom_navigation" />
 
 </android.support.constraint.ConstraintLayout>
