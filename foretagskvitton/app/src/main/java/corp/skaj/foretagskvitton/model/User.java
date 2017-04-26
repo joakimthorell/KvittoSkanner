@@ -1,9 +1,5 @@
 package corp.skaj.foretagskvitton.model;
 
-import corp.skaj.foretagskvitton.exceptions.IllegalInputException;
-import corp.skaj.foretagskvitton.exceptions.NoSuchCardException;
-import corp.skaj.foretagskvitton.exceptions.NoSuchCompanyException;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,25 +17,25 @@ public class User {
 
     /**
      * @param company
-     * @throws IllegalInputException
+     * @throws IllegalArgumentException
      */
-    public void addCompany(Company company) throws IllegalInputException {
+    public void addCompany(Company company) throws IllegalArgumentException {
         if (!containsCompany(company.getName())) {
             listOfCompanies.add(company);
         } else {
-            throw new IllegalInputException(this);
+            throw new IllegalArgumentException("Company already exists");
         }
     }
 
     /**
      * @param company
-     * @throws NoSuchCompanyException
+     * @throws IllegalArgumentException
      */
-    public void removeCompany(Company company) throws NoSuchCompanyException {
+    public void removeCompany(Company company) throws IllegalArgumentException {
         if (containsCompany(company.getName())) {
             listOfCompanies.remove(company);
         } else {
-            throw new NoSuchCompanyException(company.getName());
+            throw new IllegalArgumentException("No such company exists");
         }
     }
 
@@ -65,8 +61,8 @@ public class User {
     public void addUserToCompany(Company company, Employee employee) {
         try {
             company.addEmployee(employee);
-        } catch (IllegalInputException iie) {
-            iie.printStackTrace();
+        } catch (IllegalArgumentException iae) {
+            iae.printStackTrace();
         }
     }
 
@@ -110,8 +106,8 @@ public class User {
                 if (tempCard.getCard() == card.getCard()){
                     return temp;
                 }
-            } catch (NoSuchCardException nsce) {
-                nsce.getCause();
+            } catch (IllegalArgumentException iae) {
+                iae.getCause();
             }
         }
         return null;

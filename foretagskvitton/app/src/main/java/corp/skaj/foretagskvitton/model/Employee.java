@@ -3,8 +3,6 @@ package corp.skaj.foretagskvitton.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import corp.skaj.foretagskvitton.exceptions.NoSuchCommentException;
-import corp.skaj.foretagskvitton.exceptions.NoSuchPurchaseException;
 
 /**
  *
@@ -35,13 +33,13 @@ public class Employee {
     /**
      *
      * @param purchase
-     * @throws NoSuchPurchaseException
+     * @throws IllegalArgumentException
      */
-    public void removePurchase(Purchase purchase) throws NoSuchPurchaseException {
+    public void removePurchase(Purchase purchase) throws IllegalArgumentException {
         if (listOfPurchases.contains(purchase)) {
             listOfPurchases.remove(purchase);
         } else {
-            throw new NoSuchPurchaseException();
+            throw new IllegalArgumentException("No such purchase existing");
         }
     }
 
@@ -70,13 +68,13 @@ public class Employee {
     /**
      *
      * @param comment
-     * @throws NoSuchCommentException
+     * @throws IllegalArgumentException
      */
-    public void removeComment(Comment comment) throws NoSuchCommentException {
+    public void removeComment(Comment comment) throws IllegalArgumentException {
         if (listOfComments.contains(comment)) {
             listOfComments.remove(comment);
         } else {
-            throw new NoSuchCommentException();
+            throw new IllegalArgumentException("No such comment existing");
         }
     }
 

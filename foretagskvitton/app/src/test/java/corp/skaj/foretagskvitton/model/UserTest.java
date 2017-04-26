@@ -5,10 +5,6 @@ import org.junit.Test;
 
 import java.util.Calendar;
 
-import corp.skaj.foretagskvitton.exceptions.IllegalInputException;
-import corp.skaj.foretagskvitton.exceptions.NoSuchCardException;
-import corp.skaj.foretagskvitton.exceptions.NoSuchCompanyException;
-
 import static org.junit.Assert.*;
 
 /**
@@ -24,8 +20,8 @@ public class UserTest {
         company = new Company("Company");
         try {
             company.addEmployee(new Employee(user.getName()));
-        } catch (IllegalInputException iie) {
-            iie.getCause();
+        } catch (IllegalArgumentException iae) {
+            iae.getCause();
         }
     }
 
@@ -33,7 +29,7 @@ public class UserTest {
     public void testAddNewCompany() {
         try {
             user.addCompany(company);
-        } catch (IllegalInputException iie) {
+        } catch (IllegalArgumentException iae) {
             assertTrue(false);
         }
         assertTrue(true);
@@ -44,7 +40,7 @@ public class UserTest {
         addNewCompany();
         try {
             user.removeCompany(company);
-        } catch (NoSuchCompanyException nsce) {
+        } catch (IllegalArgumentException iae) {
             assertTrue(false);
         }
         assertTrue(true);
@@ -74,7 +70,7 @@ public class UserTest {
         Card card = new Card(cardNumber);
         try {
             user.getCompany(company).addCard(card);
-        } catch (IllegalInputException iie) {
+        } catch (IllegalArgumentException iae) {
         }
         return card;
     }
@@ -82,8 +78,8 @@ public class UserTest {
     private void addNewCompany() {
         try {
             user.addCompany(company);
-        } catch (IllegalInputException iie) {
-            iie.getCause();
+        } catch (IllegalArgumentException iae) {
+            iae.getCause();
         }
     }
 
