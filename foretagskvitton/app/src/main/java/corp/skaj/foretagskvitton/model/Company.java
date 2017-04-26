@@ -3,10 +3,6 @@ package corp.skaj.foretagskvitton.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import corp.skaj.foretagskvitton.exceptions.IllegalInputException;
-import corp.skaj.foretagskvitton.exceptions.NoSuchCardException;
-import corp.skaj.foretagskvitton.exceptions.NoSuchEmployeeException;
-import corp.skaj.foretagskvitton.exceptions.NoSuchSupplierException;
 
 /**
  *
@@ -37,34 +33,34 @@ public class Company {
 
     /**
      * @param employee
-     * @throws IllegalInputException
+     * @throws IllegalArgumentException
      */
-    public void addEmployee(Employee employee) throws IllegalInputException {
+    public void addEmployee(Employee employee) throws IllegalArgumentException {
         if (!containsEmployee(employee.getName())) {
             listOfEmployees.add(employee);
         } else {
-            throw new IllegalInputException(this);
+            throw new IllegalArgumentException("Employee already existing");
         }
     }
 
     /**
      * @param employee
-     * @throws NoSuchEmployeeException
+     * @throws IllegalArgumentException
      */
-    public void removeEmployee(Employee employee) throws NoSuchEmployeeException {
+    public void removeEmployee(Employee employee) throws IllegalArgumentException {
         if (containsEmployee(employee.getName())) {
             listOfEmployees.remove(employee);
         } else {
-            throw new NoSuchEmployeeException();
+            throw new IllegalArgumentException("No such employee existing");
         }
     }
 
     //TODO Använder vi nedanstående metod? Kommer vi använda den när vi har ovanstående?
     /**
      * @param name
-     * @throws NoSuchEmployeeException
+     * @throws IllegalArgumentException
      */
-    public void removeEmployee(String name) throws NoSuchEmployeeException {
+    public void removeEmployee(String name) throws IllegalArgumentException {
         for (int i = 0; i < listOfEmployees.size(); i++) {
             Employee temp = listOfEmployees.get(i);
             if (temp.getName().equals(name)) {
@@ -72,50 +68,50 @@ public class Company {
                 return;
             }
         }
-        throw new NoSuchEmployeeException();
+        throw new IllegalArgumentException("No such employee existing");
     }
 
     /**
      * @param card
-     * @throws IllegalInputException
+     * @throws IllegalArgumentException
      */
-    public void addCard(Card card) throws IllegalInputException {
+    public void addCard(Card card) throws IllegalArgumentException {
         if (!containsCard(card.getCard())) {
             listOfCards.add(card);
         } else {
-            throw new IllegalInputException(this);
+            throw new IllegalArgumentException("This card already exists");
         }
     }
 
     /**
      * @param card
-     * @throws NoSuchCardException
+     * @throws IllegalArgumentException
      */
-    public void removeCard(Card card) throws NoSuchCardException {
+    public void removeCard(Card card) throws IllegalArgumentException {
         if (containsCard(card.getCard())) {
             listOfCards.remove(card);
         } else {
-            throw new NoSuchCardException();
+            throw new IllegalArgumentException("No such card existing");
         }
     }
 
     /**
      * @param supplier
-     * @throws IllegalInputException
+     * @throws IllegalArgumentException
      */
-    public void addSupplier(Supplier supplier) throws IllegalInputException {
+    public void addSupplier(Supplier supplier) throws IllegalArgumentException {
         if (!containsSupplier(supplier.getName())) {
             listOfSuppliers.add(supplier);
         } else {
-            throw new IllegalInputException(this);
+            throw new IllegalArgumentException("The supplier already exists");
         }
     }
 
     /**
      * @param supplier
-     * @throws NoSuchSupplierException
+     * @throws IllegalArgumentException
      */
-    public void removeSupplier(Supplier supplier) throws NoSuchSupplierException {
+    public void removeSupplier(Supplier supplier) throws IllegalArgumentException {
         for (int i = 0; i < listOfSuppliers.size(); i++) {
             Supplier temp = listOfSuppliers.get(i);
             if (temp.getName().equals(supplier.getName())) {
@@ -123,7 +119,7 @@ public class Company {
                 return;
             }
         }
-        throw new NoSuchSupplierException();
+        throw new IllegalArgumentException("No such supplier existing");
     }
 
     /**
@@ -207,9 +203,9 @@ public class Company {
     /**
      * @param cardNumber
      * @return
-     * @throws NoSuchCardException
+     * @throws IllegalArgumentException
      */
-    public Card getCard(int cardNumber) throws NoSuchCardException {
+    public Card getCard(int cardNumber) throws IllegalArgumentException {
         for (int i = 0; i < listOfCards.size(); i++) {
             Card temp = listOfCards.get(i);
             if (temp.getCard() == cardNumber) {
