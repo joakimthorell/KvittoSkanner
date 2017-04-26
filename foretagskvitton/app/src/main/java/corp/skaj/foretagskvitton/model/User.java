@@ -124,7 +124,7 @@ public class User {
     public Company getCompany(Purchase purchase) {
         for (int i = 0; i < listOfCompanies.size(); i++) {
             Company temp = listOfCompanies.get(i);
-            List<Purchase> listOfReceipts = temp.getEmployee(purchase).getListOfPurchases();
+            List<Purchase> listOfReceipts = temp.getEmployee(purchase).getPurchases();
             if (containsReceipt(listOfReceipts, purchase)) {
                 return temp;
             }
