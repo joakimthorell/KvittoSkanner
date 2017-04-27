@@ -17,7 +17,8 @@ public class ReceiptTest {
         Calendar c = Calendar.getInstance();
         c.set(2017, 04, 10);
         double totalPrice = 15.90;
-        receipt = new Receipt(product, c, totalPrice);
+        //TODO
+        receipt = new Receipt(product, c, totalPrice, null);
     }
 
     @Test
