@@ -22,7 +22,6 @@ public class TextCollector {
     private TextCollector() {
     }
 
-    // This calls first
     public static List<String> collectStringsFromImage(Context context, Uri uri) throws IOException {
         Bitmap bmp = createImageFromUri(context, uri);
         SparseArray<TextBlock> textBlocks = getTextBlocksFromImage(context, bmp);
@@ -32,7 +31,6 @@ public class TextCollector {
         return buildListOfStrings(textBlocks);
     }
 
-    // This second
     private static Bitmap createImageFromUri(Context context, Uri uri) throws IOException {
         if (URI == null) {
             throw new NullPointerException("URI is null");
@@ -41,7 +39,6 @@ public class TextCollector {
         return bmp;
     }
 
-    // This third
     private static SparseArray<TextBlock> getTextBlocksFromImage(Context context, Bitmap bmp) {
         TextRecognizer textRecognizer = new TextRecognizer.Builder(context.getApplicationContext()).build();
         if (textRecognizer.isOperational()) {
@@ -57,7 +54,6 @@ public class TextCollector {
         }
     }
 
-    // This fourth
     private static List<String> buildListOfStrings(SparseArray<TextBlock> listOfTextBlock) {
         List<String> listOfStrings = new ArrayList<>();
         for (int i = 0; i < listOfTextBlock.size(); i++) {
@@ -68,7 +64,6 @@ public class TextCollector {
         return listOfStrings;
     }
 
-    // Last
     private static List<String> linesToStrings(List<? extends Text> list) {
         List<String> listOfStrings = new ArrayList<>();
         for (Text t : list) {

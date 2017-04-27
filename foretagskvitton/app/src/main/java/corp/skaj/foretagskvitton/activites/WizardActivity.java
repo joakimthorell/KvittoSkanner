@@ -15,32 +15,34 @@ import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.services.TextCollector;
 
 public class WizardActivity extends AppCompatActivity {
+    private List<String> listOfStrings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wizard);
+        final Uri URI = catchIntent(getIntent());
 
-        Uri URI = catchIntent(getIntent());
-        List<String> list = null;
-        try {
-            list = TextCollector.collectStringsFromImage(getApplicationContext(), URI);
-        } catch (IOException e) {
-            System.out.println("Error collecting strings");
-        }
+        collectStrings(URI).start();
+        //TODO Start loadingbar
+    }
 
-        String stringToShow = "";
-        for (String s : list) {
-            stringToShow += s + "\n";
-        }
+    private Thread collectStrings(final Uri URI) {
+        return new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    listOfStrings = TextCollector.collectStringsFromImage(getApplicationContext(), URI);
+                    endLoadingBar();
+                } catch (IOException io) {
+                    System.out.println("TextColletor not working");
+                }
+            }
+        });
+    }
 
-        System.out.println(stringToShow);
-
-        TextView textView = (TextView) findViewById(R.id.textContainer);
-        textView.setText(stringToShow);
-
-
-
+    private void endLoadingBar() {
+        //TODO End loadingbar
     }
 
     // If more then addNewPost will send images here, add them here
