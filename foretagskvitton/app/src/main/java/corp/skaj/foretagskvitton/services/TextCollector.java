@@ -22,7 +22,8 @@ public class TextCollector {
     private TextCollector() {
     }
 
-    public static List<String> collectStringsFromImage(Context context, Uri uri) throws IOException, NullPointerException {
+    // This calls first
+    public static List<String> collectStringsFromImage(Context context, Uri uri) throws IOException {
         Bitmap bmp = createImageFromUri(context, uri);
         SparseArray<TextBlock> textBlocks = getTextBlocksFromImage(context, bmp);
         if (textBlocks == null) {
@@ -31,22 +32,16 @@ public class TextCollector {
         return buildListOfStrings(textBlocks);
     }
 
-    private static List<String> buildListOfStrings(SparseArray<TextBlock> listOfTextBlock) {
-        List<String> listOfStrings = new ArrayList<>();
-        for (int i = 0; i < listOfTextBlock.size(); i++) {
-            listOfStrings.addAll(linesToStrings(listOfTextBlock.get(i).getComponents()));
+    // This second
+    private static Bitmap createImageFromUri(Context context, Uri uri) throws IOException {
+        if (URI == null) {
+            throw new NullPointerException("URI is null");
         }
-        return listOfStrings;
+        Bitmap bmp = MediaStore.Images.Media.getBitmap(context.getContentResolver(), uri);
+        return bmp;
     }
 
-    private static List<String> linesToStrings(List<? extends Text> list) {
-        List<String> listOfStrings = new ArrayList<>();
-        for (Text t : list) {
-            listOfStrings.add(t.getValue());
-        }
-        return listOfStrings;
-    }
-
+    // This third
     private static SparseArray<TextBlock> getTextBlocksFromImage(Context context, Bitmap bmp) {
         TextRecognizer textRecognizer = new TextRecognizer.Builder(context.getApplicationContext()).build();
         if (textRecognizer.isOperational()) {
@@ -58,14 +53,27 @@ public class TextCollector {
             System.out.println("TextRecognizer is not operational");
             // TODO some kind of error handling here?
             return null;
+
         }
     }
 
-    private static Bitmap createImageFromUri(Context context, Uri uri) throws IOException, NullPointerException {
-        if (URI == null) {
-            throw new NullPointerException("URI is null");
+    // This fourth
+    private static List<String> buildListOfStrings(SparseArray<TextBlock> listOfTextBlock) {
+        List<String> listOfStrings = new ArrayList<>();
+        for (int i = 0; i < listOfTextBlock.size(); i++) {
+            if (listOfTextBlock.get(i) != null) {
+                listOfStrings.addAll(linesToStrings(listOfTextBlock.get(i).getComponents()));
+            }
         }
-        Bitmap bmp = MediaStore.Images.Media.getBitmap(context.getContentResolver(), uri);
-        return bmp;
+        return listOfStrings;
+    }
+
+    // Last
+    private static List<String> linesToStrings(List<? extends Text> list) {
+        List<String> listOfStrings = new ArrayList<>();
+        for (Text t : list) {
+            listOfStrings.add(t.getValue());
+        }
+        return listOfStrings;
     }
 }

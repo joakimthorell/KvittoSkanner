@@ -34,6 +34,8 @@ public class WizardActivity extends AppCompatActivity {
             stringToShow += s + "\n";
         }
 
+        System.out.println(stringToShow);
+
         TextView textView = (TextView) findViewById(R.id.textContainer);
         textView.setText(stringToShow);
 
