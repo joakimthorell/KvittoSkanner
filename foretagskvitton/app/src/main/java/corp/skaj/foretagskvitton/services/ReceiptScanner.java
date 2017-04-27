@@ -46,7 +46,7 @@ public class ReceiptScanner {
         return biggestDouble;
     }
 
-    //TODO Kan kolla if "Totalt" or "Total" i samma metod
+    //TODO Kan kolla if "Totalt" or "Total" i samma metod m.h.a || (metoderna nedan)
     private boolean checkIfTotalBeforeAmount() {
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).equals("Total")) {
@@ -74,7 +74,7 @@ public class ReceiptScanner {
         return false;
     }
 
-    // TODO Kan kolla if Big or Small "Kr" i samma metod (även ovanstående SEK) mha ||
+    // TODO Kan kolla if Big or Small "Kr" i samma metod (även ovanstående SEK) m.h.a ||
     public boolean checkIfBigKrAfter() {
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).equals("Kr")) {
@@ -102,9 +102,6 @@ public class ReceiptScanner {
         }
     }
 
-    public void getCardNumber() {
-    }
-
     public String getDate() {
         for (int i = 0; i < list.size(); i++) {
             if (correctFirstNum(list.get(i).substring(0, 3)) && correctLength(list.get(i))) {
@@ -115,6 +112,9 @@ public class ReceiptScanner {
     }
 
     public void getProducts() {
+    }
+
+    public void getCardNumber() {
     }
 
 }
