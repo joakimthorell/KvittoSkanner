@@ -100,9 +100,19 @@ public class SearchThroughReceipt {
         }
         return false;
     }
-    public boolean checkIfKrAfter () {
+    public boolean checkIfBigKrAfter () {
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).equals("Kr")) {
+                return true;
+            }
+        }
+        return false;
+
+    }
+
+    public boolean checkIfSmallKrAfter () {
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).equals("kr")) {
                 return true;
             }
         }
