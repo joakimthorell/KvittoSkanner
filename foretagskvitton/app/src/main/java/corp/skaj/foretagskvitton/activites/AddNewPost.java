@@ -21,6 +21,9 @@ import java.util.Date;
 
 import corp.skaj.foretagskvitton.R;
 
+/**
+ *
+ */
 public class AddNewPost extends AppCompatActivity {
     private String pictureAdress;
     private static final int REQUEST_IMAGE_CAPTURE = 31415;
@@ -30,13 +33,12 @@ public class AddNewPost extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_add_new_post);
         pictureAdress = "";
-
         // Hides the actionbar and gives fullscreen feature
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
-
         // Setup bottom navigation
         BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
         setupBottomNavigationBar(bottomBar);
@@ -116,7 +118,6 @@ public class AddNewPost extends AppCompatActivity {
         // Create image file
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = "JPEG_" + timeStamp + "_";
-
         File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         File image = File.createTempFile(
                 imageFileName,  /* prefix */

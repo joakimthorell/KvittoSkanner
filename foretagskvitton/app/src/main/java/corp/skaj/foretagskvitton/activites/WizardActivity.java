@@ -16,15 +16,18 @@ import java.util.List;
 import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.services.TextCollector;
 
+/**
+ * 
+ */
 public class WizardActivity extends AppCompatActivity {
     private List<String> listOfStrings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_wizard);
         final Uri URI = catchIntent(getIntent());
-
         collectStrings(URI).start();
         ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
         progressBar.setVisibility(View.VISIBLE);
@@ -50,12 +53,11 @@ public class WizardActivity extends AppCompatActivity {
             public void run() {
                 ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
                 progressBar.setVisibility(View.GONE);
-
                 String toPrint = "";
+
                 for (String s : listOfStrings) {
                     toPrint += s + "\n";
                 }
-                
                 TextView textView = (TextView) findViewById(R.id.textContainer);
                 textView.setText(toPrint);
             }

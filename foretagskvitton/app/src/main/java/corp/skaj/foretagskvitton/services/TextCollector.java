@@ -17,6 +17,9 @@ import java.util.List;
 
 import static android.provider.CalendarContract.CalendarCache.URI;
 
+/**
+ *
+ */
 public class TextCollector {
 
     private TextCollector() {
@@ -25,6 +28,7 @@ public class TextCollector {
     public static List<String> collectStringsFromImage(Context context, Uri uri) throws IOException {
         Bitmap bmp = createImageFromUri(context, uri);
         SparseArray<TextBlock> textBlocks = getTextBlocksFromImage(context, bmp);
+
         if (textBlocks == null) {
             // TODO error handling here, no text was found or textrecognizer is not working
         }
@@ -41,6 +45,7 @@ public class TextCollector {
 
     private static SparseArray<TextBlock> getTextBlocksFromImage(Context context, Bitmap bmp) {
         TextRecognizer textRecognizer = new TextRecognizer.Builder(context.getApplicationContext()).build();
+
         if (textRecognizer.isOperational()) {
             Frame frame = new Frame.Builder().setBitmap(bmp).build();
             SparseArray<TextBlock> list = textRecognizer.detect(frame);
@@ -56,6 +61,7 @@ public class TextCollector {
 
     private static List<String> buildListOfStrings(SparseArray<TextBlock> listOfTextBlock) {
         List<String> listOfStrings = new ArrayList<>();
+
         for (int i = 0; i < listOfTextBlock.size(); i++) {
             if (listOfTextBlock.get(i) != null) {
                 listOfStrings.addAll(linesToStrings(listOfTextBlock.get(i).getComponents()));
@@ -66,6 +72,7 @@ public class TextCollector {
 
     private static List<String> linesToStrings(List<? extends Text> list) {
         List<String> listOfStrings = new ArrayList<>();
+
         for (Text t : list) {
             listOfStrings.add(t.getValue());
         }
