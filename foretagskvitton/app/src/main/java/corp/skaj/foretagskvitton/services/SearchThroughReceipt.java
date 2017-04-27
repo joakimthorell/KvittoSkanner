@@ -1,8 +1,9 @@
 package corp.skaj.foretagskvitton.services;
 
+
 import java.text.DateFormat;
 import java.util.Calendar;
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,8 +17,12 @@ public class SearchThroughReceipt {
     List<String> list;
     DateFormat date;
     Calendar calandar;
-    public void findTotalCost() {
 
+    List<Double> listOfDoubles = new ArrayList<>();
+
+    public void findTotalCost() {
+    findAllDoubles();
+    totalCost = findBiggestDouble();
     }
 
     public void findCardNumber () {
@@ -47,4 +52,23 @@ public class SearchThroughReceipt {
 
     }
 
+    public void findAllDoubles () {
+        double temp = 0;
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).contains(",")) {
+                temp = Double.parseDouble(list.get(i));
+                listOfDoubles.add(temp);
+            }
+        }
+    }
+
+    public double findBiggestDouble () {
+        double biggestDouble = 0;
+        for (int i = 0; i < listOfDoubles.size(); i++) {
+            if (listOfDoubles.get(i) > listOfDoubles.get(i+1)) {
+                biggestDouble = listOfDoubles.get(i);
+            }
+        }
+        return biggestDouble;
+    }
 }
