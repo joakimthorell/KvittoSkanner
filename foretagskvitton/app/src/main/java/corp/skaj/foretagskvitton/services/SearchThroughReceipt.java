@@ -1,8 +1,6 @@
 package corp.skaj.foretagskvitton.services;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.StringTokenizer;
 
 /**
  * Created by annekeller on 2017-04-27.
