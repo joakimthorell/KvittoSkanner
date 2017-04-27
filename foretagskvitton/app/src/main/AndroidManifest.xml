@@ -24,13 +24,14 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".controllers.AddNewPost" >
+        <activity android:name=".activites.AddNewPost">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".activites.WizardActivity"></activity>
     </application>
 
 </manifest>

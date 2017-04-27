@@ -1,4 +1,4 @@
-package corp.skaj.foretagskvitton.controllers;
+package corp.skaj.foretagskvitton.activites;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -22,10 +22,12 @@ import java.util.Date;
 import corp.skaj.foretagskvitton.R;
 
 public class AddNewPost extends AppCompatActivity {
-
     private String pictureAdress;
 
     private static final int REQUEST_IMAGE_CAPTURE = 3141;
+
+    public static final String BUILD_NEW_RECEIPT = "corp.skaj.foretagskvitton.BUILD_RECEIPT";
+    public static final String KEY_FOR_IMAGE = "corp.skaj.foretagskvitton.KEY_FOR_IMAGE";
 
 
     @Override
@@ -41,7 +43,6 @@ public class AddNewPost extends AppCompatActivity {
 
         // setting up the bottom navigation
         BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
-        bottomBar.setDefaultTab(R.id.action_add);
         setupBottomNavigationBar(bottomBar);
     }
 
@@ -60,6 +61,9 @@ public class AddNewPost extends AppCompatActivity {
     }
 
     private void setupBottomNavigationBar(BottomBar bottomBar) {
+
+        bottomBar.setDefaultTab(R.id.action_add);
+
         bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelected(@IdRes int tabId) {
