@@ -23,47 +23,27 @@ import corp.skaj.foretagskvitton.R;
 
 public class AddNewPost extends AppCompatActivity {
     private String pictureAdress;
-
-    private static final int REQUEST_IMAGE_CAPTURE = 3141;
-
+    private static final int REQUEST_IMAGE_CAPTURE = 31415;
     public static final String BUILD_NEW_RECEIPT = "corp.skaj.foretagskvitton.BUILD_RECEIPT";
     public static final String KEY_FOR_IMAGE = "corp.skaj.foretagskvitton.KEY_FOR_IMAGE";
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_new_post);
-
         pictureAdress = "";
 
-        // hides the actionbar and gives fullscreen feature
+        // Hides the actionbar and gives fullscreen feature
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
 
-        // setting up the bottom navigation
+        // Setup bottom navigation
         BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
         setupBottomNavigationBar(bottomBar);
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            if (pictureAdress.length() > 0) {
-                Uri URI = Uri.fromFile(new File(pictureAdress));
-                pictureAdress = "";
-                System.out.println("Coming back here!");
-            }
-        } else {
-            // TODO popup showing no pic was captured
-            System.out.println("No picture were found");
-        }
-    }
-
     private void setupBottomNavigationBar(BottomBar bottomBar) {
-
         bottomBar.setDefaultTab(R.id.action_add);
-
         bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelected(@IdRes int tabId) {
@@ -96,7 +76,6 @@ public class AddNewPost extends AppCompatActivity {
         if (takePicture.resolveActivity(getPackageManager()) != null) {
             // Creates a file to save the photo in
             File photoFile = null;
-
             try {
                 photoFile = createImageFile();
             } catch (IOException e) {
@@ -113,7 +92,7 @@ public class AddNewPost extends AppCompatActivity {
     }
 
     private File createImageFile() throws IOException {
-        // create image file
+        // Create image file
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = "JPEG_" + timeStamp + "_";
 
@@ -123,10 +102,23 @@ public class AddNewPost extends AppCompatActivity {
                 ".jpg",         /* suffix */
                 storageDir      /* directory */
         );
-
         // Save a file: path for use with ACTION_VIEW intents
         pictureAdress = image.getAbsolutePath();
         return image;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            if (pictureAdress.length() > 0) {
+                Uri URI = Uri.fromFile(new File(pictureAdress));
+                pictureAdress = "";
+                System.out.println("Coming back here!");
+            }
+        } else {
+            // TODO fix a popup showing "no pic was captured"
+            System.out.println("No picture were found");
+        }
     }
 
     public void takePicturePressed(View view) {
