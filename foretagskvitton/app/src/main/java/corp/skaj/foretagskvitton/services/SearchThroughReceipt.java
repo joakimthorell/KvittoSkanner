@@ -20,9 +20,12 @@ public class SearchThroughReceipt {
 
     List<Double> listOfDoubles = new ArrayList<>();
 
-    public void findTotalCost() {
-    findAllDoubles();
-    totalCost = findBiggestDouble();
+    public void findTotalCost(List<String> list) {
+    findAllDoubles(list);
+    totalCost = findBiggestDouble(listOfDoubles);
+        if (totalCost == 0) {
+
+        }
     }
 
     public void findCardNumber () {
@@ -52,7 +55,7 @@ public class SearchThroughReceipt {
 
     }
 
-    public void findAllDoubles () {
+    public void findAllDoubles (List<String> list) {
         double temp = 0;
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).contains(",")) {
@@ -62,13 +65,49 @@ public class SearchThroughReceipt {
         }
     }
 
-    public double findBiggestDouble () {
+    public double findBiggestDouble (List<Double> listOfDoubles) {
         double biggestDouble = 0;
-        for (int i = 0; i < listOfDoubles.size(); i++) {
+        for (int i = 0; i < listOfDoubles.size() - 1; i++) {
             if (listOfDoubles.get(i) > listOfDoubles.get(i+1)) {
                 biggestDouble = listOfDoubles.get(i);
             }
         }
         return biggestDouble;
     }
+    public boolean checkIfTotalBeforeAmount () {
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).equals("Total")) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean checkIfTotaltBeforeAmount () {
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).equals("Totalt")) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean checkIfSekAfter () {
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).equals("SEK")) {
+                return true;
+            }
+        }
+        return false;
+    }
+    public boolean checkIfKrAfter () {
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).equals("Kr")) {
+                return true;
+            }
+        }
+        return false;
+
+    }
+
 }

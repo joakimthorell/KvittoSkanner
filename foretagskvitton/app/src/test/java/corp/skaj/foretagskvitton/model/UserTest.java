@@ -87,7 +87,8 @@ public class UserTest {
         Product product = new Product("Apelsin", 10, 12.5);
         Calendar calendar = Calendar.getInstance();
         calendar.set(2017, 4, 20);
-        Receipt receipt = new Receipt(product, calendar, 10);
+        //TODO
+        Receipt receipt = new Receipt(product, calendar, 10, null);
         Purchase purchase = new PrivatePurchase(receipt);
         addNewCompany();
         company.getEmployee(user.getName()).addPurchase(purchase);
