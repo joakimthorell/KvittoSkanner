@@ -22,6 +22,8 @@ public class WizardActivity extends AppCompatActivity {
         setContentView(R.layout.activity_wizard);
 
         Uri URI = catchIntent(getIntent());
+        System.out.println("Här körs de fortfarande");
+        System.out.println(URI.toString());
         List<String> list = null;
         try {
             list = TextCollector.collectStringsFromImage(getApplicationContext(), URI);
@@ -33,6 +35,8 @@ public class WizardActivity extends AppCompatActivity {
         for (String s : list) {
             stringToShow += s + "\n";
         }
+
+        System.out.println(stringToShow);
 
         TextView textView = (TextView) findViewById(R.id.textContainer);
         textView.setText(stringToShow);
