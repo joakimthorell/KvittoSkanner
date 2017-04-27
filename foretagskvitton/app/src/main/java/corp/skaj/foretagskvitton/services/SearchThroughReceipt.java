@@ -16,7 +16,7 @@ public class SearchThroughReceipt {
     double totalCost;
     List<String> list;
     DateFormat date;
-    Calendar calandar;
+    Calendar calendar;
 
     List<Double> listOfDoubles = new ArrayList<>();
 
@@ -32,19 +32,21 @@ public class SearchThroughReceipt {
 
     }
 
-    public String findDate ( ) {
+    public String findDate (List<String> list ) {
         for(int i = 0; i < list.size(); i++){
             if(correctFirstnum(list.get(i).substring(0,3)) && correctLength(list.get(i))){
                 return list.get(i);
             }
         }
-        return calandar.getInstance().getTime().toString();
+        return calendar.getInstance().getTime().toString();
     }
 
     // Checks that the string starts with the current year in ex. 17 or 2017.
     private boolean correctFirstnum(String date){
-        return  date.substring(0,2).equals((String.valueOf(calandar.YEAR).substring(1,3))) ||
-                date.equals(String.valueOf(calandar.YEAR));
+         String year = String.valueOf(calendar.YEAR);
+
+        return  date.substring(0,2).equals(year.substring(1,3)) ||
+                date.equals(String.valueOf(calendar.YEAR));
     }
     // Checks that the size is correct format, either 170218 or 2017-05-03.
     private boolean correctLength(String date){
