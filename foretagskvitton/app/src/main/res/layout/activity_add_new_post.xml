@@ -9,28 +9,71 @@
     android:orientation="vertical"
     tools:context="corp.skaj.foretagskvitton.controllers.AddNewPost">
 
-    <GridView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="20dp"
-        android:layout_marginTop="150dp"
-        android:background="#99FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <android.support.design.widget.BottomNavigationView
-        android:id="@+id/bottom_navigation"
+    <!-- Input the picture here -->
+
+    <View
+        android:id="@+id/rectangle"
+        android:layout_width="0dp"
+        android:layout_height="300dp"
+        android:layout_marginBottom="20dp"
+        android:background="#99FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/bottomBar"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <com.roughike.bottombar.BottomBar
+        android:id="@+id/bottomBar"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:background="@color/colorMenu"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:bb_titleTextAppearance="@style/MyBottomBarStyle"
+        app:bb_inActiveTabColor="@color/colorMenuItem"
+        app:bb_activeTabColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:bb_tabXmlResource="@xml/bottombar_tabs" />
+
+    <Button
+        android:id="@+id/addFromCameraButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:background="@color/colorMenu"
-        app:itemIconTint="@drawable/selector"
-        app:itemTextColor="@drawable/selector"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="@string/camera"
+        android:layout_marginTop="8dp"
+        android:drawableEnd="@drawable/ic_camera"
+        android:paddingStart="40dp"
+        android:paddingEnd="15dp"
+        android:paddingTop="30dp"
+        android:paddingBottom="30dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:menu="@menu/bottom_navigation" />
+        app:layout_constraintTop_toTopOf="@+id/rectangle"
+        style="@style/AddButtonStyle"
+        />
+
+    <Button
+        android:id="@+id/noPictureButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:text="@string/no_picture"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/addFromCameraButton"
+        style="@style/AddButtonStyle"
+        />
+    <Button
+        android:id="@+id/galleryButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/gallery"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/noPictureButton"
+        app:layout_constraintBottom_toBottomOf="@id/rectangle"
+        style="@style/AddButtonStyle"/>
 
 </android.support.constraint.ConstraintLayout>

@@ -6,4 +6,7 @@
     <string name="menu_business">Företag</string>
     <string name="menu_user">Profil</string>
     <string name="title_activity_add_new_post">AddNewPost</string>
+    <string name="camera">Kamera</string>
+    <string name="no_picture">Utan bild</string>
+    <string name="gallery">Galleri</string>
 </resources>
