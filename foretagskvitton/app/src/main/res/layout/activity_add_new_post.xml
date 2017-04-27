@@ -44,7 +44,7 @@
     <com.roughike.bottombar.BottomBar
         android:id="@+id/bottomBar"
         android:layout_width="0dp"
-        android:layout_height="16dp"
+        android:layout_height="60dp"
         android:background="@color/colorMenu"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
