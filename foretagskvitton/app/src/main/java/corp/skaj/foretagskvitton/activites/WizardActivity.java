@@ -6,8 +6,13 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.TextView;
+
+import java.io.IOException;
+import java.util.List;
 
 import corp.skaj.foretagskvitton.R;
+import corp.skaj.foretagskvitton.services.TextCollector;
 
 public class WizardActivity extends AppCompatActivity {
 
@@ -17,6 +22,21 @@ public class WizardActivity extends AppCompatActivity {
         setContentView(R.layout.activity_wizard);
 
         Uri URI = catchIntent(getIntent());
+        List<String> list = null;
+        try {
+            list = TextCollector.collectStringsFromImage(getApplicationContext(), URI);
+        } catch (IOException e) {
+            System.out.println("Error collecting strings");
+        }
+
+        String stringToShow = "";
+        for (String s : list) {
+            stringToShow += s + "\n";
+        }
+
+        TextView textView = (TextView) findViewById(R.id.textContainer);
+        textView.setText(stringToShow);
+
 
 
     }

@@ -42,6 +42,27 @@ public class AddNewPost extends AppCompatActivity {
         setupBottomNavigationBar(bottomBar);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            if (pictureAdress.length() > 0) {
+                Uri URI = Uri.fromFile(new File(pictureAdress));
+                pictureAdress = "";
+                startWizard(URI);
+            }
+        } else {
+            // TODO fix a popup showing "no pic was captured"
+            System.out.println("No picture were found");
+        }
+    }
+
+    private void startWizard(Uri URI) {
+        Intent intent = new Intent(this, WizardActivity.class);
+        intent.putExtra(KEY_FOR_IMAGE, URI);
+        intent.setAction(BUILD_NEW_RECEIPT);
+        startActivity(intent);
+    }
+
     private void setupBottomNavigationBar(BottomBar bottomBar) {
         bottomBar.setDefaultTab(R.id.action_add);
         bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
@@ -105,20 +126,6 @@ public class AddNewPost extends AppCompatActivity {
         // Save a file: path for use with ACTION_VIEW intents
         pictureAdress = image.getAbsolutePath();
         return image;
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            if (pictureAdress.length() > 0) {
-                Uri URI = Uri.fromFile(new File(pictureAdress));
-                pictureAdress = "";
-                System.out.println("Coming back here!");
-            }
-        } else {
-            // TODO fix a popup showing "no pic was captured"
-            System.out.println("No picture were found");
-        }
     }
 
     public void takePicturePressed(View view) {
