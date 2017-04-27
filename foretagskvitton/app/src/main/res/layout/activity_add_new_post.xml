@@ -58,7 +58,7 @@
         android:id="@+id/addFromCameraButton"
         style="@style/AddButtonStyle"
         android:layout_width="0dp"
-        android:layout_height="96dp"
+        android:layout_height="80dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="20dp"
