@@ -20,24 +20,19 @@ import static android.provider.CalendarContract.CalendarCache.URI;
 public class TextCollector {
 
     private TextCollector() {
-        // Should not be able to create this object
     }
 
     public static List<String> collectStringsFromImage(Context context, Uri uri) throws IOException, NullPointerException {
         Bitmap bmp = createImageFromUri(context, uri);
-
         SparseArray<TextBlock> textBlocks = getTextBlocksFromImage(context, bmp);
         if (textBlocks == null) {
             // TODO error handling here, no text was found or textrecognizer is not working
         }
-
         return buildListOfStrings(textBlocks);
-
     }
 
     private static List<String> buildListOfStrings(SparseArray<TextBlock> listOfTextBlock) {
         List<String> listOfStrings = new ArrayList<>();
-
         for (int i = 0; i < listOfTextBlock.size(); i++) {
             listOfStrings.addAll(linesToStrings(listOfTextBlock.get(i).getComponents()));
         }
@@ -73,5 +68,4 @@ public class TextCollector {
         Bitmap bmp = MediaStore.Images.Media.getBitmap(context.getContentResolver(), uri);
         return bmp;
     }
-
 }
