@@ -54,7 +54,7 @@ public class AddNewPost extends AppCompatActivity {
             }
         } else {
             // TODO fix a popup showing "no pic was captured"
-            System.out.println("No picture were found");
+            System.out.println("No picture was found");
         }
     }
 
@@ -94,24 +94,26 @@ public class AddNewPost extends AppCompatActivity {
     }
 
     private void dispatchOpenCamera() {
-        Intent takePicture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        Intent openCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         // Ensure there is a camera
-        if (takePicture.resolveActivity(getPackageManager()) != null) {
-            // Creates a file to save the photo in
-            File photoFile = null;
-            try {
-                photoFile = createImageFile();
-            } catch (IOException e) {
-                System.out.println("Not able to create photoFile");
-                //TODO fix a popup here
-                return;
-            }
-            Uri photoURI = FileProvider.getUriForFile(getApplicationContext(),
-                    "corp.skaj.foretagskvitton.fileprovider",
-                    photoFile);
-            takePicture.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
-            startActivityForResult(takePicture, REQUEST_IMAGE_CAPTURE);
+        if (openCamera.resolveActivity(getPackageManager()) != null) {
+            Uri photoURI = setupImageFile(openCamera);
+            openCamera.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
         }
+    }
+
+    private Uri setupImageFile(Intent openCamera) {
+        File photoFile = null;
+        try {
+            photoFile = createImageFile();
+        } catch (IOException e) {
+            System.out.println("Not able to create photoFile");
+            //TODO fix a popup here
+        }
+        Uri photoURI = FileProvider.getUriForFile(getApplicationContext(),
+                "corp.skaj.foretagskvitton.fileprovider",
+                photoFile);
+        return photoURI;
     }
 
     private File createImageFile() throws IOException {
