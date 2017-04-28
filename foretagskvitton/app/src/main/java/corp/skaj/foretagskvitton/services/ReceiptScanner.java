@@ -11,7 +11,6 @@ import java.util.List;
 public class ReceiptScanner {
     private double totalCost;
     private List<String> list;
-    private DateFormat date;
     private List<Double> listOfDoubles = new ArrayList<>();
 
     // Checks that the string starts with the current year in ex. 17 or 2017.
