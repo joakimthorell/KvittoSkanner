@@ -119,7 +119,8 @@ public class ReceiptScanner {
         return Calendar.getInstance().getTime().toString();
     }
 
-    public void getProducts() {
+    public void getProducts(List<String> listOfStrings) {
+
     }
 
     public void getCardNumber() {

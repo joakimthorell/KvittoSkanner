@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.util.List;
 
 import corp.skaj.foretagskvitton.R;
+import corp.skaj.foretagskvitton.services.ReceiptScanner;
 import corp.skaj.foretagskvitton.services.TextCollector;
 
 /**
@@ -61,11 +62,14 @@ public class WizardActivity extends AppCompatActivity {
             public void run() {
                 ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
                 progressBar.setVisibility(View.GONE);
+                ReceiptScanner receiptScanner = new ReceiptScanner();
                 String toPrint = "";
-
+                /*
                 for (String s : listOfStrings) {
                     toPrint += s + "\n";
                 }
+                */
+                toPrint = receiptScanner.getTotalCost(listOfStrings);
                 TextView textView = (TextView) findViewById(R.id.textContainer);
                 textView.setText(toPrint);
             }
