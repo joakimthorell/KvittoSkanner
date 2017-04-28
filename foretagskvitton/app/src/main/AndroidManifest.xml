@@ -32,7 +32,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".wizard.InitWizard" />
-        <activity android:name=".wizard.FirstStep"></activity>
+        <activity android:name=".wizard.FirstStep" />
+        <activity android:name=".activites.InitApplicationActivity"></activity>
     </application>
 
 </manifest>
