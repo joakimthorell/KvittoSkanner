@@ -102,7 +102,7 @@ public class ReceiptScanner {
         }
     }
 
-    public String getDate() {
+    public String getDate(List<String> list) { // Gjorde ändring här, vet inte om det var korrekt? // Joakim
         for (int i = 0; i < list.size(); i++) {
             if (correctFirstNum(list.get(i).substring(0, 3)) && correctLength(list.get(i))) {
                 return list.get(i);

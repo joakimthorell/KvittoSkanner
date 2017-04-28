@@ -1,4 +1,4 @@
-package corp.skaj.foretagskvitton.model;
+package corp.skaj.foretagskvitton.services;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -6,18 +6,14 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import corp.skaj.foretagskvitton.services.SearchThroughReceipt;
-
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 /**
- * Created by kevinbrunstrom on 2017-04-27.
+ * Created by mattsson on 2017-04-27.
  */
-
-public class SearchThroughReceiptTest {
-
-    SearchThroughReceipt searchThroughReceipt;
-    List <String> list;
+public class ReceiptScannerTest {
+    ReceiptScanner searchThroughReceipt;
+    List<String> list;
 
     @Before
     public void setup(){
@@ -31,6 +27,6 @@ public class SearchThroughReceiptTest {
     @Test
     public void testDateFilter(){
         String corrdate = "2017-03-18";
-        assertEquals(corrdate, searchThroughReceipt.findDate(list));
+        assertEquals(corrdate, searchThroughReceipt.getDate(list));
     }
 }
