@@ -6,6 +6,7 @@ import java.util.Calendar;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 /**
  *
@@ -51,7 +52,13 @@ public class ReceiptScanner {
                     listOfDoubles.add(Double.parseDouble(s));
                 }
             } else {
-                
+                double totalCost = 0;
+                for (int j = 0; j < listOfStrings.size(); j++) {
+                    if (checkForText()) {
+                        totalCost = checkBeforeAndAfter(i);
+                        listOfDoubles.add(totalCost);
+                    }
+                }
             }
         }
         return listOfDoubles;
@@ -72,6 +79,9 @@ public class ReceiptScanner {
         }
     }
 
+    public boolean isInt(String s) {
+
+    }
 
     /**
      *
@@ -91,8 +101,12 @@ public class ReceiptScanner {
     }
 
     public double checkBeforeAndAfter (int index) {
-
-        return 0.0;
+        if (isInt(listOfStrings.get(index - 1)) || isDouble(listOfStrings.get(index - 1))) {
+            //vet att det är en double eller int
+            //spara den som total cost
+            // vill kolla index + 1
+            //kolla vilket av de två värdena som är störts
+        }
     }
 
     public String getTotalCost(List<String> listOfStrings) {
