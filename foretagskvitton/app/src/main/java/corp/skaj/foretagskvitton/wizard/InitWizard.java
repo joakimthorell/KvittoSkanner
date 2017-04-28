@@ -20,7 +20,7 @@ import corp.skaj.foretagskvitton.services.TextCollector;
 /**
  *
  */
-public class WizardActivity extends AppCompatActivity {
+public class InitWizard extends AppCompatActivity {
     private boolean progressBarShowing;
     private boolean nextButtonShowing;
     private List<String> listOfStrings;
@@ -29,7 +29,7 @@ public class WizardActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_wizard);
+        setContentView(R.layout.activity_init_wizard);
         final Uri URI = catchIntent(getIntent());
         collectStrings(URI).start();
         
