@@ -1,6 +1,5 @@
 package corp.skaj.foretagskvitton.services;
 
-import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +10,6 @@ import java.util.List;
 public class ReceiptScanner {
     private double totalCost;
     private List<String> list;
-    private List<Double> listOfDoubles = new ArrayList<>();
 
     // Checks that the string starts with the current year in ex. 17 or 2017.
     private boolean correctFirstNum(String date) {
@@ -24,7 +22,8 @@ public class ReceiptScanner {
         return date.length() <= 10 || date.length() >= 6;
     }
 
-    private void findAllDoubles(List<String> list) {
+    private List<Double> findAllDoubles(List<String> list) {
+        List<Double> listOfDoubles = new ArrayList<>();
         double temp = 0;
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).contains(",")) {
@@ -93,7 +92,7 @@ public class ReceiptScanner {
     }
 
     public void getTotalCost(List<String> list) {
-        findAllDoubles(list);
+        List<Double> listOfDoubles = findAllDoubles(list);
         totalCost = findBiggestDouble(listOfDoubles);
         if (totalCost == 0) {
 
