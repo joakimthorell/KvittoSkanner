@@ -52,6 +52,8 @@ public class ReceiptScanner {
                 if(isDouble(s)) {
                     listOfDoubles.add(Double.parseDouble(s));
                 }
+            } else {
+                
             }
         }
         return listOfDoubles;
@@ -72,36 +74,28 @@ public class ReceiptScanner {
         }
     }
 
-    /**
-     *
-     * @return <code>true</code> if total of totalt is found
-     * <code>false</code> otherwise
-     */
-    private boolean checkIfTextBefore() {
-        for (int i = 0; i < listOfStrings.size(); i++) {
-            if (listOfStrings.get(i).toLowerCase().equals("total")
-                    || listOfStrings.get(i).toLowerCase().equals("totalt")) {
-                return true;
-            }
-        }
-        return false;
-    }
 
     /**
      *
      * @return <code>true</code> if kr or sek is found
      * <code>false</code> otherwise
      */
-    private boolean checkIfTextAfter() {
+    private boolean checkForText () {
         for (int i = 0; i < listOfStrings.size(); i++) {
             if (listOfStrings.get(i).toLowerCase().equals("kr")
-                        || listOfStrings.get(i).toLowerCase().equals("sek")) {
+                        || listOfStrings.get(i).toLowerCase().equals("sek")
+                            || listOfStrings.get(i).toLowerCase().equals("total")
+                                || listOfStrings.get(i).toLowerCase().equals("totalt")) {
                 return true;
             }
         }
         return false;
     }
 
+    public double checkBeforeAndAfter (int index) {
+
+        return 0.0;
+    }
 
     public String getTotalCost(List<String> listOfStrings) {
         double totalCost = 0;
