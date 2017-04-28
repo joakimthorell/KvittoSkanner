@@ -58,12 +58,8 @@ public class User {
      * @param company
      * @param employee
      */
-    public void addUserToCompany(Company company, Employee employee) {
-        try {
-            company.addEmployee(employee);
-        } catch (IllegalArgumentException iae) {
-            iae.printStackTrace();
-        }
+    public void addUserToCompany(Company company, Employee employee) throws IllegalArgumentException {
+        company.addEmployee(employee);
     }
 
     /**
@@ -98,16 +94,12 @@ public class User {
      * @param card
      * @return
      */
-    public Company getCompany(Card card) {
+    public Company getCompany(Card card) throws IllegalArgumentException {
         for (int i = 0; i < listOfCompanies.size(); i++) {
             Company temp = listOfCompanies.get(i);
-            try {
-                Card tempCard = temp.getCard(card.getCard());
-                if (tempCard.getCard() == card.getCard()){
-                    return temp;
-                }
-            } catch (IllegalArgumentException iae) {
-                iae.getCause();
+            Card tempCard = temp.getCard(card.getCard());
+            if (tempCard.getCard() == card.getCard()) {
+                return temp;
             }
         }
         return null;
