@@ -31,6 +31,8 @@ public class SearchThroughReceiptTest {
     @Test
     public void testDateFilter(){
         String corrdate = "2017-03-18";
-        assertEquals(corrdate, searchThroughReceipt.findDate(list));
+        String methodDate = searchThroughReceipt.findDate(list);
+        System.outprint
+        assertEquals(corrdate, methodDate);
     }
 }
