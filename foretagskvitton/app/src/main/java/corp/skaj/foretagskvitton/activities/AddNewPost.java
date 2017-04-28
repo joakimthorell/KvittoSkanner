@@ -1,4 +1,4 @@
-package corp.skaj.foretagskvitton.activites;
+package corp.skaj.foretagskvitton.activities;
 
 import android.content.Intent;
 import android.net.Uri;
