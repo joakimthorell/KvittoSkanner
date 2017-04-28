@@ -68,19 +68,16 @@ public class WizardActivity extends AppCompatActivity {
             @Override
             public void run() {
                 toggleProgressBar();
-
                 ReceiptScanner receiptScanner = new ReceiptScanner();
-                String toPrint = "";
+                //String toPrint = "";
                 /*
                 for (String s : listOfStrings) {
                     toPrint += s + "\n";
                 }
                 */
-                toPrint = receiptScanner.getTotalCost(listOfStrings);
-
+                String toPrint = receiptScanner.getTotalCost(listOfStrings);
                 TextView textView = (TextView) findViewById(R.id.textContainer);
                 textView.setText(toPrint);
-
                 toggleNextButton();
             }
         });

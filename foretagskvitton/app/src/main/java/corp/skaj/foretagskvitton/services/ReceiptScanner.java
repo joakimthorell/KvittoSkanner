@@ -4,6 +4,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -46,10 +48,9 @@ public class ReceiptScanner {
         List<Double> listOfDoubles = new ArrayList<>();
         for (int i = 0; i < listOfStrings.size(); i++) {
             String s = listOfStrings.get(i).replace("," , ".");
-            if (s.contains(",")) {
+            if (s.contains(".")) {
                 if(isDouble(s)) {
-                    double temp = Double.parseDouble(s);
-                    listOfDoubles.add(temp);
+                    listOfDoubles.add(Double.parseDouble(s));
                 }
             }
         }
@@ -69,22 +70,6 @@ public class ReceiptScanner {
         } catch (NumberFormatException nfe) {
             return false;
         }
-    }
-
-    /**
-     *
-     * @param listOfDoubles
-     * @return biggestDouble
-     */
-    private double findBiggestDouble(List<Double> listOfDoubles) {
-        double biggestDouble = 0;
-        for (int i = 0; i < listOfDoubles.size() - 1; i++) {
-            if (listOfDoubles.get(i) > listOfDoubles.get(i + 1)) {
-                System.out.println(biggestDouble);
-                biggestDouble = listOfDoubles.get(i);
-            }
-        }
-        return biggestDouble;
     }
 
     /**
@@ -122,9 +107,9 @@ public class ReceiptScanner {
         double totalCost = 0;
         this.listOfStrings = listOfStrings;
         List<Double> listOfDoubles = findAllDoubles(listOfStrings);
-        totalCost = findBiggestDouble(listOfDoubles);
+        //totalCost = findBiggestDouble(listOfDoubles);
 
-        return String.valueOf(totalCost);
+        return String.valueOf(Collections.max(listOfDoubles));
         }
 
     public String getDate(List<String> listOfStrings) { // Gjorde ändring här, vet inte om det var korrekt? // Joakim
