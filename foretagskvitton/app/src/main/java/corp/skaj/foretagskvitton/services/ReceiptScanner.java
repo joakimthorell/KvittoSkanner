@@ -44,12 +44,30 @@ public class ReceiptScanner {
         List<Double> listOfDoubles = new ArrayList<>();
         double temp = 0;
         for (int i = 0; i < listOfStrings.size(); i++) {
-            if (listOfStrings.get(i).contains(",")) {
-                temp = Double.parseDouble(listOfStrings.get(i));
-                listOfDoubles.add(temp);
+            String s = listOfStrings.get(i);
+            if (s.contains(",")) {
+                if(isDouble(s.replace("," , "."))) {
+                    temp = Double.parseDouble(s);
+                    listOfDoubles.add(temp);
+                }
             }
         }
         return listOfDoubles;
+    }
+
+    /**
+     *
+     * @param s
+     * @return <code>true</code> if s is a double
+     * <code>false</code> otherwise
+     */
+    public boolean isDouble (String s) {
+        try {
+            Double.parseDouble(s);
+            return true;
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
     }
 
     /**
@@ -62,6 +80,7 @@ public class ReceiptScanner {
         double biggestDouble = 0;
         for (int i = 0; i < listOfDoubles.size() - 1; i++) {
             if (listOfDoubles.get(i) > listOfDoubles.get(i + 1)) {
+                System.out.println(biggestDouble);
                 biggestDouble = listOfDoubles.get(i);
             }
         }
