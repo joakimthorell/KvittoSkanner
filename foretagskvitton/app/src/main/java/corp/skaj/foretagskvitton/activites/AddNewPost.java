@@ -104,7 +104,7 @@ public class AddNewPost extends AppCompatActivity {
     }
 
     /**
-     * This method starts Camera
+     * This method starts Camera.
      */
     private void dispatchOpenCamera() {
         Intent openCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
