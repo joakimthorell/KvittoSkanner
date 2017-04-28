@@ -7,4 +7,5 @@
     <color name="colorMenuItem">#7CBDD6</color>
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
+    <color name="nextButtonGreen">#13c116</color>
 </resources>

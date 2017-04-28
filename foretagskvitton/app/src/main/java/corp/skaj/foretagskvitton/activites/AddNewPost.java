@@ -20,6 +20,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import corp.skaj.foretagskvitton.R;
+import corp.skaj.foretagskvitton.wizard.WizardActivity;
 
 /**
  *
