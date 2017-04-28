@@ -8,8 +8,8 @@ import java.util.List;
  *
  */
 public class ReceiptScanner {
+    private List<String> listOfStrings;
     private double totalCost;
-    private List<String> list;
 
     // Checks that the string starts with the current year in ex. 17 or 2017.
     private boolean correctFirstNum(String date) {
@@ -22,15 +22,16 @@ public class ReceiptScanner {
         return date.length() <= 10 || date.length() >= 6;
     }
 
-    private List<Double> findAllDoubles(List<String> list) {
+    private List<Double> findAllDoubles(List<String> listOfStrings) {
         List<Double> listOfDoubles = new ArrayList<>();
         double temp = 0;
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).contains(",")) {
-                temp = Double.parseDouble(list.get(i));
+        for (int i = 0; i < listOfStrings.size(); i++) {
+            if (listOfStrings.get(i).contains(",")) {
+                temp = Double.parseDouble(listOfStrings.get(i));
                 listOfDoubles.add(temp);
             }
         }
+        return listOfDoubles;
     }
 
     private double findBiggestDouble(List<Double> listOfDoubles) {
@@ -45,8 +46,8 @@ public class ReceiptScanner {
 
     //TODO Kan kolla if "Totalt" or "Total" i samma metod m.h.a || (metoderna nedan)
     private boolean checkIfTotalBeforeAmount() {
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).equals("Total")) {
+        for (int i = 0; i < listOfStrings.size(); i++) {
+            if (listOfStrings.get(i).equals("Total")) {
                 return true;
             }
         }
@@ -54,8 +55,8 @@ public class ReceiptScanner {
     }
 
     private boolean checkIfTotaltBeforeAmount() {
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).equals("Totalt")) {
+        for (int i = 0; i < listOfStrings.size(); i++) {
+            if (listOfStrings.get(i).equals("Totalt")) {
                 return true;
             }
         }
@@ -63,8 +64,8 @@ public class ReceiptScanner {
     }
 
     private boolean checkIfSekAfter() {
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).equals("SEK")) {
+        for (int i = 0; i < listOfStrings.size(); i++) {
+            if (listOfStrings.get(i).equals("SEK")) {
                 return true;
             }
         }
@@ -73,8 +74,8 @@ public class ReceiptScanner {
 
     // TODO Kan kolla if Big or Small "Kr" i samma metod (även ovanstående SEK) m.h.a ||
     public boolean checkIfBigKrAfter() {
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).equals("Kr")) {
+        for (int i = 0; i < listOfStrings.size(); i++) {
+            if (listOfStrings.get(i).equals("Kr")) {
                 return true;
             }
         }
@@ -83,26 +84,27 @@ public class ReceiptScanner {
     }
 
     private boolean checkIfSmallKrAfter() {
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).equals("kr")) {
+        for (int i = 0; i < listOfStrings.size(); i++) {
+            if (listOfStrings.get(i).equals("kr")) {
                 return true;
             }
         }
         return false;
     }
 
-    public void getTotalCost(List<String> list) {
-        List<Double> listOfDoubles = findAllDoubles(list);
+    public void getTotalCost(List<String> listOfStrings) {
+        this.listOfStrings = listOfStrings;
+        List<Double> listOfDoubles = findAllDoubles(listOfStrings);
         totalCost = findBiggestDouble(listOfDoubles);
         if (totalCost == 0) {
 
         }
     }
 
-    public String getDate(List<String> list) { // Gjorde ändring här, vet inte om det var korrekt? // Joakim
-        for (int i = 0; i < list.size(); i++) {
-            if (correctFirstNum(list.get(i).substring(0, 3)) && correctLength(list.get(i))) {
-                return list.get(i);
+    public String getDate(List<String> listOfStrings) { // Gjorde ändring här, vet inte om det var korrekt? // Joakim
+        for (int i = 0; i < listOfStrings.size(); i++) {
+            if (correctFirstNum(listOfStrings.get(i).substring(0, 3)) && correctLength(listOfStrings.get(i))) {
+                return listOfStrings.get(i);
             }
         }
         return Calendar.getInstance().getTime().toString();
