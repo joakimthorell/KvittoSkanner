@@ -18,7 +18,6 @@ public class ReceiptScanner {
      * @param date
      * @return
      */
-
     // Checks that the string starts with the current year in ex. 17 or 2017.
     private boolean correctFirstNum(String date) {
         DateFormat dateFormat = new SimpleDateFormat("yyyy");
@@ -33,7 +32,6 @@ public class ReceiptScanner {
      * @param date
      * @return
      */
-
     // Checks that the size is correct format, either 170218 or 2017-05-03.
     private boolean correctLength(String date) {
         return date.length() <= 10 && date.length() >= 6;
@@ -44,15 +42,13 @@ public class ReceiptScanner {
      * @param listOfStrings
      * @return listOfDoubles
      */
-
     private List<Double> findAllDoubles(List<String> listOfStrings) {
         List<Double> listOfDoubles = new ArrayList<>();
-        double temp = 0;
         for (int i = 0; i < listOfStrings.size(); i++) {
-            String s = listOfStrings.get(i);
+            String s = listOfStrings.get(i).replace("," , ".");
             if (s.contains(",")) {
-                if(isDouble(s.replace("," , "."))) {
-                    temp = Double.parseDouble(s);
+                if(isDouble(s)) {
+                    double temp = Double.parseDouble(s);
                     listOfDoubles.add(temp);
                 }
             }
@@ -80,7 +76,6 @@ public class ReceiptScanner {
      * @param listOfDoubles
      * @return biggestDouble
      */
-
     private double findBiggestDouble(List<Double> listOfDoubles) {
         double biggestDouble = 0;
         for (int i = 0; i < listOfDoubles.size() - 1; i++) {
@@ -97,7 +92,6 @@ public class ReceiptScanner {
      * @return <code>true</code> if total of totalt is found
      * <code>false</code> otherwise
      */
-
     private boolean checkIfTextBefore() {
         for (int i = 0; i < listOfStrings.size(); i++) {
             if (listOfStrings.get(i).toLowerCase().equals("total")
@@ -113,7 +107,6 @@ public class ReceiptScanner {
      * @return <code>true</code> if kr or sek is found
      * <code>false</code> otherwise
      */
-
     private boolean checkIfTextAfter() {
         for (int i = 0; i < listOfStrings.size(); i++) {
             if (listOfStrings.get(i).toLowerCase().equals("kr")

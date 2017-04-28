@@ -52,7 +52,7 @@ public class ReceiptScannerTest {
 
     @Test
     public void testFindingDouble () {
-        receiptScanner.getTotalCost(listOfDoubles);
-
+        String test = receiptScanner.getTotalCost(listOfDoubles);
+        assertEquals("299.00", test);
     }
 }
