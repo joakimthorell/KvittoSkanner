@@ -1,4 +1,4 @@
-package corp.skaj.foretagskvitton.activites;
+package corp.skaj.foretagskvitton.wizard;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -14,12 +15,15 @@ import java.io.IOException;
 import java.util.List;
 
 import corp.skaj.foretagskvitton.R;
+import corp.skaj.foretagskvitton.activites.AddNewPost;
 import corp.skaj.foretagskvitton.services.TextCollector;
 
 /**
  *
  */
 public class WizardActivity extends AppCompatActivity {
+    private boolean progressBarShowing;
+    private boolean nextButtonShowing;
     private List<String> listOfStrings;
 
     @Override
@@ -29,8 +33,13 @@ public class WizardActivity extends AppCompatActivity {
         setContentView(R.layout.activity_wizard);
         final Uri URI = catchIntent(getIntent());
         collectStrings(URI).start();
-        ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
-        progressBar.setVisibility(View.VISIBLE);
+        
+        progressBarShowing = false;
+        toggleProgressBar();
+
+        nextButtonShowing = true;
+        toggleNextButton();
+
     }
 
     /**
@@ -53,23 +62,39 @@ public class WizardActivity extends AppCompatActivity {
     }
 
     /**
-     * This method ends loadingbar on screen when all Strings are collected.
+     * This method ends loadingbar on screen when all Strings are collected
      */
     private void endLoadingBar() {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
-                progressBar.setVisibility(View.GONE);
-                String toPrint = "";
+                toggleProgressBar();
 
+                String toPrint = "";
                 for (String s : listOfStrings) {
                     toPrint += s + "\n";
                 }
+
                 TextView textView = (TextView) findViewById(R.id.textContainer);
                 textView.setText(toPrint);
+
+                toggleNextButton();
             }
         });
+    }
+
+    private void toggleProgressBar() {
+        int set = progressBarShowing ? View.GONE : View.VISIBLE;
+        ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        progressBar.setVisibility(set);
+        progressBarShowing = !progressBarShowing;
+    }
+
+    private void toggleNextButton() {
+        int set = nextButtonShowing ? View.GONE : View.VISIBLE;
+        Button button = (Button) findViewById(R.id.nextButton);
+        button.setVisibility(set);
+        nextButtonShowing = !nextButtonShowing;
     }
 
     /**
