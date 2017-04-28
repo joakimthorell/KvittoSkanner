@@ -45,7 +45,7 @@ public class AddNewPost extends AppCompatActivity {
     }
 
     /**
-     * This method captures taken image by camera.
+     * This method catches taken image by camera.
      * @param requestCode
      * @param resultCode
      * @param data
