@@ -21,8 +21,11 @@ import java.util.Date;
 
 import corp.skaj.foretagskvitton.R;
 
+/**
+ *
+ */
 public class AddNewPost extends AppCompatActivity {
-    private String pictureAdress;
+    private String imageAdress;
     private static final int REQUEST_IMAGE_CAPTURE = 31415;
     public static final String BUILD_NEW_RECEIPT = "corp.skaj.foretagskvitton.BUILD_RECEIPT";
     public static final String KEY_FOR_IMAGE = "corp.skaj.foretagskvitton.KEY_FOR_IMAGE";
@@ -30,32 +33,41 @@ public class AddNewPost extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_new_post);
-        pictureAdress = "";
 
+        setContentView(R.layout.activity_add_new_post);
+        imageAdress = "";
         // Hides the actionbar and gives fullscreen feature
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
-
         // Setup bottom navigation
         BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
         setupBottomNavigationBar(bottomBar);
     }
 
+    /**
+     * This method catches taken image by camera.
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            if (pictureAdress.length() > 0) {
-                Uri URI = Uri.fromFile(new File(pictureAdress));
-                pictureAdress = "";
+            if (imageAdress.length() > 0) {
+                Uri URI = Uri.fromFile(new File(imageAdress));
+                imageAdress = "";
                 startWizard(URI);
             }
         } else {
             // TODO fix a popup showing "no pic was captured"
-            System.out.println("No picture were found");
+            System.out.println("No picture was found");
         }
     }
 
+    /**
+     * This method starts wizard guide for adding new receipt by taking an image with camera.
+     * @param URI
+     */
     private void startWizard(Uri URI) {
         Intent intent = new Intent(this, WizardActivity.class);
         intent.putExtra(KEY_FOR_IMAGE, URI);
@@ -91,32 +103,46 @@ public class AddNewPost extends AppCompatActivity {
         });
     }
 
+    /**
+     * This method starts Camera.
+     */
     private void dispatchOpenCamera() {
-        Intent takePicture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        Intent openCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         // Ensure there is a camera
-        if (takePicture.resolveActivity(getPackageManager()) != null) {
-            // Creates a file to save the photo in
-            File photoFile = null;
-            try {
-                photoFile = createImageFile();
-            } catch (IOException e) {
-                System.out.println("Not able to create photoFile");
-                //TODO fix a popup here
-                return;
-            }
-            Uri photoURI = FileProvider.getUriForFile(getApplicationContext(),
-                    "corp.skaj.foretagskvitton.fileprovider",
-                    photoFile);
-            takePicture.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
-            startActivityForResult(takePicture, REQUEST_IMAGE_CAPTURE);
+        if (openCamera.resolveActivity(getPackageManager()) != null) {
+            Uri imageURI = setupImageFolder();
+            openCamera.putExtra(MediaStore.EXTRA_OUTPUT, imageURI);
+            startActivityForResult(openCamera, REQUEST_IMAGE_CAPTURE);
         }
     }
 
+    /**
+     * This method arranges a folder where an image taken by camera is saved.
+     * @return imageURI
+     */
+    private Uri setupImageFolder() {
+        File imageFile = null;
+        try {
+            imageFile = createImageFile();
+        } catch (IOException e) {
+            System.out.println("Not able to create imageFile");
+            //TODO fix a popup here
+        }
+        Uri imageURI = FileProvider.getUriForFile(getApplicationContext(),
+                "corp.skaj.foretagskvitton.fileprovider",
+                imageFile);
+        return imageURI;
+    }
+
+    /**
+     * This method creates a file in which image taken by camera is saved.
+     * @return imageFile
+     * @throws IOException
+     */
     private File createImageFile() throws IOException {
         // Create image file
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = "JPEG_" + timeStamp + "_";
-
         File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         File image = File.createTempFile(
                 imageFileName,  /* prefix */
@@ -124,11 +150,15 @@ public class AddNewPost extends AppCompatActivity {
                 storageDir      /* directory */
         );
         // Save a file: path for use with ACTION_VIEW intents
-        pictureAdress = image.getAbsolutePath();
+        imageAdress = image.getAbsolutePath();
         return image;
     }
 
-    public void takePicturePressed(View view) {
+    /**
+     * This method runs when camera button is pressed.
+     * @param view
+     */
+    public void cameraButtonActionPerformed(View view) {
         dispatchOpenCamera();
     }
 

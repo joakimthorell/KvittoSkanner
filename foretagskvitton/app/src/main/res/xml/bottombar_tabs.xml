@@ -2,28 +2,28 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <tabs>
         <tab
-            id="@+id/action_archive"
             icon="@drawable/ic_folder"
+            id="@+id/action_archive"
             title="@string/menu_archive" />
 
         <tab
-            id="@+id/action_charts"
             icon="@drawable/ic_chart"
+            id="@+id/action_charts"
             title="@string/menu_charts" />
 
         <tab
-            id="@+id/action_add"
             icon="@drawable/ic_add"
+            id="@+id/action_add"
             title="@string/menu_add" />
 
         <tab
-            id="@+id/action_business"
             icon="@drawable/ic_business"
+            id="@+id/action_business"
             title="@string/menu_business" />
 
         <tab
-            id="@+id/action_user"
             icon="@drawable/ic_user"
+            id="@+id/action_user"
             title="@string/menu_user" />
     </tabs>
 </PreferenceScreen>
