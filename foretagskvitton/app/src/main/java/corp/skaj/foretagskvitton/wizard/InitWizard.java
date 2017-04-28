@@ -69,13 +69,13 @@ public class InitWizard extends AppCompatActivity {
             public void run() {
                 toggleProgressBar();
                 ReceiptScanner receiptScanner = new ReceiptScanner();
-                //String toPrint = "";
-                /*
+                String toPrint = "";
                 for (String s : listOfStrings) {
                     toPrint += s + "\n";
                 }
-                */
-                String toPrint = receiptScanner.getTotalCost(listOfStrings);
+                String toPrintDouble = receiptScanner.getTotalCost(listOfStrings);
+
+                toPrint = toPrintDouble == null ? toPrint : toPrintDouble;
                 TextView textView = (TextView) findViewById(R.id.textContainer);
                 textView.setText(toPrint);
                 toggleNextButton();
@@ -92,7 +92,7 @@ public class InitWizard extends AppCompatActivity {
 
     private void toggleNextButton() {
         int set = nextButtonShowing ? View.GONE : View.VISIBLE;
-        Button button = (Button) findViewById(R.id.nextButton);
+        Button button = (Button) findViewById(R.id.wizardNextButton);
         button.setVisibility(set);
         nextButtonShowing = !nextButtonShowing;
     }

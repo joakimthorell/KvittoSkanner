@@ -14,9 +14,12 @@ public class InitApplicationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_init_application);
+
+        initData().start();
+
     }
 
-    private Thread collectStrings(final Uri URI) {
+    private Thread initData() {
         return new Thread(new Runnable() {
             @Override
             public void run() {

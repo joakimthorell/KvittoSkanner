@@ -99,7 +99,13 @@ public class ReceiptScanner {
         this.listOfStrings = listOfStrings;
         List<Double> listOfDoubles = findAllDoubles(listOfStrings);
 
-        return String.valueOf(Collections.max(listOfDoubles));
+        // TODO fast fix so this wont crash if no double was found, need to be fixed
+        try {
+            return String.valueOf(Collections.max(listOfDoubles));
+        } catch (Exception e) {
+            return null;
+        }
+
         }
 
     public String getDate(List<String> listOfStrings) {
