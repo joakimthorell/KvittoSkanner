@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="corp.skaj.foretagskvitton.wizard.WizardActivity">
+    tools:context="corp.skaj.foretagskvitton.wizard.InitWizard">
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -26,15 +26,15 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/nextButton"
+        android:id="@+id/wizardNextButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/nextButtonGreen"
-        android:textColor="@color/white"
+        android:onClick="nextPressed"
         android:text="@string/nextButtonText"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
-        />
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

@@ -1,18 +1,16 @@
-package corp.skaj.foretagskvitton.activites;
+package corp.skaj.foretagskvitton.activities;
 
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.support.annotation.IdRes;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.roughike.bottombar.BottomBar;
-import com.roughike.bottombar.OnTabSelectListener;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,7 +18,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import corp.skaj.foretagskvitton.R;
-import corp.skaj.foretagskvitton.wizard.WizardActivity;
+import corp.skaj.foretagskvitton.wizard.InitWizard;
 
 /**
  *
@@ -30,6 +28,7 @@ public class AddNewPost extends AppCompatActivity {
     private static final int REQUEST_IMAGE_CAPTURE = 31415;
     public static final String BUILD_NEW_RECEIPT = "corp.skaj.foretagskvitton.BUILD_RECEIPT";
     public static final String KEY_FOR_IMAGE = "corp.skaj.foretagskvitton.KEY_FOR_IMAGE";
+    public static final String STATE_FOR_BOTTOM_MENY = "corp.skaj.foretagskvitton.ADD_NEW_POST";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +41,7 @@ public class AddNewPost extends AppCompatActivity {
         actionBar.hide();
         // Setup bottom navigation
         BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
-        setupBottomNavigationBar(bottomBar);
+        BottomNavigationFragment.setupBottomNavBar(bottomBar, STATE_FOR_BOTTOM_MENY, this);
     }
 
     /**
@@ -70,38 +69,10 @@ public class AddNewPost extends AppCompatActivity {
      * @param URI
      */
     private void startWizard(Uri URI) {
-        Intent intent = new Intent(this, WizardActivity.class);
+        Intent intent = new Intent(this, InitWizard.class);
         intent.putExtra(KEY_FOR_IMAGE, URI);
         intent.setAction(BUILD_NEW_RECEIPT);
         startActivity(intent);
-    }
-
-    private void setupBottomNavigationBar(BottomBar bottomBar) {
-        bottomBar.setDefaultTab(R.id.action_add);
-        bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
-            @Override
-            public void onTabSelected(@IdRes int tabId) {
-                switch (tabId) {
-                    case R.id.action_add:
-                        //TODO what happens here?
-                        return;
-                    case R.id.action_archive:
-                        //TODO what happens here=
-                        return;
-                    case R.id.action_business:
-                        //TODO what happens here?
-                        return;
-                    case R.id.action_charts:
-                        //TODO what happens here?
-                        return;
-                    case R.id.action_user:
-                        //TODO what happens here?
-                        return;
-                    default:
-                        return;
-                }
-            }
-        });
     }
 
     /**

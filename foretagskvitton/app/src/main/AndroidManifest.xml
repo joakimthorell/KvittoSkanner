@@ -24,14 +24,22 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".activites.AddNewPost">
+        <activity android:name=".activities.InitApplicationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".wizard.WizardActivity"></activity>
+        <activity android:name=".wizard.InitWizard" />
+        <activity
+            android:name=".wizard.FirstStep"
+            android:parentActivityName=".wizard.FirstStep">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="corp.skaj.foretagskvitton.wizard.InitWizard" />
+        </activity>
+        <activity android:name=".activities.AddNewPost" />
     </application>
 
 </manifest>

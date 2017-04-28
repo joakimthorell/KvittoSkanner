@@ -1,7 +1,9 @@
 package corp.skaj.foretagskvitton.wizard;
 
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.net.Uri;
+import android.support.v4.app.TaskStackBuilder;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -13,14 +15,14 @@ import java.io.IOException;
 import java.util.List;
 
 import corp.skaj.foretagskvitton.R;
-import corp.skaj.foretagskvitton.activites.AddNewPost;
+import corp.skaj.foretagskvitton.activities.AddNewPost;
 import corp.skaj.foretagskvitton.services.ReceiptScanner;
 import corp.skaj.foretagskvitton.services.TextCollector;
 
 /**
  *
  */
-public class WizardActivity extends AppCompatActivity {
+public class InitWizard extends AppCompatActivity {
     private boolean progressBarShowing;
     private boolean nextButtonShowing;
     private List<String> listOfStrings;
@@ -29,10 +31,10 @@ public class WizardActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_wizard);
+        setContentView(R.layout.activity_init_wizard);
         final Uri URI = catchIntent(getIntent());
         collectStrings(URI).start();
-        
+
         progressBarShowing = false;
         toggleProgressBar();
 
@@ -69,13 +71,13 @@ public class WizardActivity extends AppCompatActivity {
             public void run() {
                 toggleProgressBar();
                 ReceiptScanner receiptScanner = new ReceiptScanner();
-                //String toPrint = "";
-                /*
+                String toPrint = "";
                 for (String s : listOfStrings) {
                     toPrint += s + "\n";
                 }
-                */
-                String toPrint = receiptScanner.getTotalCost(listOfStrings);
+                String toPrintDouble = receiptScanner.getTotalCost(listOfStrings);
+
+                toPrint = toPrintDouble == null ? toPrint : toPrintDouble;
                 TextView textView = (TextView) findViewById(R.id.textContainer);
                 textView.setText(toPrint);
                 toggleNextButton();
@@ -92,7 +94,7 @@ public class WizardActivity extends AppCompatActivity {
 
     private void toggleNextButton() {
         int set = nextButtonShowing ? View.GONE : View.VISIBLE;
-        Button button = (Button) findViewById(R.id.nextButton);
+        Button button = (Button) findViewById(R.id.wizardNextButton);
         button.setVisibility(set);
         nextButtonShowing = !nextButtonShowing;
     }
@@ -111,5 +113,12 @@ public class WizardActivity extends AppCompatActivity {
             }
         }
         return URI;
+    }
+
+
+    // TEMP
+    public void nextPressed(View view) {
+        Intent intent = new Intent(this, FirstStep.class);
+        startActivity(intent);
     }
 }

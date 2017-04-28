@@ -10,4 +10,5 @@
     <string name="no_picture">Utan bild</string>
     <string name="gallery">Galleri</string>
     <string name="nextButtonText">Nästa</string>
+    <string name="backButtonText">Bakåt</string>
 </resources>
