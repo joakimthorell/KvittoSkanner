@@ -44,19 +44,9 @@ public class ReceiptScanner {
         return biggestDouble;
     }
 
-    //TODO Kan kolla if "Totalt" or "Total" i samma metod m.h.a || (metoderna nedan)
     private boolean checkIfTotalBeforeAmount() {
         for (int i = 0; i < listOfStrings.size(); i++) {
-            if (listOfStrings.get(i).equals("Total")) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private boolean checkIfTotaltBeforeAmount() {
-        for (int i = 0; i < listOfStrings.size(); i++) {
-            if (listOfStrings.get(i).equals("Totalt")) {
+            if (listOfStrings.get(i).equals("Total") || listOfStrings.get(i).equals("Totalt")) {
                 return true;
             }
         }
@@ -72,20 +62,9 @@ public class ReceiptScanner {
         return false;
     }
 
-    // TODO Kan kolla if Big or Small "Kr" i samma metod (även ovanstående SEK) m.h.a ||
-    public boolean checkIfBigKrAfter() {
+    private boolean checkIfKrAfter() {
         for (int i = 0; i < listOfStrings.size(); i++) {
-            if (listOfStrings.get(i).equals("Kr")) {
-                return true;
-            }
-        }
-        return false;
-
-    }
-
-    private boolean checkIfSmallKrAfter() {
-        for (int i = 0; i < listOfStrings.size(); i++) {
-            if (listOfStrings.get(i).equals("kr")) {
+            if (listOfStrings.get(i).equals("kr") || listOfStrings.get(i).equals("Kr")) {
                 return true;
             }
         }
