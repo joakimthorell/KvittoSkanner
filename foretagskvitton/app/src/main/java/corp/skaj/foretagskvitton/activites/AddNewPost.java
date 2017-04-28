@@ -25,7 +25,7 @@ import corp.skaj.foretagskvitton.R;
  *
  */
 public class AddNewPost extends AppCompatActivity {
-    private String pictureAdress;
+    private String imageAdress;
     private static final int REQUEST_IMAGE_CAPTURE = 31415;
     public static final String BUILD_NEW_RECEIPT = "corp.skaj.foretagskvitton.BUILD_RECEIPT";
     public static final String KEY_FOR_IMAGE = "corp.skaj.foretagskvitton.KEY_FOR_IMAGE";
@@ -35,7 +35,7 @@ public class AddNewPost extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_add_new_post);
-        pictureAdress = "";
+        imageAdress = "";
         // Hides the actionbar and gives fullscreen feature
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
@@ -47,9 +47,9 @@ public class AddNewPost extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            if (pictureAdress.length() > 0) {
-                Uri URI = Uri.fromFile(new File(pictureAdress));
-                pictureAdress = "";
+            if (imageAdress.length() > 0) {
+                Uri URI = Uri.fromFile(new File(imageAdress));
+                imageAdress = "";
                 startWizard(URI);
             }
         } else {
@@ -125,11 +125,11 @@ public class AddNewPost extends AppCompatActivity {
                 storageDir      /* directory */
         );
         // Save a file: path for use with ACTION_VIEW intents
-        pictureAdress = image.getAbsolutePath();
+        imageAdress = image.getAbsolutePath();
         return image;
     }
 
-    public void takePicturePressed(View view) {
+    public void cameraButtonActionPerformed(View view) {
         dispatchOpenCamera();
     }
 
