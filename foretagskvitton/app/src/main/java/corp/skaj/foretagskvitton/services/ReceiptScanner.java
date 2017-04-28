@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class ReceiptScanner {
     private List<String> listOfStrings;
-    private double totalCost;
+
 
     /**
      *
@@ -70,14 +70,14 @@ public class ReceiptScanner {
 
     /**
      *
-     * @return <code>true</code> if Total of Totalt is found
+     * @return <code>true</code> if total of totalt is found
      * <code>false</code> otherwise
      */
 
     private boolean checkIfTextBefore() {
         for (int i = 0; i < listOfStrings.size(); i++) {
-            if (listOfStrings.get(i).equals("Total")
-                    || listOfStrings.get(i).equals("Totalt")) {
+            if (listOfStrings.get(i).toLowerCase().equals("total")
+                    || listOfStrings.get(i).toLowerCase().equals("totalt")) {
                 return true;
             }
         }
@@ -86,16 +86,14 @@ public class ReceiptScanner {
 
     /**
      *
-     * @return <code>true</code> if Kr or Sek is found
+     * @return <code>true</code> if kr or sek is found
      * <code>false</code> otherwise
      */
 
     private boolean checkIfTextAfter() {
         for (int i = 0; i < listOfStrings.size(); i++) {
-            if (listOfStrings.get(i).equals("kr")
-                    || listOfStrings.get(i).equals("Kr")
-                        || listOfStrings.get(i).equals("SEK")
-                            || listOfStrings.get(i).equals("Sek")) {
+            if (listOfStrings.get(i).toLowerCase().equals("kr")
+                        || listOfStrings.get(i).toLowerCase().equals("sek")) {
                 return true;
             }
         }
@@ -103,14 +101,14 @@ public class ReceiptScanner {
     }
 
 
-    public void getTotalCost(List<String> listOfStrings) {
+    public String getTotalCost(List<String> listOfStrings) {
+        double totalCost = 0;
         this.listOfStrings = listOfStrings;
         List<Double> listOfDoubles = findAllDoubles(listOfStrings);
         totalCost = findBiggestDouble(listOfDoubles);
-        if (totalCost == 0) {
 
+        return String.valueOf(totalCost);
         }
-    }
 
     public String getDate(List<String> listOfStrings) { // Gjorde ändring här, vet inte om det var korrekt? // Joakim
         for (int i = 0; i < listOfStrings.size(); i++) {
