@@ -29,7 +29,7 @@ public class TextCollector {
      * This method collects Strings from image.
      * @param context
      * @param uri
-     * @return
+     * @return listOfStrings
      * @throws IOException
      */
     public static List<String> collectStringsFromImage(Context context, Uri uri) throws IOException {
@@ -46,7 +46,7 @@ public class TextCollector {
      * This method converts an Uri to a Bitmap.
      * @param context
      * @param uri
-     * @return
+     * @return Bitmap
      * @throws IOException
      */
     private static Bitmap createImageFromUri(Context context, Uri uri) throws IOException {
@@ -61,16 +61,16 @@ public class TextCollector {
      * This method collects Textblocks from an image.
      * @param context
      * @param bmp
-     * @return
+     * @return listOfTextBlocks if TextRecognizer is operational. Null otherwise
      */
     private static SparseArray<TextBlock> getTextBlocksFromImage(Context context, Bitmap bmp) {
         TextRecognizer textRecognizer = new TextRecognizer.Builder(context.getApplicationContext()).build();
 
         if (textRecognizer.isOperational()) {
             Frame frame = new Frame.Builder().setBitmap(bmp).build();
-            SparseArray<TextBlock> list = textRecognizer.detect(frame);
+            SparseArray<TextBlock> listOfTextBlocks = textRecognizer.detect(frame);
             textRecognizer.release();
-            return list;
+            return listOfTextBlocks;
         } else {
             System.out.println("TextRecognizer is not operational");
             // TODO some kind of error handling here?
@@ -81,7 +81,7 @@ public class TextCollector {
     /**
      * This method collects Strings from Textblocks.
      * @param listOfTextBlock
-     * @return
+     * @return listOfStrings
      */
     private static List<String> buildListOfStrings(SparseArray<TextBlock> listOfTextBlock) {
         List<String> listOfStrings = new ArrayList<>();
@@ -97,7 +97,7 @@ public class TextCollector {
     /**
      * This method collects lines from Textblocks.
      * @param list
-     * @return
+     * @return listOfStrings
      */
     private static List<String> linesToStrings(List<? extends Text> list) {
         List<String> listOfStrings = new ArrayList<>();

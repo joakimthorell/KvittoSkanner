@@ -36,7 +36,7 @@ public class WizardActivity extends AppCompatActivity {
     /**
      * This method starts a thread to allow application to collect all available Strings from image.
      * @param URI
-     * @return
+     * @return Thread
      */
     private Thread collectStrings(final Uri URI) {
         return new Thread(new Runnable() {
@@ -75,7 +75,7 @@ public class WizardActivity extends AppCompatActivity {
     /**
      * This method catches Intents (information) sent from other classes.
      * @param intent
-     * @return
+     * @return Uri
      */
     // If more then addNewPost will send images here, add them here
     private Uri catchIntent(Intent intent) {

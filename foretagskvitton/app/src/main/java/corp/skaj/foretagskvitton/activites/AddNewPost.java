@@ -118,7 +118,7 @@ public class AddNewPost extends AppCompatActivity {
 
     /**
      * This method arranges a folder where an image taken by camera is saved.
-     * @return
+     * @return imageURI
      */
     private Uri setupImageFolder() {
         File imageFile = null;
@@ -136,7 +136,7 @@ public class AddNewPost extends AppCompatActivity {
 
     /**
      * This method creates a file in which image taken by camera is saved.
-     * @return
+     * @return imageFile
      * @throws IOException
      */
     private File createImageFile() throws IOException {
