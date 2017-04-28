@@ -4,7 +4,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -13,7 +12,6 @@ import java.util.List;
  */
 public class ReceiptScanner {
     private List<String> listOfStrings;
-
 
     /**
      *
@@ -42,7 +40,7 @@ public class ReceiptScanner {
     /**
      *
      * @param listOfStrings
-     * @return listOfDoubles
+     * @return
      */
     private List<Double> findAllDoubles(List<String> listOfStrings) {
         List<Double> listOfDoubles = new ArrayList<>();
@@ -104,15 +102,13 @@ public class ReceiptScanner {
 
 
     public String getTotalCost(List<String> listOfStrings) {
-        double totalCost = 0;
         this.listOfStrings = listOfStrings;
         List<Double> listOfDoubles = findAllDoubles(listOfStrings);
-        //totalCost = findBiggestDouble(listOfDoubles);
 
         return String.valueOf(Collections.max(listOfDoubles));
         }
 
-    public String getDate(List<String> listOfStrings) { // Gjorde ändring här, vet inte om det var korrekt? // Joakim
+    public String getDate(List<String> listOfStrings) {
         for (int i = 0; i < listOfStrings.size(); i++) {
             if (correctFirstNum(listOfStrings.get(i).substring(0, 4)) && correctLength(listOfStrings.get(i))) {
                 return listOfStrings.get(i);
