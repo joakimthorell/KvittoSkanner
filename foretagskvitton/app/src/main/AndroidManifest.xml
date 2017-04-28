@@ -32,8 +32,14 @@
             </intent-filter>
         </activity>
         <activity android:name=".wizard.InitWizard" />
-        <activity android:name=".wizard.FirstStep" />
-        <activity android:name=".activities.AddNewPost"/>
+        <activity
+            android:name=".wizard.FirstStep"
+            android:parentActivityName=".wizard.FirstStep">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="corp.skaj.foretagskvitton.wizard.InitWizard" />
+        </activity>
+        <activity android:name=".activities.AddNewPost" />
     </application>
 
 </manifest>

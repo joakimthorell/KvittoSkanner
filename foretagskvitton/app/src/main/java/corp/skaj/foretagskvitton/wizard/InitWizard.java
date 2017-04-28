@@ -1,7 +1,9 @@
 package corp.skaj.foretagskvitton.wizard;
 
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.net.Uri;
+import android.support.v4.app.TaskStackBuilder;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -111,5 +113,12 @@ public class InitWizard extends AppCompatActivity {
             }
         }
         return URI;
+    }
+
+
+    // TEMP
+    public void nextPressed(View view) {
+        Intent intent = new Intent(this, FirstStep.class);
+        startActivity(intent);
     }
 }
