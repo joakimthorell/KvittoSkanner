@@ -33,6 +33,11 @@ public class WizardActivity extends AppCompatActivity {
         progressBar.setVisibility(View.VISIBLE);
     }
 
+    /**
+     * This method starts a thread to allow application to collect all available Strings from image.
+     * @param URI
+     * @return
+     */
     private Thread collectStrings(final Uri URI) {
         return new Thread(new Runnable() {
             @Override
@@ -47,6 +52,9 @@ public class WizardActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * This method ends loadingbar on screen when all Strings are collected.
+     */
     private void endLoadingBar() {
         runOnUiThread(new Runnable() {
             @Override
@@ -64,6 +72,11 @@ public class WizardActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * This method catches Intents (information) sent from other classes.
+     * @param intent
+     * @return
+     */
     // If more then addNewPost will send images here, add them here
     private Uri catchIntent(Intent intent) {
         Uri URI = null;

@@ -44,6 +44,12 @@ public class AddNewPost extends AppCompatActivity {
         setupBottomNavigationBar(bottomBar);
     }
 
+    /**
+     * This method captures taken image by camera.
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
@@ -58,6 +64,10 @@ public class AddNewPost extends AppCompatActivity {
         }
     }
 
+    /**
+     * This method starts wizard guide for adding new receipt by taking an image with camera.
+     * @param URI
+     */
     private void startWizard(Uri URI) {
         Intent intent = new Intent(this, WizardActivity.class);
         intent.putExtra(KEY_FOR_IMAGE, URI);
@@ -93,29 +103,42 @@ public class AddNewPost extends AppCompatActivity {
         });
     }
 
+    /**
+     * This method starts Camera
+     */
     private void dispatchOpenCamera() {
         Intent openCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         // Ensure there is a camera
         if (openCamera.resolveActivity(getPackageManager()) != null) {
-            Uri photoURI = setupImageFile(openCamera);
-            openCamera.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+            Uri imageURI = setupImageFolder(openCamera);
+            openCamera.putExtra(MediaStore.EXTRA_OUTPUT, imageURI);
         }
     }
 
-    private Uri setupImageFile(Intent openCamera) {
-        File photoFile = null;
+    /**
+     * This method arranges a folder where an image taken by camera is saved.
+     * @param openCamera
+     * @return imageURI
+     */
+    private Uri setupImageFolder(Intent openCamera) {
+        File imageFile = null;
         try {
-            photoFile = createImageFile();
+            imageFile = createImageFile();
         } catch (IOException e) {
-            System.out.println("Not able to create photoFile");
+            System.out.println("Not able to create imageFile");
             //TODO fix a popup here
         }
-        Uri photoURI = FileProvider.getUriForFile(getApplicationContext(),
+        Uri imageURI = FileProvider.getUriForFile(getApplicationContext(),
                 "corp.skaj.foretagskvitton.fileprovider",
-                photoFile);
-        return photoURI;
+                imageFile);
+        return imageURI;
     }
 
+    /**
+     * This method creates a file in which image taken by camera is saved.
+     * @return
+     * @throws IOException
+     */
     private File createImageFile() throws IOException {
         // Create image file
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
@@ -131,6 +154,10 @@ public class AddNewPost extends AppCompatActivity {
         return image;
     }
 
+    /**
+     * This method runs when camera button is pressed.
+     * @param view
+     */
     public void cameraButtonActionPerformed(View view) {
         dispatchOpenCamera();
     }
