@@ -24,7 +24,7 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".activites.AddNewPost">
+        <activity android:name=".activities.InitApplicationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -33,7 +33,7 @@
         </activity>
         <activity android:name=".wizard.InitWizard" />
         <activity android:name=".wizard.FirstStep" />
-        <activity android:name=".activites.InitApplicationActivity"></activity>
+        <activity android:name=".activities.AddNewPost"/>
     </application>
 
 </manifest>

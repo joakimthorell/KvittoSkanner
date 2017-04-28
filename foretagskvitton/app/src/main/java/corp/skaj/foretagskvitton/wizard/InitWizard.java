@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.util.List;
 
 import corp.skaj.foretagskvitton.R;
-import corp.skaj.foretagskvitton.activites.AddNewPost;
+import corp.skaj.foretagskvitton.activities.AddNewPost;
 import corp.skaj.foretagskvitton.services.ReceiptScanner;
 import corp.skaj.foretagskvitton.services.TextCollector;
 
@@ -32,7 +32,7 @@ public class InitWizard extends AppCompatActivity {
         setContentView(R.layout.activity_init_wizard);
         final Uri URI = catchIntent(getIntent());
         collectStrings(URI).start();
-        
+
         progressBarShowing = false;
         toggleProgressBar();
 

@@ -1,7 +1,6 @@
 package corp.skaj.foretagskvitton.controllers;
 
 public class InitApplication {
-
     private static InitApplication instance;
 
     private InitApplication() {

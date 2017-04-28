@@ -1,4 +1,4 @@
-package corp.skaj.foretagskvitton.activites;
+package corp.skaj.foretagskvitton.activities;
 
 import android.app.Fragment;
 import android.content.Context;
