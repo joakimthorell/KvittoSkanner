@@ -37,22 +37,11 @@
         android:layout_height="300dp"
         android:layout_marginBottom="62dp"
         android:background="#99FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/bottomBar"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation_menu"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 
-    <com.roughike.bottombar.BottomBar
-        android:id="@+id/bottomBar"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:background="@color/colorMenu"
-        app:bb_activeTabColor="@color/white"
-        app:bb_inActiveTabColor="@color/colorMenuItem"
-        app:bb_tabXmlResource="@xml/bottombar_tabs"
-        app:bb_titleTextAppearance="@style/MyBottomBarStyle"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+
 
     <Button
         android:id="@+id/addFromCameraButton"
@@ -106,5 +95,15 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/noPictureButton"
         app:layout_constraintVertical_bias="0.517" />
+
+    <fragment
+        android:id="@+id/bottom_navigation_menu"
+        android:name="corp.skaj.foretagskvitton.activites.BottomNavigationFragment"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+         />
 
 </android.support.constraint.ConstraintLayout>
