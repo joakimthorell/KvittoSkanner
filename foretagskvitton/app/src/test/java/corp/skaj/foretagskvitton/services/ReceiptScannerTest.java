@@ -12,7 +12,7 @@ import static org.junit.Assert.*;
  * Created by mattsson on 2017-04-27.
  */
 public class ReceiptScannerTest {
-    ReceiptScanner searchThroughReceipt;
+    ReceiptScanner receiptScanner;
     List<String> list;
 
     @Before
@@ -27,6 +27,6 @@ public class ReceiptScannerTest {
     @Test
     public void testDateFilter(){
         String corrdate = "2017-03-18";
-        assertEquals(corrdate, searchThroughReceipt.getDate(list));
+        assertEquals(corrdate, receiptScanner.getDate(list));
     }
 }

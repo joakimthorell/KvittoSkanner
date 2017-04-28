@@ -17,7 +17,7 @@ import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.services.TextCollector;
 
 /**
- * 
+ *
  */
 public class WizardActivity extends AppCompatActivity {
     private List<String> listOfStrings;
@@ -41,7 +41,7 @@ public class WizardActivity extends AppCompatActivity {
                     listOfStrings = TextCollector.collectStringsFromImage(getApplicationContext(), URI);
                     endLoadingBar();
                 } catch (IOException io) {
-                    System.out.println("TextColletor not working");
+                    System.out.println("TextCollector is not operational");
                 }
             }
         });
