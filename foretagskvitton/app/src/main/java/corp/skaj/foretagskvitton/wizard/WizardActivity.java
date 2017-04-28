@@ -1,8 +1,6 @@
 package corp.skaj.foretagskvitton.wizard;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,6 +14,7 @@ import java.util.List;
 
 import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.activites.AddNewPost;
+import corp.skaj.foretagskvitton.services.ReceiptScanner;
 import corp.skaj.foretagskvitton.services.TextCollector;
 
 /**
@@ -70,10 +69,14 @@ public class WizardActivity extends AppCompatActivity {
             public void run() {
                 toggleProgressBar();
 
+                ReceiptScanner receiptScanner = new ReceiptScanner();
                 String toPrint = "";
+                /*
                 for (String s : listOfStrings) {
                     toPrint += s + "\n";
                 }
+                */
+                toPrint = receiptScanner.getTotalCost(listOfStrings);
 
                 TextView textView = (TextView) findViewById(R.id.textContainer);
                 textView.setText(toPrint);
