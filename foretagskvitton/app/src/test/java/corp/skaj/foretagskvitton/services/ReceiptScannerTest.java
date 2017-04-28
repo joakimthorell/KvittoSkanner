@@ -42,7 +42,6 @@ public class ReceiptScannerTest {
         listOfDoubles.add("20,00");
     }
 
-    /*
     @Test
     public void testDateFilter(){
         String testdate = "2017-04-27";
@@ -50,7 +49,6 @@ public class ReceiptScannerTest {
         assertEquals(testdate, methodDate);
         assertEquals(testdate, receiptScanner.getDate(list));
     }
-    */
 
     @Test
     public void testFindingDouble () {
