@@ -50,9 +50,7 @@ public class ReceiptScanner {
             String s = listOfStrings.get(i).replace("," , ".");
             if (s.contains(".")) {
                 if(isDouble(s)) {
-                    double temp = Double.parseDouble(s);
-                    System.out.println(temp);
-                    listOfDoubles.add(temp);
+                    listOfDoubles.add(Double.parseDouble(s));
                 }
             }
         }

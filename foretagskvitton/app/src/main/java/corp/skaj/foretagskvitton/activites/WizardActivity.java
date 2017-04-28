@@ -63,13 +63,13 @@ public class WizardActivity extends AppCompatActivity {
                 ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
                 progressBar.setVisibility(View.GONE);
                 ReceiptScanner receiptScanner = new ReceiptScanner();
-                String toPrint = "";
+                //String toPrint = "";
                 /*
                 for (String s : listOfStrings) {
                     toPrint += s + "\n";
                 }
                 */
-                toPrint = receiptScanner.getTotalCost(listOfStrings);
+                String toPrint = receiptScanner.getTotalCost(listOfStrings);
                 TextView textView = (TextView) findViewById(R.id.textContainer);
                 textView.setText(toPrint);
             }
