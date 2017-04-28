@@ -110,17 +110,17 @@ public class AddNewPost extends AppCompatActivity {
         Intent openCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         // Ensure there is a camera
         if (openCamera.resolveActivity(getPackageManager()) != null) {
-            Uri imageURI = setupImageFolder(openCamera);
+            Uri imageURI = setupImageFolder();
             openCamera.putExtra(MediaStore.EXTRA_OUTPUT, imageURI);
+            startActivityForResult(openCamera, REQUEST_IMAGE_CAPTURE);
         }
     }
 
     /**
      * This method arranges a folder where an image taken by camera is saved.
-     * @param openCamera
-     * @return imageURI
+     * @return
      */
-    private Uri setupImageFolder(Intent openCamera) {
+    private Uri setupImageFolder() {
         File imageFile = null;
         try {
             imageFile = createImageFile();
