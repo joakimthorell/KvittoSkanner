@@ -79,6 +79,12 @@ public class ReceiptScanner {
         }
     }
 
+    /**
+     *
+     * @param s
+     * @return <code>true</code> if s is a interger
+     * <code>false</code> otherwise
+     */
     public boolean isInt(String s) {
         try {
             Integer.parseInt(s);
@@ -93,6 +99,8 @@ public class ReceiptScanner {
      * @return <code>true</code> if kr or sek is found
      * <code>false</code> otherwise
      */
+
+    //här borde vi snarare returnera rätt index för att kunna använda i metoden nedan???
     private boolean checkForText () {
         for (int i = 0; i < listOfStrings.size(); i++) {
             if (listOfStrings.get(i).toLowerCase().equals("kr")
@@ -106,14 +114,25 @@ public class ReceiptScanner {
     }
 
     public double checkBeforeAndAfter (int index) {
+        double totalCostBefore = 0.0;
+        double totalCostAfter = 0.0;
+        double totalCost;
+        String temp;
         if (isInt(listOfStrings.get(index - 1)) || isDouble(listOfStrings.get(index - 1))) {
-            //vet att det är en double eller int
-            //spara den som total cost
-            // vill kolla index + 1
-            //kolla vilket av de två värdena som är störts
+            temp = listOfStrings.get(index - 1);
+            totalCostBefore = Double.parseDouble(temp);
+
+        } if (isInt(listOfStrings.get(index + 1)) || isDouble(listOfStrings.get(index + 1))) {
+            temp = listOfStrings.get(index + 1);
+            totalCostAfter = Double.parseDouble(temp);
+        }
+        if (totalCostBefore > totalCostAfter) {
+            totalCost = totalCostBefore;
+        } else {
+            totalCost = totalCostAfter;
         }
 
-        return 0.0;
+        return totalCost;
     }
 
     public String getTotalCost(List<String> listOfStrings) {
