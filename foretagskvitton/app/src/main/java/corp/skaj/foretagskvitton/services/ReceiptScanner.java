@@ -80,7 +80,12 @@ public class ReceiptScanner {
     }
 
     public boolean isInt(String s) {
-
+        try {
+            Integer.parseInt(s);
+            return true;
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
     }
 
     /**
@@ -107,6 +112,8 @@ public class ReceiptScanner {
             // vill kolla index + 1
             //kolla vilket av de två värdena som är störts
         }
+
+        return 0.0;
     }
 
     public String getTotalCost(List<String> listOfStrings) {
