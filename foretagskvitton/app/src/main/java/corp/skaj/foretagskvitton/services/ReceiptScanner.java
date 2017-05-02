@@ -1,19 +1,17 @@
 package corp.skaj.foretagskvitton.services;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
-/**
- *
- */
 public class ReceiptScanner {
     private List<String> listOfStrings;
 
     public String getDate(List<String> listOfStrings) {
+        String date = new SimpleDateFormat("yyyy-mm-dd").format(new Date());
+
         for (int i = 0; i < listOfStrings.size(); i++) {
             String currentString = listOfStrings.get(i);
 
@@ -21,8 +19,8 @@ public class ReceiptScanner {
                 return currentString;
             }
         }
-        return "2017-04-28";
-        //return Calendar.getInstance().getTime().toString();
+        return date;
+
     }
 
     /**
@@ -31,12 +29,8 @@ public class ReceiptScanner {
      * @return
      */
     // Checks that the string starts with the current year in ex. 17 or 2017.
-    // TODO - Check how simple Dateformat class works? Necessery with other solutions for date?
     private boolean correctFirstNum(String date) {
-        DateFormat dateFormat = new SimpleDateFormat("yyyy");
-        Calendar cal = Calendar.getInstance();
-        String year = "2017";
-       //String year = dateFormat.format(cal).toString();
+        String year = new SimpleDateFormat("yyyy").format(new Date());
         return date.substring(0, 2).equals(year.substring(0, 4)) || date.equals(year);
     }
 
@@ -45,7 +39,7 @@ public class ReceiptScanner {
      * @param date
      * @return
      */
-    // Checks that the size is in correct swedish format, either 170218 or 2017-05-03.
+    // Checks that the length is correct, either 170218 or 2017-05-03.
     private boolean correctLength(String date) {
         return date.length() <= 10 && date.length() >= 6;
     }
@@ -103,7 +97,6 @@ public class ReceiptScanner {
      * @return <code>true</code> if kr or sek is found
      * <code>false</code> otherwise
      */
-
     private int checkForText () {
         for (int i = 0; i < listOfStrings.size(); i++) {
             if (listOfStrings.get(i).toLowerCase().equals("kr")
@@ -115,7 +108,6 @@ public class ReceiptScanner {
         }
         return -1;
     }
-
 
     public double checkBeforeAndAfter (int index) {
         double totalCostBefore = 0.0;
@@ -132,13 +124,13 @@ public class ReceiptScanner {
         }
         if (totalCostBefore > totalCostAfter) {
             totalCost = totalCostBefore;
+
         } else {
             totalCost = totalCostAfter;
         }
 
         return totalCost > 0 ? totalCost : 0;
     }
-
 
     public double getTotalCost(List<String> listOfStrings) {
         this.listOfStrings = listOfStrings;
@@ -167,7 +159,7 @@ public class ReceiptScanner {
             }
             else if (correctCardNumLength(currString)){
 
-                if(currString.length() == 16 && containsNumEnd(currString)) {
+                if(currString.length() == 16 && lastFourIsNum(currString)) {
                     return currString.substring(12);
                 }
                 if(currString.length() == 4 && onlyNums(currString)){
@@ -175,14 +167,14 @@ public class ReceiptScanner {
                 }
             }
             else if (currString.length() >= 4 && currString.length() < 16){
-                if(containsNumEnd(currString) && notOrgNum(currString)){
+                
+                if(lastFourIsNum(currString) && notOrgNum(currString)){
                     return currString.substring(currString.length() - 4);
                 }
             }
         }
       return "0000";
     }
-
 
     private boolean containsAsterix(String currString){
      return  currString.contains("*");
@@ -193,11 +185,11 @@ public class ReceiptScanner {
     }
 
     private boolean onlyNums (String currString){
-        String compare = "\\d+";
+        String compare = "\\d+"; //only numbers
         return currString.matches(compare);
     }
 
-    private boolean containsNumEnd(String currString){
+    private boolean lastFourIsNum(String currString){
         String currEnd = currString.substring(currString.length() - 4);
         return currEnd.matches("\\d+");
     }
