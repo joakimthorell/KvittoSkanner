@@ -75,7 +75,7 @@ public class InitWizard extends AppCompatActivity {
                 for (String s : listOfStrings) {
                     toPrint += s + "\n";
                 }
-                String toPrintDouble = receiptScanner.getTotalCost(listOfStrings);
+                String toPrintDouble = String.valueOf(receiptScanner.getTotalCost(listOfStrings));
 
                 toPrint = toPrintDouble == null ? toPrint : toPrintDouble;
                 TextView textView = (TextView) findViewById(R.id.textContainer);
