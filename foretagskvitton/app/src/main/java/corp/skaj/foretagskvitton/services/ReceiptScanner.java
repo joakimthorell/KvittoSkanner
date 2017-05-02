@@ -117,11 +117,6 @@ public class ReceiptScanner {
         return -1;
     }
 
-    /**
-     *
-     * @param index
-     * @return totalCost
-     */
 
     public double checkBeforeAndAfter (int index) {
         double totalCostBefore = 0.0;
@@ -145,11 +140,7 @@ public class ReceiptScanner {
         return totalCost > 0 ? totalCost : 0;
     }
 
-    /**
-     *
-     * @param listOfStrings
-     * @return totalCost
-     */
+
     public double getTotalCost(List<String> listOfStrings) {
         this.listOfStrings = listOfStrings;
         List<Double> listOfDoubles = findAllDoubles(listOfStrings);
