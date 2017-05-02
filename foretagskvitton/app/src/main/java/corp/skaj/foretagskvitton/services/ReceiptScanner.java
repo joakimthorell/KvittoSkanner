@@ -163,20 +163,30 @@ public class ReceiptScanner {
         for (int i = 0; i < listOfStrings.size(); i++) {
             currString = listOfStrings.get(i).replace(" ", "");
 
-            if (correctCardNumLength(currString) && onlyNums(currString)){
+            if(containsAsterix(currString)){
+                return currString.substring(currString.length() - 4);
+            }
+            else if (correctCardNumLength(currString)){
 
-                if(currString.length() == 16 && specialcharCheck(currString)) {
-                    return currString;
+                if(currString.length() == 16 && containsNumEnd(currString)) {
+                    return currString.substring(12);
                 }
-                if(currString.length() == 4){
+                if(currString.length() == 4 && onlyNums(currString)){
                     return currString;
                 }
             }
+            else if (currString.length() >= 4 && currString.length() < 16){
+                if(containsNumEnd(currString) && notOrgNum(currString)){
+                    return currString.substring(currString.length() - 4);
+                }
+            }
         }
-      return currString;
+      return "0000";
     }
-    private boolean specialcharCheck(String currString){
-     return currString.contains("X") || currString.contains("x") || currString.contains("*");
+
+
+    private boolean containsAsterix(String currString){
+     return  currString.contains("*");
     }
 
     private boolean correctCardNumLength(String currString){
@@ -186,5 +196,15 @@ public class ReceiptScanner {
     private boolean onlyNums (String currString){
         String compare = "\\d+";
         return currString.matches(compare);
+    }
+
+    private boolean containsNumEnd(String currString){
+        String currEnd = currString.substring(currString.length() - 4);
+        return currEnd.matches("\\d+");
+    }
+
+    private boolean notOrgNum(String currString){
+        String currEnd = currString.substring(currString.length() - 5);
+        return !currEnd.contains("-");
     }
 }
