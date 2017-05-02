@@ -51,14 +51,6 @@ public class ReceiptScanner {
                 if(isDouble(s)) {
                     listOfDoubles.add(Double.parseDouble(s));
                 }
-            } else {
-                double totalCost = 0;
-                for (int j = 0; j < listOfStrings.size(); j++) {
-                    if (checkForText()) {
-                        totalCost = checkBeforeAndAfter(i);
-                        listOfDoubles.add(totalCost);
-                    }
-                }
             }
         }
         return listOfDoubles;
@@ -70,7 +62,7 @@ public class ReceiptScanner {
      * @return <code>true</code> if s is a double
      * <code>false</code> otherwise
      */
-    public boolean isDouble (String s) {
+    private boolean isDouble (String s) {
         try {
             Double.parseDouble(s);
             return true;
@@ -85,7 +77,7 @@ public class ReceiptScanner {
      * @return <code>true</code> if s is a interger
      * <code>false</code> otherwise
      */
-    public boolean isInt(String s) {
+    private boolean isInt(String s) {
         try {
             Integer.parseInt(s);
             return true;
@@ -100,18 +92,23 @@ public class ReceiptScanner {
      * <code>false</code> otherwise
      */
 
-    //här borde vi snarare returnera rätt index för att kunna använda i metoden nedan???
-    private boolean checkForText () {
+    private int checkForText () {
         for (int i = 0; i < listOfStrings.size(); i++) {
             if (listOfStrings.get(i).toLowerCase().equals("kr")
                         || listOfStrings.get(i).toLowerCase().equals("sek")
                             || listOfStrings.get(i).toLowerCase().equals("total")
                                 || listOfStrings.get(i).toLowerCase().equals("totalt")) {
-                return true;
+                return i;
             }
         }
-        return false;
+        return -1;
     }
+
+    /**
+     *
+     * @param index
+     * @return totalCost
+     */
 
     public double checkBeforeAndAfter (int index) {
         double totalCostBefore = 0.0;
@@ -132,18 +129,24 @@ public class ReceiptScanner {
             totalCost = totalCostAfter;
         }
 
-        return totalCost;
+        return totalCost > 0 ? totalCost : 0;
     }
 
-    public String getTotalCost(List<String> listOfStrings) {
+    /**
+     *
+     * @param listOfStrings
+     * @return totalCost
+     */
+    public double getTotalCost(List<String> listOfStrings) {
         this.listOfStrings = listOfStrings;
         List<Double> listOfDoubles = findAllDoubles(listOfStrings);
 
-        // TODO fast fix so this wont crash if no double was found, need to be fixed
         try {
-            return String.valueOf(Collections.max(listOfDoubles));
-        } catch (Exception e) {
-            return null;
+            return Collections.max(listOfDoubles);
+        } catch (ClassCastException cce) {
+            int index = checkForText();
+            double totalCost = checkBeforeAndAfter(index);
+            return totalCost;
         }
 
         }
