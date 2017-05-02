@@ -12,4 +12,8 @@
     <string name="nextButtonText">Nästa</string>
     <string name="backButtonText">Bakåt</string>
     <string name="title_activity_test">TestActivity</string>
+    <string name="last_step_text">Är alla dina val ok?</string>
+    <string name="last_step_approve_button">Lägg till</string>
+    <string name="cancel">Tillbaka</string>
+    <string name="wizard_complete">Slutför</string>
 </resources>
