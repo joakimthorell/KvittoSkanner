@@ -18,7 +18,6 @@
 package corp.skaj.foretagskvitton.activities;
 
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -41,9 +40,6 @@ import java.util.List;
 import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.view.WizardLastStep;
 import corp.skaj.foretagskvitton.wizard.ReceiptWizardModel;
-
-import static android.support.v4.view.PagerAdapter.POSITION_NONE;
-import static android.support.v4.view.PagerAdapter.POSITION_UNCHANGED;
 
 public class WizardActivity extends AppCompatActivity implements
         PageFragmentCallbacks, ReviewFragment.Callbacks, ModelCallbacks {

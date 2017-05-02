@@ -137,10 +137,10 @@ public class ReceiptScanner {
         List<Double> listOfDoubles = findAllDoubles(listOfStrings);
 
         try {
-            return Collections.max(listOfDoubles);
-        } catch (ClassCastException cce) {
+            return Collections.max(listOfDoubles); // Denna kastar 2 olika exceptions.
+        } catch (Exception cce) {
             int index = checkForText();
-            double totalCost = checkBeforeAndAfter(index);
+            double totalCost = index >= 0 ? checkBeforeAndAfter(index) : 0; // Om index är -1 som checkForText returnerar när den inte hittar något får man outOfBounds här
             return totalCost;
             }
         }
