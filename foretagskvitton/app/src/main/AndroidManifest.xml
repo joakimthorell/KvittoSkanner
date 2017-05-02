@@ -40,6 +40,10 @@
                 android:value="corp.skaj.foretagskvitton.wizard.InitWizard" />
         </activity>
         <activity android:name=".activities.AddNewPost" />
+        <activity
+            android:name=".wizard.TestActivity"
+            android:label="@string/title_activity_test"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

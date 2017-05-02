@@ -150,8 +150,7 @@ public class ReceiptScanner {
             int index = checkForText();
             double totalCost = checkBeforeAndAfter(index);
             return totalCost;
-        }
-
+            }
         }
 
     public void getProducts(List<String> listOfStrings) {
