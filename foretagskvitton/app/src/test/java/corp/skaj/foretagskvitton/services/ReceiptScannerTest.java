@@ -3,8 +3,11 @@ package corp.skaj.foretagskvitton.services;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -45,11 +48,11 @@ public class ReceiptScannerTest {
         listOfCardNums = new ArrayList<>();
 
          //listOfCardNums.add("*3v 5655");
-         listOfCardNums.add("342");
-         listOfCardNums.add("34422r32r23");
-         listOfCardNums.add("xxxx");
-        //listOfCardNums.add("5343-5554");
-       // listOfCardNums.add("dewwk* 5655");
+        listOfCardNums.add("342");
+        listOfCardNums.add("34422r32r23");
+        listOfCardNums.add("xxxx");
+        listOfCardNums.add("5343-5554"); // skips org-nums!
+        listOfCardNums.add("dewwk* 5655");
         listOfCardNums.add("Xk** x**x XXxx 5655");
     }
 
