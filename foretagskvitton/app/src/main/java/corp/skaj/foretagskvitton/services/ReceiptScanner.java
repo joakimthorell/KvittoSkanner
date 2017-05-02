@@ -14,12 +14,25 @@ import java.util.Objects;
 public class ReceiptScanner {
     private List<String> listOfStrings;
 
+    public String getDate(List<String> listOfStrings) {
+        for (int i = 0; i < listOfStrings.size(); i++) {
+            String currentString = listOfStrings.get(i);
+
+            if (correctFirstNum(currentString.substring(0, 4)) && correctLength(currentString)) {
+                return currentString;
+            }
+        }
+        return "2017-04-28";
+        //return Calendar.getInstance().getTime().toString();
+    }
+
     /**
      *
      * @param date
      * @return
      */
     // Checks that the string starts with the current year in ex. 17 or 2017.
+    // TODO - Check how simple Dateformat class works? Necessery with other solutions for date?
     private boolean correctFirstNum(String date) {
         DateFormat dateFormat = new SimpleDateFormat("yyyy");
         Calendar cal = Calendar.getInstance();
@@ -33,7 +46,7 @@ public class ReceiptScanner {
      * @param date
      * @return
      */
-    // Checks that the size is correct format, either 170218 or 2017-05-03.
+    // Checks that the size is in correct swedish format, either 170218 or 2017-05-03.
     private boolean correctLength(String date) {
         return date.length() <= 10 && date.length() >= 6;
     }
@@ -147,16 +160,6 @@ public class ReceiptScanner {
         }
 
         }
-
-    public String getDate(List<String> listOfStrings) {
-        for (int i = 0; i < listOfStrings.size(); i++) {
-            if (correctFirstNum(listOfStrings.get(i).substring(0, 4)) && correctLength(listOfStrings.get(i))) {
-                return listOfStrings.get(i);
-            }
-        }
-        return "2017-04-28";
-        //return Calendar.getInstance().getTime().toString();
-    }
 
     public void getProducts(List<String> listOfStrings) {
 
