@@ -167,7 +167,7 @@ public class ReceiptScanner {
                 }
             }
             else if (currString.length() >= 4 && currString.length() < 16){
-                
+
                 if(lastFourIsNum(currString) && notOrgNum(currString)){
                     return currString.substring(currString.length() - 4);
                 }
