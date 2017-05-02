@@ -18,6 +18,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import corp.skaj.foretagskvitton.R;
+import corp.skaj.foretagskvitton.controllers.BottomNavigationController;
 import corp.skaj.foretagskvitton.wizard.InitWizard;
 
 /**
@@ -41,7 +42,7 @@ public class AddNewPost extends AppCompatActivity {
         actionBar.hide();
         // Setup bottom navigation
         BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
-        BottomNavigationFragment.setupBottomNavBar(bottomBar, STATE_FOR_BOTTOM_MENY, this);
+        BottomNavigationController.setupBottomNavBar(bottomBar, STATE_FOR_BOTTOM_MENY, this);
     }
 
     /**
