@@ -6,7 +6,6 @@ import java.util.Calendar;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 
 /**
  *
@@ -158,7 +157,33 @@ public class ReceiptScanner {
 
     }
 
-    public void getCardNumber() {
+    public String getCardNumber(List<String> listOfStrings) {
+        String currString = "";
+        for (int i = 0; i < listOfStrings.size(); i++) {
+            currString = listOfStrings.get(i).replace(" ", "");
+
+            if (correctCardNumLength(currString) && onlyNums(currString)){
+
+                if(currString.length() == 16 && specialcharCheck(currString)) {
+                    return currString;
+                }
+                if(currString.length() == 4){
+                    return currString;
+                }
+            }
+        }
+      return currString;
+    }
+    private boolean specialcharCheck(String currString){
+     return currString.contains("X") || currString.contains("x") || currString.contains("*");
     }
 
+    private boolean correctCardNumLength(String currString){
+        return currString.length() == 16 || currString.length() == 4;
+    }
+
+    private boolean onlyNums (String currString){
+        String compare = "\\d+";
+        return currString.matches(compare);
+    }
 }
