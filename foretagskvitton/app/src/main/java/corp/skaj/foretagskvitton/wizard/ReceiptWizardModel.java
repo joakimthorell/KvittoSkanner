@@ -20,7 +20,9 @@ import android.content.Context;
 
 import com.tech.freak.wizardpager.model.AbstractWizardModel;
 import com.tech.freak.wizardpager.model.BranchPage;
+import com.tech.freak.wizardpager.model.MultipleFixedChoicePage;
 import com.tech.freak.wizardpager.model.PageList;
+import com.tech.freak.wizardpager.model.SingleFixedChoicePage;
 
 public class ReceiptWizardModel extends AbstractWizardModel {
     public ReceiptWizardModel(Context context) {
@@ -30,8 +32,29 @@ public class ReceiptWizardModel extends AbstractWizardModel {
     @Override
     protected PageList onNewRootPageList() {
 
-        return new PageList( new BranchPage(this, ""));
+        return new PageList(
+                new BranchPage(this, "Skapa ny")
+                    .addBranch("Företagskort",
 
+                        new MultipleFixedChoicePage(this, "Valmöjligheter")
+                            .setChoices(), //Företag och grossister ska in här
+
+                        new SingleFixedChoicePage(this, "Kategori")
+                            .setChoices() //Kan vi få in våra ENUM här på något sätt???
+                            .setRequired(true),
+
+                    .addBranch("Privatkort",
+
+                        new MultipleFixedChoicePage(this, "Valmöjligheter")
+                            .setChoices(), //Företag och grossister ska in här
+
+                        new SingleFixedChoicePage(this, "Kategori")
+                            .setChoices() //Kan vi få in våra ENUM här på något sätt???
+                            .setRequired(true)
+
+
+                    //new CustomerInfoPage (this, "Din information")
+                        .setRequired(true)));
 
         // TODO add all the option fragments
 
