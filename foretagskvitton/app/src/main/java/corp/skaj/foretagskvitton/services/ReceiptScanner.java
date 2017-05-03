@@ -19,7 +19,7 @@ public class ReceiptScanner {
                 return currentString;
             }
         }
-        return date;
+        return null;
 
     }
 

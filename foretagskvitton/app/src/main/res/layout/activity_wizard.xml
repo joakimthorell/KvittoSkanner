@@ -84,5 +84,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@+id/wizardBackButton"
         app:layout_constraintRight_toRightOf="parent" />
-    
+
 </android.support.constraint.ConstraintLayout>
