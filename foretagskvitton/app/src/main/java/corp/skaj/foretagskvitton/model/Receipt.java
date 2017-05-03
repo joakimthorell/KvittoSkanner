@@ -2,6 +2,7 @@ package corp.skaj.foretagskvitton.model;
 
 import android.net.Uri;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -9,7 +10,7 @@ import java.util.List;
 /**
  *
  */
-public class Receipt {
+public class Receipt implements Serializable {
     private List<Product> listOfProducts;
     private Calendar date;
     private double total;

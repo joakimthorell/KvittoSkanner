@@ -1,9 +1,11 @@
 package corp.skaj.foretagskvitton.model;
 
+import java.io.Serializable;
+
 /**
  *
  */
-public class Supplier {
+public class Supplier implements Serializable {
     private String name;
 
     public Supplier(String name) {

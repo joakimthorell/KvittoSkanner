@@ -34,9 +34,11 @@ public class ReadUserActivity extends AppCompatActivity {
     private void readData(SharedPreferences userPref) {
         Gson gson = new Gson();
         String savedData = userPref.getString(DataHandler.getGetDataKey(), "");
-        User user = savedData.isEmpty() ? new User("HEJHEJ") : gson.fromJson(savedData, User.class);
+        User user = savedData.isEmpty() ? new User("Hejsan") : gson.fromJson(savedData, User.class);
         System.out.println(user.getName());
-        DataHandler.getInstance().setUser(user);
+        DataHandler.setUser(user);
+
+        // Detta måste testas på mobiltelefon
     }
 
     private void endLoadingBar() {

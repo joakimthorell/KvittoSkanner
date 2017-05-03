@@ -1,9 +1,11 @@
 package corp.skaj.foretagskvitton.model;
 
+import java.io.Serializable;
+
 /**
  *
  */
-public class CompanyPurchase extends Purchase {
+public class CompanyPurchase extends Purchase implements Serializable {
     private Card payment;
 
     public CompanyPurchase(Receipt receipt, Supplier supplier) {

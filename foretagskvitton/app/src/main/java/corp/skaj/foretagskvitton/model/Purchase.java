@@ -1,9 +1,11 @@
 package corp.skaj.foretagskvitton.model;
 
+import java.io.Serializable;
+
 /**
  * 
  */
-public abstract class Purchase {
+public abstract class Purchase implements Serializable {
     private Receipt receipt;
     private Supplier supplier;
 

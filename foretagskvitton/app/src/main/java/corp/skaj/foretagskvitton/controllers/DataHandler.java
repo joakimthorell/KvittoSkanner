@@ -4,27 +4,19 @@ import corp.skaj.foretagskvitton.model.User;
 
 public class DataHandler {
     private static final String GET_DATA_KEY = "GET_USER_DATA";
-    private static DataHandler dataHandler;
-    private User user;
+    private static User user;
 
     private DataHandler() {
     }
 
-    public void setUser(User user) {
+    public static void setUser(User userman) {
         if (user == null) {
-            this.user = user;
+            user = userman;
         }
     }
 
-    public User getUser() {
+    public static User getUser() {
         return user;
-    }
-
-    public static DataHandler getInstance() {
-        if (dataHandler == null) {
-            dataHandler = new DataHandler();
-        }
-        return dataHandler;
     }
 
     public static String getGetDataKey() {

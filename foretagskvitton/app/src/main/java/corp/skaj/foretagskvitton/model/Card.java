@@ -1,9 +1,11 @@
 package corp.skaj.foretagskvitton.model;
 
+import java.io.Serializable;
+
 /**
  *
  */
-public class Card {
+public class Card implements Serializable {
     private int card;
 
     public Card (int card) {
