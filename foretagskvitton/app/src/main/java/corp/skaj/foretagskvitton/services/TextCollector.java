@@ -25,13 +25,6 @@ public class TextCollector {
     private TextCollector() {
     }
 
-    /**
-     * This method collects Strings from image.
-     * @param context
-     * @param uri
-     * @return listOfStrings
-     * @throws IOException
-     */
     public static List<String> collectStringsFromImage(Context context, Uri uri) throws IOException {
         Bitmap bmp = createImageFromUri(context, uri);
         SparseArray<TextBlock> textBlocks = getTextBlocksFromImage(context, bmp);
@@ -42,13 +35,6 @@ public class TextCollector {
         return buildListOfStrings(textBlocks);
     }
 
-    /**
-     * This method converts an Uri to a Bitmap.
-     * @param context
-     * @param uri
-     * @return Bitmap
-     * @throws IOException
-     */
     private static Bitmap createImageFromUri(Context context, Uri uri) throws IOException {
         if (URI == null) {
             throw new NullPointerException("URI is null");
@@ -57,12 +43,6 @@ public class TextCollector {
         return bmp;
     }
 
-    /**
-     * This method collects Textblocks from an image.
-     * @param context
-     * @param bmp
-     * @return listOfTextBlocks if TextRecognizer is operational. Null otherwise
-     */
     private static SparseArray<TextBlock> getTextBlocksFromImage(Context context, Bitmap bmp) {
         TextRecognizer textRecognizer = new TextRecognizer.Builder(context.getApplicationContext()).build();
 
@@ -78,11 +58,6 @@ public class TextCollector {
         }
     }
 
-    /**
-     * This method collects Strings from Textblocks.
-     * @param listOfTextBlock
-     * @return listOfStrings
-     */
     private static List<String> buildListOfStrings(SparseArray<TextBlock> listOfTextBlock) {
         List<String> listOfStrings = new ArrayList<>();
 
@@ -94,11 +69,6 @@ public class TextCollector {
         return listOfStrings;
     }
 
-    /**
-     * This method collects lines from Textblocks.
-     * @param list
-     * @return listOfStrings
-     */
     private static List<String> linesToStrings(List<? extends Text> list) {
         List<String> listOfStrings = new ArrayList<>();
 

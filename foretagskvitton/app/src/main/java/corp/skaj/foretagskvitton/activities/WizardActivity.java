@@ -39,7 +39,9 @@ import com.tech.freak.wizardpager.ui.StepPagerStrip;
 import java.util.List;
 
 import corp.skaj.foretagskvitton.R;
+import corp.skaj.foretagskvitton.controllers.WizardController;
 import corp.skaj.foretagskvitton.view.WizardLastStep;
+import corp.skaj.foretagskvitton.wizard.InitWizard;
 import corp.skaj.foretagskvitton.wizard.ReceiptWizardModel;
 
 public class WizardActivity extends AppCompatActivity implements
@@ -65,7 +67,11 @@ public class WizardActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wizard);
 
-        mWizardModel = new ReceiptWizardModel(this);
+        Bundle b = getIntent().getExtras();
+        List<String> listOfStrings = b.getStringArrayList(InitWizard.KEY_FOR_WIZARD_CONTROLLER);
+        mWizardModel = new WizardController(getApplicationContext(), listOfStrings).getReceiptWizardModel();
+
+        //mWizardModel = (ReceiptWizardModel) getIntent().getSerializableExtra(InitWizard.KEY_FOR_WIZARD_CONTROLLER);
 
         // Changing the normal actionbar to custom toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.wizard_action_bar);

@@ -32,13 +32,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".wizard.InitWizard" />
-        <activity
-            android:name=".wizard.FirstStep"
-            android:parentActivityName=".wizard.FirstStep">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="corp.skaj.foretagskvitton.activities.AddNewPost" />
-        </activity>
         <activity android:name=".activities.AddNewPost" />
         <activity android:name=".activities.WizardActivity"
             android:theme="@style/WizardTheme">

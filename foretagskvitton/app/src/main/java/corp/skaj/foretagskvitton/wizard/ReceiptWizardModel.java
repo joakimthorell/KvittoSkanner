@@ -17,6 +17,7 @@
 package corp.skaj.foretagskvitton.wizard;
 
 import android.content.Context;
+import android.os.Parcelable;
 
 import com.tech.freak.wizardpager.model.AbstractWizardModel;
 import com.tech.freak.wizardpager.model.BranchPage;
@@ -27,6 +28,7 @@ import com.tech.freak.wizardpager.model.PageList;
 import com.tech.freak.wizardpager.model.SingleFixedChoicePage;
 import com.tech.freak.wizardpager.model.TextPage;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.concurrent.ConcurrentMap;
 
@@ -36,15 +38,15 @@ import corp.skaj.foretagskvitton.view.WizardLastStep;
 
 public class ReceiptWizardModel extends AbstractWizardModel {
 
-    Company company;
+    String company;
     double totalSum;
-    Date date;
+    String date;
 
-    public ReceiptWizardModel(Context context, Company company, double totalSum, Date date) {
+    public ReceiptWizardModel(Context context, Company company, double totalSum, String date) {
         super(context);
-        company = this.company;
-        totalSum = this.totalSum;
-        date = this.date;
+        this.company = company == null ? null : company.getName();
+        this.totalSum = totalSum;
+        this.date = date;
     }
 
     @Override
@@ -69,7 +71,7 @@ public class ReceiptWizardModel extends AbstractWizardModel {
                                         .setChoices(), //Grossister
 
                                 new TextPage(this, "Datum")
-                                        .setValue(date.toString()),
+                                        .setValue(date),
 
                                 //TODO gör en kalender där man får välja, om vi har tid över
 
@@ -93,7 +95,7 @@ public class ReceiptWizardModel extends AbstractWizardModel {
                                         .setChoices(), //Grossister
 
                                 new TextPage(this, "Datum")
-                                        .setValue(date.toString()),
+                                        .setValue(date),
 
                                 //TODO gör en kalender där man får välja, om vi har tid över
 
@@ -117,7 +119,7 @@ public class ReceiptWizardModel extends AbstractWizardModel {
                 new BranchPage(this, "Skapa ny post"),
 
                 new TextPage(this, "Datum")
-                        .setValue(date.toString()),
+                        .setValue(date),
 
                 //TODO gör en kalender där man får välja, om vi har tid över
 
@@ -130,7 +132,7 @@ public class ReceiptWizardModel extends AbstractWizardModel {
                         .setRequired(true),
 
                 new TextPage(this, "Kommentar")
-                    .setRequired(false));
+                        .setRequired(false));
 
     }
 

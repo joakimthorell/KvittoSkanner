@@ -12,15 +12,12 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
-/**
- * Created by mattsson on 2017-04-27.
- */
 public class ReceiptScannerTest {
 
-    ReceiptScanner receiptScanner = new ReceiptScanner();
     List<String> list;
     List <String> listOfDoubles;
     List <String> listOfCardNums;
+    List<String> listWithoutDate;
 
     @Before
     public void setup(){
@@ -54,15 +51,20 @@ public class ReceiptScannerTest {
         listOfCardNums.add("5343-5554"); // skips org-nums!
         listOfCardNums.add("dewwk* 5655");
         listOfCardNums.add("Xk** x**x XXxx 5655");
+
+        listWithoutDate = new ArrayList<>();
+        for (int i  = 0; i < 10 ; i++) {
+            listWithoutDate.add(String.valueOf(i));
+        }
     }
 
     
     @Test
     public void testDateFilter(){
         String testdate = "2017-04-27";
-        String methodDate = receiptScanner.getDate(list);
+        String methodDate = ReceiptScanner.getDate(list);
         assertEquals(testdate, methodDate);
-        assertEquals(testdate, receiptScanner.getDate(list));
+        assertEquals(testdate, ReceiptScanner.getDate(list));
     }
 
     /*
@@ -74,10 +76,17 @@ public class ReceiptScannerTest {
     */
 
     @Test
+    public void testIfNoDateFound() {
+        String date = ReceiptScanner.getDate(listWithoutDate);
+
+        assertEquals(null, date);
+    }
+
+    @Test
     public void testCardNum (){
         //String expected = "xxxxxx*xXxxx5543";
         String expected = "5655";
-        String test = receiptScanner.getCardNumber(listOfCardNums);
+        String test = ReceiptScanner.getCardNumber(listOfCardNums);
         assertEquals(expected, test);
     }
 }
