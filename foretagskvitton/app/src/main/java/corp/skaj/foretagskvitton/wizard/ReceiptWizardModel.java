@@ -22,10 +22,6 @@ import com.tech.freak.wizardpager.model.AbstractWizardModel;
 import com.tech.freak.wizardpager.model.BranchPage;
 import com.tech.freak.wizardpager.model.PageList;
 
-/**
- * Created by mattsson on 2017-05-02.
- */
-
 public class ReceiptWizardModel extends AbstractWizardModel {
     public ReceiptWizardModel(Context context) {
         super(context);
@@ -34,12 +30,10 @@ public class ReceiptWizardModel extends AbstractWizardModel {
     @Override
     protected PageList onNewRootPageList() {
 
-        return new PageList( new BranchPage(this, "")
+        return new PageList( new BranchPage(this, ""));
 
 
+        // TODO add all the option fragments
 
-
-
-        );
     }
 }
