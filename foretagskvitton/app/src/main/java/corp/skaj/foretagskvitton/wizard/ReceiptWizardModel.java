@@ -24,6 +24,8 @@ import com.tech.freak.wizardpager.model.MultipleFixedChoicePage;
 import com.tech.freak.wizardpager.model.PageList;
 import com.tech.freak.wizardpager.model.SingleFixedChoicePage;
 
+import corp.skaj.foretagskvitton.view.WizardLastStep;
+
 public class ReceiptWizardModel extends AbstractWizardModel {
     public ReceiptWizardModel(Context context) {
         super(context);
@@ -31,16 +33,27 @@ public class ReceiptWizardModel extends AbstractWizardModel {
 
     @Override
     protected PageList onNewRootPageList() {
+        return new PageList(
+                new BranchPage(this, "Skapa ny")
 
-        // TODO add all the option fragments
-        return new PageList(new BranchPage(this, "Order type").addBranch(
-                "Sandwich",
-                new SingleFixedChoicePage(this, "Bread").setChoices("White",
-                        "Wheat", "Rye", "Pretzel", "Ciabatta")
-                        .setRequired(true),
+                        .addBranch("Företagskort",
 
-                new MultipleFixedChoicePage(this, "Meats").setChoices(
-                        "Pepperoni", "Turkey", "Ham", "Pastrami", "Roast Beef",
-                        "Bologna")));
+                            new MultipleFixedChoicePage(this, "Valmöjligheter")
+                                .setChoices(), //Företag och grossister ska in här
+
+                            new SingleFixedChoicePage(this, "Kategori")
+                                .setChoices() //Kan vi få in våra ENUM här på något sätt???
+                                .setRequired(true))
+
+                        .addBranch("Privatkort",
+
+                            new MultipleFixedChoicePage(this, "Valmöjligheter")
+                                .setChoices(), //Företag och grossister ska in här???
+
+                            new SingleFixedChoicePage(this, "Kategori")
+                                 .setChoices() //Kan vi få in våra ENUM här på något sätt???
+                                 .setRequired(true)));
+        
+
     }
 }
