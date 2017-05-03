@@ -18,6 +18,10 @@ public class ReceiptScanner {
         for (int i = 0; i < listOfStrings.size(); i++) {
             String currentString = listOfStrings.get(i);
 
+            if(currentString.length() < 4){
+                continue;
+            }
+
             if (correctFirstNum(currentString.substring(0, 4)) && correctLength(currentString)) {
                 return currentString;
             }
