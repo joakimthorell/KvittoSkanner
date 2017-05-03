@@ -29,7 +29,7 @@ public class WizardController {
         }
         return receiptScanner.getDate(strings);
     }
-    
+
     private double getTotCost(List<String> strings){
         if(receiptScanner.getTotalCost(strings) == 0.0 ||
                 receiptScanner.getTotalCost(strings) == 0){
