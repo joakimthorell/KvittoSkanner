@@ -34,8 +34,8 @@ public class ReadUserActivity extends AppCompatActivity {
     private void readData(SharedPreferences userPref) {
         Gson gson = new Gson();
         String savedData = userPref.getString(DataHandler.getGetDataKey(), "");
-        User user = gson.fromJson(savedData, User.class);
-        (new DataHandler()).setUser(user);
+        User user = savedData.isEmpty() ? new User("User") : gson.fromJson(savedData, User.class);
+        new DataHandler().setUser(user);
     }
 
     private void endLoadingBar() {

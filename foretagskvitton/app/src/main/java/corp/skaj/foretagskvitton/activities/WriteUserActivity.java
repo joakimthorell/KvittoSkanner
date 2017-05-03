@@ -23,5 +23,4 @@ public class WriteUserActivity extends AppCompatActivity{
         prefEditor.putString(DataHandler.getGetDataKey(), savedData);
         prefEditor.commit();
     }
-
 }
