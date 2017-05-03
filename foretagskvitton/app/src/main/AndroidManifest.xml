@@ -37,9 +37,15 @@
             android:parentActivityName=".wizard.FirstStep">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="corp.skaj.foretagskvitton.wizard.InitWizard" />
+                android:value="corp.skaj.foretagskvitton.activities.AddNewPost" />
         </activity>
         <activity android:name=".activities.AddNewPost" />
+        <activity android:name=".activities.WizardActivity"
+            android:theme="@style/WizardTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="corp.skaj.foretagskvitton.activities.AddNewPost" />
+        </activity>
     </application>
 
 </manifest>

@@ -12,71 +12,81 @@
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
-        app:layout_constraintTop_toTopOf="parent"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        tools:layout_editor_absoluteY="0dp"
-        tools:layout_editor_absoluteX="8dp" />
+        app:layout_constraintRight_toRightOf="parent">
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/pager"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Skapa kvitto"
+            android:textSize="20sp"
+            android:layout_gravity="center"
+            android:id="@+id/toolbar_title"
+            android:textColor="@color/white" />
+    </android.support.v7.widget.Toolbar>
 
     <com.tech.freak.wizardpager.ui.StepPagerStrip
         android:id="@+id/wizard_strip"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginRight="8dp"
         android:layout_marginLeft="8dp"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@id/wizard_action_bar"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="4dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/wizard_action_bar"
+        android:foregroundGravity="center"
+        />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/pager"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/wizard_strip" />
 
     <Button
         android:id="@+id/wizardBackButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
+        android:layout_marginEnd="4dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="4dp"
-        android:text="@string/backButtonText"
-        android:background="@color/colorPrimary"
-        android:textColor="@color/white"
-        app:layout_constraintRight_toLeftOf="@+id/wizardNextButton"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginStart="8dp"
-        android:layout_marginEnd="4dp" />
+        android:background="@color/colorPrimary"
+        android:text="@string/backButtonText"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/wizardNextButton" />
 
     <Button
         android:id="@+id/wizardNextButton"
         android:layout_width="0dp"
-        android:text="@string/nextButtonText"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginLeft="4dp"
-        android:background="@color/nextButtonGreen"
-        android:textColor="@color/white"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toRightOf="@+id/wizardBackButton"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginRight="8dp"
         android:layout_marginStart="4dp"
-        android:layout_marginEnd="8dp" />
+        android:background="@color/nextButtonGreen"
+        android:text="@string/nextButtonText"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/wizardBackButton"
+        app:layout_constraintRight_toRightOf="parent" />
 
 
-</android.support.constraint.ConstraintLayout>
-<!--
+</android.support.constraint.ConstraintLayout><!--
   Copyright 2012 Roman Nurik
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.

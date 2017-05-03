@@ -1,10 +1,13 @@
 package corp.skaj.foretagskvitton.wizard;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 
 import corp.skaj.foretagskvitton.R;
+import corp.skaj.foretagskvitton.activities.WizardActivity;
 
 public class FirstStep extends AppCompatActivity {
 
@@ -24,5 +27,10 @@ public class FirstStep extends AppCompatActivity {
         actionBar.setSubtitle("1 av 12");
         // https://developer.android.com/training/appbar/setting-up.html
         // Borde användas istället, sparar länken här
+    }
+
+    public void buttonPressedOFC(View view) {
+        Intent intent = new Intent(this, WizardActivity.class);
+        startActivity(intent);
     }
 }
