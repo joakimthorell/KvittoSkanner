@@ -56,7 +56,7 @@ public class ReceiptWizardModel extends AbstractWizardModel {
         }
     }
 
-    PageList companyInfoNotFound () {
+    PageList companyInfoNotFound() {
         return new PageList(
                 new BranchPage(this, "Skapa ny post")
 
@@ -79,25 +79,45 @@ public class ReceiptWizardModel extends AbstractWizardModel {
 
                                 new SingleFixedChoicePage(this, "Kategori")
                                         .setChoices("Resor", "Mat", "Bensin", "Hotell", "Frakt")
-                                        .setRequired(true))
+                                        .setRequired(true),
+
+                                new TextPage(this, "Kommentar")
+                                        .setRequired(false))
 
                         .addBranch("Privatkort",
 
                                 new MultipleFixedChoicePage(this, "Företag")
                                         .setChoices(),
 
+                                new MultipleFixedChoicePage(this, "Grossist")
+                                        .setChoices(), //Grossister
+
+                                new TextPage(this, "Datum")
+                                        .setValue(date.toString()),
+
+                                //TODO gör en kalender där man får välja, om vi har tid över
+
+                                new NumberPage(this, "Total belopp")
+                                        .setValue(totalSum > 0 ? String.valueOf(totalSum) : null)
+                                        .setRequired(true),
+
                                 new SingleFixedChoicePage(this, "Kategori")
-                                        .setChoices()
-                                        .setRequired(true)));
+                                        .setChoices("Resor", "Mat", "Bensin", "Hotell", "Frakt")
+                                        .setRequired(true),
+
+                                new TextPage(this, "Kommentar")
+                                        .setRequired(false)));
 
     }
 
-    PageList companyInfoFound () {
+    PageList companyInfoFound() {
 
         return new PageList(
 
-        new TextPage(this, "Datum")
-                .setValue(date.toString()),
+                new BranchPage(this, "Skapa ny post"),
+
+                new TextPage(this, "Datum")
+                        .setValue(date.toString()),
 
                 //TODO gör en kalender där man får välja, om vi har tid över
 
@@ -107,10 +127,11 @@ public class ReceiptWizardModel extends AbstractWizardModel {
 
                 new SingleFixedChoicePage(this, "Kategori")
                         .setChoices("Resor", "Mat", "Bensin", "Hotell", "Frakt")
-                        .setRequired(true));
-        
+                        .setRequired(true),
+
+                new TextPage(this, "Kommentar")
+                    .setRequired(false));
 
     }
-
 
 }
