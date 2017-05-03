@@ -21,39 +21,117 @@ import android.content.Context;
 import com.tech.freak.wizardpager.model.AbstractWizardModel;
 import com.tech.freak.wizardpager.model.BranchPage;
 import com.tech.freak.wizardpager.model.MultipleFixedChoicePage;
+import com.tech.freak.wizardpager.model.NumberPage;
+import com.tech.freak.wizardpager.model.Page;
 import com.tech.freak.wizardpager.model.PageList;
 import com.tech.freak.wizardpager.model.SingleFixedChoicePage;
+import com.tech.freak.wizardpager.model.TextPage;
 
+import java.util.Date;
+import java.util.concurrent.ConcurrentMap;
+
+import corp.skaj.foretagskvitton.controllers.WizardController;
+import corp.skaj.foretagskvitton.model.Company;
 import corp.skaj.foretagskvitton.view.WizardLastStep;
 
 public class ReceiptWizardModel extends AbstractWizardModel {
-    public ReceiptWizardModel(Context context) {
+
+    Company company;
+    double totalSum;
+    Date date;
+
+    public ReceiptWizardModel(Context context, Company company, double totalSum, Date date) {
         super(context);
+        company = this.company;
+        totalSum = this.totalSum;
+        date = this.date;
     }
 
     @Override
     protected PageList onNewRootPageList() {
+        if (company == null) {
+            return companyInfoNotFound();
+        } else {
+            return companyInfoFound();
+        }
+    }
+
+    PageList companyInfoNotFound() {
         return new PageList(
-                new BranchPage(this, "Skapa ny")
+                new BranchPage(this, "Skapa ny post")
 
                         .addBranch("Företagskort",
 
-                            new MultipleFixedChoicePage(this, "Valmöjligheter")
-                                .setChoices(), //Företag och grossister ska in här
+                                new MultipleFixedChoicePage(this, "Företag")
+                                        .setChoices(), //Företag
 
-                            new SingleFixedChoicePage(this, "Kategori")
-                                .setChoices() //Kan vi få in våra ENUM här på något sätt???
-                                .setRequired(true))
+                                new MultipleFixedChoicePage(this, "Grossist")
+                                        .setChoices(), //Grossister
+
+                                new TextPage(this, "Datum")
+                                        .setValue(date.toString()),
+
+                                //TODO gör en kalender där man får välja, om vi har tid över
+
+                                new NumberPage(this, "Total belopp")
+                                        .setValue(totalSum > 0 ? String.valueOf(totalSum) : null)
+                                        .setRequired(true),
+
+                                new SingleFixedChoicePage(this, "Kategori")
+                                        .setChoices("Resor", "Mat", "Bensin", "Hotell", "Frakt")
+                                        .setRequired(true),
+
+                                new TextPage(this, "Kommentar")
+                                        .setRequired(false))
 
                         .addBranch("Privatkort",
 
-                            new MultipleFixedChoicePage(this, "Valmöjligheter")
-                                .setChoices(), //Företag och grossister ska in här???
+                                new MultipleFixedChoicePage(this, "Företag")
+                                        .setChoices(),
 
-                            new SingleFixedChoicePage(this, "Kategori")
-                                 .setChoices() //Kan vi få in våra ENUM här på något sätt???
-                                 .setRequired(true)));
-        
+                                new MultipleFixedChoicePage(this, "Grossist")
+                                        .setChoices(), //Grossister
+
+                                new TextPage(this, "Datum")
+                                        .setValue(date.toString()),
+
+                                //TODO gör en kalender där man får välja, om vi har tid över
+
+                                new NumberPage(this, "Total belopp")
+                                        .setValue(totalSum > 0 ? String.valueOf(totalSum) : null)
+                                        .setRequired(true),
+
+                                new SingleFixedChoicePage(this, "Kategori")
+                                        .setChoices("Resor", "Mat", "Bensin", "Hotell", "Frakt")
+                                        .setRequired(true),
+
+                                new TextPage(this, "Kommentar")
+                                        .setRequired(false)));
 
     }
+
+    PageList companyInfoFound() {
+
+        return new PageList(
+
+                new BranchPage(this, "Skapa ny post"),
+
+                new TextPage(this, "Datum")
+                        .setValue(date.toString()),
+
+                //TODO gör en kalender där man får välja, om vi har tid över
+
+                new NumberPage(this, "Total belopp")
+                        .setValue(totalSum > 0 ? String.valueOf(totalSum) : null)
+                        .setRequired(true),
+
+                new SingleFixedChoicePage(this, "Kategori")
+                        .setChoices("Resor", "Mat", "Bensin", "Hotell", "Frakt")
+                        .setRequired(true),
+
+                new TextPage(this, "Kommentar")
+                    .setRequired(false));
+
+    }
+
 }
