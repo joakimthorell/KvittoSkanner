@@ -24,6 +24,8 @@ import com.tech.freak.wizardpager.model.MultipleFixedChoicePage;
 import com.tech.freak.wizardpager.model.PageList;
 import com.tech.freak.wizardpager.model.SingleFixedChoicePage;
 
+import corp.skaj.foretagskvitton.view.WizardLastStep;
+
 public class ReceiptWizardModel extends AbstractWizardModel {
     public ReceiptWizardModel(Context context) {
         super(context);
@@ -31,32 +33,27 @@ public class ReceiptWizardModel extends AbstractWizardModel {
 
     @Override
     protected PageList onNewRootPageList() {
-
         return new PageList(
                 new BranchPage(this, "Skapa ny")
-                    .addBranch("Företagskort",
 
-                        new MultipleFixedChoicePage(this, "Valmöjligheter")
-                            .setChoices(), //Företag och grossister ska in här
+                        .addBranch("Företagskort",
 
-                        new SingleFixedChoicePage(this, "Kategori")
-                            .setChoices() //Kan vi få in våra ENUM här på något sätt???
-                            .setRequired(true),
+                            new MultipleFixedChoicePage(this, "Valmöjligheter")
+                                .setChoices(), //Företag och grossister ska in här
 
-                    .addBranch("Privatkort",
+                            new SingleFixedChoicePage(this, "Kategori")
+                                .setChoices() //Kan vi få in våra ENUM här på något sätt???
+                                .setRequired(true))
 
-                        new MultipleFixedChoicePage(this, "Valmöjligheter")
-                            .setChoices(), //Företag och grossister ska in här
+                        .addBranch("Privatkort",
 
-                        new SingleFixedChoicePage(this, "Kategori")
-                            .setChoices() //Kan vi få in våra ENUM här på något sätt???
-                            .setRequired(true)
+                            new MultipleFixedChoicePage(this, "Valmöjligheter")
+                                .setChoices(), //Företag och grossister ska in här???
 
-
-                    //new CustomerInfoPage (this, "Din information")
-                        .setRequired(true)));
-
-        // TODO add all the option fragments
+                            new SingleFixedChoicePage(this, "Kategori")
+                                 .setChoices() //Kan vi få in våra ENUM här på något sätt???
+                                 .setRequired(true)));
+        
 
     }
 }
