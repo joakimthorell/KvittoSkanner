@@ -18,6 +18,7 @@ import java.util.List;
 import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.activities.AddNewPost;
 import corp.skaj.foretagskvitton.activities.WizardActivity;
+import corp.skaj.foretagskvitton.activities.WriteUserActivity;
 import corp.skaj.foretagskvitton.controllers.WizardController;
 import corp.skaj.foretagskvitton.services.ReceiptScanner;
 import corp.skaj.foretagskvitton.services.TextCollector;
@@ -28,6 +29,8 @@ import corp.skaj.foretagskvitton.services.TextCollector;
 public class InitWizard extends AppCompatActivity {
     public static final String KEY_FOR_WIZARD_CONTROLLER = "corp.skaj.foretagskvitton.wizard.KEY_FOR_CONTROLLER";
     private boolean progressBarShowing;
+    private boolean nextButtonShowing;
+    private List<String> listOfStrings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,17 +42,27 @@ public class InitWizard extends AppCompatActivity {
 
         progressBarShowing = false;
         toggleProgressBar();
+
+        nextButtonShowing = true;
+        toggleNextButton();
+
+        Button b = (Button) findViewById(R.id.save_button);
+        b.setVisibility(View.GONE);
+
     }
 
+    /**
+     * This method starts a thread to allow application to collect all available Strings from image.
+     * @param URI
+     * @return Thread
+     */
     private Thread collectStrings(final Uri URI) {
         return new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
-                    List<String> listOfStrings = TextCollector.collectStringsFromImage(getApplicationContext(), URI);
-                    ArrayList<String> list = new ArrayList<>();
-                    list.addAll(listOfStrings);
-                    endLoadingBar(list);
+                    listOfStrings = TextCollector.collectStringsFromImage(getApplicationContext(), URI);
+                    endLoadingBar();
                 } catch (IOException io) {
                     System.out.println("TextCollector is not operational");
                 }
@@ -57,18 +70,26 @@ public class InitWizard extends AppCompatActivity {
         });
     }
 
-    private void endLoadingBar(final ArrayList<String> arrayList) {
+    /**
+     * This method ends loadingbar on screen when all Strings are collected
+     */
+    private void endLoadingBar() {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(getApplication(), WizardActivity.class);
-                Bundle b = new Bundle();
-                b.putStringArrayList(KEY_FOR_WIZARD_CONTROLLER, arrayList);
-                intent.putExtras(b);
-
                 toggleProgressBar();
+                toggleNextButton();
+                Button b = (Button) findViewById(R.id.save_button);
+                b.setVisibility(View.VISIBLE);
 
-                startActivity(intent);
+                String toPrint = "";
+
+                for (String s : listOfStrings) {
+                    toPrint += s + "\n";
+                }
+
+                TextView t = (TextView) findViewById(R.id.textContainer);
+                t.setText(toPrint);
             }
         });
     }
@@ -80,6 +101,18 @@ public class InitWizard extends AppCompatActivity {
         progressBarShowing = !progressBarShowing;
     }
 
+    private void toggleNextButton() {
+        int set = nextButtonShowing ? View.GONE : View.VISIBLE;
+        Button button = (Button) findViewById(R.id.wizardNextButton1);
+        button.setVisibility(set);
+        nextButtonShowing = !nextButtonShowing;
+    }
+
+    /**
+     * This method catches Intents (information) sent from other classes.
+     * @param intent
+     * @return Uri
+     */
     // If more then addNewPost will send images here, add them here
     private Uri catchIntent(Intent intent) {
         Uri URI = null;
@@ -89,5 +122,22 @@ public class InitWizard extends AppCompatActivity {
             }
         }
         return URI;
+    }
+
+
+    // TEMP ALL UNDER THIS IS TEMP
+    public void nextPressed(View view) {
+        ArrayList<String> list = new ArrayList<>();
+        list.addAll(listOfStrings);
+        Intent intent = new Intent(this, WizardActivity.class);
+        Bundle b = new Bundle();
+        b.putStringArrayList(KEY_FOR_WIZARD_CONTROLLER, list);
+        intent.putExtras(b);
+        startActivity(intent);
+    }
+
+    public void saveButtonPressed(View view) {
+        Intent intent = new Intent(this, WriteUserActivity.class);
+        startActivity(intent);
     }
 }

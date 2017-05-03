@@ -1,12 +1,13 @@
 package corp.skaj.foretagskvitton.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * User class.
  */
-public class User {
+public class User implements Serializable {
     private String name;
     private List<Company> listOfCompanies;
 

@@ -39,6 +39,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="corp.skaj.foretagskvitton.activities.AddNewPost" />
         </activity>
+        <activity android:name=".activities.WriteUserActivity" />
     </application>
 
 </manifest>

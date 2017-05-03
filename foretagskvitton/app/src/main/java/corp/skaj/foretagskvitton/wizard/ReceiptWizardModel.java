@@ -59,6 +59,10 @@ public class ReceiptWizardModel extends AbstractWizardModel {
     }
 
     PageList companyInfoNotFound() {
+
+        System.out.println("TOTALSUMMAN ÄR " + String.valueOf(totalSum) + " KRONOR");
+        System.out.println("DATUMET SOM HITTAS ÄR " + date);
+
         return new PageList(
                 new BranchPage(this, "Skapa ny post")
 

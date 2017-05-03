@@ -18,12 +18,7 @@ public class ReadUserActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_init_application);
         SharedPreferences userPref = getPreferences(MODE_PRIVATE);
-        //initData(userPref).start();
-
-        //initData(userPref).start();
-
-        endLoadingBar();
-
+        initData(userPref).start();
     }
 
     private Thread initData(final SharedPreferences userPref) {
@@ -37,21 +32,16 @@ public class ReadUserActivity extends AppCompatActivity {
     }
 
     private void readData(SharedPreferences userPref) {
-        //Gson gson = new Gson();
-        //String savedData = userPref.getString(DataHandler.getGetDataKey(), "");
-        //User user = savedData.isEmpty() ? new User("User") : gson.fromJson(savedData, User.class);
-        //User user = new User("Joakim");
-        //DataHandler dh = new DataHandler(user);
+        Gson gson = new Gson();
+        String savedData = userPref.getString(DataHandler.getGetDataKey(), "");
+        User user = savedData.isEmpty() ? new User("HEJHEJ") : gson.fromJson(savedData, User.class);
+        System.out.println(user.getName());
+        DataHandler.getInstance().setUser(user);
     }
 
     private void endLoadingBar() {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                Intent intent = new Intent(getApplication(), AddNewPost.class);
-                startActivity(intent);
-            }
-        });
+        Intent intent = new Intent(this, AddNewPost.class);
+        startActivity(intent);
     }
 
 

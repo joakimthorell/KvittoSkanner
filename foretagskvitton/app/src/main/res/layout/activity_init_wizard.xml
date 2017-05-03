@@ -26,7 +26,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/wizardNextButton"
+        android:id="@+id/wizardNextButton1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/nextButtonGreen"
@@ -36,5 +36,13 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
+
+    <Button
+        android:id="@+id/save_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:onClick="saveButtonPressed"
+        android:text="Save"
+        app:layout_constraintBottom_toTopOf="@id/wizardNextButton1"/>
 
 </android.support.constraint.ConstraintLayout>

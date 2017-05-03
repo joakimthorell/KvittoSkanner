@@ -7,10 +7,7 @@ public class DataHandler {
     private static DataHandler dataHandler;
     private User user;
 
-    public DataHandler() {
-        if (dataHandler == null) {
-            dataHandler = new DataHandler();
-        }
+    private DataHandler() {
     }
 
     public void setUser(User user) {
@@ -24,6 +21,9 @@ public class DataHandler {
     }
 
     public static DataHandler getInstance() {
+        if (dataHandler == null) {
+            dataHandler = new DataHandler();
+        }
         return dataHandler;
     }
 
