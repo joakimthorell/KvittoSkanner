@@ -52,7 +52,7 @@ public class WizardModel extends AbstractWizardModel {
     @Override
     protected PageList onNewRootPageList() {
 
-        if (collectCompanyName(strings) == null) {
+        if (collectCompany(strings) == null) {
             return companyInfoNotFound();
         } else {
             return companyInfoFound();
@@ -151,7 +151,7 @@ public class WizardModel extends AbstractWizardModel {
                         .setRequired(false));
     }
 
-    private Company collectCompanyName(List<String> strings) {
+    private Company collectCompany(List<String> strings) {
         return (new User("TEMP_USER").getCompany(Integer.parseInt(ReceiptScanner.getCardNumber(strings))));
 
         //TODO Get User globally.
