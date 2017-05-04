@@ -22,13 +22,6 @@ public class ReceiptTest {
     }
 
     @Test
-    public void testGetAmountOfProducts() {
-        int amount = receipt.getAmountOfProducts();
-
-        Assert.assertEquals(1, amount);
-    }
-
-    @Test
     public void testPrice() {
         double price = receipt.getTotal();
 
@@ -37,14 +30,14 @@ public class ReceiptTest {
 
     @Test
     public void testProductName() {
-        String productName = receipt.getListOfProducts().get(0).getName();
+        String productName = receipt.getProducts().get(0).getName();
 
         Assert.assertEquals("Appelsin Juice", productName);
     }
 
     @Test
     public void testTax() {
-        double tax = receipt.getListOfProducts().get(0).getTax();
+        double tax = receipt.getProducts().get(0).getTax();
 
         Assert.assertEquals(25.0, tax);
     }
@@ -55,9 +48,9 @@ public class ReceiptTest {
         receipt.addProduct(product);
         receipt.setTotal(receipt.getTotal() + product.getPrice());
 
-        receipt.removeProduct(receipt.getListOfProducts().get(0));
+        receipt.removeProduct(receipt.getProducts().get(0));
 
-        Assert.assertEquals(1, receipt.getAmountOfProducts());
+        Assert.assertEquals(1, receipt.getProducts().size());
     }
 
     @Test(expected = IllegalArgumentException.class)

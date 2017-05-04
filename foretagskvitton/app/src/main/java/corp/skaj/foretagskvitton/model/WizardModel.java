@@ -17,7 +17,6 @@
 package corp.skaj.foretagskvitton.model;
 
 import android.content.Context;
-import android.os.Parcelable;
 
 import com.tech.freak.wizardpager.model.AbstractWizardModel;
 import com.tech.freak.wizardpager.model.BranchPage;
@@ -28,30 +27,33 @@ import com.tech.freak.wizardpager.model.PageList;
 import com.tech.freak.wizardpager.model.SingleFixedChoicePage;
 import com.tech.freak.wizardpager.model.TextPage;
 
-import java.io.Serializable;
-import java.util.Date;
-import java.util.concurrent.ConcurrentMap;
+import java.util.ArrayList;
+import java.util.List;
 
-import corp.skaj.foretagskvitton.controllers.WizardController;
-import corp.skaj.foretagskvitton.model.Company;
-import corp.skaj.foretagskvitton.view.WizardLastStep;
+import corp.skaj.foretagskvitton.services.ReceiptScanner;
+
 
 public class WizardModel extends AbstractWizardModel {
+    List<String> strings;
 
-    String company;
-    double totalSum;
-    String date;
-
-    public WizardModel(Context context, Company company, double totalSum, String date) {
+    public WizardModel(Context context, List<String> strings) {
         super(context);
-        this.company = company == null ? null : company.getName();
-        this.totalSum = totalSum;
-        this.date = date;
+
+        this.strings = strings;
+
+        PageList list = onNewRootPageList();
+        List<Page> superList = super.getCurrentPageSequence();
+        superList.clear();
+        superList.addAll(list);
+
+        //TODO Get relevant info från strings + build wizard sequence
+
     }
 
     @Override
     protected PageList onNewRootPageList() {
-        if (company == null) {
+
+        if (collectCompanyName(strings) == null) {
             return companyInfoNotFound();
         } else {
             return companyInfoFound();
@@ -59,9 +61,9 @@ public class WizardModel extends AbstractWizardModel {
     }
 
     PageList companyInfoNotFound() {
-
-        System.out.println("TOTALSUMMAN ÄR " + String.valueOf(totalSum) + " KRONOR");
-        System.out.println("DATUMET SOM HITTAS ÄR " + date);
+        //System.out.println("TOTALSUMMAN ÄR " + String.valueOf(totalSum) + " KRONOR");
+        //System.out.println("DATUMET SOM HITTAS ÄR " + date);
+        double totalSum = ReceiptScanner.getTotalCost(strings);
 
         return new PageList(
                 new BranchPage(this, "Skapa ny post")
@@ -75,7 +77,7 @@ public class WizardModel extends AbstractWizardModel {
                                         .setChoices(), //Grossister
 
                                 new TextPage(this, "Datum")
-                                        .setValue(date),
+                                        .setValue(ReceiptScanner.getDate(strings)),
 
                                 //TODO gör en kalender där man får välja, om vi har tid över
 
@@ -99,7 +101,7 @@ public class WizardModel extends AbstractWizardModel {
                                         .setChoices(), //Grossister
 
                                 new TextPage(this, "Datum")
-                                        .setValue(date),
+                                        .setValue(ReceiptScanner.getDate(strings)),
 
                                 //TODO gör en kalender där man får välja, om vi har tid över
 
@@ -117,15 +119,16 @@ public class WizardModel extends AbstractWizardModel {
     }
 
     PageList companyInfoFound() {
+        double totalSum = ReceiptScanner.getTotalCost(strings);
 
         return new PageList(
 
                 new BranchPage(this, "Skapa ny post"),
 
                 new TextPage(this, "Datum")
-                        .setValue(date),
+                        .setValue(ReceiptScanner.getDate(strings)),
 
-                //TODO gör en kalender där man får välja, om vi har tid över
+                //TODO gör en kalender där man får välja, return mCurrentPageSequence;om vi har tid över
 
                 new NumberPage(this, "Total belopp")
                         .setValue(totalSum > 0 ? String.valueOf(totalSum) : null)
@@ -137,7 +140,15 @@ public class WizardModel extends AbstractWizardModel {
 
                 new TextPage(this, "Kommentar")
                         .setRequired(false));
-
     }
+
+    private String collectCompanyName(List<String> strings) {
+        String cardNumber = ReceiptScanner.getCardNumber(strings);
+
+        //TODO Get Company name.
+
+        return null;
+    }
+
 
 }

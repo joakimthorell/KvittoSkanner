@@ -33,13 +33,11 @@ public class ReadUserActivity extends AppCompatActivity {
 
     private void readData(SharedPreferences userPref) {
         Gson gson = new Gson();
-        String savedData = userPref.getString(DataHandler.getGetDataKey(), "");
-        User user = savedData.isEmpty() ? new User("JOAKIM") : gson.fromJson(savedData, User.class);
-        System.out.println(user.getName());
-        Company company = new Company("SOMETHING");
-        user.addCompany(company);
+        //String savedData = userPref.getString(DataHandler.getGetDataKey(), "");
+        //User user = savedData.isEmpty() ? new User("JOAKIM") : gson.fromJson(savedData, User.class);
+        //user.addCompany(company);
 
-        DataHandler.setUser(user);
+        //DataHandler.setUser(user);
 
         // Detta måste testas på mobiltelefon
     }

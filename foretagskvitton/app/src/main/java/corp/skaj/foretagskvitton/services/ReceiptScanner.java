@@ -19,7 +19,7 @@ public class ReceiptScanner {
             String currentString = listOfStrings.get(i);
             letterReplace(currentString);
 
-            if(currentString.length() < 4){
+            if (currentString.length() < 4) {
                 continue;
             }        // Should not be able to create an instance of this object
 
@@ -127,6 +127,9 @@ public class ReceiptScanner {
     }
 
     public static String getCardNumber(List<String> listOfStrings) {
+
+        //TODO Metoden crashar om den inte hittar data. Fix dis.
+
         String currString = "";
         for (int i = 0; i < listOfStrings.size(); i++) {
             currString = listOfStrings.get(i).replace(" ", "");
@@ -175,13 +178,13 @@ public class ReceiptScanner {
         return !currEnd.contains("-");
     }
 
-    private static String letterReplace (String currString){
-        currString.replaceAll("B","8");
-        currString.replaceAll("S","5");
-        currString.replaceAll("O","0");
-        currString.replaceAll("i","1");
-        currString.replaceAll("l","1");
-        currString.replaceAll("S","9");
-
+    private static String letterReplace(String currString) {
+        currString.replaceAll("B", "8");
+        currString.replaceAll("S", "5");
+        currString.replaceAll("O", "0");
+        currString.replaceAll("i", "1");
+        currString.replaceAll("l", "1");
+        currString.replaceAll("S", "9");
+        return null;
     }
 }

@@ -58,6 +58,11 @@ public class ReceiptScannerTest {
         }
     }
 
+    @Test
+    public void testNullCase() {
+        assertEquals(null, ReceiptScanner.getCardNumber(null));
+    }
+
     
     @Test
     public void testDateFilter(){
