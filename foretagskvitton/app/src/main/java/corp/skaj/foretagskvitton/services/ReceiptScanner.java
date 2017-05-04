@@ -12,11 +12,15 @@ public class ReceiptScanner {
         // Should not be able to create an instance of this object
     }
 
-    public static String getDate(List<String> listOfStrings) {
+    public static String getDate(List<String> strings) {
         String date = new SimpleDateFormat("yyyy-mm-dd").format(new Date());
 
-        for (int i = 0; i < listOfStrings.size(); i++) {
-            String currentString = listOfStrings.get(i);
+        if (strings == null) {
+            return null;
+        }
+
+        for (int i = 0; i < strings.size(); i++) {
+            String currentString = strings.get(i);
             letterReplace(currentString);
 
             if (currentString.length() < 4) {
@@ -42,18 +46,18 @@ public class ReceiptScanner {
         return date.length() <= 10 && date.length() >= 6;
     }
 
-    private static List<Double> findAllDoubles(List<String> listOfStrings) {
-        List<Double> listOfDoubles = new ArrayList<>();
-        for (int i = 0; i < listOfStrings.size(); i++) {
-            String s = listOfStrings.get(i).replace(",", ".");
+    private static List<Double> findAllDoubles(List<String> strings) {
+        List<Double> doubles = new ArrayList<>();
+        for (int i = 0; i < strings.size(); i++) {
+            String s = strings.get(i).replace(",", ".");
             letterReplace(s);
             if (s.contains(".")) {
                 if (isDouble(s)) {
-                    listOfDoubles.add(Double.parseDouble(s));
+                    doubles.add(Double.parseDouble(s));
                 }
             }
         }
-        return listOfDoubles;
+        return doubles;
     }
 
     private static boolean isDouble(String s) {
@@ -74,30 +78,30 @@ public class ReceiptScanner {
         }
     }
 
-    private static int checkForText(List<String> listOfStrings) {
-        for (int i = 0; i < listOfStrings.size(); i++) {
-            if (listOfStrings.get(i).toLowerCase().equals("kr")
-                    || listOfStrings.get(i).toLowerCase().equals("sek")
-                    || listOfStrings.get(i).toLowerCase().equals("total")
-                    || listOfStrings.get(i).toLowerCase().equals("totalt")) {
+    private static int checkForText(List<String> strings) {
+        for (int i = 0; i < strings.size(); i++) {
+            if (strings.get(i).toLowerCase().equals("kr")
+                    || strings.get(i).toLowerCase().equals("sek")
+                    || strings.get(i).toLowerCase().equals("total")
+                    || strings.get(i).toLowerCase().equals("totalt")) {
                 return i;
             }
         }
         return -1;
     }
 
-    public static double checkBeforeAndAfter(int index, List<String> listOfStrings) {
+    public static double checkBeforeAndAfter(int index, List<String> strings) {
         double totalCostBefore = 0.0;
         double totalCostAfter = 0.0;
         double totalCost;
         String temp;
-        if (isInt(listOfStrings.get(index - 1)) || isDouble(listOfStrings.get(index - 1))) {
-            temp = listOfStrings.get(index - 1);
+        if (isInt(strings.get(index - 1)) || isDouble(strings.get(index - 1))) {
+            temp = strings.get(index - 1);
             totalCostBefore = Double.parseDouble(temp);
 
         }
-        if (isInt(listOfStrings.get(index + 1)) || isDouble(listOfStrings.get(index + 1))) {
-            temp = listOfStrings.get(index + 1);
+        if (isInt(strings.get(index + 1)) || isDouble(strings.get(index + 1))) {
+            temp = strings.get(index + 1);
             totalCostAfter = Double.parseDouble(temp);
         }
         if (totalCostBefore > totalCostAfter) {
@@ -110,30 +114,37 @@ public class ReceiptScanner {
         return totalCost > 0 ? totalCost : 0;
     }
 
-    public static double getTotalCost(List<String> listOfStrings) {
-        List<Double> listOfDoubles = findAllDoubles(listOfStrings);
+    public static double getTotalCost(List<String> strings) {
+
+        if (strings == null) {
+            return 0.0;
+        }
+        
+        List<Double> doubles = findAllDoubles(strings);
 
         try {
-            return Collections.max(listOfDoubles); // Denna kastar 2 olika exceptions.
+            return Collections.max(doubles); // Denna kastar 2 olika exceptions.
         } catch (Exception cce) {
-            int index = checkForText(listOfStrings);
-            double totalCost = index >= 0 ? checkBeforeAndAfter(index, listOfStrings) : 0; // Om index är -1 som checkForText returnerar när den inte hittar något får man outOfBounds här
+            int index = checkForText(strings);
+            double totalCost = index >= 0 ? checkBeforeAndAfter(index, strings) : 0; // Om index är -1 som checkForText returnerar när den inte hittar något får man outOfBounds här
             return totalCost;
         }
     }
 
-    public static void getProducts(List<String> listOfStrings) {
+    public static void getProducts(List<String> strings) {
 
     }
 
-    public static String getCardNumber(List<String> listOfStrings) {
+    public static String getCardNumber(List<String> strings) {
 
-        //TODO Metoden crashar om den inte hittar data. Fix dis.
+        if (strings == null) {
+            return null;
+        }
 
         String currString = "";
-        for (int i = 0; i < listOfStrings.size(); i++) {
-            currString = listOfStrings.get(i).replace(" ", "");
-            letterReplace(listOfStrings.get(i));
+        for (int i = 0; i < strings.size(); i++) {
+            currString = strings.get(i).replace(" ", "");
+            letterReplace(strings.get(i));
 
             if (containsAsterix(currString)) {
                 return currString.substring(currString.length() - 4);
@@ -178,13 +189,13 @@ public class ReceiptScanner {
         return !currEnd.contains("-");
     }
 
-    private static String letterReplace (String currString){
-        currString.replaceAll("B","8");
-        currString.replaceAll("S","5");
-        currString.replaceAll("O","0");
-        currString.replaceAll("i","1");
-        currString.replaceAll("l","1");
-        currString.replaceAll("S","9");
+    private static String letterReplace(String currString) {
+        currString.replaceAll("B", "8");
+        currString.replaceAll("S", "5");
+        currString.replaceAll("O", "0");
+        currString.replaceAll("i", "1");
+        currString.replaceAll("l", "1");
+        currString.replaceAll("S", "9");
         return currString;
     }
 }

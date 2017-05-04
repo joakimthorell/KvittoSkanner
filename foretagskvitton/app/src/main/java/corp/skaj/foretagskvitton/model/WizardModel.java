@@ -59,7 +59,7 @@ public class WizardModel extends AbstractWizardModel {
         }
     }
 
-    PageList companyInfoNotFound() {
+    private PageList companyInfoNotFound() {
         //System.out.println("TOTALSUMMAN ÄR " + String.valueOf(totalSum) + " KRONOR");
         //System.out.println("DATUMET SOM HITTAS ÄR " + date);
         double totalSum = ReceiptScanner.getTotalCost(strings);
@@ -125,7 +125,7 @@ public class WizardModel extends AbstractWizardModel {
 
     }
 
-    PageList companyInfoFound() {
+    private PageList companyInfoFound() {
         double totalSum = ReceiptScanner.getTotalCost(strings);
 
         //TODO If cardnumber found = save purchase in matching company
@@ -152,13 +152,12 @@ public class WizardModel extends AbstractWizardModel {
     }
 
     private Company collectCompany(List<String> strings) {
-        return (new User("TEMP_USER").getCompany(Integer.parseInt(ReceiptScanner.getCardNumber(strings))));
+
+        return null;
 
         //TODO Get User globally.
 
     }
-
-
 
 
 }

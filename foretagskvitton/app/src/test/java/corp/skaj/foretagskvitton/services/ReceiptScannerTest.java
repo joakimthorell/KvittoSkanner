@@ -59,8 +59,18 @@ public class ReceiptScannerTest {
     }
 
     @Test
-    public void testNullCase() {
+    public void testCardNullCase() {
         assertEquals(null, ReceiptScanner.getCardNumber(null));
+    }
+
+    @Test
+    public void testCostNullCase() {
+        assertEquals(0.0, ReceiptScanner.getTotalCost(null), 1);
+    }
+
+    @Test
+    public void testDateNullCase() {
+        assertEquals(null, ReceiptScanner.getDate(null));
     }
 
     

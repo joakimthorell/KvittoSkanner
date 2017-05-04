@@ -64,10 +64,12 @@ public class WizardController implements IWizardController {
                 if (mPager.getCurrentItem() == size) {
                     WizardLastStep wls = new WizardLastStep();
                     wls.show(fragmentManager, "confirm_receipt_dialog");
-                } else if (mEditingAfterReview) {
-                    mPager.setCurrentItem(mPagerAdapter.getCount() - 1);
                 } else {
-                    mPager.setCurrentItem(mPager.getCurrentItem() + 1);
+                    if (mEditingAfterReview) {
+                        mPager.setCurrentItem(mPagerAdapter.getCount() - 1);
+                    } else {
+                        mPager.setCurrentItem(mPager.getCurrentItem() + 1);
+                    }
                 }
             }
         });
