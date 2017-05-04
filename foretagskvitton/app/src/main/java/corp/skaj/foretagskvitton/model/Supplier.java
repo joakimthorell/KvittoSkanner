@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  *
  */
-public class Supplier implements Serializable {
+public class Supplier {
     private String name;
 
     public Supplier(String name) {

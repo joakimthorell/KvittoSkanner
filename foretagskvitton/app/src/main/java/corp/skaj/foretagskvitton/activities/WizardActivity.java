@@ -42,7 +42,6 @@ import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.controllers.WizardController;
 import corp.skaj.foretagskvitton.view.WizardLastStep;
 import corp.skaj.foretagskvitton.wizard.InitWizard;
-import corp.skaj.foretagskvitton.wizard.ReceiptWizardModel;
 
 public class WizardActivity extends AppCompatActivity implements
         PageFragmentCallbacks, ReviewFragment.Callbacks, ModelCallbacks {
@@ -255,7 +254,6 @@ public class WizardActivity extends AppCompatActivity implements
 
         return false;
     }
-
 
     public class MyPagerAdapter extends FragmentStatePagerAdapter {
         private int mCutOffPage;

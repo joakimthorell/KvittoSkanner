@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * User class.
  */
-public class User implements Serializable {
+public class User {
     private String name;
     private List<Company> listOfCompanies;
 

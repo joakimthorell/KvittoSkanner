@@ -9,6 +9,7 @@ import com.google.gson.Gson;
 
 import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.controllers.DataHandler;
+import corp.skaj.foretagskvitton.model.Company;
 import corp.skaj.foretagskvitton.model.User;
 
 public class ReadUserActivity extends AppCompatActivity {
@@ -34,8 +35,11 @@ public class ReadUserActivity extends AppCompatActivity {
     private void readData(SharedPreferences userPref) {
         Gson gson = new Gson();
         String savedData = userPref.getString(DataHandler.getGetDataKey(), "");
-        User user = savedData.isEmpty() ? new User("Hejsan") : gson.fromJson(savedData, User.class);
+        User user = savedData.isEmpty() ? new User("JOAKIM") : gson.fromJson(savedData, User.class);
         System.out.println(user.getName());
+        Company company = new Company("SOMETHING");
+        user.addCompany(company);
+
         DataHandler.setUser(user);
 
         // Detta måste testas på mobiltelefon

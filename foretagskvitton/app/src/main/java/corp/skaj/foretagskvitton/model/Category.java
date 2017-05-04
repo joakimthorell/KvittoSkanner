@@ -5,6 +5,6 @@ import java.io.Serializable;
 /**
  *
  */
-public enum Category implements Serializable {
+public enum Category {
         COMMUNICATIONS, REPRESENTATION, HOTEL_BILLS, OFFICE_SUPPLIES, TRANSPORTATION, TRAVEL, FOOD, POSTAGE
 }

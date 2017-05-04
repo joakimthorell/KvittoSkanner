@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  *
  */
-public class Card implements Serializable {
+public class Card {
     private int card;
 
     public Card (int card) {

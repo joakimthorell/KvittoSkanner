@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  *
  */
-public class Comment implements Serializable {
+public class Comment  {
     private String comment;
 
     public Comment(String comment) {

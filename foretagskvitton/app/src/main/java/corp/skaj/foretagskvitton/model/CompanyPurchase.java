@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  *
  */
-public class CompanyPurchase extends Purchase implements Serializable {
+public class CompanyPurchase extends Purchase {
     private Card payment;
 
     public CompanyPurchase(Receipt receipt, Supplier supplier) {

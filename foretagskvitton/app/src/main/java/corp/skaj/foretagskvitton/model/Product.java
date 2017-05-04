@@ -7,7 +7,7 @@ import java.util.List;
 /**
  *
  */
-public class Product implements Serializable {
+public class Product {
     private String name;
     private Category category;
     private List<Comment> listOfComments;

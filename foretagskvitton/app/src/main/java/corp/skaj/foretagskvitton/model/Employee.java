@@ -8,7 +8,7 @@ import java.util.List;
 /**
  *
  */
-public class Employee implements Serializable {
+public class Employee {
     private String name;
     private List<Purchase> listOfPurchases;
     private List<Comment> listOfComments;

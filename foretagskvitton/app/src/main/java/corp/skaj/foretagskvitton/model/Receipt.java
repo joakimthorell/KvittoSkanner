@@ -10,7 +10,7 @@ import java.util.List;
 /**
  *
  */
-public class Receipt implements Serializable {
+public class Receipt {
     private List<Product> listOfProducts;
     private Calendar date;
     private double total;

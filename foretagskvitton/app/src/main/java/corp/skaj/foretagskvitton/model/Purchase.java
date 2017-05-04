@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * 
  */
-public abstract class Purchase implements Serializable {
+public abstract class Purchase {
     private Receipt receipt;
     private Supplier supplier;
 
