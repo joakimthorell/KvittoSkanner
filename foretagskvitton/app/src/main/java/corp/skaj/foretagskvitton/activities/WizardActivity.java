@@ -247,28 +247,6 @@ public class WizardActivity extends AppCompatActivity implements
         }
 
         if (mPagerAdapter.getCutOffPage() != cutOffPage) {
-        totalSum = getTotCost();
-        date = getDate();
-        company = null; // TODO temporary
-
-        this.receiptWizardModel = new ReceiptWizardModel(context, company, totalSum, date);
-    }
-
-    private boolean getCardNum() {
-        return !ReceiptScanner.getCardNumber(strings).equals("0000");
-    }
-
-    private String getDate() {
-        if (ReceiptScanner.getDate(strings) == null) {
-            return null;
-        }
-        return ReceiptScanner.getDate(strings);
-    }
-
-    private double getTotCost() {
-        if (ReceiptScanner.getTotalCost(strings) == 0.0 ||
-                ReceiptScanner.getTotalCost(strings) == 0) {
-            return ReceiptScanner.getTotalCost(strings);
             mPagerAdapter.setCutOffPage(cutOffPage);
             return true;
         }
