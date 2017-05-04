@@ -112,7 +112,9 @@ public class WizardModel extends AbstractWizardModel {
                                         .setRequired(true),
 
                                 new TextPage(this, "Kommentar")
-                                        .setRequired(false)));
+                                        .setRequired(false))
+
+                        .setRequired(true));
 
     }
 

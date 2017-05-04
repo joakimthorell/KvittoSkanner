@@ -9,26 +9,26 @@ import java.util.List;
  */
 public class Company {
     private String companyName;
-    private List<Employee> listOfEmployees;
-    private List<Card> listOfCards;
-    private List<Comment> listOfComments;
-    private List<Supplier> listOfSuppliers;
+    private List<Employee> employees;
+    private List<Card> cards;
+    private List<Comment> comments;
+    private List<Supplier> suppliers;
 
     //TODO Check if constructor is needed
     public Company(String companyName, List<Employee> listOfEmployees, List<Card> listOfCards, List<Comment> listOfComments, List<Supplier> listOfSuppliers) {
         this.companyName = companyName;
-        this.listOfEmployees = listOfEmployees;
-        this.listOfCards = listOfCards;
-        this.listOfComments = listOfComments;
-        this.listOfSuppliers = listOfSuppliers;
+        this.employees = employees;
+        this.cards = cards;
+        this.comments = comments;
+        this.suppliers = suppliers;
     }
 
     public Company(String companyName) {
         this.companyName = companyName;
-        listOfEmployees = new ArrayList<>();
-        listOfCards = new ArrayList<>();
-        listOfComments = new ArrayList<>();
-        listOfSuppliers = new ArrayList<>();
+        employees = new ArrayList<>();
+        cards = new ArrayList<>();
+        comments = new ArrayList<>();
+        suppliers = new ArrayList<>();
     }
 
     /**
@@ -37,7 +37,7 @@ public class Company {
      */
     public void addEmployee(Employee employee) throws IllegalArgumentException {
         if (!containsEmployee(employee.getName())) {
-            listOfEmployees.add(employee);
+            employees.add(employee);
         } else {
             throw new IllegalArgumentException("Employee already existing");
         }
@@ -49,7 +49,7 @@ public class Company {
      */
     public void removeEmployee(Employee employee) throws IllegalArgumentException {
         if (containsEmployee(employee.getName())) {
-            listOfEmployees.remove(employee);
+            employees.remove(employee);
         } else {
             throw new IllegalArgumentException("No such employee existing");
         }
@@ -61,10 +61,10 @@ public class Company {
      * @throws IllegalArgumentException
      */
     public void removeEmployee(String name) throws IllegalArgumentException {
-        for (int i = 0; i < listOfEmployees.size(); i++) {
-            Employee temp = listOfEmployees.get(i);
+        for (int i = 0; i < employees.size(); i++) {
+            Employee temp = employees.get(i);
             if (temp.getName().equals(name)) {
-                listOfEmployees.remove(i);
+                employees.remove(i);
                 return;
             }
         }
@@ -77,7 +77,7 @@ public class Company {
      */
     public void addCard(Card card) throws IllegalArgumentException {
         if (!containsCard(card.getCard())) {
-            listOfCards.add(card);
+            cards.add(card);
         } else {
             throw new IllegalArgumentException("This card already exists");
         }
@@ -89,7 +89,7 @@ public class Company {
      */
     public void removeCard(Card card) throws IllegalArgumentException {
         if (containsCard(card.getCard())) {
-            listOfCards.remove(card);
+            cards.remove(card);
         } else {
             throw new IllegalArgumentException("No such card existing");
         }
@@ -101,7 +101,7 @@ public class Company {
      */
     public void addSupplier(Supplier supplier) throws IllegalArgumentException {
         if (!containsSupplier(supplier.getName())) {
-            listOfSuppliers.add(supplier);
+            suppliers.add(supplier);
         } else {
             throw new IllegalArgumentException("The supplier already exists");
         }
@@ -112,10 +112,10 @@ public class Company {
      * @throws IllegalArgumentException
      */
     public void removeSupplier(Supplier supplier) throws IllegalArgumentException {
-        for (int i = 0; i < listOfSuppliers.size(); i++) {
-            Supplier temp = listOfSuppliers.get(i);
+        for (int i = 0; i < suppliers.size(); i++) {
+            Supplier temp = suppliers.get(i);
             if (temp.getName().equals(supplier.getName())) {
-                listOfSuppliers.remove(i);
+                suppliers.remove(i);
                 return;
             }
         }
@@ -128,8 +128,8 @@ public class Company {
      * <code>false</code> otherwise
      */
     private boolean containsEmployee(String name) {
-        for (int i = 0; i < listOfEmployees.size(); i++) {
-            Employee temp = listOfEmployees.get(i);
+        for (int i = 0; i < employees.size(); i++) {
+            Employee temp = employees.get(i);
             if (temp.getName().equals(name)) {
                 return true;
             }
@@ -143,8 +143,8 @@ public class Company {
      * <code>false</code> otherwise
      */
     private boolean containsCard(int cardNumber) {
-        for (int i = 0; i < listOfCards.size(); i++) {
-            Card temp = listOfCards.get(i);
+        for (int i = 0; i < cards.size(); i++) {
+            Card temp = cards.get(i);
             if (temp.getCard() == cardNumber) {
                 return true;
             }
@@ -158,8 +158,8 @@ public class Company {
      * <code>false</code> otherwise
      */
     private boolean containsSupplier(String name) {
-        for (int i = 0; i < listOfSuppliers.size(); i++) {
-            Supplier temp = listOfSuppliers.get(i);
+        for (int i = 0; i < suppliers.size(); i++) {
+            Supplier temp = suppliers.get(i);
             if (temp.getName().equals(name)) {
                 return true;
             }
@@ -171,7 +171,7 @@ public class Company {
      * @return listOfEmployees
      */
     public List<Employee> getListOfEmployees() {
-        return listOfEmployees;
+        return employees;
     }
 
     /**
@@ -179,7 +179,7 @@ public class Company {
      * @return returns employee with given name, else null
      */
     public Employee getEmployee(String employeeName) {
-        for (Employee employee : listOfEmployees) {
+        for (Employee employee : employees) {
             if (employee.getName().equals(employeeName)) {
                 return employee;
             }
@@ -192,7 +192,7 @@ public class Company {
      * @return employee containing given Purchase
      */
     public Employee getEmployee(Purchase purchase) {
-        for (Employee employee : listOfEmployees) {
+        for (Employee employee : employees) {
             if (employee.containsPurchase(purchase)) {
                 return employee;
             }
@@ -206,8 +206,8 @@ public class Company {
      * @throws IllegalArgumentException
      */
     public Card getCard(int cardNumber) throws IllegalArgumentException {
-        for (int i = 0; i < listOfCards.size(); i++) {
-            Card temp = listOfCards.get(i);
+        for (int i = 0; i < cards.size(); i++) {
+            Card temp = cards.get(i);
             if (temp.getCard() == cardNumber) {
                 return temp;
             }
@@ -226,48 +226,48 @@ public class Company {
      * @return listOfCards
      */
     public List<Card> getCards() {
-        return listOfCards;
+        return cards;
     }
 
     /**
      * @return listOfComments
      */
     public List<Comment> getComments() {
-        return listOfComments;
+        return comments;
     }
 
     /**
      * @return listOfSuppliers
      */
     public List<Supplier> getSuppliers() {
-        return listOfSuppliers;
+        return suppliers;
     }
 
     /**
      * @return amount of employees in listOfEmployees
      */
     public int getAmountOfEmployees() {
-        return listOfEmployees.size();
+        return employees.size();
     }
 
     /**
      * @return amount of cards in listOfCards
      */
     public int getAmountOfCards() {
-        return listOfCards.size();
+        return cards.size();
     }
 
     /**
      * @return amount of cards in listOfComments
      */
     public int getAmountOfComments() {
-        return listOfComments.size();
+        return comments.size();
     }
 
     /**
      * @return amount of suppliers in listOfSuppliers
      */
     public int getAmountOfSuppliers() {
-        return listOfSuppliers.size();
+        return suppliers.size();
     }
 }
