@@ -21,7 +21,8 @@ public class ReceiptScanner {
 
             if(currentString.length() < 4){
                 continue;
-            }
+            }        // Should not be able to create an instance of this object
+
 
             if (correctFirstNum(currentString.substring(0, 4)) && correctLength(currentString)) {
                 return currentString;

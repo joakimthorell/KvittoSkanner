@@ -1,5 +1,7 @@
 package corp.skaj.foretagskvitton.model;
 
+import java.io.Serializable;
+
 /**
  *
  */

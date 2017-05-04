@@ -1,9 +1,11 @@
 package corp.skaj.foretagskvitton.model;
 
+import java.io.Serializable;
+
 /**
  *
  */
-public class Comment {
+public class Comment  {
     private String comment;
 
     public Comment(String comment) {

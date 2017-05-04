@@ -2,6 +2,7 @@ package corp.skaj.foretagskvitton.model;
 
 import android.net.Uri;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;

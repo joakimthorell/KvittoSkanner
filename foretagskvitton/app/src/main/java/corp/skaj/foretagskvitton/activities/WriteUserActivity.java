@@ -6,8 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.google.gson.Gson;
 
-import corp.skaj.foretagskvitton.controllers.DataHandler;
-
 public class WriteUserActivity extends AppCompatActivity{
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,8 +17,14 @@ public class WriteUserActivity extends AppCompatActivity{
     private void writeData(SharedPreferences userPref) {
         SharedPreferences.Editor prefEditor = userPref.edit();
         Gson gson = new Gson();
-        String savedData = gson.toJson(DataHandler.getInstance().getUser());
+        String savedData = gson.toJson(DataHandler.getUser());
+        System.out.println(savedData + "SPARAD DATA");
+
         prefEditor.putString(DataHandler.getGetDataKey(), savedData);
-        prefEditor.commit();
+        prefEditor.apply();
+
+        finish();
+
+        System.out.println("NU SPARAR VI");
     }
 }

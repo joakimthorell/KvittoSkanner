@@ -2,17 +2,14 @@ package corp.skaj.foretagskvitton.controllers;
 
 import android.content.Context;
 
-import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 
 import corp.skaj.foretagskvitton.model.Company;
 import corp.skaj.foretagskvitton.services.ReceiptScanner;
-import corp.skaj.foretagskvitton.wizard.ReceiptWizardModel;
+import corp.skaj.foretagskvitton.model.WizardModel;
 
 public class WizardController {
-
-    private ReceiptWizardModel receiptWizardModel;
+    private WizardModel wizardModel;
     private List<String> strings;
     private Company company;
     private double totalSum;
@@ -24,7 +21,7 @@ public class WizardController {
         date = getDate();
         company = null; // TODO temporary
 
-        this.receiptWizardModel = new ReceiptWizardModel(context, company, totalSum, date);
+        this.wizardModel = new WizardModel(context, company, totalSum, date);
     }
 
     private boolean getCardNum() {
@@ -46,7 +43,7 @@ public class WizardController {
         return ReceiptScanner.getTotalCost(strings);
     }
 
-    public ReceiptWizardModel getReceiptWizardModel() {
-        return receiptWizardModel;
+    public WizardModel getWizardModel() {
+        return wizardModel;
     }
 }
