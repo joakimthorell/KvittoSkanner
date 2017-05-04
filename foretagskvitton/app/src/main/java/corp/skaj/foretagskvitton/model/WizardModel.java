@@ -38,15 +38,20 @@ import corp.skaj.foretagskvitton.view.WizardLastStep;
 
 public class WizardModel extends AbstractWizardModel {
 
-    String company;
-    double totalSum;
-    String date;
+    private String company;
+    private Company otherCompany;
+    private double totalSum;
+    private String date;
+    private User user;
 
-    public WizardModel(Context context, Company company, double totalSum, String date) {
+
+    public WizardModel(Context context, Company company, double totalSum, String date, User user, Company otherCompany) {
         super(context);
         this.company = company == null ? null : company.getName();
         this.totalSum = totalSum;
         this.date = date;
+        this.user = user;
+        this.otherCompany = otherCompany;
     }
 
     @Override
@@ -69,10 +74,10 @@ public class WizardModel extends AbstractWizardModel {
                         .addBranch("Företagskort",
 
                                 new MultipleFixedChoicePage(this, "Företag")
-                                        .setChoices(), //Företag
+                                        .setChoices(user.getListOfCompanies().toString()), //Företag, här måste vi få in en lista av alla valbara företag
 
                                 new MultipleFixedChoicePage(this, "Grossist")
-                                        .setChoices(), //Grossister
+                                        .setChoices(otherCompany.getSuppliers().toString()), //Grossister
 
                                 new TextPage(this, "Datum")
                                         .setValue(date),
