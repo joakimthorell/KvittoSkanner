@@ -10,14 +10,14 @@ import java.util.List;
 public class Product {
     private String name;
     private Category category;
-    private List<Comment> listOfComments;
+    private List<Comment> comments;
     private double price;
     private double tax;
 
-    public Product(String name, Category category, List<Comment> listOfComments, Double price, Double tax) {
+    public Product(String name, Category category, List<Comment> comments, Double price, Double tax) {
         this.name = name;
         this.category = category;
-        this.listOfComments = listOfComments;
+        this.comments = comments;
         this.price = price;
         this.tax = tax;
     }
@@ -26,7 +26,7 @@ public class Product {
         this.name = name;
         this.price = price;
         this.tax = tax;
-        listOfComments = new ArrayList<>();
+        comments = new ArrayList<>();
     }
 
     /**
@@ -50,7 +50,7 @@ public class Product {
      * @param listOfComments
      */
     public void setListOfComments(List<Comment> listOfComments) {
-        this.listOfComments = listOfComments;
+        this.comments = listOfComments;
     }
 
     /**
@@ -90,7 +90,7 @@ public class Product {
      * @return listOfComments
      */
     public List<Comment> getListOfComments() {
-        return listOfComments;
+        return comments;
     }
 
     /**

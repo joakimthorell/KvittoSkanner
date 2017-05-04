@@ -11,30 +11,30 @@ import java.util.List;
  *
  */
 public class Receipt {
-    private List<Product> listOfProducts;
+    private List<Product> products;
     private Calendar date;
     private double total;
     private final Uri pictureAdress;
 
-    public Receipt(List<Product> listOfProducts, Calendar date, double total, final Uri pictureAdress) {
-        this.listOfProducts = listOfProducts;
+    public Receipt(List<Product> products, Calendar date, double total, final Uri pictureAdress) {
+        this.products = products;
         this.date = date;
         this.total = total;
         this.pictureAdress = pictureAdress;
     }
 
     public Receipt(Product product, Calendar date, double total, final Uri pictureAdress) {
-        listOfProducts = new ArrayList<>();
-        listOfProducts.add(product);
+        products = new ArrayList<>();
+        products.add(product);
         this.date = date;
         this.total = total;
         this.pictureAdress = pictureAdress;
     }
 
     public void removeProduct(Product product) throws IllegalArgumentException {
-        for (Product p : listOfProducts) {
+        for (Product p : products) {
             if (product == p) {
-                listOfProducts.remove(p);
+                products.remove(p);
                 return;
             }
         }
@@ -42,7 +42,7 @@ public class Receipt {
     }
 
     public void addProduct(Product product) {
-        listOfProducts.add(product);
+        products.add(product);
     }
 
     /**
@@ -50,7 +50,7 @@ public class Receipt {
      * @return listOfProducts
      */
     public List<Product> getListOfProducts() {
-        return listOfProducts;
+        return products;
     }
 
     /**
@@ -71,10 +71,10 @@ public class Receipt {
 
     /**
      *
-     * @param listOfProducts
+     * @param products
      */
-    public void setListOfProducts(List<Product> listOfProducts) {
-        this.listOfProducts = listOfProducts;
+    public void setListOfProducts(List<Product> products) {
+        this.products = products;
     }
 
     /**
@@ -98,7 +98,7 @@ public class Receipt {
      * @return amount of products in listOfProducts
      */
     public int getAmountOfProducts (){
-        return listOfProducts.size();
+        return products.size();
     }
 
     public Uri getPictureAdress() {

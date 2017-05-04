@@ -10,13 +10,13 @@ import java.util.List;
  */
 public class Employee {
     private String name;
-    private List<Purchase> listOfPurchases;
-    private List<Comment> listOfComments;
+    private List<Purchase> purchases;
+    private List<Comment> comments;
 
     public Employee(String nameOfEmployee) {
         name = nameOfEmployee;
-        listOfPurchases = new ArrayList<>();
-        listOfComments = new ArrayList<>();
+        purchases = new ArrayList<>();
+        comments = new ArrayList<>();
     }
 
     public Employee(Employee other) {
@@ -28,7 +28,7 @@ public class Employee {
      * @param purchase
      */
     public void addPurchase(Purchase purchase) {
-        listOfPurchases.add(purchase);
+        purchases.add(purchase);
     }
 
     /**
@@ -37,8 +37,8 @@ public class Employee {
      * @throws IllegalArgumentException
      */
     public void removePurchase(Purchase purchase) throws IllegalArgumentException {
-        if (listOfPurchases.contains(purchase)) {
-            listOfPurchases.remove(purchase);
+        if (purchases.contains(purchase)) {
+            purchases.remove(purchase);
         } else {
             throw new IllegalArgumentException("No such purchase existing");
         }
@@ -50,7 +50,7 @@ public class Employee {
      * @return
      */
     public boolean containsPurchase(Purchase purchase) {
-        for (Purchase p : listOfPurchases) {
+        for (Purchase p : purchases) {
             if (p == purchase) {
                 return true;
             }
@@ -63,7 +63,7 @@ public class Employee {
      * @param comment
      */
     public void addComment(Comment comment) {
-        listOfComments.add(comment);
+        comments.add(comment);
     }
 
     /**
@@ -72,8 +72,8 @@ public class Employee {
      * @throws IllegalArgumentException
      */
     public void removeComment(Comment comment) throws IllegalArgumentException {
-        if (listOfComments.contains(comment)) {
-            listOfComments.remove(comment);
+        if (comments.contains(comment)) {
+            comments.remove(comment);
         } else {
             throw new IllegalArgumentException("No such comment existing");
         }
@@ -100,7 +100,7 @@ public class Employee {
      * @return listOfPurchases
      */
     public List<Purchase> getPurchases() {
-        return listOfPurchases;
+        return purchases;
     }
 
     /**
@@ -108,7 +108,7 @@ public class Employee {
      * @return listOfComments
      */
     public List<Comment> getComments() {
-        return listOfComments;
+        return comments;
     }
 
     /**
@@ -116,6 +116,6 @@ public class Employee {
      * @return amount of purchases in list of Purchases
      */
     public int getAmountOfPurchases() {
-        return listOfPurchases.size();
+        return purchases.size();
     }
 }

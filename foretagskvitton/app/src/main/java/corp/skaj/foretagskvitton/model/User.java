@@ -9,11 +9,11 @@ import java.util.List;
  */
 public class User {
     private String name;
-    private List<Company> listOfCompanies;
+    private List<Company> companies;
 
     public User(String name) {
         this.name = name;
-        listOfCompanies = new ArrayList<>();
+        companies = new ArrayList<>();
     }
 
     /**
@@ -22,7 +22,7 @@ public class User {
      */
     public void addCompany(Company company) throws IllegalArgumentException {
         if (!containsCompany(company.getName())) {
-            listOfCompanies.add(company);
+            companies.add(company);
         } else {
             throw new IllegalArgumentException("Company already exists");
         }
@@ -34,7 +34,7 @@ public class User {
      */
     public void removeCompany(Company company) throws IllegalArgumentException {
         if (containsCompany(company.getName())) {
-            listOfCompanies.remove(company);
+            companies.remove(company);
         } else {
             throw new IllegalArgumentException("No such company exists");
         }
@@ -46,8 +46,8 @@ public class User {
      * <code>false</code> otherwise
      */
     private boolean containsCompany(String companyName) {
-        for (int i = 0; i < listOfCompanies.size(); i++) {
-            Company temp = listOfCompanies.get(i);
+        for (int i = 0; i < companies.size(); i++) {
+            Company temp = companies.get(i);
             if (companyName.equals(temp.getName())) {
                 return true;
             }
@@ -84,8 +84,8 @@ public class User {
      */
     public void setName(String name) {
         this.name = name;
-        for (int i = 0; i < listOfCompanies.size(); i++) {
-            Company company = listOfCompanies.get(i);
+        for (int i = 0; i < companies.size(); i++) {
+            Company company = companies.get(i);
             Employee employee = company.getEmployee(name);
             if (employee != null) {
                 employee.setName(name);
@@ -98,8 +98,8 @@ public class User {
      * @return Company
      */
     public Company getCompany(Company company) {
-        for (int i = 0; i < listOfCompanies.size(); i++) {
-            Company temp = listOfCompanies.get(i);
+        for (int i = 0; i < companies.size(); i++) {
+            Company temp = companies.get(i);
             if (temp.getName().equals(company.getName())) {
                 return temp;
             }
@@ -112,8 +112,8 @@ public class User {
      * @return
      */
     public Company getCompany(Card card) throws IllegalArgumentException {
-        for (int i = 0; i < listOfCompanies.size(); i++) {
-            Company temp = listOfCompanies.get(i);
+        for (int i = 0; i < companies.size(); i++) {
+            Company temp = companies.get(i);
             Card tempCard = temp.getCard(card.getCard());
             if (tempCard.getCard() == card.getCard()) {
                 return temp;
@@ -127,8 +127,8 @@ public class User {
      * @return Company
      */
     public Company getCompany(Purchase purchase) {
-        for (int i = 0; i < listOfCompanies.size(); i++) {
-            Company temp = listOfCompanies.get(i);
+        for (int i = 0; i < companies.size(); i++) {
+            Company temp = companies.get(i);
             List<Purchase> listOfReceipts = temp.getEmployee(purchase).getPurchases();
             if (containsReceipt(listOfReceipts, purchase)) {
                 return temp;
@@ -141,7 +141,7 @@ public class User {
      * @return List<Company>
      */
     public List<Company> getListOfCompanies() {
-        return listOfCompanies;
+        return companies;
     }
 
     /**
