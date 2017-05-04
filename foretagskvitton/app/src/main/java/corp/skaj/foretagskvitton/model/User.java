@@ -96,6 +96,15 @@ public class User {
         return null;
     }
 
+    public Company getCompany(int cardNumber) {
+        for (int i = 0; i < companies.size(); i++) {
+            if (companies.get(i).getCard(cardNumber) != null) {
+                return companies.get(i);
+            }
+        }
+        return null;
+    }
+
     public List<Company> getCompanies() {
         return companies;
     }

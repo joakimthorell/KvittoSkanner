@@ -34,7 +34,7 @@ import corp.skaj.foretagskvitton.services.ReceiptScanner;
 
 
 public class WizardModel extends AbstractWizardModel {
-    List<String> strings;
+    private List<String> strings;
 
     public WizardModel(Context context, List<String> strings) {
         super(context);
@@ -128,6 +128,8 @@ public class WizardModel extends AbstractWizardModel {
     PageList companyInfoFound() {
         double totalSum = ReceiptScanner.getTotalCost(strings);
 
+        //TODO If cardnumber found = save purchase in matching company
+
         return new PageList(
 
                 new BranchPage(this, "Skapa ny post"),
@@ -149,13 +151,14 @@ public class WizardModel extends AbstractWizardModel {
                         .setRequired(false));
     }
 
-    private String collectCompanyName(List<String> strings) {
-        String cardNumber = ReceiptScanner.getCardNumber(strings);
+    private Company collectCompanyName(List<String> strings) {
+        return (new User("TEMP_USER").getCompany(Integer.parseInt(ReceiptScanner.getCardNumber(strings))));
 
-        //TODO Get Company name.
+        //TODO Get User globally.
 
-        return null;
     }
+
+
 
 
 }

@@ -65,7 +65,6 @@ public class WizardActivity extends AppCompatActivity implements
 
         //TODO Figure out what this does.
         // Set listener to pagerstrip
-
         mStepPagerStrip = (StepPagerStrip) findViewById(R.id.wizard_strip);
         mStepPagerStrip.setOnPageSelectedListener(new StepPagerStrip.OnPageSelectedListener() {
             @Override
@@ -76,7 +75,6 @@ public class WizardActivity extends AppCompatActivity implements
                 }
             }
         });
-
 
         List<String> strings = new ArrayList<>();
         strings = getIntent().getExtras().getStringArrayList(InitWizardActivity.KEY_FOR_WIZARD_CONTROLLER);
@@ -110,10 +108,9 @@ public class WizardActivity extends AppCompatActivity implements
         if (savedInstanceState != null) {
             mWizardModel.load(savedInstanceState.getBundle("model"));
         }
-        // register the listner
+
+        // Register the listener
         mWizardModel.registerListener(this);
-
-
 
         onPageTreeChanged();
         updateBottomBar();

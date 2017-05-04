@@ -5,9 +5,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-/**
- * Created by annekeller on 2017-04-13.
- */
+
 public class CompanyTest {
     Company company;
     Employee employee;

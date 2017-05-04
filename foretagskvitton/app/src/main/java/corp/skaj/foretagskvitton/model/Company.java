@@ -111,7 +111,7 @@ public class Company {
         return false;
     }
 
-    public List<Employee> getListOfEmployees() {
+    public List<Employee> getEmployees() {
         return employees;
     }
 
