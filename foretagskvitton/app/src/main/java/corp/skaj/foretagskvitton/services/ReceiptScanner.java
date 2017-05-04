@@ -17,6 +17,7 @@ public class ReceiptScanner {
 
         for (int i = 0; i < listOfStrings.size(); i++) {
             String currentString = listOfStrings.get(i);
+            letterReplace(currentString);
 
             if(currentString.length() < 4){
                 continue;
@@ -45,6 +46,7 @@ public class ReceiptScanner {
         List<Double> listOfDoubles = new ArrayList<>();
         for (int i = 0; i < listOfStrings.size(); i++) {
             String s = listOfStrings.get(i).replace(",", ".");
+            letterReplace(s);
             if (s.contains(".")) {
                 if (isDouble(s)) {
                     listOfDoubles.add(Double.parseDouble(s));
@@ -128,6 +130,7 @@ public class ReceiptScanner {
         String currString = "";
         for (int i = 0; i < listOfStrings.size(); i++) {
             currString = listOfStrings.get(i).replace(" ", "");
+            letterReplace(listOfStrings.get(i));
 
             if (containsAsterix(currString)) {
                 return currString.substring(currString.length() - 4);
@@ -170,5 +173,15 @@ public class ReceiptScanner {
     private static boolean notOrgNum(String currString) {
         String currEnd = currString.substring(currString.length() - 5);
         return !currEnd.contains("-");
+    }
+
+    private static String letterReplace (String currString){
+        currString.replaceAll("B","8");
+        currString.replaceAll("S","5");
+        currString.replaceAll("O","0");
+        currString.replaceAll("i","1");
+        currString.replaceAll("l","1");
+        currString.replaceAll("S","9");
+
     }
 }
