@@ -31,13 +31,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".wizard.InitWizard" />
-        <activity android:name=".activities.AddNewPost" />
+        <activity android:name=".activities.InitWizardActivity" />
+        <activity android:name=".activities.AddNewPostActivity" />
         <activity android:name=".activities.WizardActivity"
             android:theme="@style/WizardTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="corp.skaj.foretagskvitton.activities.AddNewPost" />
+                android:value="corp.skaj.foretagskvitton.activities.AddNewPostActivity" />
         </activity>
         <activity android:name=".activities.WriteUserActivity" />
     </application>

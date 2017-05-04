@@ -7,7 +7,7 @@ import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
 
 import corp.skaj.foretagskvitton.R;
-import corp.skaj.foretagskvitton.activities.AddNewPost;
+import corp.skaj.foretagskvitton.activities.AddNewPostActivity;
 
 public class BottomNavigationController {
     /**
@@ -50,7 +50,7 @@ public class BottomNavigationController {
 
     private static int getActiveTab(String state) {
         switch (state) {
-            case AddNewPost.STATE_FOR_BOTTOM_MENY:
+            case AddNewPostActivity.STATE_FOR_BOTTOM_MENY:
                 return R.id.action_add;
             default:
                 return 0;

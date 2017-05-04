@@ -19,12 +19,11 @@ import java.util.Date;
 
 import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.controllers.BottomNavigationController;
-import corp.skaj.foretagskvitton.wizard.InitWizard;
 
 /**
  *
  */
-public class AddNewPost extends AppCompatActivity {
+public class AddNewPostActivity extends AppCompatActivity {
     private String imageAdress;
     private static final int REQUEST_IMAGE_CAPTURE = 31415;
     public static final String BUILD_NEW_RECEIPT = "corp.skaj.foretagskvitton.BUILD_RECEIPT";
@@ -70,7 +69,7 @@ public class AddNewPost extends AppCompatActivity {
      * @param URI
      */
     private void startWizard(Uri URI) {
-        Intent intent = new Intent(this, InitWizard.class);
+        Intent intent = new Intent(this, InitWizardActivity.class);
         intent.putExtra(KEY_FOR_IMAGE, URI);
         intent.setAction(BUILD_NEW_RECEIPT);
         startActivity(intent);

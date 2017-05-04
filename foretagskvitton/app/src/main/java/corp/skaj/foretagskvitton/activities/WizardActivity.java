@@ -41,7 +41,6 @@ import java.util.List;
 import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.controllers.WizardController;
 import corp.skaj.foretagskvitton.view.WizardLastStep;
-import corp.skaj.foretagskvitton.wizard.InitWizard;
 
 public class WizardActivity extends AppCompatActivity implements
         PageFragmentCallbacks, ReviewFragment.Callbacks, ModelCallbacks {
@@ -67,10 +66,10 @@ public class WizardActivity extends AppCompatActivity implements
         setContentView(R.layout.activity_wizard);
 
         Bundle b = getIntent().getExtras();
-        List<String> listOfStrings = b.getStringArrayList(InitWizard.KEY_FOR_WIZARD_CONTROLLER);
-        mWizardModel = new WizardController(getApplicationContext(), listOfStrings).getReceiptWizardModel();
+        List<String> listOfStrings = b.getStringArrayList(InitWizardActivity.KEY_FOR_WIZARD_CONTROLLER);
+        mWizardModel = new WizardController(getApplicationContext(), listOfStrings).getWizardModel();
 
-        //mWizardModel = (ReceiptWizardModel) getIntent().getSerializableExtra(InitWizard.KEY_FOR_WIZARD_CONTROLLER);
+        //mWizardModel = (WizardModel) getIntent().getSerializableExtra(InitWizardActivity.KEY_FOR_WIZARD_CONTROLLER);
 
         // Changing the normal actionbar to custom toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.wizard_action_bar);
@@ -248,6 +247,28 @@ public class WizardActivity extends AppCompatActivity implements
         }
 
         if (mPagerAdapter.getCutOffPage() != cutOffPage) {
+        totalSum = getTotCost();
+        date = getDate();
+        company = null; // TODO temporary
+
+        this.receiptWizardModel = new ReceiptWizardModel(context, company, totalSum, date);
+    }
+
+    private boolean getCardNum() {
+        return !ReceiptScanner.getCardNumber(strings).equals("0000");
+    }
+
+    private String getDate() {
+        if (ReceiptScanner.getDate(strings) == null) {
+            return null;
+        }
+        return ReceiptScanner.getDate(strings);
+    }
+
+    private double getTotCost() {
+        if (ReceiptScanner.getTotalCost(strings) == 0.0 ||
+                ReceiptScanner.getTotalCost(strings) == 0) {
+            return ReceiptScanner.getTotalCost(strings);
             mPagerAdapter.setCutOffPage(cutOffPage);
             return true;
         }

@@ -1,9 +1,7 @@
-package corp.skaj.foretagskvitton.wizard;
+package corp.skaj.foretagskvitton.activities;
 
-import android.app.PendingIntent;
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v4.app.TaskStackBuilder;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -16,17 +14,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import corp.skaj.foretagskvitton.R;
-import corp.skaj.foretagskvitton.activities.AddNewPost;
-import corp.skaj.foretagskvitton.activities.WizardActivity;
-import corp.skaj.foretagskvitton.activities.WriteUserActivity;
-import corp.skaj.foretagskvitton.controllers.WizardController;
-import corp.skaj.foretagskvitton.services.ReceiptScanner;
 import corp.skaj.foretagskvitton.services.TextCollector;
 
 /**
  *
  */
-public class InitWizard extends AppCompatActivity {
+public class InitWizardActivity extends AppCompatActivity {
     public static final String KEY_FOR_WIZARD_CONTROLLER = "corp.skaj.foretagskvitton.wizard.KEY_FOR_CONTROLLER";
     private boolean progressBarShowing;
     private boolean nextButtonShowing;
@@ -117,8 +110,8 @@ public class InitWizard extends AppCompatActivity {
     private Uri catchIntent(Intent intent) {
         Uri URI = null;
         if (intent != null) {
-            if (intent.getAction().equals(AddNewPost.BUILD_NEW_RECEIPT)) {
-                URI = (Uri) intent.getExtras().get(AddNewPost.KEY_FOR_IMAGE);
+            if (intent.getAction().equals(AddNewPostActivity.BUILD_NEW_RECEIPT)) {
+                URI = (Uri) intent.getExtras().get(AddNewPostActivity.KEY_FOR_IMAGE);
             }
         }
         return URI;

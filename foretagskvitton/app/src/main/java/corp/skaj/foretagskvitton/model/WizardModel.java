@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package corp.skaj.foretagskvitton.wizard;
+package corp.skaj.foretagskvitton.model;
 
 import android.content.Context;
 import android.os.Parcelable;
@@ -36,13 +36,13 @@ import corp.skaj.foretagskvitton.controllers.WizardController;
 import corp.skaj.foretagskvitton.model.Company;
 import corp.skaj.foretagskvitton.view.WizardLastStep;
 
-public class ReceiptWizardModel extends AbstractWizardModel {
+public class WizardModel extends AbstractWizardModel {
 
     String company;
     double totalSum;
     String date;
 
-    public ReceiptWizardModel(Context context, Company company, double totalSum, String date) {
+    public WizardModel(Context context, Company company, double totalSum, String date) {
         super(context);
         this.company = company == null ? null : company.getName();
         this.totalSum = totalSum;

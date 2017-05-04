@@ -6,8 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.google.gson.Gson;
 
-import corp.skaj.foretagskvitton.controllers.DataHandler;
-
 public class WriteUserActivity extends AppCompatActivity{
 
     protected void onCreate(Bundle savedInstanceState) {

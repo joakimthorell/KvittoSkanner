@@ -8,7 +8,6 @@ import android.os.Bundle;
 import com.google.gson.Gson;
 
 import corp.skaj.foretagskvitton.R;
-import corp.skaj.foretagskvitton.controllers.DataHandler;
 import corp.skaj.foretagskvitton.model.Company;
 import corp.skaj.foretagskvitton.model.User;
 
@@ -46,7 +45,7 @@ public class ReadUserActivity extends AppCompatActivity {
     }
 
     private void endLoadingBar() {
-        Intent intent = new Intent(this, AddNewPost.class);
+        Intent intent = new Intent(this, AddNewPostActivity.class);
         startActivity(intent);
     }
 
