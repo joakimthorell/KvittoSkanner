@@ -250,7 +250,6 @@ public class WizardActivity extends AppCompatActivity implements
             mPagerAdapter.setCutOffPage(cutOffPage);
             return true;
         }
-
         return false;
     }
 
