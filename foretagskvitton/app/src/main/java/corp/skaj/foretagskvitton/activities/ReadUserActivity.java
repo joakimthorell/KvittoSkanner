@@ -5,11 +5,8 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.google.gson.Gson;
-
 import corp.skaj.foretagskvitton.R;
-import corp.skaj.foretagskvitton.model.Company;
-import corp.skaj.foretagskvitton.model.User;
+
 
 public class ReadUserActivity extends AppCompatActivity {
 
@@ -25,21 +22,17 @@ public class ReadUserActivity extends AppCompatActivity {
         return new Thread(new Runnable() {
             @Override
             public void run() {
+
+                //TODO Fix diss.
+
                 readData(userPref);
                 endLoadingBar();
             }
         });
     }
 
+
     private void readData(SharedPreferences userPref) {
-        Gson gson = new Gson();
-        //String savedData = userPref.getString(DataHandler.getGetDataKey(), "");
-        //User user = savedData.isEmpty() ? new User("JOAKIM") : gson.fromJson(savedData, User.class);
-        //user.addCompany(company);
-
-        //DataHandler.setUser(user);
-
-        // Detta måste testas på mobiltelefon
     }
 
     private void endLoadingBar() {

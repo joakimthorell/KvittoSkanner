@@ -178,13 +178,13 @@ public class ReceiptScanner {
         return !currEnd.contains("-");
     }
 
-    private static String letterReplace(String currString) {
-        currString.replaceAll("B", "8");
-        currString.replaceAll("S", "5");
-        currString.replaceAll("O", "0");
-        currString.replaceAll("i", "1");
-        currString.replaceAll("l", "1");
-        currString.replaceAll("S", "9");
-        return null;
+    private static String letterReplace (String currString){
+        currString.replaceAll("B","8");
+        currString.replaceAll("S","5");
+        currString.replaceAll("O","0");
+        currString.replaceAll("i","1");
+        currString.replaceAll("l","1");
+        currString.replaceAll("S","9");
+        return currString;
     }
 }

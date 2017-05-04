@@ -42,7 +42,6 @@ public class Receipt {
         products.add(product);
     }
 
-
     public void setDate(Calendar date) {
         this.date = date;
     }

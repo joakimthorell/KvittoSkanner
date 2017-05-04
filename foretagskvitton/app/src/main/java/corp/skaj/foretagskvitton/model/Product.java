@@ -34,10 +34,6 @@ public class Product {
         this.category = category;
     }
 
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
-    }
-
     public void setPrice(double price) {
         this.price = price;
     }

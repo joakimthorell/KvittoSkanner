@@ -47,7 +47,6 @@ public class WizardModel extends AbstractWizardModel {
         superList.addAll(list);
 
         //TODO Get relevant info från strings + build wizard sequence
-
     }
 
     @Override
@@ -71,10 +70,16 @@ public class WizardModel extends AbstractWizardModel {
                         .addBranch("Företagskort",
 
                                 new MultipleFixedChoicePage(this, "Företag")
-                                        .setChoices(), //Företag
+
+                                        //TODO List all companies.
+
+                                        .setChoices("LISTA MED FÖRETAG"), //Företag, här måste vi få in en lista av alla valbara företag
 
                                 new MultipleFixedChoicePage(this, "Grossist")
-                                        .setChoices(), //Grossister
+
+                                        //TODO List all suppliers.
+
+                                        .setChoices("LISTA MED GROSSISTER"), //Grossister
 
                                 new TextPage(this, "Datum")
                                         .setValue(ReceiptScanner.getDate(strings)),
@@ -114,7 +119,9 @@ public class WizardModel extends AbstractWizardModel {
                                         .setRequired(true),
 
                                 new TextPage(this, "Kommentar")
-                                        .setRequired(false)));
+                                        .setRequired(false))
+
+                        .setRequired(true));
 
     }
 

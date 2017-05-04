@@ -11,17 +11,6 @@ public class Company {
     private List<Comment> comments;
     private List<Supplier> suppliers;
 
-    //TODO Check if constructor is needed
-    /*
-    public Company(String companyName, List<Employee> employees, List<Card> cards, List<Comment> comments, List<Supplier> suppliers) {
-        this.companyName = companyName;
-        this.employees = employees;
-        this.cards = cards;
-        this.comments = comments;
-        this.suppliers = suppliers;
-    }
-    */
-
     public Company(String companyName) {
         this.companyName = companyName;
         employees = new ArrayList<>();
@@ -45,10 +34,6 @@ public class Company {
             throw new IllegalArgumentException("No such employee existing");
         }
     }
-
-
-    //TODO Använder vi nedanstående metod? Kommer vi använda den när vi har ovanstående?
-
 
     public void removeEmployee(String name) throws IllegalArgumentException {
         for (int i = 0; i < employees.size(); i++) {
