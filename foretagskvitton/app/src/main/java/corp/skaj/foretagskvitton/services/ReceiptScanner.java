@@ -182,6 +182,6 @@ public class ReceiptScanner {
         currString.replaceAll("i","1");
         currString.replaceAll("l","1");
         currString.replaceAll("S","9");
-
+        return currString;
     }
 }
