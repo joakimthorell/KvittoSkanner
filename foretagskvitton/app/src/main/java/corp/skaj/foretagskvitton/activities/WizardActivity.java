@@ -65,10 +65,6 @@ public class WizardActivity extends AppCompatActivity implements
 
         this.strings = strings;
 
-        if (savedInstanceState != null) {
-            mWizardModel.load(savedInstanceState.getBundle("model"));
-        }
-
         // Set instances
         mNextButton = (Button) findViewById(R.id.wizardNextButton);
         mPrevButton = (Button) findViewById(R.id.wizardBackButton);
@@ -78,7 +74,7 @@ public class WizardActivity extends AppCompatActivity implements
         WizardController wizardController = new WizardController(this, this);
         this.mWizardModel = wizardController.getWizardModel();
 
-        mPagerAdapter = new MyPagerAdapter(getSupportFragmentManager(), mWizardModel.getCurrentPageSequence());
+        mPagerAdapter = new MyPagerAdapter(getSupportFragmentManager(), wizardController);
 
         //TODO Figure out what this does.
         // Set listener to pagerstrip

@@ -159,6 +159,4 @@ public class WizardModel extends AbstractWizardModel {
         //TODO Get User globally.
 
     }
-
-
 }

@@ -5,30 +5,37 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.view.ViewGroup;
 
+import com.tech.freak.wizardpager.model.AbstractWizardModel;
 import com.tech.freak.wizardpager.model.Page;
 import com.tech.freak.wizardpager.ui.ReviewFragment;
 
 import java.util.List;
 
+import corp.skaj.foretagskvitton.controllers.IWizardController;
+import corp.skaj.foretagskvitton.model.WizardModel;
+
 /**
  *
  */
 public class MyPagerAdapter extends FragmentStatePagerAdapter {
-    private List<Page> mCurrentPageSequence;
+    private IWizardController wizardController;
     private Fragment mPrimaryItem;
     private int mCutOffPage;
 
-    public MyPagerAdapter(FragmentManager fm, List<Page> mCurrentPageSequence) {
+    public MyPagerAdapter(FragmentManager fm, IWizardController wizardController) {
+
         super(fm);
-        this.mCurrentPageSequence = mCurrentPageSequence;
+        this.wizardController = wizardController;
     }
 
     @Override
     public Fragment getItem(int i) {
-        if (i >= mCurrentPageSequence.size()) {
+        System.out.println("POSITIONEN SOM FÖRSÖKER HÄMTAS ÄR:   " + i);
+        System.out.println("DENNA METODEN KÖRS NU");
+        if (i >= wizardController.getCurrentPageSequence().size()) {
             return new ReviewFragment();
         }
-        return mCurrentPageSequence.get(i).createFragment();
+        return wizardController.getCurrentPageSequence().get(i).createFragment();
     }
 
     @Override
@@ -50,8 +57,8 @@ public class MyPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
-        return Math.min(mCutOffPage + 1, mCurrentPageSequence == null ? 1
-                : mCurrentPageSequence.size() + 1);
+        return Math.min(mCutOffPage + 1, wizardController.getCurrentPageSequence() == null ? 1
+                : wizardController.getCurrentPageSequence().size() + 1);
     }
 
     public void setCutOffPage(int cutOffPage) {

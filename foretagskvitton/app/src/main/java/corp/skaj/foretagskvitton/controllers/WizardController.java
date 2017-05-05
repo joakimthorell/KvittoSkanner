@@ -23,6 +23,7 @@ public class WizardController implements IWizardController {
     private boolean mConsumePageSelectedEvent;
 
     public WizardController(Context context, IWizardActivity iWizardActivity) {
+        mEditingAfterReview = false;
         wizardActivity = iWizardActivity;
         wizardModel = new WizardModel(context);
     }
@@ -107,7 +108,13 @@ public class WizardController implements IWizardController {
         mEditingAfterReview = state;
     }
 
+    @Override
     public AbstractWizardModel getWizardModel() {
         return wizardModel;
+    }
+
+    @Override
+    public List<Page> getCurrentPageSequence() {
+        return wizardModel.getCurrentPageSequence();
     }
 }

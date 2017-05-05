@@ -7,6 +7,10 @@ import java.util.List;
 
 public interface IWizardController {
     void updateConsumePageSelectedEvent(boolean state);
+
     void updateEditingAfterReview(boolean state);
+
     AbstractWizardModel getWizardModel();
+
+    List<Page> getCurrentPageSequence();
 }
