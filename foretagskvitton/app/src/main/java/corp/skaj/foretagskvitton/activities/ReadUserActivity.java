@@ -8,6 +8,7 @@ import android.os.Bundle;
 import com.google.gson.Gson;
 
 import corp.skaj.foretagskvitton.R;
+import corp.skaj.foretagskvitton.controllers.DataHolder;
 import corp.skaj.foretagskvitton.model.User;
 
 
@@ -35,6 +36,8 @@ public class ReadUserActivity extends AbstractActivity {
     private void readData(SharedPreferences sharedPref) {
         Gson gson = new Gson();
         String savedData = sharedPref.getString(User.class.getName().toString(), "");
+        DataHolder dataHolder = (DataHolder)getApplicationContext();
+        dataHolder.setUser(gson.fromJson(savedData, User.class));
     }
 
     private void endLoadingBar() {

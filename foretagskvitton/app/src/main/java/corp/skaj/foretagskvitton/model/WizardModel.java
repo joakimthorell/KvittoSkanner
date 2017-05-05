@@ -25,16 +25,21 @@ import com.tech.freak.wizardpager.model.PageList;
 import com.tech.freak.wizardpager.model.SingleFixedChoicePage;
 import com.tech.freak.wizardpager.model.TextPage;
 
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import corp.skaj.foretagskvitton.activities.WizardActivity;
 import corp.skaj.foretagskvitton.services.ReceiptScanner;
-import corp.skaj.foretagskvitton.model.DatePage;
 
 
 public class WizardModel extends AbstractWizardModel {
+    private Map<String, String> data;
+
     public WizardModel(Context context) {
         super(context);
+        data = new HashMap<>();
     }
 
     @Override
@@ -55,8 +60,6 @@ public class WizardModel extends AbstractWizardModel {
     }
 
     private PageList companyInfoNotFound(List<String> strings) {
-        //System.out.println("TOTALSUMMAN ÄR " + String.valueOf(totalSum) + " KRONOR");
-        //System.out.println("DATUMET SOM HITTAS ÄR " + date);
         double totalSum = ReceiptScanner.getTotalCost(strings);
 
         return new PageList(
@@ -150,11 +153,16 @@ public class WizardModel extends AbstractWizardModel {
                         .setRequired(false));
     }
 
-    private Company collectCompany(List<String> strings) {
+    private void collectData() {
 
-        return null;
+        //TODO Collect alla data from currentPageSequence.
+        // wizardModel.getCurrentPageSequence().get(0).getData();
+    }
+
+    private Company collectCompany(List<String> strings) {
 
         //TODO Get User globally.
 
+        return null;
     }
 }

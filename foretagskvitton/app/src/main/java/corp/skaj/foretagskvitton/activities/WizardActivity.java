@@ -36,13 +36,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import corp.skaj.foretagskvitton.R;
+import corp.skaj.foretagskvitton.controllers.DataHolder;
+import corp.skaj.foretagskvitton.controllers.IUpdateUser;
 import corp.skaj.foretagskvitton.controllers.IWizardActivity;
 import corp.skaj.foretagskvitton.controllers.IWizardController;
 import corp.skaj.foretagskvitton.controllers.WizardController;
 import corp.skaj.foretagskvitton.view.MyPagerAdapter;
 
 public class WizardActivity extends AbstractActivity implements
-        PageFragmentCallbacks, ReviewFragment.Callbacks, ModelCallbacks, IWizardActivity {
+        PageFragmentCallbacks, ReviewFragment.Callbacks, ModelCallbacks, IWizardActivity, IUpdateUser {
 
     private IWizardController wizardController;
     private AbstractWizardModel mWizardModel;
@@ -171,10 +173,6 @@ public class WizardActivity extends AbstractActivity implements
     }
 
     private boolean recalculateCutOffPage() {
-
-        //TODO Check if this works.
-
-        // Cut off the pager adapter at first required page that isnt completed
         List<Page> currentPageSequenceList = mWizardModel.getCurrentPageSequence();
         int cutOffPage = currentPageSequenceList.size() + 1;
 
@@ -195,6 +193,10 @@ public class WizardActivity extends AbstractActivity implements
 
     public List<String> getStrings() {
         return strings;
+    }
+
+    public void updateUser() {
+        wizardController.updateUser((DataHolder)getApplicationContext());
     }
 
 }
