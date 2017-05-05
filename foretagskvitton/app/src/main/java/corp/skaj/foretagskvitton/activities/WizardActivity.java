@@ -51,7 +51,7 @@ public class WizardActivity extends AppCompatActivity implements
     private StepPagerStrip mStepPagerStrip;
     private Button mNextButton;
     private Button mPrevButton;
-
+    private List<String> strings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +62,8 @@ public class WizardActivity extends AppCompatActivity implements
         List<String> strings = getIntent()
                 .getExtras()
                 .getStringArrayList(InitWizardActivity.KEY_FOR_WIZARD_CONTROLLER);
+
+        this.strings = strings;
 
         if (savedInstanceState != null) {
             mWizardModel.load(savedInstanceState.getBundle("model"));
@@ -93,7 +95,8 @@ public class WizardActivity extends AppCompatActivity implements
         // Setting listeners to instances
         wizardController.initNextButton(mNextButton, mPager, mPagerAdapter, getSupportFragmentManager());
         wizardController.initBackButton(mPrevButton, mPager);
-        wizardController.initViewPagerListener(mPager);
+        wizardController.initViewPagerListener(mPager, mStepPagerStrip);
+        wizardController.initPagerStrip(mStepPagerStrip, mPagerAdapter, mPager);
 
         // Set PagerAdapter
         mPager.setAdapter(mPagerAdapter);
@@ -130,9 +133,6 @@ public class WizardActivity extends AppCompatActivity implements
         updateBottomBar();
     }
 
-
-
-
     public void updateBottomBar() {
         mPrevButton.setVisibility(View.VISIBLE);
 
@@ -150,8 +150,6 @@ public class WizardActivity extends AppCompatActivity implements
         // to have a bigger next button on the first page
         //mPrevButton.setVisibility(mPager.getCurrentItem() <= 0 ? View.GONE : View.VISIBLE);
     }
-
-
 
     @Override
     protected void onDestroy() {
@@ -224,6 +222,10 @@ public class WizardActivity extends AppCompatActivity implements
             return true;
         }
         return false;
+    }
+
+    public List<String> getStrings() {
+        return strings;
     }
 
 }

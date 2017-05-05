@@ -8,6 +8,7 @@ import android.widget.Button;
 
 import com.tech.freak.wizardpager.model.AbstractWizardModel;
 import com.tech.freak.wizardpager.model.Page;
+import com.tech.freak.wizardpager.ui.StepPagerStrip;
 
 import java.util.List;
 
@@ -26,7 +27,7 @@ public class WizardController implements IWizardController {
         wizardModel = new WizardModel(context, strings);
     }
 
-    public void initViewPagerListener(ViewPager mPager) {
+    public void initViewPagerListener(ViewPager mPager, final StepPagerStrip mStepPagerStrip) {
         mPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 
             @Override
@@ -37,7 +38,7 @@ public class WizardController implements IWizardController {
             @Override
             public void onPageSelected(int position) {
                 //TODO Figure out what this does.
-                //mStepPagerStrip.setCurrentPage(position);
+                mStepPagerStrip.setCurrentPage(position);
 
                 if (mConsumePageSelectedEvent) {
                     mConsumePageSelectedEvent = false;
@@ -80,6 +81,18 @@ public class WizardController implements IWizardController {
             @Override
             public void onClick(View v) {
                 mPager.setCurrentItem(mPager.getCurrentItem() - 1);
+            }
+        });
+    }
+
+    public void initPagerStrip(StepPagerStrip mStepPagerStrip, final MyPagerAdapter mPagerAdapter, final ViewPager mPager) {
+        mStepPagerStrip.setOnPageSelectedListener(new StepPagerStrip.OnPageSelectedListener() {
+            @Override
+            public void onPageStripSelected(int position) {
+                position = Math.min(mPagerAdapter.getCount() - 1, position);
+                if (mPager.getCurrentItem() != position) {
+                    mPager.setCurrentItem(position);
+                }
             }
         });
     }

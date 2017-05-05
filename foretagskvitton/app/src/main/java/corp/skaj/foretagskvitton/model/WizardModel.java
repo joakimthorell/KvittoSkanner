@@ -30,6 +30,7 @@ import com.tech.freak.wizardpager.model.TextPage;
 import java.util.ArrayList;
 import java.util.List;
 
+import corp.skaj.foretagskvitton.activities.WizardActivity;
 import corp.skaj.foretagskvitton.services.ReceiptScanner;
 
 
@@ -38,28 +39,26 @@ public class WizardModel extends AbstractWizardModel {
 
     public WizardModel(Context context, List<String> strings) {
         super(context);
-
-        this.strings = strings;
-
-        PageList list = onNewRootPageList();
-        List<Page> superList = super.getCurrentPageSequence();
-        superList.clear();
-        superList.addAll(list);
-
-        //TODO Get relevant info från strings + build wizard sequence
     }
 
     @Override
     protected PageList onNewRootPageList() {
 
+        /*
+        Getting the string list from WizardActivity.
+        This is needed beacuse bad implementation in WizardPager.
+         */
+        WizardActivity wa = (WizardActivity) mContext;
+        List<String> strings = wa.getStrings();
+
         if (collectCompany(strings) == null) {
-            return companyInfoNotFound();
+            return companyInfoNotFound(strings);
         } else {
-            return companyInfoFound();
+            return companyInfoFound(strings);
         }
     }
 
-    private PageList companyInfoNotFound() {
+    private PageList companyInfoNotFound(List<String> strings) {
         //System.out.println("TOTALSUMMAN ÄR " + String.valueOf(totalSum) + " KRONOR");
         //System.out.println("DATUMET SOM HITTAS ÄR " + date);
         double totalSum = ReceiptScanner.getTotalCost(strings);
@@ -129,7 +128,7 @@ public class WizardModel extends AbstractWizardModel {
 
     }
 
-    private PageList companyInfoFound() {
+    private PageList companyInfoFound(List<String> strings) {
         double totalSum = ReceiptScanner.getTotalCost(strings);
 
         //TODO If cardnumber found = save purchase in matching company
