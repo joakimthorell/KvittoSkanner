@@ -5,33 +5,23 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.view.ViewGroup;
 
-import com.tech.freak.wizardpager.model.AbstractWizardModel;
-import com.tech.freak.wizardpager.model.Page;
 import com.tech.freak.wizardpager.ui.ReviewFragment;
 
-import java.util.List;
-
 import corp.skaj.foretagskvitton.controllers.IWizardController;
-import corp.skaj.foretagskvitton.model.WizardModel;
 
-/**
- *
- */
+
 public class MyPagerAdapter extends FragmentStatePagerAdapter {
     private IWizardController wizardController;
     private Fragment mPrimaryItem;
     private int mCutOffPage;
 
     public MyPagerAdapter(FragmentManager fm, IWizardController wizardController) {
-
         super(fm);
         this.wizardController = wizardController;
     }
 
     @Override
     public Fragment getItem(int i) {
-        System.out.println("POSITIONEN SOM FÖRSÖKER HÄMTAS ÄR:   " + i);
-        System.out.println("DENNA METODEN KÖRS NU");
         if (i >= wizardController.getCurrentPageSequence().size()) {
             return new ReviewFragment();
         }
@@ -40,9 +30,7 @@ public class MyPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getItemPosition(Object object) {
-        // TODO: be smarter about this
         if (object == mPrimaryItem) {
-            // Re-use the current fragment (its position never changes)
             return POSITION_UNCHANGED;
         }
 
