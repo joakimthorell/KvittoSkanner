@@ -41,7 +41,7 @@ import corp.skaj.foretagskvitton.controllers.IWizardController;
 import corp.skaj.foretagskvitton.controllers.WizardController;
 import corp.skaj.foretagskvitton.view.MyPagerAdapter;
 
-public class WizardActivity extends AppCompatActivity implements
+public class WizardActivity extends AbstractActivity implements
         PageFragmentCallbacks, ReviewFragment.Callbacks, ModelCallbacks, IWizardActivity {
 
     private IWizardController wizardController;

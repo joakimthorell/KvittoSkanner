@@ -40,7 +40,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="corp.skaj.foretagskvitton.activities.AddNewPostActivity" />
         </activity>
-        <activity android:name=".activities.WriteUserActivity" />
         <activity android:name=".activities.ReceiptArchiveActivity"></activity>
     </application>
 

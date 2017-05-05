@@ -23,7 +23,7 @@ import corp.skaj.foretagskvitton.controllers.BottomNavigationController;
 /**
  *
  */
-public class AddNewPostActivity extends AppCompatActivity {
+public class AddNewPostActivity extends AbstractActivity {
     private String imageAdress;
     private static final int REQUEST_IMAGE_CAPTURE = 31415;
     public static final String BUILD_NEW_RECEIPT = "corp.skaj.foretagskvitton.BUILD_RECEIPT";

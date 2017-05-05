@@ -5,8 +5,8 @@ import java.util.List;
 
 
 public class User {
-    private String name;
     private List<Company> companies;
+    private String name;
 
     public User(String name) {
         this.name = name;

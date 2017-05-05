@@ -19,7 +19,7 @@ import corp.skaj.foretagskvitton.services.TextCollector;
 /**
  *
  */
-public class InitWizardActivity extends AppCompatActivity {
+public class InitWizardActivity extends AbstractActivity {
     public static final String KEY_FOR_WIZARD_CONTROLLER = "corp.skaj.foretagskvitton.wizard.KEY_FOR_CONTROLLER";
     private boolean progressBarShowing;
     private boolean nextButtonShowing;

@@ -13,7 +13,7 @@ import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.controllers.BottomNavigationController;
 import corp.skaj.foretagskvitton.view.CustomList;
 
-public class ReceiptArchiveActivity extends AppCompatActivity {
+public class ReceiptArchiveActivity extends AbstractActivity {
     private ListView list;
 
     public static final String STATE_FOR_BOTTOM_MENY = "corp.skaj.foretagskvitton.ARCHIVE";
