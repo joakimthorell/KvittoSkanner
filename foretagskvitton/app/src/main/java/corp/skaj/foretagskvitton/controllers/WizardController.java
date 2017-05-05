@@ -33,12 +33,11 @@ public class WizardController implements IWizardController {
 
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                // should do nothing i think
+                // Do nothing.
             }
 
             @Override
             public void onPageSelected(int position) {
-                //TODO Figure out what this does.
                 mStepPagerStrip.setCurrentPage(position);
 
                 if (mConsumePageSelectedEvent) {
@@ -51,7 +50,7 @@ public class WizardController implements IWizardController {
 
             @Override
             public void onPageScrollStateChanged(int state) {
-                // should do nothing i think
+                // Do nothing.
             }
         });
     }
@@ -82,18 +81,6 @@ public class WizardController implements IWizardController {
             @Override
             public void onClick(View v) {
                 mPager.setCurrentItem(mPager.getCurrentItem() - 1);
-            }
-        });
-    }
-
-    public void initPagerStrip(StepPagerStrip mStepPagerStrip, final MyPagerAdapter mPagerAdapter, final ViewPager mPager) {
-        mStepPagerStrip.setOnPageSelectedListener(new StepPagerStrip.OnPageSelectedListener() {
-            @Override
-            public void onPageStripSelected(int position) {
-                position = Math.min(mPagerAdapter.getCount() - 1, position);
-                if (mPager.getCurrentItem() != position) {
-                    mPager.setCurrentItem(position);
-                }
             }
         });
     }

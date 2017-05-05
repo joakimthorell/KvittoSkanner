@@ -62,7 +62,6 @@ public class WizardActivity extends AppCompatActivity implements
         List<String> strings = getIntent()
                 .getExtras()
                 .getStringArrayList(InitWizardActivity.KEY_FOR_WIZARD_CONTROLLER);
-
         this.strings = strings;
 
         // Set instances
@@ -70,32 +69,17 @@ public class WizardActivity extends AppCompatActivity implements
         mPrevButton = (Button) findViewById(R.id.wizardBackButton);
         mPager = (ViewPager) findViewById(R.id.pager);
         mStepPagerStrip = (StepPagerStrip) findViewById(R.id.wizard_strip);
-
         WizardController wizardController = new WizardController(this, this);
         this.mWizardModel = wizardController.getWizardModel();
-
         mPagerAdapter = new MyPagerAdapter(getSupportFragmentManager(), wizardController);
+        mPager.setAdapter(mPagerAdapter);
 
-        //TODO Figure out what this does.
-        // Set listener to pagerstrip
-        mStepPagerStrip.setOnPageSelectedListener(new StepPagerStrip.OnPageSelectedListener() {
-            @Override
-            public void onPageStripSelected(int position) {
-                position = Math.min(mPagerAdapter.getCount() - 1, position);
-                if (mPager.getCurrentItem() != position) {
-                    mPager.setCurrentItem(position);
-                }
-            }
-        });
-
-        // Setting listeners to instances
+        // Set listeners
         wizardController.initNextButton(mNextButton, mPager, mPagerAdapter, getSupportFragmentManager());
         wizardController.initBackButton(mPrevButton, mPager);
         wizardController.initViewPagerListener(mPager, mStepPagerStrip);
-        wizardController.initPagerStrip(mStepPagerStrip, mPagerAdapter, mPager);
-
-        // Set PagerAdapter
-        mPager.setAdapter(mPagerAdapter);
+        mWizardModel.registerListener(this);
+        this.wizardController = wizardController;
 
         // Set the normal actionbar to custom toolbar.
         Toolbar toolbar = (Toolbar) findViewById(R.id.wizard_action_bar);
@@ -105,10 +89,6 @@ public class WizardActivity extends AppCompatActivity implements
         actionBar.setHomeAsUpIndicator(R.drawable.ic_close);
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        // Register the listener
-        mWizardModel.registerListener(this);
-        this.wizardController = wizardController;
-
         onPageTreeChanged();
         updateBottomBar();
     }
@@ -116,11 +96,8 @@ public class WizardActivity extends AppCompatActivity implements
     @Override
     public void onPageTreeChanged() {
 
-
         //TODO Check if this works.
 
-
-        //mCurrentPageSequence = mWizardModel.getCurrentPageSequence();
         recalculateCutOffPage();
         int size = mWizardModel.getCurrentPageSequence().size() + 1;
         mStepPagerStrip.setPageCount(size); // + 1 = review, step
@@ -141,10 +118,6 @@ public class WizardActivity extends AppCompatActivity implements
         } else {
             mNextButton.setText(R.string.nextButtonText);
         }
-
-        // Uncomment this and remove first mPrevButton and the else if, if its not possible or dont want
-        // to have a bigger next button on the first page
-        //mPrevButton.setVisibility(mPager.getCurrentItem() <= 0 ? View.GONE : View.VISIBLE);
     }
 
     @Override
