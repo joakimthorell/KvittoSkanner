@@ -35,9 +35,7 @@ import corp.skaj.foretagskvitton.services.ReceiptScanner;
 
 
 public class WizardModel extends AbstractWizardModel {
-    private List<String> strings;
-
-    public WizardModel(Context context, List<String> strings) {
+    public WizardModel(Context context) {
         super(context);
     }
 

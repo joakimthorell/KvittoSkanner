@@ -22,9 +22,9 @@ public class WizardController implements IWizardController {
     private boolean mEditingAfterReview;
     private boolean mConsumePageSelectedEvent;
 
-    public WizardController(Context context, IWizardActivity iWizardActivity, List<String> strings) {
+    public WizardController(Context context, IWizardActivity iWizardActivity) {
         wizardActivity = iWizardActivity;
-        wizardModel = new WizardModel(context, strings);
+        wizardModel = new WizardModel(context);
     }
 
     public void initViewPagerListener(ViewPager mPager, final StepPagerStrip mStepPagerStrip) {

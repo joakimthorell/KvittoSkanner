@@ -75,7 +75,7 @@ public class WizardActivity extends AppCompatActivity implements
         mPager = (ViewPager) findViewById(R.id.pager);
         mStepPagerStrip = (StepPagerStrip) findViewById(R.id.wizard_strip);
 
-        WizardController wizardController = new WizardController(this, this, strings);
+        WizardController wizardController = new WizardController(this, this);
         this.mWizardModel = wizardController.getWizardModel();
 
         mPagerAdapter = new MyPagerAdapter(getSupportFragmentManager(), mWizardModel.getCurrentPageSequence());
