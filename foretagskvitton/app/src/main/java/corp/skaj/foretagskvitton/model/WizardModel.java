@@ -21,17 +21,15 @@ import android.content.Context;
 import com.tech.freak.wizardpager.model.AbstractWizardModel;
 import com.tech.freak.wizardpager.model.BranchPage;
 import com.tech.freak.wizardpager.model.MultipleFixedChoicePage;
-import com.tech.freak.wizardpager.model.NumberPage;
-import com.tech.freak.wizardpager.model.Page;
 import com.tech.freak.wizardpager.model.PageList;
 import com.tech.freak.wizardpager.model.SingleFixedChoicePage;
 import com.tech.freak.wizardpager.model.TextPage;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import corp.skaj.foretagskvitton.activities.WizardActivity;
 import corp.skaj.foretagskvitton.services.ReceiptScanner;
+import corp.skaj.foretagskvitton.model.DatePage;
 
 
 public class WizardModel extends AbstractWizardModel {
@@ -82,12 +80,12 @@ public class WizardModel extends AbstractWizardModel {
                                         .setChoices("LISTA MED GROSSISTER"), //Grossister
 
 
-                                new TextPage(this, "Datum")
+                                new DatePage(this, "Datum")
                                         .setValue(ReceiptScanner.getDate(strings)),
 
                                 //TODO gör en kalender där man får välja, om vi har tid över
 
-                                new NumberPage(this, "Total belopp")
+                                new TotalSumPage(this, "Total belopp")
                                         .setValue(totalSum > 0 ? String.valueOf(totalSum) : null)
                                         .setRequired(true),
 
@@ -106,12 +104,12 @@ public class WizardModel extends AbstractWizardModel {
                                 new MultipleFixedChoicePage(this, "Grossist")
                                         .setChoices(), //Grossister
 
-                                new TextPage(this, "Datum")
+                                new DatePage(this, "Datum")
                                         .setValue(ReceiptScanner.getDate(strings)),
 
                                 //TODO gör en kalender där man får välja, om vi har tid över
 
-                                new NumberPage(this, "Total belopp")
+                                new TotalSumPage(this, "Total belopp")
                                         .setValue(totalSum > 0 ? String.valueOf(totalSum) : null)
                                         .setRequired(true),
 
@@ -135,12 +133,12 @@ public class WizardModel extends AbstractWizardModel {
 
                 new BranchPage(this, "Skapa ny post"), //Kolla upp om detta verkligen ser rätt ut 
 
-                new TextPage(this, "Datum")
+                new DatePage(this, "Datum")
                         .setValue(ReceiptScanner.getDate(strings)),
 
                 //TODO gör en kalender där man får välja, return mCurrentPageSequence;om vi har tid över
 
-                new NumberPage(this, "Total belopp")
+                new TotalSumPage(this, "Total belopp")
                         .setValue(totalSum > 0 ? String.valueOf(totalSum) : null)
                         .setRequired(true),
 

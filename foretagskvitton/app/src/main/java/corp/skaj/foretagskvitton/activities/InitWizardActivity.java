@@ -117,7 +117,7 @@ public class InitWizardActivity extends AbstractActivity {
     }
 
     public void saveButtonPressed(View view) {
-        Intent intent = new Intent(this, WriteUserActivity.class);
-        startActivity(intent);
+        //Intent intent = new Intent(this, WriteUserActivity.class);
+        //startActivity(intent);
     }
 }
