@@ -12,6 +12,7 @@ import com.tech.freak.wizardpager.ui.StepPagerStrip;
 
 import java.util.List;
 
+import corp.skaj.foretagskvitton.model.User;
 import corp.skaj.foretagskvitton.model.WizardModel;
 import corp.skaj.foretagskvitton.view.MyPagerAdapter;
 import corp.skaj.foretagskvitton.view.WizardLastStep;
@@ -83,6 +84,13 @@ public class WizardController implements IWizardController {
                 mPager.setCurrentItem(mPager.getCurrentItem() - 1);
             }
         });
+    }
+
+    public void updateUser(DataHolder dataHolder) {
+        User user = dataHolder.getUser();
+
+        //TODO Save data in User from WizardModel data hashmap.
+
     }
 
     @Override
