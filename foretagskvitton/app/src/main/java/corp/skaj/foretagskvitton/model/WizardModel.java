@@ -77,7 +77,7 @@ public class WizardModel extends AbstractWizardModel {
                                         .setChoices(user.getListOfCompanies().toString()), //Företag, här måste vi få in en lista av alla valbara företag
 
                                 new MultipleFixedChoicePage(this, "Grossist")
-                                        .setChoices(otherCompany.getSuppliers().toString()), //Grossister
+                                        .setChoices(otherCompany.getSuppliers().toString()), //Grossister, här måste vi få in en valbar lista med grossister
 
                                 new TextPage(this, "Datum")
                                         .setValue(date),
@@ -127,7 +127,7 @@ public class WizardModel extends AbstractWizardModel {
 
         return new PageList(
 
-                new BranchPage(this, "Skapa ny post"),
+                new BranchPage(this, "Skapa ny post"), //Kolla upp om detta verkligen ser rätt ut 
 
                 new TextPage(this, "Datum")
                         .setValue(date),
