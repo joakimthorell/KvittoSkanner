@@ -17,14 +17,9 @@ public class WriteUserActivity extends AppCompatActivity{
     private void writeData(SharedPreferences userPref) {
         SharedPreferences.Editor prefEditor = userPref.edit();
         Gson gson = new Gson();
-        String savedData = gson.toJson(DataHandler.getUser());
-        System.out.println(savedData + "SPARAD DATA");
+        //String savedData = gson.toJson(DataHandler.getUser());
 
-        prefEditor.putString(DataHandler.getGetDataKey(), savedData);
+        //prefEditor.putString(DataHandler.getGetDataKey(), savedData);
         prefEditor.apply();
-
-        finish();
-
-        System.out.println("NU SPARAR VI");
     }
 }

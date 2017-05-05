@@ -17,7 +17,6 @@
 package corp.skaj.foretagskvitton.model;
 
 import android.content.Context;
-import android.os.Parcelable;
 
 import com.tech.freak.wizardpager.model.AbstractWizardModel;
 import com.tech.freak.wizardpager.model.BranchPage;
@@ -28,45 +27,42 @@ import com.tech.freak.wizardpager.model.PageList;
 import com.tech.freak.wizardpager.model.SingleFixedChoicePage;
 import com.tech.freak.wizardpager.model.TextPage;
 
-import java.io.Serializable;
-import java.util.Date;
-import java.util.concurrent.ConcurrentMap;
+import java.util.ArrayList;
+import java.util.List;
 
-import corp.skaj.foretagskvitton.controllers.WizardController;
-import corp.skaj.foretagskvitton.model.Company;
-import corp.skaj.foretagskvitton.view.WizardLastStep;
+import corp.skaj.foretagskvitton.services.ReceiptScanner;
+
 
 public class WizardModel extends AbstractWizardModel {
+    private List<String> strings;
 
-    private String company;
-    private Company otherCompany;
-    private double totalSum;
-    private String date;
-    private User user;
-
-
-    public WizardModel(Context context, Company company, double totalSum, String date, User user, Company otherCompany) {
+    public WizardModel(Context context, List<String> strings) {
         super(context);
-        this.company = company == null ? null : company.getName();
-        this.totalSum = totalSum;
-        this.date = date;
-        this.user = user;
-        this.otherCompany = otherCompany;
+
+        this.strings = strings;
+
+        PageList list = onNewRootPageList();
+        List<Page> superList = super.getCurrentPageSequence();
+        superList.clear();
+        superList.addAll(list);
+
+        //TODO Get relevant info från strings + build wizard sequence
     }
 
     @Override
     protected PageList onNewRootPageList() {
-        if (company == null) {
+
+        if (collectCompany(strings) == null) {
             return companyInfoNotFound();
         } else {
             return companyInfoFound();
         }
     }
 
-    PageList companyInfoNotFound() {
-
-        System.out.println("TOTALSUMMAN ÄR " + String.valueOf(totalSum) + " KRONOR");
-        System.out.println("DATUMET SOM HITTAS ÄR " + date);
+    private PageList companyInfoNotFound() {
+        //System.out.println("TOTALSUMMAN ÄR " + String.valueOf(totalSum) + " KRONOR");
+        //System.out.println("DATUMET SOM HITTAS ÄR " + date);
+        double totalSum = ReceiptScanner.getTotalCost(strings);
 
         return new PageList(
                 new BranchPage(this, "Skapa ny post")
@@ -74,13 +70,23 @@ public class WizardModel extends AbstractWizardModel {
                         .addBranch("Företagskort",
 
                                 new MultipleFixedChoicePage(this, "Företag")
-                                        .setChoices(user.getListOfCompanies().toString()), //Företag, här måste vi få in en lista av alla valbara företag
+
+                                        //TODO List all companies.
+
+                                        .setChoices("LISTA MED FÖRETAG"), //Företag, här måste vi få in en lista av alla valbara företag
 
                                 new MultipleFixedChoicePage(this, "Grossist")
-                                        .setChoices(otherCompany.getSuppliers().toString()), //Grossister, här måste vi få in en valbar lista med grossister
+
+                                        .setChoices() //Grossister, här måste vi få in en valbar lista med grossister
+
+
+                                        //TODO List all suppliers.
+
+                                        .setChoices("LISTA MED GROSSISTER"), //Grossister
+
 
                                 new TextPage(this, "Datum")
-                                        .setValue(date),
+                                        .setValue(ReceiptScanner.getDate(strings)),
 
                                 //TODO gör en kalender där man får välja, om vi har tid över
 
@@ -104,7 +110,7 @@ public class WizardModel extends AbstractWizardModel {
                                         .setChoices(), //Grossister
 
                                 new TextPage(this, "Datum")
-                                        .setValue(date),
+                                        .setValue(ReceiptScanner.getDate(strings)),
 
                                 //TODO gör en kalender där man får välja, om vi har tid över
 
@@ -123,16 +129,19 @@ public class WizardModel extends AbstractWizardModel {
 
     }
 
-    PageList companyInfoFound() {
+    private PageList companyInfoFound() {
+        double totalSum = ReceiptScanner.getTotalCost(strings);
+
+        //TODO If cardnumber found = save purchase in matching company
 
         return new PageList(
 
                 new BranchPage(this, "Skapa ny post"), //Kolla upp om detta verkligen ser rätt ut 
 
                 new TextPage(this, "Datum")
-                        .setValue(date),
+                        .setValue(ReceiptScanner.getDate(strings)),
 
-                //TODO gör en kalender där man får välja, om vi har tid över
+                //TODO gör en kalender där man får välja, return mCurrentPageSequence;om vi har tid över
 
                 new NumberPage(this, "Total belopp")
                         .setValue(totalSum > 0 ? String.valueOf(totalSum) : null)
@@ -144,7 +153,15 @@ public class WizardModel extends AbstractWizardModel {
 
                 new TextPage(this, "Kommentar")
                         .setRequired(false));
+    }
+
+    private Company collectCompany(List<String> strings) {
+
+        return null;
+
+        //TODO Get User globally.
 
     }
+
 
 }

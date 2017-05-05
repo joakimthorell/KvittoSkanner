@@ -1,10 +1,6 @@
 package corp.skaj.foretagskvitton.model;
 
-import java.io.Serializable;
 
-/**
- *
- */
 public class Supplier {
     private String name;
 
@@ -12,18 +8,10 @@ public class Supplier {
         this.name = name;
     }
 
-    /**
-     *
-     * @param newName
-     */
     public void setName(String newName) {
         this.name = newName;
     }
 
-    /**
-     *
-     * @return
-     */
     public String getName() {
         return name;
     }

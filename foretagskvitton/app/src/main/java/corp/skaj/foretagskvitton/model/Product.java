@@ -1,12 +1,9 @@
 package corp.skaj.foretagskvitton.model;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- */
+
 public class Product {
     private String name;
     private Category category;
@@ -29,82 +26,38 @@ public class Product {
         comments = new ArrayList<>();
     }
 
-    /**
-     *
-     * @param name
-     */
     public void setName(String name) {
         this.name = name;
     }
 
-    /**
-     *
-     * @param category
-     */
     public void setCategory(Category category) {
         this.category = category;
     }
 
-    /**
-     *
-     * @param listOfComments
-     */
-    public void setListOfComments(List<Comment> listOfComments) {
-        this.comments = listOfComments;
-    }
-
-    /**
-     *
-     * @param price
-     */
     public void setPrice(double price) {
         this.price = price;
     }
 
-    /**
-     *
-     * @param tax
-     */
     public void setTax(double tax) {
         this.tax = tax;
     }
 
-    /**
-     *
-     * @return name
-     */
     public String getName() {
         return name;
     }
 
-    /**
-     *
-     * @return category
-     */
     public Category getCategory() {
         return category;
     }
 
-    /**
-     *
-     * @return listOfComments
-     */
-    public List<Comment> getListOfComments() {
+    public List<Comment> getComments() {
         return comments;
     }
 
-    /**
-     *
-     * @return price
-     */
     public double getPrice() {
         return price;
     }
 
-    /**
-     *
-     * @return tax
-     */
     public double getTax() {
         return tax;
     }

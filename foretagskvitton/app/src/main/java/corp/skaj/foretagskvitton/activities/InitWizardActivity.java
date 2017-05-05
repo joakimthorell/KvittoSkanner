@@ -44,11 +44,6 @@ public class InitWizardActivity extends AppCompatActivity {
 
     }
 
-    /**
-     * This method starts a thread to allow application to collect all available Strings from image.
-     * @param URI
-     * @return Thread
-     */
     private Thread collectStrings(final Uri URI) {
         return new Thread(new Runnable() {
             @Override
@@ -63,9 +58,6 @@ public class InitWizardActivity extends AppCompatActivity {
         });
     }
 
-    /**
-     * This method ends loadingbar on screen when all Strings are collected
-     */
     private void endLoadingBar() {
         runOnUiThread(new Runnable() {
             @Override
@@ -101,11 +93,6 @@ public class InitWizardActivity extends AppCompatActivity {
         nextButtonShowing = !nextButtonShowing;
     }
 
-    /**
-     * This method catches Intents (information) sent from other classes.
-     * @param intent
-     * @return Uri
-     */
     // If more then addNewPost will send images here, add them here
     private Uri catchIntent(Intent intent) {
         Uri URI = null;
@@ -118,7 +105,7 @@ public class InitWizardActivity extends AppCompatActivity {
     }
 
 
-    // TEMP ALL UNDER THIS IS TEMP
+    //TODO This is temporary. Remove later
     public void nextPressed(View view) {
         ArrayList<String> list = new ArrayList<>();
         list.addAll(listOfStrings);

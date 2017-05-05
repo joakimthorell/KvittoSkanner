@@ -7,12 +7,10 @@ import java.util.Calendar;
 
 import static org.junit.Assert.*;
 
-/**
- *
- */
+
 public class UserTest {
-    User user;
-    Company company;
+    private User user;
+    private Company company;
 
     @Before
     public void setup() {

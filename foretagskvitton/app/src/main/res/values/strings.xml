@@ -16,4 +16,5 @@
     <string name="last_step_approve_button">Lägg till</string>
     <string name="cancel">Tillbaka</string>
     <string name="wizard_complete">Slutför</string>
+    <string name="action_settings">Settings</string>
 </resources>

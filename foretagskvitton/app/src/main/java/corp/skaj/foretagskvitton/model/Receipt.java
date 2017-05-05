@@ -2,14 +2,11 @@ package corp.skaj.foretagskvitton.model;
 
 import android.net.Uri;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-/**
- *
- */
+
 public class Receipt {
     private List<Product> products;
     private Calendar date;
@@ -45,60 +42,28 @@ public class Receipt {
         products.add(product);
     }
 
-    /**
-     *
-     * @return listOfProducts
-     */
-    public List<Product> getListOfProducts() {
-        return products;
-    }
-
-    /**
-     *
-     * @return date
-     */
-    public Calendar getDate() {
-        return date;
-    }
-
-    /**
-     *
-     * @return total
-     */
-    public double getTotal() {
-        return total;
-    }
-
-    /**
-     *
-     * @param products
-     */
-    public void setListOfProducts(List<Product> products) {
-        this.products = products;
-    }
-
-    /**
-     *
-     * @param date
-     */
     public void setDate(Calendar date) {
         this.date = date;
     }
 
-    /**
-     *
-     * @param total
-     */
     public void setTotal(double total) {
         this.total = total;
     }
 
-    /**
-     *
-     * @return amount of products in listOfProducts
-     */
-    public int getAmountOfProducts (){
-        return products.size();
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public Calendar getDate() {
+        return date;
+    }
+
+    public double getTotal() {
+        return total;
+    }
+
+    public void getProducts(List<Product> products) {
+        this.products = products;
     }
 
     public Uri getPictureAdress() {

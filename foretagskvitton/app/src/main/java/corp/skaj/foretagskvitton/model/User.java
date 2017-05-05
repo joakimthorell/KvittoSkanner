@@ -1,12 +1,9 @@
 package corp.skaj.foretagskvitton.model;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * User class.
- */
+
 public class User {
     private String name;
     private List<Company> companies;
@@ -16,10 +13,6 @@ public class User {
         companies = new ArrayList<>();
     }
 
-    /**
-     * @param company
-     * @throws IllegalArgumentException
-     */
     public void addCompany(Company company) throws IllegalArgumentException {
         if (!containsCompany(company.getName())) {
             companies.add(company);
@@ -28,10 +21,6 @@ public class User {
         }
     }
 
-    /**
-     * @param company
-     * @throws IllegalArgumentException
-     */
     public void removeCompany(Company company) throws IllegalArgumentException {
         if (containsCompany(company.getName())) {
             companies.remove(company);
@@ -40,11 +29,6 @@ public class User {
         }
     }
 
-    /**
-     * @param companyName
-     * @return <code>true</code> if User contains Company;
-     * <code>false</code> otherwise
-     */
     private boolean containsCompany(String companyName) {
         for (int i = 0; i < companies.size(); i++) {
             Company temp = companies.get(i);
@@ -55,12 +39,6 @@ public class User {
         return false;
     }
 
-    /**
-     * @param listOfPurchases
-     * @param purchase
-     * @return <code>true</code> if Purchase contains Receipt;
-     * <code>false</code> otherwise
-     */
     private boolean containsReceipt(List<Purchase> listOfPurchases, Purchase purchase) {
         for (int i = 0; i < listOfPurchases.size(); i++) {
             Receipt temp = listOfPurchases.get(i).getReceipt();
@@ -71,17 +49,10 @@ public class User {
         return false;
     }
 
-    /**
-     * @param company
-     * @param employee
-     */
     public void addUserToCompany(Company company, Employee employee) throws IllegalArgumentException {
         company.addEmployee(employee);
     }
 
-    /**
-     * @param name
-     */
     public void setName(String name) {
         this.name = name;
         for (int i = 0; i < companies.size(); i++) {
@@ -93,10 +64,6 @@ public class User {
         }
     }
 
-    /**
-     * @param company
-     * @return Company
-     */
     public Company getCompany(Company company) {
         for (int i = 0; i < companies.size(); i++) {
             Company temp = companies.get(i);
@@ -107,10 +74,6 @@ public class User {
         return null;
     }
 
-    /**
-     * @param card
-     * @return
-     */
     public Company getCompany(Card card) throws IllegalArgumentException {
         for (int i = 0; i < companies.size(); i++) {
             Company temp = companies.get(i);
@@ -122,10 +85,6 @@ public class User {
         return null;
     }
 
-    /**
-     * @param purchase
-     * @return Company
-     */
     public Company getCompany(Purchase purchase) {
         for (int i = 0; i < companies.size(); i++) {
             Company temp = companies.get(i);
@@ -137,16 +96,19 @@ public class User {
         return null;
     }
 
-    /**
-     * @return List<Company>
-     */
-    public List<Company> getListOfCompanies() {
+    public Company getCompany(int cardNumber) {
+        for (int i = 0; i < companies.size(); i++) {
+            if (companies.get(i).getCard(cardNumber) != null) {
+                return companies.get(i);
+            }
+        }
+        return null;
+    }
+
+    public List<Company> getCompanies() {
         return companies;
     }
 
-    /**
-     * @return name of User
-     */
     public String getName() {
         return name;
     }

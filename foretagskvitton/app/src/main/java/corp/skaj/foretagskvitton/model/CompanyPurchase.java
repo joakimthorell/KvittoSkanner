@@ -1,10 +1,6 @@
 package corp.skaj.foretagskvitton.model;
 
-import java.io.Serializable;
 
-/**
- *
- */
 public class CompanyPurchase extends Purchase {
     private Card payment;
 
@@ -16,10 +12,6 @@ public class CompanyPurchase extends Purchase {
         super(receipt);
     }
 
-    /**
-     *
-     * @return payment
-     */
     public Card getPayment() {
         return payment;
     }
