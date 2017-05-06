@@ -20,7 +20,5 @@ public class CompanyActivity extends AbstractActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_company);
 
-        BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
-        BottomNavigationController.setupBottomNavBar(bottomBar, STATE_FOR_BOTTOM_MENY, this);
     }
 }
