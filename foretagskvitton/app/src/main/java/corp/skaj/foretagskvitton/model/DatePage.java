@@ -60,6 +60,10 @@ public class DatePage extends Page {
             return this;
         }
 
+        // This is for putting date in TextField
+        mData.putString(DATE_DATA_KEY, s);
+
+        // This is for setting date in date picker dialog
         Date date = new SimpleDateFormat("yyyy-MM-dd").parse(s);
         Calendar c = new GregorianCalendar();
         c.setTime(date);
