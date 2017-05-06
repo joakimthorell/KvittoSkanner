@@ -12,17 +12,13 @@ import corp.skaj.foretagskvitton.activities.AddNewPostActivity;
 import corp.skaj.foretagskvitton.activities.GraphActivity;
 
 public class BottomNavigationController {
-    /**
-     * Setting up the BottomNavigationBar for each activity. Call this onCreate in each activity using BottomBar
-     *
-     * @param bottomBar
-     * @param state     ClassName.STATE_FOR_BOTTOM_MENY supposed to be a String
-     * @param context
-     */
+
+    // Setting up the BottomNavigationBar for each activity. Call this onCreate in each activity using BottomBar.
     public static void setupBottomNavBar(final BottomBar bottomBar, String state, final Context context) {
         final int activeState = getActiveTab(state);
         bottomBar.setDefaultTab(activeState);
         bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
+
             @Override
             public void onTabSelected(@IdRes int tabId) {
                 Intent intent;

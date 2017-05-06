@@ -17,7 +17,8 @@ public class User {
         if (!containsCompany(company.getName())) {
             companies.add(company);
         } else {
-            throw new IllegalArgumentException("Company already exists");
+            System.out.println("ALREADY EXISTS ");
+            //throw new IllegalArgumentException("Company already exists");
         }
     }
 
@@ -91,15 +92,6 @@ public class User {
             List<Purchase> listOfReceipts = temp.getEmployee(purchase).getPurchases();
             if (containsReceipt(listOfReceipts, purchase)) {
                 return temp;
-            }
-        }
-        return null;
-    }
-
-    public Company getCompany(int cardNumber) {
-        for (int i = 0; i < companies.size(); i++) {
-            if (companies.get(i).getCard(cardNumber) != null) {
-                return companies.get(i);
             }
         }
         return null;

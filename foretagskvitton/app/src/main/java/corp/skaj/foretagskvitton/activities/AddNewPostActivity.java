@@ -7,7 +7,6 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.roughike.bottombar.BottomBar;
@@ -20,15 +19,12 @@ import java.util.Date;
 import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.controllers.BottomNavigationController;
 
-/**
- *
- */
 public class AddNewPostActivity extends AbstractActivity {
-    private String imageAdress;
-    private static final int REQUEST_IMAGE_CAPTURE = 31415;
     public static final String BUILD_NEW_RECEIPT = "corp.skaj.foretagskvitton.BUILD_RECEIPT";
     public static final String KEY_FOR_IMAGE = "corp.skaj.foretagskvitton.KEY_FOR_IMAGE";
-    public static final String STATE_FOR_BOTTOM_MENY = "AddNewPostActivity";
+    public static final String STATE_FOR_BOTTOM_MENY = "ADD_NEW_POST_ACTIVITY";
+    private static final int REQUEST_IMAGE_CAPTURE = 31415;
+    private String imageAdress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,20 +32,17 @@ public class AddNewPostActivity extends AbstractActivity {
 
         setContentView(R.layout.activity_add_new_post);
         imageAdress = "";
+
         // Hides the actionbar and gives fullscreen feature
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
+
         // Setup bottom navigation
         BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
         BottomNavigationController.setupBottomNavBar(bottomBar, STATE_FOR_BOTTOM_MENY, this);
     }
 
-    /**
-     * This method catches taken image by camera.
-     * @param requestCode
-     * @param resultCode
-     * @param data
-     */
+    // This method catches taken image by camera.
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
@@ -64,10 +57,7 @@ public class AddNewPostActivity extends AbstractActivity {
         }
     }
 
-    /**
-     * This method starts wizard guide for adding new receipt by taking an image with camera.
-     * @param URI
-     */
+    // This method starts wizard guide for adding new receipt by taking an image with camera.
     private void startWizard(Uri URI) {
         Intent intent = new Intent(this, InitWizardActivity.class);
         intent.putExtra(KEY_FOR_IMAGE, URI);
@@ -75,9 +65,7 @@ public class AddNewPostActivity extends AbstractActivity {
         startActivity(intent);
     }
 
-    /**
-     * This method starts Camera.
-     */
+    //This method starts Camera.
     private void dispatchOpenCamera() {
         Intent openCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         // Ensure there is a camera
@@ -88,10 +76,7 @@ public class AddNewPostActivity extends AbstractActivity {
         }
     }
 
-    /**
-     * This method arranges a folder where an image taken by camera is saved.
-     * @return imageURI
-     */
+    // This method arranges a folder where an image taken by camera is saved.
     private Uri setupImageFolder() {
         File imageFile = null;
         try {
@@ -106,11 +91,7 @@ public class AddNewPostActivity extends AbstractActivity {
         return imageURI;
     }
 
-    /**
-     * This method creates a file in which image taken by camera is saved.
-     * @return imageFile
-     * @throws IOException
-     */
+    // This method creates a file in which image taken by camera is saved.
     private File createImageFile() throws IOException {
         // Create image file
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
@@ -126,10 +107,7 @@ public class AddNewPostActivity extends AbstractActivity {
         return image;
     }
 
-    /**
-     * This method runs when camera button is pressed.
-     * @param view
-     */
+    // This method runs when camera button is pressed.
     public void cameraButtonActionPerformed(View view) {
         dispatchOpenCamera();
     }

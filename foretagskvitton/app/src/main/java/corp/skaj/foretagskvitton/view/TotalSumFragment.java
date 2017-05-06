@@ -12,7 +12,6 @@ public class TotalSumFragment extends TextFragment {
     public static TotalSumFragment create(String key) {
         Bundle args = new Bundle();
         args.putString(ARG_KEY, key);
-
         TotalSumFragment f = new TotalSumFragment();
         f.setArguments(args);
         return f;

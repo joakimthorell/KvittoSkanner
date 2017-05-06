@@ -17,9 +17,6 @@ import java.util.List;
 
 import static android.provider.CalendarContract.CalendarCache.URI;
 
-/**
- *
- */
 public class TextCollector {
 
     private TextCollector() {

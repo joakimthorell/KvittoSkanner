@@ -1,27 +1,31 @@
 package corp.skaj.foretagskvitton.controllers;
 
 import android.app.Application;
-import android.support.v7.app.AppCompatActivity;
 
 import java.util.List;
 
 import corp.skaj.foretagskvitton.model.User;
 
 public class DataHolder extends Application {
-    private User user;
+    private boolean ONCE = true;
     private List<String> strings;
-
-    public void setUser(User user) {
-        if (user == null) {
-            this.user = user;
-        }
-    }
+    private User user;
 
     public void setStrings(List<String> strings) {
         this.strings = strings;
     }
 
+    public void setUser(User user) {
+        if (ONCE) {
+            this.user = user;
+            ONCE = false;
+        }
+    }
+
     public User getUser() {
+        if (user == null) {
+            user = new User("TEST_USER");
+        }
         return user;
     }
 

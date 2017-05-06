@@ -1,6 +1,5 @@
 package corp.skaj.foretagskvitton.view;
 
-import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
@@ -22,15 +21,12 @@ import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.model.DatePage;
 
 public class DateFragment extends Fragment {
-
-    private static final String ARG_KEY = "key";
-
-    private PageFragmentCallbacks mCallbacks;
-    private String mKey;
-    private DatePage mPage;
-    private EditText mDateView;
-    private String mDate;
+    private static final String ARG_KEY = "DATE_FRAGMENT_KEY";
     private DatePickerDialog mDatePickerDialog;
+    private PageFragmentCallbacks mCallbacks;
+    private EditText mDateView;
+    private DatePage mPage;
+    private String mKey;
 
     public static DateFragment create(String key) {
         Bundle args = new Bundle();
@@ -42,7 +38,6 @@ public class DateFragment extends Fragment {
     }
 
     public DateFragment() {
-        // Required empty public constructor
     }
 
     @Override
@@ -85,12 +80,12 @@ public class DateFragment extends Fragment {
         mCallbacks = null;
     }
 
-
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         mDateView.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
                 mDatePickerDialog.show();
@@ -98,21 +93,21 @@ public class DateFragment extends Fragment {
         });
 
         Calendar newCalendar = Calendar.getInstance();
+
         mDatePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
 
+            @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 Calendar newDate = Calendar.getInstance();
                 newDate.set(year, monthOfYear, dayOfMonth);
-
                 String formattedDate = DatePage.dateFormatter.format(newDate.getTime());
 
                 mDateView.setText(formattedDate);
-
                 mPage.getData().putString(DatePage.DATE_DATA_KEY, formattedDate);
                 mPage.notifyDataChanged();
             }
 
-        },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
+        }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
 
         if (mPage.isDateFound()) {
             mDatePickerDialog.getDatePicker().updateDate(
@@ -126,9 +121,6 @@ public class DateFragment extends Fragment {
     @Override
     public void setMenuVisibility(boolean menuVisible) {
         super.setMenuVisibility(menuVisible);
-
-        // In a future update to the support library, this should override setUserVisibleHint
-        // instead of setMenuVisibility.
         if (mDateView != null) {
             InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(
                     Context.INPUT_METHOD_SERVICE);

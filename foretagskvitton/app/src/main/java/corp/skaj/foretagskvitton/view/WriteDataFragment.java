@@ -8,10 +8,9 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 
 import corp.skaj.foretagskvitton.R;
-import corp.skaj.foretagskvitton.controllers.DataHolder;
 import corp.skaj.foretagskvitton.controllers.IUpdateUser;
 
-public class WizardLastStep extends DialogFragment {
+public class WriteDataFragment extends DialogFragment {
 
     @NonNull
     @Override
@@ -27,7 +26,7 @@ public class WizardLastStep extends DialogFragment {
                         IUpdateUser updateUser = (IUpdateUser)getContext();
                         updateUser.updateUser();
                     }
-                }) // Here we should call for completing receipt
+                })
                 .setNegativeButton(R.string.cancel, null)
                 .create();
     }

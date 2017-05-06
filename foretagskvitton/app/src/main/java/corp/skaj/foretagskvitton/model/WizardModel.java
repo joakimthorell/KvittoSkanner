@@ -25,12 +25,12 @@ import com.tech.freak.wizardpager.model.PageList;
 import com.tech.freak.wizardpager.model.SingleFixedChoicePage;
 import com.tech.freak.wizardpager.model.TextPage;
 
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import corp.skaj.foretagskvitton.activities.WizardActivity;
+import corp.skaj.foretagskvitton.controllers.DataHolder;
 import corp.skaj.foretagskvitton.services.ReceiptScanner;
 
 
@@ -44,13 +44,10 @@ public class WizardModel extends AbstractWizardModel {
 
     @Override
     protected PageList onNewRootPageList() {
-
-        /*
-        Getting the string list from WizardActivity.
-        This is needed beacuse bad implementation in WizardPager.
-         */
+        // Necessary because constructor runs super constructor which runs this method before strings are scanned.
+        DataHolder dataHolder = (DataHolder)mContext.getApplicationContext();
         WizardActivity wa = (WizardActivity) mContext;
-        List<String> strings = wa.getStrings();
+        List<String> strings = dataHolder.getStrings();
 
         if (collectCompany(strings) == null) {
             return companyInfoNotFound(strings);
@@ -77,7 +74,6 @@ public class WizardModel extends AbstractWizardModel {
 
                                         .setChoices() //Grossister, här måste vi få in en valbar lista med grossister
 
-
                                         //TODO List all suppliers.
 
                                         .setChoices("LISTA MED GROSSISTER"), //Grossister
@@ -85,8 +81,6 @@ public class WizardModel extends AbstractWizardModel {
 
                                 new DatePage(this, "Datum")
                                         .setValue(ReceiptScanner.getDate(strings)),
-
-                                //TODO gör en kalender där man får välja, om vi har tid över
 
                                 new TotalSumPage(this, "Total belopp")
                                         .setValue(totalSum > 0 ? String.valueOf(totalSum) : null)
@@ -110,8 +104,6 @@ public class WizardModel extends AbstractWizardModel {
                                 new DatePage(this, "Datum")
                                         .setValue(ReceiptScanner.getDate(strings)),
 
-                                //TODO gör en kalender där man får välja, om vi har tid över
-
                                 new TotalSumPage(this, "Total belopp")
                                         .setValue(totalSum > 0 ? String.valueOf(totalSum) : null)
                                         .setRequired(true),
@@ -124,13 +116,12 @@ public class WizardModel extends AbstractWizardModel {
                                         .setRequired(false))
 
                         .setRequired(true));
-
     }
 
     private PageList companyInfoFound(List<String> strings) {
         double totalSum = ReceiptScanner.getTotalCost(strings);
 
-        //TODO If cardnumber found = save purchase in matching company
+        //TODO If cardnumber found = save purchase in matching company.
 
         return new PageList(
 
@@ -155,13 +146,13 @@ public class WizardModel extends AbstractWizardModel {
 
     private void collectData() {
 
-        //TODO Collect alla data from currentPageSequence.
+        //TODO Collect and save all data from currentPageSequence in hashmap.
         // wizardModel.getCurrentPageSequence().get(0).getData();
     }
 
     private Company collectCompany(List<String> strings) {
 
-        //TODO Get User globally.
+        //TODO Get User globally, return company matching cardnumber.
 
         return null;
     }
