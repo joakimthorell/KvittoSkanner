@@ -34,6 +34,7 @@
         </activity>
         <activity android:name=".activities.InitWizardActivity" />
         <activity android:name=".activities.AddNewPostActivity" />
+        <activity android:name=".activities.GraphActivity" />
         <activity
             android:name=".activities.WizardActivity"
             android:theme="@style/WizardTheme">
