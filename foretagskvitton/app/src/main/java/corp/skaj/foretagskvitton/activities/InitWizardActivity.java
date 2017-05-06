@@ -13,6 +13,8 @@ import java.util.List;
 
 import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.controllers.DataHolder;
+import corp.skaj.foretagskvitton.model.Company;
+import corp.skaj.foretagskvitton.model.User;
 import corp.skaj.foretagskvitton.services.TextCollector;
 
 public class InitWizardActivity extends AbstractActivity {
@@ -107,6 +109,11 @@ public class InitWizardActivity extends AbstractActivity {
     }
 
     public void saveButtonPressed(View view) {
-
+        // Testing...
+        /*
+        DataHolder dataHolder = (DataHolder)getApplicationContext();
+        dataHolder.getUser().addCompany(new Company("TEST_COMPANY_3"));
+        writeData();
+        */
     }
 }

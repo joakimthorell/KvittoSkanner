@@ -20,11 +20,11 @@ import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.controllers.BottomNavigationController;
 
 public class AddNewPostActivity extends AbstractActivity {
-    private String imageAdress;
-    private static final int REQUEST_IMAGE_CAPTURE = 31415;
     public static final String BUILD_NEW_RECEIPT = "corp.skaj.foretagskvitton.BUILD_RECEIPT";
     public static final String KEY_FOR_IMAGE = "corp.skaj.foretagskvitton.KEY_FOR_IMAGE";
-    public static final String STATE_FOR_BOTTOM_MENY = "AddNewPostActivity";
+    public static final String STATE_FOR_BOTTOM_MENY = "ADD_NEW_POST_ACTIVITY";
+    private static final int REQUEST_IMAGE_CAPTURE = 31415;
+    private String imageAdress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

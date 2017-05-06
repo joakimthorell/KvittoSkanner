@@ -36,7 +36,6 @@ import java.util.List;
 import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.controllers.DataHolder;
 import corp.skaj.foretagskvitton.controllers.IUpdateUser;
-import corp.skaj.foretagskvitton.controllers.IWizardActivity;
 import corp.skaj.foretagskvitton.controllers.IWizardController;
 import corp.skaj.foretagskvitton.controllers.WizardController;
 import corp.skaj.foretagskvitton.view.MyPagerAdapter;
@@ -97,8 +96,8 @@ public class WizardActivity extends AbstractActivity implements
 
     public void updateBottomBar() {
         mPrevButton.setVisibility(View.VISIBLE);
-
         int position = mPager.getCurrentItem();
+
         if (position == mWizardModel.getCurrentPageSequence().size()) {
             mNextButton.setText(R.string.wizard_complete);
         } else if (position <= 0) {
@@ -161,6 +160,7 @@ public class WizardActivity extends AbstractActivity implements
     private boolean recalculateCutOffPage() {
         List<Page> currentPageSequenceList = mWizardModel.getCurrentPageSequence();
         int cutOffPage = currentPageSequenceList.size() + 1;
+
         for (int i = 0; i < currentPageSequenceList.size(); i++) {
             Page page = currentPageSequenceList.get(i);
             if (page.isRequired() && !page.isCompleted()) {
@@ -168,7 +168,6 @@ public class WizardActivity extends AbstractActivity implements
                 break;
             }
         }
-
         if (mPagerAdapter.getCutOffPage() != cutOffPage) {
             mPagerAdapter.setCutOffPage(cutOffPage);
             return true;
@@ -177,7 +176,7 @@ public class WizardActivity extends AbstractActivity implements
     }
 
     public void updateUser() {
-        wizardController.updateUser((DataHolder)getApplicationContext());
+        wizardController.updateUser((DataHolder) getApplicationContext());
     }
 
 }

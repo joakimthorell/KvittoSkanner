@@ -17,7 +17,8 @@ public class User {
         if (!containsCompany(company.getName())) {
             companies.add(company);
         } else {
-            throw new IllegalArgumentException("Company already exists");
+            System.out.println("ALREADY EXISTS ");
+            //throw new IllegalArgumentException("Company already exists");
         }
     }
 

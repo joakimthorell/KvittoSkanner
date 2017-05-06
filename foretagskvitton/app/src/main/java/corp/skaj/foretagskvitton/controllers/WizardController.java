@@ -12,6 +12,7 @@ import com.tech.freak.wizardpager.ui.StepPagerStrip;
 
 import java.util.List;
 
+import corp.skaj.foretagskvitton.activities.IWizardActivity;
 import corp.skaj.foretagskvitton.model.User;
 import corp.skaj.foretagskvitton.model.WizardModel;
 import corp.skaj.foretagskvitton.view.MyPagerAdapter;
@@ -31,6 +32,7 @@ public class WizardController implements IWizardController {
 
     public void initViewPagerListener(ViewPager mPager, final StepPagerStrip mStepPagerStrip) {
         mPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 // Do nothing.
