@@ -71,7 +71,7 @@ public class WizardModel extends AbstractWizardModel {
 
                                         //TODO List all companies.
 
-                                        .setChoices("LISTA MED FÖRETAG"), //Företag, här måste vi få in en lista av alla valbara företag
+                                        .setChoices(), //Företag, här måste vi få in en lista av alla valbara företag
 
                                 new MultipleFixedChoicePage(this, "Grossist")
 
