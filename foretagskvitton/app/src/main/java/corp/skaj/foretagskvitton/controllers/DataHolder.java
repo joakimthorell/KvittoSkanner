@@ -19,15 +19,12 @@ public class DataHolder extends Application {
         if (ONCE) {
             this.user = user;
             ONCE = false;
-        } else {
-            System.out.println("ALREADY DID DIS ");
         }
-
     }
 
     public User getUser() {
         if (user == null) {
-            user = new User("USER_SANJIN");
+            user = new User("TEST_USER");
         }
         return user;
     }
