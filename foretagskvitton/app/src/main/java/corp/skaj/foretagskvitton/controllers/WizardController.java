@@ -15,7 +15,7 @@ import java.util.List;
 import corp.skaj.foretagskvitton.model.User;
 import corp.skaj.foretagskvitton.model.WizardModel;
 import corp.skaj.foretagskvitton.view.MyPagerAdapter;
-import corp.skaj.foretagskvitton.view.WizardLastStep;
+import corp.skaj.foretagskvitton.view.WriteDataFragment;
 
 public class WizardController implements IWizardController {
     private IWizardActivity wizardActivity;
@@ -31,7 +31,6 @@ public class WizardController implements IWizardController {
 
     public void initViewPagerListener(ViewPager mPager, final StepPagerStrip mStepPagerStrip) {
         mPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 // Do nothing.
@@ -64,7 +63,7 @@ public class WizardController implements IWizardController {
                 // If we are at last page
                 int size = wizardModel.getCurrentPageSequence().size();
                 if (mPager.getCurrentItem() == size) {
-                    WizardLastStep wls = new WizardLastStep();
+                    WriteDataFragment wls = new WriteDataFragment();
                     wls.show(fragmentManager, "confirm_receipt_dialog");
                 } else {
                     if (mEditingAfterReview) {
@@ -77,7 +76,7 @@ public class WizardController implements IWizardController {
         });
     }
 
-    public void initBackButton(Button mPrevButton, final ViewPager mPager) {
+    public void initPrevButton(Button mPrevButton, final ViewPager mPager) {
         mPrevButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

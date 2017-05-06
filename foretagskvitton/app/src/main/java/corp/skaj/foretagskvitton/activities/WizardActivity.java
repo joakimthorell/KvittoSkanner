@@ -20,7 +20,6 @@ package corp.skaj.foretagskvitton.activities;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
@@ -32,7 +31,6 @@ import com.tech.freak.wizardpager.ui.PageFragmentCallbacks;
 import com.tech.freak.wizardpager.ui.ReviewFragment;
 import com.tech.freak.wizardpager.ui.StepPagerStrip;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import corp.skaj.foretagskvitton.R;
@@ -53,18 +51,11 @@ public class WizardActivity extends AbstractActivity implements
     private StepPagerStrip mStepPagerStrip;
     private Button mNextButton;
     private Button mPrevButton;
-    private List<String> strings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wizard);
-
-        // Getting list from InitWizardActivity
-        List<String> strings = getIntent()
-                .getExtras()
-                .getStringArrayList(InitWizardActivity.KEY_FOR_WIZARD_CONTROLLER);
-        this.strings = strings;
 
         // Set instances
         mNextButton = (Button) findViewById(R.id.wizardNextButton);
@@ -72,16 +63,16 @@ public class WizardActivity extends AbstractActivity implements
         mPager = (ViewPager) findViewById(R.id.pager);
         mStepPagerStrip = (StepPagerStrip) findViewById(R.id.wizard_strip);
         WizardController wizardController = new WizardController(this, this);
+        this.wizardController = wizardController;
         this.mWizardModel = wizardController.getWizardModel();
         mPagerAdapter = new MyPagerAdapter(getSupportFragmentManager(), wizardController);
         mPager.setAdapter(mPagerAdapter);
 
         // Set listeners
         wizardController.initNextButton(mNextButton, mPager, mPagerAdapter, getSupportFragmentManager());
-        wizardController.initBackButton(mPrevButton, mPager);
+        wizardController.initPrevButton(mPrevButton, mPager);
         wizardController.initViewPagerListener(mPager, mStepPagerStrip);
         mWizardModel.registerListener(this);
-        this.wizardController = wizardController;
 
         // Set the normal actionbar to custom toolbar.
         Toolbar toolbar = (Toolbar) findViewById(R.id.wizard_action_bar);
@@ -97,13 +88,9 @@ public class WizardActivity extends AbstractActivity implements
 
     @Override
     public void onPageTreeChanged() {
-
-        //TODO Check if this works.
-
         recalculateCutOffPage();
         int size = mWizardModel.getCurrentPageSequence().size() + 1;
         mStepPagerStrip.setPageCount(size); // + 1 = review, step
-
         mPagerAdapter.notifyDataSetChanged();
         updateBottomBar();
     }
@@ -116,7 +103,9 @@ public class WizardActivity extends AbstractActivity implements
             mNextButton.setText(R.string.wizard_complete);
         } else if (position <= 0) {
             mPrevButton.setVisibility(View.GONE);
+
             // TODO set next button as bigger if possible
+
         } else {
             mNextButton.setText(R.string.nextButtonText);
         }
@@ -141,9 +130,6 @@ public class WizardActivity extends AbstractActivity implements
 
     @Override
     public void onEditScreenAfterReview(String key) {
-
-        //TODO Check if this works
-
         List<Page> currentPageSequenceList = mWizardModel.getCurrentPageSequence();
         int size = currentPageSequenceList.size() - 1;
         for (int i = size; i >= 0; i--) {
@@ -175,7 +161,6 @@ public class WizardActivity extends AbstractActivity implements
     private boolean recalculateCutOffPage() {
         List<Page> currentPageSequenceList = mWizardModel.getCurrentPageSequence();
         int cutOffPage = currentPageSequenceList.size() + 1;
-
         for (int i = 0; i < currentPageSequenceList.size(); i++) {
             Page page = currentPageSequenceList.get(i);
             if (page.isRequired() && !page.isCompleted()) {
@@ -189,10 +174,6 @@ public class WizardActivity extends AbstractActivity implements
             return true;
         }
         return false;
-    }
-
-    public List<String> getStrings() {
-        return strings;
     }
 
     public void updateUser() {

@@ -1,7 +1,6 @@
 package corp.skaj.foretagskvitton.controllers;
 
 import android.app.Application;
-import android.support.v7.app.AppCompatActivity;
 
 import java.util.List;
 

@@ -21,7 +21,6 @@ public class CustomList extends ArrayAdapter<String> {
         this.context = context;
         this.web = web;
         this.imageId = imageId;
-
     }
 
     @Override
@@ -29,10 +28,8 @@ public class CustomList extends ArrayAdapter<String> {
         LayoutInflater inflater = context.getLayoutInflater();
         View rowView = inflater.inflate(R.layout.list_single, null, true);
         TextView txtTitle = (TextView) rowView.findViewById(R.id.txt);
-
         ImageView imageView = (ImageView) rowView.findViewById(R.id.img);
         txtTitle.setText(web[position]);
-
         imageView.setImageResource(imageId[position]);
         return rowView;
     }

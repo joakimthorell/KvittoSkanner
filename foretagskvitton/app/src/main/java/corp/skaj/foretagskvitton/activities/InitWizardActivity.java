@@ -2,7 +2,6 @@ package corp.skaj.foretagskvitton.activities;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,15 +9,12 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import corp.skaj.foretagskvitton.R;
+import corp.skaj.foretagskvitton.controllers.DataHolder;
 import corp.skaj.foretagskvitton.services.TextCollector;
 
-/**
- *
- */
 public class InitWizardActivity extends AbstractActivity {
     public static final String KEY_FOR_WIZARD_CONTROLLER = "corp.skaj.foretagskvitton.wizard.KEY_FOR_CONTROLLER";
     private boolean progressBarShowing;
@@ -41,7 +37,6 @@ public class InitWizardActivity extends AbstractActivity {
 
         Button b = (Button) findViewById(R.id.save_button);
         b.setVisibility(View.GONE);
-
     }
 
     private Thread collectStrings(final Uri URI) {
@@ -66,13 +61,11 @@ public class InitWizardActivity extends AbstractActivity {
                 toggleNextButton();
                 Button b = (Button) findViewById(R.id.save_button);
                 b.setVisibility(View.VISIBLE);
-
                 String toPrint = "";
 
                 for (String s : listOfStrings) {
                     toPrint += s + "\n";
                 }
-
                 TextView t = (TextView) findViewById(R.id.textContainer);
                 t.setText(toPrint);
             }
@@ -93,7 +86,7 @@ public class InitWizardActivity extends AbstractActivity {
         nextButtonShowing = !nextButtonShowing;
     }
 
-    // If more then addNewPost will send images here, add them here
+    // If more then addNewPost will send images here, add them here.
     private Uri catchIntent(Intent intent) {
         Uri URI = null;
         if (intent != null) {
@@ -104,20 +97,16 @@ public class InitWizardActivity extends AbstractActivity {
         return URI;
     }
 
+    //TODO Below is temporary. Remove later.
 
-    //TODO This is temporary. Remove later
     public void nextPressed(View view) {
-        ArrayList<String> list = new ArrayList<>();
-        list.addAll(listOfStrings);
         Intent intent = new Intent(this, WizardActivity.class);
-        Bundle b = new Bundle();
-        b.putStringArrayList(KEY_FOR_WIZARD_CONTROLLER, list);
-        intent.putExtras(b);
+        DataHolder dataHolder = (DataHolder)getApplicationContext();
+        dataHolder.setStrings(listOfStrings);
         startActivity(intent);
     }
 
     public void saveButtonPressed(View view) {
-        //Intent intent = new Intent(this, WriteUserActivity.class);
-        //startActivity(intent);
+
     }
 }

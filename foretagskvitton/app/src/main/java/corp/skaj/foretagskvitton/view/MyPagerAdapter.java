@@ -9,7 +9,6 @@ import com.tech.freak.wizardpager.ui.ReviewFragment;
 
 import corp.skaj.foretagskvitton.controllers.IWizardController;
 
-
 public class MyPagerAdapter extends FragmentStatePagerAdapter {
     private IWizardController wizardController;
     private Fragment mPrimaryItem;
@@ -33,7 +32,6 @@ public class MyPagerAdapter extends FragmentStatePagerAdapter {
         if (object == mPrimaryItem) {
             return POSITION_UNCHANGED;
         }
-
         return POSITION_NONE;
     }
 

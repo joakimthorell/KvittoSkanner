@@ -2,7 +2,6 @@ package corp.skaj.foretagskvitton.activities;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.google.gson.Gson;
@@ -12,7 +11,7 @@ import corp.skaj.foretagskvitton.controllers.DataHolder;
 import corp.skaj.foretagskvitton.model.User;
 
 
-public class ReadUserActivity extends AbstractActivity {
+public class ReadDataActivity extends AbstractActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +35,7 @@ public class ReadUserActivity extends AbstractActivity {
     private void readData(SharedPreferences sharedPref) {
         Gson gson = new Gson();
         String savedData = sharedPref.getString(User.class.getName().toString(), "");
-        DataHolder dataHolder = (DataHolder)getApplicationContext();
+        DataHolder dataHolder = (DataHolder) getApplicationContext();
         dataHolder.setUser(gson.fromJson(savedData, User.class));
     }
 

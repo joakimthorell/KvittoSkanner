@@ -18,7 +18,6 @@ import java.util.Locale;
 import corp.skaj.foretagskvitton.view.DateFragment;
 
 public class DatePage extends Page {
-
     private boolean dateFound;
     public static final String DATE_DATA_KEY = "corp.skaj.foretagskvitton.model.DatePage.date";
     public static SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
@@ -57,7 +56,6 @@ public class DatePage extends Page {
     }
 
     private Page setBundle(String s) throws ParseException {
-
         if (s == null) {
             return this;
         }
@@ -75,13 +73,9 @@ public class DatePage extends Page {
         mData.putInt(DATE_DAY_KEY, day);
 
         return this;
-
     }
 
     public boolean isDateFound() {
         return dateFound;
     }
-
-
-
 }
