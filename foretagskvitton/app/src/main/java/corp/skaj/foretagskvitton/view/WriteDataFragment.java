@@ -23,7 +23,7 @@ public class WriteDataFragment extends DialogFragment {
                         if (!(getContext() instanceof IUpdateUser)) {
                             throw new ClassCastException("Activity must implement IUpdateUser");
                         }
-                        IUpdateUser updateUser = (IUpdateUser)getContext();
+                        IUpdateUser updateUser = (IUpdateUser) getContext();
                         updateUser.updateUser();
                     }
                 })

@@ -24,7 +24,7 @@ public class DataHolder extends Application {
 
     public User getUser() {
         if (user == null) {
-            user = new User("TEST_USER");
+            user = new User("MASTER_USER");
         }
         return user;
     }

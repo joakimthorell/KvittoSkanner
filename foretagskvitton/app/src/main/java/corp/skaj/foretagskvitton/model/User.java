@@ -13,20 +13,19 @@ public class User {
         companies = new ArrayList<>();
     }
 
-    public void addCompany(Company company) throws IllegalArgumentException {
+    public void addCompany(Company company) {
         if (!containsCompany(company.getName())) {
             companies.add(company);
         } else {
-            System.out.println("ALREADY EXISTS ");
-            //throw new IllegalArgumentException("Company already exists");
+            System.out.println("Illegal argument " + this.getClass().getName().toString());
         }
     }
 
-    public void removeCompany(Company company) throws IllegalArgumentException {
+    public void removeCompany(Company company) {
         if (containsCompany(company.getName())) {
             companies.remove(company);
         } else {
-            throw new IllegalArgumentException("No such company exists");
+            System.out.println("Illegal argument " + this.getClass().getName().toString());
         }
     }
 
@@ -75,7 +74,7 @@ public class User {
         return null;
     }
 
-    public Company getCompany(Card card) throws IllegalArgumentException {
+    public Company getCompany(Card card) {
         for (int i = 0; i < companies.size(); i++) {
             Company temp = companies.get(i);
             Card tempCard = temp.getCard(card.getCard());

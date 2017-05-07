@@ -133,7 +133,7 @@ public class Company {
         return null;
     }
 
-    public Card getCard(int cardNumber) throws IllegalArgumentException {
+    public Card getCard(int cardNumber) {
         for (int i = 0; i < cards.size(); i++) {
             Card temp = cards.get(i);
             if (temp.getCard() == cardNumber) {
