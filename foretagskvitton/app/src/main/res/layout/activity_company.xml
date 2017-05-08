@@ -9,13 +9,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="corp.skaj.foretagskvitton.activities.GraphActivity">
 
-    <ListView android:id="@android:id/list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#00FF00"
-        android:layout_weight="1"
-        android:drawSelectorOnTop="false"/>
-
     <fragment
         android:id="@+id/company"
         android:name="corp.skaj.foretagskvitton.view.BottomNavigationFragment"
@@ -24,5 +17,16 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>
+
+    <ListView
+        android:id="@android:id/list"
+        android:layout_width="0dp"
+        android:layout_height="504dp"
+        android:layout_marginTop="16dp"
+        android:layout_weight="1"
+        android:drawSelectorOnTop="false"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
