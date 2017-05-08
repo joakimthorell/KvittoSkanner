@@ -1,19 +1,26 @@
 package corp.skaj.foretagskvitton.activities;
 
-/**
- * Created by annekeller on 2017-05-06.
- */
+import android.os.Bundle;
+
+import android.widget.ArrayAdapter;
+
+import corp.skaj.foretagskvitton.R;
 
 import com.roughike.bottombar.BottomBar;
 
-import corp.skaj.foretagskvitton.R;
-import android.os.Bundle;
-import corp.skaj.foretagskvitton.controllers.BottomNavigationController;
+import android.widget.ListView;
 
+import java.util.List;
+
+import corp.skaj.foretagskvitton.controllers.BottomNavigationController;
+import corp.skaj.foretagskvitton.controllers.DataHolder;
+import corp.skaj.foretagskvitton.model.Company;
 
 public class CompanyActivity extends AbstractActivity {
+    public static final String STATE_FOR_BOTTOM_MENY = "CompanyActivity";
 
-    public static final String STATE_FOR_BOTTOM_MENY = "corp.skaj.foretagskvitton.COMPANY";
+    //This is possible in all Activities where we need to get our User
+    //DataHolder dataholder = (DataHolder)getApplicationContext();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,5 +30,33 @@ public class CompanyActivity extends AbstractActivity {
         BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
         BottomNavigationController.setupBottomNavBar(bottomBar, STATE_FOR_BOTTOM_MENY, this);
 
+        populateListView();
+        //registerForClicks();
     }
+
+    private void populateListView() {
+        /*List<Company> companies = dataholder.getUser().getCompanies();
+
+        String[] companyNames = new String[companies.size()];
+        for (int i = 0; i < companies.size(); i++) {
+            companyNames[i] = companies.get(i).getName();*/
+
+            String[] companyNames = {"IKEA", "SIBA", "ELGIGANTEN", "COOP", "WILLYS"};
+
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+                    this, //context
+                    R.layout.list_view, //layout to use
+                    companyNames); //items to be displayed
+
+            ListView list = (ListView) findViewById(R.id.listView);
+            list.setAdapter(adapter);
+        }
+
+
+    private void registerForClicks() {
+
+        //Needs a method that registers what company we do click on
+    }
+
+
 }

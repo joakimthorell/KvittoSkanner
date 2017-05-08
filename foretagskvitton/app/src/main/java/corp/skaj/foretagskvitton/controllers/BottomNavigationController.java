@@ -10,6 +10,9 @@ import com.roughike.bottombar.OnTabSelectListener;
 import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.activities.AddNewPostActivity;
 import corp.skaj.foretagskvitton.activities.GraphActivity;
+import corp.skaj.foretagskvitton.activities.CompanyActivity;
+import corp.skaj.foretagskvitton.activities.UserActivity;
+
 
 public class BottomNavigationController {
 
@@ -33,7 +36,11 @@ public class BottomNavigationController {
                         //TODO what happens here?
                         return;
                     case R.id.action_business:
-                        //TODO what happens here?
+                        if (activeState == R.id.action_business) {
+                            return;
+                        }
+                        intent = new Intent(context, CompanyActivity.class);
+                        context.startActivity(intent);
                         return;
                     case R.id.action_charts:
                         if (activeState == R.id.action_charts) {
@@ -43,7 +50,11 @@ public class BottomNavigationController {
                         context.startActivity(intent);
                         return;
                     case R.id.action_user:
-                        //TODO what happens here?
+                        if (activeState == R.id.action_user) {
+                            return;
+                        }
+                        intent = new Intent(context, UserActivity.class);
+                        context.startActivity(intent);
                         return;
                     default:
                         return;
@@ -58,6 +69,10 @@ public class BottomNavigationController {
                 return R.id.action_add;
             case GraphActivity.STATE_FOR_BOTTOM_MENY:
                 return R.id.action_charts;
+            case CompanyActivity.STATE_FOR_BOTTOM_MENY:
+                return R.id.action_business;
+            case UserActivity.STATE_FOR_BOTTOM_MENY:
+                return R.id.action_user;
             default:
                 return 0;
         }
