@@ -11,13 +11,15 @@ public class Receipt {
     private List<Product> products;
     private Calendar date;
     private double total;
+    private String category;
     private final Uri pictureAdress;
 
-    public Receipt(List<Product> products, Calendar date, double total, final Uri pictureAdress) {
+    public Receipt(List<Product> products, Calendar date, double total, final Uri pictureAdress, String category) {
         this.products = products;
         this.date = date;
         this.total = total;
         this.pictureAdress = pictureAdress;
+        this.category = category;
     }
 
     public Receipt(Product product, Calendar date, double total, final Uri pictureAdress) {
@@ -68,6 +70,14 @@ public class Receipt {
 
     public Uri getPictureAdress() {
         return pictureAdress;
+    }
+
+    public String getCategory () {
+        return category;
+    }
+
+    public void setCategory (String category) {
+        this.category = category;
     }
 }
 
