@@ -33,9 +33,7 @@ import java.util.Map;
 import corp.skaj.foretagskvitton.controllers.DataHolder;
 import corp.skaj.foretagskvitton.services.ReceiptScanner;
 
-
 public class WizardModel extends AbstractWizardModel {
-
     public WizardModel(Context context) {
         super(context);
     }
@@ -83,8 +81,10 @@ public class WizardModel extends AbstractWizardModel {
                                         .setRequired(true),
 
                                 new SingleFixedChoicePage(this, "KATEGORI")
-                                        .setChoices("Resor", "Mat", "Bensin", "Hotell", "Frakt")
+                                        .setChoices()
                                         .setRequired(true),
+
+                                //TODO add a choice above which is "other" for custom choice of category
 
                                 new TextPage(this, "KOMMENTAR")
                                         .setRequired(false))
