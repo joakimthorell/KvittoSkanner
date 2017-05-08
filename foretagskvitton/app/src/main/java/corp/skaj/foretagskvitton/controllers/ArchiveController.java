@@ -232,7 +232,7 @@ public class ArchiveController extends RecyclerView.Adapter<ArchiveController.My
 
        void onIconImportantClicked(int position);
 
-       // void onMessageRowClicked(int position);
+        void onMessageRowClicked(int position);
 
         void onRowLongClicked(int position);
     }
