@@ -6,6 +6,7 @@ import corp.skaj.foretagskvitton.R;
 
 import com.roughike.bottombar.BottomBar;
 import corp.skaj.foretagskvitton.controllers.BottomNavigationController;
+import corp.skaj.foretagskvitton.controllers.DataHolder;
 
 public class CompanyActivity extends AbstractActivity {
 
@@ -18,5 +19,10 @@ public class CompanyActivity extends AbstractActivity {
 
         BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
         BottomNavigationController.setupBottomNavBar(bottomBar, STATE_FOR_BOTTOM_MENY, this);
+
+
+
     }
+
+
 }

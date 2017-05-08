@@ -43,7 +43,8 @@
                 android:value="corp.skaj.foretagskvitton.activities.AddNewPostActivity" />
         </activity>
         <activity android:name=".activities.ReceiptArchiveActivity" />
-        <activity android:name=".activities.CompanyActivity"></activity>
+        <activity android:name=".activities.CompanyActivity" />
+        <activity android:name=".activities.UserActivity"></activity>
     </application>
 
 </manifest>
