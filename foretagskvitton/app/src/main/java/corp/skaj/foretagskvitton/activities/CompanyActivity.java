@@ -10,11 +10,17 @@ import com.roughike.bottombar.BottomBar;
 
 import android.widget.ListView;
 
+import java.util.List;
+
 import corp.skaj.foretagskvitton.controllers.BottomNavigationController;
+import corp.skaj.foretagskvitton.controllers.DataHolder;
+import corp.skaj.foretagskvitton.model.Company;
 
 public class CompanyActivity extends AbstractActivity {
-
     public static final String STATE_FOR_BOTTOM_MENY = "CompanyActivity";
+
+    //This is possible in all Activities where we need to get our User
+    //DataHolder dataholder = (DataHolder)getApplicationContext();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,13 +31,27 @@ public class CompanyActivity extends AbstractActivity {
         BottomNavigationController.setupBottomNavBar(bottomBar, STATE_FOR_BOTTOM_MENY, this);
 
         populateListView();
-        registerForClicks();
+        //registerForClicks();
     }
 
     private void populateListView() {
+        /*List<Company> companies = dataholder.getUser().getCompanies();
 
-        //Here we do need an adapter
-    }
+        String[] companyNames = new String[companies.size()];
+        for (int i = 0; i < companies.size(); i++) {
+            companyNames[i] = companies.get(i).getName();*/
+
+            String[] companyNames = {"IKEA", "SIBA", "ELGIGANTEN", "COOP", "WILLYS"};
+
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+                    this, //context
+                    R.layout.list_view, //layout to use
+                    companyNames); //items to be displayed
+
+            ListView list = (ListView) findViewById(R.id.listView);
+            list.setAdapter(adapter);
+        }
+
 
     private void registerForClicks() {
 
