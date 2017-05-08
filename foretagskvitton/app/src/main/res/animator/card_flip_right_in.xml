@@ -1,6 +1,4 @@
-<set xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_height="0dp"
-    android:layout_width="0dp">
+<set xmlns:android="http://schemas.android.com/apk/res/android">
     <!-- Before rotating, immediately set the alpha to 0. -->
     <objectAnimator
         android:valueFrom="1.0"

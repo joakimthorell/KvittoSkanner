@@ -30,11 +30,6 @@ import corp.skaj.foretagskvitton.model.Receipt;
 import corp.skaj.foretagskvitton.view.CircleTransform;
 import corp.skaj.foretagskvitton.view.FlipAnimator;
 
-/**
- * Created by Ravi Tamada on 21/02/17.
- * www.androidhive.info
- */
-
 public class ArchiveController extends RecyclerView.Adapter<ArchiveController.MyViewHolder> {
     private Context mContext;
     private List<Receipt> receipts;
@@ -236,17 +231,17 @@ public class ArchiveController extends RecyclerView.Adapter<ArchiveController.My
     private void resetCurrentIndex() {
         currentSelectedIndex = -1;
     }
-/*
+
     public interface MessageAdapterListener {
         void onIconClicked(int position);
 
-        void onIconImportantClicked(int position);
+       // void onIconImportantClicked(int position);
 
-        void onMessageRowClicked(int position);
+       // void onMessageRowClicked(int position);
 
         void onRowLongClicked(int position);
     }
-*/
+
     private void getAllReceipts (){
         companies = dataHolder.getUser().getCompanies();
         for (int i = 0; i < companies.size(); i++) {

@@ -26,11 +26,9 @@ import corp.skaj.foretagskvitton.controllers.ArchiveController;
 import corp.skaj.foretagskvitton.model.Purchase;
 import corp.skaj.foretagskvitton.model.Receipt;
 
-public class ReceiptArchiveActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
-    // Implementation of - ArchiveController.MessageAdapterListener temporarly removed.
+public class ReceiptArchiveActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener, ArchiveController.MessageAdapterListener  {
 
     private List<Receipt> receipts = new ArrayList<>();
-    //private List<Message> messages = new ArrayList<>();
     private RecyclerView recyclerView;
     private ArchiveController mAdapter;
     private SwipeRefreshLayout swipeRefreshLayout;
@@ -40,7 +38,7 @@ public class ReceiptArchiveActivity extends AppCompatActivity implements SwipeRe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_receipt_archive);
+        setContentView(R.layout.archive_receipt_activity);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -120,26 +118,11 @@ private void getInbox() {
     }
     */
 
-    /**
-     * chooses a random color from array.xml
-     */
-    private int getRandomMaterialColor(String typeColor) {
-        int returnColor = Color.GRAY;
-        int arrayId = getResources().getIdentifier("mdcolor_" + typeColor, "array", getPackageName());
-
-        if (arrayId != 0) {
-            TypedArray colors = getResources().obtainTypedArray(arrayId);
-            int index = (int) (Math.random() * colors.length());
-            returnColor = colors.getColor(index, Color.GRAY);
-            colors.recycle();
-        }
-        return returnColor;
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.archive_main_menu, menu);
         return true;
     }
 
@@ -174,7 +157,7 @@ private void getInbox() {
         toggleSelection(position);
     }
 
-   /*
+   /* // TODO - REMOVE?
     @Override
     public void onMessageRowClicked(int position) {
         // verify whether action mode is enabled or not
@@ -221,7 +204,7 @@ private void getInbox() {
     private class ActionModeCallback implements ActionMode.Callback {
         @Override
         public boolean onCreateActionMode(ActionMode mode, Menu menu) {
-            mode.getMenuInflater().inflate(R.menu.menu_action_mode, menu);
+            mode.getMenuInflater().inflate(R.menu.archive_main_menu, menu);
 
             // disable swipe refresh if action mode is enabled
             swipeRefreshLayout.setEnabled(false);
