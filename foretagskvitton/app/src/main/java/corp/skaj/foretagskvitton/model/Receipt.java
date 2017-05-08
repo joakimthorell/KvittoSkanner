@@ -64,6 +64,7 @@ public class Receipt {
         return total;
     }
 
+
     public void getProducts(List<Product> products) {
         this.products = products;
     }
