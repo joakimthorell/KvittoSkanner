@@ -88,7 +88,7 @@ public class ArchiveController extends RecyclerView.Adapter<ArchiveController.My
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.message_list_row, parent, false);
+                .inflate(R.layout.archive_message_list, parent, false);
 
         return new MyViewHolder(itemView);
     }
@@ -125,13 +125,6 @@ public class ArchiveController extends RecyclerView.Adapter<ArchiveController.My
             @Override
             public void onClick(View view) {
                 listener.onIconClicked(position);
-            }
-        });
-
-        holder.iconImp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                listener.onIconImportantClicked(position);
             }
         });
 
@@ -235,7 +228,9 @@ public class ArchiveController extends RecyclerView.Adapter<ArchiveController.My
     public interface MessageAdapterListener {
         void onIconClicked(int position);
 
-       // void onIconImportantClicked(int position);
+        // TODO - Review usage and need for each methods
+
+       void onIconImportantClicked(int position);
 
        // void onMessageRowClicked(int position);
 

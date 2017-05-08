@@ -1,7 +1,5 @@
 package corp.skaj.foretagskvitton.activities;
 
-import android.content.res.TypedArray;
-import android.graphics.Color;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -23,7 +21,6 @@ import java.util.List;
 
 import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.controllers.ArchiveController;
-import corp.skaj.foretagskvitton.model.Purchase;
 import corp.skaj.foretagskvitton.model.Receipt;
 
 public class ReceiptArchiveActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener, ArchiveController.MessageAdapterListener  {
@@ -80,6 +77,7 @@ public class ReceiptArchiveActivity extends AppCompatActivity implements SwipeRe
  */
 
 /** TODO - Rebuild this method - it fetches all receipts when user refreshes the archive.
+ * internet fetching code needs to removed without destroying functionality.
 
 private void getInbox() {
         swipeRefreshLayout.setRefreshing(true);
@@ -117,7 +115,6 @@ private void getInbox() {
         });
     }
     */
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -157,7 +154,7 @@ private void getInbox() {
         toggleSelection(position);
     }
 
-   /* // TODO - REMOVE?
+   /* // TODO - REMOVE? Only adjusts a posts design from unread to read.
     @Override
     public void onMessageRowClicked(int position) {
         // verify whether action mode is enabled or not
