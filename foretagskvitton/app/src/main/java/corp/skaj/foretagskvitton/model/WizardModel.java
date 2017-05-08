@@ -35,11 +35,9 @@ import corp.skaj.foretagskvitton.services.ReceiptScanner;
 
 
 public class WizardModel extends AbstractWizardModel {
-    private Map<String, String> data;
 
     public WizardModel(Context context) {
         super(context);
-        data = new HashMap<>();
     }
 
     @Override
@@ -99,7 +97,7 @@ public class WizardModel extends AbstractWizardModel {
                                 new MultipleFixedChoicePage(this, "GROSSIST")
                                         .setChoices(), //Grossister
 
-                                new DatePage(this, "Datum")
+                                new DatePage(this, "DATUM")
                                         .setValue(ReceiptScanner.getDate(strings)),
 
                                 new TotalSumPage(this, "TOTALBELOPP")
@@ -144,6 +142,7 @@ public class WizardModel extends AbstractWizardModel {
 
     // Under construction...
     public Map<String, String> collectData() {
+        Map<String, String> data = new HashMap<>();
         List<Page> pageSequence = getCurrentPageSequence();
         for (int i = 0; i < pageSequence.size(); i++) {
             data.put(pageSequence.get(i).getKey(), pageSequence.get(i).getData().toString());

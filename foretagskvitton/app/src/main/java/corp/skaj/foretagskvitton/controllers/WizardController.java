@@ -14,8 +14,6 @@ import java.util.List;
 import java.util.Map;
 
 import corp.skaj.foretagskvitton.activities.IWizardActivity;
-import corp.skaj.foretagskvitton.model.Company;
-import corp.skaj.foretagskvitton.model.User;
 import corp.skaj.foretagskvitton.model.WizardModel;
 import corp.skaj.foretagskvitton.view.MyPagerAdapter;
 import corp.skaj.foretagskvitton.view.WriteDataFragment;
@@ -90,12 +88,11 @@ public class WizardController implements IWizardController {
     }
 
     // Under construction...
+    @Override
     public void updateUser(DataHolder dataHolder) {
         Map<String, String> data = wizardModel.collectData();
-        //dataHolder.getUser().addCompany(new Company(data.get("Företag")));
-
         for (String s : data.keySet()) {
-            System.out.println(data.get(s));
+            System.out.println("KEY: " + s + "  DATA: " + data.get(s));
         }
 
         //TODO Save data in User from WizardModel data hashmap.
