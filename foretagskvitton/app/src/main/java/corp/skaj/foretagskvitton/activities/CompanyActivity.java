@@ -47,7 +47,7 @@ public class CompanyActivity extends AbstractActivity {
 
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                     this,               //context
-                    R.layout.list_view, //layout to use
+                    R.layout.company_list_view, //layout to use
                     companyNames);      //items to be displayed
 
             ListView list = (ListView) findViewById(R.id.listView);
