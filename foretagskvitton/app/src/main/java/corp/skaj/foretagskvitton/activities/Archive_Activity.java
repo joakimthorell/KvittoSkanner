@@ -1,8 +1,5 @@
 package corp.skaj.foretagskvitton.activities;
 
-/**
- * Created by kevinbrunstrom on 2017-05-09.
- */
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -30,12 +27,12 @@ import corp.skaj.foretagskvitton.model.Employee;
 import corp.skaj.foretagskvitton.model.Purchase;
 import corp.skaj.foretagskvitton.controllers.BottomNavigationController;
 
-public class archive_mainActivity extends AppCompatActivity {
+public class Archive_Activity extends AbstractActivity {
     private List<Receipt> receiptsList = new ArrayList<>();
     private RecyclerView recyclerView;
     private ReceiptAdapter mAdapter;
     protected Context mContext;
-    public static final String STATE_FOR_BOTTOM_MENY = "ARCHIVE_ACTIVITY";
+    public static final String STATE_FOR_BOTTOM_MENY = "action_archive";
 
     DataHolder dataHolder = (DataHolder)mContext.getApplicationContext();
     List<Company> companiesList = dataHolder.getUser().getCompanies();
@@ -45,7 +42,10 @@ public class archive_mainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.archive_activity_main);
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-       // setSupportActionBar(toolbar);
+        //setSupportActionBar(toolbar);
+
+        BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
+        BottomNavigationController.setupBottomNavBar(bottomBar, STATE_FOR_BOTTOM_MENY, this);
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
@@ -54,9 +54,6 @@ public class archive_mainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAdapter);
-
-        BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
-        BottomNavigationController.setupBottomNavBar(bottomBar, STATE_FOR_BOTTOM_MENY, this);
 
         prepareReceiptData();
     }

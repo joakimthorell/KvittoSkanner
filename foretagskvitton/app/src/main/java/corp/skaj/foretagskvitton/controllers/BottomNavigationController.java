@@ -9,6 +9,7 @@ import com.roughike.bottombar.OnTabSelectListener;
 
 import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.activities.AddNewPostActivity;
+import corp.skaj.foretagskvitton.activities.Archive_Activity;
 import corp.skaj.foretagskvitton.activities.GraphActivity;
 import corp.skaj.foretagskvitton.activities.CompanyActivity;
 import corp.skaj.foretagskvitton.activities.UserActivity;
@@ -33,8 +34,11 @@ public class BottomNavigationController {
                         intent = new Intent(context, AddNewPostActivity.class);
                         context.startActivity(intent);
                     case R.id.action_archive:
-                        //TODO what happens here?
-                        return;
+                        if(activeState == R.id.action_archive) {
+                            return;
+                        }
+                        intent = new Intent(context, Archive_Activity.class);
+                        context.startActivity(intent);
                     case R.id.action_business:
                         if (activeState == R.id.action_business) {
                             return;
@@ -73,6 +77,8 @@ public class BottomNavigationController {
                 return R.id.action_business;
             case UserActivity.STATE_FOR_BOTTOM_MENY:
                 return R.id.action_user;
+            case Archive_Activity.STATE_FOR_BOTTOM_MENY:
+                return R.id.action_archive;
             default:
                 return 0;
         }

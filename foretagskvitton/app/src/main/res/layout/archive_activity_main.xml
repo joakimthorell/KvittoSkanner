@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/archive_activity_main"
-    tools:context="corp.skaj.foretagskvitton.activities.archive_mainActivity">
+    tools:context="corp.skaj.foretagskvitton.activities.Archive_Activity">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"
