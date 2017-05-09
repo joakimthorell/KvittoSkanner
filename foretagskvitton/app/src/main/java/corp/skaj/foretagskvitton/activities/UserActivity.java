@@ -8,16 +8,15 @@ import com.roughike.bottombar.BottomBar;
 import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.controllers.BottomNavigationController;
 
-public class UserActivity extends AppCompatActivity {
+public class UserActivity extends AbstractActivity {
 
-        public static final String STATE_FOR_BOTTOM_MENY = "UserActivity";
+        public static final String STATE_FOR_BOTTOM_MENU = "UserActivity";
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_company);
+            setContentView(R.layout.activity_company_listing);
 
-            BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
-            BottomNavigationController.setupBottomNavBar(bottomBar, STATE_FOR_BOTTOM_MENY, this);
+            initBottomBar(STATE_FOR_BOTTOM_MENU);
     }
 }

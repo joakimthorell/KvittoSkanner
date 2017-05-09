@@ -30,12 +30,12 @@ import corp.skaj.foretagskvitton.model.Employee;
 import corp.skaj.foretagskvitton.model.Purchase;
 import corp.skaj.foretagskvitton.controllers.BottomNavigationController;
 
-public class archive_mainActivity extends AppCompatActivity {
+public class archive_mainActivity extends AbstractActivity {
     private List<Receipt> receiptsList = new ArrayList<>();
     private RecyclerView recyclerView;
     private ReceiptAdapter mAdapter;
     protected Context mContext;
-    public static final String STATE_FOR_BOTTOM_MENY = "ARCHIVE_ACTIVITY";
+    public static final String STATE_FOR_BOTTOM_MENU = "ARCHIVE_ACTIVITY";
 
     DataHolder dataHolder = (DataHolder)mContext.getApplicationContext();
     List<Company> companiesList = dataHolder.getUser().getCompanies();
@@ -55,8 +55,7 @@ public class archive_mainActivity extends AppCompatActivity {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAdapter);
 
-        BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
-        BottomNavigationController.setupBottomNavBar(bottomBar, STATE_FOR_BOTTOM_MENY, this);
+        initBottomBar(STATE_FOR_BOTTOM_MENU);
 
         prepareReceiptData();
     }

@@ -81,7 +81,7 @@ public class WizardModel extends AbstractWizardModel {
                                         .setRequired(true),
 
                                 new SingleFixedChoicePage(this, "KATEGORI")
-                                        .setChoices(Category.getCategories().toString())
+                                        .setChoices()
                                         .setRequired(true),
 
                                 //TODO add a choice above which is "other" for custom choice of category
