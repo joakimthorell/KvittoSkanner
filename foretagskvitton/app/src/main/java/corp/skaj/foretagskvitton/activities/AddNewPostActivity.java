@@ -38,7 +38,7 @@ public class AddNewPostActivity extends AbstractActivity {
         actionBar.hide();
 
         // Setup bottom navigation
-        initBottomBar(STATE_FOR_BOTTOM_MENU);
+        initBottomBar(STATE_FOR_BOTTOM_MENU, this);
     }
 
     // This method catches taken image by camera.

@@ -1,5 +1,6 @@
 package corp.skaj.foretagskvitton.activities;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
@@ -21,14 +22,13 @@ public abstract class AbstractActivity extends AppCompatActivity {
         //prefsEditor.clear(); Not sure if necessary...
         Gson gson = new Gson();
         String saveData = gson.toJson(dataHolder.getUser());
-        prefsEditor.putString(User.class.getName().toString(), saveData);
+        prefsEditor.putString(User.class.getName(), saveData);
         prefsEditor.apply();
     }
 
-    protected void initBottomBar (String STATE) {
-
+    protected void initBottomBar (String STATE, final Context context) {
         BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
-        BottomNavigationController.setupBottomNavBar(bottomBar, STATE, this);
+        BottomNavigationController.setupBottomNavBar(bottomBar, STATE, context);
 
     }
 }

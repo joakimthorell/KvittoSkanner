@@ -17,6 +17,6 @@ public class UserActivity extends AbstractActivity {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_company_listing);
 
-            initBottomBar(STATE_FOR_BOTTOM_MENU);
+            initBottomBar(STATE_FOR_BOTTOM_MENU, this);
     }
 }

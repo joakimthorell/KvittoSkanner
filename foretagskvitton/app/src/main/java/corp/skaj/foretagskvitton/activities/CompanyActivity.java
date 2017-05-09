@@ -18,9 +18,13 @@ public class CompanyActivity extends AbstractActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_company);
 
+
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Företag");
+        //Vill sätta namnet på det företaget som vi väljer
 
-        initBottomBar(STATE_FOR_BOTTOM_MENU);
+       //initBottomBar(STATE_FOR_BOTTOM_MENU, this);
+
+        //TODO vill ha en bottombar eller case i bottomnav för att kunna skicka med rätt context
     }
 }

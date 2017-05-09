@@ -65,13 +65,13 @@ public class BottomNavigationController {
 
     private static int getActiveTab(String state) {
         switch (state) {
-            case AddNewPostActivity.STATE_FOR_BOTTOM_MENY:
+            case AddNewPostActivity.STATE_FOR_BOTTOM_MENU:
                 return R.id.action_add;
-            case GraphActivity.STATE_FOR_BOTTOM_MENY:
+            case GraphActivity.STATE_FOR_BOTTOM_MENU:
                 return R.id.action_charts;
-            case CompanyListingActivity.STATE_FOR_BOTTOM_MENY:
+            case CompanyListingActivity.STATE_FOR_BOTTOM_MENU:
                 return R.id.action_business;
-            case UserActivity.STATE_FOR_BOTTOM_MENY:
+            case UserActivity.STATE_FOR_BOTTOM_MENU:
                 return R.id.action_user;
             default:
                 return 0;
