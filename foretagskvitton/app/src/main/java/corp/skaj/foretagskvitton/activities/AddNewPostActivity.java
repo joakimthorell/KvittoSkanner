@@ -22,7 +22,7 @@ import corp.skaj.foretagskvitton.controllers.BottomNavigationController;
 public class AddNewPostActivity extends AbstractActivity {
     public static final String BUILD_NEW_RECEIPT = "corp.skaj.foretagskvitton.BUILD_RECEIPT";
     public static final String KEY_FOR_IMAGE = "corp.skaj.foretagskvitton.KEY_FOR_IMAGE";
-    public static final String STATE_FOR_BOTTOM_MENY = "ADD_NEW_POST_ACTIVITY";
+    public static final String STATE_FOR_BOTTOM_MENU = "ADD_NEW_POST_ACTIVITY";
     private static final int REQUEST_IMAGE_CAPTURE = 31415;
     private String imageAdress;
 
@@ -38,8 +38,7 @@ public class AddNewPostActivity extends AbstractActivity {
         actionBar.hide();
 
         // Setup bottom navigation
-        BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
-        BottomNavigationController.setupBottomNavBar(bottomBar, STATE_FOR_BOTTOM_MENY, this);
+        initBottomBar(STATE_FOR_BOTTOM_MENU, this);
     }
 
     // This method catches taken image by camera.

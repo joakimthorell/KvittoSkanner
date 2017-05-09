@@ -42,9 +42,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="corp.skaj.foretagskvitton.activities.AddNewPostActivity" />
         </activity>
+<<<<<<< HEAD
         <activity android:name=".activities.CompanyActivity" />
         <activity android:name=".activities.UserActivity" />
         <activity android:name=".activities.Archive_Activity"></activity>
+=======
+        <activity android:name=".activities.CompanyListingActivity" ></activity>
+        <activity android:name=".activities.UserActivity" ></activity>
+        <activity android:name=".activities.CompanyActivity"></activity>
+>>>>>>> ec004ed9372edb1b3ac1f051fff9e28c35bfb1f1
     </application>
 
 </manifest>

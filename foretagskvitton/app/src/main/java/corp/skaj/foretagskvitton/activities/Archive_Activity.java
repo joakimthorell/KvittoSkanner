@@ -27,12 +27,20 @@ import corp.skaj.foretagskvitton.model.Employee;
 import corp.skaj.foretagskvitton.model.Purchase;
 import corp.skaj.foretagskvitton.controllers.BottomNavigationController;
 
+<<<<<<< HEAD:foretagskvitton/app/src/main/java/corp/skaj/foretagskvitton/activities/Archive_Activity.java
 public class Archive_Activity extends AbstractActivity {
+=======
+public class archive_mainActivity extends AbstractActivity {
+>>>>>>> ec004ed9372edb1b3ac1f051fff9e28c35bfb1f1:foretagskvitton/app/src/main/java/corp/skaj/foretagskvitton/activities/archive_mainActivity.java
     private List<Receipt> receiptsList = new ArrayList<>();
     private RecyclerView recyclerView;
     private ReceiptAdapter mAdapter;
     protected Context mContext;
+<<<<<<< HEAD:foretagskvitton/app/src/main/java/corp/skaj/foretagskvitton/activities/Archive_Activity.java
     public static final String STATE_FOR_BOTTOM_MENY = "action_archive";
+=======
+    public static final String STATE_FOR_BOTTOM_MENU = "ARCHIVE_ACTIVITY";
+>>>>>>> ec004ed9372edb1b3ac1f051fff9e28c35bfb1f1:foretagskvitton/app/src/main/java/corp/skaj/foretagskvitton/activities/archive_mainActivity.java
 
     DataHolder dataHolder = (DataHolder)mContext.getApplicationContext();
     List<Company> companiesList = dataHolder.getUser().getCompanies();
@@ -55,6 +63,11 @@ public class Archive_Activity extends AbstractActivity {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAdapter);
 
+<<<<<<< HEAD:foretagskvitton/app/src/main/java/corp/skaj/foretagskvitton/activities/Archive_Activity.java
+=======
+        initBottomBar(STATE_FOR_BOTTOM_MENU, this);
+
+>>>>>>> ec004ed9372edb1b3ac1f051fff9e28c35bfb1f1:foretagskvitton/app/src/main/java/corp/skaj/foretagskvitton/activities/archive_mainActivity.java
         prepareReceiptData();
     }
 

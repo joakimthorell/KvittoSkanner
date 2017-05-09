@@ -65,6 +65,8 @@ public class WizardModel extends AbstractWizardModel {
 
                                         .setChoices(), //Företag, här måste vi få in en lista av alla valbara företag
 
+                                        //TODO Ska vi ha ett default företag??
+
                                 new MultipleFixedChoicePage(this, "GROSSIST")
 
                                         .setChoices() //Grossister, här måste vi få in en valbar lista med grossister
@@ -72,6 +74,9 @@ public class WizardModel extends AbstractWizardModel {
                                         //TODO List all suppliers.
 
                                         .setChoices("LISTA MED GROSSISTER"), //Grossister
+
+                                        //TODO Ska vi ha en default supplier??
+
 
                                 new DatePage(this, "DATUM")
                                         .setValue(ReceiptScanner.getDate(strings)),
@@ -81,7 +86,7 @@ public class WizardModel extends AbstractWizardModel {
                                         .setRequired(true),
 
                                 new SingleFixedChoicePage(this, "KATEGORI")
-                                        .setChoices(Category.getCategories().toString())
+                                        .setChoices()
                                         .setRequired(true),
 
                                 //TODO add a choice above which is "other" for custom choice of category
@@ -105,7 +110,10 @@ public class WizardModel extends AbstractWizardModel {
                                         .setRequired(true),
 
                                 new SingleFixedChoicePage(this, "KATEGORI")
-                                        .setChoices("Resor", "Mat", "Bensin", "Hotell", "Frakt")
+                                        .setChoices()
+
+                                        //TODO här måste vi få in våra kategorier
+                                        
                                         .setRequired(true),
 
                                 new TextPage(this, "KOMMENTAR")

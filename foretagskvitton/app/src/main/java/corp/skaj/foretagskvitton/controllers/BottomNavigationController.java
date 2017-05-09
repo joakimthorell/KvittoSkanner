@@ -11,7 +11,7 @@ import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.activities.AddNewPostActivity;
 import corp.skaj.foretagskvitton.activities.Archive_Activity;
 import corp.skaj.foretagskvitton.activities.GraphActivity;
-import corp.skaj.foretagskvitton.activities.CompanyActivity;
+import corp.skaj.foretagskvitton.activities.CompanyListingActivity;
 import corp.skaj.foretagskvitton.activities.UserActivity;
 
 
@@ -43,7 +43,7 @@ public class BottomNavigationController {
                         if (activeState == R.id.action_business) {
                             return;
                         }
-                        intent = new Intent(context, CompanyActivity.class);
+                        intent = new Intent(context, CompanyListingActivity.class);
                         context.startActivity(intent);
                         return;
                     case R.id.action_charts:
@@ -69,13 +69,13 @@ public class BottomNavigationController {
 
     private static int getActiveTab(String state) {
         switch (state) {
-            case AddNewPostActivity.STATE_FOR_BOTTOM_MENY:
+            case AddNewPostActivity.STATE_FOR_BOTTOM_MENU:
                 return R.id.action_add;
-            case GraphActivity.STATE_FOR_BOTTOM_MENY:
+            case GraphActivity.STATE_FOR_BOTTOM_MENU:
                 return R.id.action_charts;
-            case CompanyActivity.STATE_FOR_BOTTOM_MENY:
+            case CompanyListingActivity.STATE_FOR_BOTTOM_MENU:
                 return R.id.action_business;
-            case UserActivity.STATE_FOR_BOTTOM_MENY:
+            case UserActivity.STATE_FOR_BOTTOM_MENU:
                 return R.id.action_user;
             case Archive_Activity.STATE_FOR_BOTTOM_MENY:
                 return R.id.action_archive;
