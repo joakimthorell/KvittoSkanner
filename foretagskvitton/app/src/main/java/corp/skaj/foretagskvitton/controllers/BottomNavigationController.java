@@ -9,7 +9,7 @@ import com.roughike.bottombar.OnTabSelectListener;
 
 import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.activities.AddNewPostActivity;
-import corp.skaj.foretagskvitton.activities.Archive_Activity;
+import corp.skaj.foretagskvitton.activities.ArchiveActivity;
 import corp.skaj.foretagskvitton.activities.GraphActivity;
 import corp.skaj.foretagskvitton.activities.CompanyListingActivity;
 import corp.skaj.foretagskvitton.activities.UserActivity;
@@ -33,12 +33,14 @@ public class BottomNavigationController {
                         }
                         intent = new Intent(context, AddNewPostActivity.class);
                         context.startActivity(intent);
+                        return;
                     case R.id.action_archive:
                         if(activeState == R.id.action_archive) {
                             return;
                         }
-                        intent = new Intent(context, Archive_Activity.class);
+                        intent = new Intent(context, ArchiveActivity.class);
                         context.startActivity(intent);
+                        return;
                     case R.id.action_business:
                         if (activeState == R.id.action_business) {
                             return;
@@ -77,7 +79,7 @@ public class BottomNavigationController {
                 return R.id.action_business;
             case UserActivity.STATE_FOR_BOTTOM_MENU:
                 return R.id.action_user;
-            case Archive_Activity.STATE_FOR_BOTTOM_MENY:
+            case ArchiveActivity.STATE_FOR_BOTTOM_MENU:
                 return R.id.action_archive;
             default:
                 return 0;
