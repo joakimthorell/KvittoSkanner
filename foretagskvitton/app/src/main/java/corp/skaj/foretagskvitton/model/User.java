@@ -52,10 +52,6 @@ public class User {
         return false;
     }
 
-    public void addUserToCompany(Company company, Employee employee) throws IllegalArgumentException {
-        company.addEmployee(employee);
-    }
-
     public void setName(String name) {
         this.name = name;
         for (int i = 0; i < companies.size(); i++) {

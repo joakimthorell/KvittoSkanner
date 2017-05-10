@@ -1,35 +1,30 @@
 package corp.skaj.foretagskvitton.model;
 
-//TODO How do we use this?
-
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
+public enum Category {
 
-public class Category {
-        //Array of categories in alphabetic order
-        private final static List<String> categories = new ArrayList<>(Arrays.asList(
-                "Bensin",
-                "Hotell",
-                "Kontorsmaterial",
-                "Mat",
-                "Porto",
-                "Representation",
-                "Resor",
-                "Transport"));
+    BENSIN,
+    HOTELL,
+    KONTORSMATERIAL,
+    MAT,
+    PORTO,
+    REPRESENTATION,
+    RESOR,
+    TRANSPORT;
 
-        private static String category = "";
+    public static ArrayList<String> getCategoriesAsArrayList() {
+        String[] arr = Arrays.toString(Category.values()).replaceAll("^.|.$", "").split(", ");
+        List<String> categories = Arrays.asList(arr);
+        ArrayList<String> strings = new ArrayList<>();
+        strings.addAll(categories);
+        return strings;
+    }
 
-        private Category () {
-
-        }
-
-        public static String getCategory () {
-                return category;
-        }
-
-        public static List<String> getCategories () {
-                return categories;
-        }
+    public static String[] getCategoriesAsArray() {
+        return Arrays.toString(Category.values()).replaceAll("^.|.$", "").split(", ");
+    }
 }

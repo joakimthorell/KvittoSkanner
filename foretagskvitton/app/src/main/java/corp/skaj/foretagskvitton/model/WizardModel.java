@@ -30,10 +30,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import corp.skaj.foretagskvitton.controllers.DataHolder;
 import corp.skaj.foretagskvitton.services.ReceiptScanner;
 
 public class WizardModel extends AbstractWizardModel {
+
     public WizardModel(Context context) {
         super(context);
     }
@@ -41,17 +41,17 @@ public class WizardModel extends AbstractWizardModel {
     @Override
     protected PageList onNewRootPageList() {
         // Necessary because constructor runs super constructor which runs this method before strings are scanned.
-        DataHolder dataHolder = (DataHolder)mContext.getApplicationContext();
+        DataHolder dataHolder = (DataHolder) mContext.getApplicationContext();
         List<String> strings = dataHolder.getStrings();
 
         if (collectCompany(strings, dataHolder) == null) {
-            return companyInfoNotFound(strings);
+            return companyInfoNotFound(strings, dataHolder);
         } else {
-            return companyInfoFound(strings);
+            return companyInfoFound(strings, dataHolder);
         }
     }
 
-    private PageList companyInfoNotFound(List<String> strings) {
+    private PageList companyInfoNotFound(List<String> strings, DataHolder dataHolder) {
         double totalSum = ReceiptScanner.getTotalCost(strings);
 
         return new PageList(
@@ -65,7 +65,7 @@ public class WizardModel extends AbstractWizardModel {
 
                                         .setChoices(), //Företag, här måste vi få in en lista av alla valbara företag
 
-                                        //TODO Ska vi ha ett default företag??
+                                //TODO Ska vi ha ett default företag??
 
                                 new MultipleFixedChoicePage(this, "GROSSIST")
 
@@ -75,7 +75,7 @@ public class WizardModel extends AbstractWizardModel {
 
                                         .setChoices("LISTA MED GROSSISTER"), //Grossister
 
-                                        //TODO Ska vi ha en default supplier??
+                                //TODO Ska vi ha en default supplier??
 
 
                                 new DatePage(this, "DATUM")
@@ -86,7 +86,7 @@ public class WizardModel extends AbstractWizardModel {
                                         .setRequired(true),
 
                                 new SingleFixedChoicePage(this, "KATEGORI")
-                                        .setChoices()
+                                        .setChoices(Category.getCategoriesAsArray())
                                         .setRequired(true),
 
                                 //TODO add a choice above which is "other" for custom choice of category
@@ -96,8 +96,9 @@ public class WizardModel extends AbstractWizardModel {
 
                         .addBranch("Privatkort",
 
-                                new MultipleFixedChoicePage(this, "FÖRETAG")
-                                        .setChoices(),
+                                new SingleFixedChoicePage(this, "FÖRETAG")
+                                        .setChoices()
+                                        .setRequired(true),
 
                                 new MultipleFixedChoicePage(this, "GROSSIST")
                                         .setChoices(), //Grossister
@@ -110,10 +111,10 @@ public class WizardModel extends AbstractWizardModel {
                                         .setRequired(true),
 
                                 new SingleFixedChoicePage(this, "KATEGORI")
-                                        .setChoices()
+                                        .setChoices(Category.getCategoriesAsArray())
 
                                         //TODO här måste vi få in våra kategorier
-                                        
+
                                         .setRequired(true),
 
                                 new TextPage(this, "KOMMENTAR")
@@ -122,7 +123,7 @@ public class WizardModel extends AbstractWizardModel {
                         .setRequired(true));
     }
 
-    private PageList companyInfoFound(List<String> strings) {
+    private PageList companyInfoFound(List<String> strings, DataHolder dataHolder) {
         double totalSum = ReceiptScanner.getTotalCost(strings);
 
         //TODO If cardnumber found = save purchase in matching company.
@@ -141,7 +142,7 @@ public class WizardModel extends AbstractWizardModel {
                         .setRequired(true),
 
                 new SingleFixedChoicePage(this, "KATEGORI")
-                        .setChoices("Resor", "Mat", "Bensin", "Hotell", "Frakt")
+                        .setChoices(Category.getCategoriesAsArray())
                         .setRequired(true),
 
                 new TextPage(this, "KOMMENTAR")
@@ -164,5 +165,15 @@ public class WizardModel extends AbstractWizardModel {
         } catch (Exception e) {
             return null;
         }
+    }
+
+    private String[] getCompanyNames(DataHolder dataHolder) {
+        List<Company> companies = dataHolder.getUser().getCompanies();
+        String[] companyNames = new String[companies.size()];
+        companyNames = new String[companies.size()];
+        for (int i = 0; i < companies.size(); i++) {
+            companyNames[i] = companies.get(i).getName();
+        }
+        return companyNames;
     }
 }
