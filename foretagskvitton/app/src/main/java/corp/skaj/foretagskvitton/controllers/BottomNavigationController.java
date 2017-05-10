@@ -33,12 +33,14 @@ public class BottomNavigationController {
                         }
                         intent = new Intent(context, AddNewPostActivity.class);
                         context.startActivity(intent);
+                        return;
                     case R.id.action_archive:
                         if(activeState == R.id.action_archive) {
                             return;
                         }
                         intent = new Intent(context, ArchiveActivity.class);
                         context.startActivity(intent);
+                        return;
                     case R.id.action_business:
                         if (activeState == R.id.action_business) {
                             return;

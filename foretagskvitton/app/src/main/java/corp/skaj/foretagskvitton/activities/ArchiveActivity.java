@@ -45,6 +45,7 @@ public class ArchiveActivity extends AbstractActivity {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAdapter);
 
+        initBottomBar(STATE_FOR_BOTTOM_MENU, this);
         prepareReceiptData();
     }
 
