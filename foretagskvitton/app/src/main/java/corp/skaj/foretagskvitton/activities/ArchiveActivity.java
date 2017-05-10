@@ -83,7 +83,7 @@ public class ArchiveActivity extends AbstractActivity {
         products.add(product);
         */
         Calendar cal = Calendar.getInstance();
-        Receipt receipt = new Receipt( products, cal, 500.00, null, "Mat");
+        Receipt receipt = new Receipt(products, cal, 500.00, null, Category.MAT);
 
         PrivatePurchase pur = new PrivatePurchase(receipt);
         purchases.add(pur);

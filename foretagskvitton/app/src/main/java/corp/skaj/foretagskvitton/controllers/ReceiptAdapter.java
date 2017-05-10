@@ -54,7 +54,7 @@ public class ReceiptAdapter extends RecyclerView.Adapter<ReceiptAdapter.MyViewHo
         holder.title.setText(company.getName());
 
         //holder.genre.setText(movie.getGenre());
-        holder.genre.setText(purchase.getReceipt().getCategory());
+        holder.genre.setText(purchase.getReceipt().getCategory().toString());
 
         //holder.year.setText(movie.getYear());
         SimpleDateFormat dateRaw = new SimpleDateFormat("yyyy-MM-dd");
