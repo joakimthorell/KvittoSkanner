@@ -47,6 +47,7 @@ public class ArchiveActivity extends AbstractActivity {
 
         initBottomBar(STATE_FOR_BOTTOM_MENU, this);
         prepareReceiptData();
+
     }
 
     private void prepareReceiptData() {

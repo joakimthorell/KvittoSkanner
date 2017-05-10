@@ -9,6 +9,13 @@
     tools:showIn="@layout/activity_archive"
     tools:context="corp.skaj.foretagskvitton.activities.ArchiveActivity">
 
+    <fragment
+        android:id="@+id/action_archive"
+        android:name="corp.skaj.foretagskvitton.view.BottomNavigationFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true" />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
