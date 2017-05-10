@@ -27,20 +27,12 @@ import corp.skaj.foretagskvitton.model.Employee;
 import corp.skaj.foretagskvitton.model.Purchase;
 import corp.skaj.foretagskvitton.controllers.BottomNavigationController;
 
-<<<<<<< HEAD:foretagskvitton/app/src/main/java/corp/skaj/foretagskvitton/activities/Archive_Activity.java
-public class Archive_Activity extends AbstractActivity {
-=======
-public class archive_mainActivity extends AbstractActivity {
->>>>>>> ec004ed9372edb1b3ac1f051fff9e28c35bfb1f1:foretagskvitton/app/src/main/java/corp/skaj/foretagskvitton/activities/archive_mainActivity.java
+public class ArchiveActivity extends AbstractActivity {
     private List<Receipt> receiptsList = new ArrayList<>();
     private RecyclerView recyclerView;
     private ReceiptAdapter mAdapter;
     protected Context mContext;
-<<<<<<< HEAD:foretagskvitton/app/src/main/java/corp/skaj/foretagskvitton/activities/Archive_Activity.java
-    public static final String STATE_FOR_BOTTOM_MENY = "action_archive";
-=======
-    public static final String STATE_FOR_BOTTOM_MENU = "ARCHIVE_ACTIVITY";
->>>>>>> ec004ed9372edb1b3ac1f051fff9e28c35bfb1f1:foretagskvitton/app/src/main/java/corp/skaj/foretagskvitton/activities/archive_mainActivity.java
+    public static final String STATE_FOR_BOTTOM_MENU = "ArchiveActivity";
 
     DataHolder dataHolder = (DataHolder)mContext.getApplicationContext();
     List<Company> companiesList = dataHolder.getUser().getCompanies();
@@ -53,7 +45,7 @@ public class archive_mainActivity extends AbstractActivity {
         //setSupportActionBar(toolbar);
 
         BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
-        BottomNavigationController.setupBottomNavBar(bottomBar, STATE_FOR_BOTTOM_MENY, this);
+        BottomNavigationController.setupBottomNavBar(bottomBar, STATE_FOR_BOTTOM_MENU, this);
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
@@ -63,11 +55,7 @@ public class archive_mainActivity extends AbstractActivity {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAdapter);
 
-<<<<<<< HEAD:foretagskvitton/app/src/main/java/corp/skaj/foretagskvitton/activities/Archive_Activity.java
-=======
         initBottomBar(STATE_FOR_BOTTOM_MENU, this);
-
->>>>>>> ec004ed9372edb1b3ac1f051fff9e28c35bfb1f1:foretagskvitton/app/src/main/java/corp/skaj/foretagskvitton/activities/archive_mainActivity.java
         prepareReceiptData();
     }
 
