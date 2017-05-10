@@ -17,6 +17,7 @@
 
 package corp.skaj.foretagskvitton.activities;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
@@ -175,8 +176,10 @@ public class WizardActivity extends AbstractActivity implements
         return false;
     }
 
+    @Override
     public void updateUser() {
         wizardController.updateUser((DataHolder) getApplicationContext());
+        // TODO go to new intent or back to parent?
     }
 
 }

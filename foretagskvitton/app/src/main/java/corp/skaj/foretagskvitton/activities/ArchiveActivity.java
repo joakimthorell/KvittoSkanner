@@ -74,7 +74,7 @@ public class ArchiveActivity extends AbstractActivity {
     */
 
     private void testAddPurchases() {
-        Product product = new Product("Aladob", "Mat", 50.0, 12.0);
+        Product product = new Product("Aladob", Category.MAT, 50.0, 12.0);
         List<Product> products = new ArrayList<>();
           products.add(product);
      /*   products.add(product);
