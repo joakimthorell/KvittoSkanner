@@ -41,17 +41,17 @@ public class WizardModel extends AbstractWizardModel {
     @Override
     protected PageList onNewRootPageList() {
         // Necessary because constructor runs super constructor which runs this method before strings are scanned.
-        DataHolder dataHolder = (DataHolder)mContext.getApplicationContext();
+        DataHolder dataHolder = (DataHolder) mContext.getApplicationContext();
         List<String> strings = dataHolder.getStrings();
 
         if (collectCompany(strings, dataHolder) == null) {
-            return companyInfoNotFound(strings);
+            return companyInfoNotFound(strings, dataHolder);
         } else {
-            return companyInfoFound(strings);
+            return companyInfoFound(strings, dataHolder);
         }
     }
 
-    private PageList companyInfoNotFound(List<String> strings) {
+    private PageList companyInfoNotFound(List<String> strings, DataHolder dataHolder) {
         double totalSum = ReceiptScanner.getTotalCost(strings);
 
         return new PageList(
@@ -86,7 +86,7 @@ public class WizardModel extends AbstractWizardModel {
                                         .setRequired(true),
 
                                 new SingleFixedChoicePage(this, "KATEGORI")
-                                        .setChoices()
+                                        .setChoices(Category.getCategoriesAsArray())
                                         .setRequired(true),
 
                                 //TODO add a choice above which is "other" for custom choice of category
@@ -110,7 +110,7 @@ public class WizardModel extends AbstractWizardModel {
                                         .setRequired(true),
 
                                 new SingleFixedChoicePage(this, "KATEGORI")
-                                        .setChoices()
+                                        .setChoices(Category.getCategoriesAsArray())
 
                                         //TODO här måste vi få in våra kategorier
 
@@ -122,7 +122,7 @@ public class WizardModel extends AbstractWizardModel {
                         .setRequired(true));
     }
 
-    private PageList companyInfoFound(List<String> strings) {
+    private PageList companyInfoFound(List<String> strings, DataHolder dataHolder) {
         double totalSum = ReceiptScanner.getTotalCost(strings);
 
         //TODO If cardnumber found = save purchase in matching company.
@@ -141,7 +141,7 @@ public class WizardModel extends AbstractWizardModel {
                         .setRequired(true),
 
                 new SingleFixedChoicePage(this, "KATEGORI")
-                        .setChoices("Resor", "Mat", "Bensin", "Hotell", "Frakt")
+                        .setChoices(Category.getCategoriesAsArray())
                         .setRequired(true),
 
                 new TextPage(this, "KOMMENTAR")

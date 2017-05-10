@@ -11,10 +11,10 @@ public class Receipt {
     private List<Product> products;
     private Calendar date;
     private double total;
-    private String category;
+    private Category category;
     private final Uri pictureAdress;
 
-    public Receipt(List<Product> products, Calendar date, double total, final Uri pictureAdress, String category) {
+    public Receipt(List<Product> products, Calendar date, double total, final Uri pictureAdress, Category category) {
         this.products = products;
         this.date = date;
         this.total = total;
@@ -73,11 +73,11 @@ public class Receipt {
         return pictureAdress;
     }
 
-    public String getCategory () {
+    public Category getCategory () {
         return category;
     }
 
-    public void setCategory (String category) {
+    public void setCategory (Category category) {
         this.category = category;
     }
 }
