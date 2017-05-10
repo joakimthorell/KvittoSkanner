@@ -32,23 +32,10 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-    <style name="ButtonBar" parent="@android:style/ButtonBar">
-        <item name="android:background">@android:color/transparent</item>
-        <item name="android:padding">0dp</item>
-    </style>
-
-    <style name="ButtonBarButton">
-        <item name="android:minHeight">@dimen/list_item_height_small</item>
-    </style>
-
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="windowActionModeOverlay">true</item>
     </style>
-
-    <style name="GmailTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
-    <style name="GmailTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 </resources>
