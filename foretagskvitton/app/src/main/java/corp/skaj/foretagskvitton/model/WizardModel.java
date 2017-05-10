@@ -113,7 +113,7 @@ public class WizardModel extends AbstractWizardModel {
                                         .setChoices()
 
                                         //TODO här måste vi få in våra kategorier
-                                        
+
                                         .setRequired(true),
 
                                 new TextPage(this, "KOMMENTAR")
