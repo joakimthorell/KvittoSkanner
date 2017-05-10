@@ -1,13 +1,14 @@
 package corp.skaj.foretagskvitton.activities;
 
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-
-import com.roughike.bottombar.BottomBar;
+import android.widget.Button;
 
 import corp.skaj.foretagskvitton.R;
-import corp.skaj.foretagskvitton.controllers.BottomNavigationController;
+import corp.skaj.foretagskvitton.controllers.ListViewController;
+
+
+import static corp.skaj.foretagskvitton.controllers.ListViewController.COMPANY_KEY;
 
 public class CompanyActivity extends AbstractActivity {
 
@@ -18,12 +19,16 @@ public class CompanyActivity extends AbstractActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_company);
 
+        String companyName = getIntent().getExtras().get(COMPANY_KEY).toString();
+
+        ListViewController listViewController = new ListViewController();
+        Button button = (Button) findViewById(R.id.buttonForCompany);
+        listViewController.initButtonListener(button, this);
 
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle("Företag");
-        //Vill sätta namnet på det företaget som vi väljer
+        actionBar.setTitle(companyName);
 
-       //initBottomBar(STATE_FOR_BOTTOM_MENU, this);
+        //initBottomBar(STATE_FOR_BOTTOM_MENU, this);
 
         //TODO vill ha en bottombar eller case i bottomnav för att kunna skicka med rätt context
     }
