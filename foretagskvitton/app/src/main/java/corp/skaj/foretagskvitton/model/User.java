@@ -40,6 +40,9 @@ public class User {
     }
 
     private boolean containsReceipt(List<Purchase> listOfPurchases, Purchase purchase) {
+        if(listOfPurchases == null){
+            return false;
+        }
         for (int i = 0; i < listOfPurchases.size(); i++) {
             Receipt temp = listOfPurchases.get(i).getReceipt();
             if (purchase.getReceipt() == temp) {

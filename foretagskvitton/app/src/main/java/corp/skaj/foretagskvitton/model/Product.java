@@ -6,15 +6,14 @@ import java.util.List;
 
 public class Product {
     private String name;
-    private Category category;
+    private String category;
     private List<Comment> comments;
     private double price;
     private double tax;
 
-    public Product(String name, Category category, List<Comment> comments, Double price, Double tax) {
+    public Product(String name, String category, Double price, Double tax) {
         this.name = name;
         this.category = category;
-        this.comments = comments;
         this.price = price;
         this.tax = tax;
     }
@@ -31,7 +30,7 @@ public class Product {
     }
 
     public void setCategory(Category category) {
-        this.category = category;
+        //this.category = category;
     }
 
     public void setPrice(double price) {
@@ -46,8 +45,8 @@ public class Product {
         return name;
     }
 
-    public Category getCategory() {
-        return category;
+    public void getCategory() {
+        //return category;
     }
 
     public List<Comment> getComments() {
