@@ -10,7 +10,7 @@ import java.util.List;
 
 import corp.skaj.foretagskvitton.R;
 
-import corp.skaj.foretagskvitton.controllers.DataHolder;
+import corp.skaj.foretagskvitton.model.DataHolder;
 import corp.skaj.foretagskvitton.controllers.ReceiptAdapter;
 import corp.skaj.foretagskvitton.model.Receipt;
 import corp.skaj.foretagskvitton.model.Company;

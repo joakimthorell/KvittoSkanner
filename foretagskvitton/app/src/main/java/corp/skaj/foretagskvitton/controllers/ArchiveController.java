@@ -3,12 +3,11 @@ package corp.skaj.foretagskvitton.controllers;
 import android.content.Context;
 import java.util.List;
 
-import corp.skaj.foretagskvitton.R;
-
 import corp.skaj.foretagskvitton.model.Company;
 import corp.skaj.foretagskvitton.model.Employee;
 import corp.skaj.foretagskvitton.model.Purchase;
 import corp.skaj.foretagskvitton.model.Receipt;
+import corp.skaj.foretagskvitton.model.DataHolder;
 
 public class ArchiveController {
     private Context mContext;

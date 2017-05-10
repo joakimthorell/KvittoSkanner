@@ -1,5 +1,6 @@
 package corp.skaj.foretagskvitton.model;
 
+import android.content.SharedPreferences;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 
