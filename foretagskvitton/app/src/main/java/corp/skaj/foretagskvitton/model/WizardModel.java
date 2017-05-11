@@ -17,6 +17,8 @@
 package corp.skaj.foretagskvitton.model;
 
 import android.content.Context;
+import android.net.Uri;
+import android.os.Bundle;
 
 import com.tech.freak.wizardpager.model.AbstractWizardModel;
 import com.tech.freak.wizardpager.model.BranchPage;
@@ -26,6 +28,11 @@ import com.tech.freak.wizardpager.model.PageList;
 import com.tech.freak.wizardpager.model.SingleFixedChoicePage;
 import com.tech.freak.wizardpager.model.TextPage;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -63,17 +70,14 @@ public class WizardModel extends AbstractWizardModel {
 
                                         //TODO List all companies.
 
-                                        .setChoices(), //Företag, här måste vi få in en lista av alla valbara företag
+                                        .setChoices(getCompanyNames(dataHolder)), //Företag, här måste vi få in en lista av alla valbara företag
 
                                 //TODO Ska vi ha ett default företag??
-
                                 new MultipleFixedChoicePage(this, "GROSSIST")
 
-                                        .setChoices() //Grossister, här måste vi få in en valbar lista med grossister
+                                        //TODO lista grossister, vi kan inte lista från en specifikt företag. Får lista alla direkt (får tänkte om här)
 
-                                        //TODO List all suppliers.
-
-                                        .setChoices("LISTA MED GROSSISTER"), //Grossister
+                                        .setChoices(), //Grossister
 
                                 //TODO Ska vi ha en default supplier??
 
@@ -83,6 +87,9 @@ public class WizardModel extends AbstractWizardModel {
 
                                 new TotalSumPage(this, "TOTALBELOPP")
                                         .setValue(totalSum > 0 ? String.valueOf(totalSum) : null)
+                                        .setRequired(true),
+
+                                new TotalSumPage(this, "MOMS")
                                         .setRequired(true),
 
                                 new SingleFixedChoicePage(this, "KATEGORI")
@@ -97,11 +104,11 @@ public class WizardModel extends AbstractWizardModel {
                         .addBranch("Privatkort",
 
                                 new SingleFixedChoicePage(this, "FÖRETAG")
-                                        .setChoices()
+                                        .setChoices(getCompanyNames(dataHolder))
                                         .setRequired(true),
 
                                 new MultipleFixedChoicePage(this, "GROSSIST")
-                                        .setChoices(), //Grossister
+                                        .setChoices(), //Grossister, läs T O D O ovan
 
                                 new DatePage(this, "DATUM")
                                         .setValue(ReceiptScanner.getDate(strings)),
@@ -110,11 +117,11 @@ public class WizardModel extends AbstractWizardModel {
                                         .setValue(totalSum > 0 ? String.valueOf(totalSum) : null)
                                         .setRequired(true),
 
+                                new TotalSumPage(this, "MOMS")
+                                        .setRequired(true),
+
                                 new SingleFixedChoicePage(this, "KATEGORI")
                                         .setChoices(Category.getCategoriesAsArray())
-
-                                        //TODO här måste vi få in våra kategorier
-
                                         .setRequired(true),
 
                                 new TextPage(this, "KOMMENTAR")
@@ -135,10 +142,11 @@ public class WizardModel extends AbstractWizardModel {
                 new DatePage(this, "DATUM")
                         .setValue(ReceiptScanner.getDate(strings)),
 
-                //TODO gör en kalender där man får välja, return mCurrentPageSequence;om vi har tid över
-
                 new TotalSumPage(this, "TOTALBELOPP")
                         .setValue(totalSum > 0 ? String.valueOf(totalSum) : null)
+                        .setRequired(true),
+
+                new TotalSumPage(this, "MOMS")
                         .setRequired(true),
 
                 new SingleFixedChoicePage(this, "KATEGORI")
@@ -170,10 +178,52 @@ public class WizardModel extends AbstractWizardModel {
     private String[] getCompanyNames(DataHolder dataHolder) {
         List<Company> companies = dataHolder.getUser().getCompanies();
         String[] companyNames = new String[companies.size()];
-        companyNames = new String[companies.size()];
         for (int i = 0; i < companies.size(); i++) {
             companyNames[i] = companies.get(i).getName();
         }
         return companyNames;
+    }
+
+    public void addNewPost(Map<String, String> data, DataHolder dataHolder) {
+        // this needs loooooove
+        String preKey = fixBundleStrings(data.get("KORT")) + ":";
+        String s = data.get(preKey + "KATEGORI");
+        System.out.println(s);
+        Category category = Category.convertStringToCategory(fixBundleStrings(data.get(preKey+"KATEGORI")));
+        double total = Double.parseDouble(data.get("TOTALBELOPP").toString());
+        double tax = Double.parseDouble(data.get("MOMS").toString());
+
+        Product product = new Product("WHOLE_RECEIPT", category, total, tax);
+        Comment c = new Comment(data.get("KOMMENTAR").toString());
+        product.addComment(c);
+
+        Calendar cal;
+        try {
+            Date date = new SimpleDateFormat("yyyy-MM-dd").parse(data.get("DATUM").toString());
+            cal = new GregorianCalendar();
+            cal.setTime(date);
+        } catch (ParseException e) {
+            cal = Calendar.getInstance();
+        }
+
+        Uri URI = dataHolder.getURI();
+
+        Receipt receipt = new Receipt(product, cal, total, URI);
+        Company company = dataHolder.getUser().getCompany(data.get("FÖRETAG").toString());
+        Supplier supplier = company.getSupplier(data.get("GROSSIST").toString());
+        if (data.containsKey("Företagskort")) {
+            Purchase purchase = new CompanyPurchase(receipt, supplier);
+            company.getEmployees().get(0).addPurchase(purchase);
+        } else {
+            Purchase purchase = new PrivatePurchase(receipt, supplier);
+            company.getEmployees().get(0).addPurchase(purchase);
+        }
+        System.out.println("Receipt saved to " + company.getName() + ". Complete!");
+    }
+
+    private String fixBundleStrings(String s) {
+        s.replace("Bundle[{_=", "");
+        s.replace("}]", "");
+        return s;
     }
 }

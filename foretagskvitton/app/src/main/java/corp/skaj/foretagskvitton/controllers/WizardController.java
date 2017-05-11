@@ -95,7 +95,7 @@ public class WizardController implements IWizardController {
             System.out.println("KEY: " + s + "  DATA: " + data.get(s));
         }
 
-        //TODO Save data in User from WizardModel data hashmap.
+        wizardModel.addNewPost(data, dataHolder);
 
     }
 

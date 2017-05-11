@@ -95,6 +95,15 @@ public class User {
         return null;
     }
 
+    public Company getCompany(String companyName) {
+        for (Company c : companies) {
+            if (c.getName().equals(companyName)) {
+                return c;
+            }
+        }
+        return null;
+    }
+
     public List<Company> getCompanies() {
         return companies;
     }

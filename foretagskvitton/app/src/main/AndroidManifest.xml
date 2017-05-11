@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="corp.skaj.foretagskvitton">
 
+    <uses-feature
+        android:name="android.hardware.camera2"
+        android:required="true" />
+
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
@@ -28,8 +32,12 @@
         <activity android:name=".activities.ReadDataActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="image/*" />
             </intent-filter>
         </activity>
         <activity android:name=".activities.InitWizardActivity" />
@@ -42,7 +50,12 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="corp.skaj.foretagskvitton.activities.AddNewPostActivity" />
         </activity>
-        <activity android:name=".activities.CompanyActivity" />
+        <activity android:name=".activities.CompanyActivity"
+            android:theme="@style/WizardTheme">
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="corp.skaj.foretagskvitton.activities.CompanyListingActivity" />
+        </activity>
         <activity android:name=".activities.UserActivity" />
         <activity android:name=".activities.ArchiveActivity" />
         <activity android:name=".activities.CompanyListingActivity" />
