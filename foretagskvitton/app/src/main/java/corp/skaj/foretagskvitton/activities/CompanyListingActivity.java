@@ -9,7 +9,6 @@ import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.controllers.ListViewController;
 
 public class CompanyListingActivity extends AbstractActivity {
-    public static final String STATE_FOR_BOTTOM_MENU = "CompanyListingActivity";
     public static final Integer BOTTOM_BAR_ID = R.id.action_business;
     public static final String CONTEXT_KEY = "CompanyListingKey";
 
@@ -24,7 +23,7 @@ public class CompanyListingActivity extends AbstractActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Företag");
 
-        initBottomBar(BOTTOM_BAR_ID, this);
+        //initBottomBar(BOTTOM_BAR_ID, this);
 
         //The code hided below is for when we do have a list of companies
         /*List<Company> companies = dataholder.getUser().getCompanies();
@@ -44,7 +43,7 @@ public class CompanyListingActivity extends AbstractActivity {
         ListViewController listViewController = new ListViewController();
         listViewController.initListViewListener(listView, this);
 
-
+        initBottomBar(BOTTOM_BAR_ID, this);
     }
 }
 

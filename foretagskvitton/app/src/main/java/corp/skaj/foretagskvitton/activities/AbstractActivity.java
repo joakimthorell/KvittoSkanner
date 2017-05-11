@@ -32,14 +32,14 @@ public class AbstractActivity extends AppCompatActivity {
     }
 
 
-    public void initBottomBarMap() {
+    private void initBottomBarMap() {
         if (!bottomBarMap.isEmpty()) {
             return;
         }
         bottomBarMap.put(ArchiveActivity.BOTTOM_BAR_ID, ArchiveActivity.class);
         bottomBarMap.put(GraphActivity.BOTTOM_BAR_ID, GraphActivity.class);
         bottomBarMap.put(AddNewPostActivity.BOTTOM_BAR_ID, AddNewPostActivity.class);
-        bottomBarMap.put(CompanyActivity.BOTTOM_BAR_ID, CompanyActivity.class);
+        bottomBarMap.put(CompanyActivity.BOTTOM_BAR_ID, CompanyListingActivity.class);
         bottomBarMap.put(UserActivity.BOTTOM_BAR_ID, UserActivity.class);
     }
 
