@@ -10,6 +10,7 @@ import corp.skaj.foretagskvitton.controllers.ListViewController;
 
 public class CompanyListingActivity extends AbstractActivity {
     public static final String STATE_FOR_BOTTOM_MENU = "CompanyListingActivity";
+    public static final Integer BOTTOM_BAR_ID = R.id.action_business;
     public static final String CONTEXT_KEY = "CompanyListingKey";
 
     //This is possible in all Activities where we need to get our User, this is for when we do have a list of companies
@@ -23,7 +24,7 @@ public class CompanyListingActivity extends AbstractActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Företag");
 
-        initBottomBar(STATE_FOR_BOTTOM_MENU, this);
+        initBottomBar(BOTTOM_BAR_ID, this);
 
         //The code hided below is for when we do have a list of companies
         /*List<Company> companies = dataholder.getUser().getCompanies();

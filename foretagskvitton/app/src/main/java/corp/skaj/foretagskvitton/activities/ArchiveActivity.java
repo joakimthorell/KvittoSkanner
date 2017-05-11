@@ -23,6 +23,7 @@ import corp.skaj.foretagskvitton.model.Purchase;
 
 public class ArchiveActivity extends AbstractActivity {
     public static final String STATE_FOR_BOTTOM_MENU = "ArchiveActivity";
+    public static final Integer BOTTOM_BAR_ID = R.id.action_archive;
     private List<Purchase> purchases;
     private RecyclerView recyclerView;
     private ReceiptAdapter mAdapter;
@@ -44,7 +45,7 @@ public class ArchiveActivity extends AbstractActivity {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAdapter);
 
-        initBottomBar(STATE_FOR_BOTTOM_MENU, this);
+        initBottomBar(BOTTOM_BAR_ID, this);
         //prepareReceiptData();
         if (dataHolder.getUser().getCompanies().size() < 1) {
             testAddPurchases();

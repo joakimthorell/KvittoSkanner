@@ -15,7 +15,7 @@ import corp.skaj.foretagskvitton.controllers.ListViewController;
 import static corp.skaj.foretagskvitton.controllers.ListViewController.COMPANY_KEY;
 
 public class CompanyActivity extends AbstractActivity {
-
+    public static final Integer BOTTOM_BAR_ID = R.id.action_business;
     public static final String STATE_FOR_BOTTOM_MENU = "CompanyActivity";
 
     @Override
@@ -39,7 +39,7 @@ public class CompanyActivity extends AbstractActivity {
         TextView textView = (TextView) findViewById(R.id.toolbar_title);
         textView.setText(companyName);
 
-        //initBottomBar(STATE_FOR_BOTTOM_MENU, this);
+        initBottomBar(BOTTOM_BAR_ID, this);
 
         //TODO vill ha en bottombar eller case i bottomnav för att kunna skicka med rätt context
     }

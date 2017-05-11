@@ -12,7 +12,6 @@ import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.services.DataHolder;
 import corp.skaj.foretagskvitton.model.User;
 
-
 public class ReadDataActivity extends AbstractActivity {
     public static final String KEY_FOR_IMAGE = "ReadDataActivity_Key_For_Image";
     public static final String BUILD_NEW_RECEIPT = "ReadDataActivity_build_receipt";
@@ -22,10 +21,8 @@ public class ReadDataActivity extends AbstractActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_init_application);
-
         Intent intent = getIntent();
         openedFromOutside = intent.getAction().equals(Intent.ACTION_SEND) && intent.getType().startsWith("image/");
-
         initData().start();
     }
 
@@ -39,7 +36,6 @@ public class ReadDataActivity extends AbstractActivity {
         });
     }
 
-
     private void readData() {
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         // Removes all SharedPreferences.
@@ -52,13 +48,6 @@ public class ReadDataActivity extends AbstractActivity {
         String savedData = sharedPref.getString(User.class.getName().toString(), "");
         DataHolder dataHolder = (DataHolder) getApplicationContext();
         dataHolder.setUser(gson.fromJson(savedData, User.class));
-
-        // Testing...
-        /*
-        try {
-            System.out.println(dataHolder.getUser().getCompanies().get(0).getName());
-        } catch (Exception e) {}
-        */
     }
 
     private void endLoadingBar() {
@@ -73,6 +62,4 @@ public class ReadDataActivity extends AbstractActivity {
             startActivity(intent);
         }
     }
-
-
 }
