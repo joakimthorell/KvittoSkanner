@@ -1,4 +1,4 @@
-package corp.skaj.foretagskvitton.services;
+package corp.skaj.foretagskvitton.model;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

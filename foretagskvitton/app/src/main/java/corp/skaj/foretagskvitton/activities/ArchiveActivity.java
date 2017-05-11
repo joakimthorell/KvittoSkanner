@@ -1,6 +1,5 @@
 package corp.skaj.foretagskvitton.activities;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,7 +13,7 @@ import java.util.List;
 
 import corp.skaj.foretagskvitton.R;
 
-import corp.skaj.foretagskvitton.model.DataHolder;
+import corp.skaj.foretagskvitton.services.DataHolder;
 import corp.skaj.foretagskvitton.controllers.ReceiptAdapter;
 import corp.skaj.foretagskvitton.model.Category;
 import corp.skaj.foretagskvitton.model.PrivatePurchase;
@@ -30,7 +29,6 @@ public class ArchiveActivity extends AbstractActivity {
     private RecyclerView recyclerView;
     private ReceiptAdapter mAdapter;
     DataHolder dataHolder;
-    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

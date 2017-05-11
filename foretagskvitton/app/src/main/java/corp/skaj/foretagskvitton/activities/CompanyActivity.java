@@ -2,7 +2,11 @@ package corp.skaj.foretagskvitton.activities;
 
 import android.support.v7.app.ActionBar;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.widget.Button;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.controllers.ListViewController;
@@ -21,12 +25,19 @@ public class CompanyActivity extends AbstractActivity {
 
         String companyName = getIntent().getExtras().get(COMPANY_KEY).toString();
 
-        ListViewController listViewController = new ListViewController();
+        /*ListViewController listViewController = new ListViewController();
         Button button = (Button) findViewById(R.id.buttonForCompany);
-        listViewController.initButtonListener(button, this);
+        listViewController.initButtonListener(button, this);*/
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.company_action_bar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
         ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle(companyName);
+
+        TextView textView = (TextView) findViewById(R.id.toolbar_title);
+        textView.setText(companyName);
 
         //initBottomBar(STATE_FOR_BOTTOM_MENU, this);
 

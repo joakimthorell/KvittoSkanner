@@ -37,7 +37,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import corp.skaj.foretagskvitton.services.ReceiptScanner;
+import corp.skaj.foretagskvitton.services.DataHolder;
 
 public class WizardModel extends AbstractWizardModel {
 

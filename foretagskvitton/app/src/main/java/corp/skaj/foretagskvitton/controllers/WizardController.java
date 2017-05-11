@@ -13,9 +13,9 @@ import com.tech.freak.wizardpager.ui.StepPagerStrip;
 import java.util.List;
 import java.util.Map;
 
-import corp.skaj.foretagskvitton.activities.IWizardController;
+import corp.skaj.foretagskvitton.activities.IWizardActivity;
 import corp.skaj.foretagskvitton.model.WizardModel;
-import corp.skaj.foretagskvitton.model.DataHolder;
+import corp.skaj.foretagskvitton.services.DataHolder;
 import corp.skaj.foretagskvitton.view.WriteDataFragment;
 
 public class WizardController implements IWizardController {

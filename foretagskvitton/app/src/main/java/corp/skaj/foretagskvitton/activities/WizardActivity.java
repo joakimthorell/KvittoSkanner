@@ -34,8 +34,8 @@ import com.tech.freak.wizardpager.ui.StepPagerStrip;
 import java.util.List;
 
 import corp.skaj.foretagskvitton.R;
-import corp.skaj.foretagskvitton.controllers.IWizardActivity;
-import corp.skaj.foretagskvitton.model.DataHolder;
+import corp.skaj.foretagskvitton.controllers.IWizardController;
+import corp.skaj.foretagskvitton.services.DataHolder;
 import corp.skaj.foretagskvitton.model.IUpdateUser;
 import corp.skaj.foretagskvitton.controllers.WizardController;
 import corp.skaj.foretagskvitton.controllers.MyPagerAdapter;
@@ -82,7 +82,7 @@ public class WizardActivity extends AbstractActivity implements
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         onPageTreeChanged();
-        updateBottomBar();
+        updateBottomBar(); //refreshBottomBar();
     }
 
     @Override

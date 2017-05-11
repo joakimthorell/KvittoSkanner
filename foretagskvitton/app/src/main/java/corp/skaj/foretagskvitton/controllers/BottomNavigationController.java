@@ -14,7 +14,6 @@ import corp.skaj.foretagskvitton.activities.GraphActivity;
 import corp.skaj.foretagskvitton.activities.CompanyListingActivity;
 import corp.skaj.foretagskvitton.activities.UserActivity;
 
-
 public class BottomNavigationController {
 
     // Setting up the BottomNavigationBar for each activity. Call this onCreate in each activity using BottomBar.

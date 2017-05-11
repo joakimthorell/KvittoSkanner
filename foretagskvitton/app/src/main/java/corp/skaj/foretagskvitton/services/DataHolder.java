@@ -1,4 +1,4 @@
-package corp.skaj.foretagskvitton.model;
+package corp.skaj.foretagskvitton.services;
 
 import android.app.Application;
 import android.net.Uri;
