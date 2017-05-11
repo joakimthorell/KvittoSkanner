@@ -82,7 +82,7 @@ public class WizardActivity extends AbstractActivity implements
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         onPageTreeChanged();
-        updateBottomBar();
+        updateBottomBar(); //refreshBottomBar();
     }
 
     @Override

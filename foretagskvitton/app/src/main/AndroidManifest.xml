@@ -42,7 +42,12 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="corp.skaj.foretagskvitton.activities.AddNewPostActivity" />
         </activity>
-        <activity android:name=".activities.CompanyActivity" />
+        <activity android:name=".activities.CompanyActivity"
+            android:theme="@style/WizardTheme">
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="corp.skaj.foretagskvitton.activities.CompanyListingActivity" />
+        </activity>
         <activity android:name=".activities.UserActivity" />
         <activity android:name=".activities.ArchiveActivity" />
         <activity android:name=".activities.CompanyListingActivity" />
