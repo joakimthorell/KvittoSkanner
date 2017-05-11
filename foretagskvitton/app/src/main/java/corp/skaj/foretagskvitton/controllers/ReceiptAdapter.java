@@ -1,10 +1,12 @@
 package corp.skaj.foretagskvitton.controllers;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -19,6 +21,7 @@ public class ReceiptAdapter extends RecyclerView.Adapter<ReceiptAdapter.MyViewHo
     private List<Purchase> purchases;
     private List<Company> comapanyList;
     private User user;
+    private Context context;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView title, year, genre;
@@ -31,16 +34,24 @@ public class ReceiptAdapter extends RecyclerView.Adapter<ReceiptAdapter.MyViewHo
         }
     }
 
-    public ReceiptAdapter(List<Purchase> purchases, User user) {
+    public ReceiptAdapter(List<Purchase> purchases, User user, Context context) {
         this.purchases = purchases;
         this.comapanyList = user.getCompanies();
         this.user = user;
+        this.context = context;
     }
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.archive_list_row, parent, false);
+
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(context, "Mabye it works", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         return new MyViewHolder(itemView);
     }

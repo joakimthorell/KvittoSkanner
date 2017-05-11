@@ -17,10 +17,9 @@ import java.util.Date;
 import corp.skaj.foretagskvitton.R;
 
 public class AddNewPostActivity extends AbstractActivity {
+    public static final Integer BOTTOM_BAR_ID = R.id.action_add;
     public static final String BUILD_NEW_RECEIPT = "corp.skaj.foretagskvitton.BUILD_RECEIPT";
     public static final String KEY_FOR_IMAGE = "corp.skaj.foretagskvitton.KEY_FOR_IMAGE";
-    public static final String STATE_FOR_BOTTOM_MENU = "ADD_NEW_POST_ACTIVITY";
-    public static final Integer BOTTOM_BAR_ID = R.id.action_add;
     private static final int REQUEST_IMAGE_CAPTURE = 31415;
     private String imageAdress;
 

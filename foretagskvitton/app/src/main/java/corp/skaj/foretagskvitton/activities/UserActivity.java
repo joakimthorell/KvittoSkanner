@@ -6,7 +6,6 @@ import corp.skaj.foretagskvitton.R;
 
 public class UserActivity extends AbstractActivity {
     public static final Integer BOTTOM_BAR_ID = R.id.action_user;
-        public static final String STATE_FOR_BOTTOM_MENU = "UserActivity";
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
