@@ -17,7 +17,7 @@ public enum Category {
     TRANSPORT;
 
     public static ArrayList<String> getCategoriesAsArrayList() {
-        String[] arr = Arrays.toString(Category.values()).replaceAll("^.|.$", "").split(", ");
+        String[] arr = Arrays.toString(values()).replaceAll("^.|.$", "").split(", ");
         List<String> categories = Arrays.asList(arr);
         ArrayList<String> strings = new ArrayList<>();
         strings.addAll(categories);
@@ -25,6 +25,29 @@ public enum Category {
     }
 
     public static String[] getCategoriesAsArray() {
-        return Arrays.toString(Category.values()).replaceAll("^.|.$", "").split(", ");
+        return Arrays.toString(values()).replaceAll("^.|.$", "").split(", ");
+    }
+
+    public static Category convertStringToCategory(String s) {
+        s = s.toUpperCase().trim();
+
+        switch (s) {
+            case "BENSIN":
+                return BENSIN;
+            case "HOTELL":
+                return HOTELL;
+            case "KONTORSMATERIAL":
+                return KONTORSMATERIAL;
+            case "PORTO":
+                return PORTO;
+            case "REPRESENTATION":
+                return REPRESENTATION;
+            case "RESOR":
+                return RESOR;
+            case "TRANSPORT":
+                return TRANSPORT;
+            default:
+                return null;
+        }
     }
 }

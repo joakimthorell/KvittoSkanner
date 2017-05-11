@@ -1,6 +1,7 @@
 package corp.skaj.foretagskvitton.model;
 
 import android.app.Application;
+import android.net.Uri;
 
 import java.util.List;
 
@@ -12,6 +13,11 @@ public class DataHolder extends Application {
     private boolean ONCE = true;
     private List<String> strings;
     private User user;
+    private Uri URI;
+
+    public void setURI(Uri URI) {
+        this.URI = URI;
+    }
 
     public void setStrings(List<String> strings) {
         this.strings = strings;
@@ -22,6 +28,10 @@ public class DataHolder extends Application {
             this.user = user;
             ONCE = false;
         }
+    }
+
+    public Uri getURI() {
+        return URI;
     }
 
     public User getUser() {
