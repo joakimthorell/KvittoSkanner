@@ -10,7 +10,7 @@ import com.roughike.bottombar.BottomBar;
 
 import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.controllers.BottomNavigationController;
-import corp.skaj.foretagskvitton.model.DataHolder;
+import corp.skaj.foretagskvitton.services.DataHolder;
 import corp.skaj.foretagskvitton.model.User;
 
 public abstract class AbstractActivity extends AppCompatActivity {

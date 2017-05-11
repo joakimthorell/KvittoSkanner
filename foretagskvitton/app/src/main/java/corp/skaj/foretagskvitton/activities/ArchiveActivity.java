@@ -1,6 +1,5 @@
 package corp.skaj.foretagskvitton.activities;
 
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,17 +11,15 @@ import java.util.List;
 
 import corp.skaj.foretagskvitton.R;
 
-import corp.skaj.foretagskvitton.model.DataHolder;
+import corp.skaj.foretagskvitton.services.DataHolder;
 import corp.skaj.foretagskvitton.controllers.ReceiptAdapter;
 import corp.skaj.foretagskvitton.model.Category;
-import corp.skaj.foretagskvitton.model.Comment;
 import corp.skaj.foretagskvitton.model.PrivatePurchase;
 import corp.skaj.foretagskvitton.model.Product;
 import corp.skaj.foretagskvitton.model.Receipt;
 import corp.skaj.foretagskvitton.model.Company;
 import corp.skaj.foretagskvitton.model.Employee;
 import corp.skaj.foretagskvitton.model.Purchase;
-import corp.skaj.foretagskvitton.model.User;
 
 public class ArchiveActivity extends AbstractActivity {
     public static final String STATE_FOR_BOTTOM_MENU = "ArchiveActivity";

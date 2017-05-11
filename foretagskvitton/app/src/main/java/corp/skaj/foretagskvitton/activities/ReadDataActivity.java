@@ -8,7 +8,7 @@ import android.preference.PreferenceManager;
 import com.google.gson.Gson;
 
 import corp.skaj.foretagskvitton.R;
-import corp.skaj.foretagskvitton.model.DataHolder;
+import corp.skaj.foretagskvitton.services.DataHolder;
 import corp.skaj.foretagskvitton.model.User;
 
 

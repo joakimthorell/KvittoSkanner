@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.util.List;
 
 import corp.skaj.foretagskvitton.R;
-import corp.skaj.foretagskvitton.model.DataHolder;
+import corp.skaj.foretagskvitton.services.DataHolder;
 import corp.skaj.foretagskvitton.services.TextCollector;
 
 public class InitWizardActivity extends AbstractActivity {
@@ -44,7 +44,7 @@ public class InitWizardActivity extends AbstractActivity {
             @Override
             public void run() {
                 try {
-                    listOfStrings = TextCollector.collectStringsFromImage(getApplicationContext(), URI);
+                    listOfStrings = TextCollector.collectStringsFromURI(getApplicationContext(), URI);
                     endLoadingBar();
                 } catch (IOException io) {
                     System.out.println("TextCollector is not operational");
