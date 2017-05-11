@@ -37,8 +37,7 @@ public class DateFragment extends Fragment {
         return fragment;
     }
 
-    public DateFragment() {
-    }
+    public DateFragment() {}
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -46,6 +45,8 @@ public class DateFragment extends Fragment {
 
         Bundle args = getArguments();
         mKey = args.getString(ARG_KEY);
+
+
         mPage = (DatePage) mCallbacks.onGetPage(mKey);
     }
 

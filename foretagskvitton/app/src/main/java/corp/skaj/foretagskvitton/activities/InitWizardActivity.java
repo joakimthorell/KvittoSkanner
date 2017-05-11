@@ -12,9 +12,7 @@ import java.io.IOException;
 import java.util.List;
 
 import corp.skaj.foretagskvitton.R;
-import corp.skaj.foretagskvitton.controllers.DataHolder;
-import corp.skaj.foretagskvitton.model.Company;
-import corp.skaj.foretagskvitton.model.User;
+import corp.skaj.foretagskvitton.model.DataHolder;
 import corp.skaj.foretagskvitton.services.TextCollector;
 
 public class InitWizardActivity extends AbstractActivity {
@@ -22,6 +20,7 @@ public class InitWizardActivity extends AbstractActivity {
     private boolean progressBarShowing;
     private boolean nextButtonShowing;
     private List<String> listOfStrings;
+    private Uri URI;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +28,7 @@ public class InitWizardActivity extends AbstractActivity {
 
         setContentView(R.layout.activity_init_wizard);
         final Uri URI = catchIntent(getIntent());
+        this.URI = URI;
         collectStrings(URI).start();
 
         progressBarShowing = false;
@@ -94,6 +94,8 @@ public class InitWizardActivity extends AbstractActivity {
         if (intent != null) {
             if (intent.getAction().equals(AddNewPostActivity.BUILD_NEW_RECEIPT)) {
                 URI = (Uri) intent.getExtras().get(AddNewPostActivity.KEY_FOR_IMAGE);
+            } else if (intent.getAction().equals(ReadDataActivity.BUILD_NEW_RECEIPT)) {
+                URI = (Uri) intent.getExtras().get(ReadDataActivity.KEY_FOR_IMAGE);
             }
         }
         return URI;
@@ -103,17 +105,17 @@ public class InitWizardActivity extends AbstractActivity {
 
     public void nextPressed(View view) {
         Intent intent = new Intent(this, WizardActivity.class);
-        DataHolder dataHolder = (DataHolder)getApplicationContext();
+        DataHolder dataHolder = (DataHolder) getApplicationContext();
         dataHolder.setStrings(listOfStrings);
+        dataHolder.setURI(URI);
         startActivity(intent);
     }
 
     public void saveButtonPressed(View view) {
         // Testing...
-        /*
-        DataHolder dataHolder = (DataHolder)getApplicationContext();
-        dataHolder.getUser().addCompany(new Company("TEST_COMPANY_3"));
+        DataHolder dataHolder = (DataHolder) getApplicationContext();
+        //dataHolder.getUser().addCompany(new Company("TEST_COMPANY_1"));
         writeData();
-        */
+        System.out.println(dataHolder.getUser().getName());
     }
 }

@@ -1,4 +1,4 @@
-package corp.skaj.foretagskvitton.activities;
+package corp.skaj.foretagskvitton.controllers;
 
 public interface IWizardActivity {
     void updateBottomBar();

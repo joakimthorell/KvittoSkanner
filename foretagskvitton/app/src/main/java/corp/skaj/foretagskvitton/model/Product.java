@@ -11,10 +11,9 @@ public class Product {
     private double price;
     private double tax;
 
-    public Product(String name, Category category, List<Comment> comments, Double price, Double tax) {
+    public Product(String name, Category category, Double price, Double tax) {
         this.name = name;
         this.category = category;
-        this.comments = comments;
         this.price = price;
         this.tax = tax;
     }
@@ -40,6 +39,10 @@ public class Product {
 
     public void setTax(double tax) {
         this.tax = tax;
+    }
+
+    public void addComment(Comment c) {
+        comments.add(c);
     }
 
     public String getName() {

@@ -1,4 +1,4 @@
-package corp.skaj.foretagskvitton.view;
+package corp.skaj.foretagskvitton.controllers;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 
 import com.tech.freak.wizardpager.ui.ReviewFragment;
 
-import corp.skaj.foretagskvitton.controllers.IWizardController;
+import corp.skaj.foretagskvitton.activities.IWizardController;
 
 public class MyPagerAdapter extends FragmentStatePagerAdapter {
     private IWizardController wizardController;

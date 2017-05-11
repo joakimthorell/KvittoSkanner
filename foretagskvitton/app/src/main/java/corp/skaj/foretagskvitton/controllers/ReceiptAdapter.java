@@ -6,15 +6,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.model.Company;
+import corp.skaj.foretagskvitton.model.Purchase;
 import corp.skaj.foretagskvitton.model.Receipt;
+import corp.skaj.foretagskvitton.model.User;
 
 public class ReceiptAdapter extends RecyclerView.Adapter<ReceiptAdapter.MyViewHolder> {
 
-    private List<Receipt> receiptList;
+    private List<Purchase> purchases;
     private List<Company> comapanyList;
+    private User user;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView title, year, genre;
@@ -27,10 +31,10 @@ public class ReceiptAdapter extends RecyclerView.Adapter<ReceiptAdapter.MyViewHo
         }
     }
 
-
-    public ReceiptAdapter(List<Receipt> receiptList, List<Company> companyList) {
-        this.receiptList = receiptList;
-        this.comapanyList = companyList;
+    public ReceiptAdapter(List<Purchase> purchases, User user) {
+        this.purchases = purchases;
+        this.comapanyList = user.getCompanies();
+        this.user = user;
     }
 
     @Override
@@ -43,22 +47,24 @@ public class ReceiptAdapter extends RecyclerView.Adapter<ReceiptAdapter.MyViewHo
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        Receipt receipt = receiptList.get(position);
-        Company company = comapanyList.get(position);
+        Purchase purchase = purchases.get(position);
+        Company company = user.getCompany(purchase);
 
         //holder.title.setText(movie.getTitle());
         holder.title.setText(company.getName());
 
         //holder.genre.setText(movie.getGenre());
-        holder.genre.setText(company.getName());
+        holder.genre.setText(purchase.getReceipt().getCategory().toString());
 
         //holder.year.setText(movie.getYear());
-        holder.year.setText(String.valueOf(receipt.getDate()));
+        SimpleDateFormat dateRaw = new SimpleDateFormat("yyyy-MM-dd");
+        String date = dateRaw.format(purchase.getReceipt().getDate().getTime());
+        holder.year.setText(date);
 
     }
 
     @Override
     public int getItemCount() {
-        return receiptList.size();
+        return purchases.size();
     }
 }

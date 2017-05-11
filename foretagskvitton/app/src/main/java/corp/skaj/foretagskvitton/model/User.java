@@ -40,6 +40,9 @@ public class User {
     }
 
     private boolean containsReceipt(List<Purchase> listOfPurchases, Purchase purchase) {
+        if(listOfPurchases == null){
+            return false;
+        }
         for (int i = 0; i < listOfPurchases.size(); i++) {
             Receipt temp = listOfPurchases.get(i).getReceipt();
             if (purchase.getReceipt() == temp) {
@@ -47,10 +50,6 @@ public class User {
             }
         }
         return false;
-    }
-
-    public void addUserToCompany(Company company, Employee employee) throws IllegalArgumentException {
-        company.addEmployee(employee);
     }
 
     public void setName(String name) {
@@ -91,6 +90,15 @@ public class User {
             List<Purchase> listOfReceipts = temp.getEmployee(purchase).getPurchases();
             if (containsReceipt(listOfReceipts, purchase)) {
                 return temp;
+            }
+        }
+        return null;
+    }
+
+    public Company getCompany(String companyName) {
+        for (Company c : companies) {
+            if (c.getName().equals(companyName)) {
+                return c;
             }
         }
         return null;

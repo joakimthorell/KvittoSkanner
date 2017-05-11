@@ -1,4 +1,4 @@
-package corp.skaj.foretagskvitton.controllers;
+package corp.skaj.foretagskvitton.model;
 
 public interface IUpdateUser {
     void updateUser();

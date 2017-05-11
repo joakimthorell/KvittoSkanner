@@ -1,30 +1,35 @@
 package corp.skaj.foretagskvitton.activities;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import corp.skaj.foretagskvitton.R;
 
-import corp.skaj.foretagskvitton.controllers.DataHolder;
+import corp.skaj.foretagskvitton.model.DataHolder;
 import corp.skaj.foretagskvitton.controllers.ReceiptAdapter;
+import corp.skaj.foretagskvitton.model.Category;
+import corp.skaj.foretagskvitton.model.Comment;
+import corp.skaj.foretagskvitton.model.PrivatePurchase;
+import corp.skaj.foretagskvitton.model.Product;
 import corp.skaj.foretagskvitton.model.Receipt;
 import corp.skaj.foretagskvitton.model.Company;
 import corp.skaj.foretagskvitton.model.Employee;
 import corp.skaj.foretagskvitton.model.Purchase;
+import corp.skaj.foretagskvitton.model.User;
 
 public class ArchiveActivity extends AbstractActivity {
     public static final String STATE_FOR_BOTTOM_MENU = "ArchiveActivity";
-    private List<Receipt> receiptsList;
+    private List<Purchase> purchases;
     private RecyclerView recyclerView;
     private ReceiptAdapter mAdapter;
-
     DataHolder dataHolder;
-    List<Company> companiesList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,35 +37,52 @@ public class ArchiveActivity extends AbstractActivity {
         setContentView(R.layout.activity_archive);
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
-
-        receiptsList = new ArrayList<>();
-        dataHolder = (DataHolder) getApplicationContext();
-        companiesList = dataHolder.getUser().getCompanies();
-
+        purchases = new ArrayList<>();
+        dataHolder = (DataHolder) getApplicationContext();;
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
-        mAdapter = new ReceiptAdapter(receiptsList, companiesList);
+        mAdapter = new ReceiptAdapter(purchases, dataHolder.getUser());
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAdapter);
 
         initBottomBar(STATE_FOR_BOTTOM_MENU, this);
-        prepareReceiptData();
-
-    }
-
-    private void prepareReceiptData() {
-        for (int i = 0; i < companiesList.size(); i++) {
-            List<Employee> employees = companiesList.get(i).getEmployees();
-            for (int j = 0; j < employees.size(); i++) {
-                List<Purchase> purchases = employees.get(j).getPurchases();
-                for (int k = 0; k < purchases.size(); k++) {
-                    purchases.get(k).getReceipt().getDate();
-                }
-            }
+        //prepareReceiptData();
+        if (dataHolder.getUser().getCompanies().size() < 1) {
+            testAddPurchases();
+        } else {
+            purchases.addAll(dataHolder.getUser().getCompanies().get(0).getEmployees().get(0).getPurchases());
+            mAdapter.notifyDataSetChanged();
         }
 
+    }
+//.get(i).getEmployees().get(i).getPurchases().get(i);
+    private void collectAllPurchases(){
+            List<Company> company = dataHolder.getUser().getCompanies();
+        for(int i = 0; i < company.size(); i++){
+            List<Employee> emps = dataHolder.getUser().getCompanies().get(i).getEmployees();
+        }
+    }
+
+    private void testAddPurchases() {
+        
+        Product product = new Product("Aladob", Category.MAT, 50.0, 12.0);
+
+        List<Product> products = new ArrayList<>();
+          products.add(product);
+     /*   products.add(product);
+        products.add(product);
+        products.add(product);
+        products.add(product);
+        */
+        Calendar cal = Calendar.getInstance();
+        Receipt receipt = new Receipt(products, cal, 500.00, null, Category.MAT);
+
+        PrivatePurchase pur = new PrivatePurchase(receipt);
+        purchases.add(pur);
+        dataHolder.getUser().getCompanies().get(0).getEmployees().get(0).addPurchase(pur);
         mAdapter.notifyDataSetChanged();
     }
 }
+

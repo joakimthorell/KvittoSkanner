@@ -158,4 +158,13 @@ public class Company {
     public List<Supplier> getSuppliers() {
         return suppliers;
     }
+
+    public Supplier getSupplier(String supplierName) {
+        for (Supplier s : suppliers) {
+            if (s.getName().equals(supplierName)) {
+                return s;
+            }
+        }
+        return null;
+    }
 }
