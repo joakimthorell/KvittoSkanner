@@ -1,12 +1,8 @@
 package corp.skaj.foretagskvitton.activities;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.roughike.bottombar.BottomBar;
-
 import corp.skaj.foretagskvitton.R;
-import corp.skaj.foretagskvitton.controllers.BottomNavigationController;
 
 public class UserActivity extends AbstractActivity {
 
