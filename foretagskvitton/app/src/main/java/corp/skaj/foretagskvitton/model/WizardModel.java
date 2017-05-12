@@ -119,7 +119,7 @@ public class WizardModel {
 
     public void collectData() {
         Map<String, String> data = new HashMap<>();
-        //TODO Collect all data
+        //TODO Collect all data.
         notifyController();
     }
 

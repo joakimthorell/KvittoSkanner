@@ -8,8 +8,11 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 
 import corp.skaj.foretagskvitton.R;
+import corp.skaj.foretagskvitton.model.WizardModel;
 
 public class WriteDataFragment extends DialogFragment {
+
+    private WizardModel model;
 
     @NonNull
     @Override
@@ -19,13 +22,16 @@ public class WriteDataFragment extends DialogFragment {
                 .setPositiveButton(R.string.last_step_approve_button, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        // Under construction...
-                        //IData dataHandler = (DataHandler)getContext();
-                        //WizardModel wizardModel = (WizardModel) dataHandler.readData(WizardModel.class.getName(), WizardModel.class);
-                        //wizardModel.collectData();
+                        if (model != null) {
+                            model.collectData();
+                        }
                     }
                 })
                 .setNegativeButton(R.string.cancel, null)
                 .create();
+    }
+
+    public void setModel(WizardModel model) {
+        this.model = model;
     }
 }

@@ -19,7 +19,7 @@ import corp.skaj.foretagskvitton.model.Company;
 import corp.skaj.foretagskvitton.model.Employee;
 import corp.skaj.foretagskvitton.model.Purchase;
 import corp.skaj.foretagskvitton.model.User;
-import corp.skaj.foretagskvitton.services.IData;
+import corp.skaj.foretagskvitton.model.IData;
 
 public class ArchiveActivity extends AbstractActivity {
     public static final Integer BOTTOM_BAR_ID = R.id.action_archive;
