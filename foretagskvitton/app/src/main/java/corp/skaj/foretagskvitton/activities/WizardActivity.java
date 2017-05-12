@@ -35,7 +35,6 @@ import java.util.List;
 
 import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.controllers.IWizardController;
-import corp.skaj.foretagskvitton.services.DataHolder;
 import corp.skaj.foretagskvitton.model.IUpdateUser;
 import corp.skaj.foretagskvitton.controllers.WizardController;
 import corp.skaj.foretagskvitton.controllers.MyPagerAdapter;
@@ -178,7 +177,6 @@ public class WizardActivity extends AbstractActivity implements
 
     @Override
     public void updateUser() {
-        wizardController.updateUser((DataHolder) getApplicationContext());
         // TODO go to new intent or back to parent?
     }
 

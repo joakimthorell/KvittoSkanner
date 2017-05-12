@@ -18,19 +18,17 @@ import corp.skaj.foretagskvitton.model.Company;
 import corp.skaj.foretagskvitton.model.Employee;
 import corp.skaj.foretagskvitton.model.Purchase;
 import corp.skaj.foretagskvitton.model.Receipt;
-import corp.skaj.foretagskvitton.services.DataHolder;
 
 public class ArchiveController {
     private Context mContext;
     private List<Receipt> receipts;
     private List<Company> companies;
-    private DataHolder dataHolder = (DataHolder) mContext.getApplicationContext();
     private RecyclerView recyclerView;
 
     public static final String COMPANY_KEY = "ArchiveKey";
 
     private void getAllReceipts() {
-        companies = dataHolder.getUser().getCompanies();
+        //companies = dataHolder.getUser().getCompanies();
         for (int i = 0; i < companies.size(); i++) {
             List<Employee> employees = companies.get(i).getEmployees();
             for (int j = 0; j < employees.size(); i++) {

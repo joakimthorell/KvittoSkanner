@@ -7,6 +7,8 @@ import android.os.Bundle;
 import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.model.Company;
 import corp.skaj.foretagskvitton.model.User;
+import corp.skaj.foretagskvitton.services.DataHandler;
+import corp.skaj.foretagskvitton.services.IData;
 
 public class ReadDataActivity extends AbstractActivity {
     public static final String KEY_FOR_IMAGE = "ReadDataActivity_Key_For_Image";
@@ -33,12 +35,13 @@ public class ReadDataActivity extends AbstractActivity {
     }
 
     private void readData() {
+        IData dataHandler = (DataHandler) getApplicationContext();
         try {
-            ((User)readData(User.class.getName(), User.class)).getName();
+            ((User)dataHandler.readData(User.class.getName(), User.class)).getName();
         } catch (Exception e) {
             User newUser = new User("DEFAULT USER ");
             newUser.addCompany(new Company("DEFAULT COMPANY"));
-            writeData(User.class.getName(), newUser);
+            dataHandler.writeData(User.class.getName(), newUser);
         }
     }
 
