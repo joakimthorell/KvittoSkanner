@@ -13,9 +13,4 @@ public class TotalSumPage extends TextPage {
         super(callbacks, title);
     }
 
-    //Istället för fragment så returnerar vi T - Använd generics...
-    @Override
-    public Fragment createFragment() {
-        return TotalSumFragment.create(getKey());
-    }
 }

@@ -5,7 +5,13 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.view.ViewGroup;
 
+import com.tech.freak.wizardpager.model.Page;
 import com.tech.freak.wizardpager.ui.ReviewFragment;
+
+import corp.skaj.foretagskvitton.model.DatePage;
+import corp.skaj.foretagskvitton.model.TotalSumPage;
+import corp.skaj.foretagskvitton.view.DateFragment;
+import corp.skaj.foretagskvitton.view.TotalSumFragment;
 
 public class MyPagerAdapter extends FragmentStatePagerAdapter {
     private IWizardController wizardController;
@@ -22,7 +28,26 @@ public class MyPagerAdapter extends FragmentStatePagerAdapter {
         if (i >= wizardController.getCurrentPageSequence().size()) {
             return new ReviewFragment();
         }
-        return wizardController.getCurrentPageSequence().get(i).createFragment();
+        // fullösning:::: TODO if possible, make pretty
+        Page page = wizardController.getCurrentPageSequence().get(i);
+
+
+
+
+
+
+
+
+
+
+
+        if (page instanceof TotalSumPage) {
+            return TotalSumFragment.create(page.getKey());
+        } else if (page instanceof DatePage) {
+            return DateFragment.create(page.getKey());
+        }
+
+        return page.createFragment();
     }
 
     @Override

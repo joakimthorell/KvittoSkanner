@@ -11,23 +11,22 @@ import com.tech.freak.wizardpager.model.Page;
 import com.tech.freak.wizardpager.ui.StepPagerStrip;
 
 import java.util.List;
-import java.util.Map;
 
-import corp.skaj.foretagskvitton.activities.IWizardActivity;
-import corp.skaj.foretagskvitton.model.WizardModel;
+import corp.skaj.foretagskvitton.view.IWizardActivity;
 import corp.skaj.foretagskvitton.services.DataHolder;
+import corp.skaj.foretagskvitton.view.WizardView;
 import corp.skaj.foretagskvitton.view.WriteDataFragment;
 
 public class WizardController implements IWizardController {
     private IWizardActivity wizardActivity;
-    private WizardModel wizardModel;
+    private WizardView wizardView;
     private boolean mEditingAfterReview;
     private boolean mConsumePageSelectedEvent;
 
     public WizardController(Context context, IWizardActivity iWizardActivity) {
         mEditingAfterReview = false;
         wizardActivity = iWizardActivity;
-        wizardModel = new WizardModel(context);
+        wizardView = new WizardView(context);
     }
 
     public void initViewPagerListener(ViewPager mPager, final StepPagerStrip mStepPagerStrip) {
@@ -63,7 +62,7 @@ public class WizardController implements IWizardController {
             @Override
             public void onClick(View v) {
                 // If we are at last page
-                int size = wizardModel.getCurrentPageSequence().size();
+                int size = wizardView.getWizardModel().getCurrentPageSequence().size();
                 if (mPager.getCurrentItem() == size) {
                     WriteDataFragment wls = new WriteDataFragment();
                     wls.show(fragmentManager, "confirm_receipt_dialog");
@@ -90,12 +89,7 @@ public class WizardController implements IWizardController {
     // Under construction...
     @Override
     public void updateUser(DataHolder dataHolder) {
-        Map<String, String> data = wizardModel.collectData();
-        for (String s : data.keySet()) {
-            System.out.println("KEY: " + s + "  DATA: " + data.get(s));
-        }
-
-        wizardModel.addNewPost(data, dataHolder);
+        // TODO
 
     }
 
@@ -111,11 +105,11 @@ public class WizardController implements IWizardController {
 
     @Override
     public AbstractWizardModel getWizardModel() {
-        return wizardModel;
+        return wizardView.getWizardModel();
     }
 
     @Override
     public List<Page> getCurrentPageSequence() {
-        return wizardModel.getCurrentPageSequence();
+        return wizardView.getWizardModel().getCurrentPageSequence();
     }
 }
