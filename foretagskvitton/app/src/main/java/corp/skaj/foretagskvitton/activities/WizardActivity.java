@@ -35,13 +35,13 @@ import java.util.List;
 
 import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.controllers.IWizardController;
-import corp.skaj.foretagskvitton.model.IUpdateUser;
 import corp.skaj.foretagskvitton.controllers.WizardController;
 import corp.skaj.foretagskvitton.controllers.MyPagerAdapter;
+import corp.skaj.foretagskvitton.services.DataHandler;
 import corp.skaj.foretagskvitton.view.IWizardActivity;
 
 public class WizardActivity extends AbstractActivity implements
-        PageFragmentCallbacks, ReviewFragment.Callbacks, ModelCallbacks, IWizardActivity, IUpdateUser {
+        PageFragmentCallbacks, ReviewFragment.Callbacks, ModelCallbacks, IWizardActivity {
 
     private IWizardController wizardController;
     private AbstractWizardModel mWizardModel;
@@ -68,7 +68,7 @@ public class WizardActivity extends AbstractActivity implements
         mPager.setAdapter(mPagerAdapter);
 
         // Set listeners
-        wizardController.initNextButton(mNextButton, mPager, mPagerAdapter, getSupportFragmentManager());
+        wizardController.initNextButton((DataHandler)getApplicationContext(), mNextButton, mPager, mPagerAdapter, getSupportFragmentManager());
         wizardController.initPrevButton(mPrevButton, mPager);
         wizardController.initViewPagerListener(mPager, mStepPagerStrip);
         mWizardModel.registerListener(this);
@@ -174,10 +174,4 @@ public class WizardActivity extends AbstractActivity implements
         }
         return false;
     }
-
-    @Override
-    public void updateUser() {
-        // TODO go to new intent or back to parent?
-    }
-
 }

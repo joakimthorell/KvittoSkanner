@@ -24,16 +24,17 @@ import com.tech.freak.wizardpager.model.PageList;
 
 import java.util.List;
 
+import corp.skaj.foretagskvitton.model.IObserver;
 import corp.skaj.foretagskvitton.model.User;
 import corp.skaj.foretagskvitton.model.WizardModel;
 import corp.skaj.foretagskvitton.services.IData;
 
 public class WizardView extends AbstractWizardModel implements ModelCallbacks {
-
     private WizardModel model;
 
-    public WizardView(Context context) {
+    public WizardView(IObserver observer, Context context) {
         super(context);
+        model.addObserver(observer);
     }
 
     @Override

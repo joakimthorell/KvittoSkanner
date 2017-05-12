@@ -14,6 +14,4 @@ public interface IWizardController {
     AbstractWizardModel getWizardModel();
 
     List<Page> getCurrentPageSequence();
-
-    void updateUser();
 }

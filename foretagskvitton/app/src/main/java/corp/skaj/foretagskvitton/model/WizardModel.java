@@ -23,14 +23,18 @@ import com.tech.freak.wizardpager.model.PageList;
 import com.tech.freak.wizardpager.model.SingleFixedChoicePage;
 import com.tech.freak.wizardpager.model.TextPage;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class WizardModel {
-
+    private List<IObserver> observers;
     private PageList pages;
 
     public WizardModel(User user, ModelCallbacks view, List<String> strings) {
         pages = companyInfoNotFound(strings, user, view);
+        observers = new ArrayList<>();
     }
 
     private PageList companyInfoNotFound(List<String> strings, User user, ModelCallbacks view) {
@@ -103,6 +107,26 @@ public class WizardModel {
                                         .setRequired(false))
 
                         .setRequired(true));
+    }
+
+    public void addObserver(IObserver observer) {
+        observers.add(observer);
+    }
+
+    public void removeObserver(IObserver observer) {
+        observers.remove(observer);
+    }
+
+    public void collectData() {
+        Map<String, String> data = new HashMap<>();
+        //TODO Collect all data
+        notifyController();
+    }
+
+    private void notifyController() {
+        for (IObserver io : observers) {
+            io.onDataChange();
+        }
     }
 
     // Under construction...

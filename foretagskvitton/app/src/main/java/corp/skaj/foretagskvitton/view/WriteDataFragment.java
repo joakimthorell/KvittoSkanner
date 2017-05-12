@@ -8,7 +8,11 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 
 import corp.skaj.foretagskvitton.R;
-import corp.skaj.foretagskvitton.model.IUpdateUser;
+import corp.skaj.foretagskvitton.activities.WizardActivity;
+import corp.skaj.foretagskvitton.model.IObserver;
+import corp.skaj.foretagskvitton.model.WizardModel;
+import corp.skaj.foretagskvitton.services.DataHandler;
+import corp.skaj.foretagskvitton.services.IData;
 
 public class WriteDataFragment extends DialogFragment {
 
@@ -20,11 +24,10 @@ public class WriteDataFragment extends DialogFragment {
                 .setPositiveButton(R.string.last_step_approve_button, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        if (!(getContext() instanceof IUpdateUser)) {
-                            throw new ClassCastException("Activity must implement IUpdateUser");
-                        }
-                        IUpdateUser updateUser = (IUpdateUser) getContext();
-                        updateUser.updateUser();
+                        // Under construction...
+                        //IData dataHandler = (DataHandler)getContext();
+                        //WizardModel wizardModel = (WizardModel) dataHandler.readData(WizardModel.class.getName(), WizardModel.class);
+                        //wizardModel.collectData();
                     }
                 })
                 .setNegativeButton(R.string.cancel, null)
