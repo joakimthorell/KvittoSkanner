@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">foretagskvitton</string>
+    <string name="app_name">ReceiptScanner</string>
     <string name="menu_archive">Arkiv</string>
     <string name="menu_charts">Grafer</string>
     <string name="menu_add">Skapa ny</string>

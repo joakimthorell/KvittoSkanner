@@ -48,30 +48,32 @@ public class ArchiveActivity extends AbstractActivity {
         initBottomBar(BOTTOM_BAR_ID, this);
         //prepareReceiptData();
 
-        if (user.getCompanies().size() < 1) {
-            testAddPurchases();
-        } else {
             testAddFirstPurchases();
-            purchases.addAll(user.getCompanies().get(0).getEmployees().get(0).getPurchases());
+            //purchases.addAll(user.getCompanies().get(0).getEmployees().get(0).getPurchases());
             mAdapter.notifyDataSetChanged();
-        }
-
     }
 
     private void testAddFirstPurchases(){
-        Product product = new Product("Aladob", Category.MAT, 50.0, 12.0);
-        List<Product> products = new ArrayList<>();
-        products.add(product);
-        Calendar cal = Calendar.getInstance();
-        Receipt receipt = new Receipt(products, cal, 500.00, null, Category.MAT);
+        IData dataHandler = (IData)getApplicationContext();
 
+        //Skapar en produkt
+        Product product = new Product("Aladob", Category.MAT, 50.0, 12.0);
+
+        // Skapar ett kvitto och lägger till produkten i kvittot
+        Calendar cal = Calendar.getInstance();
+        Receipt receipt = new Receipt(product, cal, 500.00, null);
         PrivatePurchase pur = new PrivatePurchase(receipt);
         purchases.add(pur);
 
-        IData dataHandler = (IData)getApplicationContext();
+        //Skapar en anställd och ger den företag och kvitto med produkt
         User user = (User) dataHandler.readData(User.class.getName(), User.class);
+        System.out.println(user.getName() + "HAHAHAHHAHAHAHAHHAHAH");
+        //Employee emp = new Employee("Gunde");
+        //emp.addPurchase(pur);
+        //user.getCompanies().get(0).addEmployee(emp);
 
-        user.getCompanies().get(0).getEmployees().get(0).addPurchase(pur);
+        //first input write is the key for saving changes
+        dataHandler.writeData(User.class.getName(), user);
         mAdapter.notifyDataSetChanged();
     }
 
@@ -84,28 +86,6 @@ public class ArchiveActivity extends AbstractActivity {
         for(int i = 0; i < company.size(); i++){
             List<Employee> emps = user.getCompanies().get(i).getEmployees();
         }
-    }
-
-    private void testAddPurchases() {
-        IData dataHandler = (IData)getApplicationContext();
-        User user = (User) dataHandler.readData(User.class.getName(), User.class);
-
-        Product product = new Product("Aladob", Category.MAT, 50.0, 12.0);
-
-        List<Product> products = new ArrayList<>();
-          products.add(product);
-     /*   products.add(product);
-        products.add(product);
-        products.add(product);
-        products.add(product);
-        */
-        Calendar cal = Calendar.getInstance();
-        Receipt receipt = new Receipt(products, cal, 500.00, null, Category.MAT);
-
-        PrivatePurchase pur = new PrivatePurchase(receipt);
-        purchases.add(pur);
-        user.getCompanies().get(0).getEmployees().get(0).addPurchase(pur);
-        mAdapter.notifyDataSetChanged();
     }
 }
 

@@ -14,12 +14,11 @@ public class Receipt {
     private Category category;
     private final Uri pictureAdress;
 
-    public Receipt(List<Product> products, Calendar date, double total, final Uri pictureAdress, Category category) {
+    public Receipt(List<Product> products, Calendar date, double total, final Uri pictureAdress) {
         this.products = products;
         this.date = date;
         this.total = total;
         this.pictureAdress = pictureAdress;
-        this.category = category;
     }
 
     public Receipt(Product product, Calendar date, double total, final Uri pictureAdress) {
