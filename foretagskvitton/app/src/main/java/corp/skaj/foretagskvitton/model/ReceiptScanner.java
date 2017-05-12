@@ -35,6 +35,58 @@ public class ReceiptScanner {
         return null;
     }
 
+    public static double getTotalCost(List<String> strings) {
+
+        if (strings == null) {
+            return 0.0;
+        }
+
+        List<Double> doubles = findAllDoubles(strings);
+
+        try {
+            return Collections.max(doubles); // Denna kastar 2 olika exceptions.
+        } catch (Exception cce) {
+            int index = checkForText(strings);
+            double totalCost = index >= 0 ? checkBeforeAndAfter(index, strings) : 0; // Om index är -1 som checkForText returnerar när den inte hittar något får man outOfBounds här
+            return totalCost;
+        }
+    }
+
+    public static String getCardNumber(List<String> strings) {
+
+        if (strings == null) {
+            return null;
+        }
+
+        String currString = "";
+        for (int i = 0; i < strings.size(); i++) {
+            currString = strings.get(i).replace(" ", "");
+            letterReplace(strings.get(i));
+
+            if (containsAsterix(currString)) {
+                return currString.substring(currString.length() - 4);
+            } else if (correctCardNumLength(currString)) {
+
+                if (currString.length() == 16 && lastFourIsNum(currString)) {
+                    return currString.substring(12);
+                }
+                if (currString.length() == 4 && onlyNums(currString)) {
+                    return currString;
+                }
+            } else if (currString.length() >= 4 && currString.length() < 16) {
+
+                if (lastFourIsNum(currString) && notOrgNum(currString)) {
+                    return currString.substring(currString.length() - 4);
+                }
+            }
+        }
+        return "0000";
+    }
+
+    public static void getProducts(List<String> strings) {
+
+    }
+
     // Checks that the string starts with the current year in ex. 17 or 2017.
     private static boolean correctFirstNum(String date) {
         String year = new SimpleDateFormat("yyyy").format(new Date());
@@ -90,7 +142,7 @@ public class ReceiptScanner {
         return -1;
     }
 
-    public static double checkBeforeAndAfter(int index, List<String> strings) {
+    private static double checkBeforeAndAfter(int index, List<String> strings) {
         double totalCostBefore = 0.0;
         double totalCostAfter = 0.0;
         double totalCost;
@@ -112,58 +164,6 @@ public class ReceiptScanner {
         }
 
         return totalCost > 0 ? totalCost : 0;
-    }
-
-    public static double getTotalCost(List<String> strings) {
-
-        if (strings == null) {
-            return 0.0;
-        }
-        
-        List<Double> doubles = findAllDoubles(strings);
-
-        try {
-            return Collections.max(doubles); // Denna kastar 2 olika exceptions.
-        } catch (Exception cce) {
-            int index = checkForText(strings);
-            double totalCost = index >= 0 ? checkBeforeAndAfter(index, strings) : 0; // Om index är -1 som checkForText returnerar när den inte hittar något får man outOfBounds här
-            return totalCost;
-        }
-    }
-
-    public static void getProducts(List<String> strings) {
-
-    }
-
-    public static String getCardNumber(List<String> strings) {
-
-        if (strings == null) {
-            return null;
-        }
-
-        String currString = "";
-        for (int i = 0; i < strings.size(); i++) {
-            currString = strings.get(i).replace(" ", "");
-            letterReplace(strings.get(i));
-
-            if (containsAsterix(currString)) {
-                return currString.substring(currString.length() - 4);
-            } else if (correctCardNumLength(currString)) {
-
-                if (currString.length() == 16 && lastFourIsNum(currString)) {
-                    return currString.substring(12);
-                }
-                if (currString.length() == 4 && onlyNums(currString)) {
-                    return currString;
-                }
-            } else if (currString.length() >= 4 && currString.length() < 16) {
-
-                if (lastFourIsNum(currString) && notOrgNum(currString)) {
-                    return currString.substring(currString.length() - 4);
-                }
-            }
-        }
-        return "0000";
     }
 
     private static boolean containsAsterix(String currString) {

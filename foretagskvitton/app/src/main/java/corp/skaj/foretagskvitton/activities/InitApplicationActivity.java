@@ -11,7 +11,7 @@ import corp.skaj.foretagskvitton.model.User;
 import corp.skaj.foretagskvitton.services.DataHandler;
 import corp.skaj.foretagskvitton.model.IData;
 
-public class ReadDataActivity extends AbstractActivity {
+public class InitApplicationActivity extends AbstractActivity {
     public static final String KEY_FOR_IMAGE = "ReadDataActivity_Key_For_Image";
     public static final String BUILD_NEW_RECEIPT = "ReadDataActivity_build_receipt";
     private boolean openedFromOutside;

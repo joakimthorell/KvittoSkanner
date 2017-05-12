@@ -15,7 +15,7 @@ import java.util.List;
 import corp.skaj.foretagskvitton.model.IObserver;
 import corp.skaj.foretagskvitton.model.IData;
 import corp.skaj.foretagskvitton.view.WizardView;
-import corp.skaj.foretagskvitton.view.WriteDataFragment;
+import corp.skaj.foretagskvitton.view.ConfirmWizardFragment;
 
 public class WizardController implements IObserver {
     private IUpdatable updater;
@@ -64,7 +64,7 @@ public class WizardController implements IObserver {
                 // If we are at last page
                 int size = wizardView.getWizardView().getCurrentPageSequence().size();
                 if (mPager.getCurrentItem() == size) {
-                    WriteDataFragment wls = new WriteDataFragment();
+                    ConfirmWizardFragment wls = new ConfirmWizardFragment();
                     wls.setModel(wizardView.getWizardModel());
                     wls.show(fragmentManager, "confirm_receipt_dialog");
                 } else {

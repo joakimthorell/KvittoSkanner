@@ -10,7 +10,7 @@ import android.support.v4.app.DialogFragment;
 import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.model.WizardModel;
 
-public class WriteDataFragment extends DialogFragment {
+public class ConfirmWizardFragment extends DialogFragment {
 
     private WizardModel model;
 

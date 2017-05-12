@@ -93,8 +93,8 @@ public class InitWizardActivity extends AbstractActivity {
         if (intent != null) {
             if (intent.getAction().equals(AddNewPostActivity.BUILD_NEW_RECEIPT)) {
                 URI = (Uri) intent.getExtras().get(AddNewPostActivity.KEY_FOR_IMAGE);
-            } else if (intent.getAction().equals(ReadDataActivity.BUILD_NEW_RECEIPT)) {
-                URI = (Uri) intent.getExtras().get(ReadDataActivity.KEY_FOR_IMAGE);
+            } else if (intent.getAction().equals(InitApplicationActivity.BUILD_NEW_RECEIPT)) {
+                URI = (Uri) intent.getExtras().get(InitApplicationActivity.KEY_FOR_IMAGE);
             }
         }
         return URI;

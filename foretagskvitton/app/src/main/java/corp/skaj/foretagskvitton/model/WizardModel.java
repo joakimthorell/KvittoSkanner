@@ -23,7 +23,10 @@ import com.tech.freak.wizardpager.model.PageList;
 import com.tech.freak.wizardpager.model.SingleFixedChoicePage;
 import com.tech.freak.wizardpager.model.TextPage;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,30 +42,42 @@ public class WizardModel {
 
     private PageList companyInfoNotFound(List<String> strings, User user, ModelCallbacks view) {
         double totalSum = ReceiptScanner.getTotalCost(strings);
+        String date = ReceiptScanner.getDate(strings);
+
+        String cardNum = ReceiptScanner.getCardNumber(strings);
+        Company foundCompany = null;
+        if (user.getCompanies().size() > 1 && cardNum != null) {
+            Card foundCard = new Card(Integer.parseInt(cardNum));
+            foundCompany = user.getCompany(foundCard);
+        } else if (foundCompany == null && user.getCompanies().size() == 1) {
+            foundCompany = user.getCompanies().get(0);
+        } else {
+            // let it be null
+        }
+
+
+        // TODO sidorna kan inte hantera default värden just nu. Kan bara lista alla, inga för tryckta
 
         return new PageList(
                 new BranchPage(view, "KORT")
 
                         .addBranch("Företagskort",
 
-                                new MultipleFixedChoicePage(view, "FÖRETAG")
+                                new SingleFixedChoicePage(view, "FÖRETAG")
 
-                                        //TODO List all companies.
+                                        .setChoices(getCompanyNames(user))
+                                        .setValue(foundCompany == null ? null : foundCompany.getName())
+                                        .setRequired(true),
 
-                                        .setChoices(getCompanyNames(user)), //Företag, här måste vi få in en lista av alla valbara företag
-
-                                //TODO Ska vi ha ett default företag??
                                 new MultipleFixedChoicePage(view, "GROSSIST")
 
                                         //TODO lista grossister, vi kan inte lista från en specifikt företag. Får lista alla direkt (får tänkte om här)
 
-                                        .setChoices(), //Grossister
-
-                                //TODO Ska vi ha en default supplier??
+                                        .setChoices(),
 
 
                                 new DatePage(view, "DATUM")
-                                        .setValue(ReceiptScanner.getDate(strings)),
+                                        .setValue(date == null ? getTodaysDate() : date),
 
                                 new TotalSumPage(view, "TOTALBELOPP")
                                         .setValue(totalSum > 0 ? String.valueOf(totalSum) : null)
@@ -84,13 +99,14 @@ public class WizardModel {
 
                                 new SingleFixedChoicePage(view, "FÖRETAG")
                                         .setChoices(getCompanyNames(user))
+                                        .setValue(foundCompany == null ? null : foundCompany.getName())
                                         .setRequired(true),
 
                                 new MultipleFixedChoicePage(view, "GROSSIST")
-                                        .setChoices(), //Grossister, läs T O D O ovan
+                                        .setChoices(),
 
                                 new DatePage(view, "DATUM")
-                                        .setValue(ReceiptScanner.getDate(strings)),
+                                        .setValue(date == null ? getTodaysDate() : date),
 
                                 new TotalSumPage(view, "TOTALBELOPP")
                                         .setValue(totalSum > 0 ? String.valueOf(totalSum) : null)
@@ -137,6 +153,10 @@ public class WizardModel {
             companyNames[i] = companies.get(i).getName();
         }
         return companyNames;
+    }
+
+    private String getTodaysDate() {
+        return new SimpleDateFormat("yyyy-MM-dd").format(new Date());
     }
 
     public PageList getPages() {
