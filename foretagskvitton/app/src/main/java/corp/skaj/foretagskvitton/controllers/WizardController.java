@@ -65,12 +65,10 @@ public class WizardController implements IObserver {
             @Override
             public void onClick(View v) {
                 // If we are at last page
-                int size = wizardView.getWizardModel().getCurrentPageSequence().size();
+                int size = wizardView.getWizardView().getCurrentPageSequence().size();
                 if (mPager.getCurrentItem() == size) {
-                    // Under contruction...
-                    //dataHandler.writeData(WizardModel.class.getName(), wizardView.getWizardModel());
                     WriteDataFragment wls = new WriteDataFragment();
-
+                    wls.setModel(wizardView.getWizardModel());
                     wls.show(fragmentManager, "confirm_receipt_dialog");
                 } else {
                     if (mEditingAfterReview) {
@@ -106,11 +104,11 @@ public class WizardController implements IObserver {
         mEditingAfterReview = state;
     }
 
-    public AbstractWizardModel getWizardModel() {
-        return wizardView.getWizardModel();
+    public AbstractWizardModel getWizardView() {
+        return wizardView.getWizardView();
     }
 
     public List<Page> getCurrentPageSequence() {
-        return wizardView.getWizardModel().getCurrentPageSequence();
+        return wizardView.getWizardView().getCurrentPageSequence();
     }
 }

@@ -44,7 +44,7 @@ public class WizardActivity extends AbstractActivity implements
         PageFragmentCallbacks, ReviewFragment.Callbacks, ModelCallbacks, IWizardActivity {
 
     private WizardController wizardController;
-    private AbstractWizardModel mWizardModel;
+    private AbstractWizardModel mWizardView;
     private MyPagerAdapter mPagerAdapter;
     private ViewPager mPager;
     private StepPagerStrip mStepPagerStrip;
@@ -62,7 +62,7 @@ public class WizardActivity extends AbstractActivity implements
         mPager = (ViewPager) findViewById(R.id.pager);
         mStepPagerStrip = (StepPagerStrip) findViewById(R.id.wizard_strip);
         wizardController = new WizardController(this, this);
-        this.mWizardModel = wizardController.getWizardModel();
+        this.mWizardView = wizardController.getWizardView();
         mPagerAdapter = new MyPagerAdapter(getSupportFragmentManager(), wizardController);
         mPager.setAdapter(mPagerAdapter);
 
@@ -70,7 +70,7 @@ public class WizardActivity extends AbstractActivity implements
         wizardController.initNextButton((DataHandler)getApplicationContext(), mNextButton, mPager, mPagerAdapter, getSupportFragmentManager());
         wizardController.initPrevButton(mPrevButton, mPager);
         wizardController.initViewPagerListener(mPager, mStepPagerStrip);
-        mWizardModel.registerListener(this);
+        mWizardView.registerListener(this);
 
         // Set the normal actionbar to custom toolbar.
         Toolbar toolbar = (Toolbar) findViewById(R.id.wizard_action_bar);
@@ -87,7 +87,7 @@ public class WizardActivity extends AbstractActivity implements
     @Override
     public void onPageTreeChanged() {
         recalculateCutOffPage();
-        int size = mWizardModel.getCurrentPageSequence().size() + 1;
+        int size = mWizardView.getCurrentPageSequence().size() + 1;
         mStepPagerStrip.setPageCount(size); // + 1 = review, step
         mPagerAdapter.notifyDataSetChanged();
         updateBottomBar();
@@ -97,7 +97,7 @@ public class WizardActivity extends AbstractActivity implements
         mPrevButton.setVisibility(View.VISIBLE);
         int position = mPager.getCurrentItem();
 
-        if (position == mWizardModel.getCurrentPageSequence().size()) {
+        if (position == mWizardView.getCurrentPageSequence().size()) {
             mNextButton.setText(R.string.wizard_complete);
         } else if (position <= 0) {
             mPrevButton.setVisibility(View.GONE);
@@ -112,23 +112,23 @@ public class WizardActivity extends AbstractActivity implements
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mWizardModel.unregisterListener(this);
+        mWizardView.unregisterListener(this);
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putBundle("model", mWizardModel.save());
+        outState.putBundle("model", mWizardView.save());
     }
 
     @Override
     public AbstractWizardModel onGetModel() {
-        return mWizardModel;
+        return mWizardView;
     }
 
     @Override
     public void onEditScreenAfterReview(String key) {
-        List<Page> currentPageSequenceList = mWizardModel.getCurrentPageSequence();
+        List<Page> currentPageSequenceList = mWizardView.getCurrentPageSequence();
         int size = currentPageSequenceList.size() - 1;
         for (int i = size; i >= 0; i--) {
             if (currentPageSequenceList.get(i).getKey().equals(key)) {
@@ -153,11 +153,11 @@ public class WizardActivity extends AbstractActivity implements
 
     @Override
     public Page onGetPage(String key) {
-        return mWizardModel.findByKey(key);
+        return mWizardView.findByKey(key);
     }
 
     private boolean recalculateCutOffPage() {
-        List<Page> currentPageSequenceList = mWizardModel.getCurrentPageSequence();
+        List<Page> currentPageSequenceList = mWizardView.getCurrentPageSequence();
         int cutOffPage = currentPageSequenceList.size() + 1;
 
         for (int i = 0; i < currentPageSequenceList.size(); i++) {

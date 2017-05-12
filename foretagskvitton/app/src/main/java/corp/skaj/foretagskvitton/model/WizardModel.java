@@ -127,6 +127,7 @@ public class WizardModel {
         for (IObserver io : observers) {
             io.onDataChange();
         }
+        System.out.println("THIS GOES MOTHER FUCKERSSS!!!!!");
     }
 
     // Under construction...

@@ -49,7 +49,13 @@ public class WizardView extends AbstractWizardModel implements ModelCallbacks {
         return model.getPages();
     }
 
-    public AbstractWizardModel getWizardModel() {
+    public AbstractWizardModel getWizardView() {
         return this;
     }
+
+    public WizardModel getWizardModel() {
+        return model;
+    }
+
+
 }
