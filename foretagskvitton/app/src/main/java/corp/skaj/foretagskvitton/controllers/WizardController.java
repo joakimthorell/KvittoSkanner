@@ -12,11 +12,15 @@ import com.tech.freak.wizardpager.ui.StepPagerStrip;
 
 import java.util.List;
 
+import corp.skaj.foretagskvitton.model.IObserver;
+import corp.skaj.foretagskvitton.model.WizardModel;
+import corp.skaj.foretagskvitton.services.DataHandler;
+import corp.skaj.foretagskvitton.services.IData;
 import corp.skaj.foretagskvitton.view.IWizardActivity;
 import corp.skaj.foretagskvitton.view.WizardView;
 import corp.skaj.foretagskvitton.view.WriteDataFragment;
 
-public class WizardController {
+public class WizardController implements IObserver {
     private IWizardActivity wizardActivity;
     private WizardView wizardView;
     private boolean mEditingAfterReview;
@@ -25,7 +29,7 @@ public class WizardController {
     public WizardController(Context context, IWizardActivity iWizardActivity) {
         mEditingAfterReview = false;
         wizardActivity = iWizardActivity;
-        wizardView = new WizardView(context);
+        wizardView = new WizardView(this, context);
     }
 
     public void initViewPagerListener(ViewPager mPager, final StepPagerStrip mStepPagerStrip) {
@@ -55,7 +59,7 @@ public class WizardController {
         });
     }
 
-    public void initNextButton(Button mNextButton, final ViewPager mPager,
+    public void initNextButton(final IData dataHandler, Button mNextButton, final ViewPager mPager,
                                final MyPagerAdapter mPagerAdapter, final FragmentManager fragmentManager) {
         mNextButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,7 +67,10 @@ public class WizardController {
                 // If we are at last page
                 int size = wizardView.getWizardModel().getCurrentPageSequence().size();
                 if (mPager.getCurrentItem() == size) {
+                    // Under contruction...
+                    //dataHandler.writeData(WizardModel.class.getName(), wizardView.getWizardModel());
                     WriteDataFragment wls = new WriteDataFragment();
+
                     wls.show(fragmentManager, "confirm_receipt_dialog");
                 } else {
                     if (mEditingAfterReview) {
@@ -86,8 +93,9 @@ public class WizardController {
     }
 
     // Under construction...
-    public void updateUser() {
-        // TODO
+    @Override
+    public void onDataChange() {
+        System.out.println("SHIT FUCKING WORKS MAAAAN");
     }
 
     public void updateConsumePageSelectedEvent(boolean state) {

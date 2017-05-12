@@ -37,10 +37,11 @@ import corp.skaj.foretagskvitton.R;
 
 import corp.skaj.foretagskvitton.controllers.WizardController;
 import corp.skaj.foretagskvitton.controllers.MyPagerAdapter;
+import corp.skaj.foretagskvitton.services.DataHandler;
 import corp.skaj.foretagskvitton.view.IWizardActivity;
 
 public class WizardActivity extends AbstractActivity implements
-        PageFragmentCallbacks, ReviewFragment.Callbacks, ModelCallbacks, IWizardActivity, IUpdateUser {
+        PageFragmentCallbacks, ReviewFragment.Callbacks, ModelCallbacks, IWizardActivity {
 
     private WizardController wizardController;
     private AbstractWizardModel mWizardModel;
@@ -60,14 +61,13 @@ public class WizardActivity extends AbstractActivity implements
         mPrevButton = (Button) findViewById(R.id.wizardBackButton);
         mPager = (ViewPager) findViewById(R.id.pager);
         mStepPagerStrip = (StepPagerStrip) findViewById(R.id.wizard_strip);
-        WizardController wizardController = new WizardController(this, this);
-        this.wizardController = wizardController;
+        wizardController = new WizardController(this, this);
         this.mWizardModel = wizardController.getWizardModel();
         mPagerAdapter = new MyPagerAdapter(getSupportFragmentManager(), wizardController);
         mPager.setAdapter(mPagerAdapter);
 
         // Set listeners
-        wizardController.initNextButton(mNextButton, mPager, mPagerAdapter, getSupportFragmentManager());
+        wizardController.initNextButton((DataHandler)getApplicationContext(), mNextButton, mPager, mPagerAdapter, getSupportFragmentManager());
         wizardController.initPrevButton(mPrevButton, mPager);
         wizardController.initViewPagerListener(mPager, mStepPagerStrip);
         mWizardModel.registerListener(this);
@@ -173,10 +173,4 @@ public class WizardActivity extends AbstractActivity implements
         }
         return false;
     }
-
-    @Override
-    public void updateUser() {
-        // TODO go to new intent or back to parent?
-    }
-
 }
