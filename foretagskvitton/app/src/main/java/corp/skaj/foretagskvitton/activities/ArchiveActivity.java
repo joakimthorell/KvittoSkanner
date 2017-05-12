@@ -19,6 +19,7 @@ import corp.skaj.foretagskvitton.model.Company;
 import corp.skaj.foretagskvitton.model.Employee;
 import corp.skaj.foretagskvitton.model.Purchase;
 import corp.skaj.foretagskvitton.model.User;
+import corp.skaj.foretagskvitton.services.IData;
 
 public class ArchiveActivity extends AbstractActivity {
     public static final Integer BOTTOM_BAR_ID = R.id.action_archive;
@@ -35,7 +36,10 @@ public class ArchiveActivity extends AbstractActivity {
         purchases = new ArrayList<>();
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
-        mAdapter = new ReceiptAdapter(purchases, (User) readData(User.class.getName(), User.class));
+        IData dataHandler = (IData)getApplicationContext();
+        User user = (User) dataHandler.readData(User.class.getName(), User.class);
+
+        mAdapter = new ReceiptAdapter(purchases,user);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -43,7 +47,7 @@ public class ArchiveActivity extends AbstractActivity {
 
         initBottomBar(BOTTOM_BAR_ID, this);
         //prepareReceiptData();
-        User user = (User) readData(User.class.getName(), User.class);
+
         if (user.getCompanies().size() < 1) {
             testAddPurchases();
         } else {
@@ -63,19 +67,28 @@ public class ArchiveActivity extends AbstractActivity {
 
         PrivatePurchase pur = new PrivatePurchase(receipt);
         purchases.add(pur);
-        ((User)readData(User.class.getName(), User.class)).getCompanies().get(0).getEmployees().get(0).addPurchase(pur);
+
+        IData dataHandler = (IData)getApplicationContext();
+        User user = (User) dataHandler.readData(User.class.getName(), User.class);
+
+        user.getCompanies().get(0).getEmployees().get(0).addPurchase(pur);
         mAdapter.notifyDataSetChanged();
     }
 
 //.get(i).getEmployees().get(i).getPurchases().get(i);
     private void collectAllPurchases(){
-            List<Company> company = ((User)readData(User.class.getName(), User.class)).getCompanies();
+        IData dataHandler = (IData)getApplicationContext();
+        User user = (User) dataHandler.readData(User.class.getName(), User.class);
+
+            List<Company> company = user.getCompanies();
         for(int i = 0; i < company.size(); i++){
-            List<Employee> emps = ((User)readData(User.class.getName(), User.class)).getCompanies().get(i).getEmployees();
+            List<Employee> emps = user.getCompanies().get(i).getEmployees();
         }
     }
 
     private void testAddPurchases() {
+        IData dataHandler = (IData)getApplicationContext();
+        User user = (User) dataHandler.readData(User.class.getName(), User.class);
 
         Product product = new Product("Aladob", Category.MAT, 50.0, 12.0);
 
@@ -91,7 +104,7 @@ public class ArchiveActivity extends AbstractActivity {
 
         PrivatePurchase pur = new PrivatePurchase(receipt);
         purchases.add(pur);
-        ((User)readData(User.class.getName(), User.class)).getCompanies().get(0).getEmployees().get(0).addPurchase(pur);
+        user.getCompanies().get(0).getEmployees().get(0).addPurchase(pur);
         mAdapter.notifyDataSetChanged();
     }
 }

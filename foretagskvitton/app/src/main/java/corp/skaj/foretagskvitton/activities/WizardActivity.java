@@ -34,8 +34,7 @@ import com.tech.freak.wizardpager.ui.StepPagerStrip;
 import java.util.List;
 
 import corp.skaj.foretagskvitton.R;
-import corp.skaj.foretagskvitton.services.DataHolder;
-import corp.skaj.foretagskvitton.model.IUpdateUser;
+
 import corp.skaj.foretagskvitton.controllers.WizardController;
 import corp.skaj.foretagskvitton.controllers.MyPagerAdapter;
 import corp.skaj.foretagskvitton.view.IWizardActivity;
@@ -177,7 +176,6 @@ public class WizardActivity extends AbstractActivity implements
 
     @Override
     public void updateUser() {
-        wizardController.updateUser((DataHolder) getApplicationContext());
         // TODO go to new intent or back to parent?
     }
 

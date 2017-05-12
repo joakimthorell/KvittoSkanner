@@ -13,7 +13,6 @@ import com.tech.freak.wizardpager.ui.StepPagerStrip;
 import java.util.List;
 
 import corp.skaj.foretagskvitton.view.IWizardActivity;
-import corp.skaj.foretagskvitton.services.DataHolder;
 import corp.skaj.foretagskvitton.view.WizardView;
 import corp.skaj.foretagskvitton.view.WriteDataFragment;
 
@@ -87,9 +86,8 @@ public class WizardController {
     }
 
     // Under construction...
-    public void updateUser(DataHolder dataHolder) {
+    public void updateUser() {
         // TODO
-
     }
 
     public void updateConsumePageSelectedEvent(boolean state) {

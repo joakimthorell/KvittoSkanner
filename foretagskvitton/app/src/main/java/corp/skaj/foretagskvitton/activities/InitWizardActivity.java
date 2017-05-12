@@ -13,6 +13,7 @@ import java.util.List;
 
 import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.model.User;
+import corp.skaj.foretagskvitton.services.IData;
 import corp.skaj.foretagskvitton.services.TextCollector;
 
 public class InitWizardActivity extends AbstractActivity {
@@ -104,15 +105,12 @@ public class InitWizardActivity extends AbstractActivity {
 
     public void nextPressed(View view) {
         Intent intent = new Intent(this, WizardActivity.class);
-        writeData("strings", strings);
-        writeData("URI", URI);
+        IData dataHandler = (IData) getApplicationContext();
+        dataHandler.writeData("strings", strings);
+        dataHandler.writeData("URI", URI);
         startActivity(intent);
     }
 
     public void saveButtonPressed(View view) {
-        User user = (User) readData(User.class.getName(), User.class);
-        user.setName("MADAFATHIS FUCKING WORKS");
-        writeData(User.class.getName(), user);
-        System.out.println("THIS IS USER: " + ((User) readData(User.class.getName(), User.class)).getName());
     }
 }

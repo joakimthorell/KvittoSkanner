@@ -8,7 +8,8 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 
 import corp.skaj.foretagskvitton.R;
-import corp.skaj.foretagskvitton.model.IUpdateUser;
+import corp.skaj.foretagskvitton.activities.IUpdateUser;
+import corp.skaj.foretagskvitton.model.WizardModel;
 
 public class WriteDataFragment extends DialogFragment {
 

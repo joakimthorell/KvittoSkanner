@@ -19,25 +19,6 @@ import corp.skaj.foretagskvitton.R;
 public class AbstractActivity extends AppCompatActivity {
     private Map<Integer, Class<?extends AbstractActivity>> bottomBarMap;
 
-    protected <T> void writeData(String key, T t) {
-        SharedPreferences.Editor spe = getEditor();
-        spe.putString(key, toJson(t));
-        spe.apply();
-    }
-
-    public Object readData(String key, Class c) {
-        return new Gson().fromJson(PreferenceManager.getDefaultSharedPreferences(this).getString(key, ""), c);
-    }
-
-    private <T> String toJson(T data) {
-        Gson gson = new Gson();
-        return gson.toJson(data);
-    }
-
-    private SharedPreferences.Editor getEditor() {
-        return PreferenceManager.getDefaultSharedPreferences(this).edit();
-    }
-
     private void setupBottomBarMap() {
         if (bottomBarMap == null) {
             bottomBarMap  = new HashMap<>();
