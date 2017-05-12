@@ -12,14 +12,13 @@ import java.io.IOException;
 import java.util.List;
 
 import corp.skaj.foretagskvitton.R;
-import corp.skaj.foretagskvitton.services.DataHolder;
+import corp.skaj.foretagskvitton.model.User;
 import corp.skaj.foretagskvitton.services.TextCollector;
 
 public class InitWizardActivity extends AbstractActivity {
-    public static final String KEY_FOR_WIZARD_CONTROLLER = "corp.skaj.foretagskvitton.wizard.KEY_FOR_CONTROLLER";
     private boolean progressBarShowing;
     private boolean nextButtonShowing;
-    private List<String> listOfStrings;
+    private List<String> strings;
     private Uri URI;
 
     @Override
@@ -46,7 +45,7 @@ public class InitWizardActivity extends AbstractActivity {
             @Override
             public void run() {
                 try {
-                    listOfStrings = TextCollector.collectStringsFromURI(getApplicationContext(), URI);
+                    strings = TextCollector.collectStringsFromURI(getApplicationContext(), URI);
                     endLoadingBar();
                 } catch (IOException io) {
                     System.out.println("TextCollector is not operational");
@@ -65,7 +64,7 @@ public class InitWizardActivity extends AbstractActivity {
                 b.setVisibility(View.VISIBLE);
                 String toPrint = "";
 
-                for (String s : listOfStrings) {
+                for (String s : strings) {
                     toPrint += s + "\n";
                 }
                 TextView t = (TextView) findViewById(R.id.textContainer);
@@ -105,17 +104,15 @@ public class InitWizardActivity extends AbstractActivity {
 
     public void nextPressed(View view) {
         Intent intent = new Intent(this, WizardActivity.class);
-        DataHolder dataHolder = (DataHolder) getApplicationContext();
-        dataHolder.setStrings(listOfStrings);
-        dataHolder.setURI(URI);
+        writeData("strings", strings);
+        writeData("URI", URI);
         startActivity(intent);
     }
 
     public void saveButtonPressed(View view) {
-        // Testing...
-        DataHolder dataHolder = (DataHolder) getApplicationContext();
-        //dataHolder.getUser().addCompany(new Company("TEST_COMPANY_1"));
-        writeData();
-        System.out.println(dataHolder.getUser().getName());
+        User user = (User) readData(User.class.getName(), User.class);
+        user.setName("MADAFATHIS FUCKING WORKS");
+        writeData(User.class.getName(), user);
+        System.out.println("THIS IS USER: " + ((User) readData(User.class.getName(), User.class)).getName());
     }
 }

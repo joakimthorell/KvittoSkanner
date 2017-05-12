@@ -13,7 +13,6 @@ import java.util.List;
 import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.model.Company;
 import corp.skaj.foretagskvitton.model.Purchase;
-import corp.skaj.foretagskvitton.model.Receipt;
 import corp.skaj.foretagskvitton.model.User;
 
 public class ReceiptAdapter extends RecyclerView.Adapter<ReceiptAdapter.MyViewHolder> {
@@ -34,11 +33,10 @@ public class ReceiptAdapter extends RecyclerView.Adapter<ReceiptAdapter.MyViewHo
         }
     }
 
-    public ReceiptAdapter(List<Purchase> purchases, User user, Context context) {
+    public ReceiptAdapter(List<Purchase> purchases, User user) {
         this.purchases = purchases;
         this.comapanyList = user.getCompanies();
         this.user = user;
-        this.context = context;
     }
 
     @Override

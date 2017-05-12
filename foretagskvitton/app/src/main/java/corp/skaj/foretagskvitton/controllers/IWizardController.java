@@ -5,7 +5,6 @@ import com.tech.freak.wizardpager.model.Page;
 
 import java.util.List;
 
-import corp.skaj.foretagskvitton.services.DataHolder;
 
 public interface IWizardController {
     void updateConsumePageSelectedEvent(boolean state);
@@ -16,5 +15,5 @@ public interface IWizardController {
 
     List<Page> getCurrentPageSequence();
 
-    void updateUser(DataHolder dataHolder);
+    void updateUser();
 }

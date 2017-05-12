@@ -1,15 +1,11 @@
 package corp.skaj.foretagskvitton.activities;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
-
-import com.google.gson.Gson;
 
 import corp.skaj.foretagskvitton.R;
-import corp.skaj.foretagskvitton.services.DataHolder;
+import corp.skaj.foretagskvitton.model.Company;
 import corp.skaj.foretagskvitton.model.User;
 
 public class ReadDataActivity extends AbstractActivity {
@@ -37,17 +33,13 @@ public class ReadDataActivity extends AbstractActivity {
     }
 
     private void readData() {
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-        // Removes all SharedPreferences.
-        /*
-        SharedPreferences.Editor prefsEditor = sharedPref.edit();
-        prefsEditor.clear();
-        prefsEditor.apply();
-        */
-        Gson gson = new Gson();
-        String savedData = sharedPref.getString(User.class.getName().toString(), "");
-        DataHolder dataHolder = (DataHolder) getApplicationContext();
-        dataHolder.setUser(gson.fromJson(savedData, User.class));
+        try {
+            ((User)readData(User.class.getName(), User.class)).getName();
+        } catch (Exception e) {
+            User newUser = new User("DEFAULT USER ");
+            newUser.addCompany(new Company("DEFAULT COMPANY"));
+            writeData(User.class.getName(), newUser);
+        }
     }
 
     private void endLoadingBar() {

@@ -15,26 +15,32 @@ import java.util.HashMap;
 import java.util.Map;
 
 import corp.skaj.foretagskvitton.R;
-import corp.skaj.foretagskvitton.services.DataHolder;
-import corp.skaj.foretagskvitton.model.User;
 
 public class AbstractActivity extends AppCompatActivity {
-    private Map<Integer, Class<?extends AbstractActivity>> bottomBarMap = new HashMap<>();
+    private Map<Integer, Class<?extends AbstractActivity>> bottomBarMap;
 
-    protected void writeData() {
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-        DataHolder dataHolder = (DataHolder) getApplicationContext();
-        SharedPreferences.Editor prefsEditor = sharedPref.edit();
-        Gson gson = new Gson();
-        String saveData = gson.toJson(dataHolder.getUser());
-        prefsEditor.putString(User.class.getName(), saveData);
-        prefsEditor.apply();
+    protected <T> void writeData(String key, T t) {
+        SharedPreferences.Editor spe = getEditor();
+        spe.putString(key, toJson(t));
+        spe.apply();
     }
 
+    public Object readData(String key, Class c) {
+        return new Gson().fromJson(PreferenceManager.getDefaultSharedPreferences(this).getString(key, ""), c);
+    }
 
-    private void initBottomBarMap() {
-        if (!bottomBarMap.isEmpty()) {
-            return;
+    private <T> String toJson(T data) {
+        Gson gson = new Gson();
+        return gson.toJson(data);
+    }
+
+    private SharedPreferences.Editor getEditor() {
+        return PreferenceManager.getDefaultSharedPreferences(this).edit();
+    }
+
+    private void setupBottomBarMap() {
+        if (bottomBarMap == null) {
+            bottomBarMap  = new HashMap<>();
         }
         bottomBarMap.put(ArchiveActivity.BOTTOM_BAR_ID, ArchiveActivity.class);
         bottomBarMap.put(GraphActivity.BOTTOM_BAR_ID, GraphActivity.class);
@@ -44,10 +50,8 @@ public class AbstractActivity extends AppCompatActivity {
     }
 
     protected void initBottomBar(final Integer ID, final Context context) {
-        final BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
-        bottomBar.setDefaultTab(ID);
-        initBottomBarMap();
-        bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
+        setupBottomBarMap();
+        setuDefaultTab(ID).setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelected(@IdRes int tabId) {
                 if (tabId != ID) {
@@ -55,5 +59,11 @@ public class AbstractActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private BottomBar setuDefaultTab(final  Integer ID) {
+        final BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
+        bottomBar.setDefaultTab(ID);
+        return bottomBar;
     }
 }
