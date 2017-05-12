@@ -39,6 +39,7 @@ import corp.skaj.foretagskvitton.services.DataHolder;
 import corp.skaj.foretagskvitton.model.IUpdateUser;
 import corp.skaj.foretagskvitton.controllers.WizardController;
 import corp.skaj.foretagskvitton.controllers.MyPagerAdapter;
+import corp.skaj.foretagskvitton.view.IWizardActivity;
 
 public class WizardActivity extends AbstractActivity implements
         PageFragmentCallbacks, ReviewFragment.Callbacks, ModelCallbacks, IWizardActivity, IUpdateUser {

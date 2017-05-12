@@ -31,11 +31,14 @@
         <activity android:name=".activities.ReadDataActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
+
                 <category android:name="android.intent.category.DEFAULT" />
+
                 <data android:mimeType="image/*" />
             </intent-filter>
         </activity>
@@ -49,15 +52,17 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="corp.skaj.foretagskvitton.activities.AddNewPostActivity" />
         </activity>
-        <activity android:name=".activities.CompanyActivity"
+        <activity
+            android:name=".activities.CompanyActivity"
             android:theme="@style/WizardTheme">
-        <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value="corp.skaj.foretagskvitton.activities.CompanyListingActivity" />
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="corp.skaj.foretagskvitton.activities.CompanyListingActivity" />
         </activity>
         <activity android:name=".activities.UserActivity" />
         <activity android:name=".activities.ArchiveActivity" />
         <activity android:name=".activities.CompanyListingActivity" />
+        <activity android:name=".activities.singleReceipt"/>
     </application>
 
 </manifest>

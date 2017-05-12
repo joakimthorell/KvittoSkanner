@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import com.tech.freak.wizardpager.model.ModelCallbacks;
 import com.tech.freak.wizardpager.model.Page;
 import com.tech.freak.wizardpager.model.ReviewItem;
+import com.tech.freak.wizardpager.model.TextPage;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -18,7 +19,7 @@ import java.util.Locale;
 
 import corp.skaj.foretagskvitton.view.DateFragment;
 
-public class DatePage extends Page {
+public class DatePage extends TextPage {
     public static SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
     public static final String DATE_DATA_KEY = "corp.skaj.foretagskvitton.model.DatePage.date";
     public static final String DATE_YEAR_KEY = "YEAR_KEY";
@@ -33,11 +34,6 @@ public class DatePage extends Page {
     }
 
     @Override
-    public Fragment createFragment() {
-        return DateFragment.create(getKey());
-    }
-
-    @Override
     public void getReviewItems(ArrayList<ReviewItem> dest) {
         dest.add(new ReviewItem(getTitle(), mData.getString(DATE_DATA_KEY), getKey()));
     }
@@ -47,13 +43,14 @@ public class DatePage extends Page {
         return !TextUtils.isEmpty(mData.getString(DATE_DATA_KEY));
     }
 
-    public Page setValue(String s) {
+    public DatePage setValue(String s) {
         try {
-            return setBundle(s);
+            setBundle(s);
         } catch (ParseException e) {
             // Nothing to do here
+        } finally {
+            return this;
         }
-        return this;
     }
 
     private Page setBundle(String s) throws ParseException {
