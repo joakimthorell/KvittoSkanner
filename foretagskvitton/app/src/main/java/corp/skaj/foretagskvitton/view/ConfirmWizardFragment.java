@@ -11,7 +11,6 @@ import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.model.WizardModel;
 
 public class ConfirmWizardFragment extends DialogFragment {
-
     private WizardModel model;
 
     @NonNull

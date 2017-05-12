@@ -37,13 +37,12 @@ import corp.skaj.foretagskvitton.R;
 
 import corp.skaj.foretagskvitton.controllers.WizardController;
 import corp.skaj.foretagskvitton.controllers.MyPagerAdapter;
-import corp.skaj.foretagskvitton.services.DataHandler;
 import corp.skaj.foretagskvitton.controllers.IUpdatable;
 
 public class WizardActivity extends AbstractActivity implements
         PageFragmentCallbacks, ReviewFragment.Callbacks, ModelCallbacks, IUpdatable {
 
-    private WizardController wizardController;
+    private WizardController mWizardController;
     private AbstractWizardModel mWizardView;
     private MyPagerAdapter mPagerAdapter;
     private ViewPager mPager;
@@ -61,18 +60,18 @@ public class WizardActivity extends AbstractActivity implements
         mPrevButton = (Button) findViewById(R.id.wizardBackButton);
         mPager = (ViewPager) findViewById(R.id.pager);
         mStepPagerStrip = (StepPagerStrip) findViewById(R.id.wizard_strip);
-        wizardController = new WizardController(this, this);
-        this.mWizardView = wizardController.getWizardView();
-        mPagerAdapter = new MyPagerAdapter(getSupportFragmentManager(), wizardController);
+        mWizardController = new WizardController(this, this);
+        this.mWizardView = mWizardController.getWizardView();
+        mPagerAdapter = new MyPagerAdapter(getSupportFragmentManager(), mWizardController);
         mPager.setAdapter(mPagerAdapter);
 
         // Set listeners
-        wizardController.initNextButton((DataHandler)getApplicationContext(), mNextButton, mPager, mPagerAdapter, getSupportFragmentManager());
-        wizardController.initPrevButton(mPrevButton, mPager);
-        wizardController.initViewPagerListener(mPager, mStepPagerStrip);
+        mWizardController.initNextButton(mNextButton, mPager, mPagerAdapter, getSupportFragmentManager());
+        mWizardController.initPrevButton(mPrevButton, mPager);
+        mWizardController.initViewPagerListener(mPager, mStepPagerStrip);
         mWizardView.registerListener(this);
 
-        // Set the normal actionbar to custom toolbar.
+        // Set actionbar to custom toolbar.
         Toolbar toolbar = (Toolbar) findViewById(R.id.wizard_action_bar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -131,8 +130,8 @@ public class WizardActivity extends AbstractActivity implements
         int size = currentPageSequenceList.size() - 1;
         for (int i = size; i >= 0; i--) {
             if (currentPageSequenceList.get(i).getKey().equals(key)) {
-                wizardController.updateConsumePageSelectedEvent(true);
-                wizardController.updateEditingAfterReview(true);
+                mWizardController.updateConsumePageSelectedEvent(true);
+                mWizardController.updateEditingAfterReview(true);
                 mPager.setCurrentItem(i);
                 refreshBottomBar();
                 break;

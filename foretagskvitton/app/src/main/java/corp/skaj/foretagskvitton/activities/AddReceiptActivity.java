@@ -16,25 +16,24 @@ import java.util.Date;
 
 import corp.skaj.foretagskvitton.R;
 
-public class AddNewPostActivity extends AbstractActivity {
-    public static final Integer BOTTOM_BAR_ID = R.id.action_add;
+public class AddReceiptActivity extends AbstractActivity {
     public static final String BUILD_NEW_RECEIPT = "corp.skaj.foretagskvitton.BUILD_RECEIPT";
     public static final String KEY_FOR_IMAGE = "corp.skaj.foretagskvitton.KEY_FOR_IMAGE";
+    public static final Integer BOTTOM_BAR_ID = R.id.action_add;
     private static final int REQUEST_IMAGE_CAPTURE = 31415;
-    private String imageAdress;
+    private String mImageAdress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_add_new_post);
-        imageAdress = "";
+        mImageAdress = "";
 
-        // Hides the actionbar and gives fullscreen feature
+        // Hide actionbar and gives fullscreen feature
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
 
-        // Setup bottom navigation
         initBottomBar(BOTTOM_BAR_ID, this);
     }
 
@@ -42,9 +41,9 @@ public class AddNewPostActivity extends AbstractActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            if (imageAdress.length() > 0) {
-                Uri URI = Uri.fromFile(new File(imageAdress));
-                imageAdress = "";
+            if (mImageAdress.length() > 0) {
+                Uri URI = Uri.fromFile(new File(mImageAdress));
+                mImageAdress = "";
                 startWizard(URI);
             }
         } else {
@@ -99,7 +98,7 @@ public class AddNewPostActivity extends AbstractActivity {
                 storageDir      /* directory */
         );
         // Save a file: path for use with ACTION_VIEW intents
-        imageAdress = image.getAbsolutePath();
+        mImageAdress = image.getAbsolutePath();
         return image;
     }
 

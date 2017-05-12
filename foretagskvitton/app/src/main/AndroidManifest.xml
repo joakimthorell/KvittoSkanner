@@ -44,25 +44,25 @@
             </intent-filter>
         </activity>
         <activity android:name=".activities.InitWizardActivity" />
-        <activity android:name=".activities.AddNewPostActivity" />
+        <activity android:name=".activities.AddReceiptActivity" />
         <activity android:name=".activities.GraphActivity" />
         <activity
             android:name=".activities.WizardActivity"
             android:theme="@style/WizardTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="corp.skaj.foretagskvitton.activities.AddNewPostActivity" />
+                android:value="corp.skaj.foretagskvitton.activities.AddReceiptActivity" />
         </activity>
         <activity
             android:name=".activities.CompanyActivity"
             android:theme="@style/WizardTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="corp.skaj.foretagskvitton.activities.CompanyListingActivity" />
+                android:value="corp.skaj.foretagskvitton.activities.CompanyListActivity" />
         </activity>
         <activity android:name=".activities.UserActivity" />
         <activity android:name=".activities.ArchiveActivity" />
-        <activity android:name=".activities.CompanyListingActivity" />
+        <activity android:name=".activities.CompanyListActivity" />
         <activity android:name=".activities.singleReceipt"/>
     </application>
 

@@ -25,7 +25,6 @@ import com.tech.freak.wizardpager.model.TextPage;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -60,24 +59,19 @@ public class WizardModel {
 
         return new PageList(
                 new BranchPage(view, "KORT")
-
                         .addBranch("Företagskort",
 
                                 new SingleFixedChoicePage(view, "FÖRETAG")
-
                                         .setChoices(getCompanyNames(user))
                                         .setValue(foundCompany == null ? null : foundCompany.getName())
                                         .setRequired(true),
 
                                 new MultipleFixedChoicePage(view, "GROSSIST")
-
                                         //TODO lista grossister, vi kan inte lista från en specifikt företag. Får lista alla direkt (får tänkte om här)
-
                                         .setChoices(),
 
-
                                 new DatePage(view, "DATUM")
-                                        .setValue(date == null ? getTodaysDate() : date),
+                                        .setValue(date == null ? getCurrentDate() : date),
 
                                 new TotalSumPage(view, "TOTALBELOPP")
                                         .setValue(totalSum > 0 ? String.valueOf(totalSum) : null)
@@ -87,16 +81,13 @@ public class WizardModel {
                                         .setRequired(true),
 
                                 new SingleFixedChoicePage(view, "KATEGORI")
-                                        .setChoices(Category.getCategoriesAsArray())
+                                        .setChoices(Category.getCategoriesArray())
                                         .setRequired(true),
-
                                 //TODO add a choice above which is "other" for custom choice of category
-
                                 new TextPage(view, "KOMMENTAR")
                                         .setRequired(false))
 
                         .addBranch("Privatkort",
-
                                 new SingleFixedChoicePage(view, "FÖRETAG")
                                         .setChoices(getCompanyNames(user))
                                         .setValue(foundCompany == null ? null : foundCompany.getName())
@@ -106,7 +97,7 @@ public class WizardModel {
                                         .setChoices(),
 
                                 new DatePage(view, "DATUM")
-                                        .setValue(date == null ? getTodaysDate() : date),
+                                        .setValue(date == null ? getCurrentDate() : date),
 
                                 new TotalSumPage(view, "TOTALBELOPP")
                                         .setValue(totalSum > 0 ? String.valueOf(totalSum) : null)
@@ -116,12 +107,11 @@ public class WizardModel {
                                         .setRequired(true),
 
                                 new SingleFixedChoicePage(view, "KATEGORI")
-                                        .setChoices(Category.getCategoriesAsArray())
+                                        .setChoices(Category.getCategoriesArray())
                                         .setRequired(true),
 
                                 new TextPage(view, "KOMMENTAR")
                                         .setRequired(false))
-
                         .setRequired(true));
     }
 
@@ -155,7 +145,7 @@ public class WizardModel {
         return companyNames;
     }
 
-    private String getTodaysDate() {
+    private String getCurrentDate() {
         return new SimpleDateFormat("yyyy-MM-dd").format(new Date());
     }
 

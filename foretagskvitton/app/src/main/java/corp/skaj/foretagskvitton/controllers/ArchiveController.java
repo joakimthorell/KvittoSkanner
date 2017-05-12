@@ -1,31 +1,21 @@
 package corp.skaj.foretagskvitton.controllers;
 
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Movie;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.List;
 
-import corp.skaj.foretagskvitton.activities.CompanyActivity;
 import corp.skaj.foretagskvitton.model.Company;
 import corp.skaj.foretagskvitton.model.Employee;
 import corp.skaj.foretagskvitton.model.Purchase;
 import corp.skaj.foretagskvitton.model.Receipt;
 
 public class ArchiveController {
+    public static final String COMPANY_KEY = "ArchiveKey";
     private Context mContext;
     private List<Receipt> receipts;
     private List<Company> companies;
     private RecyclerView recyclerView;
-
-    public static final String COMPANY_KEY = "ArchiveKey";
 
     private void getAllReceipts() {
         //companies = dataHolder.getUser().getCompanies();

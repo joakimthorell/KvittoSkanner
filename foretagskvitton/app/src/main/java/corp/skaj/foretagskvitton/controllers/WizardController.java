@@ -13,25 +13,23 @@ import com.tech.freak.wizardpager.ui.StepPagerStrip;
 import java.util.List;
 
 import corp.skaj.foretagskvitton.model.IObserver;
-import corp.skaj.foretagskvitton.model.IData;
 import corp.skaj.foretagskvitton.view.WizardView;
 import corp.skaj.foretagskvitton.view.ConfirmWizardFragment;
 
 public class WizardController implements IObserver {
-    private IUpdatable updater;
-    private WizardView wizardView;
+    private IUpdatable mUpdater;
+    private WizardView mWizardView;
     private boolean mEditingAfterReview;
     private boolean mConsumePageSelectedEvent;
 
-    public WizardController(Context context, IUpdatable updater) {
+    public WizardController(Context context, IUpdatable mUpdater) {
         mEditingAfterReview = false;
-        this.updater = updater;
-        wizardView = new WizardView(this, context);
+        this.mUpdater = mUpdater;
+        mWizardView = new WizardView(this, context);
     }
 
     public void initViewPagerListener(ViewPager mPager, final StepPagerStrip mStepPagerStrip) {
         mPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 // Do nothing.
@@ -40,12 +38,11 @@ public class WizardController implements IObserver {
             @Override
             public void onPageSelected(int position) {
                 mStepPagerStrip.setCurrentPage(position);
-
                 if (mConsumePageSelectedEvent) {
                     mConsumePageSelectedEvent = false;
                 } else {
                     mEditingAfterReview = false;
-                    updater.refreshBottomBar();
+                    mUpdater.refreshBottomBar();
                 }
             }
 
@@ -56,16 +53,17 @@ public class WizardController implements IObserver {
         });
     }
 
-    public void initNextButton(final IData dataHandler, Button mNextButton, final ViewPager mPager,
-                               final MyPagerAdapter mPagerAdapter, final FragmentManager fragmentManager) {
+    public void initNextButton(Button mNextButton,
+                               final ViewPager mPager,
+                               final MyPagerAdapter mPagerAdapter,
+                               final FragmentManager fragmentManager) {
         mNextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // If we are at last page
-                int size = wizardView.getWizardView().getCurrentPageSequence().size();
+                int size = mWizardView.getWizardView().getCurrentPageSequence().size();
                 if (mPager.getCurrentItem() == size) {
                     ConfirmWizardFragment wls = new ConfirmWizardFragment();
-                    wls.setModel(wizardView.getWizardModel());
+                    wls.setModel(mWizardView.getWizardModel());
                     wls.show(fragmentManager, "confirm_receipt_dialog");
                 } else {
                     if (mEditingAfterReview) {
@@ -102,10 +100,10 @@ public class WizardController implements IObserver {
     }
 
     public AbstractWizardModel getWizardView() {
-        return wizardView.getWizardView();
+        return mWizardView.getWizardView();
     }
 
     public List<Page> getCurrentPageSequence() {
-        return wizardView.getWizardView().getCurrentPageSequence();
+        return mWizardView.getWizardView().getCurrentPageSequence();
     }
 }

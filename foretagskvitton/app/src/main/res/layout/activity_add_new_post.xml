@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/backround_xxxhdpi"
     android:orientation="vertical"
-    tools:context="corp.skaj.foretagskvitton.activities.AddNewPostActivity">
+    tools:context="corp.skaj.foretagskvitton.activities.AddReceiptActivity">
 
     <ImageView
         android:id="@+id/imageView1"

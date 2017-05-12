@@ -28,25 +28,14 @@ public class MyPagerAdapter extends FragmentStatePagerAdapter {
         if (i >= wizardController.getCurrentPageSequence().size()) {
             return new ReviewFragment();
         }
-        // fullösning:::: TODO if possible, make pretty
+        //TODO if possible, make pretty
         Page page = wizardController.getCurrentPageSequence().get(i);
-
-
-
-
-
-
-
-
-
-
 
         if (page instanceof TotalSumPage) {
             return TotalSumFragment.create(page.getKey());
         } else if (page instanceof DatePage) {
             return DateFragment.create(page.getKey());
         }
-
         return page.createFragment();
     }
 

@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import corp.skaj.foretagskvitton.R;
 
-import static corp.skaj.foretagskvitton.controllers.ListViewController.COMPANY_KEY;
+import static corp.skaj.foretagskvitton.controllers.CompanyListController.COMPANY_KEY;
 
 public class CompanyActivity extends AppCompatActivity {
     public static final Integer BOTTOM_BAR_ID = R.id.action_business;
@@ -20,7 +20,7 @@ public class CompanyActivity extends AppCompatActivity {
 
         String companyName = getIntent().getExtras().get(COMPANY_KEY).toString();
 
-        /*ListViewController listViewController = new ListViewController();
+        /*CompanyListController listViewController = new CompanyListController();
         Button button = (Button) findViewById(R.id.buttonForCompany);
         listViewController.initButtonListener(button, this);*/
 

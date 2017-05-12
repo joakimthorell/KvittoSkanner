@@ -11,7 +11,6 @@ public class UserActivity extends AbstractActivity {
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_company_listing);
-
             initBottomBar(BOTTOM_BAR_ID, this);
     }
 }

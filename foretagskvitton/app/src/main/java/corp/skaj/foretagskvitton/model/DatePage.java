@@ -1,7 +1,5 @@
 package corp.skaj.foretagskvitton.model;
 
-import android.content.SharedPreferences;
-import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 
 import com.tech.freak.wizardpager.model.ModelCallbacks;
@@ -17,20 +15,17 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 
-import corp.skaj.foretagskvitton.view.DateFragment;
-
 public class DatePage extends TextPage {
     public static SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
     public static final String DATE_DATA_KEY = "corp.skaj.foretagskvitton.model.DatePage.date";
     public static final String DATE_YEAR_KEY = "YEAR_KEY";
     public static final String DATE_MONTH_KEY = "MONTH_KEY";
     public static final String DATE_DAY_KEY = "DAY_KEY";
-    private boolean dateFound;
-
+    private boolean mDateFound;
 
     public DatePage(ModelCallbacks callbacks, String title) {
         super(callbacks, title);
-        dateFound = false;
+        mDateFound = false;
     }
 
     @Override
@@ -68,7 +63,7 @@ public class DatePage extends TextPage {
         int year = c.get(Calendar.YEAR);
         int month = c.get(Calendar.MONTH);
         int day = c.get(Calendar.DATE);
-        dateFound = true;
+        mDateFound = true;
 
         mData.putInt(DATE_YEAR_KEY, year);
         mData.putInt(DATE_MONTH_KEY, month);
@@ -78,6 +73,6 @@ public class DatePage extends TextPage {
     }
 
     public boolean isDateFound() {
-        return dateFound;
+        return mDateFound;
     }
 }
