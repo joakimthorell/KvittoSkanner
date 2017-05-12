@@ -37,7 +37,7 @@ public class ArchiveActivity extends AbstractActivity {
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
         IData dataHandler = (IData)getApplicationContext();
-        User user = (User) dataHandler.readData(User.class.getName(), User.class);
+        User user = dataHandler.readData(User.class.getName(), User.class);
 
         mAdapter = new ReceiptAdapter(purchases,user);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());

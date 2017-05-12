@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 
 import corp.skaj.foretagskvitton.R;
 
-public class BottomNavigationFragment extends Fragment {
+public class BottomBarFragment extends Fragment {
 
     @Nullable
     @Override
