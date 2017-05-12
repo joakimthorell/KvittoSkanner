@@ -13,22 +13,19 @@ import com.tech.freak.wizardpager.ui.StepPagerStrip;
 import java.util.List;
 
 import corp.skaj.foretagskvitton.model.IObserver;
-import corp.skaj.foretagskvitton.model.WizardModel;
-import corp.skaj.foretagskvitton.services.DataHandler;
-import corp.skaj.foretagskvitton.services.IData;
-import corp.skaj.foretagskvitton.view.IWizardActivity;
+import corp.skaj.foretagskvitton.model.IData;
 import corp.skaj.foretagskvitton.view.WizardView;
 import corp.skaj.foretagskvitton.view.WriteDataFragment;
 
 public class WizardController implements IObserver {
-    private IWizardActivity wizardActivity;
+    private IUpdatable updater;
     private WizardView wizardView;
     private boolean mEditingAfterReview;
     private boolean mConsumePageSelectedEvent;
 
-    public WizardController(Context context, IWizardActivity iWizardActivity) {
+    public WizardController(Context context, IUpdatable updater) {
         mEditingAfterReview = false;
-        wizardActivity = iWizardActivity;
+        this.updater = updater;
         wizardView = new WizardView(this, context);
     }
 
@@ -48,7 +45,7 @@ public class WizardController implements IObserver {
                     mConsumePageSelectedEvent = false;
                 } else {
                     mEditingAfterReview = false;
-                    wizardActivity.updateBottomBar();
+                    updater.refreshBottomBar();
                 }
             }
 
@@ -93,7 +90,7 @@ public class WizardController implements IObserver {
     // Under construction...
     @Override
     public void onDataChange() {
-        System.out.println("SHIT FUCKING WORKS MAAAAN");
+        //TODO Save data from Wizard
     }
 
     public void updateConsumePageSelectedEvent(boolean state) {

@@ -119,7 +119,7 @@ public class WizardModel {
 
     public void collectData() {
         Map<String, String> data = new HashMap<>();
-        //TODO Collect all data
+        //TODO Collect all data.
         notifyController();
     }
 
@@ -127,7 +127,6 @@ public class WizardModel {
         for (IObserver io : observers) {
             io.onDataChange();
         }
-        System.out.println("THIS GOES MOTHER FUCKERSSS!!!!!");
     }
 
     // Under construction...

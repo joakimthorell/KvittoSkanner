@@ -1,4 +1,4 @@
-package corp.skaj.foretagskvitton.services;
+package corp.skaj.foretagskvitton.model;
 
 public interface IData {
     <T> void writeData(String key, T t);

@@ -38,10 +38,10 @@ import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.controllers.WizardController;
 import corp.skaj.foretagskvitton.controllers.MyPagerAdapter;
 import corp.skaj.foretagskvitton.services.DataHandler;
-import corp.skaj.foretagskvitton.view.IWizardActivity;
+import corp.skaj.foretagskvitton.controllers.IUpdatable;
 
 public class WizardActivity extends AbstractActivity implements
-        PageFragmentCallbacks, ReviewFragment.Callbacks, ModelCallbacks, IWizardActivity {
+        PageFragmentCallbacks, ReviewFragment.Callbacks, ModelCallbacks, IUpdatable {
 
     private WizardController wizardController;
     private AbstractWizardModel mWizardView;
@@ -81,7 +81,7 @@ public class WizardActivity extends AbstractActivity implements
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         onPageTreeChanged();
-        updateBottomBar(); //refreshBottomBar();
+        refreshBottomBar();
     }
 
     @Override
@@ -90,13 +90,12 @@ public class WizardActivity extends AbstractActivity implements
         int size = mWizardView.getCurrentPageSequence().size() + 1;
         mStepPagerStrip.setPageCount(size); // + 1 = review, step
         mPagerAdapter.notifyDataSetChanged();
-        updateBottomBar();
+        refreshBottomBar();
     }
 
-    public void updateBottomBar() {
+    public void refreshBottomBar() {
         mPrevButton.setVisibility(View.VISIBLE);
         int position = mPager.getCurrentItem();
-
         if (position == mWizardView.getCurrentPageSequence().size()) {
             mNextButton.setText(R.string.wizard_complete);
         } else if (position <= 0) {
@@ -135,7 +134,7 @@ public class WizardActivity extends AbstractActivity implements
                 wizardController.updateConsumePageSelectedEvent(true);
                 wizardController.updateEditingAfterReview(true);
                 mPager.setCurrentItem(i);
-                updateBottomBar();
+                refreshBottomBar();
                 break;
             }
         }
@@ -146,7 +145,7 @@ public class WizardActivity extends AbstractActivity implements
         if (page.isRequired()) {
             if (recalculateCutOffPage()) {
                 mPagerAdapter.notifyDataSetChanged();
-                updateBottomBar();
+                refreshBottomBar();
             }
         }
     }

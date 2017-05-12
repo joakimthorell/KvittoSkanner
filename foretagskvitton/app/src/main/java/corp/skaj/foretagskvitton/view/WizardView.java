@@ -27,7 +27,7 @@ import java.util.List;
 import corp.skaj.foretagskvitton.model.IObserver;
 import corp.skaj.foretagskvitton.model.User;
 import corp.skaj.foretagskvitton.model.WizardModel;
-import corp.skaj.foretagskvitton.services.IData;
+import corp.skaj.foretagskvitton.model.IData;
 
 public class WizardView extends AbstractWizardModel implements ModelCallbacks {
     private WizardModel model;
