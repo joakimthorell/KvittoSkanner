@@ -14,11 +14,11 @@ import corp.skaj.foretagskvitton.view.DateFragment;
 import corp.skaj.foretagskvitton.view.TotalSumFragment;
 
 public class MyPagerAdapter extends FragmentStatePagerAdapter {
-    private IWizardController wizardController;
+    private WizardController wizardController;
     private Fragment mPrimaryItem;
     private int mCutOffPage;
 
-    public MyPagerAdapter(FragmentManager fm, IWizardController wizardController) {
+    public MyPagerAdapter(FragmentManager fm, WizardController wizardController) {
         super(fm);
         this.wizardController = wizardController;
     }

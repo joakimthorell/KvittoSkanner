@@ -34,7 +34,6 @@ import com.tech.freak.wizardpager.ui.StepPagerStrip;
 import java.util.List;
 
 import corp.skaj.foretagskvitton.R;
-import corp.skaj.foretagskvitton.controllers.IWizardController;
 import corp.skaj.foretagskvitton.services.DataHolder;
 import corp.skaj.foretagskvitton.model.IUpdateUser;
 import corp.skaj.foretagskvitton.controllers.WizardController;
@@ -44,7 +43,7 @@ import corp.skaj.foretagskvitton.view.IWizardActivity;
 public class WizardActivity extends AbstractActivity implements
         PageFragmentCallbacks, ReviewFragment.Callbacks, ModelCallbacks, IWizardActivity, IUpdateUser {
 
-    private IWizardController wizardController;
+    private WizardController wizardController;
     private AbstractWizardModel mWizardModel;
     private MyPagerAdapter mPagerAdapter;
     private ViewPager mPager;

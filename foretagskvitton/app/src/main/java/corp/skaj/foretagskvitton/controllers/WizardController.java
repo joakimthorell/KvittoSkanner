@@ -17,7 +17,7 @@ import corp.skaj.foretagskvitton.services.DataHolder;
 import corp.skaj.foretagskvitton.view.WizardView;
 import corp.skaj.foretagskvitton.view.WriteDataFragment;
 
-public class WizardController implements IWizardController {
+public class WizardController {
     private IWizardActivity wizardActivity;
     private WizardView wizardView;
     private boolean mEditingAfterReview;
@@ -87,28 +87,23 @@ public class WizardController implements IWizardController {
     }
 
     // Under construction...
-    @Override
     public void updateUser(DataHolder dataHolder) {
         // TODO
 
     }
 
-    @Override
     public void updateConsumePageSelectedEvent(boolean state) {
         mConsumePageSelectedEvent = state;
     }
 
-    @Override
     public void updateEditingAfterReview(boolean state) {
         mEditingAfterReview = state;
     }
 
-    @Override
     public AbstractWizardModel getWizardModel() {
         return wizardView.getWizardModel();
     }
 
-    @Override
     public List<Page> getCurrentPageSequence() {
         return wizardView.getWizardModel().getCurrentPageSequence();
     }
