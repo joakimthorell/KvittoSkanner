@@ -17,7 +17,7 @@ public class DataHandler extends Application implements IData {
     }
 
     public <T> T readData(String key, Class<T> classOfT) {
-        return (T) new Gson().fromJson(PreferenceManager.getDefaultSharedPreferences(this).getString(key, ""), classOfT);
+        return new Gson().fromJson(PreferenceManager.getDefaultSharedPreferences(this).getString(key, ""), classOfT);
     }
 
     private <T> String toJson(T data) {
