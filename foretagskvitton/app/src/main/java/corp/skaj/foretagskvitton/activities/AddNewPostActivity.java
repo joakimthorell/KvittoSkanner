@@ -9,20 +9,17 @@ import android.support.v4.content.FileProvider;
 import android.support.v7.app.ActionBar;
 import android.view.View;
 
-import com.roughike.bottombar.BottomBar;
-
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import corp.skaj.foretagskvitton.R;
-import corp.skaj.foretagskvitton.controllers.BottomNavigationController;
 
 public class AddNewPostActivity extends AbstractActivity {
+    public static final Integer BOTTOM_BAR_ID = R.id.action_add;
     public static final String BUILD_NEW_RECEIPT = "corp.skaj.foretagskvitton.BUILD_RECEIPT";
     public static final String KEY_FOR_IMAGE = "corp.skaj.foretagskvitton.KEY_FOR_IMAGE";
-    public static final String STATE_FOR_BOTTOM_MENU = "ADD_NEW_POST_ACTIVITY";
     private static final int REQUEST_IMAGE_CAPTURE = 31415;
     private String imageAdress;
 
@@ -38,7 +35,7 @@ public class AddNewPostActivity extends AbstractActivity {
         actionBar.hide();
 
         // Setup bottom navigation
-        initBottomBar(STATE_FOR_BOTTOM_MENU, this);
+        initBottomBar(BOTTOM_BAR_ID, this);
     }
 
     // This method catches taken image by camera.
