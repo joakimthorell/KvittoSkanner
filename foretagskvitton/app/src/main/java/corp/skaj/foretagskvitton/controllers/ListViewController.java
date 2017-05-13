@@ -8,7 +8,6 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
-import corp.skaj.foretagskvitton.activities.AbstractActivity;
 import corp.skaj.foretagskvitton.activities.CompanyActivity;
 
 /**
@@ -34,7 +33,6 @@ public class ListViewController {
 
         });
     }
-
 
     /*public void initButtonListener (Button button, final Activity activity) {
         button.setOnClickListener(new View.OnClickListener() {
