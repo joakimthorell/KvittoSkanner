@@ -4,11 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="corp.skaj.foretagskvitton.activities.CompanyListingActivity">
+    tools:context="corp.skaj.foretagskvitton.activities.CompanyListActivity">
 
     <fragment
         android:id="@+id/company"
-        android:name="corp.skaj.foretagskvitton.view.BottomNavigationFragment"
+        android:name="corp.skaj.foretagskvitton.view.BottomBarFragment"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"

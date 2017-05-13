@@ -22,8 +22,8 @@ public class TextCollector {
     private TextCollector() {
     }
 
-    public static List<String> collectStringsFromImage(Context context, Uri uri) throws IOException {
-        Bitmap bmp = createImageFromUri(context, uri);
+    public static List<String> collectStringsFromURI(Context context, Uri uri) throws IOException {
+        Bitmap bmp = createImageFromURI(context, uri);
         SparseArray<TextBlock> textBlocks = getTextBlocksFromImage(context, bmp);
 
         if (textBlocks == null) {
@@ -32,7 +32,7 @@ public class TextCollector {
         return buildListOfStrings(textBlocks);
     }
 
-    private static Bitmap createImageFromUri(Context context, Uri uri) throws IOException {
+    private static Bitmap createImageFromURI(Context context, Uri uri) throws IOException {
         if (URI == null) {
             throw new NullPointerException("URI is null");
         }

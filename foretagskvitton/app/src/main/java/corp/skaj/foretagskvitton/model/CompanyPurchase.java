@@ -2,7 +2,7 @@ package corp.skaj.foretagskvitton.model;
 
 
 public class CompanyPurchase extends Purchase {
-    private Card payment;
+    private Card card;
 
     public CompanyPurchase(Receipt receipt, Supplier supplier) {
         super(receipt, supplier);
@@ -13,6 +13,6 @@ public class CompanyPurchase extends Purchase {
     }
 
     public Card getPayment() {
-        return payment;
+        return card;
     }
 }

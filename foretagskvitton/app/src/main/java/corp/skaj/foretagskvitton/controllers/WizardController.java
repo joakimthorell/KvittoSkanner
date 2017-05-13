@@ -11,28 +11,25 @@ import com.tech.freak.wizardpager.model.Page;
 import com.tech.freak.wizardpager.ui.StepPagerStrip;
 
 import java.util.List;
-import java.util.Map;
 
-import corp.skaj.foretagskvitton.activities.IWizardController;
-import corp.skaj.foretagskvitton.model.WizardModel;
-import corp.skaj.foretagskvitton.model.DataHolder;
-import corp.skaj.foretagskvitton.view.WriteDataFragment;
+import corp.skaj.foretagskvitton.model.IObserver;
+import corp.skaj.foretagskvitton.view.WizardView;
+import corp.skaj.foretagskvitton.view.ConfirmWizardFragment;
 
-public class WizardController implements IWizardController {
-    private IWizardActivity wizardActivity;
-    private WizardModel wizardModel;
+public class WizardController implements IObserver {
+    private IUpdatable mUpdater;
+    private WizardView mWizardView;
     private boolean mEditingAfterReview;
     private boolean mConsumePageSelectedEvent;
 
-    public WizardController(Context context, IWizardActivity iWizardActivity) {
+    public WizardController(Context context, IUpdatable mUpdater) {
         mEditingAfterReview = false;
-        wizardActivity = iWizardActivity;
-        wizardModel = new WizardModel(context);
+        this.mUpdater = mUpdater;
+        mWizardView = new WizardView(this, context);
     }
 
     public void initViewPagerListener(ViewPager mPager, final StepPagerStrip mStepPagerStrip) {
         mPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 // Do nothing.
@@ -41,12 +38,11 @@ public class WizardController implements IWizardController {
             @Override
             public void onPageSelected(int position) {
                 mStepPagerStrip.setCurrentPage(position);
-
                 if (mConsumePageSelectedEvent) {
                     mConsumePageSelectedEvent = false;
                 } else {
                     mEditingAfterReview = false;
-                    wizardActivity.updateBottomBar();
+                    mUpdater.refreshBottomBar();
                 }
             }
 
@@ -57,15 +53,17 @@ public class WizardController implements IWizardController {
         });
     }
 
-    public void initNextButton(Button mNextButton, final ViewPager mPager,
-                               final MyPagerAdapter mPagerAdapter, final FragmentManager fragmentManager) {
+    public void initNextButton(Button mNextButton,
+                               final ViewPager mPager,
+                               final MyPagerAdapter mPagerAdapter,
+                               final FragmentManager fragmentManager) {
         mNextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // If we are at last page
-                int size = wizardModel.getCurrentPageSequence().size();
+                int size = mWizardView.getWizardView().getCurrentPageSequence().size();
                 if (mPager.getCurrentItem() == size) {
-                    WriteDataFragment wls = new WriteDataFragment();
+                    ConfirmWizardFragment wls = new ConfirmWizardFragment();
+                    wls.setModel(mWizardView.getWizardModel());
                     wls.show(fragmentManager, "confirm_receipt_dialog");
                 } else {
                     if (mEditingAfterReview) {
@@ -89,33 +87,23 @@ public class WizardController implements IWizardController {
 
     // Under construction...
     @Override
-    public void updateUser(DataHolder dataHolder) {
-        Map<String, String> data = wizardModel.collectData();
-        for (String s : data.keySet()) {
-            System.out.println("KEY: " + s + "  DATA: " + data.get(s));
-        }
-
-        wizardModel.addNewPost(data, dataHolder);
-
+    public void onDataChange() {
+        //TODO Save data from Wizard
     }
 
-    @Override
     public void updateConsumePageSelectedEvent(boolean state) {
         mConsumePageSelectedEvent = state;
     }
 
-    @Override
     public void updateEditingAfterReview(boolean state) {
         mEditingAfterReview = state;
     }
 
-    @Override
-    public AbstractWizardModel getWizardModel() {
-        return wizardModel;
+    public AbstractWizardModel getWizardView() {
+        return mWizardView.getWizardView();
     }
 
-    @Override
     public List<Page> getCurrentPageSequence() {
-        return wizardModel.getCurrentPageSequence();
+        return mWizardView.getWizardView().getCurrentPageSequence();
     }
 }

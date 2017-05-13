@@ -1,24 +1,30 @@
 package corp.skaj.foretagskvitton.controllers;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
 import corp.skaj.foretagskvitton.R;
+import corp.skaj.foretagskvitton.activities.singleReceipt;
 import corp.skaj.foretagskvitton.model.Company;
 import corp.skaj.foretagskvitton.model.Purchase;
-import corp.skaj.foretagskvitton.model.Receipt;
 import corp.skaj.foretagskvitton.model.User;
 
 public class ReceiptAdapter extends RecyclerView.Adapter<ReceiptAdapter.MyViewHolder> {
 
+    public static final String ARCHIVE_KEY = "ArchiveKey";
+
     private List<Purchase> purchases;
     private List<Company> comapanyList;
     private User user;
+    private Context context;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView title, year, genre;
@@ -39,9 +45,18 @@ public class ReceiptAdapter extends RecyclerView.Adapter<ReceiptAdapter.MyViewHo
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext())
+        final View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.archive_list_row, parent, false);
 
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Toast.makeText(context, "Mabye it works", Toast.LENGTH_SHORT).show();
+               Intent intent =  new Intent(context, singleReceipt.class);
+                intent.putExtra(ARCHIVE_KEY, "lars");
+                context.startActivity(intent);
+            }
+        });
         return new MyViewHolder(itemView);
     }
 
@@ -60,7 +75,6 @@ public class ReceiptAdapter extends RecyclerView.Adapter<ReceiptAdapter.MyViewHo
         SimpleDateFormat dateRaw = new SimpleDateFormat("yyyy-MM-dd");
         String date = dateRaw.format(purchase.getReceipt().getDate().getTime());
         holder.year.setText(date);
-
     }
 
     @Override

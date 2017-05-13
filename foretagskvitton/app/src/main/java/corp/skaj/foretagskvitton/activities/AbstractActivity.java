@@ -1,32 +1,47 @@
 package corp.skaj.foretagskvitton.activities;
 
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
+import android.content.Intent;
+import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
 
-import com.google.gson.Gson;
 import com.roughike.bottombar.BottomBar;
+import com.roughike.bottombar.OnTabSelectListener;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import corp.skaj.foretagskvitton.R;
-import corp.skaj.foretagskvitton.controllers.BottomNavigationController;
-import corp.skaj.foretagskvitton.model.DataHolder;
-import corp.skaj.foretagskvitton.model.User;
 
-public abstract class AbstractActivity extends AppCompatActivity {
+public class AbstractActivity extends AppCompatActivity {
+    private Map<Integer, Class<?extends AbstractActivity>> mBottomBarMap;
 
-    protected void writeData() {
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-        DataHolder dataHolder = (DataHolder)getApplicationContext();
-        SharedPreferences.Editor prefsEditor = sharedPref.edit();
-        Gson gson = new Gson();
-        String saveData = gson.toJson(dataHolder.getUser());
-        prefsEditor.putString(User.class.getName(), saveData);
-        prefsEditor.apply();
+    private void setBottomBarMap() {
+        if (mBottomBarMap == null) {
+            mBottomBarMap  = new HashMap<>();
+        }
+        mBottomBarMap.put(ArchiveActivity.BOTTOM_BAR_ID, ArchiveActivity.class);
+        mBottomBarMap.put(GraphActivity.BOTTOM_BAR_ID, GraphActivity.class);
+        mBottomBarMap.put(AddReceiptActivity.BOTTOM_BAR_ID, AddReceiptActivity.class);
+        mBottomBarMap.put(CompanyActivity.BOTTOM_BAR_ID, CompanyListActivity.class);
+        mBottomBarMap.put(UserActivity.BOTTOM_BAR_ID, UserActivity.class);
     }
 
-    protected void initBottomBar (String STATE, final Context context) {
-        BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
-        BottomNavigationController.setupBottomNavBar(bottomBar, STATE, context);
+    protected void initBottomBar(final Integer ID, final Context context) {
+        setBottomBarMap();
+        setDefaultTab(ID).setOnTabSelectListener(new OnTabSelectListener() {
+            @Override
+            public void onTabSelected(@IdRes int tabId) {
+                if (tabId != ID) {
+                    context.startActivity(new Intent(context, mBottomBarMap.get(tabId)));
+                }
+            }
+        });
+    }
+
+    private BottomBar setDefaultTab(final  Integer ID) {
+        final BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
+        bottomBar.setDefaultTab(ID);
+        return bottomBar;
     }
 }

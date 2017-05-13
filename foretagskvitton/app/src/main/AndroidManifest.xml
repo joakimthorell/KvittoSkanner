@@ -10,7 +10,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
-        android:name=".model.DataHolder"
+        android:name=".services.DataHandler"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -29,36 +29,41 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".activities.ReadDataActivity">
+        <activity android:name=".activities.InitApplicationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
+
                 <category android:name="android.intent.category.DEFAULT" />
+
                 <data android:mimeType="image/*" />
             </intent-filter>
         </activity>
         <activity android:name=".activities.InitWizardActivity" />
-        <activity android:name=".activities.AddNewPostActivity" />
+        <activity android:name=".activities.AddReceiptActivity" />
         <activity android:name=".activities.GraphActivity" />
         <activity
             android:name=".activities.WizardActivity"
             android:theme="@style/WizardTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="corp.skaj.foretagskvitton.activities.AddNewPostActivity" />
+                android:value="corp.skaj.foretagskvitton.activities.AddReceiptActivity" />
         </activity>
-        <activity android:name=".activities.CompanyActivity"
+        <activity
+            android:name=".activities.CompanyActivity"
             android:theme="@style/WizardTheme">
-        <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value="corp.skaj.foretagskvitton.activities.CompanyListingActivity" />
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="corp.skaj.foretagskvitton.activities.CompanyListActivity" />
         </activity>
         <activity android:name=".activities.UserActivity" />
         <activity android:name=".activities.ArchiveActivity" />
-        <activity android:name=".activities.CompanyListingActivity" />
+        <activity android:name=".activities.CompanyListActivity" />
+        <activity android:name=".activities.singleReceipt"/>
     </application>
 
 </manifest>

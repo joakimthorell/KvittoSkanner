@@ -6,7 +6,6 @@ import java.util.Collections;
 import java.util.List;
 
 public enum Category {
-
     BENSIN,
     HOTELL,
     KONTORSMATERIAL,
@@ -16,7 +15,7 @@ public enum Category {
     RESOR,
     TRANSPORT;
 
-    public static ArrayList<String> getCategoriesAsArrayList() {
+    public static ArrayList<String> getCategoriesArrayList() {
         String[] arr = Arrays.toString(values()).replaceAll("^.|.$", "").split(", ");
         List<String> categories = Arrays.asList(arr);
         ArrayList<String> strings = new ArrayList<>();
@@ -24,13 +23,12 @@ public enum Category {
         return strings;
     }
 
-    public static String[] getCategoriesAsArray() {
+    public static String[] getCategoriesArray() {
         return Arrays.toString(values()).replaceAll("^.|.$", "").split(", ");
     }
 
-    public static Category convertStringToCategory(String s) {
+    public static Category toString(String s) {
         s = s.toUpperCase().trim();
-
         switch (s) {
             case "BENSIN":
                 return BENSIN;

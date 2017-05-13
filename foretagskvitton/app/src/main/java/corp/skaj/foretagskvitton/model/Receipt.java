@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-
 public class Receipt {
     private List<Product> products;
     private Calendar date;
@@ -14,12 +13,11 @@ public class Receipt {
     private Category category;
     private final Uri pictureAdress;
 
-    public Receipt(List<Product> products, Calendar date, double total, final Uri pictureAdress, Category category) {
+    public Receipt(List<Product> products, Calendar date, double total, final Uri pictureAdress) {
         this.products = products;
         this.date = date;
         this.total = total;
         this.pictureAdress = pictureAdress;
-        this.category = category;
     }
 
     public Receipt(Product product, Calendar date, double total, final Uri pictureAdress) {
@@ -73,11 +71,11 @@ public class Receipt {
         return pictureAdress;
     }
 
-    public Category getCategory () {
+    public Category getCategory() {
         return category;
     }
 
-    public void setCategory (Category category) {
+    public void setCategory(Category category) {
         this.category = category;
     }
 }

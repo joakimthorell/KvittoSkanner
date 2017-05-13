@@ -9,45 +9,41 @@ import android.support.v4.content.FileProvider;
 import android.support.v7.app.ActionBar;
 import android.view.View;
 
-import com.roughike.bottombar.BottomBar;
-
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import corp.skaj.foretagskvitton.R;
-import corp.skaj.foretagskvitton.controllers.BottomNavigationController;
 
-public class AddNewPostActivity extends AbstractActivity {
+public class AddReceiptActivity extends AbstractActivity {
     public static final String BUILD_NEW_RECEIPT = "corp.skaj.foretagskvitton.BUILD_RECEIPT";
     public static final String KEY_FOR_IMAGE = "corp.skaj.foretagskvitton.KEY_FOR_IMAGE";
-    public static final String STATE_FOR_BOTTOM_MENU = "ADD_NEW_POST_ACTIVITY";
+    public static final Integer BOTTOM_BAR_ID = R.id.action_add;
     private static final int REQUEST_IMAGE_CAPTURE = 31415;
-    private String imageAdress;
+    private String mImageAdress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_add_new_post);
-        imageAdress = "";
+        mImageAdress = "";
 
-        // Hides the actionbar and gives fullscreen feature
+        // Hide actionbar and gives fullscreen feature
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
 
-        // Setup bottom navigation
-        initBottomBar(STATE_FOR_BOTTOM_MENU, this);
+        initBottomBar(BOTTOM_BAR_ID, this);
     }
 
     // This method catches taken image by camera.
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            if (imageAdress.length() > 0) {
-                Uri URI = Uri.fromFile(new File(imageAdress));
-                imageAdress = "";
+            if (mImageAdress.length() > 0) {
+                Uri URI = Uri.fromFile(new File(mImageAdress));
+                mImageAdress = "";
                 startWizard(URI);
             }
         } else {
@@ -102,7 +98,7 @@ public class AddNewPostActivity extends AbstractActivity {
                 storageDir      /* directory */
         );
         // Save a file: path for use with ACTION_VIEW intents
-        imageAdress = image.getAbsolutePath();
+        mImageAdress = image.getAbsolutePath();
         return image;
     }
 

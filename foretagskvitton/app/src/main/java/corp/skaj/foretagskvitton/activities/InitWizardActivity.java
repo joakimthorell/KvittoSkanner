@@ -12,41 +12,40 @@ import java.io.IOException;
 import java.util.List;
 
 import corp.skaj.foretagskvitton.R;
-import corp.skaj.foretagskvitton.model.DataHolder;
+import corp.skaj.foretagskvitton.model.IData;
 import corp.skaj.foretagskvitton.services.TextCollector;
 
 public class InitWizardActivity extends AbstractActivity {
-    public static final String KEY_FOR_WIZARD_CONTROLLER = "corp.skaj.foretagskvitton.wizard.KEY_FOR_CONTROLLER";
-    private boolean progressBarShowing;
-    private boolean nextButtonShowing;
-    private List<String> listOfStrings;
-    private Uri URI;
+    private boolean mProgressBar;
+    private boolean mNextButton;
+    private List<String> mStrings;
+    private Uri mURI;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_init_wizard);
-        final Uri URI = catchIntent(getIntent());
-        this.URI = URI;
-        collectStrings(URI).start();
+        final Uri mURI = catchIntent(getIntent());
+        this.mURI = mURI;
+        collectStrings(mURI).start();
 
-        progressBarShowing = false;
+        mProgressBar = false;
         toggleProgressBar();
 
-        nextButtonShowing = true;
+        mNextButton = true;
         toggleNextButton();
 
         Button b = (Button) findViewById(R.id.save_button);
         b.setVisibility(View.GONE);
     }
 
-    private Thread collectStrings(final Uri URI) {
+    private Thread collectStrings(final Uri mURI) {
         return new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
-                    listOfStrings = TextCollector.collectStringsFromImage(getApplicationContext(), URI);
+                    mStrings = TextCollector.collectStringsFromURI(getApplicationContext(), mURI);
                     endLoadingBar();
                 } catch (IOException io) {
                     System.out.println("TextCollector is not operational");
@@ -65,7 +64,7 @@ public class InitWizardActivity extends AbstractActivity {
                 b.setVisibility(View.VISIBLE);
                 String toPrint = "";
 
-                for (String s : listOfStrings) {
+                for (String s : mStrings) {
                     toPrint += s + "\n";
                 }
                 TextView t = (TextView) findViewById(R.id.textContainer);
@@ -75,47 +74,42 @@ public class InitWizardActivity extends AbstractActivity {
     }
 
     private void toggleProgressBar() {
-        int set = progressBarShowing ? View.GONE : View.VISIBLE;
+        int set = mProgressBar ? View.GONE : View.VISIBLE;
         ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
         progressBar.setVisibility(set);
-        progressBarShowing = !progressBarShowing;
+        mProgressBar = !mProgressBar;
     }
 
     private void toggleNextButton() {
-        int set = nextButtonShowing ? View.GONE : View.VISIBLE;
+        int set = mNextButton ? View.GONE : View.VISIBLE;
         Button button = (Button) findViewById(R.id.wizardNextButton1);
         button.setVisibility(set);
-        nextButtonShowing = !nextButtonShowing;
+        mNextButton = !mNextButton;
     }
 
     // If more then addNewPost will send images here, add them here.
     private Uri catchIntent(Intent intent) {
-        Uri URI = null;
+        Uri mURI = null;
         if (intent != null) {
-            if (intent.getAction().equals(AddNewPostActivity.BUILD_NEW_RECEIPT)) {
-                URI = (Uri) intent.getExtras().get(AddNewPostActivity.KEY_FOR_IMAGE);
-            } else if (intent.getAction().equals(ReadDataActivity.BUILD_NEW_RECEIPT)) {
-                URI = (Uri) intent.getExtras().get(ReadDataActivity.KEY_FOR_IMAGE);
+            if (intent.getAction().equals(AddReceiptActivity.BUILD_NEW_RECEIPT)) {
+                mURI = (Uri) intent.getExtras().get(AddReceiptActivity.KEY_FOR_IMAGE);
+            } else if (intent.getAction().equals(InitApplicationActivity.BUILD_NEW_RECEIPT)) {
+                mURI = (Uri) intent.getExtras().get(InitApplicationActivity.KEY_FOR_IMAGE);
             }
         }
-        return URI;
+        return mURI;
     }
 
     //TODO Below is temporary. Remove later.
 
     public void nextPressed(View view) {
         Intent intent = new Intent(this, WizardActivity.class);
-        DataHolder dataHolder = (DataHolder) getApplicationContext();
-        dataHolder.setStrings(listOfStrings);
-        dataHolder.setURI(URI);
+        IData dataHandler = (IData) getApplicationContext();
+        dataHandler.writeData("mStrings", mStrings);
+        dataHandler.writeData("mURI", mURI);
         startActivity(intent);
     }
 
     public void saveButtonPressed(View view) {
-        // Testing...
-        DataHolder dataHolder = (DataHolder) getApplicationContext();
-        //dataHolder.getUser().addCompany(new Company("TEST_COMPANY_1"));
-        writeData();
-        System.out.println(dataHolder.getUser().getName());
     }
 }
