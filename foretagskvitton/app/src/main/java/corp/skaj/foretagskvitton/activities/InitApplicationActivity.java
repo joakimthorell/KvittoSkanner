@@ -37,15 +37,14 @@ public class InitApplicationActivity extends AbstractActivity {
 
     private void readData() {
         IData dataHandler = (DataHandler) getApplicationContext();
-        try {
-            ((User)dataHandler.readData(User.class.getName(), User.class)).getName();
-        } catch (Exception e) {
+        if (dataHandler.readData(User.class.getName(), User.class) == null) {
             User user = new User("DEFAULT USER ");
             Company company = new Company("DEFAULT COMPANY");
             company.addEmployee(new Employee(user.getName()));
             user.addCompany(company);
             dataHandler.writeData(User.class.getName(), user);
         }
+
     }
 
     private void endLoadingBar() {
