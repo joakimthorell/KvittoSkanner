@@ -15,7 +15,7 @@ public class DataHandler extends Application implements IData {
     }
 
     public <T> T readData(String key, Class<T> classOfT) {
-        return new Gson().fromJson(PreferenceManager.getDefaultSharedPreferences(this).getString(key, ""), classOfT);
+        return new Gson().fromJson(getString(key), classOfT);
     }
 
     private <T> String toJson(T data) {
@@ -24,5 +24,9 @@ public class DataHandler extends Application implements IData {
 
     private SharedPreferences.Editor getEditor() {
         return PreferenceManager.getDefaultSharedPreferences(this).edit();
+    }
+
+    private String getString(String key) {
+        return PreferenceManager.getDefaultSharedPreferences(this).getString(key, "");
     }
 }
