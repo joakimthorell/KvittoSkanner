@@ -1,5 +1,6 @@
 package corp.skaj.foretagskvitton.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.widget.ArrayAdapter;
@@ -30,6 +31,10 @@ public class CompanyListActivity extends AbstractActivity {
 
         final ListView listView = (ListView) findViewById(R.id.listView);
         listView.setAdapter(adapter);
+
+        CompanyListController listViewController = new CompanyListController();
+
+        listViewController.initListViewListener(listView, this);
 
         CompanyListController cLController = new CompanyListController();
         cLController.initListViewListener(listView, this);
