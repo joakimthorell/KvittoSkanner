@@ -11,9 +11,7 @@ import corp.skaj.foretagskvitton.model.IData;
 public class DataHandler extends Application implements IData {
 
     public <T> void writeData(String key, T t) {
-        SharedPreferences.Editor spe = getEditor();
-        spe.putString(key, toJson(t));
-        spe.apply();
+        getEditor().putString(key, toJson(t)).apply();
     }
 
     public <T> T readData(String key, Class<T> classOfT) {
@@ -21,8 +19,7 @@ public class DataHandler extends Application implements IData {
     }
 
     private <T> String toJson(T data) {
-        Gson gson = new Gson();
-        return gson.toJson(data);
+        return new Gson().toJson(data);
     }
 
     private SharedPreferences.Editor getEditor() {
