@@ -17,10 +17,12 @@ public class MyPagerAdapter extends FragmentStatePagerAdapter {
     private WizardController wizardController;
     private Fragment mPrimaryItem;
     private int mCutOffPage;
+    private PageWrapper pageWrapper;
 
     public MyPagerAdapter(FragmentManager fm, WizardController wizardController) {
         super(fm);
         this.wizardController = wizardController;
+        pageWrapper = new PageWrapper();
     }
 
     @Override
@@ -30,13 +32,7 @@ public class MyPagerAdapter extends FragmentStatePagerAdapter {
         }
         //TODO if possible, make pretty
         Page page = wizardController.getCurrentPageSequence().get(i);
-
-        if (page instanceof TotalSumPage) {
-            return TotalSumFragment.create(page.getKey());
-        } else if (page instanceof DatePage) {
-            return DateFragment.create(page.getKey());
-        }
-        return page.createFragment();
+        return pageWrapper.createFragment(page);
     }
 
     @Override
@@ -69,4 +65,20 @@ public class MyPagerAdapter extends FragmentStatePagerAdapter {
     public int getCutOffPage() {
         return mCutOffPage;
     }
+
+    /**
+     *  This class is needed because the WizardPager is bad. To take load of from model we need this to
+     *  decide what fragment to build
+     */
+    private class PageWrapper {
+        private Fragment createFragment(Page page) {
+            if (page instanceof TotalSumPage) {
+                return TotalSumFragment.create(page.getKey());
+            } else if (page instanceof DatePage) {
+                return DateFragment.create(page.getKey());
+            }
+            return page.createFragment();
+        }
+    }
+
 }

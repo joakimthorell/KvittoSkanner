@@ -48,71 +48,45 @@ public class WizardModel {
         if (user.getCompanies().size() > 1 && cardNum != null) {
             Card foundCard = new Card(Integer.parseInt(cardNum));
             foundCompany = user.getCompany(foundCard);
-        } else if (foundCompany == null && user.getCompanies().size() == 1) {
+        } else if (user.getCompanies().size() == 1) {
             foundCompany = user.getCompanies().get(0);
         } else {
             // let it be null
         }
 
-
-        // TODO sidorna kan inte hantera default värden just nu. Kan bara lista alla, inga för tryckta
-
         return new PageList(
-                new BranchPage(view, "KORT")
-                        .addBranch("Företagskort",
+                new SingleFixedChoicePage(view, "KORT")
+                        .setChoices("Privat", "Företag")
+                        .setValue(foundCompany == null ? null : "Företag")
+                        .setRequired(true),
 
-                                new SingleFixedChoicePage(view, "FÖRETAG")
-                                        .setChoices(getCompanyNames(user))
-                                        .setValue(foundCompany == null ? null : foundCompany.getName())
-                                        .setRequired(true),
+                // TODO någon error som gör att den inte kommer markera företaget automatiskt, inte heller är den required...
+                new SingleFixedChoicePage(view, "FÖRETAG")
+                        .setChoices(getCompanyNames(user))
+                        .setValue(foundCompany == null ? null : foundCompany.getName())
+                        .setRequired(true),
 
-                                new MultipleFixedChoicePage(view, "GROSSIST")
-                                        //TODO lista grossister, vi kan inte lista från en specifikt företag. Får lista alla direkt (får tänkte om här)
-                                        .setChoices(),
+                new MultipleFixedChoicePage(view, "GROSSIST")
+                        //TODO lista grossister, vi kan inte lista från en specifikt företag. Får lista alla direkt (får tänkte om här)
+                        .setChoices(),
 
-                                new DatePage(view, "DATUM")
-                                        .setValue(date == null ? getCurrentDate() : date),
+                new DatePage(view, "DATUM")
+                        .setValue(date == null ? getCurrentDate() : date)
+                        .setRequired(true),
 
-                                new TotalSumPage(view, "TOTALBELOPP")
-                                        .setValue(totalSum > 0 ? String.valueOf(totalSum) : null)
-                                        .setRequired(true),
+                new TotalSumPage(view, "TOTALBELOPP")
+                        .setValue(totalSum > 0 ? String.valueOf(totalSum) : null)
+                        .setRequired(true),
 
-                                new TotalSumPage(view, "MOMS")
-                                        .setRequired(true),
+                new TotalSumPage(view, "MOMS")
+                        .setRequired(true),
 
-                                new SingleFixedChoicePage(view, "KATEGORI")
-                                        .setChoices(Category.getCategoriesArray())
-                                        .setRequired(true),
-                                //TODO add a choice above which is "other" for custom choice of category
-                                new TextPage(view, "KOMMENTAR")
-                                        .setRequired(false))
-
-                        .addBranch("Privatkort",
-                                new SingleFixedChoicePage(view, "FÖRETAG")
-                                        .setChoices(getCompanyNames(user))
-                                        .setValue(foundCompany == null ? null : foundCompany.getName())
-                                        .setRequired(true),
-
-                                new MultipleFixedChoicePage(view, "GROSSIST")
-                                        .setChoices(),
-
-                                new DatePage(view, "DATUM")
-                                        .setValue(date == null ? getCurrentDate() : date),
-
-                                new TotalSumPage(view, "TOTALBELOPP")
-                                        .setValue(totalSum > 0 ? String.valueOf(totalSum) : null)
-                                        .setRequired(true),
-
-                                new TotalSumPage(view, "MOMS")
-                                        .setRequired(true),
-
-                                new SingleFixedChoicePage(view, "KATEGORI")
-                                        .setChoices(Category.getCategoriesArray())
-                                        .setRequired(true),
-
-                                new TextPage(view, "KOMMENTAR")
-                                        .setRequired(false))
-                        .setRequired(true));
+                new SingleFixedChoicePage(view, "KATEGORI")
+                        .setChoices(Category.getCategoriesArray())
+                        .setRequired(true),
+                //TODO add a choice above which is "other" for custom choice of category
+                new TextPage(view, "KOMMENTAR")
+                        .setRequired(false));
     }
 
     public void addObserver(IObserver observer) {
@@ -125,7 +99,7 @@ public class WizardModel {
 
     public void collectData() {
         Map<String, String> data = new HashMap<>();
-        //TODO Collect all data.
+
         notifyController();
     }
 
