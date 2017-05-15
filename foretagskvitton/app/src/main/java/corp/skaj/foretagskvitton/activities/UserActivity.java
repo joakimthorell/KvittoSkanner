@@ -18,7 +18,7 @@ public class UserActivity extends AbstractActivity {
     }
 
     public void resetData(View view) {
-        Toast.makeText(this, "You now have to restart the app", Toast.LENGTH_LONG);
+        Toast.makeText(this, "You now have to restart the app", Toast.LENGTH_LONG).show();
         DataHandler handler = (DataHandler) getApplicationContext();
         handler.clearData();
     }
