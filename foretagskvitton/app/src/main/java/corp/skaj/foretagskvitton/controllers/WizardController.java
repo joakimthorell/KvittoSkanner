@@ -12,23 +12,28 @@ import com.tech.freak.wizardpager.ui.StepPagerStrip;
 
 import java.util.List;
 
+import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.model.IObserver;
 import corp.skaj.foretagskvitton.view.WizardView;
 import corp.skaj.foretagskvitton.view.ConfirmWizardFragment;
 
 public class WizardController implements IObserver {
-    private IUpdatable mUpdater;
     private WizardView mWizardView;
+    private ViewPager mPager;
+    private Button mNextButton;
+    private Button mPrevButton;
     private boolean mEditingAfterReview;
     private boolean mConsumePageSelectedEvent;
 
-    public WizardController(Context context, IUpdatable mUpdater) {
+    public WizardController(Context context, Button mNextButton, Button mPrevButton, ViewPager mPager) {
         mEditingAfterReview = false;
-        this.mUpdater = mUpdater;
+        this.mNextButton = mNextButton;
+        this.mPrevButton = mPrevButton;
+        this.mPager = mPager;
         mWizardView = new WizardView(this, context);
     }
 
-    public void initViewPagerListener(ViewPager mPager, final StepPagerStrip mStepPagerStrip) {
+    public void initViewPagerListener(final StepPagerStrip mStepPagerStrip) {
         mPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -42,7 +47,7 @@ public class WizardController implements IObserver {
                     mConsumePageSelectedEvent = false;
                 } else {
                     mEditingAfterReview = false;
-                    mUpdater.refreshBottomBar();
+                    refreshBottomBar();
                 }
             }
 
@@ -54,7 +59,6 @@ public class WizardController implements IObserver {
     }
 
     public void initNextButton(Button mNextButton,
-                               final ViewPager mPager,
                                final MyPagerAdapter mPagerAdapter,
                                final FragmentManager fragmentManager) {
         mNextButton.setOnClickListener(new View.OnClickListener() {
@@ -76,13 +80,32 @@ public class WizardController implements IObserver {
         });
     }
 
-    public void initPrevButton(Button mPrevButton, final ViewPager mPager) {
+    public void initPrevButton(Button mPrevButton) {
         mPrevButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mPager.setCurrentItem(mPager.getCurrentItem() - 1);
             }
         });
+    }
+
+    public void refreshBottomBar() {
+        mPrevButton.setVisibility(View.VISIBLE);
+        int position = mPager.getCurrentItem();
+        if (position == mWizardView.getCurrentPageSequence().size()) {
+            mNextButton.setText(R.string.wizard_complete);
+        } else if (position <= 0) {
+            mPrevButton.setVisibility(View.GONE);
+
+            // TODO set next button as bigger if possible
+
+        } else {
+            mNextButton.setText(R.string.nextButtonText);
+        }
+    }
+
+    public void setCurrentItem(int i) {
+        mPager.setCurrentItem(i);
     }
 
     // Under construction...

@@ -21,7 +21,6 @@ import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.widget.Button;
 
 import com.tech.freak.wizardpager.model.AbstractWizardModel;
@@ -37,18 +36,14 @@ import corp.skaj.foretagskvitton.R;
 
 import corp.skaj.foretagskvitton.controllers.WizardController;
 import corp.skaj.foretagskvitton.controllers.MyPagerAdapter;
-import corp.skaj.foretagskvitton.controllers.IUpdatable;
 
 public class WizardActivity extends AbstractActivity implements
-        PageFragmentCallbacks, ReviewFragment.Callbacks, ModelCallbacks, IUpdatable {
+        PageFragmentCallbacks, ReviewFragment.Callbacks, ModelCallbacks {
 
     private WizardController mWizardController;
     private AbstractWizardModel mWizardView;
     private MyPagerAdapter mPagerAdapter;
-    private ViewPager mPager;
     private StepPagerStrip mStepPagerStrip;
-    private Button mNextButton;
-    private Button mPrevButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,19 +51,19 @@ public class WizardActivity extends AbstractActivity implements
         setContentView(R.layout.activity_wizard);
 
         // Set instances
-        mNextButton = (Button) findViewById(R.id.wizardNextButton);
-        mPrevButton = (Button) findViewById(R.id.wizardBackButton);
-        mPager = (ViewPager) findViewById(R.id.pager);
+        Button mNextButton = (Button) findViewById(R.id.wizardNextButton);
+        Button mPrevButton = (Button) findViewById(R.id.wizardBackButton);
+        ViewPager mPager = (ViewPager) findViewById(R.id.pager);
         mStepPagerStrip = (StepPagerStrip) findViewById(R.id.wizard_strip);
-        mWizardController = new WizardController(this, this);
+        mWizardController = new WizardController(this, mNextButton, mPrevButton, mPager);
         this.mWizardView = mWizardController.getWizardView();
         mPagerAdapter = new MyPagerAdapter(getSupportFragmentManager(), mWizardController);
         mPager.setAdapter(mPagerAdapter);
 
         // Set listeners
-        mWizardController.initNextButton(mNextButton, mPager, mPagerAdapter, getSupportFragmentManager());
-        mWizardController.initPrevButton(mPrevButton, mPager);
-        mWizardController.initViewPagerListener(mPager, mStepPagerStrip);
+        mWizardController.initNextButton(mNextButton, mPagerAdapter, getSupportFragmentManager());
+        mWizardController.initPrevButton(mPrevButton);
+        mWizardController.initViewPagerListener(mStepPagerStrip);
         mWizardView.registerListener(this);
 
         // Set actionbar to custom toolbar.
@@ -80,7 +75,7 @@ public class WizardActivity extends AbstractActivity implements
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         onPageTreeChanged();
-        refreshBottomBar();
+        mWizardController.refreshBottomBar();
     }
 
     @Override
@@ -89,22 +84,7 @@ public class WizardActivity extends AbstractActivity implements
         int size = mWizardView.getCurrentPageSequence().size() + 1;
         mStepPagerStrip.setPageCount(size); // + 1 = review, step
         mPagerAdapter.notifyDataSetChanged();
-        refreshBottomBar();
-    }
-
-    public void refreshBottomBar() {
-        mPrevButton.setVisibility(View.VISIBLE);
-        int position = mPager.getCurrentItem();
-        if (position == mWizardView.getCurrentPageSequence().size()) {
-            mNextButton.setText(R.string.wizard_complete);
-        } else if (position <= 0) {
-            mPrevButton.setVisibility(View.GONE);
-
-            // TODO set next button as bigger if possible
-
-        } else {
-            mNextButton.setText(R.string.nextButtonText);
-        }
+        mWizardController.refreshBottomBar();
     }
 
     @Override
@@ -132,8 +112,8 @@ public class WizardActivity extends AbstractActivity implements
             if (currentPageSequenceList.get(i).getKey().equals(key)) {
                 mWizardController.updateConsumePageSelectedEvent(true);
                 mWizardController.updateEditingAfterReview(true);
-                mPager.setCurrentItem(i);
-                refreshBottomBar();
+                mWizardController.setCurrentItem(i);
+                mWizardController.refreshBottomBar();
                 break;
             }
         }
@@ -144,7 +124,7 @@ public class WizardActivity extends AbstractActivity implements
         if (page.isRequired()) {
             if (recalculateCutOffPage()) {
                 mPagerAdapter.notifyDataSetChanged();
-                refreshBottomBar();
+                mWizardController.refreshBottomBar();
             }
         }
     }
