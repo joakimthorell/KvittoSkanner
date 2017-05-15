@@ -3,6 +3,8 @@ package corp.skaj.foretagskvitton.activities;
 import android.os.Bundle;
 
 import corp.skaj.foretagskvitton.R;
+import corp.skaj.foretagskvitton.model.User;
+import corp.skaj.foretagskvitton.services.DataHandler;
 
 public class UserActivity extends AbstractActivity {
 
