@@ -7,6 +7,8 @@ import android.support.v7.widget.Toolbar;
 import android.widget.Button;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.controllers.CompanyListController;
 
@@ -28,9 +30,13 @@ public class CompanyActivity extends AbstractActivity {
         CompanyListController companyListController = new CompanyListController();
 
         Button button = (Button) findViewById(R.id.edit);
-        companyListController.editButtonListener(button);
+        TextView textView1 = (TextView) findViewById(R.id.editText);
+        TextView textView2 = (TextView) findViewById(R.id.editText2);
+        TextView textView3 = (TextView) findViewById(R.id.editText3);
 
-        
+        companyListController.editButtonListener(button, textView1, textView2, textView3);
+
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.company_action_bar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -38,8 +44,8 @@ public class CompanyActivity extends AbstractActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle(companyName);
 
-        TextView textView = (TextView) findViewById(R.id.toolbar_title);
-        textView.setText(companyName);
+        TextView textViewForToolbar = (TextView) findViewById(R.id.toolbar_title);
+        textViewForToolbar.setText(companyName);
 
         //TODO vill ha en bottombar eller case i bottomnav för att kunna skicka med rätt context
     }
