@@ -27,7 +27,8 @@ public class TextCollector {
         SparseArray<TextBlock> textBlocks = getTextBlocksFromImage(context, bmp);
 
         if (textBlocks == null) {
-            // TODO error handling here, no text was found or textrecognizer is not working
+            // This will only happend if there was no text found on image or text recognizer not operational.
+            return null;
         }
         return buildListOfStrings(textBlocks);
     }
@@ -50,7 +51,6 @@ public class TextCollector {
             return listOfTextBlocks;
         } else {
             System.out.println("TextRecognizer is not operational");
-            // TODO some kind of error handling here?
             return null;
         }
     }
