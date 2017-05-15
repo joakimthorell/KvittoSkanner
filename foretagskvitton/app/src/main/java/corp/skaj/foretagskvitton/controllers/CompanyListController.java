@@ -7,22 +7,23 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import corp.skaj.foretagskvitton.activities.CompanyActivity;
+import corp.skaj.foretagskvitton.activities.CompanyListActivity;
 
-public class CompanyListController {
+public class CompanyListController <T> {
     public static final String COMPANY_KEY = "CompanyKey";
 
     public CompanyListController() {
+
     }
 
-    public void initListViewListener(final ListView listView, final Context context) {
+    public void initListViewListener(final ListView listView, final Class<?> nextActivityToStart, final Context context) {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(context, CompanyActivity.class);
+                Intent intent = new Intent(context, nextActivityToStart);
                 intent.putExtra(COMPANY_KEY, listView.getItemAtPosition(position).toString());
                 context.startActivity(intent);
             }
-
         });
     }
 }

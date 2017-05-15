@@ -31,12 +31,10 @@ public class CompanyListActivity extends AbstractActivity {
         final ListView listView = (ListView) findViewById(R.id.listView);
         listView.setAdapter(adapter);
 
-        CompanyListController listViewController = new CompanyListController();
+        new CompanyListController().initListViewListener(listView, CompanyActivity.class, this);
 
-        listViewController.initListViewListener(listView, this);
-
-        CompanyListController cLController = new CompanyListController();
-        cLController.initListViewListener(listView, this);
+        //CompanyListController cLController = new CompanyListController();
+        //cLController.initListViewListener(listView, this);
 
         initBottomBar(COMPANY_ID, this);
     }
