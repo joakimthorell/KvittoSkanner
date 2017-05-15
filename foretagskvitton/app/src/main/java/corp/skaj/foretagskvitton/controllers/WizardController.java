@@ -104,10 +104,6 @@ public class WizardController implements IObserver {
         }
     }
 
-    public void setCurrentItem(int i) {
-        mPager.setCurrentItem(i);
-    }
-
     // Under construction...
     @Override
     public void onDataChange() {
@@ -122,11 +118,15 @@ public class WizardController implements IObserver {
         mEditingAfterReview = state;
     }
 
-    public AbstractWizardModel getWizardView() {
-        return mWizardView.getWizardView();
+    public void setCurrentItem(int i) {
+        mPager.setCurrentItem(i);
     }
 
     public List<Page> getCurrentPageSequence() {
         return mWizardView.getWizardView().getCurrentPageSequence();
+    }
+
+    public AbstractWizardModel getWizardView() {
+        return mWizardView.getWizardView();
     }
 }
