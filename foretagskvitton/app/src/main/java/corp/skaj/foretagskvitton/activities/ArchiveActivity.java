@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -20,6 +21,7 @@ import corp.skaj.foretagskvitton.model.Employee;
 import corp.skaj.foretagskvitton.model.Purchase;
 import corp.skaj.foretagskvitton.model.User;
 import corp.skaj.foretagskvitton.model.IData;
+import corp.skaj.foretagskvitton.services.DataHandler;
 
 public class ArchiveActivity extends AbstractActivity {
     private RecyclerView recyclerView;
@@ -35,21 +37,17 @@ public class ArchiveActivity extends AbstractActivity {
 
         testAddFirstPurchases();
 
-        mAdapter = new ReceiptAdapter();
+        mAdapter = new ReceiptAdapter((DataHandler)getApplicationContext());
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAdapter);
 
         initBottomBar(ARCHIVE_ID, this);
-        //prepareReceiptData();
         mAdapter.notifyDataSetChanged();
-
-        //purchases.addAll(user.getCompanies().get(0).getEmployees().get(0).getPurchases());
     }
 
-    private void testAddFirstPurchases(){
-
+    private void testAddFirstPurchases() {
         //Skapar en produkt
         Product product = new Product("Aladob", Category.MAT, 50.0, 12.0);
 
@@ -57,30 +55,21 @@ public class ArchiveActivity extends AbstractActivity {
         Calendar cal = Calendar.getInstance();
         Receipt receipt = new Receipt(product, cal, 500.00, null);
         PrivatePurchase pur = new PrivatePurchase(receipt);
-        //purchases.add(pur);
 
         //Skapar en anställd och ger den företag och kvitto med produkt
-        IData dataHandler = (IData)getApplicationContext();
+        IData dataHandler = (DataHandler) getApplicationContext();
         User user = dataHandler.readData(User.class.getName(), User.class);
-        System.out.println("THIS IS DA COMPANY " + user.getCompany(new Company("DEFAULT COMPANY")).getEmployee(user.getName()));
         user.getCompany(new Company("DEFAULT COMPANY")).getEmployee(user.getName()).addPurchase(pur);
-        //System.out.println(user.getName() + "HAHAHAHHAHAHAHAHHAHAH");
-        //Employee emp = new Employee("Gunde");
-        //emp.addPurchase(pur);
-        //user.getCompanies().get(0).addEmployee(emp);
-
-        //first input write is the key for saving changes
         dataHandler.writeData(User.class.getName(), user);
-       // mAdapter.notifyDataSetChanged();
+        //mAdapter.notifyDataSetChanged();
     }
 
-//.get(i).getEmployees().get(i).getPurchases().get(i);
-    private void collectAllPurchases(){
-        IData dataHandler = (IData)getApplicationContext();
-        User user = (User) dataHandler.readData(User.class.getName(), User.class);
+    private void collectAllPurchases() {
+        IData dataHandler = (IData) getApplicationContext();
+        User user = dataHandler.readData(User.class.getName(), User.class);
+        List<Company> company = user.getCompanies();
 
-            List<Company> company = user.getCompanies();
-        for(int i = 0; i < company.size(); i++){
+        for (int i = 0; i < company.size(); i++) {
             List<Employee> emps = user.getCompanies().get(i).getEmployees();
         }
     }
