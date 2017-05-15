@@ -22,7 +22,6 @@ import corp.skaj.foretagskvitton.model.User;
 import corp.skaj.foretagskvitton.model.IData;
 
 public class ArchiveActivity extends AbstractActivity {
-    private List<Purchase> purchases;
     private RecyclerView recyclerView;
     private ReceiptAdapter mAdapter;
 
@@ -32,13 +31,11 @@ public class ArchiveActivity extends AbstractActivity {
         setContentView(R.layout.activity_archive);
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
-        purchases = new ArrayList<>();
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
-        IData dataHandler = (IData)getApplicationContext();
-        User user = dataHandler.readData(User.class.getName(), User.class);
+        testAddFirstPurchases();
 
-        mAdapter = new ReceiptAdapter(purchases,user);
+        mAdapter = new ReceiptAdapter();
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -46,14 +43,12 @@ public class ArchiveActivity extends AbstractActivity {
 
         initBottomBar(ARCHIVE_ID, this);
         //prepareReceiptData();
+        mAdapter.notifyDataSetChanged();
 
-            testAddFirstPurchases();
-            //purchases.addAll(user.getCompanies().get(0).getEmployees().get(0).getPurchases());
-            mAdapter.notifyDataSetChanged();
+        //purchases.addAll(user.getCompanies().get(0).getEmployees().get(0).getPurchases());
     }
 
     private void testAddFirstPurchases(){
-        IData dataHandler = (IData)getApplicationContext();
 
         //Skapar en produkt
         Product product = new Product("Aladob", Category.MAT, 50.0, 12.0);
@@ -62,18 +57,21 @@ public class ArchiveActivity extends AbstractActivity {
         Calendar cal = Calendar.getInstance();
         Receipt receipt = new Receipt(product, cal, 500.00, null);
         PrivatePurchase pur = new PrivatePurchase(receipt);
-        purchases.add(pur);
+        //purchases.add(pur);
 
         //Skapar en anställd och ger den företag och kvitto med produkt
-        User user = (User) dataHandler.readData(User.class.getName(), User.class);
-        System.out.println(user.getName() + "HAHAHAHHAHAHAHAHHAHAH");
+        IData dataHandler = (IData)getApplicationContext();
+        User user = dataHandler.readData(User.class.getName(), User.class);
+        System.out.println("THIS IS DA COMPANY " + user.getCompany(new Company("DEFAULT COMPANY")).getEmployee(user.getName()));
+        user.getCompany(new Company("DEFAULT COMPANY")).getEmployee(user.getName()).addPurchase(pur);
+        //System.out.println(user.getName() + "HAHAHAHHAHAHAHAHHAHAH");
         //Employee emp = new Employee("Gunde");
         //emp.addPurchase(pur);
         //user.getCompanies().get(0).addEmployee(emp);
 
         //first input write is the key for saving changes
         dataHandler.writeData(User.class.getName(), user);
-        mAdapter.notifyDataSetChanged();
+       // mAdapter.notifyDataSetChanged();
     }
 
 //.get(i).getEmployees().get(i).getPurchases().get(i);

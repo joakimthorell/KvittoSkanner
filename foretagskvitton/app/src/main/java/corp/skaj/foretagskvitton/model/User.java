@@ -87,8 +87,14 @@ public class User {
     public Company getCompany(Purchase purchase) {
         for (int i = 0; i < companies.size(); i++) {
             Company temp = companies.get(i);
-            List<Purchase> listOfReceipts = temp.getEmployee(purchase).getPurchases();
-            if (containsReceipt(listOfReceipts, purchase)) {
+            List<Purchase> receipts;
+            try {
+                receipts = temp.getEmployee(purchase).getPurchases();
+            } catch (Exception e) {
+                System.out.println("List is null " + this.getClass().getName());
+                return null;
+            }
+            if (containsReceipt(receipts, purchase)) {
                 return temp;
             }
         }
