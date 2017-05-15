@@ -29,4 +29,8 @@ public class DataHandler extends Application implements IData {
     private String getString(String key) {
         return PreferenceManager.getDefaultSharedPreferences(this).getString(key, "");
     }
+
+    public void clearData() {
+        getEditor().clear().apply();
+    }
 }

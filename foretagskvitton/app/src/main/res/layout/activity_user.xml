@@ -6,4 +6,30 @@
     android:layout_height="match_parent"
     tools:context="corp.skaj.foretagskvitton.activities.UserActivity">
 
+    <fragment
+        android:id="@+id/user_bottomnav"
+        android:name="corp.skaj.foretagskvitton.view.BottomBarFragment"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+
+    <Button
+        android:id="@+id/reset_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="resetData"
+        android:text="ResetData"
+        app:layout_constraintBottom_toTopOf="@id/user_bottomnav" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:text="you will have to restart the app"
+        app:layout_constraintBaseline_toBaselineOf="@+id/reset_button"
+        app:layout_constraintLeft_toRightOf="@+id/reset_button" />
+
 </android.support.constraint.ConstraintLayout>
