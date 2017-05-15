@@ -5,7 +5,6 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -18,42 +17,39 @@ import corp.skaj.foretagskvitton.model.Product;
 import corp.skaj.foretagskvitton.model.Receipt;
 import corp.skaj.foretagskvitton.model.Company;
 import corp.skaj.foretagskvitton.model.Employee;
-import corp.skaj.foretagskvitton.model.Purchase;
 import corp.skaj.foretagskvitton.model.User;
 import corp.skaj.foretagskvitton.model.IData;
 import corp.skaj.foretagskvitton.services.DataHandler;
 
 public class ArchiveActivity extends AbstractActivity {
-    private RecyclerView recyclerView;
     private ReceiptAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_archive);
+        mAdapter = new ReceiptAdapter(getApplicationContext());
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
-        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-
-        testAddFirstPurchases();
-
-        mAdapter = new ReceiptAdapter((DataHandler)getApplicationContext());
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAdapter);
 
+        testAddFirstPurchases();
         initBottomBar(ARCHIVE_ID, this);
         mAdapter.notifyDataSetChanged();
     }
 
     private void testAddFirstPurchases() {
         //Skapar en produkt
-        Product product = new Product("Aladob", Category.MAT, 50.0, 12.0);
+        Product product = new Product("Aladob", 50.0, 12.0);
 
         // Skapar ett kvitto och lägger till produkten i kvittot
         Calendar cal = Calendar.getInstance();
         Receipt receipt = new Receipt(product, cal, 500.00, null);
+        receipt.setCategory(Category.MAT);
         PrivatePurchase pur = new PrivatePurchase(receipt);
 
         //Skapar en anställd och ger den företag och kvitto med produkt
@@ -61,7 +57,7 @@ public class ArchiveActivity extends AbstractActivity {
         User user = dataHandler.readData(User.class.getName(), User.class);
         user.getCompany(new Company("DEFAULT COMPANY")).getEmployee(user.getName()).addPurchase(pur);
         dataHandler.writeData(User.class.getName(), user);
-        //mAdapter.notifyDataSetChanged();
+        mAdapter.notifyDataSetChanged();
     }
 
     private void collectAllPurchases() {

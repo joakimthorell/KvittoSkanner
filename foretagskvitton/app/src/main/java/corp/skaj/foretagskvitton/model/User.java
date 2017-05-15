@@ -100,7 +100,7 @@ public class User {
         try {
             receipts = company.getEmployee(purchase).getPurchases();
         } catch (Exception e) {
-            System.out.println("Purchase list is null " + this.getClass().getName());
+            System.out.println("getPurchase is null " + this.getClass().getName());
             return null;
         }
         return receipts;

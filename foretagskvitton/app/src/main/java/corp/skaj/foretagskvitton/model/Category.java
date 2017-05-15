@@ -27,23 +27,24 @@ public enum Category {
         return Arrays.toString(values()).replaceAll("^.|.$", "").split(", ");
     }
 
-    public static Category toString(String s) {
-        s = s.toUpperCase().trim();
-        switch (s) {
-            case "BENSIN":
-                return BENSIN;
-            case "HOTELL":
-                return HOTELL;
-            case "KONTORSMATERIAL":
-                return KONTORSMATERIAL;
-            case "PORTO":
-                return PORTO;
-            case "REPRESENTATION":
-                return REPRESENTATION;
-            case "RESOR":
-                return RESOR;
-            case "TRANSPORT":
-                return TRANSPORT;
+    public static String toString(Category category) {
+        switch (category) {
+            case BENSIN:
+                return "BENSIN";
+            case MAT:
+                return "MAT";
+            case HOTELL:
+                return "HOTELL";
+            case KONTORSMATERIAL:
+                return "KONTORSMATERIAL";
+            case PORTO:
+                return "PORTO";
+            case REPRESENTATION:
+                return "REPRESENTATION";
+            case RESOR:
+                return "RESOR";
+            case TRANSPORT:
+                return "TRANSPORT";
             default:
                 return null;
         }
