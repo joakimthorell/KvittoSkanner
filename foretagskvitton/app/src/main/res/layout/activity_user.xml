@@ -23,13 +23,4 @@
         android:text="ResetData"
         app:layout_constraintBottom_toTopOf="@id/user_bottomnav" />
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:text="you will have to restart the app"
-        app:layout_constraintBaseline_toBaselineOf="@+id/reset_button"
-        app:layout_constraintLeft_toRightOf="@+id/reset_button" />
-
 </android.support.constraint.ConstraintLayout>

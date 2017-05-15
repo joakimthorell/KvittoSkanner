@@ -1,7 +1,7 @@
 package corp.skaj.foretagskvitton.model;
 
 
-public abstract class Purchase {
+public class Purchase {
     private Receipt receipt;
     private Supplier supplier;
 
