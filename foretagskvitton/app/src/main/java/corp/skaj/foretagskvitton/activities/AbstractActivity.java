@@ -11,7 +11,7 @@ import com.roughike.bottombar.OnTabSelectListener;
 
 import corp.skaj.foretagskvitton.R;
 
-public class AbstractActivity extends AppCompatActivity {
+public abstract class AbstractActivity extends AppCompatActivity {
     private SparseArray<Class<?extends AbstractActivity>> mBottomBarMap;
     protected final Integer ARCHIVE_ID = R.id.action_archive;
     protected final Integer CHARTS_ID = R.id.action_charts;

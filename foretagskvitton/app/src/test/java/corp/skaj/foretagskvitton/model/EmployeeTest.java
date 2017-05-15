@@ -32,7 +32,7 @@ public class EmployeeTest {
     public void testAmountOfPurchases() {
         int n = 4;
         for (int i = 0; i < n; i++) {
-            employee.addPurchase(new PrivatePurchase(setupARecipt()));
+            employee.addPurchase(new Purchase(setupARecipt(), Purchase.PurchaseType.PRIVATE));
         }
 
         assertEquals(n, employee.getAmountOfPurchases());
@@ -40,7 +40,7 @@ public class EmployeeTest {
 
     @Test
     public void testRemoveOfPurchase() {
-        Purchase purchase = new PrivatePurchase(setupARecipt());
+        Purchase purchase = new Purchase(setupARecipt(), Purchase.PurchaseType.PRIVATE);
 
         employee.addPurchase(purchase);
 
@@ -55,8 +55,8 @@ public class EmployeeTest {
 
     @Test
     public void testRemoveAPurchaseNotExcisting() {
-        Purchase pur1 = new PrivatePurchase(setupARecipt());
-        Purchase pur2 = new PrivatePurchase(setupARecipt());
+        Purchase pur1 = new Purchase(setupARecipt(), Purchase.PurchaseType.PRIVATE);
+        Purchase pur2 = new Purchase(setupARecipt(), Purchase.PurchaseType.PRIVATE);
 
         employee.addPurchase(pur1);
 
