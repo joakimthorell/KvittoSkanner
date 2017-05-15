@@ -4,15 +4,23 @@ import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.IdRes;
+import android.text.InputType;
+import android.text.method.KeyListener;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
+import corp.skaj.foretagskvitton.R;
+import corp.skaj.foretagskvitton.activities.AbstractActivity;
 import corp.skaj.foretagskvitton.activities.CompanyActivity;
 import corp.skaj.foretagskvitton.activities.CompanyListActivity;
 
-public class CompanyListController <T> {
+public class CompanyListController <T>{
     public static final String COMPANY_KEY = "CompanyKey";
 
     public CompanyListController() {
@@ -30,12 +38,26 @@ public class CompanyListController <T> {
         });
     }
 
-    public void editButtonListener(Button button) {
+    public static void editButtonListener(final Button button, final TextView tv1, final TextView tv2, final TextView tv3) {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
             //När vi klickar på denna knappen vill vi öppna upp för redigering
                 //Byta namn på knappen till spara
+                button.setText("Spara");
+
+                tv1.setFocusable(true);
+                tv1.setClickable(true);
+                tv1.setFocusableInTouchMode(true);
+
+                tv2.setFocusable(true);
+                tv2.setClickable(true);
+                tv2.setFocusableInTouchMode(true);
+
+                tv3.setFocusable(true);
+                tv3.setClickable(true);
+                tv3.setFocusableInTouchMode(true);
+
             }
         });
 

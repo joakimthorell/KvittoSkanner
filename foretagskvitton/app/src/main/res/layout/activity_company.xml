@@ -55,7 +55,7 @@
         android:layout_marginLeft="13dp"
         android:layout_marginStart="13dp"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:focusable="false"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/employees"
         tools:layout_editor_absoluteY="100dp" />
@@ -70,7 +70,8 @@
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/company_action_bar" />
+        app:layout_constraintTop_toBottomOf="@id/company_action_bar"
+        android:layout_marginTop="0dp" />
 
     <TextView
         android:id="@+id/cards"
@@ -91,7 +92,7 @@
         android:layout_marginLeft="11dp"
         android:layout_marginStart="11dp"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:focusable="false"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cards" />
 
@@ -114,7 +115,7 @@
         android:layout_marginLeft="11dp"
         android:layout_marginStart="11dp"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:focusable="false"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/comments" />
 
