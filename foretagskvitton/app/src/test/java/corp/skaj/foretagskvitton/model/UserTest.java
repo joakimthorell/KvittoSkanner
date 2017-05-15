@@ -86,7 +86,7 @@ public class UserTest {
         Calendar calendar = Calendar.getInstance();
         calendar.set(2017, 4, 20);
         Receipt receipt = new Receipt(product, calendar, 10, null);
-        Purchase purchase = new PrivatePurchase(receipt);
+        Purchase purchase = new Purchase(receipt, Purchase.PurchaseType.PRIVATE);
         addNewCompany();
         company.getEmployee(user.getName()).addPurchase(purchase);
         return purchase;
