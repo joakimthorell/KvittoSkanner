@@ -14,16 +14,16 @@ import java.util.List;
 import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.activities.singleReceipt;
 import corp.skaj.foretagskvitton.model.Company;
+import corp.skaj.foretagskvitton.model.Employee;
+import corp.skaj.foretagskvitton.model.IData;
 import corp.skaj.foretagskvitton.model.Purchase;
 import corp.skaj.foretagskvitton.model.User;
+import corp.skaj.foretagskvitton.services.DataHandler;
 
 public class ReceiptAdapter extends RecyclerView.Adapter<ReceiptAdapter.MyViewHolder> {
 
     public static final String ARCHIVE_KEY = "ArchiveKey";
 
-    private List<Purchase> purchases;
-    private List<Company> comapanyList;
-    private User user;
     private Context context;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -37,10 +37,8 @@ public class ReceiptAdapter extends RecyclerView.Adapter<ReceiptAdapter.MyViewHo
         }
     }
 
-    public ReceiptAdapter(List<Purchase> purchases, User user) {
-        this.purchases = purchases;
-        this.comapanyList = user.getCompanies();
-        this.user = user;
+    public ReceiptAdapter() {
+
     }
 
     @Override
@@ -62,7 +60,13 @@ public class ReceiptAdapter extends RecyclerView.Adapter<ReceiptAdapter.MyViewHo
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        Purchase purchase = purchases.get(position);
+        IData dataHandler = (DataHandler)context.getApplicationContext();
+        User user = dataHandler.readData(User.class.getName(), User.class);
+        Purchase purchase = user.getCompany(new Company("DEFAULT COMPANY")).getEmployee("DEFAULT USER").getPurchases().get(position);
+
+        //Purchase purchase = purchases.get(position);
+        //System.out.println("AHAHAHHAHA OMG ROFLMAO" + purchase);
+
         Company company = user.getCompany(purchase);
 
         //holder.title.setText(movie.getTitle());
@@ -79,6 +83,9 @@ public class ReceiptAdapter extends RecyclerView.Adapter<ReceiptAdapter.MyViewHo
 
     @Override
     public int getItemCount() {
+        IData dataHandler = (DataHandler)context.getApplicationContext();
+        User user = dataHandler.readData(User.class.getName(), User.class);
+        List<Purchase> purchases = user.getCompany(new Company("DEFAULT COMPANY")).getEmployee("DEFAULT USER").getPurchases();
         return purchases.size();
     }
 }
