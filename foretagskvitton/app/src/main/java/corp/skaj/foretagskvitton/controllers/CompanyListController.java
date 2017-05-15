@@ -18,6 +18,14 @@ public class CompanyListController <T>{
 
     }
 
+
+
+    /**
+     *
+     * @param listView
+     * @param nextActivityToStart
+     * @param context
+     */
     public void initListViewListener(final ListView listView, final Class<?> nextActivityToStart, final Context context) {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -53,16 +61,19 @@ public class CompanyListController <T>{
         });
     }
 
+
     public void createNewEmployeeListener (ImageButton button) {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 //Här vill vi lägga till en ny anställd i listan av anställda
+                //Skapa en ny text view?
             }
         });
 
     }
+
 
     public void createNewCardListener (ImageButton button) {
         button.setOnClickListener(new View.OnClickListener() {
