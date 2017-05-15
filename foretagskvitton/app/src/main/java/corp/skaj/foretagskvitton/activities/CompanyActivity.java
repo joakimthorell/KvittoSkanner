@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
@@ -35,6 +36,15 @@ public class CompanyActivity extends AbstractActivity {
         TextView textView3 = (TextView) findViewById(R.id.editText3);
 
         companyListController.editButtonListener(button, textView1, textView2, textView3);
+
+        ImageButton addEmployeeButton = (ImageButton) findViewById(R.id.addNewEmployee);
+        companyListController.createNewEmployeeListener(addEmployeeButton);
+
+        ImageButton addCardButton = (ImageButton) findViewById(R.id.addNewCard);
+        companyListController.createNewCardListener(addCardButton);
+
+        ImageButton addCommentButton = (ImageButton) findViewById(R.id.addNewComment);
+        companyListController.createNewCommentListener(addCommentButton);
 
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.company_action_bar);
