@@ -11,7 +11,6 @@ import corp.skaj.foretagskvitton.R;
 import static corp.skaj.foretagskvitton.controllers.CompanyListController.COMPANY_KEY;
 
 public class CompanyActivity extends AppCompatActivity {
-    public static final Integer BOTTOM_BAR_ID = R.id.action_business;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

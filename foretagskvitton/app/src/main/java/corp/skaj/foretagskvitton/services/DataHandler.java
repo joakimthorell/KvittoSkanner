@@ -10,16 +10,16 @@ import corp.skaj.foretagskvitton.model.IData;
 
 public class DataHandler extends Application implements IData {
 
-    public <T> void writeData(String key, T t) {
-        getEditor().putString(key, toJson(t)).apply();
+    public <T> void writeData(String key, T writeT) {
+        getEditor().putString(key, toJson(writeT)).apply();
     }
 
     public <T> T readData(String key, Class<T> classOfT) {
         return new Gson().fromJson(getString(key), classOfT);
     }
 
-    private <T> String toJson(T data) {
-        return new Gson().toJson(data);
+    private <T> String toJson(T translateT) {
+        return new Gson().toJson(translateT);
     }
 
     private SharedPreferences.Editor getEditor() {

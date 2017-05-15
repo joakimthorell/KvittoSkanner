@@ -19,7 +19,6 @@ import corp.skaj.foretagskvitton.R;
 public class AddReceiptActivity extends AbstractActivity {
     public static final String BUILD_NEW_RECEIPT = "corp.skaj.foretagskvitton.BUILD_RECEIPT";
     public static final String KEY_FOR_IMAGE = "corp.skaj.foretagskvitton.KEY_FOR_IMAGE";
-    public static final Integer BOTTOM_BAR_ID = R.id.action_add;
     private static final int REQUEST_IMAGE_CAPTURE = 31415;
     private String mImageAdress;
 
@@ -34,7 +33,7 @@ public class AddReceiptActivity extends AbstractActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
 
-        initBottomBar(BOTTOM_BAR_ID, this);
+        initBottomBar(ADD_RECEIPT_ID, this);
     }
 
     // This method catches taken image by camera.

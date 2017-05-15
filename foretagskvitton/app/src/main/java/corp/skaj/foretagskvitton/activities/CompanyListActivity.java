@@ -11,7 +11,6 @@ import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.controllers.CompanyListController;
 
 public class CompanyListActivity extends AbstractActivity {
-    public static final Integer BOTTOM_BAR_ID = R.id.action_business;
     public static final String COMPANYLIST_KEY = "COMPANYLIST_KEY";
 
     //This is possible in all Activities where we need to get our User, this is for when we do have a list of companies
@@ -39,7 +38,7 @@ public class CompanyListActivity extends AbstractActivity {
         CompanyListController cLController = new CompanyListController();
         cLController.initListViewListener(listView, this);
 
-        initBottomBar(BOTTOM_BAR_ID, this);
+        initBottomBar(COMPANY_ID, this);
     }
 }
 

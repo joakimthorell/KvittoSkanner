@@ -17,7 +17,7 @@ public class User {
         if (!containsCompany(company.getName())) {
             companies.add(company);
         } else {
-            System.out.println("Illegal argument " + this.getClass().getName().toString());
+            System.out.println("Illegal argument " + this.getClass().getName());
         }
     }
 
@@ -25,7 +25,7 @@ public class User {
         if (containsCompany(company.getName())) {
             companies.remove(company);
         } else {
-            System.out.println("Illegal argument " + this.getClass().getName().toString());
+            System.out.println("Illegal argument " + this.getClass().getName());
         }
     }
 
