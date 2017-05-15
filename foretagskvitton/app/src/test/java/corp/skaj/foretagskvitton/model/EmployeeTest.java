@@ -23,7 +23,7 @@ public class EmployeeTest {
         Random rand = new Random();
         cal.set(rand.nextInt(18) + 2000, rand.nextInt(12) + 1, rand.nextInt(28) + 1);
         double total = 19.50;
-        //TODO
+
         return new Receipt(product, cal, total, null);
 
     }
