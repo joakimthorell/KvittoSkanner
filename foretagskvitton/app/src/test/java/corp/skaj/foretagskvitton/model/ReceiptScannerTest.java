@@ -1,9 +1,10 @@
-package corp.skaj.foretagskvitton.services;
+package corp.skaj.foretagskvitton.model;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import corp.skaj.foretagskvitton.model.ReceiptScanner;
@@ -11,11 +12,10 @@ import corp.skaj.foretagskvitton.model.ReceiptScanner;
 import static org.junit.Assert.*;
 
 public class ReceiptScannerTest {
-
-    List<String> list;
-    List <String> listOfDoubles;
-    List <String> listOfCardNums;
-    List<String> listWithoutDate;
+    private List<String> list;
+    private List <String> listOfDoubles;
+    private List <String> listOfCardNums;
+    private List<String> listWithoutDate;
 
     @Before
     public void setup(){
@@ -58,7 +58,7 @@ public class ReceiptScannerTest {
 
     @Test
     public void testCardNullCase() {
-        assertEquals(null, ReceiptScanner.getCardNumber(null));
+        assertEquals(null, ReceiptScanner.getCard(null));
     }
 
     @Test
@@ -97,9 +97,9 @@ public class ReceiptScannerTest {
 
     @Test
     public void testCardNum (){
-        //String expected = "xxxxxx*xXxxx5543";
-        String expected = "5655";
-        String test = ReceiptScanner.getCardNumber(listOfCardNums);
-        assertEquals(expected, test);
+        List<String> list = new ArrayList<>(Arrays.asList("1234,45","KORTNUMMER ","*** * * ", "5547019677" + "9", "***B*xx*xxX**", "*3310 ", "v"));
+        String expected = "3310";
+        String result = ReceiptScanner.getCard(list);
+        assertEquals(expected, result);
     }
 }

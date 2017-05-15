@@ -43,7 +43,7 @@ public class WizardModel {
         double totalSum = ReceiptScanner.getTotalCost(strings);
         String date = ReceiptScanner.getDate(strings);
 
-        String cardNum = ReceiptScanner.getCardNumber(strings);
+        String cardNum = ReceiptScanner.getCard(strings);
         Company foundCompany = null;
         if (user.getCompanies().size() > 1 && cardNum != null) {
             Card foundCard = new Card(Integer.parseInt(cardNum));
