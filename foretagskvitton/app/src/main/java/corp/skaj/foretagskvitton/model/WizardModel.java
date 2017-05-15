@@ -55,15 +55,16 @@ public class WizardModel {
         }
 
         return new PageList(
-                new SingleFixedChoicePage(view, "FÖRETAG")
-                        .setChoices(getCompanyNames(user))
-                        .setValue(foundCompany == null ? null : foundCompany.getName())
-                        .setRequired(true),
                 new SingleFixedChoicePage(view, "KORT")
                         .setChoices("Privat", "Företag")
                         .setValue(foundCompany == null ? null : "Företag")
                         .setRequired(true),
 
+                // TODO någon error som gör att den inte kommer markera företaget automatiskt, inte heller är den required...
+                new SingleFixedChoicePage(view, "FÖRETAG")
+                        .setChoices(getCompanyNames(user))
+                        .setValue(foundCompany == null ? null : foundCompany.getName())
+                        .setRequired(true),
 
                 new MultipleFixedChoicePage(view, "GROSSIST")
                         //TODO lista grossister, vi kan inte lista från en specifikt företag. Får lista alla direkt (får tänkte om här)
@@ -98,7 +99,7 @@ public class WizardModel {
 
     public void collectData() {
         Map<String, String> data = new HashMap<>();
-        //TODO Collect all data.
+
         notifyController();
     }
 
