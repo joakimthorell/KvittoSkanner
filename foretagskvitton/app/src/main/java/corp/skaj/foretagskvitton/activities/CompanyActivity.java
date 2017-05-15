@@ -30,7 +30,7 @@ public class CompanyActivity extends AbstractActivity {
         Button button = (Button) findViewById(R.id.edit);
         companyListController.editButtonListener(button);
 
-        
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.company_action_bar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);

@@ -18,7 +18,8 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        android:layout_marginTop="-14dp">
 
         <TextView
             android:id="@+id/toolbar_title"
@@ -56,10 +57,11 @@
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/employees"
         tools:layout_editor_absoluteY="100dp" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/employees"
         android:layout_width="100dp"
         android:layout_height="23dp"
         android:layout_marginLeft="13dp"
@@ -68,17 +70,19 @@
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintLeft_toLeftOf="parent"
-        tools:layout_editor_absoluteY="73dp" />
+        app:layout_constraintTop_toBottomOf="@id/company_action_bar" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/cards"
         android:layout_width="57dp"
         android:layout_height="23dp"
+        android:layout_marginLeft="13dp"
+        android:layout_marginStart="13dp"
         android:text="Kort"
         android:textSize="20sp"
         android:textStyle="bold"
-        tools:layout_editor_absoluteX="13dp"
-        tools:layout_editor_absoluteY="206dp" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addNewEmployee" />
 
     <EditText
         android:id="@+id/editText2"
@@ -89,10 +93,10 @@
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintLeft_toLeftOf="parent"
-        tools:layout_editor_absoluteY="232dp" />
+        app:layout_constraintTop_toBottomOf="@id/cards" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/comments"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="13dp"
@@ -101,7 +105,7 @@
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintLeft_toLeftOf="parent"
-        tools:layout_editor_absoluteY="333dp" />
+        app:layout_constraintTop_toBottomOf="@+id/addNewCard" />
 
     <EditText
         android:id="@+id/editText3"
@@ -112,7 +116,7 @@
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintLeft_toLeftOf="parent"
-        tools:layout_editor_absoluteY="359dp" />
+        app:layout_constraintTop_toBottomOf="@id/comments" />
 
     <ImageButton
         android:id="@+id/addNewEmployee"
@@ -122,7 +126,7 @@
         android:layout_marginStart="13dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:srcCompat="@android:drawable/ic_input_add"
-        tools:layout_editor_absoluteY="143dp" />
+        app:layout_constraintTop_toBottomOf="@id/editText" />
 
     <ImageButton
         android:id="@+id/addNewCard"
@@ -132,15 +136,17 @@
         android:layout_marginStart="13dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:srcCompat="@android:drawable/ic_input_add"
-        tools:layout_editor_absoluteY="275dp" />
+        app:layout_constraintTop_toBottomOf="@id/editText2" />
 
     <ImageButton
         android:id="@+id/addNewComment"
         android:layout_width="33dp"
         android:layout_height="36dp"
+        android:layout_marginLeft="13dp"
+        android:layout_marginStart="13dp"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:srcCompat="@android:drawable/ic_input_add"
-        tools:layout_editor_absoluteX="13dp"
-        tools:layout_editor_absoluteY="405dp" />
+        app:layout_constraintTop_toBottomOf="@id/editText3" />
 
 
 </android.support.constraint.ConstraintLayout>
