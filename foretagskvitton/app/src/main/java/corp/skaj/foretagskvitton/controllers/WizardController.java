@@ -142,34 +142,25 @@ public class WizardController implements IObserver {
         Product product = buildProduct(
                 totalBundle.getString("_"),
                 vatBundle.getString("_"),
-                categoryBundle.getString("_")
-        );
+                categoryBundle.getString("_"));
 
         Receipt receipt = buildReceipt(
                 product,
                 dateBundle.getString("_"),
-                totalBundle.getString("_")
-        );
+                totalBundle.getString("_"));
 
         Purchase purchase = buildPurchase(
                 receipt, supplierBundle.getString("_"),
-                payMethodBundle.getString("_")
-        );
+                payMethodBundle.getString("_"));
 
         if (commentBundle.getString("_") != null) {
             purchase.addComment(new Comment(commentBundle.getString("_")));
         }
-
         User user = handler.readData(User.class.getName(), User.class);
         Company company = user.getCompany(companyNameBundle.getString("_"));
         Employee employee = company.getEmployees().get(0);
-
         employee.addPurchase(purchase);
-
-
         saveUser(user);
-
-
     }
 
     private void saveUser(User user) {
@@ -196,14 +187,10 @@ public class WizardController implements IObserver {
         } catch (ParseException pe) {
             dateAsDate = new Date();
         }
-
         Calendar date = Calendar.getInstance();
         date.setTime(dateAsDate);
-
         double total = Double.parseDouble(totalAsString);
-
         String URIAsString = handler.readData("mURI", String.class);
-
         return new Receipt(product, date, total, URIAsString);
     }
 
@@ -211,7 +198,6 @@ public class WizardController implements IObserver {
         double totalPrice = Double.parseDouble(priceAsString);
         double taxAsDouble = Double.parseDouble(taxAsString);
         Category categoryAsCategory = Category.valueOf(categoryAsString.toUpperCase());
-
         return new Product(Product.WHOLE_RECEIPT, categoryAsCategory, totalPrice, taxAsDouble);
     }
 

@@ -12,7 +12,6 @@ import java.io.IOException;
 import java.util.List;
 
 import corp.skaj.foretagskvitton.R;
-import corp.skaj.foretagskvitton.model.IData;
 import corp.skaj.foretagskvitton.services.TextCollector;
 
 public class InitWizardActivity extends AbstractActivity {
@@ -103,10 +102,9 @@ public class InitWizardActivity extends AbstractActivity {
     //TODO Below is temporary. Remove later.
     public void nextPressed(View view) {
         Intent intent = new Intent(this, WizardActivity.class);
-        IData dataHandler = (IData) getApplicationContext();
-        dataHandler.writeData("mStrings", mStrings);
-        String URIAsString = mURI.toString();
-        dataHandler.writeData("mURI", URIAsString);
+        writeData("mStrings", mStrings);
+        writeData("mURI", mURI.toString());
         startActivity(intent);
+
     }
 }

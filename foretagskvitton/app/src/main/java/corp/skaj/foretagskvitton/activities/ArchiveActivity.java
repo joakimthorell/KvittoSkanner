@@ -21,8 +21,9 @@ public class ArchiveActivity extends AbstractActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_archive);
 
-        User user = getUser();
         ArchiveController archiveController = new ArchiveController(this, ArchiveReceiptActivity.class);
+        User user = readUser();
+
         mAdapter = new ReceiptAdapter(user, archiveController);
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);

@@ -67,8 +67,8 @@ public class MyPagerAdapter extends FragmentStatePagerAdapter {
     }
 
     /**
-     *  This class is needed because the WizardPager is bad. To take load of from model we need this to
-     *  decide what fragment to build
+     *  This class is needed because the WizardPager is bad.
+     *  In order to follow a MVC pattern we need this to decide what fragment to build here.
      */
     private class PageWrapper {
         private Fragment createFragment(Page page) {
