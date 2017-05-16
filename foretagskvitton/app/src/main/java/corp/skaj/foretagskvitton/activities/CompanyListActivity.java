@@ -31,8 +31,7 @@ public class CompanyListActivity extends AbstractActivity {
 
         //The code hided below is for when we do have a list of companies
 
-        IData iData = (DataHandler) getApplicationContext();
-        User user = iData.readData(User.class.getName(), User.class);
+        User user = getUser();
         List<Company> companies = user.getCompanies();
         String[] companyNames = new String[companies.size()];
         for (int i = 0; i < companies.size(); i++) {

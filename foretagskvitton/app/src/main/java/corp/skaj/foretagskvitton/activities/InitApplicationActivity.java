@@ -35,13 +35,12 @@ public class InitApplicationActivity extends AbstractActivity {
     }
 
     private void readData() {
-        IData handler = (IData) getApplicationContext();
-        if (handler.readData(User.class.getName(), User.class) == null) {
+        if (getUser() == null) {
             User user = new User("DEFAULT USER");
             Company company = new Company("DEFAULT COMPANY");
             company.addEmployee(new Employee(user.getName()));
             user.addCompany(company);
-            handler.writeData(User.class.getName(), user);
+            saveUser(user);
         }
     }
 

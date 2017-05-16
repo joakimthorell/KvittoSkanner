@@ -31,8 +31,7 @@ public class CompanyActivity extends AbstractActivity {
         String companyName = getIntent().getExtras().get(COMPANY_KEY).toString();
 
         //Getting hold of the user
-        IData iData = (IData) getApplicationContext();
-        User user = iData.readData(User.class.getName(), User.class);
+        User user = getUser();
 
         //Code for the tool-and actionbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.company_action_bar);

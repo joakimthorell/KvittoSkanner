@@ -1,6 +1,9 @@
 package corp.skaj.foretagskvitton.model;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Purchase {
 
     public enum PurchaseType {
@@ -10,6 +13,7 @@ public class Purchase {
 
     private Receipt receipt;
     private Supplier supplier;
+    private List<Comment> comments;
 
     private PurchaseType purchaseType;
 
@@ -17,11 +21,15 @@ public class Purchase {
         this.receipt = receipt;
         this.supplier = supplier;
         this.purchaseType = purchaseType;
+        comments = new ArrayList<>();
     }
 
     public Purchase(Receipt receipt, PurchaseType purchaseType) {
-        this.receipt = receipt;
-        this.purchaseType = purchaseType;
+        this(receipt, null, purchaseType);
+    }
+
+    public void addComment(Comment comment) {
+        comments.add(comment);
     }
 
     public void setPurchaseType(PurchaseType purchaseType) {
@@ -34,6 +42,10 @@ public class Purchase {
 
     public void setSupplier(Supplier supplier) {
         this.supplier = supplier;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
     }
 
     public Receipt getReceipt() {

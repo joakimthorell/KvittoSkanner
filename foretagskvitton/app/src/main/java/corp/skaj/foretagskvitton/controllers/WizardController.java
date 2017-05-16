@@ -19,6 +19,7 @@ import java.util.List;
 
 import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.model.Category;
+import corp.skaj.foretagskvitton.model.Comment;
 import corp.skaj.foretagskvitton.model.Company;
 import corp.skaj.foretagskvitton.model.Employee;
 import corp.skaj.foretagskvitton.model.IData;
@@ -154,6 +155,10 @@ public class WizardController implements IObserver {
                 receipt, supplierBundle.getString("_"),
                 payMethodBundle.getString("_")
         );
+
+        if (commentBundle.getString("_") != null) {
+            purchase.addComment(new Comment(commentBundle.getString("_")));
+        }
 
         User user = handler.readData(User.class.getName(), User.class);
         Company company = user.getCompany(companyNameBundle.getString("_"));
