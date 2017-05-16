@@ -12,8 +12,8 @@ import corp.skaj.foretagskvitton.R;
 
 import corp.skaj.foretagskvitton.controllers.ReceiptAdapter;
 import corp.skaj.foretagskvitton.model.Category;
-import corp.skaj.foretagskvitton.model.PrivatePurchase;
 import corp.skaj.foretagskvitton.model.Product;
+import corp.skaj.foretagskvitton.model.Purchase;
 import corp.skaj.foretagskvitton.model.Receipt;
 import corp.skaj.foretagskvitton.model.Company;
 import corp.skaj.foretagskvitton.model.Employee;
@@ -50,7 +50,7 @@ public class ArchiveActivity extends AbstractActivity {
         Calendar cal = Calendar.getInstance();
         Receipt receipt = new Receipt(product, cal, 500.00, null);
         receipt.setCategory(Category.MAT);
-        PrivatePurchase pur = new PrivatePurchase(receipt);
+        Purchase pur = new Purchase(receipt, Purchase.PurchaseType.COMPANY);
 
         //Skapar en anställd och ger den företag och kvitto med produkt
         IData dataHandler = (DataHandler) getApplicationContext();

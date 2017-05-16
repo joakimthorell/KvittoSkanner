@@ -34,35 +34,9 @@ public class CompanyActivity extends AbstractActivity {
 
         String companyName = getIntent().getExtras().get(COMPANY_KEY).toString();
 
+        //Getting hold of the user
         IData iData = (DataHandler) getApplicationContext();
         User user = iData.readData(User.class.getName(), User.class);
-        List<Company> companies = user.getCompanies();
-        
-
-        /*CompanyListController listViewController = new CompanyListController();
-        Button button = (Button) findViewById(R.id.buttonForCompany);
-        listViewController.initButtonListener(button, this);*/
-
-
-        CompanyListController companyListController = new CompanyListController();
-
-        //Creating new TextViews and Buttons and connecting them
-        Button button = (Button) findViewById(R.id.edit);
-        TextView textView1 = (TextView) findViewById(R.id.editText);
-        TextView textView2 = (TextView) findViewById(R.id.editText2);
-        TextView textView3 = (TextView) findViewById(R.id.editText3);
-
-        companyListController.editButtonListener(button, textView1, textView2, textView3);
-
-        ImageButton addEmployeeButton = (ImageButton) findViewById(R.id.addNewEmployee);
-        companyListController.createNewEmployeeListener(addEmployeeButton);
-
-        ImageButton addCardButton = (ImageButton) findViewById(R.id.addNewCard);
-        companyListController.createNewCardListener(addCardButton);
-
-        ImageButton addCommentButton = (ImageButton) findViewById(R.id.addNewComment);
-        companyListController.createNewCommentListener(addCommentButton);
-
 
         //Code for the tool-and actionbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.company_action_bar);
@@ -74,6 +48,39 @@ public class CompanyActivity extends AbstractActivity {
 
         TextView textViewForToolbar = (TextView) findViewById(R.id.toolbar_title);
         textViewForToolbar.setText(companyName);
+
+        /*CompanyListController listViewController = new CompanyListController();
+        Button button = (Button) findViewById(R.id.buttonForCompany);
+        listViewController.initButtonListener(button, this);*/
+
+        CompanyListController companyListController = new CompanyListController();
+
+        //Creating new TextViews and Buttons and connecting them
+        Button button = (Button) findViewById(R.id.edit);
+        TextView textView1 = (TextView) findViewById(R.id.editText);
+        TextView textView2 = (TextView) findViewById(R.id.editText2);
+        TextView textView3 = (TextView) findViewById(R.id.editText3);
+
+        //Creating a List to hold att the textViews
+        List<TextView> textViews = new ArrayList<>();
+            textViews.add(textView1);
+            textViews.add(textView2);
+            textViews.add(textView3);
+
+        companyListController.editButtonListener(button, textViews);
+
+        //Creating connecting the xml with the java code for the image buttons
+        ImageButton addEmployeeButton = (ImageButton) findViewById(R.id.addNewEmployee);
+        companyListController.createNewEmployeeListener(addEmployeeButton, user, companyName);
+
+        ImageButton addCardButton = (ImageButton) findViewById(R.id.addNewCard);
+        companyListController.createNewCardListener(addCardButton, user, companyName);
+
+        ImageButton addCommentButton = (ImageButton) findViewById(R.id.addNewComment);
+        companyListController.createNewCommentListener(addCommentButton, user, companyName);
+
+
+
 
     }
 }

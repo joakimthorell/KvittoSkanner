@@ -11,7 +11,6 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 import corp.skaj.foretagskvitton.R;
-import corp.skaj.foretagskvitton.model.PrivatePurchase;
 import corp.skaj.foretagskvitton.model.Purchase;
 import corp.skaj.foretagskvitton.model.Category;
 import corp.skaj.foretagskvitton.model.Company;
