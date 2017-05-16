@@ -66,6 +66,7 @@
         android:layout_height="23dp"
         android:layout_marginLeft="13dp"
         android:layout_marginStart="13dp"
+        android:layout_margin="13dp"
         android:text="Anställda"
         android:textSize="20sp"
         android:textStyle="bold"

@@ -3,12 +3,16 @@ package corp.skaj.foretagskvitton.controllers;
 import android.content.Context;
 import android.content.Intent;
 
+import android.support.constraint.ConstraintLayout;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -24,7 +28,6 @@ public class CompanyListController <T>{
     public CompanyListController() {
 
     }
-
 
     /**
      *
@@ -43,21 +46,15 @@ public class CompanyListController <T>{
         });
     }
 
-    public static void editButtonListener(final Button button, final List<TextView> tv) {
+    public void editButtonListener(final Button button, final List<TextView> tv) {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    button.setText("Spara");
+                toggle(button, tv);
 
-                    for(int i = 0; i < tv.size() - 1; i++) {
-                        tv.get(i).setFocusable(true);
-                        tv.get(i).setClickable(true);
-                        tv.get(i).setFocusableInTouchMode(true);
-
-                    }
-
-                //Spara undan det som man editerat, var sparar vi det? Hur kollar vi vad som är editerat?
             }
+
+            //Spara undan det som man editerat, var sparar vi det? Hur kollar vi vad som är editerat?
         });
     }
 
@@ -102,6 +99,42 @@ public class CompanyListController <T>{
                 //comments.add(new Comment("information"));
          }
      });
+    }
+
+    public void deleteCompanyListener (Button button) {
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+    }
+
+    //Den här metoden kanske kommer att behövas
+    /*private TextView createNewTextView(String text) {
+        final ConstraintLayout.LayoutParams lparams = new ConstraintLayout.LayoutParams(ConstraintLayout.LayoutParams.WRAP_CONTENT,
+                ConstraintLayout.LayoutParams.WRAP_CONTENT);
+
+        return null;
+    }*/
+
+    public void toggle (Button button, List<TextView> tv) {
+        if(button.getText() == "Editera") {
+            button.setText("Spara");
+            for (int i = 0; i < tv.size(); i++) {
+                tv.get(i).setFocusable(true);
+                tv.get(i).setClickable(true);
+                tv.get(i).setFocusableInTouchMode(true);
+            }
+        } else {
+            button.setText("Editera");
+            for (int i = 0; i < tv.size(); i++) {
+                tv.get(i).setFocusable(false);
+                tv.get(i).setClickable(false);
+                tv.get(i).setFocusableInTouchMode(false);
+            }
+        }
     }
 }
 
