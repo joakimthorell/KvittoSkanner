@@ -104,7 +104,8 @@ public class ReceiptScanner {
             if (strings.get(i).toLowerCase().equals("kr")
                     || strings.get(i).toLowerCase().equals("sek")
                     || strings.get(i).toLowerCase().equals("total")
-                    || strings.get(i).toLowerCase().equals("totalt")) {
+                    || strings.get(i).toLowerCase().equals("totalt")
+                    || strings.get(i).toLowerCase().equals("betala")) {
                 return i;
             }
         }
@@ -137,7 +138,7 @@ public class ReceiptScanner {
         if (index != -1) {
             return evaluateResult(s, detachCard((s.substring(index, s.length()))), index);
         } else {
-            String newS = replaceX(s);
+            String newS = anticipateAterix(s);
             int asterix = findAterix(newS);
             if (asterix != -1) {
                 return evaluateResult(newS, detachCard((newS.substring(asterix, newS.length()))), asterix);
@@ -189,23 +190,37 @@ public class ReceiptScanner {
     }
 
     private static boolean isFourDigits(String s, int count, int i) {
-        if (count == 4) {
-            if (isDetached(s, i)) {
-                return true;
-            }
-        }
-        return false;
+        return count == 4 && isDetached(s, i);
     }
 
     private static boolean isDetached(String s, int i) {
-        return outOfBounds(s, i) || !isDigit(String.valueOf(s.charAt(i + 1))) && !isDigit(String.valueOf(s.charAt(i - 4)));
+        return outOfBounds(s, i) || !isDigit(String.valueOf(s.charAt(i + 1)))
+                && !isDigit(String.valueOf(s.charAt(i - 4)))
+                && !isDate(s, i)
+                && !isPrice(s, i);
+    }
+
+    private static boolean isDate(String s, int i) {
+        if (!isAsterix(s, i)) {
+            return false;
+        }
+        return "-.".contains(String.valueOf(s.charAt(i + 1))) || "-.".contains(String.valueOf(s.charAt(i - 4)));
+    }
+
+    private static boolean isPrice(String s, int i) {
+        return ",".contains(String.valueOf(s.charAt(i + 1)));
+    }
+
+    private static boolean isAsterix(String s, int i) {
+        return "'*x".contains(String.valueOf(s.charAt(i - 4)))
+                || String.valueOf(s.charAt(i - 4)).matches("[^\"]*");
     }
 
     private static boolean outOfBounds(String s, int i) {
         try {
             s.charAt(i + 1);
             s.charAt(i - 4);
-        } catch (Exception e) {
+        } catch (IndexOutOfBoundsException e) {
             return true;
         }
         return false;
@@ -219,8 +234,8 @@ public class ReceiptScanner {
         return s.replaceAll("il", "1").replaceAll("o", "0").replaceAll("s", "5").replaceAll("b", "8");
     }
 
-    private static String replaceX(String s) {
-        return s.replaceAll("x", "*");
+    private static String anticipateAterix(String s) {
+        return s.replaceAll("x^´`'[^\"]*", "*");
     }
 
     private static int findAterix(String s) {
