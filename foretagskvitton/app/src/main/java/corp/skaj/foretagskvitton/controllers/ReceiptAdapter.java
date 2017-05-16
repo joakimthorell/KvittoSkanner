@@ -18,11 +18,10 @@ import corp.skaj.foretagskvitton.model.User;
 
 public class ReceiptAdapter extends RecyclerView.Adapter<ReceiptAdapter.MyViewHolder> {
     public static final String ARCHIVE_KEY = "ArchiveKey";
-    private Context context;
-    private User user;
+    private User mUser;
 
-    public ReceiptAdapter(Context context) {
-        this.context = context;
+    public ReceiptAdapter(User user) {
+        mUser = user;
     }
 
     @Override
@@ -40,23 +39,16 @@ public class ReceiptAdapter extends RecyclerView.Adapter<ReceiptAdapter.MyViewHo
             }
         });
         */
-        user = readUser();
         return new MyViewHolder(itemView);
     }
 
-    // Varje gång man går trycker på archive i menyn byggs en ny tom rad. Vet inte om detta är intended men en sak att tänka på.
-
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        //User user = readUser();
-        Purchase purchase = user.getCompanies().get(0).getEmployees().get(0).getPurchases().get(position);
-        Company company = user.getCompany(purchase);
+        Purchase purchase = mUser.getCompanies().get(0).getEmployees().get(0).getPurchases().get(position);
+        Company company = mUser.getCompany(purchase);
 
-        //holder.title.setText(movie.getTitle());
         holder.title.setText(company.getName());
-        //holder.genre.setText(movie.getGenre());
         holder.genre.setText(purchase.getReceipt().getProducts().get(0).getCategory().name());
-        //holder.year.setText(movie.getYear());
 
         SimpleDateFormat dateRaw = new SimpleDateFormat("yyyy-MM-dd");
         String date = dateRaw.format(purchase.getReceipt().getDate().getTime());
@@ -65,14 +57,8 @@ public class ReceiptAdapter extends RecyclerView.Adapter<ReceiptAdapter.MyViewHo
 
     @Override
     public int getItemCount() {
-        //List<Purchase> purchases = readUser().getCompany(new Company("DEFAULT COMPANY")).getEmployee("DEFAULT USER").getPurchases();
-        List<Purchase> purchases = readUser().getCompanies().get(0).getEmployees().get(0).getPurchases();
-        System.out.println("LISTANS STORLEK ÄR   ::: " + purchases.size());
+        List<Purchase> purchases = mUser.getCompanies().get(0).getEmployees().get(0).getPurchases();
         return purchases.size();
-    }
-
-    private User readUser() {
-        return ((IData) context.getApplicationContext()).readData(User.class.getName(), User.class);
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
