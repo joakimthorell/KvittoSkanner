@@ -10,6 +10,8 @@ import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
 
 import corp.skaj.foretagskvitton.R;
+import corp.skaj.foretagskvitton.model.IData;
+import corp.skaj.foretagskvitton.model.User;
 
 public abstract class AbstractActivity extends AppCompatActivity {
     private SparseArray<Class<?extends AbstractActivity>> mBottomBarMap;
@@ -46,5 +48,15 @@ public abstract class AbstractActivity extends AppCompatActivity {
         final BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
         bottomBar.setDefaultTab(ID);
         return bottomBar;
+    }
+
+    protected User getUser() {
+        User user = ((IData) getApplicationContext()).readData(User.class.getName(), User.class);
+        return user;
+    }
+
+    protected void saveUser(User user) {
+        IData handler = (IData) getApplicationContext();
+        handler.writeData(User.class.getName(), user);
     }
 }

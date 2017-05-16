@@ -63,7 +63,7 @@ public class ReceiptScannerTest {
 
     @Test
     public void testCostNullCase() {
-        assertEquals(0.0, ReceiptScanner.getTotalCost(null), 1);
+        assertEquals(0.0, ReceiptScanner.getPrice(null), 1);
     }
 
     @Test

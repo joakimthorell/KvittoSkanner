@@ -9,13 +9,10 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.model.IData;
-import corp.skaj.foretagskvitton.model.Receipt;
-import corp.skaj.foretagskvitton.model.ReceiptScanner;
 import corp.skaj.foretagskvitton.services.TextCollector;
 
 public class InitWizardActivity extends AbstractActivity {
@@ -111,10 +108,5 @@ public class InitWizardActivity extends AbstractActivity {
         String URIAsString = mURI.toString();
         dataHandler.writeData("mURI", URIAsString);
         startActivity(intent);
-    }
-
-    public void saveButtonPressed(View view) {
-        TextView t = (TextView) findViewById(R.id.textContainer);
-        t.setText(ReceiptScanner.getCard(mStrings));
     }
 }

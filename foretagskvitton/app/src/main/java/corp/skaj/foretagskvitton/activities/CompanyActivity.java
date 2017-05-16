@@ -1,25 +1,21 @@
 package corp.skaj.foretagskvitton.activities;
 
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.ActionBar;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.controllers.CompanyListController;
-import corp.skaj.foretagskvitton.model.Company;
-import corp.skaj.foretagskvitton.model.Employee;
 import corp.skaj.foretagskvitton.model.IData;
 import corp.skaj.foretagskvitton.model.User;
-import corp.skaj.foretagskvitton.services.DataHandler;
 
 import static corp.skaj.foretagskvitton.controllers.CompanyListController.COMPANY_KEY;
 
@@ -35,8 +31,7 @@ public class CompanyActivity extends AbstractActivity {
         String companyName = getIntent().getExtras().get(COMPANY_KEY).toString();
 
         //Getting hold of the user
-        IData iData = (DataHandler) getApplicationContext();
-        User user = iData.readData(User.class.getName(), User.class);
+        User user = getUser();
 
         //Code for the tool-and actionbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.company_action_bar);
@@ -63,15 +58,18 @@ public class CompanyActivity extends AbstractActivity {
 
         //Creating a List to hold att the textViews
         List<TextView> textViews = new ArrayList<>();
-            textViews.add(textView1);
-            textViews.add(textView2);
-            textViews.add(textView3);
+        textViews.add(textView1);
+        textViews.add(textView2);
+        textViews.add(textView3);
 
         companyListController.editButtonListener(button, textViews);
 
+        EditText editText = (EditText) findViewById(R.id.editText);
+        companyListController.employeeTextViewListener(editText, user, companyName);
+
         //Creating connecting the xml with the java code for the image buttons
         ImageButton addEmployeeButton = (ImageButton) findViewById(R.id.addNewEmployee);
-        companyListController.createNewEmployeeListener(addEmployeeButton, user, companyName);
+        companyListController.createNewEmployeeListener(addEmployeeButton, user, companyName, this, editText);
 
         ImageButton addCardButton = (ImageButton) findViewById(R.id.addNewCard);
         companyListController.createNewCardListener(addCardButton, user, companyName);
@@ -82,6 +80,7 @@ public class CompanyActivity extends AbstractActivity {
         //Delete button for deleting an entire company
         Button deleteButton = (Button) findViewById(R.id.radera);
         companyListController.deleteCompanyListener(deleteButton, user, companyName);
+
 
     }
 }

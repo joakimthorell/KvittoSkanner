@@ -3,19 +3,17 @@ package corp.skaj.foretagskvitton.controllers;
 import android.content.Context;
 import android.content.Intent;
 
-import android.support.constraint.ConstraintLayout;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import java.util.List;
 
+import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.model.Card;
 import corp.skaj.foretagskvitton.model.Comment;
 import corp.skaj.foretagskvitton.model.Company;
@@ -23,7 +21,7 @@ import corp.skaj.foretagskvitton.model.Employee;
 import corp.skaj.foretagskvitton.model.User;
 
 
-public class CompanyListController <T>{
+public class CompanyListController <T> {
     public static final String COMPANY_KEY = "CompanyKey";
 
     public CompanyListController() {
@@ -31,7 +29,6 @@ public class CompanyListController <T>{
     }
 
     /**
-     *
      * @param listView
      * @param nextActivityToStart
      * @param context
@@ -53,55 +50,109 @@ public class CompanyListController <T>{
             public void onClick(View v) {
                 toggle(button, tv);
 
+                if (button.getText() == "Spara") {
+                    //employeeTextViewListener();
+                }
+
             }
             //Spara undan det som man editerat, var sparar vi det? Hur kollar vi vad som är editerat?
         });
     }
 
 
-    public void createNewEmployeeListener (ImageButton button, final User user, final String company) {
+    public void createNewEmployeeListener(ImageButton button, final User user, final String company, final Context context, final EditText editText) {
         button.setOnClickListener(new View.OnClickListener() {
-            //List<Employee> employees = user.getCompany(company).getEmployees();
             @Override
             public void onClick(View v) {
 
                 //Här vill vi lägga till en ny anställd i listan av anställda
                 //Skapa en ny text view?
-
-                //employees.add(new Employee("ny anställd")); //Här har vi någon form av input, den inputen ska in i setText
-                //TextView textView = new TextView();
-                //textView.setText();
+                employeeTextViewListener(editText, user, company);
 
             }
         });
 
     }
 
-    public void createNewCardListener (ImageButton button, final User user, final String company) {
+    //Saves the input in the textview
+    public void employeeTextViewListener(final EditText editText, User user, final String company) {
+        final List<Employee> employees = user.getCompany(company).getEmployees();
+        if (employees.equals(null)) {
+            employees.add(new Employee("Anställd"));
+        }
+        editText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String input = editText.getText().toString();
+                saveEmployee(input, employees);
+
+            }
+        });
+    }
+
+    //Saves the employee to the employee list
+    public void saveEmployee (String employeeName, List<Employee> employees) {
+        Employee employee = new Employee(employeeName);
+        employees.add(employee);
+    }
+
+    public void createNewCardListener(ImageButton button, final User user, final String company) {
         button.setOnClickListener(new View.OnClickListener() {
             //List<Card> cards = user.getCompany(company).getCards();
             @Override
             public void onClick(View v) {
                 //Här vill vi lägga till ett nytt kort i listan av kort
-                //cards.add(new Card(1234));
+                //cards.add(new Card(här vill vi ju ha inputen som man skriver in));
 
             }
         });
 
     }
 
-    public void createNewCommentListener (ImageButton button, final User user, final String company) {
+    public void cardTextViewListener (final EditText editText, User user, final String company) {
+        final List<Card> cards = user.getCompany(company).getCards();
+        editText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int input = Integer.parseInt(editText.getText().toString());
+                saveCard(input, cards);
+            }
+        });
+
+    }
+
+    public void saveCard (int input, List<Card> cards) {
+        Card card = new Card(input);
+        cards.add(card);
+    }
+
+    public void createNewCommentListener(ImageButton button, final User user, final String company) {
         button.setOnClickListener(new View.OnClickListener() {
             //List<Comment> comments = user.getCompany(company).getComments();
             @Override
-             public void onClick(View v) {
-             //Här vill vi lägga till en ny kommentar i listan av kommentarer
-                //comments.add(new Comment("information"));
-         }
-     });
+            public void onClick(View v) {
+                //Här vill vi lägga till en ny kommentar i listan av kommentarer
+            }
+        });
     }
 
-    public void deleteCompanyListener (final Button button, final User user, final String companyName) {
+    public void commentTextViewListener (final EditText editText, User user, final String company) {
+        final List<Comment> comments = user.getCompany(company).getComments();
+        editText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String input = editText.getText().toString();
+                saveComment(input, comments);
+            }
+        });
+    }
+
+    public void saveComment (String input, List<Comment> comments) {
+        Comment comment = new Comment(input);
+        comments.add(comment);
+    }
+
+    public void deleteCompanyListener(final Button button, final User user, final String companyName) {
         final List<Company> companies = user.getCompanies();
 
         button.setOnClickListener(new View.OnClickListener() {
@@ -119,13 +170,10 @@ public class CompanyListController <T>{
 
     }
 
-    //Den här metoden kanske kommer att behövas
-    /*private TextView createNewTextView(String text) {
-        final ConstraintLayout.LayoutParams lparams = new ConstraintLayout.LayoutParams(ConstraintLayout.LayoutParams.WRAP_CONTENT,
-                ConstraintLayout.LayoutParams.WRAP_CONTENT);
+    private void createNewTextView() {
+        //TODO lägga till en ny textview under redan existerande
+    }
 
-        return null;
-    }*/
 
     public void toggle (Button button, List<TextView> tv) {
         if(button.getText() == "Editera") {

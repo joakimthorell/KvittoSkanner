@@ -1,7 +1,9 @@
 package corp.skaj.foretagskvitton.controllers;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import java.util.List;
 
@@ -10,23 +12,19 @@ import corp.skaj.foretagskvitton.model.Company;
 import corp.skaj.foretagskvitton.model.Employee;
 import corp.skaj.foretagskvitton.model.Receipt;
 
-public class ArchiveController {
-    public static final String COMPANY_KEY = "ArchiveKey";
-    private Context mContext;
-    private List<Receipt> receipts;
-    private List<Company> companies;
-    private RecyclerView recyclerView;
+public class ArchiveController<T> {
+    public static final String ITEM_ID = "receipt_id";
 
-    private void getAllReceipts() {
-        //companies = dataHolder.getUser().getCompanies();
-        for (int i = 0; i < companies.size(); i++) {
-            List<Employee> employees = companies.get(i).getEmployees();
-            for (int j = 0; j < employees.size(); i++) {
-                List<Purchase> purchases = employees.get(j).getPurchases();
-                for (int k = 0; k < purchases.size(); k++) {
-                    receipts.add(purchases.get(k).getReceipt());
-                }
+    public void setItemListener(View itemView, final Class<T> nextClassToStart,final Context context) {
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Toast.makeText(context, "Mabye it works", Toast.LENGTH_SHORT).show();
+                Intent intent =  new Intent(context, nextClassToStart);
+                intent.putExtra(ITEM_ID, "lars");
+                context.startActivity(intent);
             }
-        }
+        });
     }
+
 }

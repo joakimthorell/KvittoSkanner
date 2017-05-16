@@ -1,7 +1,6 @@
 package corp.skaj.foretagskvitton.controllers;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
@@ -20,6 +19,7 @@ import java.util.List;
 
 import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.model.Category;
+import corp.skaj.foretagskvitton.model.Comment;
 import corp.skaj.foretagskvitton.model.Company;
 import corp.skaj.foretagskvitton.model.Employee;
 import corp.skaj.foretagskvitton.model.IData;
@@ -27,10 +27,8 @@ import corp.skaj.foretagskvitton.model.IObserver;
 import corp.skaj.foretagskvitton.model.Product;
 import corp.skaj.foretagskvitton.model.Purchase;
 import corp.skaj.foretagskvitton.model.Receipt;
-import corp.skaj.foretagskvitton.model.Supplier;
 import corp.skaj.foretagskvitton.model.User;
 import corp.skaj.foretagskvitton.model.WizardConstants;
-import corp.skaj.foretagskvitton.services.DataHandler;
 import corp.skaj.foretagskvitton.view.WizardView;
 import corp.skaj.foretagskvitton.view.ConfirmWizardFragment;
 
@@ -49,7 +47,7 @@ public class WizardController implements IObserver {
         this.mNextButton = mNextButton;
         this.mPrevButton = mPrevButton;
         this.mPager = mPager;
-        this.handler = (DataHandler) context.getApplicationContext();
+        this.handler = (IData) context.getApplicationContext();
         mWizardView = new WizardView(this, context);
     }
 
@@ -158,6 +156,10 @@ public class WizardController implements IObserver {
                 payMethodBundle.getString("_")
         );
 
+        if (commentBundle.getString("_") != null) {
+            purchase.addComment(new Comment(commentBundle.getString("_")));
+        }
+
         User user = handler.readData(User.class.getName(), User.class);
         Company company = user.getCompany(companyNameBundle.getString("_"));
         Employee employee = company.getEmployees().get(0);
@@ -174,6 +176,10 @@ public class WizardController implements IObserver {
         System.out.println("Saving user " + user.getName());
         handler.writeData(User.class.getName(), user);
         System.out.println("User : " + user.getName() + " saved. COMPLETE!");
+        System.out.println("Removing used items");
+        handler.removeData("mURI");
+        handler.removeData("mStrings");
+        System.out.println("Removed data. COMPLETE!");
     }
 
     private Purchase buildPurchase(Receipt receipt, String supplierAsString, String purchaseType) {
