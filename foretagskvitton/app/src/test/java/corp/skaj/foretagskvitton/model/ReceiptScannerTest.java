@@ -98,7 +98,6 @@ public class ReceiptScannerTest {
     @Test
     public void testCardNum (){
         List<String> list = new ArrayList<>(Arrays.asList("cxx134,-45","M R STER ","", "019677" + "9", "Bjl", " THAITAKEA\"3310-0140,00mPer50nligk", ""));
-        System.out.println(list);
         String expected = "3310";
         String result = ReceiptScanner.getCard(list);
         assertEquals(expected, result);

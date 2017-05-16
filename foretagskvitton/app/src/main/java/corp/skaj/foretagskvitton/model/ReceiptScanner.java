@@ -134,12 +134,12 @@ public class ReceiptScanner {
     }
 
     private static String findCard(String s) {
-        int index = getIndex(s);
+        int index = getCardIndex(s);
         if (index != -1) {
             return evaluateResult(s, detachCard((s.substring(index, s.length()))), index);
         } else {
             String newS = anticipateAterix(s);
-            int asterix = findAterix(newS);
+            int asterix = findAsterix(newS);
             if (asterix != -1) {
                 return evaluateResult(newS, detachCard((newS.substring(asterix, newS.length()))), asterix);
             }
@@ -154,7 +154,7 @@ public class ReceiptScanner {
         return result;
     }
 
-    private static int getIndex(String s) {
+    private static int getCardIndex(String s) {
         if (s.contains(KORTNUMMER)) {
             return s.lastIndexOf(KORTNUMMER);
         }
@@ -170,7 +170,7 @@ public class ReceiptScanner {
         return -1;
     }
 
-    private static String listToString(List<String> strings) {
+    public static String listToString(List<String> strings) {
         String S = "";
         for (String s : strings) {
             S += s;
@@ -201,7 +201,9 @@ public class ReceiptScanner {
     }
 
     private static boolean isDate(String s, int i) {
-        return isAsterix(s, i) && "-.".contains(String.valueOf(s.charAt(i + 1))) || "-.".contains(String.valueOf(s.charAt(i - 4)));
+        return !isAsterix(s, i)
+                && "-.".contains(String.valueOf(s.charAt(i + 1)))
+                || "-.".contains(String.valueOf(s.charAt(i - 4)));
     }
 
     private static boolean isPrice(String s, int i) {
@@ -209,8 +211,7 @@ public class ReceiptScanner {
     }
 
     private static boolean isAsterix(String s, int i) {
-        return "'*x".contains(String.valueOf(s.charAt(i - 4)))
-                || String.valueOf(s.charAt(i - 4)).matches("[^\"]*");
+        return ("*x\"'^").contains(String.valueOf(s.charAt(i - 4)));
     }
 
     private static boolean outOfBounds(String s, int i) {
@@ -228,14 +229,21 @@ public class ReceiptScanner {
     }
 
     private static String replaceLetters(String s) {
-        return s.replaceAll("il", "1").replaceAll("o", "0").replaceAll("s", "5").replaceAll("b", "8");
+        return s.replaceAll("i", "1")
+                .replaceAll("l","1")
+                .replaceAll("o", "0")
+                .replaceAll("s", "5")
+                .replaceAll("b", "8");
     }
 
-    private static String anticipateAterix(String s) {
-        return s.replaceAll("x^´`'[^\"]*", "*");
+    public static String anticipateAterix(String s) {
+        return s.replaceAll("x", "*")
+                .replaceAll("\"", "*")
+                .replaceAll("^", "*")
+                .replaceAll("'", "*");
     }
 
-    private static int findAterix(String s) {
+    private static int findAsterix(String s) {
         return s.indexOf("*");
     }
 }
