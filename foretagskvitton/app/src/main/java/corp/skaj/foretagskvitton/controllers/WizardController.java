@@ -176,6 +176,10 @@ public class WizardController implements IObserver {
         System.out.println("Saving user " + user.getName());
         handler.writeData(User.class.getName(), user);
         System.out.println("User : " + user.getName() + " saved. COMPLETE!");
+        System.out.println("Removing used items");
+        handler.removeData("mURI");
+        handler.removeData("mStrings");
+        System.out.println("Removed data. COMPLETE!");
     }
 
     private Purchase buildPurchase(Receipt receipt, String supplierAsString, String purchaseType) {
