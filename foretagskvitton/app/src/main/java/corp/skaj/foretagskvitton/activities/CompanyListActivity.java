@@ -16,7 +16,6 @@ public class CompanyListActivity extends AbstractActivity {
     //This is just an example
     String[] companyNames = {"IKEA", "SIBA", "ELGIGANTEN", "COOP", "WILLYS", "TELIA", "SKANSKA", "NORDEA", "PRESSBYRÅN"};
 
-    //This is possible in all Activities where we need to get our User, this is for when we do have a list of companies
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -20,17 +20,7 @@ import corp.skaj.foretagskvitton.services.DataHandler;
 public class ReceiptAdapter extends RecyclerView.Adapter<ReceiptAdapter.MyViewHolder> {
     public static final String ARCHIVE_KEY = "ArchiveKey";
     private Context context;
-
-    public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView title, year, genre;
-
-        public MyViewHolder(View view) {
-            super(view);
-            title = (TextView) view.findViewById(R.id.title);
-            genre = (TextView) view.findViewById(R.id.genre);
-            year = (TextView) view.findViewById(R.id.year);
-        }
-    }
+    private User user;
 
     public ReceiptAdapter(Context context) {
         this.context = context;
@@ -51,17 +41,16 @@ public class ReceiptAdapter extends RecyclerView.Adapter<ReceiptAdapter.MyViewHo
             }
         });
         */
+        user = readUser();
         return new MyViewHolder(itemView);
     }
 
-    private User readUser() {
-        return ((DataHandler)context.getApplicationContext()).readData(User.class.getName(), User.class);
-    }
+    // Varje gång man går trycker på archive i menyn byggs en ny tom rad. Vet inte om detta är intended men en sak att tänka på.
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        User user = readUser();
-        Purchase purchase = user.getCompany(new Company("DEFAULT COMPANY")).getEmployee("DEFAULT USER").getPurchases().get(position);
+        //User user = readUser();
+        Purchase purchase = user.getCompanies().get(0).getEmployees().get(0).getPurchases().get(position);
         Company company = user.getCompany(purchase);
 
         //holder.title.setText(movie.getTitle());
@@ -79,5 +68,20 @@ public class ReceiptAdapter extends RecyclerView.Adapter<ReceiptAdapter.MyViewHo
     public int getItemCount() {
         List<Purchase> purchases = readUser().getCompany(new Company("DEFAULT COMPANY")).getEmployee("DEFAULT USER").getPurchases();
         return purchases.size();
+    }
+
+    private User readUser() {
+        return ((DataHandler)context.getApplicationContext()).readData(User.class.getName(), User.class);
+    }
+
+    public class MyViewHolder extends RecyclerView.ViewHolder {
+        public TextView title, year, genre;
+
+        public MyViewHolder(View view) {
+            super(view);
+            title = (TextView) view.findViewById(R.id.title);
+            genre = (TextView) view.findViewById(R.id.genre);
+            year = (TextView) view.findViewById(R.id.year);
+        }
     }
 }
