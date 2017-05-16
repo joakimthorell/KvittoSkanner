@@ -40,7 +40,7 @@ public class WizardModel {
     }
 
     private PageList companyInfoNotFound(List<String> strings, User user, ModelCallbacks view) {
-        double totalSum = ReceiptScanner.getTotalCost(strings);
+        double totalSum = ReceiptScanner.getPrice(strings);
         String date = ReceiptScanner.getDate(strings);
 
         String cardNum = ReceiptScanner.getCard(strings);
