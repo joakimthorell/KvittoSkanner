@@ -10,10 +10,12 @@ import corp.skaj.foretagskvitton.model.IData;
 
 public class DataHandler extends Application implements IData {
 
+    @Override
     public <T> void writeData(String key, T writeT) {
         getEditor().putString(key, toJson(writeT)).apply();
     }
 
+    @Override
     public <T> T readData(String key, Class<T> classOfT) {
         return new Gson().fromJson(getString(key), classOfT);
     }
@@ -32,8 +34,9 @@ public class DataHandler extends Application implements IData {
 
     public void clearData() {
         getEditor().clear().apply();
-    }
+    } // probobly temporary for testing purpose
 
+    @Override
     public void removeData(String key) {
         getEditor().remove(key).apply();
     }

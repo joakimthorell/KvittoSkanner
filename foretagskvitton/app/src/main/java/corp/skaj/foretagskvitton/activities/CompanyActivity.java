@@ -2,24 +2,18 @@ package corp.skaj.foretagskvitton.activities;
 
 import android.support.v7.app.ActionBar;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.controllers.CompanyListController;
-import corp.skaj.foretagskvitton.model.Company;
-import corp.skaj.foretagskvitton.model.Employee;
 import corp.skaj.foretagskvitton.model.IData;
 import corp.skaj.foretagskvitton.model.User;
-import corp.skaj.foretagskvitton.services.DataHandler;
 
 import static corp.skaj.foretagskvitton.controllers.CompanyListController.COMPANY_KEY;
 
@@ -35,7 +29,7 @@ public class CompanyActivity extends AbstractActivity {
         String companyName = getIntent().getExtras().get(COMPANY_KEY).toString();
 
         //Getting hold of the user
-        IData iData = (DataHandler) getApplicationContext();
+        IData iData = (IData) getApplicationContext();
         User user = iData.readData(User.class.getName(), User.class);
 
         //Code for the tool-and actionbar

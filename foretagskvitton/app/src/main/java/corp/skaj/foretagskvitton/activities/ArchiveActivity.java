@@ -19,7 +19,6 @@ import corp.skaj.foretagskvitton.model.Company;
 import corp.skaj.foretagskvitton.model.Employee;
 import corp.skaj.foretagskvitton.model.User;
 import corp.skaj.foretagskvitton.model.IData;
-import corp.skaj.foretagskvitton.services.DataHandler;
 
 public class ArchiveActivity extends AbstractActivity {
     private ReceiptAdapter mAdapter;
@@ -52,7 +51,7 @@ public class ArchiveActivity extends AbstractActivity {
         Purchase pur = new Purchase(receipt, Purchase.PurchaseType.PRIVATE);
 
         //Skapar en anställd och ger den företag och kvitto med produkt
-        IData dataHandler = (DataHandler) getApplicationContext();
+        IData dataHandler = (IData) getApplicationContext();
         User user = dataHandler.readData(User.class.getName(), User.class);
         user.getCompany(new Company("DEFAULT COMPANY")).getEmployee(user.getName()).addPurchase(pur);
         Employee emp = user.getCompanies().get(0).getEmployees().get(0);

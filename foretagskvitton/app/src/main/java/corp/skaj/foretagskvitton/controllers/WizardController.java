@@ -1,7 +1,6 @@
 package corp.skaj.foretagskvitton.controllers;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
@@ -27,10 +26,8 @@ import corp.skaj.foretagskvitton.model.IObserver;
 import corp.skaj.foretagskvitton.model.Product;
 import corp.skaj.foretagskvitton.model.Purchase;
 import corp.skaj.foretagskvitton.model.Receipt;
-import corp.skaj.foretagskvitton.model.Supplier;
 import corp.skaj.foretagskvitton.model.User;
 import corp.skaj.foretagskvitton.model.WizardConstants;
-import corp.skaj.foretagskvitton.services.DataHandler;
 import corp.skaj.foretagskvitton.view.WizardView;
 import corp.skaj.foretagskvitton.view.ConfirmWizardFragment;
 
@@ -49,7 +46,7 @@ public class WizardController implements IObserver {
         this.mNextButton = mNextButton;
         this.mPrevButton = mPrevButton;
         this.mPager = mPager;
-        this.handler = (DataHandler) context.getApplicationContext();
+        this.handler = (IData) context.getApplicationContext();
         mWizardView = new WizardView(this, context);
     }
 

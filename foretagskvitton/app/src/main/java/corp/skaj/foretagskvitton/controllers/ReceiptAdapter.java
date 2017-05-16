@@ -11,11 +11,10 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 import corp.skaj.foretagskvitton.R;
+import corp.skaj.foretagskvitton.model.IData;
 import corp.skaj.foretagskvitton.model.Purchase;
-import corp.skaj.foretagskvitton.model.Category;
 import corp.skaj.foretagskvitton.model.Company;
 import corp.skaj.foretagskvitton.model.User;
-import corp.skaj.foretagskvitton.services.DataHandler;
 
 public class ReceiptAdapter extends RecyclerView.Adapter<ReceiptAdapter.MyViewHolder> {
     public static final String ARCHIVE_KEY = "ArchiveKey";
@@ -28,7 +27,7 @@ public class ReceiptAdapter extends RecyclerView.Adapter<ReceiptAdapter.MyViewHo
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        final View itemView = LayoutInflater.from(parent.getContext())
+        View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.archive_list_row, parent, false);
         /*
         itemView.setOnClickListener(new View.OnClickListener() {
@@ -68,11 +67,12 @@ public class ReceiptAdapter extends RecyclerView.Adapter<ReceiptAdapter.MyViewHo
     public int getItemCount() {
         //List<Purchase> purchases = readUser().getCompany(new Company("DEFAULT COMPANY")).getEmployee("DEFAULT USER").getPurchases();
         List<Purchase> purchases = readUser().getCompanies().get(0).getEmployees().get(0).getPurchases();
+        System.out.println("LISTANS STORLEK ÄR   ::: " + purchases.size());
         return purchases.size();
     }
 
     private User readUser() {
-        return ((DataHandler)context.getApplicationContext()).readData(User.class.getName(), User.class);
+        return ((IData) context.getApplicationContext()).readData(User.class.getName(), User.class);
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {

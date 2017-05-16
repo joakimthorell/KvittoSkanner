@@ -10,8 +10,8 @@ import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.model.Company;
 import corp.skaj.foretagskvitton.model.Employee;
 import corp.skaj.foretagskvitton.model.User;
-import corp.skaj.foretagskvitton.services.DataHandler;
 import corp.skaj.foretagskvitton.model.IData;
+import corp.skaj.foretagskvitton.services.DataHandler;
 
 public class InitApplicationActivity extends AbstractActivity {
     public static final String KEY_FOR_IMAGE = "READACTIVITY_IMAGE_KEY";
@@ -38,16 +38,13 @@ public class InitApplicationActivity extends AbstractActivity {
     }
 
     private void readData() {
-        IData dataHandler = (DataHandler) getApplicationContext();
-        SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(this).edit();
-        editor.clear();
-        editor.apply();
-        if (dataHandler.readData(User.class.getName(), User.class) == null) {
+        IData handler = (IData) getApplicationContext();
+        if (handler.readData(User.class.getName(), User.class) == null) {
             User user = new User("DEFAULT USER");
             Company company = new Company("DEFAULT COMPANY");
             company.addEmployee(new Employee(user.getName()));
             user.addCompany(company);
-            dataHandler.writeData(User.class.getName(), user);
+            handler.writeData(User.class.getName(), user);
         }
     }
 
