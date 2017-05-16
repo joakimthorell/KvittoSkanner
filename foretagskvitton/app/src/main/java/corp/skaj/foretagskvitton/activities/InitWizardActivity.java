@@ -103,10 +103,9 @@ public class InitWizardActivity extends AbstractActivity {
     //TODO Below is temporary. Remove later.
     public void nextPressed(View view) {
         Intent intent = new Intent(this, WizardActivity.class);
-        IData dataHandler = (IData) getApplicationContext();
-        dataHandler.writeData("mStrings", mStrings);
-        String URIAsString = mURI.toString();
-        dataHandler.writeData("mURI", URIAsString);
+        writeData("mStrings", mStrings);
+        writeData("mURI", mURI.toString());
         startActivity(intent);
+
     }
 }

@@ -5,5 +5,7 @@ public interface IData {
 
     <T> T readData(String key, Class<T> classOfT);
 
-    <T> void removeData(String key);
+    void removeData(String key);
+
+    void initDefaultUser();
 }
