@@ -27,7 +27,8 @@ public class TextCollector {
         SparseArray<TextBlock> textBlocks = getTextBlocksFromImage(context, bmp);
 
         if (textBlocks == null) {
-            // This will only happend if there was no text found on image or text recognizer not operational.
+            // This will only happend if no text found in image
+            // or text recognizer is not operational.
             return null;
         }
         return buildListOfStrings(textBlocks);

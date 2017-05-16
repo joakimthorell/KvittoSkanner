@@ -13,7 +13,6 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.model.Card;
 import corp.skaj.foretagskvitton.model.Comment;
 import corp.skaj.foretagskvitton.model.Company;
@@ -25,14 +24,8 @@ public class CompanyListController <T> {
     public static final String COMPANY_KEY = "CompanyKey";
 
     public CompanyListController() {
-
     }
 
-    /**
-     * @param listView
-     * @param nextActivityToStart
-     * @param context
-     */
     public void initListViewListener(final ListView listView, final Class<?> nextActivityToStart, final Context context) {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -58,7 +51,6 @@ public class CompanyListController <T> {
             //Spara undan det som man editerat, var sparar vi det? Hur kollar vi vad som är editerat?
         });
     }
-
 
     public void createNewEmployeeListener(ImageButton button, final User user, final String company, final Context context, final EditText editText) {
         button.setOnClickListener(new View.OnClickListener() {
@@ -173,7 +165,6 @@ public class CompanyListController <T> {
     private void createNewTextView() {
         //TODO lägga till en ny textview under redan existerande
     }
-
 
     public void toggle (Button button, List<TextView> tv) {
         if(button.getText() == "Editera") {

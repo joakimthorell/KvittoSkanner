@@ -1,9 +1,5 @@
 package corp.skaj.foretagskvitton.view;
 
-/**
- * Created by kevinbrunstrom on 2017-05-08.
- */
-
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapShader;

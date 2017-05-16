@@ -8,7 +8,6 @@ import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.model.Company;
 import corp.skaj.foretagskvitton.model.Employee;
 import corp.skaj.foretagskvitton.model.User;
-import corp.skaj.foretagskvitton.model.IData;
 
 public class InitApplicationActivity extends AbstractActivity {
     public static final String KEY_FOR_IMAGE = "READACTIVITY_IMAGE_KEY";
@@ -35,12 +34,12 @@ public class InitApplicationActivity extends AbstractActivity {
     }
 
     private void readData() {
-        if (getUser() == null) {
+        if (readUser() == null) {
             User user = new User("DEFAULT USER");
             Company company = new Company("DEFAULT COMPANY");
             company.addEmployee(new Employee(user.getName()));
             user.addCompany(company);
-            saveUser(user);
+            writeUser(user);
         }
     }
 

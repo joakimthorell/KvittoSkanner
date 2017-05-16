@@ -16,8 +16,8 @@ import corp.skaj.foretagskvitton.model.User;
 
 public class ReceiptAdapter extends RecyclerView.Adapter<ReceiptAdapter.MyViewHolder> {
     public static final String ARCHIVE_KEY = "ArchiveKey";
-    private User mUser;
     private ArchiveController mArchiveController;
+    private User mUser;
 
     public ReceiptAdapter(User user, ArchiveController archiveController) {
         mUser = user;
@@ -26,11 +26,7 @@ public class ReceiptAdapter extends RecyclerView.Adapter<ReceiptAdapter.MyViewHo
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.archive_list_item, parent, false);
-
-
-
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.archive_list_item, parent, false);
         return new MyViewHolder(itemView);
     }
 
