@@ -14,7 +14,7 @@ public class BottomBarFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.bottom_navigation_fragment, container, false);
+        View view = inflater.inflate(R.layout.fragment_bottom_navigation, container, false);
         return view;
     }
 }

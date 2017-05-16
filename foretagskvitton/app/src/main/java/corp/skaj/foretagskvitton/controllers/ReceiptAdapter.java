@@ -1,6 +1,5 @@
 package corp.skaj.foretagskvitton.controllers;
 
-import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +10,6 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 import corp.skaj.foretagskvitton.R;
-import corp.skaj.foretagskvitton.model.IData;
 import corp.skaj.foretagskvitton.model.Purchase;
 import corp.skaj.foretagskvitton.model.Company;
 import corp.skaj.foretagskvitton.model.User;
@@ -27,7 +25,7 @@ public class ReceiptAdapter extends RecyclerView.Adapter<ReceiptAdapter.MyViewHo
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.archive_list_row, parent, false);
+                .inflate(R.layout.archive_list_item, parent, false);
         /*
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override

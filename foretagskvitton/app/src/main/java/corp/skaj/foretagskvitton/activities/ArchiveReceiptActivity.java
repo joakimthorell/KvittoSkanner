@@ -5,11 +5,11 @@ import android.os.Bundle;
 
 import corp.skaj.foretagskvitton.R;
 
-public class singleReceipt extends AppCompatActivity {
+public class ArchiveReceiptActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_single_receipt);
+        setContentView(R.layout.activity_archive_receipt);
     }
 }
