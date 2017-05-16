@@ -12,7 +12,6 @@ import java.io.IOException;
 import java.util.List;
 
 import corp.skaj.foretagskvitton.R;
-import corp.skaj.foretagskvitton.model.IData;
 import corp.skaj.foretagskvitton.services.TextCollector;
 
 public class InitWizardActivity extends AbstractActivity {

@@ -1,6 +1,5 @@
 package corp.skaj.foretagskvitton.activities;
 
-import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.ActionBar;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -14,7 +13,6 @@ import java.util.List;
 
 import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.controllers.CompanyListController;
-import corp.skaj.foretagskvitton.model.IData;
 import corp.skaj.foretagskvitton.model.User;
 
 import static corp.skaj.foretagskvitton.controllers.CompanyListController.COMPANY_KEY;

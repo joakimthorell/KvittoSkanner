@@ -183,6 +183,15 @@ public class CompanyListController <T> {
             }
         }
     }
+
+    public String[] getCompanyNames(User user) {
+        List<Company> companies = user.getCompanies();
+        String[] companyNames = new String[companies.size()];
+        for (int i = 0; i < companies.size(); i++) {
+            companyNames[i] = companies.get(i).getName();
+        }
+        return companyNames;
+    }
 }
 
     /*public void initButtonListener (Button button, final Activity activity) {
