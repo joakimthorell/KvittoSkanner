@@ -201,10 +201,7 @@ public class ReceiptScanner {
     }
 
     private static boolean isDate(String s, int i) {
-        if (!isAsterix(s, i)) {
-            return false;
-        }
-        return "-.".contains(String.valueOf(s.charAt(i + 1))) || "-.".contains(String.valueOf(s.charAt(i - 4)));
+        return isAsterix(s, i) && "-.".contains(String.valueOf(s.charAt(i + 1))) || "-.".contains(String.valueOf(s.charAt(i - 4)));
     }
 
     private static boolean isPrice(String s, int i) {
