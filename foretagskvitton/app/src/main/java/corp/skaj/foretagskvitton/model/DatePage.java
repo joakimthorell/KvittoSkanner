@@ -17,7 +17,6 @@ import java.util.Locale;
 
 public class DatePage extends TextPage {
     public static SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
-    public static final String DATE_DATA_KEY = "corp.skaj.foretagskvitton.model.DatePage.date";
     public static final String DATE_YEAR_KEY = "YEAR_KEY";
     public static final String DATE_MONTH_KEY = "MONTH_KEY";
     public static final String DATE_DAY_KEY = "DAY_KEY";
@@ -30,12 +29,12 @@ public class DatePage extends TextPage {
 
     @Override
     public void getReviewItems(ArrayList<ReviewItem> dest) {
-        dest.add(new ReviewItem(getTitle(), mData.getString(DATE_DATA_KEY), getKey()));
+        dest.add(new ReviewItem(getTitle(), mData.getString(SIMPLE_DATA_KEY), getKey()));
     }
 
     @Override
     public boolean isCompleted() {
-        return !TextUtils.isEmpty(mData.getString(DATE_DATA_KEY));
+        return !TextUtils.isEmpty(mData.getString(SIMPLE_DATA_KEY));
     }
 
     public DatePage setValue(String s) {
@@ -43,9 +42,8 @@ public class DatePage extends TextPage {
             setBundle(s);
         } catch (ParseException e) {
             // Nothing to do here
-        } finally {
-            return this;
         }
+        return this;
     }
 
     private Page setBundle(String s) throws ParseException {
@@ -54,7 +52,7 @@ public class DatePage extends TextPage {
         }
 
         // Set date in TextField
-        mData.putString(DATE_DATA_KEY, s);
+        mData.putString(SIMPLE_DATA_KEY, s);
 
         // Set date in date picker dialog.
         Date date = new SimpleDateFormat("yyyy-MM-dd").parse(s);

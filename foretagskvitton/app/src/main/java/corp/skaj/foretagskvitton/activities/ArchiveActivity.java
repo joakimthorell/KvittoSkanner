@@ -37,7 +37,6 @@ public class ArchiveActivity extends AbstractActivity {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAdapter);
 
-        testAddFirstPurchases();
         initBottomBar(ARCHIVE_ID, this);
         mAdapter.notifyDataSetChanged();
     }

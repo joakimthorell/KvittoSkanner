@@ -11,16 +11,16 @@ public class Receipt {
     private Calendar date;
     private double total;
     private Category category;
-    private final Uri pictureAdress;
+    private final String pictureAdress; // This is URI as String
 
-    public Receipt(List<Product> products, Calendar date, double total, final Uri pictureAdress) {
+    public Receipt(List<Product> products, Calendar date, double total, final String pictureAdress) {
         this.products = products;
         this.date = date;
         this.total = total;
         this.pictureAdress = pictureAdress;
     }
 
-    public Receipt(Product product, Calendar date, double total, final Uri pictureAdress) {
+    public Receipt(Product product, Calendar date, double total, final String pictureAdress) {
         products = new ArrayList<>();
         products.add(product);
         this.date = date;
@@ -67,7 +67,10 @@ public class Receipt {
         this.products = products;
     }
 
-    public Uri getPictureAdress() {
+    /**
+     * This is Uri as String
+     */
+    public String getPictureAdress() {
         return pictureAdress;
     }
 

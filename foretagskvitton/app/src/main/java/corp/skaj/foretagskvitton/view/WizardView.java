@@ -17,6 +17,7 @@
 package corp.skaj.foretagskvitton.view;
 
 import android.content.Context;
+import android.os.Bundle;
 
 import com.tech.freak.wizardpager.model.AbstractWizardModel;
 import com.tech.freak.wizardpager.model.ModelCallbacks;
@@ -52,6 +53,10 @@ public class WizardView extends AbstractWizardModel implements ModelCallbacks {
 
     public WizardModel getWizardModel() {
         return model;
+    }
+
+    public Bundle getWizardData() {
+        return super.save();
     }
 
 

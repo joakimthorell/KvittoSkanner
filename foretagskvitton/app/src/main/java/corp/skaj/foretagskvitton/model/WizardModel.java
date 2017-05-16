@@ -55,37 +55,37 @@ public class WizardModel {
         }
 
         return new PageList(
-                new SingleFixedChoicePage(view, "KORT")
+                new SingleFixedChoicePage(view, WizardConstants.CARD)
                         .setChoices("Privat", "Företag")
                         .setValue(foundCompany == null ? null : "Företag")
                         .setRequired(true),
 
-                // TODO någon error som gör att den inte kommer markera företaget automatiskt, inte heller är den required...
-                new SingleFixedChoicePage(view, "FÖRETAG")
+                // TODO företag fungerar men, MEN när den står som i klickan är de inte en boll i radio knappen utan den är bara rosa.
+                new SingleFixedChoicePage(view, WizardConstants.COMPANY)
                         .setChoices(getCompanyNames(user))
                         .setValue(foundCompany == null ? null : foundCompany.getName())
                         .setRequired(true),
 
-                new MultipleFixedChoicePage(view, "GROSSIST")
-                        //TODO lista grossister, vi kan inte lista från en specifikt företag. Får lista alla direkt (får tänkte om här)
+                new MultipleFixedChoicePage(view, WizardConstants.SUPPLIER)
+                        // TODO lista alla grossister
                         .setChoices(),
 
-                new DatePage(view, "DATUM")
+                new DatePage(view, WizardConstants.DATE)
                         .setValue(date == null ? getCurrentDate() : date)
                         .setRequired(true),
 
-                new TotalSumPage(view, "TOTALBELOPP")
+                new TotalSumPage(view, WizardConstants.TOTAL)
                         .setValue(totalSum > 0 ? String.valueOf(totalSum) : null)
                         .setRequired(true),
 
-                new TotalSumPage(view, "MOMS")
+                new TotalSumPage(view, WizardConstants.VAT)
                         .setRequired(true),
 
-                new SingleFixedChoicePage(view, "KATEGORI")
+                new SingleFixedChoicePage(view, WizardConstants.CATEGORY)
                         .setChoices(Category.getCategoriesArray())
                         .setRequired(true),
                 //TODO add a choice above which is "other" for custom choice of category
-                new TextPage(view, "KOMMENTAR")
+                new TextPage(view, WizardConstants.COMMENT)
                         .setRequired(false));
     }
 

@@ -1,3 +1,8 @@
+/**
+ * This class is taken from a pullrequest made by Github user: Monomachus, in romannurik's Android-WizardPager repo.
+ * A lot of code is changed from the original code.
+ */
+
 package corp.skaj.foretagskvitton.view;
 
 import android.app.DatePickerDialog;
@@ -59,7 +64,7 @@ public class DateFragment extends Fragment {
         ((TextView) rootView.findViewById(android.R.id.title)).setText(mPage.getTitle());
 
         mDateView = ((EditText) rootView.findViewById(R.id.etDate));
-        mDateView.setText(mPage.getData().getString(DatePage.DATE_DATA_KEY));
+        mDateView.setText(mPage.getData().getString(DatePage.SIMPLE_DATA_KEY));
 
         return rootView;
     }
@@ -104,7 +109,7 @@ public class DateFragment extends Fragment {
                 String formattedDate = DatePage.dateFormatter.format(newDate.getTime());
 
                 mDateView.setText(formattedDate);
-                mPage.getData().putString(DatePage.DATE_DATA_KEY, formattedDate);
+                mPage.getData().putString(DatePage.SIMPLE_DATA_KEY, formattedDate);
                 mPage.notifyDataChanged();
             }
 

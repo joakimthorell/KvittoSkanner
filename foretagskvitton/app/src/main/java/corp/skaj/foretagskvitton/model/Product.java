@@ -5,6 +5,9 @@ import java.util.List;
 
 
 public class Product {
+
+    public static final String WHOLE_RECEIPT = "whole receipt";
+
     private String name;
     private Category category;
     private List<Comment> comments;

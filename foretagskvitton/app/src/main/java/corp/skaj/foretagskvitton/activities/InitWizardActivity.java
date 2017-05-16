@@ -107,7 +107,8 @@ public class InitWizardActivity extends AbstractActivity {
         Intent intent = new Intent(this, WizardActivity.class);
         IData dataHandler = (IData) getApplicationContext();
         dataHandler.writeData("mStrings", mStrings);
-        dataHandler.writeData("mURI", mURI);
+        String URIAsString = mURI.toString();
+        dataHandler.writeData("mURI", URIAsString);
         startActivity(intent);
     }
 

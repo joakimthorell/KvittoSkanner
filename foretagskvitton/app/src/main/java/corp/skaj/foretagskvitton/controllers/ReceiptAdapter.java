@@ -56,7 +56,7 @@ public class ReceiptAdapter extends RecyclerView.Adapter<ReceiptAdapter.MyViewHo
         //holder.title.setText(movie.getTitle());
         holder.title.setText(company.getName());
         //holder.genre.setText(movie.getGenre());
-        holder.genre.setText(Category.toString(purchase.getReceipt().getCategory()));
+        holder.genre.setText(purchase.getReceipt().getCategory().name());
         //holder.year.setText(movie.getYear());
 
         SimpleDateFormat dateRaw = new SimpleDateFormat("yyyy-MM-dd");
@@ -66,7 +66,8 @@ public class ReceiptAdapter extends RecyclerView.Adapter<ReceiptAdapter.MyViewHo
 
     @Override
     public int getItemCount() {
-        List<Purchase> purchases = readUser().getCompany(new Company("DEFAULT COMPANY")).getEmployee("DEFAULT USER").getPurchases();
+        //List<Purchase> purchases = readUser().getCompany(new Company("DEFAULT COMPANY")).getEmployee("DEFAULT USER").getPurchases();
+        List<Purchase> purchases = readUser().getCompanies().get(0).getEmployees().get(0).getPurchases();
         return purchases.size();
     }
 
