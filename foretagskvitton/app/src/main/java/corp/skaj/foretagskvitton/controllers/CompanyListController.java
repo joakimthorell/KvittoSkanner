@@ -18,6 +18,7 @@ import java.util.List;
 
 import corp.skaj.foretagskvitton.model.Card;
 import corp.skaj.foretagskvitton.model.Comment;
+import corp.skaj.foretagskvitton.model.Company;
 import corp.skaj.foretagskvitton.model.Employee;
 import corp.skaj.foretagskvitton.model.User;
 
@@ -53,7 +54,6 @@ public class CompanyListController <T>{
                 toggle(button, tv);
 
             }
-
             //Spara undan det som man editerat, var sparar vi det? Hur kollar vi vad som är editerat?
         });
     }
@@ -101,10 +101,18 @@ public class CompanyListController <T>{
      });
     }
 
-    public void deleteCompanyListener (Button button) {
+    public void deleteCompanyListener (final Button button, final User user, final String companyName) {
+        final List<Company> companies = user.getCompanies();
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (companies.size() == 1) {
+                    //TODO lägg in en toast "du kan inte radera ditt enda företag"
+                }
+                //TODO här ska vi ha en popup "är du säker på att du vill radera företaget"
+                Company company = user.getCompany(companyName);
+                companies.remove(company);
 
             }
         });

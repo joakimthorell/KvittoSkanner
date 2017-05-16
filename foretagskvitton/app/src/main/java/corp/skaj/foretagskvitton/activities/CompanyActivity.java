@@ -79,8 +79,9 @@ public class CompanyActivity extends AbstractActivity {
         ImageButton addCommentButton = (ImageButton) findViewById(R.id.addNewComment);
         companyListController.createNewCommentListener(addCommentButton, user, companyName);
 
-
-
+        //Delete button for deleting an entire company
+        Button deleteButton = (Button) findViewById(R.id.radera);
+        companyListController.deleteCompanyListener(deleteButton, user, companyName);
 
     }
 }
