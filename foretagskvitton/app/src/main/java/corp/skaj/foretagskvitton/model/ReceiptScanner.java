@@ -15,13 +15,11 @@ public class ReceiptScanner {
     private ReceiptScanner() {
     }
 
-    public static String getCard(List<String> strings) {
-        if (strings == null) {
-            return null;
-        }
-        return findCard(listToString(strings).toLowerCase());
+    //TODO Do this if there is time
+    public static void getProducts(List<String> strings) {
     }
 
+    /*----------------------------------GET DATE----------------------------------*/
     public static String getDate(List<String> strings) {
         if (strings == null) {
             return null;
@@ -39,7 +37,19 @@ public class ReceiptScanner {
         return null;
     }
 
-    public static double getTotalCost(List<String> strings) {
+    // Checks that the string starts with the current year in ex. 17 or 2017.
+    private static boolean correctFirstNum(String date) {
+        String year = new SimpleDateFormat("yyyy").format(new Date());
+        return date.substring(0, 2).equals(year.substring(0, 4)) || date.equals(year);
+    }
+
+    // Checks that the length is correct, either 170218 or 2017-05-03.
+    private static boolean correctLength(String date) {
+        return date.length() <= 10 && date.length() >= 6;
+    }
+
+    /*----------------------------------GET PRICE----------------------------------*/
+    public static double getPrice(List<String> strings) {
         if (strings == null) {
             return 0.0;
         }
@@ -51,20 +61,6 @@ public class ReceiptScanner {
             double totalCost = index >= 0 ? checkBeforeAndAfter(index, strings) : 0; // Om index är -1 som checkForText returnerar när den inte hittar något får man outOfBounds här
             return totalCost;
         }
-    }
-
-    public static void getProducts(List<String> strings) {
-    }
-
-    // Checks that the string starts with the current year in ex. 17 or 2017.
-    private static boolean correctFirstNum(String date) {
-        String year = new SimpleDateFormat("yyyy").format(new Date());
-        return date.substring(0, 2).equals(year.substring(0, 4)) || date.equals(year);
-    }
-
-    // Checks that the length is correct, either 170218 or 2017-05-03.
-    private static boolean correctLength(String date) {
-        return date.length() <= 10 && date.length() >= 6;
     }
 
     private static List<Double> findDoubles(List<String> strings) {
@@ -104,7 +100,8 @@ public class ReceiptScanner {
             if (strings.get(i).toLowerCase().equals("kr")
                     || strings.get(i).toLowerCase().equals("sek")
                     || strings.get(i).toLowerCase().equals("total")
-                    || strings.get(i).toLowerCase().equals("totalt")) {
+                    || strings.get(i).toLowerCase().equals("totalt")
+                    || strings.get(i).toLowerCase().equals("betala")) {
                 return i;
             }
         }
@@ -132,13 +129,21 @@ public class ReceiptScanner {
         return totalCost > 0 ? totalCost : 0;
     }
 
+    /*----------------------------------GET CARD----------------------------------*/
+    public static String getCard(List<String> strings) {
+        if (strings == null) {
+            return null;
+        }
+        return findCard(listToString(strings).toLowerCase());
+    }
+
     private static String findCard(String s) {
-        int index = getIndex(s);
+        int index = getCardIndex(s);
         if (index != -1) {
             return evaluateResult(s, detachCard((s.substring(index, s.length()))), index);
         } else {
-            String newS = replaceX(s);
-            int asterix = findAterix(newS);
+            String newS = anticipateAterix(s);
+            int asterix = findAsterix(newS);
             if (asterix != -1) {
                 return evaluateResult(newS, detachCard((newS.substring(asterix, newS.length()))), asterix);
             }
@@ -153,7 +158,7 @@ public class ReceiptScanner {
         return result;
     }
 
-    private static int getIndex(String s) {
+    private static int getCardIndex(String s) {
         if (s.contains(KORTNUMMER)) {
             return s.lastIndexOf(KORTNUMMER);
         }
@@ -189,23 +194,40 @@ public class ReceiptScanner {
     }
 
     private static boolean isFourDigits(String s, int count, int i) {
-        if (count == 4) {
-            if (isDetached(s, i)) {
-                return true;
-            }
+        return count == 4 && isDetached(s, i, -4, 1);
+    }
+
+    private static boolean isDetached(String s, int i, int before, int after) {
+        if (!outOfBounds(s, i, before, after)) {
+            return !isDigit(String.valueOf(s.charAt(i + before)))
+                    && !isDigit(String.valueOf(s.charAt(i + after)))
+                    && !isDate(s, i, before)
+                    && !isDate(s, i, after)
+                    && !isPrice(s, i);
+        } else if (!outOfBounds(s, i, before, 0)) {
+            return !isDate(s, i, before);
         }
         return false;
     }
 
-    private static boolean isDetached(String s, int i) {
-        return outOfBounds(s, i) || !isDigit(String.valueOf(s.charAt(i + 1))) && !isDigit(String.valueOf(s.charAt(i - 4)));
+    private static boolean isDate(String s, int i, int position) {
+        return !isAsterix(s, i)
+                && "-.".contains(String.valueOf(s.charAt(i + position)));
     }
 
-    private static boolean outOfBounds(String s, int i) {
+    private static boolean isPrice(String s, int i) {
+        return ",".contains(String.valueOf(s.charAt(i + 1)));
+    }
+
+    private static boolean isAsterix(String s, int i) {
+        return ("*x\"'¤").contains(String.valueOf(s.charAt(i - 4)));
+    }
+
+    private static boolean outOfBounds(String s, int i, int before, int after) {
         try {
-            s.charAt(i + 1);
-            s.charAt(i - 4);
-        } catch (Exception e) {
+            s.charAt(i + before);
+            s.charAt(i + after);
+        } catch (IndexOutOfBoundsException e) {
             return true;
         }
         return false;
@@ -216,14 +238,22 @@ public class ReceiptScanner {
     }
 
     private static String replaceLetters(String s) {
-        return s.replaceAll("il", "1").replaceAll("o", "0").replaceAll("s", "5").replaceAll("b", "8");
+        return s.replaceAll("i", "1")
+                .replaceAll("l", "1")
+                .replaceAll("o", "0")
+                .replaceAll("s", "5")
+                .replaceAll("b", "8");
     }
 
-    private static String replaceX(String s) {
-        return s.replaceAll("x", "*");
+    private static String anticipateAterix(String s) {
+        return s.replaceAll("x", "*")
+                .replaceAll("\"", "*")
+                .replaceAll("'", "*")
+                .replaceAll("#", "*")
+                .replaceAll("¤", "*");
     }
 
-    private static int findAterix(String s) {
+    private static int findAsterix(String s) {
         return s.indexOf("*");
     }
 }

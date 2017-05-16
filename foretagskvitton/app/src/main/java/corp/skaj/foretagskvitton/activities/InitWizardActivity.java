@@ -14,6 +14,8 @@ import java.util.List;
 
 import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.model.IData;
+import corp.skaj.foretagskvitton.model.Receipt;
+import corp.skaj.foretagskvitton.model.ReceiptScanner;
 import corp.skaj.foretagskvitton.services.TextCollector;
 
 public class InitWizardActivity extends AbstractActivity {
@@ -102,7 +104,6 @@ public class InitWizardActivity extends AbstractActivity {
     }
 
     //TODO Below is temporary. Remove later.
-
     public void nextPressed(View view) {
         Intent intent = new Intent(this, WizardActivity.class);
         IData dataHandler = (IData) getApplicationContext();
@@ -113,5 +114,7 @@ public class InitWizardActivity extends AbstractActivity {
     }
 
     public void saveButtonPressed(View view) {
+        TextView t = (TextView) findViewById(R.id.textContainer);
+        t.setText(ReceiptScanner.getCard(mStrings));
     }
 }

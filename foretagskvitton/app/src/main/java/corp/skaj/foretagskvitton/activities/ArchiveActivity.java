@@ -54,7 +54,7 @@ public class ArchiveActivity extends AbstractActivity {
         //Skapar en anställd och ger den företag och kvitto med produkt
         IData dataHandler = (DataHandler) getApplicationContext();
         User user = dataHandler.readData(User.class.getName(), User.class);
-        //user.getCompany(new Company("DEFAULT COMPANY")).getEmployee(user.getName()).addPurchase(pur);
+        user.getCompany(new Company("DEFAULT COMPANY")).getEmployee(user.getName()).addPurchase(pur);
         Employee emp = user.getCompanies().get(0).getEmployees().get(0);
         emp.addPurchase(pur);
         dataHandler.writeData(User.class.getName(), user);

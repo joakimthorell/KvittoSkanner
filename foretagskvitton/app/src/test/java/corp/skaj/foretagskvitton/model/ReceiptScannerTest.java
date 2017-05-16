@@ -97,7 +97,11 @@ public class ReceiptScannerTest {
 
     @Test
     public void testCardNum (){
-        List<String> list = new ArrayList<>(Arrays.asList("cx**x*134,-45","M R STER ","", "019677" + "9", "BxxsxxX", " b3310 ", ""));
+        List<String> list = new ArrayList<>(Arrays.asList("cxx134,-45","M R STER ","", "019677" + "9", "Bjl", " THAITAKEA\"3310y040,00mPer50nligk1234"
+        ));
+        List<String> test = new ArrayList<>(Arrays.asList("xx*¤#'\""));
+        //System.out.println(ReceiptScanner.anticipateAterix(ReceiptScanner.listToString(test)));
+        System.out.println(list);
         String expected = "3310";
         String result = ReceiptScanner.getCard(list);
         assertEquals(expected, result);
