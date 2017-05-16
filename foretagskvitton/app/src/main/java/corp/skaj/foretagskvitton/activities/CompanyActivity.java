@@ -1,9 +1,11 @@
 package corp.skaj.foretagskvitton.activities;
 
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.ActionBar;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -57,15 +59,18 @@ public class CompanyActivity extends AbstractActivity {
 
         //Creating a List to hold att the textViews
         List<TextView> textViews = new ArrayList<>();
-            textViews.add(textView1);
-            textViews.add(textView2);
-            textViews.add(textView3);
+        textViews.add(textView1);
+        textViews.add(textView2);
+        textViews.add(textView3);
 
         companyListController.editButtonListener(button, textViews);
 
+        EditText editText = (EditText) findViewById(R.id.editText);
+        companyListController.employeeTextViewListener(editText, user, companyName);
+
         //Creating connecting the xml with the java code for the image buttons
         ImageButton addEmployeeButton = (ImageButton) findViewById(R.id.addNewEmployee);
-        companyListController.createNewEmployeeListener(addEmployeeButton, user, companyName);
+        companyListController.createNewEmployeeListener(addEmployeeButton, user, companyName, this, editText);
 
         ImageButton addCardButton = (ImageButton) findViewById(R.id.addNewCard);
         companyListController.createNewCardListener(addCardButton, user, companyName);
@@ -76,6 +81,7 @@ public class CompanyActivity extends AbstractActivity {
         //Delete button for deleting an entire company
         Button deleteButton = (Button) findViewById(R.id.radera);
         companyListController.deleteCompanyListener(deleteButton, user, companyName);
+
 
     }
 }
