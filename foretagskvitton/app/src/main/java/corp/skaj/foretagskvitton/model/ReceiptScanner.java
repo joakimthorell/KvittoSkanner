@@ -19,7 +19,11 @@ public class ReceiptScanner {
     public static void getProducts(List<String> strings) {
     }
 
-    /*----------------------------------GET DATE----------------------------------*/
+    /**
+     *
+     * @param strings
+     * @return
+     */
     public static String getDate(List<String> strings) {
         if (strings == null) {
             return null;
@@ -48,7 +52,11 @@ public class ReceiptScanner {
         return date.length() <= 10 && date.length() >= 6;
     }
 
-    /*----------------------------------GET PRICE----------------------------------*/
+    /**
+     *
+     * @param strings
+     * @return
+     */
     public static double getPrice(List<String> strings) {
         if (strings == null) {
             return 0.0;
@@ -129,7 +137,11 @@ public class ReceiptScanner {
         return totalCost > 0 ? totalCost : 0;
     }
 
-    /*----------------------------------GET CARD----------------------------------*/
+    /**
+     *
+     * @param strings
+     * @return
+     */
     public static String getCard(List<String> strings) {
         if (strings == null) {
             return null;
