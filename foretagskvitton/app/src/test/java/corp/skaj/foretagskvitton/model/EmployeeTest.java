@@ -10,7 +10,7 @@ import static org.junit.Assert.*;
 
 
 public class EmployeeTest {
-    Employee employee;
+    private Employee employee;
 
     @Before
     public void setup() {
