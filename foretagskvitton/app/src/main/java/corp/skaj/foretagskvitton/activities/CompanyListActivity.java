@@ -7,14 +7,20 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
+import java.util.List;
+
 import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.controllers.CompanyListController;
+import corp.skaj.foretagskvitton.model.Company;
+import corp.skaj.foretagskvitton.model.IData;
+import corp.skaj.foretagskvitton.model.User;
+import corp.skaj.foretagskvitton.services.DataHandler;
 
 public class CompanyListActivity extends AbstractActivity {
     public static final String COMPANYLIST_KEY = "COMPANYLIST_KEY";
 
     //This is just an example
-    String[] companyNames = {"IKEA", "SIBA", "ELGIGANTEN", "COOP", "WILLYS", "TELIA", "SKANSKA", "NORDEA", "PRESSBYRÅN"};
+    //String[] companyNames = {"IKEA", "SIBA", "ELGIGANTEN", "COOP", "WILLYS", "TELIA", "SKANSKA", "NORDEA", "PRESSBYRÅN"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,24 +31,22 @@ public class CompanyListActivity extends AbstractActivity {
 
         //The code hided below is for when we do have a list of companies
 
-        /*IData iData = (DataHandler) getApplicationContext();
+        IData iData = (DataHandler) getApplicationContext();
         User user = iData.readData(User.class.getName(), User.class);
         List<Company> companies = user.getCompanies();
         String[] companyNames = new String[companies.size()];
         for (int i = 0; i < companies.size(); i++) {
-            companyNames[i] = companies.get(i).getName();*/
+            companyNames[i] = companies.get(i).getName();
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.company_list_view, companyNames);
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.company_list_view, companyNames);
+            final ListView listView = (ListView) findViewById(R.id.listView);
+            listView.setAdapter(adapter);
 
-        final ListView listView = (ListView) findViewById(R.id.listView);
-        listView.setAdapter(adapter);
+            new CompanyListController().initListViewListener(listView, CompanyActivity.class, this);
 
-        new CompanyListController().initListViewListener(listView, CompanyActivity.class, this);
+            initBottomBar(COMPANY_ID, this);
+        }
 
-        //CompanyListController cLController = new CompanyListController();
-        //cLController.initListViewListener(listView, this);
-
-        initBottomBar(COMPANY_ID, this);
     }
 }
 
