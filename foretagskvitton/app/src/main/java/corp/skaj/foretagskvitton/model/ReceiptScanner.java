@@ -142,8 +142,8 @@ public class ReceiptScanner {
             if (asterix != -1) {
                 return evaluateResult(newS, detachCard((newS.substring(asterix, newS.length()))), asterix);
             }
+            return evaluateResult(s, detachCard(s), 0);
         }
-        return null;
     }
 
     private static String evaluateResult(String s, String result, int index) {
