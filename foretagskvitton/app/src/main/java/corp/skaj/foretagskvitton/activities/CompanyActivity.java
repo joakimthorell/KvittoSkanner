@@ -10,12 +10,22 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.controllers.CompanyListController;
+import corp.skaj.foretagskvitton.model.Company;
+import corp.skaj.foretagskvitton.model.Employee;
+import corp.skaj.foretagskvitton.model.IData;
+import corp.skaj.foretagskvitton.model.User;
+import corp.skaj.foretagskvitton.services.DataHandler;
 
 import static corp.skaj.foretagskvitton.controllers.CompanyListController.COMPANY_KEY;
 
 public class CompanyActivity extends AbstractActivity {
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,29 +34,11 @@ public class CompanyActivity extends AbstractActivity {
 
         String companyName = getIntent().getExtras().get(COMPANY_KEY).toString();
 
-        /*CompanyListController listViewController = new CompanyListController();
-        Button button = (Button) findViewById(R.id.buttonForCompany);
-        listViewController.initButtonListener(button, this);*/
+        //Getting hold of the user
+        IData iData = (DataHandler) getApplicationContext();
+        User user = iData.readData(User.class.getName(), User.class);
 
-        CompanyListController companyListController = new CompanyListController();
-
-        Button button = (Button) findViewById(R.id.edit);
-        TextView textView1 = (TextView) findViewById(R.id.editText);
-        TextView textView2 = (TextView) findViewById(R.id.editText2);
-        TextView textView3 = (TextView) findViewById(R.id.editText3);
-
-        companyListController.editButtonListener(button, textView1, textView2, textView3);
-
-        ImageButton addEmployeeButton = (ImageButton) findViewById(R.id.addNewEmployee);
-        companyListController.createNewEmployeeListener(addEmployeeButton);
-
-        ImageButton addCardButton = (ImageButton) findViewById(R.id.addNewCard);
-        companyListController.createNewCardListener(addCardButton);
-
-        ImageButton addCommentButton = (ImageButton) findViewById(R.id.addNewComment);
-        companyListController.createNewCommentListener(addCommentButton);
-
-
+        //Code for the tool-and actionbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.company_action_bar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -57,6 +49,38 @@ public class CompanyActivity extends AbstractActivity {
         TextView textViewForToolbar = (TextView) findViewById(R.id.toolbar_title);
         textViewForToolbar.setText(companyName);
 
-        //TODO vill ha en bottombar eller case i bottomnav för att kunna skicka med rätt context
+        /*CompanyListController listViewController = new CompanyListController();
+        Button button = (Button) findViewById(R.id.buttonForCompany);
+        listViewController.initButtonListener(button, this);*/
+
+        CompanyListController companyListController = new CompanyListController();
+
+        //Creating new TextViews and Buttons and connecting them
+        Button button = (Button) findViewById(R.id.edit);
+        TextView textView1 = (TextView) findViewById(R.id.editText);
+        TextView textView2 = (TextView) findViewById(R.id.editText2);
+        TextView textView3 = (TextView) findViewById(R.id.editText3);
+
+        //Creating a List to hold att the textViews
+        List<TextView> textViews = new ArrayList<>();
+            textViews.add(textView1);
+            textViews.add(textView2);
+            textViews.add(textView3);
+
+        companyListController.editButtonListener(button, textViews);
+
+        //Creating connecting the xml with the java code for the image buttons
+        ImageButton addEmployeeButton = (ImageButton) findViewById(R.id.addNewEmployee);
+        companyListController.createNewEmployeeListener(addEmployeeButton, user, companyName);
+
+        ImageButton addCardButton = (ImageButton) findViewById(R.id.addNewCard);
+        companyListController.createNewCardListener(addCardButton, user, companyName);
+
+        ImageButton addCommentButton = (ImageButton) findViewById(R.id.addNewComment);
+        companyListController.createNewCommentListener(addCommentButton, user, companyName);
+
+
+
+
     }
 }

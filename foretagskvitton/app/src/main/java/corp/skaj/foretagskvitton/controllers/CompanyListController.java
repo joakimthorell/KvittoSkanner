@@ -10,6 +10,13 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.List;
+
+import corp.skaj.foretagskvitton.model.Card;
+import corp.skaj.foretagskvitton.model.Comment;
+import corp.skaj.foretagskvitton.model.Employee;
+import corp.skaj.foretagskvitton.model.User;
+
 
 public class CompanyListController <T>{
     public static final String COMPANY_KEY = "CompanyKey";
@@ -18,6 +25,13 @@ public class CompanyListController <T>{
 
     }
 
+
+    /**
+     *
+     * @param listView
+     * @param nextActivityToStart
+     * @param context
+     */
     public void initListViewListener(final ListView listView, final Class<?> nextActivityToStart, final Context context) {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -29,56 +43,63 @@ public class CompanyListController <T>{
         });
     }
 
-    public static void editButtonListener(final Button button, final TextView tv1, final TextView tv2, final TextView tv3) {
+    public static void editButtonListener(final Button button, final List<TextView> tv) {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                     button.setText("Spara");
 
-                    //Nedan kan nog lösas på ett snyggare sätt...
-                    tv1.setFocusable(true);
-                    tv1.setClickable(true);
-                    tv1.setFocusableInTouchMode(true);
+                    for(int i = 0; i < tv.size() - 1; i++) {
+                        tv.get(i).setFocusable(true);
+                        tv.get(i).setClickable(true);
+                        tv.get(i).setFocusableInTouchMode(true);
 
-                    tv2.setFocusable(true);
-                    tv2.setClickable(true);
-                    tv2.setFocusableInTouchMode(true);
+                    }
 
-                    tv3.setFocusable(true);
-                    tv3.setClickable(true);
-                    tv3.setFocusableInTouchMode(true);
-
-                //Spara undan det som man editerat
+                //Spara undan det som man editerat, var sparar vi det? Hur kollar vi vad som är editerat?
             }
         });
     }
 
-    public void createNewEmployeeListener (ImageButton button) {
+
+    public void createNewEmployeeListener (ImageButton button, final User user, final String company) {
         button.setOnClickListener(new View.OnClickListener() {
+            //List<Employee> employees = user.getCompany(company).getEmployees();
             @Override
             public void onClick(View v) {
 
                 //Här vill vi lägga till en ny anställd i listan av anställda
+                //Skapa en ny text view?
+
+                //employees.add(new Employee("ny anställd")); //Här har vi någon form av input, den inputen ska in i setText
+                //TextView textView = new TextView();
+                //textView.setText();
+
             }
         });
 
     }
 
-    public void createNewCardListener (ImageButton button) {
+    public void createNewCardListener (ImageButton button, final User user, final String company) {
         button.setOnClickListener(new View.OnClickListener() {
+            //List<Card> cards = user.getCompany(company).getCards();
             @Override
             public void onClick(View v) {
                 //Här vill vi lägga till ett nytt kort i listan av kort
+                //cards.add(new Card(1234));
+
             }
         });
 
     }
 
-    public void createNewCommentListener (ImageButton button) {
+    public void createNewCommentListener (ImageButton button, final User user, final String company) {
         button.setOnClickListener(new View.OnClickListener() {
-             @Override
+            //List<Comment> comments = user.getCompany(company).getComments();
+            @Override
              public void onClick(View v) {
              //Här vill vi lägga till en ny kommentar i listan av kommentarer
+                //comments.add(new Comment("information"));
          }
      });
     }

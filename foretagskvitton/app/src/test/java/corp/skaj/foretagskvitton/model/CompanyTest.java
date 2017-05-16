@@ -7,10 +7,10 @@ import static org.junit.Assert.*;
 
 
 public class CompanyTest {
-    Company company;
-    Employee employee;
-    Card card;
-    Supplier supplier;
+    private Company company;
+    private Employee employee;
+    private Card card;
+    private Supplier supplier;
 
     @Before
     public void setup () {

@@ -13,6 +13,9 @@ import corp.skaj.foretagskvitton.controllers.CompanyListController;
 public class CompanyListActivity extends AbstractActivity {
     public static final String COMPANYLIST_KEY = "COMPANYLIST_KEY";
 
+    //This is just an example
+    String[] companyNames = {"IKEA", "SIBA", "ELGIGANTEN", "COOP", "WILLYS", "TELIA", "SKANSKA", "NORDEA", "PRESSBYRÅN"};
+
     //This is possible in all Activities where we need to get our User, this is for when we do have a list of companies
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,16 +26,12 @@ public class CompanyListActivity extends AbstractActivity {
 
         //The code hided below is for when we do have a list of companies
 
-        //The code hided below is for when we do have a list of companies
         /*IData iData = (DataHandler) getApplicationContext();
         User user = iData.readData(User.class.getName(), User.class);
         List<Company> companies = user.getCompanies();
         String[] companyNames = new String[companies.size()];
         for (int i = 0; i < companies.size(); i++) {
             companyNames[i] = companies.get(i).getName();*/
-
-        //This is just an example
-        String[] companyNames = {"IKEA", "SIBA", "ELGIGANTEN", "COOP", "WILLYS", "TELIA", "SKANSKA", "NORDEA", "PRESSBYRÅN"};
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.company_list_view, companyNames);
 

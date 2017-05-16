@@ -8,8 +8,7 @@ import org.junit.Test;
 import java.util.Calendar;
 
 public class ReceiptTest {
-
-    Receipt receipt;
+    private Receipt receipt;
 
     @Before
     public void setup() {

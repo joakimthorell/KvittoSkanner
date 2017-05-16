@@ -33,4 +33,8 @@ public class DataHandler extends Application implements IData {
     public void clearData() {
         getEditor().clear().apply();
     }
+
+    public void removeData(String key) {
+        getEditor().remove(key).apply();
+    }
 }
