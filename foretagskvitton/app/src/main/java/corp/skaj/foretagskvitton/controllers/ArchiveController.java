@@ -15,16 +15,21 @@ import corp.skaj.foretagskvitton.model.Receipt;
 public class ArchiveController<T> {
     public static final String ITEM_ID = "receipt_id";
 
-    public void setItemListener(View itemView, final Class<T> nextClassToStart,final Context context) {
-        itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //Toast.makeText(context, "Mabye it works", Toast.LENGTH_SHORT).show();
-                Intent intent =  new Intent(context, nextClassToStart);
-                intent.putExtra(ITEM_ID, "lars");
-                context.startActivity(intent);
-            }
-        });
+    private Context mContext;
+    private Class<T> mNextActivityToStart;
+
+    public ArchiveController(Context context, Class<T> nextActivityToStart) {
+        mContext = context;
+        mNextActivityToStart = nextActivityToStart;
+    }
+
+    public void onItemClicked(int itemId) {
+        Intent intent = new Intent(mContext, mNextActivityToStart);
+        intent.putExtra(ITEM_ID, itemId);
+
+        System.out.println("Going to itemID   :   " + itemId);
+
+        mContext.startActivity(intent);
     }
 
 }

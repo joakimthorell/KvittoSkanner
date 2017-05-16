@@ -15,20 +15,21 @@ import corp.skaj.foretagskvitton.model.Company;
 import corp.skaj.foretagskvitton.model.User;
 
 public class ReceiptAdapter extends RecyclerView.Adapter<ReceiptAdapter.MyViewHolder> {
-    public static final String ARCHIVE_KEY = "ArchiveKey";
     private User mUser;
+    private List<Purchase> mListToShow; // TODO see todo in constructor
     private ArchiveController mArchiveController;
 
     public ReceiptAdapter(User user, ArchiveController archiveController) {
         mUser = user;
         mArchiveController = archiveController;
+
+        //listToShow = mUser.getCompanies().get(0).getEmployees().get(0).getPurchases(); // TODO fix so you can filter the receipts. List will be diffrent
     }
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.archive_list_item, parent, false);
-
 
 
         return new MyViewHolder(itemView);
@@ -53,7 +54,9 @@ public class ReceiptAdapter extends RecyclerView.Adapter<ReceiptAdapter.MyViewHo
         return purchases.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    public class MyViewHolder extends RecyclerView.ViewHolder
+            implements View.OnClickListener {
+
         public TextView title, year, genre;
 
         public MyViewHolder(View view) {
@@ -61,6 +64,17 @@ public class ReceiptAdapter extends RecyclerView.Adapter<ReceiptAdapter.MyViewHo
             title = (TextView) view.findViewById(R.id.title);
             genre = (TextView) view.findViewById(R.id.genre);
             year = (TextView) view.findViewById(R.id.year);
+
+            view.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            int position = getAdapterPosition();
+            Purchase pur = mUser.getCompanies().get(0).getEmployees().get(0).getPurchases().get(position);
+            int purId = pur.getId();
+
+            mArchiveController.onItemClicked(purId);
         }
     }
 }
