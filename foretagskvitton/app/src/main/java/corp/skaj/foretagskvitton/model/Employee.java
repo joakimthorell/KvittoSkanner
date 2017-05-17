@@ -18,37 +18,20 @@ public class Employee {
         this(other.getName());
     }
 
-    public void addPurchase(Purchase purchase) {
-        purchases.add(purchase);
+    public boolean addPurchase(Purchase purchase) {
+        return purchases.add(purchase);
     }
 
-    public void removePurchase(Purchase purchase) throws IllegalArgumentException {
-        if (purchases.contains(purchase)) {
-            purchases.remove(purchase);
-        } else {
-            throw new IllegalArgumentException("No such purchase existing");
-        }
+    public boolean removePurchase(Purchase purchase) {
+        return purchases.remove(purchase);
     }
 
-    public boolean containsPurchase(Purchase purchase) {
-        for (Purchase p : purchases) {
-            if (p == purchase) {
-                return true;
-            }
-        }
-        return false;
+    public boolean addComment(Comment comment) {
+        return comments.add(comment);
     }
 
-    public void addComment(Comment comment) {
-        comments.add(comment);
-    }
-
-    public void removeComment(Comment comment) throws IllegalArgumentException {
-        if (comments.contains(comment)) {
-            comments.remove(comment);
-        } else {
-            throw new IllegalArgumentException("No such comment existing");
-        }
+    public boolean removeComment(Comment comment) {
+        return comments.remove(comment);
     }
 
     public void setName(String employeeName) {
@@ -63,20 +46,8 @@ public class Employee {
         return purchases;
     }
 
-    public Purchase getPurchase(int id) {
-        for (Purchase p : purchases) {
-            if (p.getId() == id) {
-                return p;
-            }
-        }
-        return null;
-    }
-
     public List<Comment> getComments() {
         return comments;
     }
 
-    public int getAmountOfPurchases() {
-        return purchases.size();
-    }
 }
