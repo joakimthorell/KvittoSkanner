@@ -20,12 +20,12 @@
 
     <TextView
         android:id="@+id/Category"
-        android:layout_width="322dp"
-        android:layout_height="94dp"
+        android:layout_width="315dp"
+        android:layout_height="92dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="8dp"
         android:background="@color/colorMenu"
@@ -35,11 +35,11 @@
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/imageView8"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="@+id/imageView8"
+        app:layout_constraintRight_toRightOf="@+id/imageView8"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.529"
-        app:layout_constraintHorizontal_bias="0.517" />
+        app:layout_constraintVertical_bias="0.525"
+        tools:layout_editor_absoluteX="53dp" />
 
     <TextView
         android:id="@+id/Company"
@@ -57,7 +57,10 @@
         app:layout_constraintBottom_toBottomOf="@+id/imageView8"
         app:layout_constraintTop_toTopOf="@+id/imageView8"
         app:layout_constraintVertical_bias="0.146"
-        tools:layout_editor_absoluteX="36dp" />
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="@+id/imageView8"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="@+id/imageView8" />
 
     <TextView
         android:id="@+id/date"
@@ -65,16 +68,17 @@
         android:layout_height="27dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginTop="55dp"
         android:text="2017-05-15"
         android:textAlignment="viewEnd"
         android:textColor="@color/colorMenu"
-        app:layout_constraintHorizontal_bias="0.888"
+        app:layout_constraintHorizontal_bias="0.828"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp" />
+        app:layout_constraintTop_toTopOf="@+id/imageView8"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView8"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintVertical_bias="0.047" />
 
     <TextView
         android:id="@+id/Supplier"
@@ -85,13 +89,16 @@
         android:text="Grossist: Päronfrön Inc."
         android:textColor="@color/colorMenuItem"
         android:textSize="14sp"
-        app:layout_constraintHorizontal_bias="0.366"
+        app:layout_constraintHorizontal_bias="0.391"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="68dp"
-        app:layout_constraintBottom_toTopOf="@+id/Category" />
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView8"
+        app:layout_constraintTop_toTopOf="@+id/imageView8"
+        android:layout_marginTop="8dp"
+        app:layout_constraintVertical_bias="0.228" />
 
     <TextView
         android:id="@+id/cost"
@@ -106,8 +113,11 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/imageView8"
         app:layout_constraintRight_toRightOf="@+id/imageView8"
-        app:layout_constraintTop_toBottomOf="@+id/Category"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.702"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="@+id/imageView8"
+        app:layout_constraintTop_toTopOf="@+id/imageView8"
+        app:layout_constraintHorizontal_bias="1.0" />
 
     <TextView
         android:id="@+id/Moms"
@@ -121,7 +131,10 @@
         app:layout_constraintBottom_toBottomOf="@+id/imageView8"
         app:layout_constraintHorizontal_bias="0.871"
         app:layout_constraintLeft_toLeftOf="@+id/imageView8"
-        app:layout_constraintRight_toRightOf="@+id/imageView8" />
+        app:layout_constraintRight_toRightOf="@+id/imageView8"
+        app:layout_constraintTop_toTopOf="@+id/imageView8"
+        android:layout_marginTop="8dp"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/payment_method"
@@ -135,7 +148,10 @@
         app:layout_constraintLeft_toLeftOf="@+id/imageView8"
         app:layout_constraintBottom_toBottomOf="@+id/imageView8"
         android:layout_marginBottom="8dp"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="@+id/imageView8"
+        app:layout_constraintHorizontal_bias="0.0" />
 
     <Button
         android:id="@+id/view_receipt"
@@ -146,6 +162,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginTop="8dp"
         android:background="@color/colorMenu"
+        android:onClick="onReceiptClick"
         android:scrollHorizontally="false"
         android:text="Kvitto"
         android:textColor="@color/common_google_signin_btn_text_dark_default"
@@ -153,8 +170,8 @@
         app:layout_constraintHorizontal_bias="0.093"
         app:layout_constraintLeft_toRightOf="@+id/view_comments"
         app:layout_constraintRight_toRightOf="@+id/imageView8"
-        app:layout_constraintTop_toBottomOf="@+id/Category"
-        app:layout_constraintVertical_bias="0.923" />
+        app:layout_constraintTop_toTopOf="@+id/imageView8"
+        app:layout_constraintVertical_bias="0.977" />
 
     <Button
         android:id="@+id/view_comments"
@@ -162,10 +179,17 @@
         android:layout_height="29dp"
         android:layout_marginBottom="54dp"
         android:layout_marginLeft="97dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
         android:background="@color/colorMenu"
+        android:onClick="onCommentClick"
         android:text="Kommentarer"
         android:textColor="@color/common_google_signin_btn_text_dark_default"
         app:layout_constraintBottom_toBottomOf="@+id/imageView8"
-        app:layout_constraintLeft_toLeftOf="@+id/imageView8" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="@+id/imageView8"
+        app:layout_constraintRight_toRightOf="@+id/imageView8"
+        app:layout_constraintTop_toTopOf="@+id/imageView8"
+        app:layout_constraintVertical_bias="1.0" />
 
 </android.support.constraint.ConstraintLayout>
