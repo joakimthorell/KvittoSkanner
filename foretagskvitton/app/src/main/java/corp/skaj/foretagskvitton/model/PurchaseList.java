@@ -11,7 +11,7 @@ public class PurchaseList extends ArrayList<Purchase> {
         this.user = user;
     }
 
-    public PurchaseList getReceipts(Company company) {
+    public PurchaseList getPurchases(Company company) {
         PurchaseList list = new PurchaseList(user);
         for (Employee e : company.getEmployees()) {
             list.addAll(e.getPurchases());
@@ -19,26 +19,31 @@ public class PurchaseList extends ArrayList<Purchase> {
         return list;
     }
 
-    public PurchaseList getReceipts(Employee employee) {
+    public PurchaseList getPurchases(Employee employee) {
         PurchaseList list = new PurchaseList(user);
         list.addAll(employee.getPurchases());
         return list;
     }
 
-    public PurchaseList getReceipts(Category category) {
+    public PurchaseList getPurchases(Category category) {
         PurchaseList purchases = new PurchaseList(user);
-        for (Company c : user.getCompanies()) {
-            for (Employee e : c.getEmployees()) {
-                for (Purchase p : e.getPurchases()) {
-                    for (Product product : p.getReceipt().getProducts()) {
-                        if (category.equals(product.getCategory())) {
-                            purchases.add(p);
-                        }
-                    }
+        for (Purchase p : this) {
+            for (Product pr : p.getReceipt().getProducts()) {
+                if (pr.getCategory().equals(category)) {
+                    purchases.add(p);
                 }
             }
         }
         return purchases;
+    }
+
+    public Purchase getPurchase(String ID) {
+        for (Purchase p : this) {
+            if (p.getId().equals(ID)) {
+                return p;
+            }
+        }
+        return null;
     }
 
     public void sortByDate() {
@@ -72,4 +77,3 @@ public class PurchaseList extends ArrayList<Purchase> {
         }
     }
 }
-
