@@ -19,96 +19,28 @@ public class Company {
         suppliers = new ArrayList<>();
     }
 
-    public void addEmployee(Employee employee) throws IllegalArgumentException {
-        if (!containsEmployee(employee.getName())) {
-            employees.add(employee);
-        } else {
-            throw new IllegalArgumentException("Employee already existing");
-        }
+    public boolean addEmployee(Employee employee) {
+        return employees.add(employee);
     }
 
-    public void removeEmployee(Employee employee) throws IllegalArgumentException {
-        if (containsEmployee(employee.getName())) {
-            employees.remove(employee);
-        } else {
-            throw new IllegalArgumentException("No such employee existing");
-        }
+    public boolean removeEmployee(Employee employee) {
+        return employees.size() > 1 && employees.remove(employee);
     }
 
-    public void removeEmployee(String name) throws IllegalArgumentException {
-        for (int i = 0; i < employees.size(); i++) {
-            Employee temp = employees.get(i);
-            if (temp.getName().equals(name)) {
-                employees.remove(i);
-                return;
-            }
-        }
-        throw new IllegalArgumentException("No such employee existing");
+    public boolean addCard(Card card) {
+        return cards.add(card);
     }
 
-    public void addCard(Card card) throws IllegalArgumentException {
-        if (!containsCard(card.getCard())) {
-            cards.add(card);
-        } else {
-            throw new IllegalArgumentException("This card already exists");
-        }
+    public boolean removeCard(Card card) {
+        return cards.remove(card);
     }
 
-    public void removeCard(Card card) throws IllegalArgumentException {
-        if (containsCard(card.getCard())) {
-            cards.remove(card);
-        } else {
-            throw new IllegalArgumentException("No such card existing");
-        }
+    public boolean addSupplier(Supplier supplier) {
+        return suppliers.add(supplier);
     }
 
-    public void addSupplier(Supplier supplier) throws IllegalArgumentException {
-        if (!containsSupplier(supplier.getName())) {
-            suppliers.add(supplier);
-        } else {
-            throw new IllegalArgumentException("The supplier already exists");
-        }
-    }
-
-    public void removeSupplier(Supplier supplier) throws IllegalArgumentException {
-        for (int i = 0; i < suppliers.size(); i++) {
-            Supplier temp = suppliers.get(i);
-            if (temp.getName().equals(supplier.getName())) {
-                suppliers.remove(i);
-                return;
-            }
-        }
-        throw new IllegalArgumentException("No such supplier existing");
-    }
-
-    private boolean containsEmployee(String name) {
-        for (int i = 0; i < employees.size(); i++) {
-            Employee temp = employees.get(i);
-            if (temp.getName().equals(name)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private boolean containsCard(int cardNumber) {
-        for (int i = 0; i < cards.size(); i++) {
-            Card temp = cards.get(i);
-            if (temp.getCard() == cardNumber) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private boolean containsSupplier(String name) {
-        for (int i = 0; i < suppliers.size(); i++) {
-            Supplier temp = suppliers.get(i);
-            if (temp.getName().equals(name)) {
-                return true;
-            }
-        }
-        return false;
+    public boolean removeSupplier(Supplier supplier) {
+        return suppliers.remove(supplier);
     }
 
     public List<Employee> getEmployees() {
@@ -134,10 +66,9 @@ public class Company {
     }
 
     public Card getCard(int cardNumber) {
-        for (int i = 0; i < cards.size(); i++) {
-            Card temp = cards.get(i);
-            if (temp.getCard() == cardNumber) {
-                return temp;
+        for (Card card : cards) {
+            if (card.getCard() == cardNumber) {
+                return card;
             }
         }
         return null;
@@ -160,9 +91,9 @@ public class Company {
     }
 
     public Supplier getSupplier(String supplierName) {
-        for (Supplier s : suppliers) {
-            if (s.getName().equals(supplierName)) {
-                return s;
+        for (Supplier supplier : suppliers) {
+            if (supplier.getName().equals(supplierName)) {
+                return supplier;
             }
         }
         return null;

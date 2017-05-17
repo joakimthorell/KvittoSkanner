@@ -12,39 +12,20 @@ public class User {
         companies = new ArrayList<>();
     }
 
-    public void addCompany(Company company) {
-        if (!containsCompany(company.getName())) {
-            companies.add(company);
-        } else {
-            System.out.println("Illegal argument " + this.getClass().getName());
-        }
+    public boolean addCompany(Company company) {
+        return companies.add(company);
     }
 
-    public void removeCompany(Company company) {
-        if (containsCompany(company.getName())) {
-            companies.remove(company);
-        } else {
-            System.out.println("Illegal argument " + this.getClass().getName());
-        }
+    public boolean removeCompany(Company company) {
+        return companies.size() > 1 && companies.remove(company);
     }
 
-    private boolean containsCompany(String companyName) {
-        for (int i = 0; i < companies.size(); i++) {
-            Company temp = companies.get(i);
-            if (companyName.equals(temp.getName())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private boolean containsReceipt(List<Purchase> listOfPurchases, Purchase purchase) {
-        if(listOfPurchases == null){
+    private boolean containsReceipt(List<Purchase> purchases, Purchase purchase) {
+        if (purchases == null) {
             return false;
         }
-        for (int i = 0; i < listOfPurchases.size(); i++) {
-            Receipt temp = listOfPurchases.get(i).getReceipt();
-            if (purchase.getReceipt() == temp) {
+        for (Purchase p : purchases) {
+            if (purchase.getReceipt() == p.getReceipt()) {
                 return true;
             }
         }
@@ -53,8 +34,7 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
-        for (int i = 0; i < companies.size(); i++) {
-            Company company = companies.get(i);
+        for (Company company : companies) {
             Employee employee = company.getEmployee(name);
             if (employee != null) {
                 employee.setName(name);
@@ -63,29 +43,26 @@ public class User {
     }
 
     public Company getCompany(Company company) {
-        for (int i = 0; i < companies.size(); i++) {
-            Company temp = companies.get(i);
-            if (temp.getName().equals(company.getName())) {
-                return temp;
+        for (Company c : companies) {
+            if (c.getName().equals(company.getName())) {
+                return c;
             }
         }
         return null;
     }
 
     public Company getCompany(Card card) {
-        for (int i = 0; i < companies.size(); i++) {
-            Company temp = companies.get(i);
-            Card tempCard = temp.getCard(card.getCard());
-            if (tempCard.getCard() == card.getCard()) {
-                return temp;
+        for (Company company : companies) {
+            Card c = company.getCard(card.getCard());
+            if (c.getCard() == card.getCard()) {
+                return company;
             }
         }
         return null;
     }
 
     public Company getCompany(Purchase purchase) {
-        for (int i = 0; i < companies.size(); i++) {
-            Company company = companies.get(i);
+        for (Company company : companies) {
             List<Purchase> purchases = getPurchases(company, purchase);
             if (containsReceipt(purchases, purchase)) {
                 return company;
