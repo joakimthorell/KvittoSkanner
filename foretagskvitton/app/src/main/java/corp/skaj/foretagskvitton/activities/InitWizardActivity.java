@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.util.List;
 
 import corp.skaj.foretagskvitton.R;
-import corp.skaj.foretagskvitton.services.TextCollector;
+import corp.skaj.foretagskvitton.services.ReceiptScanner;
 
 public class InitWizardActivity extends AbstractActivity {
     private boolean mProgressBar;
@@ -44,7 +44,7 @@ public class InitWizardActivity extends AbstractActivity {
             @Override
             public void run() {
                 try {
-                    mStrings = TextCollector.collectStringsFromURI(getApplicationContext(), mURI);
+                    mStrings = ReceiptScanner.collectStringsFromURI(getApplicationContext(), mURI);
                     endLoadingBar();
                 } catch (IOException io) {
                     System.out.println("TextCollector is not operational");

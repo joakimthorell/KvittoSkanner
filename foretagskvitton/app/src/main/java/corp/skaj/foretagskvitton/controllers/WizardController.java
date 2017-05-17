@@ -198,7 +198,7 @@ public class WizardController implements IObserver {
         double totalPrice = Double.parseDouble(priceAsString);
         double taxAsDouble = Double.parseDouble(taxAsString);
         Category categoryAsCategory = Category.valueOf(categoryAsString.toUpperCase());
-        return new Product(Product.WHOLE_RECEIPT, categoryAsCategory, totalPrice, taxAsDouble);
+        return new Product(Product.ALL_PRODUCTS, categoryAsCategory, totalPrice, taxAsDouble);
     }
 
     public void updateConsumePageSelectedEvent(boolean state) {
