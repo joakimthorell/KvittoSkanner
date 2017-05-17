@@ -53,7 +53,7 @@ public class DataHandler extends Application implements IData {
             Company company = new Company("DEFAULT COMPANY");
             company.addEmployee(new Employee(user.getName()));
             user.addCompany(company);
-            writeData(DataHandler.USER_KEY, DataHandler.classOfUser);
+            writeData(DataHandler.USER_KEY, user);
         }
     }
 }
