@@ -62,8 +62,8 @@ public class DataHandler extends Application implements IData {
     }
 
     public PurchaseList getPurchases() {
-        PurchaseList purchases = new PurchaseList();
         User user = readData(USER_KEY, classOfUser);
+        PurchaseList purchases = new PurchaseList(user);
         for (Company c : user.getCompanies()) {
             for (Employee e : c.getEmployees()) {
                 purchases.addAll(e.getPurchases());

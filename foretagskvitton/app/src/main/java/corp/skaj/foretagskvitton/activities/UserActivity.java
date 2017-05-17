@@ -14,6 +14,8 @@ public class UserActivity extends AbstractActivity {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_user);
             initBottomBar(USER_ID, this);
+
+
     }
 
     public void resetData(View view) {
