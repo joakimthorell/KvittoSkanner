@@ -1,11 +1,13 @@
 package corp.skaj.foretagskvitton.controllers;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.tech.freak.wizardpager.model.AbstractWizardModel;
 import com.tech.freak.wizardpager.model.Page;
@@ -18,6 +20,7 @@ import java.util.Date;
 import java.util.List;
 
 import corp.skaj.foretagskvitton.R;
+import corp.skaj.foretagskvitton.activities.AddReceiptActivity;
 import corp.skaj.foretagskvitton.model.Category;
 import corp.skaj.foretagskvitton.model.Comment;
 import corp.skaj.foretagskvitton.model.Company;
@@ -32,23 +35,24 @@ import corp.skaj.foretagskvitton.model.WizardConstants;
 import corp.skaj.foretagskvitton.view.WizardView;
 import corp.skaj.foretagskvitton.view.ConfirmWizardFragment;
 
-public class WizardController implements IObserver {
+public class WizardController {
     private WizardView mWizardView;
     private ViewPager mPager;
     private Button mNextButton;
     private Button mPrevButton;
     private boolean mEditingAfterReview;
     private boolean mConsumePageSelectedEvent;
-    private IData handler;
+    private IData mHandler;
 
 
-    public WizardController(Context context, Button mNextButton, Button mPrevButton, ViewPager mPager) {
+    public WizardController(Context context, Button mNextButton, Button mPrevButton,
+                            ViewPager mPager) {
         mEditingAfterReview = false;
         this.mNextButton = mNextButton;
         this.mPrevButton = mPrevButton;
         this.mPager = mPager;
-        this.handler = (IData) context.getApplicationContext();
-        mWizardView = new WizardView(this, context);
+        mHandler = (IData) context.getApplicationContext();
+        mWizardView = new WizardView(context);
     }
 
     public void initViewPagerListener(final StepPagerStrip mStepPagerStrip) {
@@ -125,8 +129,7 @@ public class WizardController implements IObserver {
     /**
      * Key for bundle is "_". This is hardcoded from the WizardPager package
      */
-    @Override
-    public void onDataChange() {
+    public void saveReceipts() {
         Bundle b = mWizardView.getWizardData();
         Bundle companyNameBundle = b.getBundle(WizardConstants.COMPANY);
         Bundle payMethodBundle = b.getBundle(WizardConstants.CARD);
@@ -156,7 +159,7 @@ public class WizardController implements IObserver {
         if (commentBundle.getString("_") != null) {
             purchase.addComment(new Comment(commentBundle.getString("_")));
         }
-        User user = handler.readData(User.class.getName(), User.class);
+        User user = mHandler.readData(User.class.getName(), User.class);
         Company company = user.getCompany(companyNameBundle.getString("_"));
         Employee employee = company.getEmployees().get(0);
         employee.addPurchase(purchase);
@@ -165,11 +168,11 @@ public class WizardController implements IObserver {
 
     private void saveUser(User user) {
         System.out.println("Saving user " + user.getName());
-        handler.writeData(User.class.getName(), user);
+        mHandler.writeData(User.class.getName(), user);
         System.out.println("User : " + user.getName() + " saved. COMPLETE!");
         System.out.println("Removing used items");
-        handler.removeData("mURI");
-        handler.removeData("mStrings");
+        mHandler.removeData("mURI");
+        mHandler.removeData("mStrings");
         System.out.println("Removed data. COMPLETE!");
     }
 
@@ -190,7 +193,7 @@ public class WizardController implements IObserver {
         Calendar date = Calendar.getInstance();
         date.setTime(dateAsDate);
         double total = Double.parseDouble(totalAsString);
-        String URIAsString = handler.readData("mURI", String.class);
+        String URIAsString = mHandler.readData("mURI", String.class);
         return new Receipt(product, date, total, URIAsString);
     }
 

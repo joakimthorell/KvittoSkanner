@@ -33,9 +33,9 @@ import corp.skaj.foretagskvitton.model.IData;
 public class WizardView extends AbstractWizardModel implements ModelCallbacks {
     private WizardModel model;
 
-    public WizardView(IObserver observer, Context context) {
+    public WizardView(Context context) {
         super(context);
-        model.addObserver(observer);
+        model.addObserver((IObserver) context);
     }
 
     @Override
