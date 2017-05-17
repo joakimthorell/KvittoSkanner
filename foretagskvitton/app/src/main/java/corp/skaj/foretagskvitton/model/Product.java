@@ -3,24 +3,17 @@ package corp.skaj.foretagskvitton.model;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class Product {
     public static final String ALL_PRODUCTS = "ALL_PRODUCTS";
-    private Category category;
     private List<Comment> comments;
+    private Category category;
     private String name;
     private double price;
     private double tax;
 
-    public Product(String name, Category category, Double price, Double tax) {
+    public Product(String name, Category category, double price, double tax) {
         this.name = name;
         this.category = category;
-        this.price = price;
-        this.tax = tax;
-    }
-
-    public Product(String name, double price, double tax) {
-        this.name = name;
         this.price = price;
         this.tax = tax;
         comments = new ArrayList<>();
@@ -54,10 +47,6 @@ public class Product {
         return category;
     }
 
-    public List<Comment> getComments() {
-        return comments;
-    }
-
     public double getPrice() {
         return price;
     }
@@ -66,4 +55,7 @@ public class Product {
         return tax;
     }
 
+    public List<Comment> getComments() {
+        return comments;
+    }
 }

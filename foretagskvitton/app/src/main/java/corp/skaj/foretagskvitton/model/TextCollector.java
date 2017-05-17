@@ -6,13 +6,13 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-public class ReceiptScanner {
+public class TextCollector {
     private static final String MASTERCARD = "mastercard";
     private static final String VISA = "visa";
     private static final String KORTNUMMER = "kortnummer";
     private static final String KORT = "kort";
 
-    private ReceiptScanner() {
+    private TextCollector() {
     }
 
     //TODO Do this if there is time
@@ -167,7 +167,7 @@ public class ReceiptScanner {
         if (result.equals("null")) {
             return detachCard(replaceLetters(s.substring(index, s.length())));
         }
-        return result;
+        return null;
     }
 
     private static int getCardIndex(String s) {

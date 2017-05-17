@@ -17,9 +17,9 @@ import java.util.List;
 
 import static android.provider.CalendarContract.CalendarCache.URI;
 
-public class TextCollector {
+public class ReceiptScanner {
 
-    private TextCollector() {
+    private ReceiptScanner() {
     }
 
     public static List<String> collectStringsFromURI(Context context, Uri uri) throws IOException {
