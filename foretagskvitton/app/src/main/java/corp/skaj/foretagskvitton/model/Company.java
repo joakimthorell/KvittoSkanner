@@ -58,7 +58,7 @@ public class Company {
 
     public Employee getEmployee(Purchase purchase) {
         for (Employee employee : employees) {
-            if (employee.containsPurchase(purchase)) {
+            if (employee.getPurchases().contains(purchase)) {
                 return employee;
             }
         }
