@@ -43,7 +43,19 @@ public class PurchaseList extends ArrayList<Purchase> {
     }
 
     public PurchaseList getReceipts(Category category) {
-        return null;
+        PurchaseList purchases = new PurchaseList(user);
+        for (Company c : user.getCompanies()) {
+            for (Employee e : c.getEmployees()) {
+                for (Purchase p : e.getPurchases()) {
+                    for (Product product : p.getReceipt().getProducts()) {
+                        if (category.equals(product.getCategory())) {
+                            purchases.add(p);
+                        }
+                    }
+                }
+            }
+        }
+        return purchases;
     }
 
     public void sortByDate() {
