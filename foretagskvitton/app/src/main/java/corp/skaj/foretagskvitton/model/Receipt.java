@@ -27,18 +27,13 @@ public class Receipt {
         this.pictureAdress = pictureAdress;
     }
 
-    public void removeProduct(Product product) throws IllegalArgumentException {
-        for (Product p : products) {
-            if (product == p) {
-                products.remove(p);
-                return;
-            }
-        }
-        throw new IllegalArgumentException("That product does not exist");
+    public boolean removeProduct(Product product) {
+        // make sure there is always one product in receipt
+        return products.size() > 1 && products.remove(product);
     }
 
-    public void addProduct(Product product) {
-        products.add(product);
+    public boolean addProduct(Product product) {
+        return products.add(product);
     }
 
     public void setDate(Calendar date) {
@@ -60,7 +55,6 @@ public class Receipt {
     public double getTotal() {
         return total;
     }
-
 
     public void getProducts(List<Product> products) {
         this.products = products;
