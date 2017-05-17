@@ -5,12 +5,10 @@ import java.util.List;
 
 
 public class Product {
-
-    public static final String WHOLE_RECEIPT = "whole receipt";
-
-    private String name;
+    public static final String ALL_PRODUCTS = "ALL_PRODUCTS";
     private Category category;
     private List<Comment> comments;
+    private String name;
     private double price;
     private double tax;
 

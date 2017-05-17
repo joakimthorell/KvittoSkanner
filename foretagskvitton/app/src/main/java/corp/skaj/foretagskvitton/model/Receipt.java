@@ -9,9 +9,8 @@ import java.util.List;
 public class Receipt {
     private List<Product> products;
     private Calendar date;
-    private double total;
-    private Category category;
     private final String pictureAdress; // This is URI as String
+    private double total;
 
     public Receipt(List<Product> products, Calendar date, double total, final String pictureAdress) {
         this.products = products;
@@ -72,14 +71,6 @@ public class Receipt {
      */
     public String getPictureAdress() {
         return pictureAdress;
-    }
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
     }
 }
 

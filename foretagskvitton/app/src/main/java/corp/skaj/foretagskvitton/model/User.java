@@ -3,7 +3,6 @@ package corp.skaj.foretagskvitton.model;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class User {
     private List<Company> companies;
     private String name;
