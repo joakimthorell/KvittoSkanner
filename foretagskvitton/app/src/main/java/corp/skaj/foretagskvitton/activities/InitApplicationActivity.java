@@ -1,16 +1,10 @@
 package corp.skaj.foretagskvitton.activities;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 
 import corp.skaj.foretagskvitton.R;
-import corp.skaj.foretagskvitton.model.Company;
-import corp.skaj.foretagskvitton.model.Employee;
-import corp.skaj.foretagskvitton.model.User;
-import corp.skaj.foretagskvitton.services.DataHandler;
 import corp.skaj.foretagskvitton.model.IData;
 
 public class InitApplicationActivity extends AbstractActivity {
@@ -38,17 +32,7 @@ public class InitApplicationActivity extends AbstractActivity {
     }
 
     private void readData() {
-        IData dataHandler = (DataHandler) getApplicationContext();
-        SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(this).edit();
-        editor.clear();
-        editor.apply();
-        if (dataHandler.readData(User.class.getName(), User.class) == null) {
-            User user = new User("DEFAULT USER");
-            Company company = new Company("DEFAULT COMPANY");
-            company.addEmployee(new Employee(user.getName()));
-            user.addCompany(company);
-            dataHandler.writeData(User.class.getName(), user);
-        }
+        ((IData)getApplicationContext()).initDefaultUser();
     }
 
     private void endLoadingBar() {

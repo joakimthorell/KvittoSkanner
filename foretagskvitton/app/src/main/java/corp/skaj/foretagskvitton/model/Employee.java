@@ -63,6 +63,15 @@ public class Employee {
         return purchases;
     }
 
+    public Purchase getPurchase(int id) {
+        for (Purchase p : purchases) {
+            if (p.getId() == id) {
+                return p;
+            }
+        }
+        return null;
+    }
+
     public List<Comment> getComments() {
         return comments;
     }

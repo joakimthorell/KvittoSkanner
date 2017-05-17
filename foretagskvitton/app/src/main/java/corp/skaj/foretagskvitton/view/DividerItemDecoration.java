@@ -1,9 +1,5 @@
 package corp.skaj.foretagskvitton.view;
 
-/**
- * Created by kevinbrunstrom on 2017-05-08.
- */
-
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
@@ -12,7 +8,6 @@ import android.graphics.drawable.Drawable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-
 
 public class DividerItemDecoration extends RecyclerView.ItemDecoration {
 

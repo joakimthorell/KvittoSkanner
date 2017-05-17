@@ -63,7 +63,7 @@
         <activity android:name=".activities.UserActivity" />
         <activity android:name=".activities.ArchiveActivity" />
         <activity android:name=".activities.CompanyListActivity" />
-        <activity android:name=".activities.singleReceipt"/>
+        <activity android:name=".activities.ArchiveReceiptActivity"/>
     </application>
 
 </manifest>

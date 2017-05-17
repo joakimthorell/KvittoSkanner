@@ -16,7 +16,6 @@
 
 package corp.skaj.foretagskvitton.model;
 
-import com.tech.freak.wizardpager.model.BranchPage;
 import com.tech.freak.wizardpager.model.ModelCallbacks;
 import com.tech.freak.wizardpager.model.MultipleFixedChoicePage;
 import com.tech.freak.wizardpager.model.PageList;
@@ -99,7 +98,6 @@ public class WizardModel {
 
     public void collectData() {
         Map<String, String> data = new HashMap<>();
-
         notifyController();
     }
 
