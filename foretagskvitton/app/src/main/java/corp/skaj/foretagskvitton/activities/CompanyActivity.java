@@ -69,9 +69,10 @@ public class CompanyActivity extends AbstractActivity {
         textViews.add(textView2);
         textViews.add(textView3);
 
-        companyListController.editButtonListener(button, textViews);
-
         EditText editText = (EditText) findViewById(R.id.editText);
+
+        companyListController.editButtonListener(button, textViews, editText, user, companyName);
+
         companyListController.employeeTextViewListener(editText, user, companyName);
 
         //Creating connecting the xml with the java code for the image buttons

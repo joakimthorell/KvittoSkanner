@@ -44,18 +44,18 @@ public class CompanyListController <T> {
         });
     }
 
-    public void editButtonListener(final Button button, final List<TextView> tv) {
+    public void editButtonListener(final Button button, final List<TextView> tv, final EditText editText, final User user, final String company) {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 toggle(button, tv);
 
                 if (button.getText() == "Spara") {
-                    //employeeTextViewListener();
+                    employeeTextViewListener(editText, user, company);
+                    cardTextViewListener(editText,user,company);
+                    commentTextViewListener(editText,user,company);
                 }
-
             }
-            //Spara undan det som man editerat, var sparar vi det? Hur kollar vi vad som är editerat?
         });
     }
 
