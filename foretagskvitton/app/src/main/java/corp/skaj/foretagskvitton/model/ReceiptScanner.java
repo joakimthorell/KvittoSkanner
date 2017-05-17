@@ -154,7 +154,7 @@ public class ReceiptScanner {
         if (index != -1) {
             return evaluateResult(s, detachCard((s.substring(index, s.length()))), index);
         } else {
-            String newS = anticipateAterix(s);
+            String newS = placePotentialAsterix(s);
             int asterix = findAsterix(newS);
             if (asterix != -1) {
                 return evaluateResult(newS, detachCard((newS.substring(asterix, newS.length()))), asterix);
@@ -257,7 +257,7 @@ public class ReceiptScanner {
                 .replaceAll("b", "8");
     }
 
-    private static String anticipateAterix(String s) {
+    private static String placePotentialAsterix(String s) {
         return s.replaceAll("x", "*")
                 .replaceAll("\"", "*")
                 .replaceAll("'", "*")
