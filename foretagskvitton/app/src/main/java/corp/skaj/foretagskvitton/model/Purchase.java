@@ -1,12 +1,10 @@
 package corp.skaj.foretagskvitton.model;
 
-
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class Purchase {
-
-    private static int ID_BUILDER = 0;
 
     public enum PurchaseType {
         PRIVATE,
@@ -16,18 +14,15 @@ public class Purchase {
     private Receipt receipt;
     private Supplier supplier;
     private List<Comment> comments;
-    private int id;
-
     private PurchaseType purchaseType;
+    private String id;
 
     public Purchase(Receipt receipt, Supplier supplier, PurchaseType purchaseType) {
         this.receipt = receipt;
         this.supplier = supplier;
         this.purchaseType = purchaseType;
         comments = new ArrayList<>();
-        id = Purchase.ID_BUILDER++;
-
-        System.out.println("Receipt ID is now    :   " + id);
+        id = UUID.randomUUID().toString();
     }
 
     public Purchase(Receipt receipt, PurchaseType purchaseType) {
@@ -66,9 +61,7 @@ public class Purchase {
         return purchaseType;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
-
-
 }

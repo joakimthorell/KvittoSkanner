@@ -9,9 +9,8 @@ import java.util.List;
 public class Receipt {
     private List<Product> products;
     private Calendar date;
-    private double total;
-    private Category category;
     private final String pictureAdress; // This is URI as String
+    private double total;
 
     public Receipt(List<Product> products, Calendar date, double total, final String pictureAdress) {
         this.products = products;
@@ -28,18 +27,13 @@ public class Receipt {
         this.pictureAdress = pictureAdress;
     }
 
-    public void removeProduct(Product product) throws IllegalArgumentException {
-        for (Product p : products) {
-            if (product == p) {
-                products.remove(p);
-                return;
-            }
-        }
-        throw new IllegalArgumentException("That product does not exist");
+    public boolean removeProduct(Product product) {
+        // make sure there is always one product in receipt
+        return products.size() > 1 && products.remove(product);
     }
 
-    public void addProduct(Product product) {
-        products.add(product);
+    public boolean addProduct(Product product) {
+        return products.add(product);
     }
 
     public void setDate(Calendar date) {
@@ -62,7 +56,6 @@ public class Receipt {
         return total;
     }
 
-
     public void getProducts(List<Product> products) {
         this.products = products;
     }
@@ -72,14 +65,6 @@ public class Receipt {
      */
     public String getPictureAdress() {
         return pictureAdress;
-    }
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
     }
 }
 

@@ -7,8 +7,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import corp.skaj.foretagskvitton.model.ReceiptScanner;
-
 import static org.junit.Assert.*;
 
 public class ReceiptScannerTest {
@@ -58,26 +56,26 @@ public class ReceiptScannerTest {
 
     @Test
     public void testCardNullCase() {
-        assertEquals(null, ReceiptScanner.getCard(null));
+        assertEquals(null, TextCollector.getCard(null));
     }
 
     @Test
     public void testCostNullCase() {
-        assertEquals(0.0, ReceiptScanner.getPrice(null), 1);
+        assertEquals(0.0, TextCollector.getPrice(null), 1);
     }
 
     @Test
     public void testDateNullCase() {
-        assertEquals(null, ReceiptScanner.getDate(null));
+        assertEquals(null, TextCollector.getDate(null));
     }
 
     
     @Test
     public void testDateFilter(){
         String testdate = "2017-04-27";
-        String methodDate = ReceiptScanner.getDate(list);
+        String methodDate = TextCollector.getDate(list);
         assertEquals(testdate, methodDate);
-        assertEquals(testdate, ReceiptScanner.getDate(list));
+        assertEquals(testdate, TextCollector.getDate(list));
     }
 
     /*
@@ -90,7 +88,7 @@ public class ReceiptScannerTest {
 
     @Test
     public void testIfNoDateFound() {
-        String date = ReceiptScanner.getDate(listWithoutDate);
+        String date = TextCollector.getDate(listWithoutDate);
 
         assertEquals(null, date);
     }
@@ -100,10 +98,10 @@ public class ReceiptScannerTest {
         List<String> list = new ArrayList<>(Arrays.asList("cxx134,-45","M R STER ","", "019677" + "9", "Bjl", " THAITAKEA\"3310y040,00mPer50nligk1234"
         ));
         List<String> test = new ArrayList<>(Arrays.asList("xx*¤#'\""));
-        //System.out.println(ReceiptScanner.anticipateAterix(ReceiptScanner.listToString(test)));
+        //System.out.println(TextCollector.anticipateAterix(TextCollector.listToString(test)));
         System.out.println(list);
         String expected = "3310";
-        String result = ReceiptScanner.getCard(list);
+        String result = TextCollector.getCard(list);
         assertEquals(expected, result);
     }
 }
