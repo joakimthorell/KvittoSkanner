@@ -2,6 +2,7 @@ package corp.skaj.foretagskvitton.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class Purchase {
 
@@ -14,12 +15,14 @@ public class Purchase {
     private Supplier supplier;
     private List<Comment> comments;
     private PurchaseType purchaseType;
+    private String id;
 
     public Purchase(Receipt receipt, Supplier supplier, PurchaseType purchaseType) {
         this.receipt = receipt;
         this.supplier = supplier;
         this.purchaseType = purchaseType;
         comments = new ArrayList<>();
+        id = UUID.randomUUID().toString();
     }
 
     public Purchase(Receipt receipt, PurchaseType purchaseType) {
@@ -56,5 +59,9 @@ public class Purchase {
 
     public PurchaseType getPurchaseType() {
         return purchaseType;
+    }
+
+    public String getId() {
+        return id;
     }
 }
