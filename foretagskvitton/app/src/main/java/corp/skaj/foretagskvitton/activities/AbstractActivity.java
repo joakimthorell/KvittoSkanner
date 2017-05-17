@@ -51,10 +51,14 @@ public abstract class AbstractActivity extends AppCompatActivity {
     }
 
     protected User readUser() {
-        return ((IData) getApplicationContext()).readData(User.class.getName(), User.class);
+        return getHandler().readData(User.class.getName(), User.class);
     }
 
     protected <T> void writeData(String key, T t) {
-        ((IData) getApplicationContext()).writeData(key, t);
+        getHandler().writeData(key, t);
+    }
+
+    protected IData getHandler() {
+        return (IData) getApplicationContext();
     }
 }
