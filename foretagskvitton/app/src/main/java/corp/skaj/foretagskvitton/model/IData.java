@@ -8,4 +8,6 @@ public interface IData {
     void removeData(String key);
 
     void initDefaultUser();
+
+    PurchaseList getPurchases();
 }
