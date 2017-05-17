@@ -71,7 +71,7 @@ public class ReceiptAdapter extends RecyclerView.Adapter<ReceiptAdapter.MyViewHo
         public void onClick(View v) {
             int position = getAdapterPosition();
             Purchase pur = mUser.getCompanies().get(0).getEmployees().get(0).getPurchases().get(position);
-            mArchiveController.onItemClicked(0);
+            mArchiveController.onItemClicked(pur.getId());
         }
     }
 }

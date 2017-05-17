@@ -6,15 +6,18 @@ import android.preference.PreferenceManager;
 
 import com.google.gson.Gson;
 
+import java.util.Comparator;
+
 import corp.skaj.foretagskvitton.model.Company;
 import corp.skaj.foretagskvitton.model.Employee;
 import corp.skaj.foretagskvitton.model.IData;
+import corp.skaj.foretagskvitton.model.Purchase;
 import corp.skaj.foretagskvitton.model.PurchaseList;
 import corp.skaj.foretagskvitton.model.User;
 
 public class DataHandler extends Application implements IData {
-    public final static Class<User> classOfUser = User.class;
-    public final static String USER_KEY = User.class.getName();
+    private final Class<User> classOfUser = User.class;
+    private final String USER_KEY = User.class.getName();
 
     @Override
     public <T> void writeData(String key, T writeT) {
@@ -49,12 +52,12 @@ public class DataHandler extends Application implements IData {
 
     @Override
     public void initDefaultUser() {
-        if (readData(DataHandler.USER_KEY, DataHandler.classOfUser) == null) {
+        if (readData(USER_KEY, classOfUser) == null) {
             User user = new User("DEFAULT USER");
             Company company = new Company("DEFAULT COMPANY");
             company.addEmployee(new Employee(user.getName()));
             user.addCompany(company);
-            writeData(DataHandler.USER_KEY, user);
+            writeData(USER_KEY, user);
         }
     }
 
