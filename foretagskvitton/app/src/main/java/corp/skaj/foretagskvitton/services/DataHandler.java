@@ -9,6 +9,7 @@ import com.google.gson.Gson;
 import corp.skaj.foretagskvitton.model.Company;
 import corp.skaj.foretagskvitton.model.Employee;
 import corp.skaj.foretagskvitton.model.IData;
+import corp.skaj.foretagskvitton.model.PurchaseList;
 import corp.skaj.foretagskvitton.model.User;
 
 public class DataHandler extends Application implements IData {
@@ -55,5 +56,16 @@ public class DataHandler extends Application implements IData {
             user.addCompany(company);
             writeData(DataHandler.USER_KEY, user);
         }
+    }
+
+    public PurchaseList getPurchases() {
+        PurchaseList purchases = new PurchaseList();
+        User user = readData(USER_KEY, classOfUser);
+        for (Company c : user.getCompanies()) {
+            for (Employee e : c.getEmployees()) {
+                purchases.addAll(e.getPurchases());
+            }
+        }
+        return purchases;
     }
 }
