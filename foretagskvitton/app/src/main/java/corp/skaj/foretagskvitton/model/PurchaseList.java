@@ -35,11 +35,17 @@ public class PurchaseList extends ArrayList<Purchase> {
     }
 
     public PurchaseList getReceipts(Company company) {
-        return null;
+        PurchaseList list = new PurchaseList(user);
+        for (Employee e : company.getEmployees()) {
+            list.addAll(e.getPurchases());
+        }
+        return list;
     }
 
     public PurchaseList getReceipts(Employee employee) {
-        return null;
+        PurchaseList list = new PurchaseList(user);
+        list.addAll(employee.getPurchases());
+        return list;
     }
 
     public PurchaseList getReceipts(Category category) {
