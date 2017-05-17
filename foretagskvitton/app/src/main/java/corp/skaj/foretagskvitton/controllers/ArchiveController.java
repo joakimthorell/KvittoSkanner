@@ -15,7 +15,7 @@ public class ArchiveController<T> {
         mNextActivityToStart = nextActivityToStart;
     }
 
-    public void onItemClicked(int itemId) {
+    public void onItemClicked(String itemId) {
         Intent intent = new Intent(mContext, mNextActivityToStart);
         intent.putExtra(ITEM_ID, itemId);
 
