@@ -9,7 +9,7 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
-public class ReceiptScannerTest {
+public class TextCollectorTest {
     private List<String> list;
     private List <String> listOfDoubles;
     private List <String> listOfCardNums;

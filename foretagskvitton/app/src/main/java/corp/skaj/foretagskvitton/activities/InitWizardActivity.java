@@ -7,11 +7,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.util.List;
 
 import corp.skaj.foretagskvitton.R;
+import corp.skaj.foretagskvitton.model.TextCollector;
 import corp.skaj.foretagskvitton.services.ReceiptScanner;
 
 public class InitWizardActivity extends AbstractActivity {
@@ -101,10 +103,10 @@ public class InitWizardActivity extends AbstractActivity {
 
     //TODO Below is temporary. Remove later.
     public void nextPressed(View view) {
+        //Toast.makeText(this, TextCollector.getCard(mStrings), Toast.LENGTH_LONG).show();
         Intent intent = new Intent(this, WizardActivity.class);
         writeData("mStrings", mStrings);
         writeData("mURI", mURI.toString());
         startActivity(intent);
-
     }
 }

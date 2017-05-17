@@ -25,9 +25,7 @@ import com.tech.freak.wizardpager.model.TextPage;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class WizardModel {
     private List<IObserver> observers;
@@ -97,7 +95,6 @@ public class WizardModel {
     }
 
     public void collectData() {
-        Map<String, String> data = new HashMap<>();
         notifyController();
     }
 

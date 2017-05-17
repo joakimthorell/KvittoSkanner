@@ -1,9 +1,6 @@
 package corp.skaj.foretagskvitton.model;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 
 public enum Category {
     BENSIN,
@@ -15,38 +12,11 @@ public enum Category {
     RESOR,
     TRANSPORT;
 
-    public static ArrayList<String> getCategoriesArrayList() {
-        String[] arr = Arrays.toString(values()).replaceAll("^.|.$", "").split(", ");
-        List<String> categories = Arrays.asList(arr);
-        ArrayList<String> strings = new ArrayList<>();
-        strings.addAll(categories);
-        return strings;
-    }
-
     public static String[] getCategoriesArray() {
         return Arrays.toString(values()).replaceAll("^.|.$", "").split(", ");
     }
 
-    public static String toString(Category category) {
-        switch (category) {
-            case BENSIN:
-                return "BENSIN";
-            case MAT:
-                return "MAT";
-            case HOTELL:
-                return "HOTELL";
-            case KONTORSMATERIAL:
-                return "KONTORSMATERIAL";
-            case PORTO:
-                return "PORTO";
-            case REPRESENTATION:
-                return "REPRESENTATION";
-            case RESOR:
-                return "RESOR";
-            case TRANSPORT:
-                return "TRANSPORT";
-            default:
-                return null;
-        }
+    public boolean equals(Category category) {
+        return this.name().equals(category.name());
     }
 }

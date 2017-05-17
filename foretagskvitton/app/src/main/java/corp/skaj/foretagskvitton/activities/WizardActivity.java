@@ -17,11 +17,13 @@
 
 package corp.skaj.foretagskvitton.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.tech.freak.wizardpager.model.AbstractWizardModel;
 import com.tech.freak.wizardpager.model.ModelCallbacks;
@@ -36,9 +38,11 @@ import corp.skaj.foretagskvitton.R;
 
 import corp.skaj.foretagskvitton.controllers.WizardController;
 import corp.skaj.foretagskvitton.controllers.MyPagerAdapter;
+import corp.skaj.foretagskvitton.model.IData;
+import corp.skaj.foretagskvitton.model.IObserver;
 
 public class WizardActivity extends AbstractActivity implements
-        PageFragmentCallbacks, ReviewFragment.Callbacks, ModelCallbacks {
+        PageFragmentCallbacks, ReviewFragment.Callbacks, ModelCallbacks, IObserver {
 
     private WizardController mWizardController;
     private AbstractWizardModel mWizardView;
@@ -150,5 +154,13 @@ public class WizardActivity extends AbstractActivity implements
             return true;
         }
         return false;
+    }
+
+    @Override
+    public void onDataChange() {
+        mWizardController.saveReceipts();
+        Toast.makeText(this, "Kvitto sparat", Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(this, AddReceiptActivity.class);
+        startActivity(intent);
     }
 }

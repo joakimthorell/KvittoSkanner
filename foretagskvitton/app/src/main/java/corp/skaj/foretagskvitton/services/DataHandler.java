@@ -9,11 +9,10 @@ import com.google.gson.Gson;
 import corp.skaj.foretagskvitton.model.Company;
 import corp.skaj.foretagskvitton.model.Employee;
 import corp.skaj.foretagskvitton.model.IData;
+import corp.skaj.foretagskvitton.model.PurchaseList;
 import corp.skaj.foretagskvitton.model.User;
 
 public class DataHandler extends Application implements IData {
-    public final static Class<User> classOfUser = User.class;
-    public final static String USER_KEY = User.class.getName();
 
     @Override
     public <T> void writeData(String key, T writeT) {
@@ -48,12 +47,24 @@ public class DataHandler extends Application implements IData {
 
     @Override
     public void initDefaultUser() {
-        if (readData(DataHandler.USER_KEY, DataHandler.classOfUser) == null) {
-            User user = new User("DEFAULT USER");
+        if (readData(User.class.getName(), User.class) == null) {
+            User user = new User("USER");
             Company company = new Company("DEFAULT COMPANY");
             company.addEmployee(new Employee(user.getName()));
             user.addCompany(company);
-            writeData(DataHandler.USER_KEY, user);
+            writeData(User.class.getName(), user);
         }
+    }
+
+    @Override
+    public PurchaseList getPurchases() {
+        User user = readData(User.class.getName(), User.class);
+        PurchaseList purchases = new PurchaseList(user);
+        for (Company c : user.getCompanies()) {
+            for (Employee e : c.getEmployees()) {
+                purchases.addAll(e.getPurchases());
+            }
+        }
+        return purchases;
     }
 }
