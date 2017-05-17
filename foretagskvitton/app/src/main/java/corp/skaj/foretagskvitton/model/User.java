@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class User {
+    private List<Supplier> suppliers;
     private List<Company> companies;
     private String name;
 
     public User(String name) {
         this.name = name;
         companies = new ArrayList<>();
+        suppliers = new ArrayList<>();
     }
 
     public boolean addCompany(Company company) {
@@ -20,16 +22,12 @@ public class User {
         return companies.size() > 1 && companies.remove(company);
     }
 
-    private boolean containsReceipt(List<Purchase> purchases, Purchase purchase) {
-        if (purchases == null) {
-            return false;
-        }
-        for (Purchase p : purchases) {
-            if (purchase.getReceipt() == p.getReceipt()) {
-                return true;
-            }
-        }
-        return false;
+    public boolean addSupplier(Supplier supplier) {
+        return suppliers.add(supplier);
+    }
+
+    public boolean removeSupplier(Supplier supplier) {
+        return suppliers.remove(supplier);
     }
 
     public void setName(String name) {
@@ -63,23 +61,15 @@ public class User {
 
     public Company getCompany(Purchase purchase) {
         for (Company company : companies) {
-            List<Purchase> purchases = getPurchases(company, purchase);
-            if (containsReceipt(purchases, purchase)) {
-                return company;
+            for (Employee e : company.getEmployees()) {
+                for (Purchase p : e.getPurchases()) {
+                    if (p == purchase) {
+                        return company;
+                    }
+                }
             }
         }
         return null;
-    }
-
-    private List<Purchase> getPurchases(Company company, Purchase purchase) {
-        List<Purchase> receipts;
-        try {
-            receipts = company.getEmployee(purchase).getPurchases();
-        } catch (Exception e) {
-            System.out.println("getPurchase is null " + this.getClass().getName());
-            return null;
-        }
-        return receipts;
     }
 
     public Company getCompany(String companyName) {
@@ -89,6 +79,19 @@ public class User {
             }
         }
         return null;
+    }
+
+    public Supplier getSupplier(String supplierName) {
+        for (Supplier supplier : suppliers) {
+            if (supplier.getName().equals(supplierName)) {
+                return supplier;
+            }
+        }
+        return null;
+    }
+
+    public List<Supplier> getSuppliers() {
+        return suppliers;
     }
 
     public List<Company> getCompanies() {

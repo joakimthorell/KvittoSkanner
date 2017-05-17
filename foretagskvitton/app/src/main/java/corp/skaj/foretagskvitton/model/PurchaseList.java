@@ -11,29 +11,6 @@ public class PurchaseList extends ArrayList<Purchase> {
         this.user = user;
     }
 
-    private class sortByPrice implements Comparator<Purchase> {
-
-        @Override
-        public int compare(Purchase o1, Purchase o2) {
-            double r1 = o1.getReceipt().getTotal();
-            double r2 = o2.getReceipt().getTotal();
-            if (r1 > r2) {
-                return 1;
-            } else if (r1 == r2) {
-                return 0;
-            }
-            return -1;
-        }
-    }
-
-    private class sortByDate implements Comparator<Purchase> {
-
-        @Override
-        public int compare(Purchase o1, Purchase o2) {
-            return o1.getReceipt().getDate().compareTo(o2.getReceipt().getDate());
-        }
-    }
-
     public PurchaseList getReceipts(Company company) {
         PurchaseList list = new PurchaseList(user);
         for (Employee e : company.getEmployees()) {
@@ -70,6 +47,29 @@ public class PurchaseList extends ArrayList<Purchase> {
 
     public void sortByPrice() {
         Collections.sort(this, new sortByPrice());
+    }
+
+    private class sortByPrice implements Comparator<Purchase> {
+
+        @Override
+        public int compare(Purchase o1, Purchase o2) {
+            double r1 = o1.getReceipt().getTotal();
+            double r2 = o2.getReceipt().getTotal();
+            if (r1 > r2) {
+                return 1;
+            } else if (r1 == r2) {
+                return 0;
+            }
+            return -1;
+        }
+    }
+
+    private class sortByDate implements Comparator<Purchase> {
+
+        @Override
+        public int compare(Purchase o1, Purchase o2) {
+            return o1.getReceipt().getDate().compareTo(o2.getReceipt().getDate());
+        }
     }
 }
 
