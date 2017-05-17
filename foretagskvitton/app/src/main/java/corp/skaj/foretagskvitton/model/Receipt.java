@@ -44,10 +44,6 @@ public class Receipt {
         this.total = total;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
-    }
-
     public List<Product> getProducts() {
         return products;
     }
@@ -69,10 +65,6 @@ public class Receipt {
      */
     public String getPictureAdress() {
         return pictureAdress;
-    }
-
-    public Category getCategory() {
-        return category;
     }
 }
 
