@@ -18,7 +18,7 @@ public class EmployeeTest {
     }
 
     private Receipt setupARecipt() {
-        Product product = new Product("Apelsin Juice", 19.50, 25);
+        Product product = new Product("Apelsin Juice", Category.BENSIN, 19.50, 25);
         Calendar cal = Calendar.getInstance();
         Random rand = new Random();
         cal.set(rand.nextInt(18) + 2000, rand.nextInt(12) + 1, rand.nextInt(28) + 1);
@@ -35,7 +35,7 @@ public class EmployeeTest {
             employee.addPurchase(new Purchase(setupARecipt(), Purchase.PurchaseType.PRIVATE));
         }
 
-        assertEquals(n, employee.getAmountOfPurchases());
+        assertEquals(n, employee.getPurchases().size());
     }
 
     @Test
@@ -50,30 +50,6 @@ public class EmployeeTest {
             iae.printStackTrace();
         }
 
-        assertEquals(0, employee.getAmountOfPurchases());
-    }
-
-    @Test
-    public void testRemoveAPurchaseNotExcisting() {
-        Purchase pur1 = new Purchase(setupARecipt(), Purchase.PurchaseType.PRIVATE);
-        Purchase pur2 = new Purchase(setupARecipt(), Purchase.PurchaseType.PRIVATE);
-
-        employee.addPurchase(pur1);
-
-        try {
-            employee.removePurchase(pur2);
-            assertTrue(false);
-        } catch (IllegalArgumentException iae) {
-            assertTrue(true);
-        }
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testRemoveCommentFromEmployee() {
-        Comment comment = new Comment("Hej");
-        employee.addComment(comment);
-
-        Comment comment1 = new Comment("Då");
-        employee.removeComment(comment1);
+        assertEquals(0, employee.getPurchases().size());
     }
 }

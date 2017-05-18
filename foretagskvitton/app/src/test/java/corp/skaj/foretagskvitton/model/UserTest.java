@@ -82,7 +82,7 @@ public class UserTest {
     }
 
     private Purchase setupPurchase() {
-        Product product = new Product("Apelsin", 10, 12.5);
+        Product product = new Product("Apelsin",Category.BENSIN, 10, 12.5);
         Calendar calendar = Calendar.getInstance();
         calendar.set(2017, 4, 20);
         Receipt receipt = new Receipt(product, calendar, 10, null);

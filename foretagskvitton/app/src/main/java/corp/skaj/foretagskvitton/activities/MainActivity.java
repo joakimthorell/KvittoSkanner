@@ -13,11 +13,13 @@ import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.controllers.IMain;
 import corp.skaj.foretagskvitton.controllers.MainController;
 import corp.skaj.foretagskvitton.model.Company;
+import corp.skaj.foretagskvitton.model.Supplier;
 import corp.skaj.foretagskvitton.model.User;
 import corp.skaj.foretagskvitton.view.ArchiveAdapter;
 import corp.skaj.foretagskvitton.view.CompanyAdapter;
 import corp.skaj.foretagskvitton.view.IController;
 import corp.skaj.foretagskvitton.view.ListFragment;
+import corp.skaj.foretagskvitton.view.SupplierAdapter;
 
 public class MainActivity extends AbstractActivity implements IMain {
 
@@ -76,7 +78,9 @@ public class MainActivity extends AbstractActivity implements IMain {
     }
 
     private void supplierList () {
-
+        ListFragment listFragment = ListFragment.create(new SupplierAdapter(getDataHandler()));
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.fragment_container, listFragment).commit();
     }
 
     @Override
