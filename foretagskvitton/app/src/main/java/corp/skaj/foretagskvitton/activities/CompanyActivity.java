@@ -29,7 +29,7 @@ public class CompanyActivity extends AbstractActivity {
         String companyName = getIntent().getExtras().get(COMPANY_KEY).toString();
 
         //Getting hold of the user
-        User user = readUser();
+        User user = getDataHandler().readData(User.class.getName(), User.class);
 
         //Code for the tool-and actionbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.company_action_bar);

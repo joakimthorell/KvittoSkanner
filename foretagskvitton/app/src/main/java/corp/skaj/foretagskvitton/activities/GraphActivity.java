@@ -11,5 +11,6 @@ public class GraphActivity extends AbstractActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_graph);
         initBottomBar(CHARTS_ID, this);
+        
     }
 }

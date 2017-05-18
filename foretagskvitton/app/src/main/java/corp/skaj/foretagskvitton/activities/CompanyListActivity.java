@@ -7,6 +7,7 @@ import android.widget.ListView;
 
 import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.controllers.CompanyListController;
+import corp.skaj.foretagskvitton.model.User;
 
 public class CompanyListActivity extends AbstractActivity {
     public static final String COMPANYLIST_KEY = "COMPANYLIST_KEY";
@@ -21,10 +22,12 @@ public class CompanyListActivity extends AbstractActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Företag");
 
+        User user = getDataHandler().readData(User.class.getName(), User.class);
+
         //The code hided below is for when we do have a list of companies
 
         CompanyListController controller = new CompanyListController();
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.company_list_view, controller.getCompanyNames(readUser()));
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.company_list_view, controller.getCompanyNames(user));
         final ListView listView = (ListView) findViewById(R.id.listView);
         listView.setAdapter(adapter);
         controller.initListViewListener(listView, CompanyActivity.class, this);
