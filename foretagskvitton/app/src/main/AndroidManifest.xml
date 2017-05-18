@@ -65,7 +65,8 @@
         <activity android:name=".activities.CompanyListActivity" />
         <activity android:name=".activities.ArchiveReceiptActivity" />
         <activity android:name=".activities.ArchiveReceiptComments" />
-        <activity android:name=".activities.ArchiveReceiptPicture"></activity>
+        <activity android:name=".activities.ArchiveReceiptPicture" />
+        <activity android:name=".activities.MainActivity"></activity>
     </application>
 
 </manifest>
