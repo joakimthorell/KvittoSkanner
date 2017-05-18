@@ -8,7 +8,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 
 import corp.skaj.foretagskvitton.R;
-import corp.skaj.foretagskvitton.model.WizardModel;
+import corp.skaj.foretagskvitton.view.WizardModel;
 
 public class ConfirmWizardFragment extends DialogFragment {
     private WizardModel model;
