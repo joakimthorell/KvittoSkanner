@@ -9,22 +9,22 @@ import java.util.List;
 public class Receipt {
     private List<Product> products;
     private Calendar date;
-    private final String pictureAdress; // This is URI as String
+    private final String imageAdress; // This is URI as String
     private double total;
 
-    public Receipt(List<Product> products, Calendar date, double total, final String pictureAdress) {
+    public Receipt(List<Product> products, Calendar date, double total, final String imageAdress) {
         this.products = products;
         this.date = date;
         this.total = total;
-        this.pictureAdress = pictureAdress;
+        this.imageAdress = imageAdress;
     }
 
-    public Receipt(Product product, Calendar date, double total, final String pictureAdress) {
+    public Receipt(Product product, Calendar date, double total, final String imageAdress) {
         products = new ArrayList<>();
         products.add(product);
         this.date = date;
         this.total = total;
-        this.pictureAdress = pictureAdress;
+        this.imageAdress = imageAdress;
     }
 
     public boolean removeProduct(Product product) {
@@ -64,7 +64,7 @@ public class Receipt {
      * This is Uri as String
      */
     public String getPictureAdress() {
-        return pictureAdress;
+        return imageAdress;
     }
 }
 

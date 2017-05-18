@@ -32,6 +32,7 @@ public abstract class AbstractActivity extends AppCompatActivity {
         mBottomBarMap.put(USER_ID, UserActivity.class);
     }
 
+    //Flytta ut till controller ????
     protected void initBottomBar(final Integer ID, final Context context) {
         setBottomBarMap();
         setDefaultTab(ID).setOnTabSelectListener(new OnTabSelectListener() {
@@ -50,15 +51,7 @@ public abstract class AbstractActivity extends AppCompatActivity {
         return bottomBar;
     }
 
-    protected User readUser() {
-        return getHandler().readData(User.class.getName(), User.class);
-    }
-
-    protected <T> void writeData(String key, T t) {
-        getHandler().writeData(key, t);
-    }
-
-    protected IData getHandler() {
+    protected IData getDataHandler() {
         return (IData) getApplicationContext();
     }
 }
