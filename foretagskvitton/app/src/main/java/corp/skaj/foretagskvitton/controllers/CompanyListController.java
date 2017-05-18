@@ -1,5 +1,6 @@
 package corp.skaj.foretagskvitton.controllers;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 
@@ -67,7 +68,7 @@ public class CompanyListController <T> {
 
                 //Här vill vi lägga till en ny anställd i listan av anställda
                 //Skapa en ny text view?
-                employeeTextViewListener(editText, user, company);
+                //employeeTextViewListener(editText, user, company);
 
             }
         });
@@ -96,13 +97,14 @@ public class CompanyListController <T> {
         employees.add(employee);
     }
 
-    public void createNewCardListener(ImageButton button, final User user, final String company) {
+    public void createNewCardListener(ImageButton button, final User user, final String company, final EditText editText) {
         button.setOnClickListener(new View.OnClickListener() {
-            //List<Card> cards = user.getCompany(company).getCards();
+            List<Card> cards = user.getCompany(company).getCards();
             @Override
             public void onClick(View v) {
+
                 //Här vill vi lägga till ett nytt kort i listan av kort
-                //cards.add(new Card(här vill vi ju ha inputen som man skriver in));
+                //cardTextViewListener(editText, user, company);
 
             }
         });
@@ -126,12 +128,13 @@ public class CompanyListController <T> {
         cards.add(card);
     }
 
-    public void createNewCommentListener(ImageButton button, final User user, final String company) {
+    public void createNewCommentListener(ImageButton button, final User user, final String company, final EditText editText) {
         button.setOnClickListener(new View.OnClickListener() {
             //List<Comment> comments = user.getCompany(company).getComments();
             @Override
             public void onClick(View v) {
                 //Här vill vi lägga till en ny kommentar i listan av kommentarer
+                commentTextViewListener(editText, user, company);
             }
         });
     }
@@ -165,7 +168,6 @@ public class CompanyListController <T> {
                             Toast.LENGTH_SHORT).show();
                 } else {
                     //TODO här ska vi ha en popup "är du säker på att du vill radera företaget"
-                    createPopUpWindow(context);
 
                     Company company = user.getCompany(companyName);
                     companies.remove(company);
@@ -206,9 +208,6 @@ public class CompanyListController <T> {
         return companyNames;
     }
 
-    public void createPopUpWindow(Context context) {
-    PopupWindow popUpWindow = new PopupWindow(context);
-    }
 }
 
     /*public void initButtonListener (Button button, final Activity activity) {
