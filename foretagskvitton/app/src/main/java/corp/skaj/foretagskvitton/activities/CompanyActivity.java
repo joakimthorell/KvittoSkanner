@@ -78,8 +78,9 @@ public class CompanyActivity extends AbstractActivity {
 
         //Delete button for deleting an entire company
         Button deleteButton = (Button) findViewById(R.id.radera);
-        companyListController.deleteCompanyListener(deleteButton, user, companyName);
+        companyListController.deleteCompanyListener(deleteButton, user, companyName, this);
 
 
     }
+
 }

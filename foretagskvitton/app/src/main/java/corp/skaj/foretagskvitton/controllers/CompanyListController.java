@@ -3,16 +3,24 @@ package corp.skaj.foretagskvitton.controllers;
 import android.content.Context;
 import android.content.Intent;
 
+import android.support.constraint.ConstraintLayout;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.vision.text.Line;
 
 import java.util.List;
 
+import corp.skaj.foretagskvitton.activities.CompanyActivity;
 import corp.skaj.foretagskvitton.model.Card;
 import corp.skaj.foretagskvitton.model.Comment;
 import corp.skaj.foretagskvitton.model.Company;
@@ -144,19 +152,24 @@ public class CompanyListController <T> {
         comments.add(comment);
     }
 
-    public void deleteCompanyListener(final Button button, final User user, final String companyName) {
+    public void deleteCompanyListener(final Button button, final User user, final String companyName, final Context context) {
         final List<Company> companies = user.getCompanies();
+        final ConstraintLayout mainLayout = new ConstraintLayout(context);
+        final PopupWindow popUpWindow = new PopupWindow();
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (companies.size() == 1) {
-                    //TODO lägg in en toast "du kan inte radera ditt enda företag"
-                }
-                //TODO här ska vi ha en popup "är du säker på att du vill radera företaget"
-                Company company = user.getCompany(companyName);
-                companies.remove(company);
+                    Toast.makeText(context, "Du kan inte radera ditt enda företag",
+                            Toast.LENGTH_SHORT).show();
+                } else {
+                    //TODO här ska vi ha en popup "är du säker på att du vill radera företaget"
+                    createPopUpWindow(context);
 
+                    Company company = user.getCompany(companyName);
+                    companies.remove(company);
+                }
             }
         });
 
@@ -191,6 +204,10 @@ public class CompanyListController <T> {
             companyNames[i] = companies.get(i).getName();
         }
         return companyNames;
+    }
+
+    public void createPopUpWindow(Context context) {
+    PopupWindow popUpWindow = new PopupWindow(context);
     }
 }
 
