@@ -63,7 +63,7 @@ public class User {
         for (Company company : companies) {
             for (Employee e : company.getEmployees()) {
                 for (Purchase p : e.getPurchases()) {
-                    if (p == purchase) {
+                    if (p.getId().equals(purchase.getId())) {
                         return company;
                     }
                 }

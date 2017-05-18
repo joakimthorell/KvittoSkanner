@@ -14,14 +14,23 @@ import org.w3c.dom.Text;
 import java.util.ArrayList;
 
 import corp.skaj.foretagskvitton.R;
+import corp.skaj.foretagskvitton.model.IData;
 import corp.skaj.foretagskvitton.model.Purchase;
+import corp.skaj.foretagskvitton.model.PurchaseList;
+
+import static corp.skaj.foretagskvitton.activities.ArchiveReceiptActivity.COMMENT_ID;
 
 public class ArchiveReceiptComments extends AppCompatActivity {
-    private Purchase mPur = new Purchase(null, null);
     ArrayList<String> comments =new ArrayList<String>();
     ArrayAdapter<String> adapter;
+    Purchase mPur;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        IData handler = (IData) getApplicationContext();
+        PurchaseList list = handler.getPurchases();
+
+        String purchaseId= getIntent().getExtras().get(COMMENT_ID).toString();
+        mPur = list.getPurchase(purchaseId);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_archive_comments);
 

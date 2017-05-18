@@ -37,16 +37,16 @@ public class ArchiveReceiptActivity<T> extends AbstractActivity {
         TextView date = (TextView) findViewById(R.id.date);
         TextView supplier = (TextView) findViewById(R.id.Supplier);
         TextView payment_method = (TextView) findViewById(R.id.payment_method);
-        TextView company = (TextView) findViewById(R.id.company);
+        TextView company = (TextView) findViewById(R.id.Company);
 
         cost.setText(String.valueOf(mPur.getReceipt().getTotal()) + "SEK");
-        category.setText(mPur.getReceipt().getProducts().get(0).getName());
+        category.setText(mPur.getReceipt().getProducts().get(0).getCategory().name());
         moms.setText(String.valueOf("Moms: " + mPur.getReceipt().getProducts().get(0).getTax()) +"%");
         supplier.setText(checkSupplier());
         payment_method.setText(purchaseType());
-        
+
         // TODO - Find out what goes wrong with company fetch.
-        //company.setText(user.getCompany(mPur).getName());
+        company.setText(user.getCompany(mPur).getName());
 
         SimpleDateFormat dateRaw = new SimpleDateFormat("yyyy-MM-dd");
         String receiptDate = dateRaw.format(mPur.getReceipt().getDate().getTime());
