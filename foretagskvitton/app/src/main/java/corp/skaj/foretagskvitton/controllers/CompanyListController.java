@@ -1,23 +1,18 @@
 package corp.skaj.foretagskvitton.controllers;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 
 import android.support.constraint.ConstraintLayout;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.google.android.gms.vision.text.Line;
 
 import java.util.List;
 
@@ -29,7 +24,7 @@ import corp.skaj.foretagskvitton.model.Employee;
 import corp.skaj.foretagskvitton.model.User;
 
 
-public class CompanyListController <T> {
+public class CompanyListController {
     public static final String COMPANY_KEY = "CompanyKey";
 
     public CompanyListController() {

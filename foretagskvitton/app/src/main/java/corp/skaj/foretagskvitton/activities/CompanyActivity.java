@@ -15,8 +15,6 @@ import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.controllers.CompanyListController;
 import corp.skaj.foretagskvitton.model.User;
 
-import static corp.skaj.foretagskvitton.controllers.CompanyListController.COMPANY_KEY;
-
 public class CompanyActivity extends AbstractActivity {
 
 
@@ -26,7 +24,7 @@ public class CompanyActivity extends AbstractActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_company);
 
-        String companyName = getIntent().getExtras().get(COMPANY_KEY).toString();
+        String companyName = getIntent().getStringExtra(MainActivity.COMPANY_KEY);
 
         //Getting hold of the user
         User user = getDataHandler().readData(User.class.getName(), User.class);

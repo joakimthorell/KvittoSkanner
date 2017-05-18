@@ -10,12 +10,9 @@ import corp.skaj.foretagskvitton.model.Purchase;
 import corp.skaj.foretagskvitton.model.PurchaseList;
 import corp.skaj.foretagskvitton.model.User;
 
-import static corp.skaj.foretagskvitton.controllers.ArchiveController.RECEIPT_ID;
-
-public class ArchiveReceiptActivity<T> extends AbstractActivity {
+public class ArchiveReceiptActivity extends AbstractActivity {
 
     Purchase mPur;
-    private Class<T> mNextActivityToStart;
     public static final String COMMENT_ID = "COMMENT_ID";
     public static final String PICTURE_ID = "PICTURE_ID";
 
@@ -27,7 +24,7 @@ public class ArchiveReceiptActivity<T> extends AbstractActivity {
         IData handler = (IData) getApplicationContext();
         PurchaseList list = handler.getPurchases();
 
-        String purchaseId= getIntent().getExtras().get(RECEIPT_ID).toString();
+        String purchaseId= getIntent().getStringExtra(MainActivity.ARCHIVE_KEY);
         mPur = list.getPurchase(purchaseId);
 
         User user = handler.readData(User.class.getName(), User.class);

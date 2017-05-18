@@ -18,7 +18,12 @@ public class MainController<T> implements IController<T> {
 
     @Override
     public void setListener(UltimateRecyclerviewViewHolder<T> view, final String data, final String key) {
-        view.onBindView(new View.OnClickListener() {
+
+
+    }
+
+    /*
+    new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 switch (key) {
@@ -34,8 +39,8 @@ public class MainController<T> implements IController<T> {
                         return;
                 }
             }
-        });
-    }
+        }
+     */
 
 
 
