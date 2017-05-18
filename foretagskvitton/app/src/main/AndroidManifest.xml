@@ -31,11 +31,6 @@
 
         <activity android:name=".activities.InitApplicationActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-            <intent-filter>
                 <action android:name="android.intent.action.SEND" />
 
                 <category android:name="android.intent.category.DEFAULT" />
@@ -66,7 +61,13 @@
         <activity android:name=".activities.ArchiveReceiptActivity" />
         <activity android:name=".activities.ArchiveReceiptComments" />
         <activity android:name=".activities.ArchiveReceiptPicture" />
-        <activity android:name=".activities.MainActivity"></activity>
+        <activity android:name=".activities.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

@@ -19,12 +19,16 @@ import corp.skaj.foretagskvitton.model.User;
 
 public class ArchiveAdapter extends UltimateViewAdapter <ArchiveAdapter.SimpleAdapterViewHolder>{
 
+    public static final String ARCHIVE_KEY = "ArchiveKey";
+
     private PurchaseList mPurchases;
     private IData dataHandler;
+    private IController mController;
 
-    public ArchiveAdapter(IData dataHandler){
+    public ArchiveAdapter(IData dataHandler, IController controller){
         this.dataHandler = dataHandler;
         this.mPurchases = dataHandler.getPurchases();
+        mController = controller;
     }
 
     @Override
@@ -90,6 +94,10 @@ public class ArchiveAdapter extends UltimateViewAdapter <ArchiveAdapter.SimpleAd
         SimpleDateFormat dateRaw = new SimpleDateFormat("yyyy-MM-dd");
         String date = dateRaw.format(pur.getReceipt().getDate().getTime());
         holder.dateTitle.setText(date);
+
+        mController.setListener(holder, pur.getId(), ARCHIVE_KEY);
+
+
     }
 
 }

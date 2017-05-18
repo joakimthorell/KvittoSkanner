@@ -1,35 +1,28 @@
 package corp.skaj.foretagskvitton.view;
 
-import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.marshalchen.ultimaterecyclerview.UltimateRecyclerviewViewHolder;
 import com.marshalchen.ultimaterecyclerview.UltimateViewAdapter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.model.Company;
-import corp.skaj.foretagskvitton.model.Purchase;
-import corp.skaj.foretagskvitton.model.PurchaseList;
-import corp.skaj.foretagskvitton.model.User;
-
-/**
- * Created by annekeller on 2017-05-18.
- */
 
 public class CompanyAdapter extends UltimateViewAdapter <CompanyAdapter.SimpleAdapterViewHolder> {
 
-    List<Company> mCompanies;
+    public static final String COMPANY_KEY = "CompanyKey";
+    private List<Company> mCompanies;
+    private IController mController;
 
-    public CompanyAdapter (List<Company> companies) {
+    public CompanyAdapter (List<Company> companies, IController controller) {
         this.mCompanies = companies;
+        mController = controller;
     }
     @Override
     public SimpleAdapterViewHolder newFooterHolder(View view) {
@@ -61,6 +54,10 @@ public class CompanyAdapter extends UltimateViewAdapter <CompanyAdapter.SimpleAd
     @Override
     public void onBindViewHolder(SimpleAdapterViewHolder holder, int position) {
 
+        String name = mCompanies.get(position).getName();
+        holder.textView.setText(name);
+
+        mController.setListener(holder, name, COMPANY_KEY);
 
     }
 
@@ -76,7 +73,7 @@ public class CompanyAdapter extends UltimateViewAdapter <CompanyAdapter.SimpleAd
 
     public class SimpleAdapterViewHolder extends UltimateRecyclerviewViewHolder {
 
-        private TextView textView;
+        public TextView textView;
 
         public SimpleAdapterViewHolder(View itemView) {
             super(itemView);
