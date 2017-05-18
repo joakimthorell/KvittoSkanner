@@ -1,15 +1,10 @@
 package corp.skaj.foretagskvitton.activities;
-
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
-
 import java.text.SimpleDateFormat;
-
 import corp.skaj.foretagskvitton.R;
-
 import corp.skaj.foretagskvitton.model.IData;
 import corp.skaj.foretagskvitton.model.Purchase;
 import corp.skaj.foretagskvitton.model.PurchaseList;
@@ -47,16 +42,15 @@ public class ArchiveReceiptActivity<T> extends AbstractActivity {
         cost.setText(String.valueOf(mPur.getReceipt().getTotal()) + "SEK");
         category.setText(mPur.getReceipt().getProducts().get(0).getName());
         moms.setText(String.valueOf("Moms: " + mPur.getReceipt().getProducts().get(0).getTax()) +"%");
+        supplier.setText(checkSupplier());
+        payment_method.setText(purchaseType());
+        
+        // TODO - Find out what goes wrong with company fetch.
+        //company.setText(user.getCompany(mPur).getName());
 
         SimpleDateFormat dateRaw = new SimpleDateFormat("yyyy-MM-dd");
         String receiptDate = dateRaw.format(mPur.getReceipt().getDate().getTime());
-
         date.setText(receiptDate);
-        supplier.setText(checkSupplier());
-        payment_method.setText(purchaseType());
-
-        // TODO - Find out what goes wrong with company fetch.
-        //company.setText(user.getCompany(mPur).getName());
 
     }
 
@@ -68,7 +62,6 @@ public class ArchiveReceiptActivity<T> extends AbstractActivity {
         }
         return mPur.getSupplier().getName();
     }
-
 
     private String  purchaseType() {
         if (mPur.getPurchaseType() == mPur.getPurchaseType().PRIVATE) {
@@ -82,7 +75,6 @@ public class ArchiveReceiptActivity<T> extends AbstractActivity {
         intent.putExtra(COMMENT_ID, mPur.getId());
         startActivity(intent);
     }
-
 
     public void onReceiptClick(View view){
         Intent intent = new Intent(this, ArchiveReceiptPicture.class);
