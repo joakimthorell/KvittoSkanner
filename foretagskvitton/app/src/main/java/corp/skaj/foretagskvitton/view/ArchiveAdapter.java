@@ -8,9 +8,14 @@ import android.widget.TextView;
 
 import com.marshalchen.ultimaterecyclerview.UltimateRecyclerviewViewHolder;
 import com.marshalchen.ultimaterecyclerview.UltimateViewAdapter;
+
+import java.text.SimpleDateFormat;
+
 import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.model.IData;
+import corp.skaj.foretagskvitton.model.Purchase;
 import corp.skaj.foretagskvitton.model.PurchaseList;
+import corp.skaj.foretagskvitton.model.User;
 
 public class ArchiveAdapter extends UltimateViewAdapter <ArchiveAdapter.SimpleAdapterViewHolder>{
 
@@ -76,6 +81,15 @@ public class ArchiveAdapter extends UltimateViewAdapter <ArchiveAdapter.SimpleAd
     @Override
     public void onBindViewHolder(SimpleAdapterViewHolder holder, int position) {
 
+        User user = dataHandler.readData(User.class.getName(), User.class);
+        Purchase pur = mPurchases.get(position);
+
+        holder.companyTitle.setText(user.getCompany(pur).getName());
+        holder.categoryTitle.setText(pur.getReceipt().getProducts().get(0).getCategory().name());
+
+        SimpleDateFormat dateRaw = new SimpleDateFormat("yyyy-MM-dd");
+        String date = dateRaw.format(pur.getReceipt().getDate().getTime());
+        holder.dateTitle.setText(date);
     }
 
 }

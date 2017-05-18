@@ -105,8 +105,8 @@ public class InitWizardActivity extends AbstractActivity {
     public void nextPressed(View view) {
         //Toast.makeText(this, TextCollector.getCard(mStrings), Toast.LENGTH_LONG).show();
         Intent intent = new Intent(this, WizardActivity.class);
-        writeData("mStrings", mStrings);
-        writeData("mURI", mURI.toString());
+        //writeData("mStrings", mStrings);
+        //writeData("mURI", mURI.toString());
         startActivity(intent);
     }
 }

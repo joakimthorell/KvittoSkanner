@@ -30,7 +30,8 @@ public class ArchiveReceiptActivity<T> extends AbstractActivity {
         String purchaseId= getIntent().getExtras().get(RECEIPT_ID).toString();
         mPur = list.getPurchase(purchaseId);
 
-        User user = readUser();
+        User user = handler.readData(User.class.getName(), User.class);
+
         TextView cost = (TextView) findViewById(R.id.cost);
         TextView category = (TextView) findViewById(R.id.Category);
         TextView moms = (TextView) findViewById(R.id.Moms);

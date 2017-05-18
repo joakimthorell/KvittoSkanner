@@ -10,6 +10,7 @@ import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.controllers.ArchiveController;
 import corp.skaj.foretagskvitton.controllers.ReceiptAdapter;
 
+import corp.skaj.foretagskvitton.model.IData;
 import corp.skaj.foretagskvitton.model.User;
 
 public class ArchiveActivity extends AbstractActivity {
@@ -21,8 +22,11 @@ public class ArchiveActivity extends AbstractActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_archive);
 
+        IData dataHandler = (IData) getApplicationContext();
+        User user = dataHandler.readData(User.class.getName(), User.class);
+
         ArchiveController archiveController = new ArchiveController(this, ArchiveReceiptActivity.class);
-        User user = readUser();
+
 
         mAdapter = new ReceiptAdapter(user, archiveController);
 
