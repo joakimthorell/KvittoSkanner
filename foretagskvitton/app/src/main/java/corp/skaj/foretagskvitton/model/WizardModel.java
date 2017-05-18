@@ -121,4 +121,6 @@ public class WizardModel {
     public PageList getPages() {
         return pages;
     }
+
+
 }

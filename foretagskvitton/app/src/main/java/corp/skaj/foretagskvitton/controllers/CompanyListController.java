@@ -1,18 +1,27 @@
 package corp.skaj.foretagskvitton.controllers;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 
+import android.support.constraint.ConstraintLayout;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.vision.text.Line;
 
 import java.util.List;
 
+import corp.skaj.foretagskvitton.activities.CompanyActivity;
 import corp.skaj.foretagskvitton.model.Card;
 import corp.skaj.foretagskvitton.model.Comment;
 import corp.skaj.foretagskvitton.model.Company;
@@ -59,7 +68,7 @@ public class CompanyListController <T> {
 
                 //Här vill vi lägga till en ny anställd i listan av anställda
                 //Skapa en ny text view?
-                employeeTextViewListener(editText, user, company);
+                //employeeTextViewListener(editText, user, company);
 
             }
         });
@@ -88,13 +97,14 @@ public class CompanyListController <T> {
         employees.add(employee);
     }
 
-    public void createNewCardListener(ImageButton button, final User user, final String company) {
+    public void createNewCardListener(ImageButton button, final User user, final String company, final EditText editText) {
         button.setOnClickListener(new View.OnClickListener() {
-            //List<Card> cards = user.getCompany(company).getCards();
+            List<Card> cards = user.getCompany(company).getCards();
             @Override
             public void onClick(View v) {
+
                 //Här vill vi lägga till ett nytt kort i listan av kort
-                //cards.add(new Card(här vill vi ju ha inputen som man skriver in));
+                //cardTextViewListener(editText, user, company);
 
             }
         });
@@ -118,12 +128,13 @@ public class CompanyListController <T> {
         cards.add(card);
     }
 
-    public void createNewCommentListener(ImageButton button, final User user, final String company) {
+    public void createNewCommentListener(ImageButton button, final User user, final String company, final EditText editText) {
         button.setOnClickListener(new View.OnClickListener() {
             //List<Comment> comments = user.getCompany(company).getComments();
             @Override
             public void onClick(View v) {
                 //Här vill vi lägga till en ny kommentar i listan av kommentarer
+                commentTextViewListener(editText, user, company);
             }
         });
     }
@@ -144,19 +155,23 @@ public class CompanyListController <T> {
         comments.add(comment);
     }
 
-    public void deleteCompanyListener(final Button button, final User user, final String companyName) {
+    public void deleteCompanyListener(final Button button, final User user, final String companyName, final Context context) {
         final List<Company> companies = user.getCompanies();
+        final ConstraintLayout mainLayout = new ConstraintLayout(context);
+        final PopupWindow popUpWindow = new PopupWindow();
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (companies.size() == 1) {
-                    //TODO lägg in en toast "du kan inte radera ditt enda företag"
-                }
-                //TODO här ska vi ha en popup "är du säker på att du vill radera företaget"
-                Company company = user.getCompany(companyName);
-                companies.remove(company);
+                    Toast.makeText(context, "Du kan inte radera ditt enda företag",
+                            Toast.LENGTH_SHORT).show();
+                } else {
+                    //TODO här ska vi ha en popup "är du säker på att du vill radera företaget"
 
+                    Company company = user.getCompany(companyName);
+                    companies.remove(company);
+                }
             }
         });
 
@@ -192,6 +207,7 @@ public class CompanyListController <T> {
         }
         return companyNames;
     }
+
 }
 
     /*public void initButtonListener (Button button, final Activity activity) {

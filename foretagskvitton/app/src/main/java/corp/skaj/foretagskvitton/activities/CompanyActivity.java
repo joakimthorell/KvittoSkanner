@@ -71,15 +71,16 @@ public class CompanyActivity extends AbstractActivity {
         companyListController.createNewEmployeeListener(addEmployeeButton, user, companyName, this, editText);
 
         ImageButton addCardButton = (ImageButton) findViewById(R.id.addNewCard);
-        companyListController.createNewCardListener(addCardButton, user, companyName);
+        companyListController.createNewCardListener(addCardButton, user, companyName, editText);
 
         ImageButton addCommentButton = (ImageButton) findViewById(R.id.addNewComment);
-        companyListController.createNewCommentListener(addCommentButton, user, companyName);
+        companyListController.createNewCommentListener(addCommentButton, user, companyName, editText);
 
         //Delete button for deleting an entire company
         Button deleteButton = (Button) findViewById(R.id.radera);
-        companyListController.deleteCompanyListener(deleteButton, user, companyName);
+        companyListController.deleteCompanyListener(deleteButton, user, companyName, this);
 
 
     }
+
 }
