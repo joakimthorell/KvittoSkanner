@@ -30,6 +30,7 @@ public class ArchiveReceiptComments extends AppCompatActivity {
         ListView listView = (ListView) findViewById(R.id.listOfComments);
         listView.setAdapter(adapter);
     }
+
     private String[] getComments(){
         int length = mPur.getComments().size();
         String[] commentes = new String[length];
@@ -37,6 +38,5 @@ public class ArchiveReceiptComments extends AppCompatActivity {
             commentes[i] = mPur.getComments().get(i).getComment();
         }
         return commentes;
-
     }
 }

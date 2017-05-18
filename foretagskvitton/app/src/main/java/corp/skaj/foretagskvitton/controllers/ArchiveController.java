@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 
 public class ArchiveController<T> {
-    public static final String ITEM_ID = "RECEIPT_ID";
+    public static final String RECEIPT_ID = "RECEIPT_ID";
     private Context mContext;
     private Class<T> mNextActivityToStart;
 
@@ -15,7 +15,7 @@ public class ArchiveController<T> {
 
     public void onItemClicked(String itemId) {
         Intent intent = new Intent(mContext, mNextActivityToStart);
-        intent.putExtra(ITEM_ID, itemId);
+        intent.putExtra(RECEIPT_ID, itemId);
         mContext.startActivity(intent);
     }
 

@@ -15,7 +15,7 @@ public class ArchiveReceiptPicture extends AppCompatActivity {
         setContentView(R.layout.activity_archive_receipt_picture);
 
         Intent intent = getIntent();
-        String purId = intent.getStringExtra(ArchiveController.ITEM_ID);
+        //String purId = intent.getStringExtra(ArchiveController.ITEM_ID);
     }
 
 }

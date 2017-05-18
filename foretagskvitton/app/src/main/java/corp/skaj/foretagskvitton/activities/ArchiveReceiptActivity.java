@@ -1,19 +1,20 @@
 package corp.skaj.foretagskvitton.activities;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
-
 import java.text.SimpleDateFormat;
-
 import corp.skaj.foretagskvitton.R;
-import corp.skaj.foretagskvitton.controllers.ArchiveController;
+import corp.skaj.foretagskvitton.model.IData;
 import corp.skaj.foretagskvitton.model.Purchase;
+import corp.skaj.foretagskvitton.model.PurchaseList;
 import corp.skaj.foretagskvitton.model.User;
 
+import static corp.skaj.foretagskvitton.controllers.ArchiveController.RECEIPT_ID;
+
 public class ArchiveReceiptActivity<T> extends AbstractActivity {
-    private Purchase mPur = new Purchase(null, null);
+
+    Purchase mPur;
     private Class<T> mNextActivityToStart;
     public static final String COMMENT_ID = "COMMENT_ID";
     public static final String PICTURE_ID = "PICTURE_ID";
@@ -23,9 +24,11 @@ public class ArchiveReceiptActivity<T> extends AbstractActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_archive_receipt);
 
-        //Id is used for getting the correct purchase
-        Intent intent = getIntent();
-        String purId = intent.getStringExtra(ArchiveController.ITEM_ID);
+        IData handler = (IData) getApplicationContext();
+        PurchaseList list = handler.getPurchases();
+
+        String purchaseId= getIntent().getExtras().get(RECEIPT_ID).toString();
+        mPur = list.getPurchase(purchaseId);
 
         User user = readUser();
         TextView cost = (TextView) findViewById(R.id.cost);
@@ -36,17 +39,28 @@ public class ArchiveReceiptActivity<T> extends AbstractActivity {
         TextView payment_method = (TextView) findViewById(R.id.payment_method);
         TextView company = (TextView) findViewById(R.id.company);
 
-        cost.setText(String.valueOf(mPur.getReceipt().getTotal()));
+        cost.setText(String.valueOf(mPur.getReceipt().getTotal()) + "SEK");
         category.setText(mPur.getReceipt().getProducts().get(0).getName());
-        moms.setText(String.valueOf(mPur.getReceipt().getProducts().get(0).getTax()));
+        moms.setText(String.valueOf("Moms: " + mPur.getReceipt().getProducts().get(0).getTax()) +"%");
+        supplier.setText(checkSupplier());
+        payment_method.setText(purchaseType());
+        
+        // TODO - Find out what goes wrong with company fetch.
+        //company.setText(user.getCompany(mPur).getName());
 
         SimpleDateFormat dateRaw = new SimpleDateFormat("yyyy-MM-dd");
         String receiptDate = dateRaw.format(mPur.getReceipt().getDate().getTime());
-
         date.setText(receiptDate);
-        supplier.setText(mPur.getSupplier().getName());
-        payment_method.setText(purchaseType());
-        company.setText(user.getCompany(mPur).getName());
+
+    }
+
+    private String checkSupplier(){
+        try {
+            mPur.getSupplier().getName();
+        } catch(NullPointerException e) {
+            return "Supplier not specified";
+        }
+        return mPur.getSupplier().getName();
     }
 
     private String  purchaseType() {
@@ -57,14 +71,15 @@ public class ArchiveReceiptActivity<T> extends AbstractActivity {
     }
 
     public void onCommentClick (View view){
-        Intent intent = new Intent(this, mNextActivityToStart);
-        //intent.putExtra(COMMENT_ID, itemId);
+        Intent intent = new Intent(this, ArchiveReceiptComments.class);
+        intent.putExtra(COMMENT_ID, mPur.getId());
         startActivity(intent);
     }
 
     public void onReceiptClick(View view){
-        Intent intent = new Intent(this, mNextActivityToStart);
-        //intent.putExtra(PICTURE_ID, itemId);
+        Intent intent = new Intent(this, ArchiveReceiptPicture.class);
+        intent.putExtra(PICTURE_ID, mPur.getId());
         startActivity(intent);
     }
 }
+
