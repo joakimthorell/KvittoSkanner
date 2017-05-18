@@ -8,7 +8,7 @@ public class Purchase {
 
     public enum PurchaseType {
         PRIVATE,
-        COMPANY;
+        COMPANY
     }
 
     private Receipt receipt;

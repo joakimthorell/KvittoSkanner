@@ -31,13 +31,11 @@ public class User {
     }
 
     public void setName(String name) {
-        this.name = name;
         for (Company company : companies) {
-            Employee employee = company.getEmployee(name);
-            if (employee != null) {
-                employee.setName(name);
-            }
+            Employee employee = company.getEmployee(this.name);
+            employee.setName(name);
         }
+        this.name = name;
     }
 
     public Company getCompany(Company company) {
