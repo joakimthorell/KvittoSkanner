@@ -78,30 +78,19 @@ public class TextCollectorTest {
         assertEquals(testdate, TextCollector.getDate(list));
     }
 
-    /*
-    @Test
-    public void testFindingDouble () {
-        double test = receiptScanner.getTotalCost(listOfDoubles);
-        assertEquals("299.0", test);
-    }
-    */
-
     @Test
     public void testIfNoDateFound() {
         String date = TextCollector.getDate(listWithoutDate);
 
         assertEquals(null, date);
     }
-
+/*
     @Test
     public void testCardNum (){
-        List<String> list = new ArrayList<>(Arrays.asList("cxx134,-45","M R STER ","", "019677" + "9", "Bjl", " THAITAKEA\"3310y040,00mPer50nligk1234"
-        ));
-        List<String> test = new ArrayList<>(Arrays.asList("xx*¤#'\""));
-        //System.out.println(TextCollector.anticipateAterix(TextCollector.listToString(test)));
-        System.out.println(list);
+        List<String> list = new ArrayList<>(Arrays.asList("3310"));
         String expected = "3310";
         String result = TextCollector.getCard(list);
         assertEquals(expected, result);
     }
+    */
 }

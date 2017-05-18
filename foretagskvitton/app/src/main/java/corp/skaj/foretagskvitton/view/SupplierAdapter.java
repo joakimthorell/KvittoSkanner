@@ -15,12 +15,7 @@ import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.model.IData;
 import corp.skaj.foretagskvitton.model.Purchase;
 import corp.skaj.foretagskvitton.model.PurchaseList;
-import corp.skaj.foretagskvitton.model.Supplier;
 import corp.skaj.foretagskvitton.model.User;
-
-/**
- * Created by kevinbrunstrom on 2017-05-18.
- */
 
 public class SupplierAdapter extends UltimateViewAdapter<SupplierAdapter.SimpleAdapterViewHolder> {
     private PurchaseList mPurchases;
@@ -54,7 +49,7 @@ public class SupplierAdapter extends UltimateViewAdapter<SupplierAdapter.SimpleA
 
     @Override
     public long generateHeaderId(int position) {
-        // If something wrong try -1 here!
+        // If something wrong here try returning -1 here!
         return 0;
     }
 
@@ -67,7 +62,6 @@ public class SupplierAdapter extends UltimateViewAdapter<SupplierAdapter.SimpleA
     public void onBindHeaderViewHolder(RecyclerView.ViewHolder holder, int position) {
 
     }
-
 
     public class SimpleAdapterViewHolder extends UltimateRecyclerviewViewHolder {
 

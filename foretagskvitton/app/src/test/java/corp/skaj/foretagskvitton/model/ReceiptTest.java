@@ -12,7 +12,7 @@ public class ReceiptTest {
 
     @Before
     public void setup() {
-        Product product = new Product("Appelsin Juice", 15.90, 25);
+        Product product = new Product("Appelsin Juice",Category.BENSIN, 15.90, 25);
         Calendar c = Calendar.getInstance();
         c.set(2017, 04, 10);
         double totalPrice = 15.90;
@@ -42,19 +42,12 @@ public class ReceiptTest {
 
     @Test
     public void testRemoveProduct() {
-        Product product = new Product("Banan paj", 25.00, 12);
+        Product product = new Product("Banan paj",Category.BENSIN, 25.00, 12);
         receipt.addProduct(product);
         receipt.setTotal(receipt.getTotal() + product.getPrice());
 
         receipt.removeProduct(receipt.getProducts().get(0));
 
         Assert.assertEquals(1, receipt.getProducts().size());
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testRemoveProductException() {
-        Product product = new Product("Banan", 15, 12);
-
-        receipt.removeProduct(product);
     }
 }

@@ -44,9 +44,9 @@ public class CompanyTest {
 
     @Test
     public void testRemoveEmployeeWithString () {
-        addNewEmployee();
+        Employee gunnar = new Employee("Gunnar");
         try {
-            company.removeEmployee("testEmployee"); {
+            company.removeEmployee(gunnar); {
 
             }
         } catch (IllegalArgumentException iae) {
@@ -64,32 +64,12 @@ public class CompanyTest {
         }
         assertTrue(true);
     }
+
     @Test
     public void testRemoveCard () {
         addNewCard();
         try {
             company.removeCard(card);
-        } catch (IllegalArgumentException iae) {
-            assertTrue(false);
-        }
-        assertTrue(true);
-    }
-
-    @Test
-    public void testAddASupplier () {
-        try {
-            company.addSupplier(new Supplier("testSupplier"));
-        } catch (IllegalArgumentException iae) {
-            assertTrue(false);
-        }
-        assertTrue(true);
-    }
-
-    @Test
-    public void testRemoveSupplier () {
-        addNewSupplier();
-        try {
-            company.removeSupplier(supplier);
         } catch (IllegalArgumentException iae) {
             assertTrue(false);
         }
@@ -111,12 +91,4 @@ public class CompanyTest {
             iae.getCause();
         }
     }
-    public void addNewSupplier () {
-        try {
-            company.addSupplier(new Supplier("testSupplier"));
-        } catch (IllegalArgumentException iae) {
-            iae.getCause();
-        }
-    }
-
 }
