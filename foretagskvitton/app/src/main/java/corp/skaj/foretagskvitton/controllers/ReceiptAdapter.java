@@ -60,9 +60,9 @@ public class ReceiptAdapter extends RecyclerView.Adapter<ReceiptAdapter.MyViewHo
 
         public MyViewHolder(View view) {
             super(view);
-            title = (TextView) view.findViewById(R.id.title);
-            genre = (TextView) view.findViewById(R.id.genre);
-            year = (TextView) view.findViewById(R.id.year);
+            title = (TextView) view.findViewById(R.id.ArchiveTitle);
+            genre = (TextView) view.findViewById(R.id.ArchiveCategory);
+            year = (TextView) view.findViewById(R.id.ArchiveCreationDate);
 
             view.setOnClickListener(this);
         }

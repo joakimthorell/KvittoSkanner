@@ -17,7 +17,6 @@ import corp.skaj.foretagskvitton.model.Company;
 import corp.skaj.foretagskvitton.model.Supplier;
 import corp.skaj.foretagskvitton.model.User;
 import corp.skaj.foretagskvitton.view.ArchiveAdapter;
-import corp.skaj.foretagskvitton.view.CompanyAdapter;
 import corp.skaj.foretagskvitton.view.IAdapterController;
 import corp.skaj.foretagskvitton.view.ListFragment;
 import corp.skaj.foretagskvitton.view.SupplierAdapter;
@@ -63,13 +62,14 @@ public class MainActivity extends AbstractActivity implements IMain {
 
     private void companyList () {
         List<Company> companies = getDataHandler().readData(User.class.getName(), User.class).getCompanies();
-        ListFragment lf = ListFragment.create(new CompanyAdapter(companies, mAdapterController));
+        //ListFragment lf = ListFragment.create(new CompanyAdapter(companies, mAdapterController));
         FragmentManager fm = getSupportFragmentManager();
-        fm.beginTransaction().replace(R.id.fragment_container, lf).commit();
+        //fm.beginTransaction().replace(R.id.fragment_container, lf).commit();
     }
 
     private void archiveList () {
-        ListFragment lf = ListFragment.create(new ArchiveAdapter(getDataHandler(), mAdapterController));
+        ArchiveAdapter aa = new ArchiveAdapter(R.layout.archive_list_item, getDataHandler().getPurchases(), getDataHandler());
+        ListFragment lf = ListFragment.create(aa);
         FragmentManager fm = getSupportFragmentManager();
         fm.beginTransaction().replace(R.id.fragment_container, lf).commit();
     }

@@ -19,15 +19,6 @@ public class UserActivity extends AbstractActivity {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_user);
             initBottomBar(USER_ID, this);
-            IData dataHandler = (IData) getApplicationContext();
-
-            ListFragment fragment = ListFragment.create(new SupplierAdapter(dataHandler));
-
-            FragmentManager fm = getSupportFragmentManager();
-            // Replaces the old layout with the new layout.
-            fm.beginTransaction().replace(R.id.fragment_container, fragment).commit();
-
-
     }
 
     public void resetData(View view) {
