@@ -9,4 +9,6 @@ public interface IMain {
     void buildCompanyFragment();
 
     void buildSupplierFragment();
+
+    void buildCompanyInfoFragment();
 }

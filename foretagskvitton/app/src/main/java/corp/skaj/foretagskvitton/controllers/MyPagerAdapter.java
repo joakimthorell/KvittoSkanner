@@ -8,21 +8,19 @@ import android.view.ViewGroup;
 import com.tech.freak.wizardpager.model.Page;
 import com.tech.freak.wizardpager.ui.ReviewFragment;
 
-import corp.skaj.foretagskvitton.model.DatePage;
-import corp.skaj.foretagskvitton.model.TotalSumPage;
 import corp.skaj.foretagskvitton.view.DateFragment;
+import corp.skaj.foretagskvitton.view.DatePage;
 import corp.skaj.foretagskvitton.view.TotalSumFragment;
+import corp.skaj.foretagskvitton.view.TotalSumPage;
 
 public class MyPagerAdapter extends FragmentStatePagerAdapter {
     private WizardController wizardController;
     private Fragment mPrimaryItem;
     private int mCutOffPage;
-    private PageWrapper pageWrapper;
 
     public MyPagerAdapter(FragmentManager fm, WizardController wizardController) {
         super(fm);
         this.wizardController = wizardController;
-        pageWrapper = new PageWrapper();
     }
 
     @Override
@@ -30,9 +28,8 @@ public class MyPagerAdapter extends FragmentStatePagerAdapter {
         if (i >= wizardController.getCurrentPageSequence().size()) {
             return new ReviewFragment();
         }
-        //TODO if possible, make pretty
-        Page page = wizardController.getCurrentPageSequence().get(i);
-        return pageWrapper.createFragment(page);
+
+        return wizardController.getCurrentPageSequence().get(i).createFragment();
     }
 
     @Override
@@ -64,21 +61,6 @@ public class MyPagerAdapter extends FragmentStatePagerAdapter {
 
     public int getCutOffPage() {
         return mCutOffPage;
-    }
-
-    /**
-     *  This class is needed because the WizardPager is bad.
-     *  In order to follow a MVC pattern we need this to decide what fragment to build here.
-     */
-    private class PageWrapper {
-        private Fragment createFragment(Page page) {
-            if (page instanceof TotalSumPage) {
-                return TotalSumFragment.create(page.getKey());
-            } else if (page instanceof DatePage) {
-                return DateFragment.create(page.getKey());
-            }
-            return page.createFragment();
-        }
     }
 
 }

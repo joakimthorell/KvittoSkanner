@@ -6,16 +6,21 @@ import android.support.v4.app.FragmentManager;
 
 import com.roughike.bottombar.BottomBar;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.controllers.IMain;
 import corp.skaj.foretagskvitton.controllers.MainController;
+import corp.skaj.foretagskvitton.model.Card;
 import corp.skaj.foretagskvitton.model.Company;
+import corp.skaj.foretagskvitton.model.Employee;
+import corp.skaj.foretagskvitton.model.MultipleItem;
 import corp.skaj.foretagskvitton.model.Supplier;
 import corp.skaj.foretagskvitton.model.User;
 import corp.skaj.foretagskvitton.view.ArchiveAdapter;
 import corp.skaj.foretagskvitton.view.CompanyAdapter;
+import corp.skaj.foretagskvitton.view.CompanyMutlipleItemAdapter;
 import corp.skaj.foretagskvitton.view.ListFragment;
 import corp.skaj.foretagskvitton.view.SupplierAdapter;
 
@@ -75,4 +80,44 @@ public class MainActivity extends AbstractActivity implements IMain {
         intent.putExtra(key, data);
         startActivity(intent);
     }
+
+    @Override
+    public void buildCompanyInfoFragment() {
+
+
+        /* ------ DEMO ------- */
+
+        List<Employee> employees = new ArrayList<>();
+        employees.add(new Employee("Sanjin :)"));
+        employees.add(new Employee("Jocke :)"));
+
+        List<Card> cards = new ArrayList<>();
+        cards.add(new Card(1234));
+        cards.add(new Card(7890));
+
+        List<MultipleItem> list = new ArrayList<>();
+        MultipleItem m = new MultipleItem(MultipleItem.EMPLOYEE, "Sanjin");
+        MultipleItem m1 = new MultipleItem(MultipleItem.EMPLOYEE, "Joakim");
+        MultipleItem m2 = new MultipleItem(MultipleItem.CARD, String.valueOf(1234));
+        MultipleItem m3 = new MultipleItem(MultipleItem.CARD, String.valueOf(5630));
+        MultipleItem m4 = new MultipleItem(MultipleItem.COMMENT, "Hej jag är ganska duktig");
+        MultipleItem m5 = new MultipleItem(MultipleItem.COMMENT, "Detta kanske fungerar");
+
+        list.add(m);
+        list.add(m1);
+        list.add(m2);
+        list.add(m3);
+        list.add(m4);
+        list.add(m5);
+
+        CompanyMutlipleItemAdapter cia = new CompanyMutlipleItemAdapter(list);
+
+        ListFragment lf = ListFragment.create(cia);
+        mFragmentManger.beginTransaction().replace(R.id.fragment_container, lf).commit();
+    }
+
+
+
+
+
 }

@@ -1,4 +1,4 @@
-package corp.skaj.foretagskvitton.model;
+package corp.skaj.foretagskvitton.view;
 
 public class WizardConstants {
 

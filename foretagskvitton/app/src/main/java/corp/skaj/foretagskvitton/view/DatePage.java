@@ -1,5 +1,6 @@
 package corp.skaj.foretagskvitton.view;
 
+import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 
 import com.tech.freak.wizardpager.model.ModelCallbacks;
@@ -68,6 +69,10 @@ public class DatePage extends TextPage {
         mData.putInt(DATE_DAY_KEY, day);
 
         return this;
+    }
+
+    public Fragment createFragment() {
+        return DateFragment.create(getKey());
     }
 
     public boolean isDateFound() {

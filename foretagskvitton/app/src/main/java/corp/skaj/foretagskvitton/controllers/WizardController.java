@@ -1,13 +1,11 @@
 package corp.skaj.foretagskvitton.controllers;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.tech.freak.wizardpager.model.AbstractWizardModel;
 import com.tech.freak.wizardpager.model.Page;
@@ -20,18 +18,16 @@ import java.util.Date;
 import java.util.List;
 
 import corp.skaj.foretagskvitton.R;
-import corp.skaj.foretagskvitton.activities.AddReceiptActivity;
 import corp.skaj.foretagskvitton.model.Category;
 import corp.skaj.foretagskvitton.model.Comment;
 import corp.skaj.foretagskvitton.model.Company;
 import corp.skaj.foretagskvitton.model.Employee;
 import corp.skaj.foretagskvitton.model.IData;
-import corp.skaj.foretagskvitton.model.IObserver;
 import corp.skaj.foretagskvitton.model.Product;
 import corp.skaj.foretagskvitton.model.Purchase;
 import corp.skaj.foretagskvitton.model.Receipt;
 import corp.skaj.foretagskvitton.model.User;
-import corp.skaj.foretagskvitton.model.WizardConstants;
+import corp.skaj.foretagskvitton.view.WizardConstants;
 import corp.skaj.foretagskvitton.view.WizardView;
 import corp.skaj.foretagskvitton.view.ConfirmWizardFragment;
 

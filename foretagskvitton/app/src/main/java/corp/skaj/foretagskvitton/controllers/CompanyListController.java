@@ -60,7 +60,8 @@ public class CompanyListController {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //employeeTextViewListener(editText, user, company);
+
+
             }
         });
 
@@ -93,7 +94,8 @@ public class CompanyListController {
             List<Card> cards = user.getCompany(company).getCards();
             @Override
             public void onClick(View v) {
-                //cardTextViewListener(editText, user, company);
+
+
             }
         });
 
@@ -121,8 +123,8 @@ public class CompanyListController {
             //List<Comment> comments = user.getCompany(company).getComments();
             @Override
             public void onClick(View v) {
-                //Här vill vi lägga till en ny kommentar i listan av kommentarer
-                commentTextViewListener(editText, user, company);
+
+
             }
         });
     }

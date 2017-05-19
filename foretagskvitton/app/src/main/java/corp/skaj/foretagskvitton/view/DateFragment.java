@@ -23,7 +23,6 @@ import com.tech.freak.wizardpager.ui.PageFragmentCallbacks;
 import java.util.Calendar;
 
 import corp.skaj.foretagskvitton.R;
-import corp.skaj.foretagskvitton.model.DatePage;
 
 public class DateFragment extends Fragment {
     private static final String ARG_KEY = "DATE_FRAGMENT_KEY";

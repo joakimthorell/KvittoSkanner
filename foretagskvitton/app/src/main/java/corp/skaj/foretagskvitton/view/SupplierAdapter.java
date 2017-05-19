@@ -16,7 +16,7 @@ public class SupplierAdapter extends BaseQuickAdapter<Supplier, BaseViewHolder> 
 
     @Override
     protected void convert(BaseViewHolder helper, Supplier supplier) {
-        helper.setText(R.id.supplierTitle, supplier.getName());
+        helper.setText(R.id.supplierTitle, "ETT NAMN");
         helper.setText(R.id.supplierYear, "2017-04-20");
     }
 }

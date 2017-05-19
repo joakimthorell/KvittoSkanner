@@ -33,7 +33,6 @@ import corp.skaj.foretagskvitton.model.Company;
 import corp.skaj.foretagskvitton.model.IObserver;
 import corp.skaj.foretagskvitton.model.TextCollector;
 import corp.skaj.foretagskvitton.model.User;
-import corp.skaj.foretagskvitton.model.WizardConstants;
 
 public class WizardModel {
     private List<IObserver> observers;
