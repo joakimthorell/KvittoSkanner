@@ -84,7 +84,7 @@ public class TextCollectorTest {
 
         assertEquals(null, date);
     }
-/*
+
     @Test
     public void testCardNum (){
         List<String> list = new ArrayList<>(Arrays.asList("3310"));
@@ -92,5 +92,5 @@ public class TextCollectorTest {
         String result = TextCollector.getCard(list);
         assertEquals(expected, result);
     }
-    */
+
 }

@@ -164,10 +164,10 @@ public class TextCollector {
     }
 
     private static String evaluateResult(String s, String result, int index) {
-        if (result.equals("null")) {
+        if (result == null) {
             return detachCard(replaceLetters(s.substring(index, s.length())));
         }
-        return null;
+        return result;
     }
 
     private static int getCardIndex(String s) {
@@ -199,14 +199,15 @@ public class TextCollector {
         for (int i = 0; i < s.length(); i++) {
             count = isDigit(String.valueOf(s.charAt(i))) ? count + 1 : 0;
             if (isFourDigits(s, count, i)) {
+                System.out.println(s.substring(i - 3, i + 1));
                 return s.substring(i - 3, i + 1);
             }
         }
-        return "null";
+        return null;
     }
 
     private static boolean isFourDigits(String s, int count, int i) {
-        return count == 4 && isDetached(s, i, -4, 1);
+        return count == 4 && isDetached(s, i, -4, 2);
     }
 
     private static boolean isDetached(String s, int i, int before, int after) {
