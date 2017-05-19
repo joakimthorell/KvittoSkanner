@@ -2,11 +2,7 @@ package corp.skaj.foretagskvitton.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.IdRes;
 import android.support.v4.app.FragmentManager;
-
-import com.roughike.bottombar.BottomBar;
-import com.roughike.bottombar.OnTabSelectListener;
 
 import java.util.List;
 
@@ -31,50 +27,26 @@ public class MainActivity extends AbstractActivity implements IMain {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getDataHandler().initDefaultUser();
-        initBottomBar();
-        mAdapterController = new MainController(this);
-        archiveList();
+        MainController mc = new MainController(this, this, getDataHandler());
+        mc.initBottomBar();
+        buildArchiveFragment();
     }
 
-    private void initBottomBar () {
-        final BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
-        bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
-            @Override
-            public void onTabSelected(@IdRes int tabId) {
-                if (bottomBar.getCurrentTabId() != tabId) {
-                    switch (tabId) {
-                        case R.id.action_business:
-                            companyList();
-                            return;
-                        case R.id.action_archive:
-                            archiveList();
-                            return;
-                        case R.id.action_user:
-                            //TODO
-                            return;
-                        default:
-                            return;
-                    }
-                }
-            }
-        });
-    }
-
-    private void companyList () {
+    public void buildCompanyFragment () {
         List<Company> companies = getDataHandler().readData(User.class.getName(), User.class).getCompanies();
         //ListFragment lf = ListFragment.create(new CompanyAdapter(companies, mAdapterController));
         FragmentManager fm = getSupportFragmentManager();
         //fm.beginTransaction().replace(R.id.fragment_container, lf).commit();
     }
 
-    private void archiveList () {
+    public void buildArchiveFragment () {
         ArchiveAdapter aa = new ArchiveAdapter(R.layout.archive_list_item, getDataHandler().getPurchases(), getDataHandler());
         ListFragment lf = ListFragment.create(aa);
         FragmentManager fm = getSupportFragmentManager();
         fm.beginTransaction().replace(R.id.fragment_container, lf).commit();
     }
 
-    private void supplierList () {
+    public void buildSupplierFragment () {
         List<Supplier> suppliers = getDataHandler().readData(User.class.getName(), User.class).getSuppliers();
         SupplierAdapter sa = new SupplierAdapter(R.layout.supplier_list_item, suppliers);
         ListFragment lf = ListFragment.create(sa);

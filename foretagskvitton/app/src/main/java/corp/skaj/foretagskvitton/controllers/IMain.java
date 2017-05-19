@@ -7,4 +7,10 @@ public interface IMain {
     void goToPurchase(String s);
 
     void goToSupplier(String s);
+
+    void buildArchiveFragment();
+
+    void buildCompanyFragment();
+
+    void buildSupplierFragment();
 }
