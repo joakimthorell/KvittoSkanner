@@ -20,7 +20,16 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        android:layout_marginTop="-14dp">
+        android:layout_marginTop="1dp">
+
+        <Button
+            android:id="@+id/radera"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="Radera" />
 
         <TextView
             android:id="@+id/toolbar_title"
@@ -29,12 +38,6 @@
             android:layout_gravity="center"
             android:textColor="@color/white"
             android:textSize="20sp" />
-
-        <Button
-            android:id="@+id/radera"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Radera" />
 
     </android.support.v7.widget.Toolbar>
 
@@ -50,16 +53,20 @@
 
 
     <EditText
-        android:id="@+id/editText"
-        android:layout_width="366dp"
-        android:layout_height="43dp"
+        android:id="@+id/employeEditText"
+        android:layout_width="361dp"
+        android:layout_height="68dp"
         android:layout_marginLeft="13dp"
         android:layout_marginStart="13dp"
+        android:layout_marginTop="0dp"
+        android:inputType="textMultiLine"
+        android:lines="8"
         android:ems="10"
         android:focusable="false"
+        android:textSize="18dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/employees"
-        tools:layout_editor_absoluteY="100dp" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/employees" />
 
     <TextView
         android:id="@+id/employees"
@@ -73,7 +80,7 @@
         android:textStyle="bold"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/company_action_bar"
-        android:layout_marginTop="0dp" />
+        android:layout_marginTop="20dp" />
 
     <TextView
         android:id="@+id/cards"
@@ -88,14 +95,19 @@
         app:layout_constraintTop_toBottomOf="@+id/addNewEmployee" />
 
     <EditText
-        android:id="@+id/editText2"
-        android:layout_width="363dp"
-        android:layout_height="43dp"
+        android:id="@+id/cardEditText"
+        android:layout_width="361dp"
+        android:layout_height="68dp"
         android:layout_marginLeft="11dp"
         android:layout_marginStart="11dp"
+        android:layout_marginTop="0dp"
         android:ems="10"
         android:focusable="false"
+        android:lines="4"
+        android:textSize="18dp"
+        app:layout_constraintHorizontal_bias="0.545"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cards" />
 
     <TextView
@@ -111,35 +123,40 @@
         app:layout_constraintTop_toBottomOf="@+id/addNewCard" />
 
     <EditText
-        android:id="@+id/editText3"
-        android:layout_width="363dp"
-        android:layout_height="46dp"
-        android:layout_marginLeft="11dp"
+        android:id="@+id/commentEditText"
+        android:layout_width="371dp"
+        android:layout_height="67dp"
         android:layout_marginStart="11dp"
+        android:layout_marginTop="8dp"
         android:ems="10"
         android:focusable="false"
+        android:lines="4"
+        android:textSize="18dp"
+        app:layout_constraintHorizontal_bias="0.913"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/comments" />
+        app:layout_constraintTop_toBottomOf="@+id/comments"
+        tools:layout_editor_absoluteX="11dp" />
 
     <ImageButton
         android:id="@+id/addNewEmployee"
-        android:layout_width="35dp"
-        android:layout_height="38dp"
+        android:layout_width="32dp"
+        android:layout_height="35dp"
         android:layout_marginLeft="13dp"
         android:layout_marginStart="13dp"
+        android:background="@drawable/plus"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:srcCompat="@android:drawable/ic_input_add"
-        app:layout_constraintTop_toBottomOf="@id/editText" />
+        app:layout_constraintTop_toBottomOf="@id/employeEditText" />
 
     <ImageButton
         android:id="@+id/addNewCard"
         android:layout_width="32dp"
         android:layout_height="35dp"
-        android:layout_marginLeft="13dp"
+        android:layout_marginLeft="0dp"
         android:layout_marginStart="13dp"
+        android:layout_marginTop="0dp"
+        android:background="@drawable/plus"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:srcCompat="@android:drawable/ic_input_add"
-        app:layout_constraintTop_toBottomOf="@id/editText2" />
+        app:layout_constraintTop_toBottomOf="@id/cardEditText" />
 
     <ImageButton
         android:id="@+id/addNewComment"
@@ -147,9 +164,9 @@
         android:layout_height="36dp"
         android:layout_marginLeft="13dp"
         android:layout_marginStart="13dp"
+        android:background="@drawable/plus"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:srcCompat="@android:drawable/ic_input_add"
-        app:layout_constraintTop_toBottomOf="@id/editText3" />
+        app:layout_constraintTop_toBottomOf="@id/commentEditText" />
 
 
 </android.support.constraint.ConstraintLayout>

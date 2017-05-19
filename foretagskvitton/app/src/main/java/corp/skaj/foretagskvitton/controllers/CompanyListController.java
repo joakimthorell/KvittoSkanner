@@ -60,11 +60,7 @@ public class CompanyListController {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                //Här vill vi lägga till en ny anställd i listan av anställda
-                //Skapa en ny text view?
                 //employeeTextViewListener(editText, user, company);
-
             }
         });
 
@@ -97,10 +93,7 @@ public class CompanyListController {
             List<Card> cards = user.getCompany(company).getCards();
             @Override
             public void onClick(View v) {
-
-                //Här vill vi lägga till ett nytt kort i listan av kort
                 //cardTextViewListener(editText, user, company);
-
             }
         });
 
@@ -172,9 +165,6 @@ public class CompanyListController {
 
     }
 
-    private void createNewTextView() {
-        //TODO lägga till en ny textview under redan existerande
-    }
 
     public void toggle (Button button, List<TextView> tv) {
         if(button.getText() == "Editera") {
@@ -202,6 +192,7 @@ public class CompanyListController {
         }
         return companyNames;
     }
+
 
 }
 
