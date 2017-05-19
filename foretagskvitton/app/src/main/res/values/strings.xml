@@ -18,8 +18,11 @@
     <string name="wizard_complete">Slutför</string>
     <string name="action_settings">Settings</string>
     <string name="date_hint">Datum</string>
+    <string name="cab_share_title">Dela</string>
+    <string name="cab_remove_title">Remove</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="archive_menu_sort">Sortera</string>
+    <string name="archive_menu_filter">Filtrera</string>
     <string name="noContentText">\Det finns inget innehåll att visa, \n lägg till innehåll via plussymbolen.</string>
 </resources>

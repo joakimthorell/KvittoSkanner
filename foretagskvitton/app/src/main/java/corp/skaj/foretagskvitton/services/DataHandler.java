@@ -68,4 +68,16 @@ public class DataHandler extends Application implements IData {
         }
         return purchases;
     }
+
+    @Override
+    public PurchaseList getPurchases(User user) {
+        PurchaseList purchases = new PurchaseList(user);
+        for (Company c : user.getCompanies()) {
+            for (Employee e : c.getEmployees()) {
+                purchases.addAll(e.getPurchases());
+            }
+        }
+        return purchases;
+    }
+
 }

@@ -10,4 +10,6 @@ public interface IData {
     void initDefaultUser();
 
     PurchaseList getPurchases();
+
+    PurchaseList getPurchases(User user);
 }
