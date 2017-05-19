@@ -1,6 +1,5 @@
 package corp.skaj.foretagskvitton.controllers;
 
-import android.app.Activity;
 import android.content.Context;
 import android.support.annotation.IdRes;
 import android.view.View;
@@ -10,7 +9,6 @@ import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
 
 import corp.skaj.foretagskvitton.R;
-import corp.skaj.foretagskvitton.model.IData;
 import corp.skaj.foretagskvitton.view.ArchiveAdapter;
 import corp.skaj.foretagskvitton.view.CompanyAdapter;
 import corp.skaj.foretagskvitton.view.SupplierAdapter;
