@@ -75,7 +75,7 @@ public class MainActivity extends AbstractActivity implements IMain {
     }
 
     private void archiveList () {
-        ListFragment listFragment = ListFragment.create(new ArchiveAdapter(getDataHandler(), mAdapterController));
+        ListFragment listFragment = ListFragment.create(new ArchiveAdapter(R.layout.archive_list_item, getDataHandler().getPurchases(), getDataHandler().readData(User.class.getName(), User.class)));
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.fragment_container, listFragment).commit();
 

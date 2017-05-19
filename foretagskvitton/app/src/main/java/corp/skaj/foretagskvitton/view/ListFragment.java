@@ -22,20 +22,20 @@ import corp.skaj.foretagskvitton.R;
 public class ListFragment extends Fragment {
 
 
-    private UltimateRecyclerView mRecyclerView;
-    private UltimateViewAdapter mAdapter;
+    private RecyclerView mRecyclerView;
+    private RecyclerView.Adapter mAdapter;
 
     public ListFragment() {
         // Required empty public constructor
     }
 
-    public static ListFragment create (UltimateViewAdapter ultimateViewAdapter) {
+    public static ListFragment create (RecyclerView.Adapter viewAdapter) {
         ListFragment fragment = new ListFragment();
-        fragment.setAdapter(ultimateViewAdapter);
+        fragment.setAdapter(viewAdapter);
         return fragment;
     }
 
-    private void setAdapter (UltimateViewAdapter adapter) {
+    private void setAdapter (RecyclerView.Adapter adapter) {
         this.mAdapter = adapter;
     }
 
@@ -50,7 +50,7 @@ public class ListFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         if (savedInstanceState == null) {
 
-            mRecyclerView = (UltimateRecyclerView) view.findViewById(R.id.ultimate_recycler_view);
+            mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
             LinearLayoutManager manager = new LinearLayoutManager(view.getContext());
             mRecyclerView.setLayoutManager(manager);
             mRecyclerView.setHasFixedSize(true);
