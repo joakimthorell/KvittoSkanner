@@ -1,16 +1,11 @@
 package corp.skaj.foretagskvitton.activities;
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.widget.Toast;
 
 import corp.skaj.foretagskvitton.R;
-import corp.skaj.foretagskvitton.model.IData;
 import corp.skaj.foretagskvitton.services.DataHandler;
-import corp.skaj.foretagskvitton.view.ArchiveAdapter;
-import corp.skaj.foretagskvitton.view.ListFragment;
-import corp.skaj.foretagskvitton.view.SupplierAdapter;
 
 public class UserActivity extends AbstractActivity {
 

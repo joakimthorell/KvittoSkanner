@@ -1,10 +1,13 @@
 package corp.skaj.foretagskvitton.controllers;
 
-import com.marshalchen.ultimaterecyclerview.UltimateRecyclerviewViewHolder;
+import android.view.View;
 
-import corp.skaj.foretagskvitton.view.IAdapterController;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 
-public class MainController<T> implements IAdapterController<T> {
+import corp.skaj.foretagskvitton.view.ArchiveAdapter;
+import corp.skaj.foretagskvitton.view.SupplierAdapter;
+
+public class MainController {
 
     private IMain mListener;
 
@@ -12,32 +15,33 @@ public class MainController<T> implements IAdapterController<T> {
         mListener = listener;
     }
 
-    @Override
-    public void setListener(UltimateRecyclerviewViewHolder<T> view, final String data, final String key) {
-
-
+    public void setArchiveAdapterListener(final ArchiveAdapter sAdapter, final Class<?> nextActivity, final String key) {
+        sAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                String data = sAdapter.getData().get(position).getId();
+                mListener.goToActivity(nextActivity, key, data);
+            }
+        });
     }
 
-    /*
-    new View.OnClickListener() {
+    public void setCompanyAdapterListener(final CompanyAdapter sAdapter, final Class<?> nextActivity, final String key) {
+        sAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
-            public void onClick(View v) {
-                switch (key) {
-                    case CompanyAdapter.COMPANY_KEY:
-                        mListener.goToCompany(data);
-                        return;
-                    case ArchiveAdapter.ARCHIVE_KEY:
-                        mListener.goToPurchase(data);
-                        return;
-                    case "Supplier":
-                        // TODO FIX KEY ETC
-                    default:
-                        return;
-                }
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                String data = sAdapter.getData().get(position).getName();
+                mListener.goToActivity(nextActivity, key, data);
             }
-        }
-     */
+        });
+    }
 
-
-
+    public void setCompanyAdapterListener(final SupplierAdapter sAdapter, final Class<?> nextActivity, final String key) {
+        sAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                String data = sAdapter.getData().get(position).getName();
+                mListener.goToActivity(nextActivity, key, data);
+            }
+        });
+    }
 }

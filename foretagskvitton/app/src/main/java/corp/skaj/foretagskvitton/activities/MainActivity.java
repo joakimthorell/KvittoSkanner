@@ -17,14 +17,13 @@ import corp.skaj.foretagskvitton.model.Company;
 import corp.skaj.foretagskvitton.model.Supplier;
 import corp.skaj.foretagskvitton.model.User;
 import corp.skaj.foretagskvitton.view.ArchiveAdapter;
-import corp.skaj.foretagskvitton.view.IAdapterController;
 import corp.skaj.foretagskvitton.view.ListFragment;
 import corp.skaj.foretagskvitton.view.SupplierAdapter;
 
 public class MainActivity extends AbstractActivity implements IMain {
     public static final String COMPANY_KEY = "key_for_company_ofc";
     public static final String ARCHIVE_KEY = "key_for_archive_ofc";
-    private IAdapterController mAdapterController;
+    private MainController mController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,20 +82,9 @@ public class MainActivity extends AbstractActivity implements IMain {
     }
 
     @Override
-    public void goToCompany(String s) {
-        Intent intent = new Intent(this, CompanyActivity.class);
-        intent.putExtra(COMPANY_KEY, s);
+    public void goToActivity(Class<?> c, String key, String data) {
+        Intent intent = new Intent(this, c);
+        intent.putExtra(key, data);
         startActivity(intent);
-    }
-
-    @Override
-    public void goToPurchase(String s) {
-        Intent intent = new Intent(this, ArchiveReceiptActivity.class);
-        intent.putExtra(ARCHIVE_KEY, s);
-        startActivity(intent);
-    }
-
-    @Override
-    public void goToSupplier(String s) {
     }
 }
