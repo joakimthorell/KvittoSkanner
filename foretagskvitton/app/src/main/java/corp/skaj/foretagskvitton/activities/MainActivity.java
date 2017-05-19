@@ -44,7 +44,7 @@ public class MainActivity extends AbstractActivity implements IMain, MaterialCab
         mController.initBottomBar(bottomBar);
 
         mFragmentManger = getSupportFragmentManager();
-        
+
         //mListFragmentController = new ListFragmentController(this);
 
         buildArchiveFragment();

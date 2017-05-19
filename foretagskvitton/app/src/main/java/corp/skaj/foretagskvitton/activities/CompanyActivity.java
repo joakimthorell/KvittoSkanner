@@ -8,15 +8,19 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.controllers.CompanyListController;
+import corp.skaj.foretagskvitton.model.Card;
+import corp.skaj.foretagskvitton.model.Comment;
+import corp.skaj.foretagskvitton.model.Employee;
 import corp.skaj.foretagskvitton.model.User;
 
 public class CompanyActivity extends AbstractActivity {
-
 
 
     @Override
@@ -48,37 +52,73 @@ public class CompanyActivity extends AbstractActivity {
 
         //Creating new TextViews and Buttons and connecting them
         Button button = (Button) findViewById(R.id.edit);
-        TextView textView1 = (TextView) findViewById(R.id.editText);
-        TextView textView2 = (TextView) findViewById(R.id.editText2);
-        TextView textView3 = (TextView) findViewById(R.id.editText3);
+        EditText employeeView = (EditText) findViewById(R.id.employeEditText);
+        EditText cardView = (EditText) findViewById(R.id.cardEditText);
+        EditText commentView = (EditText) findViewById(R.id.commentEditText);
 
         //Creating a List to hold att the textViews
         List<TextView> textViews = new ArrayList<>();
-        textViews.add(textView1);
-        textViews.add(textView2);
-        textViews.add(textView3);
+        textViews.add(employeeView);
+        textViews.add(cardView);
+        textViews.add(commentView);
 
-        EditText editText = (EditText) findViewById(R.id.editText);
+        companyListController.editButtonListener(button, textViews, employeeView, user, companyName);
 
-        companyListController.editButtonListener(button, textViews, editText, user, companyName);
+        companyListController.employeeTextViewListener(employeeView, user, companyName);
 
-        companyListController.employeeTextViewListener(editText, user, companyName);
+        //Displaying employees
+        List<Employee> employees = user.getCompany(companyName).getEmployees();
+        displayEmployees(employees, employeeView);
+
+
+        //Displaying cards
+        List<Card> cards = user.getCompany(companyName).getCards();
+        displayCards(cards, cardView);
+
+        //Displaying comments
+        List<Comment> comments = user.getCompany(companyName).getComments();
+        displayComments(comments, commentView);
 
         //Creating connecting the xml with the java code for the image buttons
         ImageButton addEmployeeButton = (ImageButton) findViewById(R.id.addNewEmployee);
-        companyListController.createNewEmployeeListener(addEmployeeButton, user, companyName, this, editText);
+        companyListController.createNewEmployeeListener(addEmployeeButton, user, companyName, this, employeeView);
 
         ImageButton addCardButton = (ImageButton) findViewById(R.id.addNewCard);
-        companyListController.createNewCardListener(addCardButton, user, companyName, editText);
+        companyListController.createNewCardListener(addCardButton, user, companyName, cardView);
 
         ImageButton addCommentButton = (ImageButton) findViewById(R.id.addNewComment);
-        companyListController.createNewCommentListener(addCommentButton, user, companyName, editText);
+        companyListController.createNewCommentListener(addCommentButton, user, companyName, commentView);
 
         //Delete button for deleting an entire company
         Button deleteButton = (Button) findViewById(R.id.radera);
         companyListController.deleteCompanyListener(deleteButton, user, companyName, this);
 
-
     }
 
+    public void displayEmployees (List<Employee> employees, TextView employeeView) {
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < employees.size(); i++) {
+            builder.append(employees.get(i).getName() + "\n");
+        }
+        employeeView.setText(builder.toString());
+    }
+
+    public void displayCards (List<Card> cards, TextView cardView) {
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < cards.size(); i++) {
+            builder.append(cards.get(i).getCard() + "\n");
+        }
+        cardView.setText(builder.toString());
+    }
+
+    public void displayComments (List<Comment> comments, TextView commentView) {
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < comments.size(); i++) {
+            builder.append(comments.get(i).getComment() + "\n");
+        }
+        commentView.setText(builder.toString());
+    }
 }
+
+
+
