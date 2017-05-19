@@ -12,19 +12,17 @@ import com.roughike.bottombar.OnTabSelectListener;
 import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.model.IData;
 import corp.skaj.foretagskvitton.view.ArchiveAdapter;
+import corp.skaj.foretagskvitton.view.CompanyAdapter;
 import corp.skaj.foretagskvitton.view.SupplierAdapter;
 
 public class MainController {
-
     private IMain mListener;
-    private Context context;
-    private IData dataHandler;
+    private Context mContext;
 
 
-    public MainController(IMain listener, Context context, IData dataHandler) {
-        mListener = listener;
-        this.context = context;
-        this.dataHandler = dataHandler;
+    public MainController(Context context) {
+        mListener = (IMain) context;
+        mContext = context;
     }
 
     public void setArchiveAdapterListener(final ArchiveAdapter sAdapter, final Class<?> nextActivity, final String key) {
@@ -47,7 +45,7 @@ public class MainController {
         });
     }
 
-    public void setCompanyAdapterListener(final SupplierAdapter sAdapter, final Class<?> nextActivity, final String key) {
+    public void setSupplierAdapterListener(final SupplierAdapter sAdapter, final Class<?> nextActivity, final String key) {
         sAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
@@ -58,7 +56,7 @@ public class MainController {
     }
 
     public void initBottomBar () {
-        final BottomBar bottomBar = (BottomBar) ((Activity)context).findViewById(R.id.bottomBar);
+        final BottomBar bottomBar = (BottomBar) ((Activity)mContext).findViewById(R.id.bottomBar);
         bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelected(@IdRes int tabId) {

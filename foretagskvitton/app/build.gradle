@@ -34,7 +34,6 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:25.3.0'
     compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.16'
     compile 'com.android.support:support-v4:25.3.0'
-    compile 'com.marshalchen.ultimaterecyclerview:library:0.7.2'
     compile 'com.android.support:support-v13:25.3.0'
     testCompile 'junit:junit:4.12'
 }
