@@ -1,14 +1,10 @@
 package corp.skaj.foretagskvitton.controllers;
 
-import android.view.View;
-
 import com.marshalchen.ultimaterecyclerview.UltimateRecyclerviewViewHolder;
 
-import corp.skaj.foretagskvitton.view.ArchiveAdapter;
-import corp.skaj.foretagskvitton.view.CompanyAdapter;
-import corp.skaj.foretagskvitton.view.IController;
+import corp.skaj.foretagskvitton.view.IAdapterController;
 
-public class MainController<T> implements IController<T> {
+public class MainController<T> implements IAdapterController<T> {
 
     private IMain mListener;
 

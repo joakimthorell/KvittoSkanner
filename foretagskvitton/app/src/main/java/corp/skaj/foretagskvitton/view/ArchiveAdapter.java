@@ -23,9 +23,9 @@ public class ArchiveAdapter extends UltimateViewAdapter <ArchiveAdapter.SimpleAd
 
     private PurchaseList mPurchases;
     private IData dataHandler;
-    private IController mController;
+    private IAdapterController mController;
 
-    public ArchiveAdapter(IData dataHandler, IController controller){
+    public ArchiveAdapter(IData dataHandler, IAdapterController controller){
         this.dataHandler = dataHandler;
         this.mPurchases = dataHandler.getPurchases();
         mController = controller;

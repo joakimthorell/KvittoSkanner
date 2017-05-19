@@ -18,9 +18,9 @@ public class CompanyAdapter extends UltimateViewAdapter <CompanyAdapter.SimpleAd
 
     public static final String COMPANY_KEY = "CompanyKey";
     private List<Company> mCompanies;
-    private IController mController;
+    private IAdapterController mController;
 
-    public CompanyAdapter (List<Company> companies, IController controller) {
+    public CompanyAdapter (List<Company> companies, IAdapterController controller) {
         this.mCompanies = companies;
         mController = controller;
     }

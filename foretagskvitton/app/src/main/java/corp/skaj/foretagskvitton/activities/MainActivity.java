@@ -18,27 +18,22 @@ import corp.skaj.foretagskvitton.model.Supplier;
 import corp.skaj.foretagskvitton.model.User;
 import corp.skaj.foretagskvitton.view.ArchiveAdapter;
 import corp.skaj.foretagskvitton.view.CompanyAdapter;
-import corp.skaj.foretagskvitton.view.IController;
+import corp.skaj.foretagskvitton.view.IAdapterController;
 import corp.skaj.foretagskvitton.view.ListFragment;
 import corp.skaj.foretagskvitton.view.SupplierAdapter;
 
 public class MainActivity extends AbstractActivity implements IMain {
-
     public static final String COMPANY_KEY = "key_for_company_ofc";
     public static final String ARCHIVE_KEY = "key_for_archive_ofc";
-
-    private IController mAdapterController;
+    private IAdapterController mAdapterController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         getDataHandler().initDefaultUser();
         initBottomBar();
-
         mAdapterController = new MainController(this);
-
         archiveList();
     }
 
@@ -68,23 +63,23 @@ public class MainActivity extends AbstractActivity implements IMain {
 
     private void companyList () {
         List<Company> companies = getDataHandler().readData(User.class.getName(), User.class).getCompanies();
-        ListFragment listFragment = ListFragment.create(new CompanyAdapter(companies, mAdapterController));
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.fragment_container, listFragment).commit();
-
+        ListFragment lf = ListFragment.create(new CompanyAdapter(companies, mAdapterController));
+        FragmentManager fm = getSupportFragmentManager();
+        fm.beginTransaction().replace(R.id.fragment_container, lf).commit();
     }
 
     private void archiveList () {
-        ListFragment listFragment = ListFragment.create(new ArchiveAdapter(getDataHandler(), mAdapterController));
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.fragment_container, listFragment).commit();
-
+        ListFragment lf = ListFragment.create(new ArchiveAdapter(getDataHandler(), mAdapterController));
+        FragmentManager fm = getSupportFragmentManager();
+        fm.beginTransaction().replace(R.id.fragment_container, lf).commit();
     }
 
     private void supplierList () {
-        ListFragment listFragment = ListFragment.create(new SupplierAdapter(getDataHandler()));
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.fragment_container, listFragment).commit();
+        List<Supplier> suppliers = getDataHandler().readData(User.class.getName(), User.class).getSuppliers();
+        SupplierAdapter sa = new SupplierAdapter(R.layout.supplier_list_item, suppliers);
+        ListFragment lf = ListFragment.create(sa);
+        FragmentManager fm = getSupportFragmentManager();
+        fm.beginTransaction().replace(R.id.fragment_container, lf).commit();
     }
 
     @Override
@@ -92,7 +87,6 @@ public class MainActivity extends AbstractActivity implements IMain {
         Intent intent = new Intent(this, CompanyActivity.class);
         intent.putExtra(COMPANY_KEY, s);
         startActivity(intent);
-
     }
 
     @Override
@@ -104,6 +98,5 @@ public class MainActivity extends AbstractActivity implements IMain {
 
     @Override
     public void goToSupplier(String s) {
-
     }
 }
