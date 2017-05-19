@@ -55,8 +55,7 @@ public class MainController {
         });
     }
 
-    public void initBottomBar () {
-        final BottomBar bottomBar = (BottomBar) ((Activity)mContext).findViewById(R.id.bottomBar);
+    public void initBottomBar (final BottomBar bottomBar) {
         bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelected(@IdRes int tabId) {

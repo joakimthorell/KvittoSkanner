@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 
+import com.roughike.bottombar.BottomBar;
+
 import java.util.List;
 
 import corp.skaj.foretagskvitton.R;
@@ -13,6 +15,7 @@ import corp.skaj.foretagskvitton.model.Company;
 import corp.skaj.foretagskvitton.model.Supplier;
 import corp.skaj.foretagskvitton.model.User;
 import corp.skaj.foretagskvitton.view.ArchiveAdapter;
+import corp.skaj.foretagskvitton.view.CompanyAdapter;
 import corp.skaj.foretagskvitton.view.ListFragment;
 import corp.skaj.foretagskvitton.view.SupplierAdapter;
 
@@ -33,7 +36,10 @@ public class MainActivity extends AbstractActivity implements IMain {
         getDataHandler().initDefaultUser();
 
         mController = new MainController(this);
-        mController.initBottomBar();
+
+
+        BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
+        mController.initBottomBar(bottomBar);
 
         mFragmentManger = getSupportFragmentManager();
 
@@ -42,8 +48,10 @@ public class MainActivity extends AbstractActivity implements IMain {
 
     public void buildCompanyFragment() {
         List<Company> companies = getDataHandler().readData(User.class.getName(), User.class).getCompanies();
-        //ListFragment lf = ListFragment.create(new CompanyAdapter(companies, mAdapterController));
-        FragmentManager fm = getSupportFragmentManager();
+        CompanyAdapter ca = new CompanyAdapter(R.layout.company_list_view, companies);
+        mController.setCompanyAdapterListener(ca, CompanyActivity.class, COMPANY_KEY);
+        ListFragment fragment = ListFragment.create(ca);
+        mFragmentManger.beginTransaction().replace(R.id.fragment_container, fragment).commit();
     }
 
     public void buildArchiveFragment() {
