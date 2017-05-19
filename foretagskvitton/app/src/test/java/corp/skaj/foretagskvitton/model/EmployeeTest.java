@@ -52,4 +52,18 @@ public class EmployeeTest {
 
         assertEquals(0, employee.getPurchases().size());
     }
+    @Test
+    public void testAddComment (){
+        Comment comment = new Comment("This should work");
+        String expected = "This should work";
+        Employee employee = new Employee("Torsten");
+        employee.addComment(comment);
+        assertEquals(expected,employee.getComments().get(0).getComment());
+    }
+
+    @Test
+    public void testAddName (){
+
+    }
+
 }

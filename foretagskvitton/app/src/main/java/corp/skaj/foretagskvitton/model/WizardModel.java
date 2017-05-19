@@ -32,6 +32,11 @@ public class WizardModel {
     private PageList pages;
 
     public WizardModel(User user, ModelCallbacks view, List<String> strings) {
+
+        if(user.getSuppliers().size() == 0){
+            pages = supplierInfoNotFound(strings, user, view);
+        }
+
         pages = companyInfoNotFound(strings, user, view);
         observers = new ArrayList<>();
     }
@@ -66,6 +71,52 @@ public class WizardModel {
                 new MultipleFixedChoicePage(view, WizardConstants.SUPPLIER)
                         // TODO lista alla grossister
                         .setChoices(),
+
+                new DatePage(view, WizardConstants.DATE)
+                        .setValue(date == null ? getCurrentDate() : date)
+                        .setRequired(true),
+
+                new TotalSumPage(view, WizardConstants.TOTAL)
+                        .setValue(totalSum > 0 ? String.valueOf(totalSum) : null)
+                        .setRequired(true),
+
+                new TotalSumPage(view, WizardConstants.VAT)
+                        .setRequired(true),
+
+                new SingleFixedChoicePage(view, WizardConstants.CATEGORY)
+                        .setChoices(Category.getCategoriesArray())
+                        .setRequired(true),
+                //TODO add a choice above which is "other" for custom choice of category
+                new TextPage(view, WizardConstants.COMMENT)
+                        .setRequired(false));
+    }
+
+    private PageList supplierInfoNotFound(List<String> strings, User user, ModelCallbacks view) {
+        double totalSum = TextCollector.getPrice(strings);
+        String date = TextCollector.getDate(strings);
+
+        String cardNum = TextCollector.getCard(strings);
+        Company foundCompany = null;
+        if (user.getCompanies().size() > 1 && cardNum != null) {
+            Card foundCard = new Card(Integer.parseInt(cardNum));
+            foundCompany = user.getCompany(foundCard);
+        } else if (user.getCompanies().size() == 1) {
+            foundCompany = user.getCompanies().get(0);
+        } else {
+            // let it be null
+        }
+
+        return new PageList(
+                new SingleFixedChoicePage(view, WizardConstants.CARD)
+                        .setChoices("Privat", "Företag")
+                        .setValue(foundCompany == null ? null : "Företag")
+                        .setRequired(true),
+
+                // TODO företag fungerar men, MEN när den står som i klickan är de inte en boll i radio knappen utan den är bara rosa.
+                new SingleFixedChoicePage(view, WizardConstants.COMPANY)
+                        .setChoices(getCompanyNames(user))
+                        .setValue(foundCompany == null ? null : foundCompany.getName())
+                        .setRequired(true),
 
                 new DatePage(view, WizardConstants.DATE)
                         .setValue(date == null ? getCurrentDate() : date)

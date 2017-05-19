@@ -91,4 +91,8 @@ public class CompanyTest {
             iae.getCause();
         }
     }
+
+    public void getEmployee () {
+
+    }
 }
