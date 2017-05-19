@@ -18,35 +18,14 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.571" />
 
-    <TextView
-        android:id="@+id/Category"
-        android:layout_width="315dp"
-        android:layout_height="92dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="8dp"
-        android:background="@color/colorMenu"
-        android:gravity="center"
-        android:text="Representation"
-        android:textColor="@color/common_google_signin_btn_text_dark_default"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView8"
-        app:layout_constraintLeft_toLeftOf="@+id/imageView8"
-        app:layout_constraintRight_toRightOf="@+id/imageView8"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.525"
-        tools:layout_editor_absoluteX="53dp" />
-
-    <TextView
+    <EditText
         android:id="@+id/Company"
         android:layout_width="316dp"
         android:layout_height="41dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="8dp"
         android:text="Sanijs Päron AB"
@@ -54,33 +33,36 @@
         android:textColor="@color/colorPrimary"
         android:textSize="30sp"
         android:textStyle="bold"
+        android:background="@android:color/transparent"
         app:layout_constraintBottom_toBottomOf="@+id/imageView8"
-        app:layout_constraintTop_toTopOf="@+id/imageView8"
-        app:layout_constraintVertical_bias="0.146"
-        android:layout_marginRight="8dp"
+        app:layout_constraintLeft_toLeftOf="@+id/imageView8"
         app:layout_constraintRight_toRightOf="@+id/imageView8"
-        android:layout_marginLeft="8dp"
-        app:layout_constraintLeft_toLeftOf="@+id/imageView8" />
+        app:layout_constraintTop_toTopOf="@+id/imageView8"
+        app:layout_constraintVertical_bias="0.146" />
 
-    <TextView
+    <EditText
         android:id="@+id/date"
-        android:layout_width="80dp"
-        android:layout_height="27dp"
+        android:layout_width="119dp"
+        android:layout_height="28dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:singleLine="true"
         android:text="2017-05-15"
         android:textAlignment="viewEnd"
         android:textColor="@color/colorMenu"
+        android:background="@android:color/transparent"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView8"
         app:layout_constraintHorizontal_bias="0.828"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView8"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView8"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintVertical_bias="0.047" />
+        app:layout_constraintVertical_bias="0.047"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp" />
 
-    <TextView
+    <EditText
         android:id="@+id/Supplier"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -89,6 +71,7 @@
         android:text="Grossist: Päronfrön Inc."
         android:textColor="@color/colorMenuItem"
         android:textSize="14sp"
+        android:background="@android:color/transparent"
         app:layout_constraintHorizontal_bias="0.391"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -100,26 +83,29 @@
         android:layout_marginTop="8dp"
         app:layout_constraintVertical_bias="0.228" />
 
-    <TextView
+    <EditText
         android:id="@+id/cost"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginRight="48dp"
         android:layout_marginTop="8dp"
-        android:text="350sek"
+        android:background="@android:color/transparent"
+        android:text="350"
         android:textColor="@color/colorMenu"
         android:textSize="50sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/imageView8"
-        app:layout_constraintRight_toRightOf="@+id/imageView8"
-        app:layout_constraintVertical_bias="0.702"
-        android:layout_marginLeft="8dp"
+        app:layout_constraintHorizontal_bias="0.808"
         app:layout_constraintLeft_toLeftOf="@+id/imageView8"
+        app:layout_constraintRight_toRightOf="@+id/imageView8"
         app:layout_constraintTop_toTopOf="@+id/imageView8"
-        app:layout_constraintHorizontal_bias="1.0" />
+        app:layout_constraintVertical_bias="0.687"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="48dp" />
 
-    <TextView
+    <EditText
         android:id="@+id/Moms"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -127,20 +113,22 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:text="Moms: 20%"
+        android:background="@android:color/transparent"
         android:textColor="@color/colorMenuItem"
         app:layout_constraintBottom_toBottomOf="@+id/imageView8"
-        app:layout_constraintHorizontal_bias="0.871"
+        app:layout_constraintHorizontal_bias="0.85"
         app:layout_constraintLeft_toLeftOf="@+id/imageView8"
         app:layout_constraintRight_toRightOf="@+id/imageView8"
         app:layout_constraintTop_toTopOf="@+id/imageView8"
         android:layout_marginTop="8dp"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="1.0"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp" />
 
-    <TextView
+    <EditText
         android:id="@+id/payment_method"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="-8dp"
         android:text="Betalt med: Privatkort"
         android:textColor="@color/colorMenuItem"
         app:layout_constraintTop_toBottomOf="@+id/Moms"
@@ -149,14 +137,17 @@
         app:layout_constraintBottom_toBottomOf="@+id/imageView8"
         android:layout_marginBottom="8dp"
         app:layout_constraintVertical_bias="0.0"
-        android:layout_marginRight="8dp"
+        android:layout_marginRight="50dp"
+        android:background="@android:color/transparent"
         app:layout_constraintRight_toRightOf="@+id/imageView8"
-        app:layout_constraintHorizontal_bias="0.0" />
+        app:layout_constraintHorizontal_bias="0.95"
+        android:layout_marginStart="194dp"
+        android:layout_marginEnd="50dp" />
 
     <Button
         android:id="@+id/view_receipt"
         android:layout_width="98dp"
-        android:layout_height="29dp"
+        android:layout_height="48dp"
         android:layout_marginBottom="45dp"
         android:layout_marginLeft="9dp"
         android:layout_marginRight="8dp"
@@ -171,12 +162,14 @@
         app:layout_constraintLeft_toRightOf="@+id/view_comments"
         app:layout_constraintRight_toRightOf="@+id/imageView8"
         app:layout_constraintTop_toTopOf="@+id/imageView8"
-        app:layout_constraintVertical_bias="0.977" />
+        app:layout_constraintVertical_bias="0.977"
+        android:layout_marginStart="9dp"
+        android:layout_marginEnd="8dp" />
 
     <Button
         android:id="@+id/view_comments"
         android:layout_width="122dp"
-        android:layout_height="29dp"
+        android:layout_height="48dp"
         android:layout_marginBottom="54dp"
         android:layout_marginLeft="97dp"
         android:layout_marginRight="8dp"
@@ -190,6 +183,63 @@
         app:layout_constraintLeft_toLeftOf="@+id/imageView8"
         app:layout_constraintRight_toRightOf="@+id/imageView8"
         app:layout_constraintTop_toTopOf="@+id/imageView8"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="1.0"
+        android:layout_marginStart="97dp"
+        android:layout_marginEnd="8dp" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/floatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:clickable="true"
+        android:onClick="onSaveClick"
+        app:backgroundTint="@color/colorMenu"
+        app:fabSize="mini"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.928"
+        app:layout_constraintLeft_toLeftOf="@+id/imageView8"
+        app:layout_constraintRight_toRightOf="@+id/imageView8"
+        app:layout_constraintTop_toTopOf="@+id/imageView8"
+        app:layout_constraintVertical_bias="0.984"
+        app:srcCompat="@android:drawable/ic_menu_save"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SEK"
+        android:textColor="@color/colorMenu"
+        android:textSize="30sp"
+        app:layout_constraintLeft_toRightOf="@+id/cost"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView8"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintRight_toRightOf="@+id/imageView8"
+        app:layout_constraintTop_toTopOf="@+id/imageView8"
+        android:layout_marginTop="8dp"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintVertical_bias="0.686"
+        android:layout_marginEnd="8dp" />
+
+    <Spinner
+        android:id="@+id/spinnerCategories"
+        android:layout_width="226dp"
+        android:layout_height="29dp"
+        android:layout_marginRight="0dp"
+        app:layout_constraintRight_toRightOf="@+id/imageView8"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintHorizontal_bias="0.595"
+        app:layout_constraintVertical_bias="0.465" />
 
 </android.support.constraint.ConstraintLayout>
