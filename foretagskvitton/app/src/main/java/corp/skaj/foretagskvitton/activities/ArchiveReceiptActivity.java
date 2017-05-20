@@ -7,7 +7,11 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
+
 import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.model.Category;
 import corp.skaj.foretagskvitton.model.IData;
@@ -25,7 +29,7 @@ public class ArchiveReceiptActivity extends AbstractActivity {
     TextView date;
     TextView supplier;
     TextView payment_method;
-    TextView company;
+    Spinner company;
     Spinner category;
     IData handler;
     User user;
@@ -48,25 +52,31 @@ public class ArchiveReceiptActivity extends AbstractActivity {
         cost = (TextView) findViewById(R.id.cost);
         cost.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
 
-        //category = (TextView) findViewById(R.id.Category);
+        //Category and company is set with spinners to avoid incorrect input
+
         category = (Spinner) findViewById(R.id.spinnerCategories);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item,
                 Category.getCategoriesArray());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         category.setAdapter(adapter);
 
+        company = (Spinner) findViewById(R.id.spinnerCompany);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item,
+                user.getCompaniesArray());
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        company.setAdapter(arrayAdapter);
+
         moms = (TextView) findViewById(R.id.Moms);
         date = (TextView) findViewById(R.id.date);
         supplier = (TextView) findViewById(R.id.Supplier);
         payment_method = (TextView) findViewById(R.id.payment_method);
-        company = (TextView) findViewById(R.id.Company);
+        //company = (TextView) findViewById(R.id.Company);
 
         cost.setText(String.valueOf(mPur.getReceipt().getTotal()));
-        //category.(mPur.getReceipt().getProducts().get(0).getCategory().name());
         moms.setText(String.valueOf("Moms: " + mPur.getReceipt().getProducts().get(0).getTax()) +"%");
         supplier.setText(checkSupplier());
         payment_method.setText(purchaseType());
-        company.setText(user.getCompany(mPur).getName());
+        //company.setText(user.getCompany(mPur).getName());
 
         SimpleDateFormat dateRaw = new SimpleDateFormat("yyyy-MM-dd");
         String receiptDate = dateRaw.format(mPur.getReceipt().getDate().getTime());
@@ -104,10 +114,14 @@ public class ArchiveReceiptActivity extends AbstractActivity {
 
     public void onSaveClick(View view){
         mPur.getReceipt().setTotal(Double.valueOf(String.valueOf(cost.getText())));
-        mPur.getReceipt().getProducts().get(0).getCategory();
+        mPur.getReceipt().getProducts().get(0).setCategory(getCorrectCategory());
         handler.writeData(User.class.getName(), user);
+    }
 
-
+    // Needed because of how the spinner works.
+    public Category getCorrectCategory(){
+     Category[] catStrings = Category.categoriesInArr();
+      return catStrings[category.getSelectedItemPosition()];
     }
 }
 

@@ -19,4 +19,10 @@ public enum Category {
     public boolean equals(Category category) {
         return this.name().equals(category.name());
     }
+
+    public static Category[] categoriesInArr() {
+        Category[] cat = new Category[]{BENSIN, HOTELL, KONTORSMATERIAL, MAT,
+                PORTO, REPRESENTATION, RESOR, TRANSPORT};
+        return cat;
+    }
 }
