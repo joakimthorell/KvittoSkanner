@@ -14,9 +14,11 @@ import java.util.Arrays;
 
 import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.model.Category;
+import corp.skaj.foretagskvitton.model.Company;
 import corp.skaj.foretagskvitton.model.IData;
 import corp.skaj.foretagskvitton.model.Purchase;
 import corp.skaj.foretagskvitton.model.PurchaseList;
+import corp.skaj.foretagskvitton.model.Supplier;
 import corp.skaj.foretagskvitton.model.User;
 
 public class ArchiveReceiptActivity extends AbstractActivity {
@@ -25,7 +27,7 @@ public class ArchiveReceiptActivity extends AbstractActivity {
     public static final String COMMENT_ID = "COMMENT_ID";
     public static final String PICTURE_ID = "PICTURE_ID";
     TextView cost;
-    TextView moms;
+    TextView tax;
     TextView date;
     TextView supplier;
     TextView payment_method;
@@ -48,12 +50,17 @@ public class ArchiveReceiptActivity extends AbstractActivity {
         String purchaseId= getIntent().getStringExtra(MainActivity.ARCHIVE_KEY);
         mPur = list.getPurchase(purchaseId);
 
-
         cost = (TextView) findViewById(R.id.cost);
+        tax = (TextView) findViewById(R.id.Moms);
+        date = (TextView) findViewById(R.id.date);
+        supplier = (TextView) findViewById(R.id.Supplier);
+        payment_method = (TextView) findViewById(R.id.payment_method);
+
+        // Cost and tax can only be numbers.
         cost.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
+        tax.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
 
-        //Category and company is set with spinners to avoid incorrect input
-
+        //Category and company info is set with spinners to avoid incorrect input.
         category = (Spinner) findViewById(R.id.spinnerCategories);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item,
                 Category.getCategoriesArray());
@@ -66,20 +73,16 @@ public class ArchiveReceiptActivity extends AbstractActivity {
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         company.setAdapter(arrayAdapter);
 
-        moms = (TextView) findViewById(R.id.Moms);
-        date = (TextView) findViewById(R.id.date);
-        supplier = (TextView) findViewById(R.id.Supplier);
-        payment_method = (TextView) findViewById(R.id.payment_method);
-        //company = (TextView) findViewById(R.id.Company);
-
+        //Fills the textviews
         cost.setText(String.valueOf(mPur.getReceipt().getTotal()));
-        moms.setText(String.valueOf("Moms: " + mPur.getReceipt().getProducts().get(0).getTax()) +"%");
+        tax.setText(String.valueOf(+ mPur.getReceipt().getProducts().get(0).getTax()));
         supplier.setText(checkSupplier());
         payment_method.setText(purchaseType());
-        //company.setText(user.getCompany(mPur).getName());
 
+        //Gives date a correct format.
         SimpleDateFormat dateRaw = new SimpleDateFormat("yyyy-MM-dd");
         String receiptDate = dateRaw.format(mPur.getReceipt().getDate().getTime());
+
         date.setText(receiptDate);
 
     }
@@ -113,15 +116,43 @@ public class ArchiveReceiptActivity extends AbstractActivity {
     }
 
     public void onSaveClick(View view){
+        //Sets new..
+
+        //cost
         mPur.getReceipt().setTotal(Double.valueOf(String.valueOf(cost.getText())));
+
+        //category
         mPur.getReceipt().getProducts().get(0).setCategory(getCorrectCategory());
+
+        //tax
+        mPur.getReceipt().getProducts().get(0).setTax(Double.valueOf(String.valueOf(tax.getText())));
+
+        // date TODO - Get calender pop-up for correct entries
+
+        //Supplier - WHY BOOLEAN?
+        //mPur.setSupplier(user.addSupplier(new Supplier("hej"))));
+
+        //payment method
+        mPur.setPurchaseType(setPurchaseType());
+
+        //company
+        user.addCompany(new Company(company.getSelectedItem().toString()));
+
+        //Saves all changes
         handler.writeData(User.class.getName(), user);
     }
 
     // Needed because of how the spinner works.
-    public Category getCorrectCategory(){
+    private Category getCorrectCategory(){
      Category[] catStrings = Category.categoriesInArr();
       return catStrings[category.getSelectedItemPosition()];
+    }
+
+    private Purchase.PurchaseType setPurchaseType () {
+        if (payment_method.getText().equals("Företagskort")){
+            return Purchase.PurchaseType.COMPANY;
+        }
+        return Purchase.PurchaseType.PRIVATE;
     }
 }
 
