@@ -29,40 +29,4 @@ public class ArchiveActivity extends AbstractActivity {
         FragmentManager fm = getSupportFragmentManager();
         fm.beginTransaction().replace(R.id.archive_fragment_container, af).commit();
     }
-
-    /*
-    private String checkSupplier(){
-        try {
-            mPur.getSupplier().getName();
-        } catch(NullPointerException e) {
-            return "Supplier not specified";
-        }
-        return mPur.getSupplier().getName();
-    }
-
-    private String  purchaseType() {
-        if (mPur.getPurchaseType() == mPur.getPurchaseType().PRIVATE) {
-            return "Privatkort";
-        }
-        return "Företagskort";
-    }
-
-    public void onCommentClick (View view){
-        Intent intent = new Intent(this, ArchiveReceiptComments.class);
-        intent.putExtra(COMMENT_ID, mPur.getId());
-        startActivity(intent);
-    }
-
-    public void onReceiptClick(View view){
-        Intent intent = new Intent(this, ArchiveReceiptPicture.class);
-        intent.putExtra("image", mPur.getReceipt().getPictureAdress());
-        startActivity(intent);
-    }
-
-    public void onSaveClick(View view){
-        mPur.getReceipt().setTotal(Double.valueOf(String.valueOf(cost.getText())));
-        mPur.getReceipt().getProducts().get(0).getCategory();
-        handler.writeData(User.class.getName(), user);
-    }
-    */
 }

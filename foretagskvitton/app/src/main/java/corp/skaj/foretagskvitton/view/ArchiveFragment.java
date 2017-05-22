@@ -2,6 +2,7 @@ package corp.skaj.foretagskvitton.view;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,12 +22,14 @@ import corp.skaj.foretagskvitton.model.User;
 
 public class ArchiveFragment extends Fragment {
     private TextView price;
-    private TextView moms;
+    private TextView tax;
     private TextView date;
     private TextView supplier;
     private TextView comment;
-    private TextView company;
+    private Spinner company;
     private Spinner category;
+    private Purchase mPur;
+
 
     public ArchiveFragment() {
         // Required empty public constructor
@@ -61,25 +64,68 @@ public class ArchiveFragment extends Fragment {
         Purchase purchase = purchases.getPurchase(purchaseId);
 
         price = (TextView) view.findViewById(R.id.archive_receipt_price);
-        //price.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
-        //category = (TextView) view().findViewById(R.id.Category);
+        price.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
+
+
         category = (Spinner) view.findViewById(R.id.archive_receipt_categories);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(view.getContext(), R.layout.support_simple_spinner_dropdown_item, Category.getCategories());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         category.setAdapter(adapter);
-        moms = (TextView) view.findViewById(R.id.archive_receipt_moms);
+
+        tax = (TextView) view.findViewById(R.id.archive_receipt_moms);
         date = (TextView) view.findViewById(R.id.archive_receipt_date);
         supplier = (TextView) view.findViewById(R.id.archive_receipt_supplier);
         comment = (TextView) view.findViewById(R.id.archive_receipt_comment);
-        company = (TextView) view.findViewById(R.id.archive_receipt_company);
+
+        company = (Spinner) view.findViewById(R.id.spinnerCompany); 
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, 
+                user.getCompaniesArray()); 
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); 
+        company.setAdapter(arrayAdapter);
+
         price.setText(String.valueOf(purchase.getReceipt().getTotal()) + "0");
-        //category.set(purchase.getReceipt().getProducts().get(0).getCategory().name());
-        moms.setText("Moms: " + String.valueOf(purchase.getReceipt().getProducts().get(0).getTax()) + " %");
+        tax.setText("Moms: " + String.valueOf(purchase.getReceipt().getProducts().get(0).getTax()) + " %");
         //supplier.setText(checkSupplier());
-        comment.setText("\"" + purchase.getComments().get(0).getComment() + "\"");
-        company.setText(user.getCompany(purchase).getName());
+        //comment.setText("\"" + purchase.getComments().get(0).getComment() + "\"");
+        //company.setText(user.getCompany(purchase).getName());
         SimpleDateFormat dateRaw = new SimpleDateFormat("yyyy-MM-dd");
         String receiptDate = dateRaw.format(purchase.getReceipt().getDate().getTime());
         date.setText(receiptDate);
     }
+
+    public void sendSavedData () {
+
+
+    }
+
+        public double getCost () {
+            return Double.valueOf(String.valueOf(price.getText()));
+        }
+
+    public double getTax() {
+        String newTax = String.valueOf((tax.getText()));
+        return Double.valueOf(newTax.substring(7, newTax.length() - 2));
+
+
+    public String getCategory() {
+        return category.getSelectedItem().toString();
+    }
+
+    public String getCompany() {
+        return company.getSelectedItem().toString();
+    }
+
+    public String getDate() {
+        return String.valueOf(date.getText());
+    }
+
+    public String getSupplier() {
+        return String.valueOf(supplier.getText());
+    }
+
+    public String getComment() {
+        return String.valueOf(comment.getText());
+    }
+
 }
+
