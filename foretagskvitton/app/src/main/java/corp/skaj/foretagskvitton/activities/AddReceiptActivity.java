@@ -1,6 +1,5 @@
 package corp.skaj.foretagskvitton.activities;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -9,8 +8,6 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
-import android.util.AttributeSet;
-import android.view.View;
 import android.widget.ProgressBar;
 
 import com.github.ybq.android.spinkit.style.CubeGrid;
@@ -22,7 +19,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import corp.skaj.foretagskvitton.R;
-import corp.skaj.foretagskvitton.controllers.FloatingButtonController;
+import corp.skaj.foretagskvitton.controllers.ArchiveFABController;
 import corp.skaj.foretagskvitton.services.ReceiptScanner;
 
 public class AddReceiptActivity extends AbstractActivity {
@@ -44,13 +41,13 @@ public class AddReceiptActivity extends AbstractActivity {
 
     private void onActionPerformed(String action) {
         switch (action) {
-            case FloatingButtonController.CAMERA_ACTION:
+            case ArchiveFABController.CAMERA_ACTION:
                 dispatchOpenCamera();
                 break;
-            case FloatingButtonController.GALLERY_ACTION:
+            case ArchiveFABController.GALLERY_ACTION:
                 dispatchChoosePictureIntent();
                 break;
-            case FloatingButtonController.NO_IMAGE_ACTION:
+            case ArchiveFABController.NO_IMAGE_ACTION:
                 // TODO
                 break;
             case Intent.ACTION_SEND:

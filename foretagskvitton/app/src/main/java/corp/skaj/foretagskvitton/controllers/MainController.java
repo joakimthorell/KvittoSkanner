@@ -42,7 +42,7 @@ public class MainController {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 String data = sAdapter.getData().get(position).getName();
-                mListener.buildCompanyInfoFragment();
+                mListener.nextActivity(nextActivity, key, data);
             }
         });
     }

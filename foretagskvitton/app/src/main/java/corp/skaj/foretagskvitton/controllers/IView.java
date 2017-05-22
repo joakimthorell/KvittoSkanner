@@ -9,6 +9,4 @@ public interface IView {
     void buildCompanyFragment();
 
     void buildSupplierFragment();
-
-    void buildCompanyInfoFragment();
 }
