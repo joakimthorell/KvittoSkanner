@@ -23,7 +23,6 @@ public class ArchiveAdapter extends BaseQuickAdapter<Purchase, BaseViewHolder> {
 
     @Override
     protected void convert(BaseViewHolder helper, Purchase item) {
-
         User user = dataHandler.readData(User.class.getName(), User.class);
         String companyName = user.getCompany(item).getName();
         Category category = item.getReceipt().getProducts().get(0).getCategory();

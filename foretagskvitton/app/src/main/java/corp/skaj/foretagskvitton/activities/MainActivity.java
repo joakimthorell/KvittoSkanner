@@ -46,6 +46,7 @@ public class MainActivity extends AbstractActivity
         setContentView(R.layout.activity_main);
 
         // Create a default user if there is no user
+        //getDataHandler().clearData();
         getDataHandler().initDefaultUser();
 
         // Initiate main controller and bottom bar
@@ -59,7 +60,8 @@ public class MainActivity extends AbstractActivity
         mFragmentMap = new HashMap<>();
 
         //TODO Designa en start vy istället?
-        buildArchiveFragment();
+        buildCompanyFragment();
+        //buildArchiveFragment();
     }
 
     @Override

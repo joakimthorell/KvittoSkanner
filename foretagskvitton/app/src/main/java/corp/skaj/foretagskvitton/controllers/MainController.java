@@ -32,8 +32,6 @@ public class MainController {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 String data = sAdapter.getData().get(position).getId();
-                System.out.println("THIS IS PURCHASE ID FIRST TIME " + data);
-
                 mListener.nextActivity(nextActivity, key, data);
             }
         });

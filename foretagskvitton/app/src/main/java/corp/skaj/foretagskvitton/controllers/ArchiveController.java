@@ -1,5 +1,8 @@
 package corp.skaj.foretagskvitton.controllers;
 
+import android.view.View;
+import android.widget.Button;
+
 import corp.skaj.foretagskvitton.model.Category;
 import corp.skaj.foretagskvitton.model.Company;
 import corp.skaj.foretagskvitton.model.IData;
@@ -11,14 +14,13 @@ import corp.skaj.foretagskvitton.view.ArchiveFragment;
 
 public class ArchiveController {
     private Purchase mPur;
-    private PurchaseList purchaseList;
     private User user;
     private ArchiveFragment archiveFragment;
     private IData handler;
 
     public ArchiveController(IData dataHandler, String purId, ArchiveFragment archiveFragment) {
-        this.mPur = purchaseList.getPurchase(purId);
         this.user = dataHandler.readData(User.class.getName(), User.class);
+        this.mPur = dataHandler.getPurchases(user).getPurchase(purId);
         this.archiveFragment = archiveFragment;
         this.handler = dataHandler;
     }
@@ -28,6 +30,15 @@ public class ArchiveController {
             return "Privatkort";
         }
         return "Företagskort";
+    }
+
+    public void setListerOnSaveButton(Button saveButton){
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println("ILLUMINATI HAHAHHAHHA ");
+            }
+        });
     }
 
     public void updateReceiptData() {
