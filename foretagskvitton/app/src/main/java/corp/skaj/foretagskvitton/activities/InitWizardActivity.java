@@ -4,6 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+
+import com.github.ybq.android.spinkit.style.FadingCircle;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,7 +22,13 @@ public class InitWizardActivity extends AbstractActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_init_wizard);
+        setContentView(R.layout.copy_image_layout);
+        ProgressBar progressBar = (ProgressBar) findViewById(R.id.spin_kit);
+        FadingCircle circle = new FadingCircle();
+        progressBar.setIndeterminateDrawable(circle);
+        TextView text = (TextView) findViewById(R.id.loading_layout_text);
+        text.setText(R.string.reading_image);
+
         Uri URI = catchIntent(getIntent());
         if (URI == null) {
             startWizard();

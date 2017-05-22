@@ -15,5 +15,8 @@
     <string name="menu_supplier">Grossist</string>
     <string name="total">Total:</string>
     <string name="currancy">Sek</string>
+    <string name="copy_image_text">Kopierar bild...</string>
+    <string name="gallery">Galleri</string>
+    <string name="reading_image">Skannar kvitto...</string>
 
 </resources>

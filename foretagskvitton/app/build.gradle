@@ -38,5 +38,6 @@ dependencies {
     compile 'com.getbase:floatingactionbutton:1.10.1'
     compile 'com.amulyakhare:com.amulyakhare.textdrawable:1.0.1'
     compile 'com.afollestad:material-cab:0.1.12'
+    compile 'com.github.ybq:Android-SpinKit:1.1.0'
     testCompile 'junit:junit:4.12'
 }

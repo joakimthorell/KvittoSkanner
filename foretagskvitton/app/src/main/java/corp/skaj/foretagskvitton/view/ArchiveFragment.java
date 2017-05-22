@@ -75,12 +75,15 @@ public class ArchiveFragment extends Fragment {
         //category.set(purchase.getReceipt().getProducts().get(0).getCategory().name());
         moms.setText("Moms: " + String.valueOf(purchase.getReceipt().getProducts().get(0).getTax()) + " %");
         //supplier.setText(checkSupplier());
+<<<<<<< HEAD
         comment.setText("\"" + purchase.getComments().get(0).getComment() + "\"");
 
         company = (Spinner) view.findViewById(R.id.archive_receipt_categories);
         ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(view.getContext(), R.layout.support_simple_spinner_dropdown_item, Category.getCategories());
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
+        //comment.setText("\"" + purchase.getComments().get(0).getComment() + "\"");
+        company.setText(user.getCompany(purchase).getName());
         SimpleDateFormat dateRaw = new SimpleDateFormat("yyyy-MM-dd");
         String receiptDate = dateRaw.format(purchase.getReceipt().getDate().getTime());
         date.setText(receiptDate);
