@@ -3,7 +3,6 @@ package corp.skaj.foretagskvitton.activities;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -15,13 +14,14 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import corp.skaj.foretagskvitton.controllers.AddReceiptController;
+import corp.skaj.foretagskvitton.controllers.FloatingButtonController;
 import corp.skaj.foretagskvitton.services.ReceiptScanner;
 
 public class AddReceiptActivity extends AbstractActivity {
     public static final String BUILD_NEW_RECEIPT = "corp.skaj.foretagskvitton.BUILD_RECEIPT";
     public static final String KEY_FOR_IMAGE = "corp.skaj.foretagskvitton.KEY_FOR_IMAGE";
     private static final int REQUEST_IMAGE_CAPTURE = 31415;
+    private static final int REQUEST_IMAGE_CHOOSEN = 1313;
     private String mImageAdress;
 
     @Override
@@ -34,13 +34,13 @@ public class AddReceiptActivity extends AbstractActivity {
 
     private void onActionPerformed(String action) {
         switch (action) {
-            case AddReceiptController.CAMERA_ACTION:
+            case FloatingButtonController.CAMERA_ACTION:
                 dispatchOpenCamera();
                 break;
-            case AddReceiptController.GALLERY_ACTION:
-                // TODO
+            case FloatingButtonController.GALLERY_ACTION:
+                dispatchChoosePictureIntent();
                 break;
-            case AddReceiptController.NO_IMAGE_ACTION:
+            case FloatingButtonController.NO_IMAGE_ACTION:
                 // TODO
                 break;
             case Intent.ACTION_SEND:
@@ -66,7 +66,12 @@ public class AddReceiptActivity extends AbstractActivity {
                 Uri URI = Uri.fromFile(new File(mImageAdress));
                 mImageAdress = "";
                 startWizard(URI);
+                return;
             }
+        } else if (requestCode == REQUEST_IMAGE_CHOOSEN && resultCode == RESULT_OK) {
+            Uri uri = data.getData();
+            readGallerImage(uri);
+            return;
         } else {
             System.out.println("No picture was found");
         }
@@ -90,6 +95,15 @@ public class AddReceiptActivity extends AbstractActivity {
             openCamera.putExtra(MediaStore.EXTRA_OUTPUT, imageURI);
             startActivityForResult(openCamera, REQUEST_IMAGE_CAPTURE);
         }
+    }
+
+    private void dispatchChoosePictureIntent() {
+
+        Intent intent = new Intent(Intent.ACTION_PICK)
+                .setType("image/*");
+
+        startActivityForResult(intent, REQUEST_IMAGE_CHOOSEN);
+
     }
 
     // This method arranges a folder where an image taken by camera is saved.

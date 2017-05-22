@@ -15,5 +15,7 @@
     <string name="menu_supplier">Grossist</string>
     <string name="total">Total:</string>
     <string name="currancy">Sek</string>
+    <string name="Galleri">\@string/gallery</string>
+    <string name="gallery">Galleri</string>
 
 </resources>
