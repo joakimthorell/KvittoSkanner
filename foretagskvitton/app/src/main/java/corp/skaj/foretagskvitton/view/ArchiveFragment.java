@@ -84,13 +84,13 @@ public class ArchiveFragment extends Fragment {
 
 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item,
-                user.getCompanies().get(0).getEmployees()); 
-        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); 
+                user.getCompanies().get(0).getEmployees());
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         company.setAdapter(arrayAdapter);
 
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item,
-                user.getCompanies().get(0).getEmployees()); 
-        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); 
+        ArrayAdapter<String>arrayAdapter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item,
+                user.getCompanies().get(0).getEmployees());
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         company.setAdapter(arrayAdapter);
 
 
