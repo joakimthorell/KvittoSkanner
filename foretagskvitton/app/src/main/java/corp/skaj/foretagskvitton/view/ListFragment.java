@@ -21,47 +21,21 @@ import corp.skaj.foretagskvitton.R;
  * {@link FloatingActionsMenu} that can either be used as a direct button
  * or add more buttons into it.
  */
-public class ListFragment extends Fragment{
+public abstract class ListFragment extends Fragment{
     private RecyclerView mRecyclerView;
-    private RecyclerView.Adapter mAdapter;
     private Callback mObserver;
     private FloatingActionsMenu mButton;
-    private boolean mAdapterIsComplete;
 
     // internal interface so not depending on anything else
     public interface Callback {
-        void onListCreated();
+        void onListCreated(FloatingActionsMenu button);
     }
 
 
-    public ListFragment() {
+    protected ListFragment() {
     }
 
-    public static ListFragment create (RecyclerView.Adapter viewAdapater) {
-        ListFragment fragment = new ListFragment()
-                .setAdapterBoolean()
-                .setAdapter(viewAdapater);
-        return fragment;
-    }
-
-    public static ListFragment create(RecyclerView.Adapter viewAdapter, Callback observer) {
-        ListFragment fragment = create(viewAdapter)
-                .setListener(observer)
-                .setAdapterBoolean();
-        return fragment;
-    }
-
-    private ListFragment setAdapterBoolean() {
-        mAdapterIsComplete = false;
-        return this;
-    }
-
-    private ListFragment setAdapter (RecyclerView.Adapter adapter) {
-        this.mAdapter = adapter;
-        return this;
-    }
-
-    private ListFragment setListener(Callback observer) {
+    protected ListFragment setListener(Callback observer) {
         mObserver = observer;
         return this;
     }
@@ -81,7 +55,7 @@ public class ListFragment extends Fragment{
             mRecyclerView.setLayoutManager(manager);
             mRecyclerView.setHasFixedSize(true);
             mRecyclerView.setSaveEnabled(false);
-            mRecyclerView.setAdapter(mAdapter);
+            mRecyclerView.setAdapter(getBaseAdapter());
             mButton = (FloatingActionsMenu) getActivity().findViewById(R.id.floating_action_button);
 
             DividerItemDecoration divider = new DividerItemDecoration(view.getContext(), DividerItemDecoration.VERTICAL);
@@ -89,7 +63,7 @@ public class ListFragment extends Fragment{
 
             if (mObserver != null) {
                 System.out.println("ListFragment shouting to observer");
-                mObserver.onListCreated();
+                mObserver.onListCreated(mButton);
             }
         }
     }
@@ -98,7 +72,5 @@ public class ListFragment extends Fragment{
         return mButton;
     }
 
-    public BaseQuickAdapter getAdapter() {
-        return (BaseQuickAdapter)mAdapter;
-    }
+    protected abstract BaseQuickAdapter getBaseAdapter();
 }
