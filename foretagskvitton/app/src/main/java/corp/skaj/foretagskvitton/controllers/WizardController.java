@@ -40,7 +40,6 @@ public class WizardController {
     private boolean mConsumePageSelectedEvent;
     private IData mDataHandler;
 
-
     public WizardController(Context context, Button mNextButton, Button mPrevButton,
                             ViewPager mPager) {
         mEditingAfterReview = false;

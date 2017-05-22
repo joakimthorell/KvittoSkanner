@@ -2,78 +2,61 @@ package corp.skaj.foretagskvitton.controllers;
 
 import android.support.design.widget.FloatingActionButton;
 import android.view.View;
-import android.widget.Button;
 
 import corp.skaj.foretagskvitton.model.Category;
 import corp.skaj.foretagskvitton.model.Company;
 import corp.skaj.foretagskvitton.model.IData;
 import corp.skaj.foretagskvitton.model.Purchase;
-import corp.skaj.foretagskvitton.model.PurchaseList;
 import corp.skaj.foretagskvitton.model.Supplier;
 import corp.skaj.foretagskvitton.model.User;
 import corp.skaj.foretagskvitton.view.ArchiveFragment;
 
 public class ArchiveController {
-    private Purchase mPur;
-    private User user;
-    private ArchiveFragment archiveFragment;
-    private IData handler;
+    private ArchiveFragment fragment;
+    private String purchaseId;
+    private IData dataHandler;
 
-    public ArchiveController(IData dataHandler, String purId, ArchiveFragment archiveFragment) {
-        this.user = dataHandler.readData(User.class.getName(), User.class);
-        this.mPur = dataHandler.getPurchases(user).getPurchase(purId);
-        this.archiveFragment = archiveFragment;
-        this.handler = dataHandler;
-    }
-
-    private String purchaseType() {
-        if (mPur.getPurchaseType() == mPur.getPurchaseType().PRIVATE) {
-            return "Privatkort";
-        }
-        return "Företagskort";
+    public ArchiveController(IData dataHandler, String purId, ArchiveFragment fragment) {
+        this.dataHandler = dataHandler;
+        purchaseId = purId;
+        this.fragment = fragment;
     }
 
     public void setListerOnSaveButton(FloatingActionButton saveButton){
-        System.out.println("ILLUMINATI HAHAHHAHHA 1");
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("ILLUMINATI HAHAHHAHHA 2");
+                System.out.println("This works ");
+
+                //TODO Save edited data
+
+                //updateReceiptData();
             }
         });
     }
 
     public void updateReceiptData() {
-        //Sets new..  
-
-        // cost 
-        mPur.getReceipt().setTotal(archiveFragment.getCost());
-
+        User user = dataHandler.readData(User.class.getName(), User.class);
+        Purchase purchase = dataHandler.getPurchases(user).getPurchase(purchaseId);
+        // price 
+        purchase.getReceipt().setTotal(fragment.getPrice());
         // category 
-        mPur.getReceipt().getProducts().get(0).setCategory(Category.valueOf(archiveFragment.getCategory().toUpperCase()));
-
-        //tax 
-        mPur.getReceipt().getProducts().get(0).setTax(archiveFragment.getTax());
-
-        //Supplier
-        Supplier updatedSupplier = new Supplier(archiveFragment.getSupplier());
-        mPur.setSupplier(updatedSupplier);
-
-        //payment method 
-        mPur.setPurchaseType(selectCorrectPurchase());
-
+        purchase.getReceipt().getProducts().get(0).setCategory(Category.valueOf(fragment.getCategory().toUpperCase()));
+        // tax 
+        purchase.getReceipt().getProducts().get(0).setTax(fragment.getTax());
+        // supplier
+        Supplier updatedSupplier = new Supplier(fragment.getSupplier(purchaseId));
+        purchase.setSupplier(updatedSupplier);
+        // payment method 
+        purchase.setPurchaseType(selectCorrectPurchase());
         // company 
-        Company updatedCompany = new Company(archiveFragment.getCompany());
+        Company updatedCompany = new Company(fragment.getCompany());
         user.addCompany(updatedCompany);
-
-        // Saves all changes 
-        handler.writeData(User.class.getName(), user);
+        // saves all changes 
+        dataHandler.writeData(User.class.getName(), user);
     }
 
-    private Purchase.PurchaseType selectCorrectPurchase(){
-        if (archiveFragment.getSupplier().equals("Företagskort")) {
-            return Purchase.PurchaseType.COMPANY;
-    }
-        return Purchase.PurchaseType.PRIVATE;
+    private Purchase.PurchaseType selectCorrectPurchase() {
+        return fragment.getPurchaseType().equals("Företagskort") ? Purchase.PurchaseType.COMPANY : Purchase.PurchaseType.PRIVATE;
     }
 }
