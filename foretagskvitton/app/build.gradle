@@ -35,6 +35,8 @@ dependencies {
     compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.16'
     compile 'com.android.support:support-v4:25.3.0'
     compile 'com.android.support:support-v13:25.3.0'
-    testCompile 'junit:junit:4.12'
+    compile 'com.getbase:floatingactionbutton:1.10.1'
+    compile 'com.amulyakhare:com.amulyakhare.textdrawable:1.0.1'
     compile 'com.afollestad:material-cab:0.1.12'
+    testCompile 'junit:junit:4.12'
 }

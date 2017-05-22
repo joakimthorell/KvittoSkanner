@@ -29,7 +29,8 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".activities.InitApplicationActivity">
+        <activity android:name=".activities.InitWizardActivity" />
+        <activity android:name=".activities.AddReceiptActivity">
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
 
@@ -38,27 +39,15 @@
                 <data android:mimeType="image/*" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.InitWizardActivity" />
-        <activity android:name=".activities.AddReceiptActivity" />
-        <activity android:name=".activities.GraphActivity" />
         <activity
             android:name=".activities.WizardActivity"
             android:theme="@style/WizardTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="corp.skaj.foretagskvitton.activities.AddReceiptActivity" />
+                android:value="corp.skaj.foretagskvitton.activities.MainActivity" />
         </activity>
-        <activity
-            android:name=".activities.CompanyActivity"
-            android:theme="@style/WizardTheme">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="corp.skaj.foretagskvitton.activities.CompanyListActivity" />
-        </activity>
-        <activity android:name=".activities.UserActivity" />
+        <activity android:name=".activities.SupplierActivity" />
         <activity android:name=".activities.ArchiveActivity" />
-        <activity android:name=".activities.CompanyListActivity" />
-        <activity android:name=".activities.ArchiveReceiptActivity" />
         <activity android:name=".activities.ArchiveReceiptComments" />
         <activity android:name=".activities.ArchiveReceiptPicture" />
         <activity android:name=".activities.MainActivity">
@@ -68,6 +57,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".activities.CompanyActivity"></activity>
     </application>
 
 </manifest>

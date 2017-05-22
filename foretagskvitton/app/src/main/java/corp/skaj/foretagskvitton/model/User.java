@@ -96,14 +96,6 @@ public class User {
         return companies;
     }
 
-    public String[] getCompaniesArray(){
-        String[] companies = new String[getCompanies().size()];
-        for(int i = 0; i < getCompanies().size(); i++){
-            companies[i] = getCompanies().get(i).getName();
-        }
-        return companies;
-    }
-
     public String getName() {
         return name;
     }

@@ -34,8 +34,8 @@ public class ReceiptScanner {
         return buildListOfStrings(textBlocks);
     }
 
-    private static Bitmap createImageFromURI(Context context, Uri uri) throws IOException {
-        if (URI == null) {
+    public static Bitmap createImageFromURI(Context context, Uri uri) throws IOException {
+        if (uri == null) {
             throw new NullPointerException("URI is null");
         }
         Bitmap bmp = MediaStore.Images.Media.getBitmap(context.getContentResolver(), uri);

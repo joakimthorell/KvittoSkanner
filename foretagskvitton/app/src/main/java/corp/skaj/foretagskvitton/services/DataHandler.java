@@ -14,7 +14,6 @@ import corp.skaj.foretagskvitton.model.User;
 
 public class DataHandler extends Application implements IData {
 
-
     @Override
     public <T> void writeData(String key, T writeT) {
         getEditor().putString(key, toJson(writeT)).apply();
@@ -37,6 +36,7 @@ public class DataHandler extends Application implements IData {
         return PreferenceManager.getDefaultSharedPreferences(this).getString(key, "");
     }
 
+    @Override
     public void clearData() {
         getEditor().clear().apply();
     } // probobly temporary for testing purpose
@@ -55,18 +55,6 @@ public class DataHandler extends Application implements IData {
             user.addCompany(company);
             writeData(User.class.getName(), user);
         }
-    }
-
-    @Override
-    public PurchaseList getPurchases() {
-        User user = readData(User.class.getName(), User.class);
-        PurchaseList purchases = new PurchaseList(user);
-        for (Company c : user.getCompanies()) {
-            for (Employee e : c.getEmployees()) {
-                purchases.addAll(e.getPurchases());
-            }
-        }
-        return purchases;
     }
 
     @Override

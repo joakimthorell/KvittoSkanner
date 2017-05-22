@@ -27,9 +27,9 @@ import corp.skaj.foretagskvitton.model.Product;
 import corp.skaj.foretagskvitton.model.Purchase;
 import corp.skaj.foretagskvitton.model.Receipt;
 import corp.skaj.foretagskvitton.model.User;
-import corp.skaj.foretagskvitton.view.WizardConstants;
-import corp.skaj.foretagskvitton.view.WizardView;
-import corp.skaj.foretagskvitton.view.ConfirmWizardFragment;
+import corp.skaj.foretagskvitton.view.wizard.ConfirmWizardFragment;
+import corp.skaj.foretagskvitton.view.wizard.WizardConstants;
+import corp.skaj.foretagskvitton.view.wizard.WizardView;
 
 public class WizardController {
     private WizardView mWizardView;
@@ -38,7 +38,7 @@ public class WizardController {
     private Button mPrevButton;
     private boolean mEditingAfterReview;
     private boolean mConsumePageSelectedEvent;
-    private IData mHandler;
+    private IData mDataHandler;
 
 
     public WizardController(Context context, Button mNextButton, Button mPrevButton,
@@ -47,7 +47,7 @@ public class WizardController {
         this.mNextButton = mNextButton;
         this.mPrevButton = mPrevButton;
         this.mPager = mPager;
-        mHandler = (IData) context.getApplicationContext();
+        mDataHandler = (IData) context.getApplicationContext();
         mWizardView = new WizardView(context);
     }
 
@@ -77,7 +77,7 @@ public class WizardController {
     }
 
     public void initNextButton(Button mNextButton,
-                               final MyPagerAdapter mPagerAdapter,
+                               final WizardPageController mPagerAdapter,
                                final FragmentManager fragmentManager) {
         mNextButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -155,7 +155,7 @@ public class WizardController {
         if (commentBundle.getString("_") != null) {
             purchase.addComment(new Comment(commentBundle.getString("_")));
         }
-        User user = mHandler.readData(User.class.getName(), User.class);
+        User user = mDataHandler.readData(User.class.getName(), User.class);
         Company company = user.getCompany(companyNameBundle.getString("_"));
         Employee employee = company.getEmployees().get(0);
         employee.addPurchase(purchase);
@@ -164,11 +164,11 @@ public class WizardController {
 
     private void saveUser(User user) {
         System.out.println("Saving user " + user.getName());
-        mHandler.writeData(User.class.getName(), user);
+        mDataHandler.writeData(User.class.getName(), user);
         System.out.println("User : " + user.getName() + " saved. COMPLETE!");
         System.out.println("Removing used items");
-        mHandler.removeData("mURI");
-        mHandler.removeData("mStrings");
+        mDataHandler.removeData("mURI");
+        mDataHandler.removeData("mStrings");
         System.out.println("Removed data. COMPLETE!");
     }
 
@@ -189,7 +189,7 @@ public class WizardController {
         Calendar date = Calendar.getInstance();
         date.setTime(dateAsDate);
         double total = Double.parseDouble(totalAsString);
-        String URIAsString = mHandler.readData("mURI", String.class);
+        String URIAsString = mDataHandler.readData("mURI", String.class);
         return new Receipt(product, date, total, URIAsString);
     }
 

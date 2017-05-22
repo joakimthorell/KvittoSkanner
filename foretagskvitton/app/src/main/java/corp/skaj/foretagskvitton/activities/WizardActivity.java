@@ -35,18 +35,15 @@ import com.tech.freak.wizardpager.ui.StepPagerStrip;
 import java.util.List;
 
 import corp.skaj.foretagskvitton.R;
-
+import corp.skaj.foretagskvitton.controllers.WizardPageController;
 import corp.skaj.foretagskvitton.controllers.WizardController;
-import corp.skaj.foretagskvitton.controllers.MyPagerAdapter;
-import corp.skaj.foretagskvitton.model.IData;
 import corp.skaj.foretagskvitton.model.IObserver;
 
 public class WizardActivity extends AbstractActivity implements
         PageFragmentCallbacks, ReviewFragment.Callbacks, ModelCallbacks, IObserver {
-
     private WizardController mWizardController;
     private AbstractWizardModel mWizardView;
-    private MyPagerAdapter mPagerAdapter;
+    private WizardPageController mPagerAdapter;
     private StepPagerStrip mStepPagerStrip;
 
     @Override
@@ -61,7 +58,7 @@ public class WizardActivity extends AbstractActivity implements
         mStepPagerStrip = (StepPagerStrip) findViewById(R.id.wizard_strip);
         mWizardController = new WizardController(this, mNextButton, mPrevButton, mPager);
         this.mWizardView = mWizardController.getWizardView();
-        mPagerAdapter = new MyPagerAdapter(getSupportFragmentManager(), mWizardController);
+        mPagerAdapter = new WizardPageController(getSupportFragmentManager(), mWizardController);
         mPager.setAdapter(mPagerAdapter);
 
         // Set listeners
@@ -160,7 +157,15 @@ public class WizardActivity extends AbstractActivity implements
     public void onDataChange() {
         mWizardController.saveReceipts();
         Toast.makeText(this, "Kvitto sparat", Toast.LENGTH_LONG).show();
-        Intent intent = new Intent(this, AddReceiptActivity.class);
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onBackPressed() {
+        getDataHandler().removeData("mURI");
+        getDataHandler().removeData("mStrings");
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 }

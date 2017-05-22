@@ -1,7 +1,5 @@
 package corp.skaj.foretagskvitton.model;
 
-import android.net.Uri;
-
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -28,7 +26,6 @@ public class Receipt {
     }
 
     public boolean removeProduct(Product product) {
-        // make sure there is always one product in receipt
         return products.size() > 1 && products.remove(product);
     }
 

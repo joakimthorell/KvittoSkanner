@@ -1,0 +1,171 @@
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+             tools:context="corp.skaj.foretagskvitton.view.ArchiveFragment">
+
+    <ImageView
+        android:id="@+id/imageView8"
+        android:layout_width="385dp"
+        android:layout_height="500dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:srcCompat="@drawable/receipt_background"/>
+
+    <EditText
+        android:id="@+id/archive_receipt_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2017-05-15"
+        android:textColor="@color/colorMenu"
+        android:background="@android:color/transparent"
+        app:layout_constraintTop_toTopOf="@+id/imageView8"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginEnd="40dp"/>
+
+    <EditText
+        android:id="@+id/archive_receipt_company"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Sanjins Päron AB"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimary"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:background="@android:color/transparent"
+        app:layout_constraintTop_toBottomOf="@+id/archive_receipt_date"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"/>
+
+    <EditText
+        android:id="@+id/archive_receipt_supplier"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Grossist: Päronfrön Inc."
+        android:textAlignment="center"
+        android:textColor="@color/colorMenuItem"
+        android:textSize="16sp"
+        android:background="@android:color/transparent"
+        app:layout_constraintTop_toBottomOf="@+id/archive_receipt_company"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"/>
+
+    <Spinner
+        android:id="@+id/archive_receipt_categories"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="20dp"
+        android:singleLine="true"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintTop_toBottomOf="@+id/archive_receipt_supplier"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"/>
+
+    <EditText
+        android:id="@+id/archive_receipt_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:text="350"
+        android:textColor="@color/colorMenu"
+        android:textSize="50sp"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="6dp"
+        app:layout_constraintTop_toBottomOf="@+id/archive_receipt_categories"
+        app:layout_constraintRight_toLeftOf="@+id/archive_receipt_sek"
+        android:layout_marginEnd="6dp"/>
+
+    <TextView
+        android:id="@+id/archive_receipt_sek"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SEK"
+        android:textColor="@color/colorMenu"
+        android:textSize="30sp"
+        android:layout_marginBottom="6dp"
+        app:layout_constraintBottom_toBottomOf="@+id/archive_receipt_price"
+        app:layout_constraintRight_toRightOf="@+id/archive_receipt_company"/>
+
+    <EditText
+        android:id="@+id/archive_receipt_moms"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Moms: 20%"
+        android:background="@android:color/transparent"
+        android:textColor="@color/colorMenuItem"
+        android:layout_marginRight="39dp"
+        android:layout_marginTop="6dp"
+        app:layout_constraintTop_toBottomOf="@+id/archive_receipt_price"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginEnd="40dp"/>
+
+    <EditText
+        android:id="@+id/archive_receipt_comment"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:text="Det här är ett bra företag med mycket stor potential"
+        android:textColor="@color/colorMenuItem"
+        android:background="@android:color/transparent"
+        android:maxLines="2"
+        android:lines="2"
+        android:textAlignment="center"
+        android:textStyle="italic"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="40dp"
+        app:layout_constraintTop_toBottomOf="@+id/archive_receipt_moms"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+
+    <Button
+        android:id="@+id/archive_receipt_imagebutton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@color/colorMenu"
+        android:textColor="@color/common_google_signin_btn_text_dark_default"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginStart="40dp"/>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/archive_receipt_savebutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:clickable="true"
+        android:onClick="onSaveClick"
+        app:backgroundTint="@color/colorMenu"
+        app:fabSize="mini"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.928"
+        app:layout_constraintLeft_toLeftOf="@+id/imageView8"
+        app:layout_constraintRight_toRightOf="@+id/imageView8"
+        app:layout_constraintTop_toTopOf="@+id/imageView8"
+        app:layout_constraintVertical_bias="0.984"
+        app:srcCompat="@android:drawable/ic_menu_save"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp" />
+
+</android.support.constraint.ConstraintLayout>

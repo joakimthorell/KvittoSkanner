@@ -14,13 +14,17 @@ import corp.skaj.foretagskvitton.view.CompanyAdapter;
 import corp.skaj.foretagskvitton.view.SupplierAdapter;
 
 public class MainController {
-    private IMain mListener;
-    private Context mContext;
+    public enum State {
+        COMPANY,
+        ARCHIVE,
+        SUPPLIER
+    }
+
+    private IView mListener;
 
 
     public MainController(Context context) {
-        mListener = (IMain) context;
-        mContext = context;
+        mListener = (IView) context;
     }
 
     public void setArchiveAdapterListener(final ArchiveAdapter sAdapter, final Class<?> nextActivity, final String key) {
@@ -28,7 +32,9 @@ public class MainController {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 String data = sAdapter.getData().get(position).getId();
-                mListener.goToActivity(nextActivity, key, data);
+                System.out.println("THIS IS PURCHASE ID FIRST TIME " + data);
+
+                mListener.nextActivity(nextActivity, key, data);
             }
         });
     }
@@ -38,7 +44,6 @@ public class MainController {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 String data = sAdapter.getData().get(position).getName();
-                //mListener.goToActivity(nextActivity, key, data);
                 mListener.buildCompanyInfoFragment();
             }
         });
@@ -49,7 +54,7 @@ public class MainController {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 String data = sAdapter.getData().get(position).getName();
-                mListener.goToActivity(nextActivity, key, data);
+                mListener.nextActivity(nextActivity, key, data);
             }
         });
     }
@@ -66,8 +71,8 @@ public class MainController {
                         case R.id.action_archive:
                             mListener.buildArchiveFragment();
                             return;
-                        case R.id.action_user:
-                            //TODO
+                        case R.id.action_supplier:
+                            mListener.buildSupplierFragment();
                             return;
                         default:
                             return;

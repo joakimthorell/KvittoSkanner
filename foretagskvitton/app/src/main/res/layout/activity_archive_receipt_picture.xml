@@ -7,4 +7,10 @@
     android:background="@color/colorMenuItem"
     tools:context="corp.skaj.foretagskvitton.activities.ArchiveReceiptPicture">
 
+    <ImageView
+        android:id="@+id/archive_showing_only_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
 </android.support.constraint.ConstraintLayout>

@@ -1,28 +1,19 @@
 <resources>
     <string name="app_name">ReceiptScanner</string>
     <string name="menu_archive">Arkiv</string>
-    <string name="menu_charts">Grafer</string>
-    <string name="menu_add">Skapa ny</string>
     <string name="menu_business">Företag</string>
-    <string name="menu_user">Profil</string>
-    <string name="title_activity_add_new_post">AddNewPost</string>
     <string name="camera">Kamera</string>
-    <string name="no_picture">Utan bild</string>
-    <string name="gallery">Galleri</string>
     <string name="nextButtonText">Nästa</string>
     <string name="backButtonText">Bakåt</string>
-    <string name="title_activity_test">TestActivity</string>
     <string name="last_step_text">Bekräfta val</string>
     <string name="last_step_approve_button">Lägg till</string>
     <string name="cancel">Tillbaka</string>
     <string name="wizard_complete">Slutför</string>
-    <string name="action_settings">Settings</string>
     <string name="date_hint">Datum</string>
-    <string name="cab_share_title">Dela</string>
-    <string name="cab_remove_title">Remove</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="archive_menu_sort">Sortera</string>
-    <string name="archive_menu_filter">Filtrera</string>
-    <string name="noContentText">\Det finns inget innehåll att visa, \n lägg till innehåll via plussymbolen.</string>
+    <string name="menu_supplier">Grossist</string>
+    <string name="total">Total:</string>
+    <string name="currancy">Sek</string>
+
 </resources>

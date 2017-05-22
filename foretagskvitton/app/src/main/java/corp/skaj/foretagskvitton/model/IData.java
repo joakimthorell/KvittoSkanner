@@ -7,9 +7,9 @@ public interface IData {
 
     void removeData(String key);
 
-    void initDefaultUser();
+    void clearData();
 
-    PurchaseList getPurchases();
+    void initDefaultUser();
 
     PurchaseList getPurchases(User user);
 }

@@ -57,7 +57,7 @@ public class TextCollector {
      * @param strings
      * @return
      */
-    public static double getPrice(List<String> strings) {
+    public static double getTotalSum(List<String> strings) {
         if (strings == null) {
             return 0.0;
         }

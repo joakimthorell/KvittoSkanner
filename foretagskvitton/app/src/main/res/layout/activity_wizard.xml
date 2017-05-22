@@ -25,7 +25,7 @@
             android:textSize="20sp"
             android:layout_gravity="center"
             android:id="@+id/toolbar_title"
-            android:textColor="@color/white" />
+            android:textColor="@android:color/white" />
     </android.support.v7.widget.Toolbar>
 
     <com.tech.freak.wizardpager.ui.StepPagerStrip
@@ -64,7 +64,7 @@
         android:layout_marginStart="8dp"
         android:background="@color/colorPrimary"
         android:text="@string/backButtonText"
-        android:textColor="@color/white"
+        android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/wizardNextButton" />
@@ -80,7 +80,7 @@
         android:layout_marginStart="4dp"
         android:background="@color/nextButtonGreen"
         android:text="@string/nextButtonText"
-        android:textColor="@color/white"
+        android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@+id/wizardBackButton"
         app:layout_constraintRight_toRightOf="parent" />

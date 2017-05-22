@@ -1,20 +1,22 @@
 package corp.skaj.foretagskvitton.activities;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
-import android.support.v7.app.ActionBar;
-import android.view.View;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import corp.skaj.foretagskvitton.R;
+import corp.skaj.foretagskvitton.controllers.AddReceiptController;
+import corp.skaj.foretagskvitton.services.ReceiptScanner;
 
 public class AddReceiptActivity extends AbstractActivity {
     public static final String BUILD_NEW_RECEIPT = "corp.skaj.foretagskvitton.BUILD_RECEIPT";
@@ -25,15 +27,35 @@ public class AddReceiptActivity extends AbstractActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        setContentView(R.layout.activity_add_new_post);
         mImageAdress = "";
+        String action = getIntent().getAction();
+        onActionPerformed(action);
+    }
 
-        // Hide actionbar and gives fullscreen feature
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.hide();
+    private void onActionPerformed(String action) {
+        switch (action) {
+            case AddReceiptController.CAMERA_ACTION:
+                dispatchOpenCamera();
+                break;
+            case AddReceiptController.GALLERY_ACTION:
+                // TODO
+                break;
+            case AddReceiptController.NO_IMAGE_ACTION:
+                // TODO
+                break;
+            case Intent.ACTION_SEND:
+                onActionSend();
+                break;
+            default:
+                break;
+        }
+    }
 
-        initBottomBar(ADD_RECEIPT_ID, this);
+    private void onActionSend() {
+        if (getIntent().getType().startsWith("image/")) {
+            Uri uri = getIntent().getParcelableExtra(Intent.EXTRA_STREAM);
+            readGallerImage(uri);
+        }
     }
 
     // This method catches taken image by camera.
@@ -46,7 +68,6 @@ public class AddReceiptActivity extends AbstractActivity {
                 startWizard(URI);
             }
         } else {
-            // TODO fix a popup showing "no pic was captured"
             System.out.println("No picture was found");
         }
     }
@@ -57,6 +78,7 @@ public class AddReceiptActivity extends AbstractActivity {
         intent.putExtra(KEY_FOR_IMAGE, URI);
         intent.setAction(BUILD_NEW_RECEIPT);
         startActivity(intent);
+
     }
 
     //This method starts Camera.
@@ -76,12 +98,12 @@ public class AddReceiptActivity extends AbstractActivity {
         try {
             imageFile = createImageFile();
         } catch (IOException e) {
-            System.out.println("Not able to create imageFile");
+            System.out.println("Not able to create imageFile " + this.toString());
             //TODO fix a popup here
         }
-        Uri imageURI = FileProvider.getUriForFile(getApplicationContext(),
-                "corp.skaj.foretagskvitton.fileprovider",
-                imageFile);
+        Uri imageURI = FileProvider.getUriForFile(getApplicationContext()
+                , "corp.skaj.foretagskvitton.fileprovider"
+                , imageFile);
         return imageURI;
     }
 
@@ -101,9 +123,38 @@ public class AddReceiptActivity extends AbstractActivity {
         return image;
     }
 
-    // This method runs when camera button is pressed.
-    public void cameraButtonActionPerformed(View view) {
-        dispatchOpenCamera();
+    private void readGallerImage(Uri addressToGallery) {
+        setupImageFolder();
+        File newFile = new File(mImageAdress);
+        Bitmap bmp;
+        try {
+            bmp = ReceiptScanner.createImageFromURI(this, addressToGallery);
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+            startWizard(null);
+            return;
+        }
+        copyImage(newFile, bmp);
+        Uri addressToNewFile = Uri.fromFile(newFile);
+        mImageAdress = "";
+        startWizard(addressToNewFile);
     }
 
+    private void copyImage(File dest, Bitmap bmp) {
+        FileOutputStream out = null;
+        try {
+            out = new FileOutputStream(dest);
+            bmp.compress(Bitmap.CompressFormat.PNG, 100, out); // bmp is Bitmap instance
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (out != null) {
+                    out.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }

@@ -7,23 +7,13 @@
             title="@string/menu_archive" />
 
         <tab
-            icon="@drawable/ic_chart"
-            id="@+id/action_charts"
-            title="@string/menu_charts" />
-
-        <tab
-            icon="@drawable/ic_add"
-            id="@+id/action_add"
-            title="@string/menu_add" />
-
-        <tab
             icon="@drawable/ic_business"
             id="@+id/action_business"
             title="@string/menu_business" />
 
         <tab
-            icon="@drawable/ic_user"
-            id="@+id/action_user"
-            title="@string/menu_user" />
+            icon="@drawable/ic_supplier"
+            id="@+id/action_supplier"
+            title="@string/menu_supplier" />
     </tabs>
 </PreferenceScreen>

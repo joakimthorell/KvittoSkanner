@@ -3,98 +3,103 @@ package corp.skaj.foretagskvitton.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
-import android.view.Menu;
-import android.view.MenuItem;
 
-import com.afollestad.materialcab.MaterialCab;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.roughike.bottombar.BottomBar;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import corp.skaj.foretagskvitton.R;
-import corp.skaj.foretagskvitton.controllers.IMain;
-import corp.skaj.foretagskvitton.controllers.ListFragmentController;
+import corp.skaj.foretagskvitton.controllers.AddReceiptController;
+import corp.skaj.foretagskvitton.controllers.IView;
 import corp.skaj.foretagskvitton.controllers.MainController;
-import corp.skaj.foretagskvitton.model.Card;
-import corp.skaj.foretagskvitton.model.Company;
-import corp.skaj.foretagskvitton.model.Employee;
-import corp.skaj.foretagskvitton.model.MultipleItem;
-import corp.skaj.foretagskvitton.model.Supplier;
-import corp.skaj.foretagskvitton.model.User;
-import corp.skaj.foretagskvitton.view.ArchiveAdapter;
-import corp.skaj.foretagskvitton.view.CompanyAdapter;
-import corp.skaj.foretagskvitton.view.CompanyMutlipleItemAdapter;
-import corp.skaj.foretagskvitton.view.ListFragment;
-import corp.skaj.foretagskvitton.view.SupplierAdapter;
+import corp.skaj.foretagskvitton.model.*;
+import corp.skaj.foretagskvitton.view.*;
 
-public class MainActivity extends AbstractActivity implements IMain, MaterialCab.Callback {
-    public static final String COMPANY_KEY = "key_for_company_ofc";
-    public static final String ARCHIVE_KEY = "key_for_archive_ofc";
-    public static final String SUPPLIER_KEY = "key_for_supplier_ofc";
+public class MainActivity extends AbstractActivity
+        implements IView,  ListFragment.Callback {
+    public static final String COMPANY_KEY = "COMPANY_KEY";
+    public static final String ARCHIVE_KEY = "ARCHIVE_KEY";
+    public static final String SUPPLIER_KEY = "SUPPLIER_KEY";
     private MainController mController;
     private FragmentManager mFragmentManger;
-    private ListFragmentController mListFragmentController;
+    private AddReceiptController mFloatingController;
+    private ListFragment mActiveFragment;
+    private Map<MainController.State, ListFragment> mFragmentMap;
+    private MainController.State mState;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        // If there is no user, create a default user
+
+        // Create a default user if there is no user
         getDataHandler().initDefaultUser();
+
+        // Initiate main controller and bottom bar
         mController = new MainController(this);
         BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
         mController.initBottomBar(bottomBar);
 
         mFragmentManger = getSupportFragmentManager();
+        // TODO denna kanske är onödig, tror de finns någon inbyggd som går att använda istället, ska kolla upp detta.
+        // Den sparar gamla värden, så går man tillbaka till ett tidigare fragment är datan kvar.
+        mFragmentMap = new HashMap<>();
 
-        //mListFragmentController = new ListFragmentController(this);
-
+        //TODO Designa en start vy istället?
         buildArchiveFragment();
     }
 
     @Override
-    public boolean onCabCreated(MaterialCab cab, Menu menu) {
-        return true;
-    }
-
-    @Override
-    public boolean onCabItemClicked(MenuItem item) {
-        return false;
-    }
-
-    @Override
-    public boolean onCabFinished(MaterialCab cab) {
-        return false;
-    }
-
     public void buildCompanyFragment() {
-        List<Company> companies = getDataHandler().readData(User.class.getName(), User.class).getCompanies();
-        CompanyAdapter ca = new CompanyAdapter(R.layout.company_list_view, companies);
-        mController.setCompanyAdapterListener(ca, CompanyActivity.class, COMPANY_KEY);
-        mFragmentManger.beginTransaction().replace(R.id.fragment_container, buildFragmentList(ca)).commit();
-    }
-
-    public void buildArchiveFragment() {
-        ArchiveAdapter aa = new ArchiveAdapter(R.layout.archive_list_item, getDataHandler().getPurchases(), getDataHandler());
-        mController.setArchiveAdapterListener(aa, ArchiveReceiptActivity.class, ARCHIVE_KEY);
-        mFragmentManger.beginTransaction().replace(R.id.fragment_container, buildFragmentList(aa)).commit();
-    }
-
-    public void buildSupplierFragment() {
-        List<Supplier> suppliers = getDataHandler().readData(User.class.getName(), User.class).getSuppliers();
-        SupplierAdapter sa = new SupplierAdapter(R.layout.supplier_list_item, suppliers);
-        mController.setSupplierAdapterListener(sa, UserActivity.class, SUPPLIER_KEY);
-        mFragmentManger.beginTransaction().replace(R.id.fragment_container, buildFragmentList(sa)).commit();
-    }
-
-    private ListFragment buildFragmentList(BaseQuickAdapter bqa) {
-        return  ListFragment.create(bqa);
+        ListFragment fragment;
+        if (!mFragmentMap.containsKey(MainController.State.COMPANY)) {
+            CompanyAdapter ca = buildCompanyAdapter(); // Todo create xml for company
+            mController.setCompanyAdapterListener(ca, null, COMPANY_KEY); // todo null here
+            fragment = buildFragmentList(ca);
+            mFragmentMap.put(MainController.State.COMPANY, fragment);
+        } else {
+            fragment = mFragmentMap.get(MainController.State.COMPANY);
+        }
+        updateFragmentState(fragment,  MainController.State.COMPANY);
+        initFragment(fragment);
     }
 
     @Override
-    public void goToActivity(Class<?> c, String key, String data) {
+    public void buildArchiveFragment() {
+        ListFragment fragment;
+        if (!mFragmentMap.containsKey(MainController.State.ARCHIVE)) {
+            ArchiveAdapter aa = buildArchiveAdapter();
+            fragment = buildFragmentList(aa);
+            mController.setArchiveAdapterListener(aa, ArchiveActivity.class, ARCHIVE_KEY);
+            mFragmentMap.put(MainController.State.ARCHIVE, fragment);
+        } else {
+            fragment = mFragmentMap.get(MainController.State.ARCHIVE);
+        }
+        updateFragmentState(fragment,  MainController.State.ARCHIVE);
+        initFragment(fragment);
+    }
+
+    @Override
+    public void buildSupplierFragment() {
+        ListFragment fragment;
+        if (!mFragmentMap.containsKey(MainController.State.SUPPLIER)) {
+            SupplierAdapter sa = buildSupplierAdapter(getSuppliers());
+            fragment = buildFragmentList(sa);
+            mController.setSupplierAdapterListener(sa, SupplierActivity.class, SUPPLIER_KEY);
+            mFragmentMap.put(MainController.State.SUPPLIER, fragment);
+        } else {
+            fragment = mFragmentMap.get(MainController.State.SUPPLIER);
+        }
+        updateFragmentState(fragment,  MainController.State.SUPPLIER);
+        initFragment(fragment);
+    }
+
+    @Override
+    public void nextActivity(Class<?> c, String key, String data) {
         Intent intent = new Intent(this, c);
         intent.putExtra(key, data);
         startActivity(intent);
@@ -132,11 +137,58 @@ public class MainActivity extends AbstractActivity implements IMain, MaterialCab
         CompanyMutlipleItemAdapter cia = new CompanyMutlipleItemAdapter(list);
 
         ListFragment lf = ListFragment.create(cia);
-        mFragmentManger.beginTransaction().replace(R.id.fragment_container, lf).commit();
+        initFragment(lf);
     }
 
+    @Override
+    public void onListCreated() {
+        if (mFloatingController == null) {
+            mFloatingController = new AddReceiptController(this,
+                    AddReceiptActivity.class, null, null);
+        }
+        mFloatingController.setButton(mActiveFragment.getButton())
+                .setListener(mState);
+    }
 
+    private ArchiveAdapter buildArchiveAdapter() {
+        return new ArchiveAdapter(R.layout.archive_list_item, getPurchases(), getDataHandler());
+    }
 
+    private CompanyAdapter buildCompanyAdapter() {
+        return new CompanyAdapter(R.layout.archive_list_item, getCompanies());
+    }
 
+    private SupplierAdapter buildSupplierAdapter(List<Supplier> suppliers) {
+        return new SupplierAdapter(R.layout.archive_list_item, suppliers);
+    }
 
+    private User getUser() {
+        return getDataHandler().readData(User.class.getName(), User.class);
+    }
+
+    private List<Company> getCompanies() {
+        return getUser().getCompanies();
+    }
+
+    private List<Supplier> getSuppliers() {
+        return getDataHandler().readData(User.class.getName(), User.class).getSuppliers();
+    }
+
+    private PurchaseList getPurchases() {
+        return getDataHandler().getPurchases(getUser());
+    }
+
+    private ListFragment buildFragmentList(BaseQuickAdapter bqa) {
+        ListFragment fragment = ListFragment.create(bqa, this);
+        return fragment;
+    }
+
+    private void updateFragmentState(ListFragment fragment, MainController.State state) {
+        mActiveFragment = fragment;
+        mState = state;
+    }
+
+    private void initFragment(ListFragment fragment) {
+        mFragmentManger.beginTransaction().replace(R.id.fragment_container, fragment).commit();
+    }
 }

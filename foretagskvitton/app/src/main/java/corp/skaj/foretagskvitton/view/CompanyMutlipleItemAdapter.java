@@ -22,7 +22,6 @@ public class CompanyMutlipleItemAdapter extends BaseMultiItemQuickAdapter<Multip
 
     @Override
     protected void convert(BaseViewHolder helper, MultipleItem item) {
-        int id = R.id.ArchiveTitle;
-        helper.setText(id, item.getContent());
+        helper.setText(R.id.list_item_archive_company_name, item.getContent());
     }
 }
