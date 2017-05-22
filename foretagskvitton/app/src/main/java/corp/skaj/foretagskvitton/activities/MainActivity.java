@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 import corp.skaj.foretagskvitton.R;
-import corp.skaj.foretagskvitton.controllers.AddReceiptController;
+import corp.skaj.foretagskvitton.controllers.FloatingButtonController;
 import corp.skaj.foretagskvitton.controllers.IView;
 import corp.skaj.foretagskvitton.controllers.MainController;
 import corp.skaj.foretagskvitton.model.*;
@@ -26,7 +26,7 @@ public class MainActivity extends AbstractActivity
     public static final String SUPPLIER_KEY = "SUPPLIER_KEY";
     private MainController mController;
     private FragmentManager mFragmentManger;
-    private AddReceiptController mFloatingController;
+    private FloatingButtonController mFloatingController;
     private ListFragment mActiveFragment;
     private Map<MainController.State, ListFragment> mFragmentMap;
     private MainController.State mState;
@@ -143,7 +143,7 @@ public class MainActivity extends AbstractActivity
     @Override
     public void onListCreated() {
         if (mFloatingController == null) {
-            mFloatingController = new AddReceiptController(this,
+            mFloatingController = new FloatingButtonController(this,
                     AddReceiptActivity.class, null, null);
         }
         mFloatingController.setButton(mActiveFragment.getButton())

@@ -1,5 +1,6 @@
 package corp.skaj.foretagskvitton.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -8,6 +9,8 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
+import android.util.AttributeSet;
+import android.view.View;
 import android.widget.ProgressBar;
 
 import com.github.ybq.android.spinkit.style.CubeGrid;
@@ -19,18 +22,20 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import corp.skaj.foretagskvitton.R;
-import corp.skaj.foretagskvitton.controllers.AddReceiptController;
+import corp.skaj.foretagskvitton.controllers.FloatingButtonController;
 import corp.skaj.foretagskvitton.services.ReceiptScanner;
 
 public class AddReceiptActivity extends AbstractActivity {
     public static final String BUILD_NEW_RECEIPT = "corp.skaj.foretagskvitton.BUILD_RECEIPT";
     public static final String KEY_FOR_IMAGE = "corp.skaj.foretagskvitton.KEY_FOR_IMAGE";
     private static final int REQUEST_IMAGE_CAPTURE = 31415;
+    private static final int REQUEST_IMAGE_CHOOSEN = 1313;
     private String mImageAdress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.copy_image_layout);
 
         mImageAdress = "";
         String action = getIntent().getAction();
@@ -39,13 +44,13 @@ public class AddReceiptActivity extends AbstractActivity {
 
     private void onActionPerformed(String action) {
         switch (action) {
-            case AddReceiptController.CAMERA_ACTION:
+            case FloatingButtonController.CAMERA_ACTION:
                 dispatchOpenCamera();
                 break;
-            case AddReceiptController.GALLERY_ACTION:
-                // TODO
+            case FloatingButtonController.GALLERY_ACTION:
+                dispatchChoosePictureIntent();
                 break;
-            case AddReceiptController.NO_IMAGE_ACTION:
+            case FloatingButtonController.NO_IMAGE_ACTION:
                 // TODO
                 break;
             case Intent.ACTION_SEND:
@@ -66,17 +71,21 @@ public class AddReceiptActivity extends AbstractActivity {
     // This method catches taken image by camera.
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        setContentView(R.layout.activity_archive);
-        ProgressBar progressBar = (ProgressBar) findViewById(R.id.spin_kit_copy);
-        CubeGrid cubeGrid = new CubeGrid();
-        progressBar.setIndeterminateDrawable(cubeGrid);
+
+        // TODO här vill vi börja async task
+
 
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             if (mImageAdress.length() > 0) {
                 Uri URI = Uri.fromFile(new File(mImageAdress));
                 mImageAdress = "";
                 startWizard(URI);
+                return;
             }
+        } else if (requestCode == REQUEST_IMAGE_CHOOSEN && resultCode == RESULT_OK) {
+            Uri uri = data.getData();
+            readGallerImage(uri);
+            return;
         } else {
             System.out.println("No picture was found");
         }
@@ -100,6 +109,15 @@ public class AddReceiptActivity extends AbstractActivity {
             openCamera.putExtra(MediaStore.EXTRA_OUTPUT, imageURI);
             startActivityForResult(openCamera, REQUEST_IMAGE_CAPTURE);
         }
+    }
+
+    private void dispatchChoosePictureIntent() {
+
+        Intent intent = new Intent(Intent.ACTION_PICK)
+                .setType("image/*");
+
+        startActivityForResult(intent, REQUEST_IMAGE_CHOOSEN);
+
     }
 
     // This method arranges a folder where an image taken by camera is saved.
@@ -144,10 +162,13 @@ public class AddReceiptActivity extends AbstractActivity {
             startWizard(null);
             return;
         }
-        copyImage(newFile, bmp);
-        Uri addressToNewFile = Uri.fromFile(newFile);
-        mImageAdress = "";
-        startWizard(addressToNewFile);
+        //copyImage(newFile, bmp);
+        CopyImageTask task = new CopyImageTask(newFile, bmp);
+        task.execute();
+
+        //Uri addressToNewFile = Uri.fromFile(newFile);
+        //mImageAdress = "";
+        //startWizard(addressToNewFile);
     }
 
     private void copyImage(File dest, Bitmap bmp) {
@@ -167,4 +188,43 @@ public class AddReceiptActivity extends AbstractActivity {
             }
         }
     }
+
+    private class CopyImageTask extends AsyncTask<Void, Void, Void> {
+
+        private File copyTo;
+        private Bitmap copyFrom;
+
+        private CopyImageTask(File copyTo, Bitmap copyFrom) {
+            this.copyTo = copyTo;
+            this.copyFrom = copyFrom;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            ProgressBar progressBar = (ProgressBar) findViewById(R.id.spin_kit);
+            CubeGrid cubeGrid = new CubeGrid();
+            progressBar.setIndeterminateDrawable(cubeGrid);
+
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+
+            Uri addressToNewFile = Uri.fromFile(copyTo);
+            mImageAdress = "";
+            startWizard(addressToNewFile);
+
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            copyImage(copyTo, copyFrom);
+
+            return null;
+        }
+    }
+
 }

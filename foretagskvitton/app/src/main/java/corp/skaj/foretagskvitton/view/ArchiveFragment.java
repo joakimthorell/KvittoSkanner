@@ -76,7 +76,7 @@ public class ArchiveFragment extends Fragment {
         //category.set(purchase.getReceipt().getProducts().get(0).getCategory().name());
         moms.setText("Moms: " + String.valueOf(purchase.getReceipt().getProducts().get(0).getTax()) + " %");
         //supplier.setText(checkSupplier());
-        comment.setText("\"" + purchase.getComments().get(0).getComment() + "\"");
+        //comment.setText("\"" + purchase.getComments().get(0).getComment() + "\"");
         company.setText(user.getCompany(purchase).getName());
         SimpleDateFormat dateRaw = new SimpleDateFormat("yyyy-MM-dd");
         String receiptDate = dateRaw.format(purchase.getReceipt().getDate().getTime());

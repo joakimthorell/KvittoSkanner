@@ -12,7 +12,7 @@ import com.getbase.floatingactionbutton.FloatingActionsMenu;
 
 import corp.skaj.foretagskvitton.R;
 
-public class AddReceiptController {
+public class FloatingButtonController {
     // these actions are for Archive FAB
     public static final String CAMERA_ACTION = "time_to_take_picture";
     public static final String GALLERY_ACTION = "collect_image_from_gallery";
@@ -29,14 +29,14 @@ public class AddReceiptController {
     private Class<?> mCompanyNextActivity;
     private Class<?> mSupplierNextActivity;
 
-    public AddReceiptController(Context context,
-                                Class<?> archiveNextActivity,
-                                Class<?> companyNextActivity,
-                                Class<?> supplierNextActivity) {
+    public FloatingButtonController(Context context,
+                                    Class<?> archiveNextActivity,
+                                    Class<?> companyNextActivity,
+                                    Class<?> supplierNextActivity) {
         mContext = context;
 
         mCameraDraw = context.getDrawable(R.drawable.ic_camera);
-        mGalleryDraw = context.getDrawable(R.drawable.ic_folder); // Todo fix other icons here
+        mGalleryDraw = context.getDrawable(R.drawable.ic_image); // Todo fix other icons here
         mNoImageDraw = context.getDrawable(R.drawable.ic_close);
 
         mArchiveNextActivity = archiveNextActivity;
@@ -51,12 +51,12 @@ public class AddReceiptController {
 
     }
 
-    public AddReceiptController setButton(FloatingActionsMenu button) {
+    public FloatingButtonController setButton(FloatingActionsMenu button) {
         mButton = button;
         return this;
     }
 
-    public AddReceiptController setListener(MainController.State state) {
+    public FloatingButtonController setListener(MainController.State state) {
         if (mButton == null) {
             System.out.println("FloatingButton is null in controller");
             return this;
@@ -72,7 +72,7 @@ public class AddReceiptController {
         return this;
     }
 
-    private AddReceiptController setButtonForArchive() {
+    private FloatingButtonController setButtonForArchive() {
         FloatingActionButton camera = new FloatingActionButton(mContext);
         camera.setTitle(mContext.getString(R.string.camera));
         camera.setImageDrawable(mCameraDraw);
@@ -85,10 +85,23 @@ public class AddReceiptController {
             }
         });
         mButton.addButton(camera);
+
+        FloatingActionButton gallery = new FloatingActionButton(mContext);
+        gallery.setTitle(mContext.getString(R.string.gallery));
+        gallery.setImageDrawable(mGalleryDraw);
+        gallery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, mArchiveNextActivity);
+                intent.setAction(GALLERY_ACTION);
+                mContext.startActivity(intent);
+            }
+        });
+        mButton.addButton(gallery);
         return this;
     }
 
-    private AddReceiptController setButtonForCompany() {
+    private FloatingButtonController setButtonForCompany() {
         mButton.setOnFloatingActionsMenuUpdateListener(new FloatingActionsMenu.OnFloatingActionsMenuUpdateListener() {
             @Override
             public void onMenuExpanded() {
@@ -105,7 +118,7 @@ public class AddReceiptController {
         return this;
     }
 
-    private AddReceiptController setButtonForSupplier() {
+    private FloatingButtonController setButtonForSupplier() {
         mButton.setOnFloatingActionsMenuUpdateListener(new FloatingActionsMenu.OnFloatingActionsMenuUpdateListener() {
             @Override
             public void onMenuExpanded() {
