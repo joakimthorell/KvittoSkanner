@@ -11,6 +11,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.activities.ArchiveActivity;
@@ -25,13 +27,14 @@ public class ArchiveFragment extends Fragment {
     private TextView price;
     private TextView tax;
     private TextView date;
-    private TextView supplier;
     private TextView comment;
     private TextView purchaseType;
+    private Spinner supplier;
     private Spinner employes;
     private Spinner company;
     private Spinner category;
     private Purchase mPur;
+    private User user;
 
 
     public ArchiveFragment() {
@@ -78,36 +81,48 @@ public class ArchiveFragment extends Fragment {
         price.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
 
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(view.getContext(), R.layout.support_simple_spinner_dropdown_item, Category.getCategories());
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        category.setAdapter(adapter);
+        ArrayAdapter<String> categoryAdapter = new ArrayAdapter<String>(view.getContext(), R.layout.support_simple_spinner_dropdown_item, Category.getCategories());
+        categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        category.setAdapter(categoryAdapter);
 
 
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item,
-                user.getCompanies().get(0).getEmployees());
-        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        company.setAdapter(arrayAdapter);
+        ArrayAdapter<String> employeAdapter = new ArrayAdapter<String>( view.getContext(), R.layout.support_simple_spinner_dropdown_item,
+                empolyesAsList());
+        employeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        company.setAdapter(employeAdapter);
 
-        ArrayAdapter<String>arrayAdapter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item,
-                user.getCompanies().get(0).getEmployees());
-        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        company.setAdapter(arrayAdapter);
-
-
-        ArrayAdapter<String> employeeAdapter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item,
-                );
-        employeeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        company.setAdapter(employeeAdapter);
+        ArrayAdapter<String> supplierAdapter = new ArrayAdapter<String>(view.getContext(), R.layout.support_simple_spinner_dropdown_item,
+                suppliersAsList());
+        supplierAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        company.setAdapter(supplierAdapter);
 
 
         price.setText(String.valueOf(purchase.getReceipt().getTotal()) + "0");
         tax.setText("Moms: " + String.valueOf(purchase.getReceipt().getProducts().get(0).getTax()) + " %");
-        supplier.setText(checkSupplier());
 
         SimpleDateFormat dateRaw = new SimpleDateFormat("yyyy-MM-dd");
         String receiptDate = dateRaw.format(purchase.getReceipt().getDate().getTime());
         date.setText(receiptDate);
     }
+
+    private List<String> empolyesAsList() {
+        List<String> list = new ArrayList<>();
+        for (int i = 0; i < user.getCompanies().size(); i++) {
+            list.add(user.getCompanies().get(i).getName());
+        }
+        return list;
+    }
+
+
+    private List<String> suppliersAsList(){
+        List<String> list = new ArrayList<>();
+        for (int i = 0; i < user.getSuppliers().size(); i++) {
+            list.add(user.getSuppliers().get(i).getName());
+        }
+        return list;
+    }
+
+
     /*
        // date TODO - Get calender pop-up for correct entries  
         Calendar newCalendar = Calendar.getInstance();  
@@ -134,6 +149,9 @@ public class ArchiveFragment extends Fragment {
         }
         return mPur.getSupplier().getName();
     }
+
+
+
 
     public void sendSavedData () {
 
@@ -162,7 +180,7 @@ public class ArchiveFragment extends Fragment {
     }
 
     public String getSupplier() {
-        return String.valueOf(supplier.getText());
+        return String.valueOf(supplier.getSelectedItem().toString());
     }
 
     public String getComment() {

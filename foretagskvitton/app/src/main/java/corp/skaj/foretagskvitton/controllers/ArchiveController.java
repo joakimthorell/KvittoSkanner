@@ -48,9 +48,11 @@ public class ArchiveController {
 
         //payment method 
         mPur.setPurchaseType(selectCorrectPurchase());
+
         // company 
         Company updatedCompany = new Company(archiveFragment.getCompany());
         user.addCompany(updatedCompany);
+
         // Saves all changes 
         handler.writeData(User.class.getName(), user);
     }
