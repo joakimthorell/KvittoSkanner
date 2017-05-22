@@ -39,7 +39,6 @@ public class MainActivity extends AbstractActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.main_toolbar);
 
 
 
@@ -55,7 +54,7 @@ public class MainActivity extends AbstractActivity
         mFragmentManger = getSupportFragmentManager();
 
         mFragmentFactory = new ListFragmentFactory(this,
-                ArchiveActivity.class,
+                AddReceiptActivity.class,
                 SupplierActivity.class,
                 CompanyActivity.class);
 
@@ -88,31 +87,6 @@ public class MainActivity extends AbstractActivity
         Intent intent = new Intent(this, c);
         intent.putExtra(key, data);
         startActivity(intent);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        try {
-            getMenuInflater().inflate(R.menu.main_toolbar, menu);
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_sort:
-                // todo
-                return true;
-            case R.id.action_filter:
-                // todo
-                return true;
-            default:
-                return false;
-        }
     }
 
     private User getUser() {
