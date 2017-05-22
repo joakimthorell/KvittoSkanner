@@ -8,14 +8,14 @@ import java.util.List;
  * String in Category is a color in hex
  */
 public enum Category {
-    BENSIN ("#E43F3F"), // red
-    HOTELL ("#FFFF66"), // light yellow
-    KONTORSMATERIAL ("#FFCCE5"), // pinkish
-    MAT ("#99FF33"), // green
-    PORTO ("#33FFFF"), // light blue
-    REPRESENTATION ("#FFB266"), // orange/brown
-    RESOR ("#FF66FF"), // purpleish
-    TRANSPORT ("#6666FF"); // darker blue
+    BENSIN("#E43F3F"), // red
+    HOTELL("#FFFF66"), // light yellow
+    KONTORSMATERIAL("#FFCCE5"), // pinkish
+    MAT("#99FF33"), // green
+    PORTO("#33FFFF"), // light blue
+    REPRESENTATION("#FFB266"), // orange/brown
+    RESOR("#FF66FF"), // purpleish
+    TRANSPORT("#6666FF"); // darker blue
 
     private final String color;
 

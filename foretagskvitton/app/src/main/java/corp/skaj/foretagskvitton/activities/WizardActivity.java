@@ -35,8 +35,8 @@ import com.tech.freak.wizardpager.ui.StepPagerStrip;
 import java.util.List;
 
 import corp.skaj.foretagskvitton.R;
-import corp.skaj.foretagskvitton.controllers.WizardPageController;
 import corp.skaj.foretagskvitton.controllers.WizardController;
+import corp.skaj.foretagskvitton.controllers.WizardPageController;
 import corp.skaj.foretagskvitton.model.IObserver;
 
 public class WizardActivity extends AbstractActivity implements

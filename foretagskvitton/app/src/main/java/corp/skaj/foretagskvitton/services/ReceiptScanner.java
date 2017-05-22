@@ -15,8 +15,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static android.provider.CalendarContract.CalendarCache.URI;
-
 public class ReceiptScanner {
 
     private ReceiptScanner() {

@@ -15,6 +15,7 @@ import java.text.SimpleDateFormat;
 import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.activities.ArchiveActivity;
 import corp.skaj.foretagskvitton.model.Category;
+import corp.skaj.foretagskvitton.model.Company;
 import corp.skaj.foretagskvitton.model.IData;
 import corp.skaj.foretagskvitton.model.Purchase;
 import corp.skaj.foretagskvitton.model.PurchaseList;
@@ -26,6 +27,8 @@ public class ArchiveFragment extends Fragment {
     private TextView date;
     private TextView supplier;
     private TextView comment;
+    private TextView purchaseType;
+    private Spinner employes;
     private Spinner company;
     private Spinner category;
     private Purchase mPur;
@@ -44,7 +47,6 @@ public class ArchiveFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-
         }
     }
 
@@ -60,45 +62,72 @@ public class ArchiveFragment extends Fragment {
     private void setupFragment(View view, String purchaseId) {
         IData dataHandler = (IData) getContext().getApplicationContext();
         User user = dataHandler.readData(User.class.getName(), User.class);
+
         PurchaseList purchases = dataHandler.getPurchases(user);
         Purchase purchase = purchases.getPurchase(purchaseId);
 
         price = (TextView) view.findViewById(R.id.archive_receipt_price);
-        price.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
-
-
-        category = (Spinner) view.findViewById(R.id.archive_receipt_categories);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(view.getContext(), R.layout.support_simple_spinner_dropdown_item, Category.getCategories());
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        category.setAdapter(adapter);
-
         tax = (TextView) view.findViewById(R.id.archive_receipt_moms);
         date = (TextView) view.findViewById(R.id.archive_receipt_date);
         supplier = (TextView) view.findViewById(R.id.archive_receipt_supplier);
         comment = (TextView) view.findViewById(R.id.archive_receipt_comment);
+        category = (Spinner) view.findViewById(R.id.archive_receipt_categories);
+        company = (Spinner) view.findViewById(R.id.archive_receipt_company; 
+        employes = (Spinner) view.findViewById(R.id.archive_receipt_company; 
 
-        company = (Spinner) view.findViewById(R.id.spinnerCompany); 
+        price.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
+
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(view.getContext(), R.layout.support_simple_spinner_dropdown_item, Category.getCategories());
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        category.setAdapter(adapter);
+
+
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, 
-                user.getCompaniesArray()); 
+                user.getCompanies().get(0).getEmployees()); 
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); 
         company.setAdapter(arrayAdapter);
 
+
+        ArrayAdapter<String> employeeAdapter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, 
+                ); 
+        employeeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); 
+        company.setAdapter(employeeAdapter);
+
+
         price.setText(String.valueOf(purchase.getReceipt().getTotal()) + "0");
         tax.setText("Moms: " + String.valueOf(purchase.getReceipt().getProducts().get(0).getTax()) + " %");
-        //supplier.setText(checkSupplier());
-        //comment.setText("\"" + purchase.getComments().get(0).getComment() + "\"");
-        //company.setText(user.getCompany(purchase).getName());
+        supplier.setText(checkSupplier());
+
         SimpleDateFormat dateRaw = new SimpleDateFormat("yyyy-MM-dd");
         String receiptDate = dateRaw.format(purchase.getReceipt().getDate().getTime());
         date.setText(receiptDate);
     }
+    /*
+       // date TODO - Get calender pop-up for correct entries  
+        Calendar newCalendar = Calendar.getInstance();  
+        mDatePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener()
+        {  
+            @Override 
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) { 
+                Calendar newDate = Calendar.getInstance(); 
+                newDate.set(year, monthOfYear, dayOfMonth); 
+                String formattedDate = DatePage.dateFormatter.format(newDate.getTime());  
+                date.setText(formattedDate); 
+                mPage.getData().putString(DatePage.SIMPLE_DATA_KEY, formattedDate); 
+                mPage.notifyDataChanged(); 
+        }  
+
+        }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));  
+     */
+
 
     public void sendSavedData () {
 
 
     }
 
-        public double getCost () {
+    public double getCost () {
             return Double.valueOf(String.valueOf(price.getText()));
         }
 
@@ -126,6 +155,14 @@ public class ArchiveFragment extends Fragment {
     public String getComment() {
         return String.valueOf(comment.getText());
     }
+
+    public String getPurchaseType(){
+    }
+
+    public String getEmployee (){
+
+    }
+}
 
 }
 

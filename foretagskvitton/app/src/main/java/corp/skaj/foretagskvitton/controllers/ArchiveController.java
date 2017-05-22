@@ -1,32 +1,33 @@
 package corp.skaj.foretagskvitton.controllers;
 
+import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.widget.Button;
 
+import corp.skaj.foretagskvitton.model.Category;
+import corp.skaj.foretagskvitton.model.Company;
 import corp.skaj.foretagskvitton.model.IData;
 import corp.skaj.foretagskvitton.model.Purchase;
 import corp.skaj.foretagskvitton.model.PurchaseList;
+import corp.skaj.foretagskvitton.model.Supplier;
 import corp.skaj.foretagskvitton.model.User;
+import corp.skaj.foretagskvitton.view.ArchiveFragment;
 
-public class ArchiveController<T> {
-    public static final String RECEIPT_ID = "RECEIPT_ID";
-    private Context mContext;
-    private Class<T> mNextActivityToStart;
+public class ArchiveController {
     private Purchase mPur;
     private PurchaseList purchaseList;
     private User user;
+    private ArchiveFragment archiveFragment;
+    private IData handler;
 
-    public ArchiveController(IData dataHandler, String purId, Button saveButton ) {
+    public ArchiveController(IData dataHandler, String purId, ArchiveFragment archiveFragment) {
         this.mPur = purchaseList.getPurchase(purId);
         this.user = dataHandler.readData(User.class.getName(),User.class);
+        this.archiveFragment = archiveFragment;
+        this.handler = dataHandler;
     }
 
-    public void onItemClicked(String itemId) {
-        Intent intent = new Intent(mContext, mNextActivityToStart);
-        intent.putExtra(RECEIPT_ID, itemId);
-        mContext.startActivity(intent);
-    }
 
     private String checkSupplier(){
         try {
@@ -44,64 +45,37 @@ public class ArchiveController<T> {
         return "Företagskort";
     }
 
-    public void onCommentClick (View view){
-        Intent intent = new Intent(this, ArchiveReceiptComments.class);
-        intent.putExtra(COMMENT_ID, mPur.getId());
-        startActivity(intent);
-    }
-
-    public void onReceiptClick(View view){
-        Intent intent = new Intent(this, ArchiveReceiptPicture.class);
-        intent.putExtra("image", mPur.getReceipt().getPictureAdress());
-        startActivity(intent);
-    }
-
     public void updateReceiptData(){ 
         //Sets new..  
 
         // cost 
-        mPur.getReceipt().setTotal(Double.valueOf(String.valueOf(g)));  
+        mPur.getReceipt().setTotal(Double.valueOf(String.valueOf(archiveFragment.getCost())));  
 
         // category 
-        mPur.getReceipt().getProducts().get(0).setCategory(getCorrectCategory());  
+        mPur.getReceipt().getProducts().get(0).setCategory(Category.valueOf(archiveFragment.getCategory().toUpperCase()));  
 
         //tax 
-        // mPur.getReceipt().getProducts().get(0).setTax(Double.valueOf(String.valueOf(tax.getText())));  
+        mPur.getReceipt().getProducts().get(0).setTax(archiveFragment.getTax());  
 
-        // date TODO - Get calender pop-up for correct entries  
-        Calendar newCalendar = Calendar.getInstance();  
-        mDatePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener()
-        {  
-            @Override 
-            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) { 
-                Calendar newDate = Calendar.getInstance(); 
-                newDate.set(year, monthOfYear, dayOfMonth); 
-                String formattedDate = DatePage.dateFormatter.format(newDate.getTime());  
-                date.setText(formattedDate); 
-                mPage.getData().putString(DatePage.SIMPLE_DATA_KEY, formattedDate); 
-                mPage.notifyDataChanged(); 
-        }  
-
-        }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));  
-
-        //Supplier - WHY BOOLEAN? 
-        mPur.setSupplier(user.addSupplier(new Supplier("hej"))));  
+        //Supplier
+        Supplier updatedSupplier = new Supplier(archiveFragment.getSupplier());
+        mPur.setSupplier(updatedSupplier);  
 
         //payment method 
-        mPur.setPurchaseType(setPurchaseType());  
+        mPur.setPurchaseType(selectCorrectPurchase());  
 
         // company 
-        user.addCompany(new Company(company.getSelectedItem().toString()));  
+        Company updatedCompany = new Company(archiveFragment.getCompany());
+        user.addCompany(updatedCompany);  
 
         // Saves all changes 
         handler.writeData(User.class.getName(), user); 
     }  
 
-        // Needed because of how the spinner works. 
-        private Category getCorrectCategory(){ 
-        Category[] catStrings = Category.categoriesInArr(); 
-        return catStrings[category.getSelectedItemPosition()]; 
-        }  
-
-
+    private Purchase.PurchaseType selectCorrectPurchase () { 
+        if (archiveFragment.getSupplier().equals("Företagskort")){ 
+            return Purchase.PurchaseType.COMPANY; 
+    } 
+        return Purchase.PurchaseType.PRIVATE; 
+        }
 }

@@ -17,7 +17,6 @@ public class ArchiveActivity extends AbstractActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_archive);
 
-
         String purchaseId= getIntent().getStringExtra(MainActivity.ARCHIVE_KEY);
 
         Bundle bundle = new Bundle();
