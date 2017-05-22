@@ -1,5 +1,6 @@
 package corp.skaj.foretagskvitton.controllers;
 
+import android.support.design.widget.FloatingActionButton;
 import android.view.View;
 import android.widget.Button;
 
@@ -32,11 +33,12 @@ public class ArchiveController {
         return "Företagskort";
     }
 
-    public void setListerOnSaveButton(Button saveButton){
+    public void setListerOnSaveButton(FloatingActionButton saveButton){
+        System.out.println("ILLUMINATI HAHAHHAHHA 1");
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("ILLUMINATI HAHAHHAHHA ");
+                System.out.println("ILLUMINATI HAHAHHAHHA 2");
             }
         });
     }
@@ -67,7 +69,6 @@ public class ArchiveController {
         // Saves all changes 
         handler.writeData(User.class.getName(), user);
     }
-
 
     private Purchase.PurchaseType selectCorrectPurchase(){
         if (archiveFragment.getSupplier().equals("Företagskort")) {
