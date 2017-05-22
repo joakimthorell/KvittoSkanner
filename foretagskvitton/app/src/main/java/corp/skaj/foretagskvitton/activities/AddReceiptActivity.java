@@ -8,6 +8,9 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
+import android.widget.ProgressBar;
+
+import com.github.ybq.android.spinkit.style.CubeGrid;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -15,6 +18,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.controllers.AddReceiptController;
 import corp.skaj.foretagskvitton.services.ReceiptScanner;
 
@@ -27,6 +31,7 @@ public class AddReceiptActivity extends AbstractActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         mImageAdress = "";
         String action = getIntent().getAction();
         onActionPerformed(action);
@@ -61,6 +66,11 @@ public class AddReceiptActivity extends AbstractActivity {
     // This method catches taken image by camera.
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        setContentView(R.layout.activity_archive);
+        ProgressBar progressBar = (ProgressBar) findViewById(R.id.spin_kit_copy);
+        CubeGrid cubeGrid = new CubeGrid();
+        progressBar.setIndeterminateDrawable(cubeGrid);
+
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             if (mImageAdress.length() > 0) {
                 Uri URI = Uri.fromFile(new File(mImageAdress));

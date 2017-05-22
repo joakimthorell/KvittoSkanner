@@ -15,5 +15,6 @@
     <string name="menu_supplier">Grossist</string>
     <string name="total">Total:</string>
     <string name="currancy">Sek</string>
+    <string name="copy_image_text">Detta tar några sekunder, kopierar bild...</string>
 
 </resources>
