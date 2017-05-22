@@ -189,6 +189,6 @@ public class MainActivity extends AbstractActivity
     }
 
     private void initFragment(ListFragment fragment) {
-        mFragmentManger.beginTransaction().replace(R.id.fragment_container, fragment).commit();
+        mFragmentManger.beginTransaction().replace(R.id.main_fragment_container, fragment).commit();
     }
 }
