@@ -25,7 +25,7 @@ public class ArchiveFragment extends Fragment {
     private TextView date;
     private TextView supplier;
     private TextView comment;
-    private TextView company;
+    private Spinner company;
     private Spinner category;
 
     public ArchiveFragment() {
@@ -41,7 +41,6 @@ public class ArchiveFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-
         }
     }
 
@@ -71,11 +70,18 @@ public class ArchiveFragment extends Fragment {
         date = (TextView) view.findViewById(R.id.archive_receipt_date);
         supplier = (TextView) view.findViewById(R.id.archive_receipt_supplier);
         comment = (TextView) view.findViewById(R.id.archive_receipt_comment);
-        company = (TextView) view.findViewById(R.id.archive_receipt_company);
+        company = (Spinner) view.findViewById(R.id.archive_receipt_company);
         price.setText(String.valueOf(purchase.getReceipt().getTotal()) + "0");
         //category.set(purchase.getReceipt().getProducts().get(0).getCategory().name());
         moms.setText("Moms: " + String.valueOf(purchase.getReceipt().getProducts().get(0).getTax()) + " %");
         //supplier.setText(checkSupplier());
+<<<<<<< HEAD
+        comment.setText("\"" + purchase.getComments().get(0).getComment() + "\"");
+
+        company = (Spinner) view.findViewById(R.id.archive_receipt_categories);
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(view.getContext(), R.layout.support_simple_spinner_dropdown_item, Category.getCategories());
+        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
         //comment.setText("\"" + purchase.getComments().get(0).getComment() + "\"");
         company.setText(user.getCompany(purchase).getName());
         SimpleDateFormat dateRaw = new SimpleDateFormat("yyyy-MM-dd");

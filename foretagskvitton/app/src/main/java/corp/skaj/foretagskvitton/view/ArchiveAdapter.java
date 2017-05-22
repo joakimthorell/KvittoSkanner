@@ -6,8 +6,6 @@ import com.amulyakhare.textdrawable.TextDrawable;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 
-import java.text.SimpleDateFormat;
-
 import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.model.Category;
 import corp.skaj.foretagskvitton.model.IData;
@@ -40,6 +38,5 @@ public class ArchiveAdapter extends BaseQuickAdapter<Purchase, BaseViewHolder> {
                 .setText(R.id.list_item_archive_total, String.valueOf(total))
                 .setText(R.id.list_item_archive_num_of_comments, String.valueOf(nComments))
                 .setImageDrawable(R.id.list_item_archive_circular_image, circleImage);
-
     }
 }

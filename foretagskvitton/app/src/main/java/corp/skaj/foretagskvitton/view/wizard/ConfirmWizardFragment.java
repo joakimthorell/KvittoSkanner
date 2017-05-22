@@ -8,7 +8,6 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 
 import corp.skaj.foretagskvitton.R;
-import corp.skaj.foretagskvitton.view.wizard.WizardPageBuilder;
 
 public class ConfirmWizardFragment extends DialogFragment {
     private WizardPageBuilder model;

@@ -1,7 +1,7 @@
 package corp.skaj.foretagskvitton.activities;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 import corp.skaj.foretagskvitton.R;
 
