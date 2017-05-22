@@ -69,11 +69,11 @@ public class ArchiveFragment extends Fragment {
         price = (TextView) view.findViewById(R.id.archive_receipt_price);
         tax = (TextView) view.findViewById(R.id.archive_receipt_moms);
         date = (TextView) view.findViewById(R.id.archive_receipt_date);
-        supplier = (TextView) view.findViewById(R.id.archive_receipt_supplier);
+        supplier = (Spinner) view.findViewById(R.id.archive_receipt_supplier);
         comment = (TextView) view.findViewById(R.id.archive_receipt_comment);
         category = (Spinner) view.findViewById(R.id.archive_receipt_categories);
-        company = (Spinner) view.findViewById(R.id.archive_receipt_company; 
-        employes = (Spinner) view.findViewById(R.id.archive_receipt_company; 
+        company = (Spinner) view.findViewById(R.id.archive_receipt_company);
+        employes = (Spinner) view.findViewById(R.id.archive_receipt_company);
 
         price.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
 
@@ -83,15 +83,20 @@ public class ArchiveFragment extends Fragment {
         category.setAdapter(adapter);
 
 
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, 
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item,
+                user.getCompanies().get(0).getEmployees()); 
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); 
+        company.setAdapter(arrayAdapter);
+
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item,
                 user.getCompanies().get(0).getEmployees()); 
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); 
         company.setAdapter(arrayAdapter);
 
 
-        ArrayAdapter<String> employeeAdapter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, 
-                ); 
-        employeeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); 
+        ArrayAdapter<String> employeeAdapter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item,
+                );
+        employeeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         company.setAdapter(employeeAdapter);
 
 
@@ -121,6 +126,14 @@ public class ArchiveFragment extends Fragment {
         }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));  
      */
 
+    private String checkSupplier() {
+        try {
+            mPur.getSupplier().getName();
+        } catch (NullPointerException e) {
+            return "Supplier not specified";
+        }
+        return mPur.getSupplier().getName();
+    }
 
     public void sendSavedData () {
 
@@ -134,7 +147,7 @@ public class ArchiveFragment extends Fragment {
     public double getTax() {
         String newTax = String.valueOf((tax.getText()));
         return Double.valueOf(newTax.substring(7, newTax.length() - 2));
-
+    }
 
     public String getCategory() {
         return category.getSelectedItem().toString();
@@ -157,12 +170,13 @@ public class ArchiveFragment extends Fragment {
     }
 
     public String getPurchaseType(){
+        return null;
     }
 
     public String getEmployee (){
-
+    return null;
     }
-}
 
 }
+
 

@@ -1,10 +1,5 @@
 package corp.skaj.foretagskvitton.controllers;
 
-import android.app.Fragment;
-import android.content.Context;
-import android.content.Intent;
-import android.widget.Button;
-
 import corp.skaj.foretagskvitton.model.Category;
 import corp.skaj.foretagskvitton.model.Company;
 import corp.skaj.foretagskvitton.model.IData;
@@ -23,59 +18,48 @@ public class ArchiveController {
 
     public ArchiveController(IData dataHandler, String purId, ArchiveFragment archiveFragment) {
         this.mPur = purchaseList.getPurchase(purId);
-        this.user = dataHandler.readData(User.class.getName(),User.class);
+        this.user = dataHandler.readData(User.class.getName(), User.class);
         this.archiveFragment = archiveFragment;
         this.handler = dataHandler;
     }
 
-
-    private String checkSupplier(){
-        try {
-            mPur.getSupplier().getName();
-        } catch(NullPointerException e) {
-            return "Supplier not specified";
-        }
-        return mPur.getSupplier().getName();
-    }
-
-    private String  purchaseType() {
+    private String purchaseType() {
         if (mPur.getPurchaseType() == mPur.getPurchaseType().PRIVATE) {
             return "Privatkort";
         }
         return "Företagskort";
     }
 
-    public void updateReceiptData(){ 
+    public void updateReceiptData() {
         //Sets new..  
 
         // cost 
-        mPur.getReceipt().setTotal(Double.valueOf(String.valueOf(archiveFragment.getCost())));  
+        mPur.getReceipt().setTotal(archiveFragment.getCost());
 
         // category 
-        mPur.getReceipt().getProducts().get(0).setCategory(Category.valueOf(archiveFragment.getCategory().toUpperCase()));  
+        mPur.getReceipt().getProducts().get(0).setCategory(Category.valueOf(archiveFragment.getCategory().toUpperCase()));
 
         //tax 
-        mPur.getReceipt().getProducts().get(0).setTax(archiveFragment.getTax());  
+        mPur.getReceipt().getProducts().get(0).setTax(archiveFragment.getTax());
 
         //Supplier
         Supplier updatedSupplier = new Supplier(archiveFragment.getSupplier());
-        mPur.setSupplier(updatedSupplier);  
+        mPur.setSupplier(updatedSupplier);
 
         //payment method 
-        mPur.setPurchaseType(selectCorrectPurchase());  
-
+        mPur.setPurchaseType(selectCorrectPurchase());
         // company 
         Company updatedCompany = new Company(archiveFragment.getCompany());
-        user.addCompany(updatedCompany);  
-
+        user.addCompany(updatedCompany);
         // Saves all changes 
-        handler.writeData(User.class.getName(), user); 
-    }  
+        handler.writeData(User.class.getName(), user);
+    }
 
-    private Purchase.PurchaseType selectCorrectPurchase () { 
-        if (archiveFragment.getSupplier().equals("Företagskort")){ 
-            return Purchase.PurchaseType.COMPANY; 
-    } 
-        return Purchase.PurchaseType.PRIVATE; 
-        }
+
+    private Purchase.PurchaseType selectCorrectPurchase(){
+        if (archiveFragment.getSupplier().equals("Företagskort")) {
+            return Purchase.PurchaseType.COMPANY;
+    }
+        return Purchase.PurchaseType.PRIVATE;
+    }
 }
