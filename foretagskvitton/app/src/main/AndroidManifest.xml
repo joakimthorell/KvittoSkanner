@@ -48,8 +48,6 @@
         </activity>
         <activity android:name=".activities.SupplierActivity" />
         <activity android:name=".activities.ArchiveActivity" />
-        <activity android:name=".activities.ArchiveReceiptComments" />
-        <activity android:name=".activities.ArchiveReceiptPicture" />
         <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
