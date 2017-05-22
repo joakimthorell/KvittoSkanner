@@ -93,6 +93,7 @@ public class User {
     }
 
     public List<Company> getCompanies() {
+        System.out.println(companies.get(0).getName() + "AHHAHAHA AH AhalOOLLLLLL ");
         return companies;
     }
 

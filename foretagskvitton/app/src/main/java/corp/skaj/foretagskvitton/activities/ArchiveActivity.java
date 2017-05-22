@@ -2,8 +2,10 @@ package corp.skaj.foretagskvitton.activities;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
+import android.widget.Button;
 
 import corp.skaj.foretagskvitton.R;
+import corp.skaj.foretagskvitton.controllers.ArchiveController;
 import corp.skaj.foretagskvitton.view.ArchiveFragment;
 
 public class ArchiveActivity extends AbstractActivity {
@@ -24,8 +26,10 @@ public class ArchiveActivity extends AbstractActivity {
 
 
         ArchiveFragment af = ArchiveFragment.create();
+        ArchiveController acab = new ArchiveController(getDataHandler(), purchaseId, af);
         af.setArguments(bundle);
         FragmentManager fm = getSupportFragmentManager();
         fm.beginTransaction().replace(R.id.archive_fragment_container, af).commit();
+//        acab.setListerOnSaveButton((Button) findViewById(R.id.archive_receipt_savebutton));
     }
 }

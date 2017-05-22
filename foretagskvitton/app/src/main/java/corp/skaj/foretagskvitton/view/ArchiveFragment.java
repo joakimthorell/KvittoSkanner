@@ -11,11 +11,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.activities.ArchiveActivity;
 import corp.skaj.foretagskvitton.model.Category;
-import corp.skaj.foretagskvitton.model.Company;
 import corp.skaj.foretagskvitton.model.IData;
 import corp.skaj.foretagskvitton.model.Purchase;
 import corp.skaj.foretagskvitton.model.PurchaseList;
@@ -25,13 +26,14 @@ public class ArchiveFragment extends Fragment {
     private TextView price;
     private TextView tax;
     private TextView date;
-    private TextView supplier;
     private TextView comment;
     private TextView purchaseType;
+    private Spinner supplier;
     private Spinner employes;
     private Spinner company;
     private Spinner category;
     private Purchase mPur;
+    private User user;
 
 
     public ArchiveFragment() {
@@ -51,8 +53,7 @@ public class ArchiveFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         String purchaseId = getArguments().getString(ArchiveActivity.ARCHIVE_BUNDLE);
         View view = inflater.inflate(R.layout.fragment_archive, container, false);
         setupFragment(view, purchaseId);
@@ -61,8 +62,7 @@ public class ArchiveFragment extends Fragment {
 
     private void setupFragment(View view, String purchaseId) {
         IData dataHandler = (IData) getContext().getApplicationContext();
-        User user = dataHandler.readData(User.class.getName(), User.class);
-
+        user = dataHandler.readData(User.class.getName(), User.class);
         PurchaseList purchases = dataHandler.getPurchases(user);
         Purchase purchase = purchases.getPurchase(purchaseId);
 
@@ -73,41 +73,73 @@ public class ArchiveFragment extends Fragment {
         comment = (TextView) view.findViewById(R.id.archive_receipt_comment);
         category = (Spinner) view.findViewById(R.id.archive_receipt_categories);
         company = (Spinner) view.findViewById(R.id.archive_receipt_company);
-        employes = (Spinner) view.findViewById(R.id.archive_receipt_company);
+        employes = (Spinner) view.findViewById(R.id.archive_receipt_employee);
 
         price.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
 
+        //Sets & fills the..
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(view.getContext(), R.layout.support_simple_spinner_dropdown_item, Category.getCategories());
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        category.setAdapter(adapter);
+        //Category spinner
+        ArrayAdapter<String> categoryAdapter = new ArrayAdapter<String>(view.getContext(), R.layout.support_simple_spinner_dropdown_item, Category.getCategories());
+        categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        category.setAdapter(categoryAdapter);
 
-
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item,
-                user.getCompanies().get(0).getEmployees());
-        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        company.setAdapter(arrayAdapter);
-
-        ArrayAdapter<String>arrayAdapter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item,
-                user.getCompanies().get(0).getEmployees());
-        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        company.setAdapter(arrayAdapter);
-
-
-        ArrayAdapter<String> employeeAdapter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item,
-                );
+        //Employee spinner
+        ArrayAdapter<String> employeeAdapter = new ArrayAdapter<String>( view.getContext(), R.layout.support_simple_spinner_dropdown_item,
+                empolyesAsList());
         employeeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        company.setAdapter(employeeAdapter);
+        employes.setAdapter(employeeAdapter);
+
+        //Supplier spinner
+        ArrayAdapter<String> supplierAdapter = new ArrayAdapter<String>(view.getContext(), R.layout.support_simple_spinner_dropdown_item,
+                suppliersAsList());
+        supplierAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        supplier.setAdapter(supplierAdapter);
+
+        //Company spinner
+        ArrayAdapter<String> companyAdapter = new ArrayAdapter<String>(view.getContext(), R.layout.support_simple_spinner_dropdown_item,
+                companiesAsList());
+        companyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        company.setAdapter(companyAdapter);
 
 
         price.setText(String.valueOf(purchase.getReceipt().getTotal()) + "0");
         tax.setText("Moms: " + String.valueOf(purchase.getReceipt().getProducts().get(0).getTax()) + " %");
-        supplier.setText(checkSupplier());
 
         SimpleDateFormat dateRaw = new SimpleDateFormat("yyyy-MM-dd");
         String receiptDate = dateRaw.format(purchase.getReceipt().getDate().getTime());
         date.setText(receiptDate);
     }
+
+    private List<String> empolyesAsList() {
+        List<String> list = new ArrayList<>();
+        for (int i = 0; i <= user.getCompanies().get(0).getEmployees().size() - 1; i++) {
+            list.add(user.getCompanies().get(0).getEmployees().get(i).getName());
+        }
+        return list;
+    }
+
+    private List<String> companiesAsList() {
+        List<String> list = new ArrayList<>();
+        for (int i = 0; i < user.getCompanies().size(); i++) {
+            list.add(user.getCompanies().get(0).getName());
+        }
+        return list;
+    }
+
+    private List<String> suppliersAsList(){
+        List<String> list = new ArrayList<>();
+
+        if(checkIfSupplier()){
+            list.add("No supplier");
+            return list;
+        }
+        for (int i = 0; i < user.getSuppliers().size(); i++) {
+            list.add(user.getSuppliers().get(i).getName());
+        }
+        return list;
+    }
+
     /*
        // date TODO - Get calender pop-up for correct entries  
         Calendar newCalendar = Calendar.getInstance();  
@@ -126,13 +158,13 @@ public class ArchiveFragment extends Fragment {
         }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));  
      */
 
-    private String checkSupplier() {
+    private boolean checkIfSupplier() {
         try {
             mPur.getSupplier().getName();
         } catch (NullPointerException e) {
-            return "Supplier not specified";
+            return true;
         }
-        return mPur.getSupplier().getName();
+        return false;
     }
 
     public void sendSavedData () {
@@ -162,7 +194,7 @@ public class ArchiveFragment extends Fragment {
     }
 
     public String getSupplier() {
-        return String.valueOf(supplier.getText());
+        return String.valueOf(supplier.getSelectedItem().toString());
     }
 
     public String getComment() {

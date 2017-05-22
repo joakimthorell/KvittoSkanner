@@ -44,6 +44,7 @@ public class MainActivity extends AbstractActivity
 
 
         // Create a default user if there is no user
+        //getDataHandler().clearData();
         getDataHandler().initDefaultUser();
 
         // Initiate main controller and bottom bar
@@ -52,7 +53,6 @@ public class MainActivity extends AbstractActivity
         mController.initBottomBar(bottomBar);
 
         mFragmentManger = getSupportFragmentManager();
-
 
         mFragmentFactory = new ListFragmentFactory(this,
                 ArchiveActivity.class,
