@@ -39,7 +39,7 @@ public class CompanyListFragment extends ListFragment {
         mAdapter = adapter;
     }
 
-    public static CompanyListFragment create(CompanyAdapter adapter, Callback listener) {
+    public static CompanyListFragment create(CompanyAdapter adapter, FABCallback listener) {
         CompanyListFragment fragment = create(adapter);
         fragment.setListener(listener);
         return fragment;

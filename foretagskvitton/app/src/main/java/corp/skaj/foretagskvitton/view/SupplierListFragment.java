@@ -35,7 +35,7 @@ public class SupplierListFragment extends ListFragment {
         return fragment;
     }
 
-    public static SupplierListFragment create(SupplierAdapter adapter, Callback listener) {
+    public static SupplierListFragment create(SupplierAdapter adapter, FABCallback listener) {
         SupplierListFragment fragment = create(adapter);
         fragment.setListener(listener);
         return fragment;

@@ -2,7 +2,11 @@ package corp.skaj.foretagskvitton.controllers;
 
 import android.content.Context;
 
-public abstract class FABController {
+import com.getbase.floatingactionbutton.FloatingActionsMenu;
+
+import corp.skaj.foretagskvitton.view.FABCallback;
+
+public abstract class FABController implements FABCallback {
 
     private Context mContext;
     private Class<?> mNextActivity;
@@ -19,4 +23,6 @@ public abstract class FABController {
     protected Class<?> getNextActivity() {
         return mNextActivity;
     }
+
+    public abstract void bindButton(FloatingActionsMenu button);
 }

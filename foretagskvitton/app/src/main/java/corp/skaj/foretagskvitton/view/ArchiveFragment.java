@@ -1,6 +1,7 @@
 package corp.skaj.foretagskvitton.view;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.InputType;
 import android.view.LayoutInflater;
@@ -9,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import com.getbase.floatingactionbutton.FloatingActionsMenu;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -25,6 +28,8 @@ import corp.skaj.foretagskvitton.model.Supplier;
 import corp.skaj.foretagskvitton.model.User;
 
 public class ArchiveFragment extends AbstractFragment {
+    public static final String ARCHIVE_BUNDLE = "PURCHASE_ID";
+    private FABCallback mListener;
     private TextView mPrice;
     private TextView mTax;
     private TextView mDate;
@@ -39,17 +44,34 @@ public class ArchiveFragment extends AbstractFragment {
         // Required empty public constructor
     }
 
-    public static ArchiveFragment create() {
+    public static ArchiveFragment create(String purchaseID) {
+        Bundle b = new Bundle();
+        b.putString(ARCHIVE_BUNDLE, purchaseID);
         ArchiveFragment fragment = new ArchiveFragment();
+        fragment.setArguments(b);
         return fragment;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        String purchaseId = getArguments().getString(ArchiveActivity.ARCHIVE_BUNDLE);
+        String purchaseId = getArguments().getString(ARCHIVE_BUNDLE);
         View view = inflater.inflate(R.layout.fragment_archive, container, false);
         setupFragment(view, purchaseId);
         return view;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+
+        FloatingActionsMenu button = (FloatingActionsMenu) view.findViewById(R.id.archive_receipt_savebutton);
+        //mListener.bindButton(button);
+
+    }
+
+    public void setListener(FABCallback listener) {
+        mListener = listener;
     }
 
     private void setupFragment(View view, String purchaseId) {
@@ -82,7 +104,8 @@ public class ArchiveFragment extends AbstractFragment {
         setArrayAdapter(companyAdapter, mCompany);
 
         mTax.setText("Moms: " + String.valueOf(purchase.getReceipt().getProducts().get(0).getTax()) + " %");
-        mPurchaseType.setText(purchase.getPurchaseType().name());
+
+        mPurchaseType.setText(String.valueOf(purchase.getPurchaseType().name()));
     }
 
     private void setPriceTextView(View view, Purchase purchase) {

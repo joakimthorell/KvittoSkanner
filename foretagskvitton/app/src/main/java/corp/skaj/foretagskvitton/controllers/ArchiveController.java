@@ -3,6 +3,8 @@ package corp.skaj.foretagskvitton.controllers;
 import android.support.design.widget.FloatingActionButton;
 import android.view.View;
 
+import com.getbase.floatingactionbutton.FloatingActionsMenu;
+
 import corp.skaj.foretagskvitton.model.Category;
 import corp.skaj.foretagskvitton.model.Company;
 import corp.skaj.foretagskvitton.model.IData;
@@ -10,8 +12,9 @@ import corp.skaj.foretagskvitton.model.Purchase;
 import corp.skaj.foretagskvitton.model.Supplier;
 import corp.skaj.foretagskvitton.model.User;
 import corp.skaj.foretagskvitton.view.ArchiveFragment;
+import corp.skaj.foretagskvitton.view.FABCallback;
 
-public class ArchiveController {
+public class ArchiveController implements FABCallback {
     private ArchiveFragment fragment;
     private String purchaseId;
     private IData dataHandler;
@@ -54,5 +57,9 @@ public class ArchiveController {
 
     private Purchase.PurchaseType selectCorrectPurchase() {
         return fragment.getPurchaseType().equals("Företagskort") ? Purchase.PurchaseType.COMPANY : Purchase.PurchaseType.PRIVATE;
+    }
+
+    public void bindButton(FloatingActionsMenu button) {
+        // todo
     }
 }

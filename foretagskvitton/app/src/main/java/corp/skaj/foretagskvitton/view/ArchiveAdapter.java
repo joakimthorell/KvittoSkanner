@@ -59,15 +59,17 @@ public class ArchiveAdapter extends BaseQuickAdapter<Purchase, BaseViewHolder> {
         setNewData(purchases);
     }
 
-    public void sortListByCategoryAccending(){
-
+    public void sortListByDateOldestFirst(){
+        PurchaseList purchases = PurchaseList.convert(getData(), getUser());
+        purchases.sortByDate();
+        setNewData(purchases);
     }
 
-    public void sortListByDateDecending(){
-
-    }
-
-    public void sortListByDateAccending(){
+    public void sortListByDateNewstFirst(){
+        PurchaseList purchases = PurchaseList.convert(getData(), getUser());
+        purchases.sortByDate();
+        Collections.reverse(purchases);
+        setNewData(purchases);
 
     }
 

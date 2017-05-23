@@ -2,6 +2,26 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+
+    <item
+        android:title="@string/sort_by_date"
+        android:icon="@drawable/icon_calendar"
+        app:showAsAction="ifRoom"
+        >
+    <menu>
+        <item
+            android:id="@+id/action_sort_date_oldest_first"
+            android:title="@string/sort_by_date_descending"
+            />
+        <item
+            android:id="@+id/action_sort_date_newest_first"
+            android:title="@string/sort_by_date_accending"
+            />
+
+    </menu>
+    </item>
+
+
     <item
         android:title="@string/sort"
         android:icon="@drawable/ic_sort"
@@ -15,7 +35,6 @@
                 android:title="@string/sort_down"/>
         </menu>
     </item>
-
 
     <item
         android:title="@string/filter"
