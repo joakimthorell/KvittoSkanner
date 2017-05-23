@@ -7,14 +7,14 @@ import java.util.List;
 public class Receipt {
     private List<Product> products;
     private Calendar date;
-    private final String imageAdress; // This is URI as String
+    private final String imageAddress; // This is URI as String
     private double total;
 
     public Receipt(List<Product> products, Calendar date, double total, final String imageAdress) {
         this.products = products;
         this.date = date;
         this.total = total;
-        this.imageAdress = imageAdress;
+        this.imageAddress = imageAdress;
     }
 
     public Receipt(Product product, Calendar date, double total, final String imageAdress) {
@@ -22,7 +22,7 @@ public class Receipt {
         products.add(product);
         this.date = date;
         this.total = total;
-        this.imageAdress = imageAdress;
+        this.imageAddress = imageAdress;
     }
 
     public boolean removeProduct(Product product) {
@@ -61,7 +61,7 @@ public class Receipt {
      * This is Uri as String
      */
     public String getPictureAdress() {
-        return imageAdress;
+        return imageAddress;
     }
 }
 

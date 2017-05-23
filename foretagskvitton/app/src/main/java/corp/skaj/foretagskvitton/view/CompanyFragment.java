@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -13,8 +14,9 @@ import java.util.List;
 
 import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.model.Card;
+import corp.skaj.foretagskvitton.model.Comment;
 import corp.skaj.foretagskvitton.model.Company;
-import corp.skaj.foretagskvitton.model.IData;
+import corp.skaj.foretagskvitton.model.Employee;
 
 public class CompanyFragment extends AbstractFragment {
     private final static String COMPANY_BUNDLE = "COMPANY_ID";
@@ -30,6 +32,7 @@ public class CompanyFragment extends AbstractFragment {
         Bundle bundle = new Bundle();
         bundle.putString(COMPANY_BUNDLE, companyName);
         CompanyFragment fragment = new CompanyFragment();
+        fragment.setArguments(bundle);
         return fragment;
     }
 
@@ -43,10 +46,10 @@ public class CompanyFragment extends AbstractFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_company, container, false);
         String companyName = getArguments().getString(COMPANY_BUNDLE);
+        View v = inflater.inflate(R.layout.fragment_company, container, false);
         setupFragment(v, companyName);
-        return inflater.inflate(R.layout.fragment_company, container, false);
+        return v;
     }
 
     private void setupFragment(View view, String companyName) {
@@ -54,20 +57,34 @@ public class CompanyFragment extends AbstractFragment {
         mCards = (Spinner) view.findViewById(R.id.company_fragment_cards_spinner);
         mComment = (TextView) view.findViewById(R.id.company_fragment_comment);
 
-        ArrayAdapter<String> employeeAdapter = buildArrayAdapter(view, getEmployees());
+        ArrayAdapter<String> employeeAdapter = buildArrayAdapter(view, getEmployees(companyName));
         setArrayAdapter(employeeAdapter, mEmployees);
 
-        ArrayAdapter<String> cardsAdapter = buildArrayAdapter(view, getCards());
+        ArrayAdapter<String> cardsAdapter = buildArrayAdapter(view, getCards(companyName));
         setArrayAdapter(cardsAdapter, mCards);
+
+        mComment.setText(getComment(companyName));
     }
 
-    private List<String> getCards() {
+    private String getComment(String companyName) {
+        List<Comment> comments = getUser().getCompany(companyName).getComments();
+        return comments.size() == 0 ? "Ingen kommentar" : comments.get(0).getComment();
+    }
+
+    private List<String> getCards(String companyName) {
         List<String> list = new ArrayList<>();
-        List<Company> companies = getUser().getCompanies();
-        for (Company c : companies) {
-            for (Card card : c.getCards()) {
-                list.add(String.valueOf(card.getCard()));
-            }
+        Company company = getUser().getCompany(companyName);
+        for (Card c : company.getCards()) {
+            list.add(String.valueOf(c.getCard()));
+        }
+        return list;
+    }
+
+    private List<String> getEmployees(String companyName) {
+        List<String> list = new ArrayList<>();
+        Company company = getUser().getCompany(companyName);
+        for (Employee e : company.getEmployees()) {
+            list.add(e.getName());
         }
         return list;
     }

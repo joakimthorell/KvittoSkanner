@@ -19,6 +19,10 @@ public class Product {
         comments = new ArrayList<>();
     }
 
+    public void addComment(Comment c) {
+        comments.add(c);
+    }
+    
     public void setName(String name) {
         this.name = name;
     }
@@ -33,10 +37,6 @@ public class Product {
 
     public void setTax(double tax) {
         this.tax = tax;
-    }
-
-    public void addComment(Comment c) {
-        comments.add(c);
     }
 
     public String getName() {
