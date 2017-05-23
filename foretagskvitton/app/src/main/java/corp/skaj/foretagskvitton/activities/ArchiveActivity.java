@@ -15,8 +15,10 @@ public class ArchiveActivity extends AbstractActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_archive);
         FragmentManager fm = getSupportFragmentManager();
-        String purchaseId= getIntent().getStringExtra(MainActivity.ARCHIVE_KEY);
+        String purchaseId = getIntent().getStringExtra(MainActivity.ARCHIVE_KEY);
         ArchiveFragment af = ArchiveFragment.create(purchaseId);
+        ArchiveController controller = new ArchiveController(getDataHandler(), purchaseId, af);
+        af.setListener(controller);
 
         fm.beginTransaction().replace(R.id.archive_fragment_container, af).commit();
     }

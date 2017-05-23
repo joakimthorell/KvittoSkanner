@@ -68,7 +68,7 @@ public class ArchiveFragment extends Fragment {
 
 
         FloatingActionsMenu button = (FloatingActionsMenu) view.findViewById(R.id.archive_receipt_savebutton);
-        //mListener.bindButton(button);
+        mListener.bindButton(button);
 
     }
 

@@ -2,9 +2,11 @@ package corp.skaj.foretagskvitton.controllers;
 
 import android.support.design.widget.FloatingActionButton;
 import android.view.View;
+import android.widget.Toast;
 
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
 
+import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.model.Category;
 import corp.skaj.foretagskvitton.model.Company;
 import corp.skaj.foretagskvitton.model.IData;
@@ -44,7 +46,7 @@ public class ArchiveController implements FABCallback {
         // tax 
         purchase.getReceipt().getProducts().get(0).setTax(fragment.getTax());
         // supplier
-        Supplier updatedSupplier = new Supplier(fragment.getSupplier(purchaseId));
+        Supplier updatedSupplier = fragment.getSupplier;
         purchase.setSupplier(updatedSupplier);
         // payment method 
         purchase.setPurchaseType(selectCorrectPurchase());
@@ -59,7 +61,19 @@ public class ArchiveController implements FABCallback {
         return fragment.getPurchaseType().equals("Företagskort") ? Purchase.PurchaseType.COMPANY : Purchase.PurchaseType.PRIVATE;
     }
 
-    public void bindButton(FloatingActionsMenu button) {
-        // todo
+    public void bindButton(final FloatingActionsMenu button) {
+        button.setOnFloatingActionsMenuUpdateListener(new FloatingActionsMenu.OnFloatingActionsMenuUpdateListener() {
+            @Override
+            public void onMenuExpanded() {
+                updateReceiptData();
+                button.collapse();
+                Toast.makeText(fragment.getContext(), fragment.getContext().getString(R.string.archive_save), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onMenuCollapsed() {
+
+            }
+        });
     }
 }
