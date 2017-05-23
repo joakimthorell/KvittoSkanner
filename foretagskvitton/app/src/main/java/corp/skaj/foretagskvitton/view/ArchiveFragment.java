@@ -7,6 +7,7 @@ import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -39,6 +40,7 @@ public class ArchiveFragment extends AbstractFragment {
     private Spinner mEmployees;
     private Spinner mCompany;
     private Spinner mCategory;
+    private Purchase mPurchase;
 
     public ArchiveFragment() {
         // Required empty public constructor
@@ -67,6 +69,7 @@ public class ArchiveFragment extends AbstractFragment {
 
         FloatingActionsMenu button = (FloatingActionsMenu) view.findViewById(R.id.archive_receipt_savebutton);
         mListener.bindButton(button);
+        onClick();
 
     }
 
@@ -75,10 +78,10 @@ public class ArchiveFragment extends AbstractFragment {
     }
 
     private void setupFragment(View view, String purchaseId) {
-        Purchase purchase = getCurrentPurchase(purchaseId);
+        mPurchase = getCurrentPurchase(purchaseId);
 
-        setDateTextView(view, purchase);
-        setPriceTextView(view, purchase);
+        setDateTextView(view, mPurchase);
+        setPriceTextView(view, mPurchase);
 
         mEmployees = (Spinner) view.findViewById(R.id.archive_receipt_employee);
         mCompany = (Spinner) view.findViewById(R.id.archive_receipt_company);
@@ -91,35 +94,65 @@ public class ArchiveFragment extends AbstractFragment {
         //Category spinner
         ArrayAdapter<String> categoryAdapter = buildArrayAdapter(view, Category.getCategories());
         setArrayAdapter(categoryAdapter, mCategory);
-        mCategory.setSelection(Category.getCategories().indexOf(
-                purchase.getReceipt().getProducts().get(0).getCategory()));
+        /*
+       mCategory.setSelection(Category.getCategories().indexOf(mPurchase.getReceipt().
+               getProducts().get(0).getCategory()));
+               */
+                mCategory.setSelection(2);
 
         //Company spinner
         ArrayAdapter<String> companyAdapter = buildArrayAdapter(view, getCompanies());
         setArrayAdapter(companyAdapter, mCompany);
-        Company c = getUser().getCompany(purchase);
+        Company c = getUser().getCompany(mPurchase);
         mCompany.setSelection(getCompanies().indexOf(c));
 
         //Employee spinner
         ArrayAdapter<String> employeeAdapter = buildArrayAdapter(view, getEmployees());
         setArrayAdapter(employeeAdapter, mEmployees);
-        System.out.println(mCompany.getSelectedItemPosition() + "ahahahahahhahaH");
-        Employee e = getUser().getCompanies().get(mCompany.getSelectedItemPosition()).getEmployee(purchase);
+        Employee e = c.getEmployee(mPurchase);
         mEmployees.setSelection(getEmployees().indexOf(e));
 
         //Supplier spinner
         ArrayAdapter<String> supplierAdapter = buildArrayAdapter(view, getSuppliers());
         setArrayAdapter(supplierAdapter, mSupplier);
-        mSupplier.setSelection(purchase.getSupplier() == null ? getSuppliers().size() - 1:
-                getSuppliers().indexOf(purchase.getSupplier()));
+        mSupplier.setSelection(mPurchase.getSupplier() == null ? getSuppliers().size() - 1:
+                getSuppliers().indexOf(mPurchase.getSupplier()));
 
 
-        mTax.setText("Moms: " + String.valueOf(purchase.getReceipt().getProducts().get(0).getTax()) + " %");
+        mTax.setText("Moms: " + String.valueOf(mPurchase.getReceipt().getProducts().get(0).getTax()) + " %");
 
-        mPurchaseType.setText(String.valueOf(purchase.getPurchaseType().name()));
+        mPurchaseType.setText(String.valueOf(mPurchase.getPurchaseType().name()));
 
-        mComment.setText(String.valueOf(purchase.getReceipt().getProducts().get(0).getComments().get(0).getComment()));
+        mComment.setText(String.valueOf(mPurchase.getReceipt().getProducts().get(0).getComments().get(0).getComment()));
     }
+
+    public void onClick() {
+        mCompany.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Company c = getUser().getCompany(mCompany.getAdapter().getItem(position).toString());
+                List <String> employeeNames = new ArrayList<String>();
+
+                for(Employee e : c.getEmployees()){
+                    employeeNames.add(e.getName());
+                }
+
+                ArrayAdapter<String> employeeAdapter = buildArrayAdapter(view, employeeNames);
+                setArrayAdapter(employeeAdapter, mEmployees);
+
+                //If we want a standard user, fix code below
+                //Employee e = getUser().getCompanies().get(position).getEmployee(mPurchase);
+                //mEmployees.setSelection(getEmployees().indexOf(e));
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+
+
 
     private void setPriceTextView(View view, Purchase purchase) {
         mPrice = (TextView) view.findViewById(R.id.archive_receipt_price);
@@ -140,14 +173,14 @@ public class ArchiveFragment extends AbstractFragment {
 
     protected List<String> getEmployees() {
         List<String> list = new ArrayList<>();
-        List<Company> companies = getUser().getCompanies();
-        for (Company c : companies) {
-            for (Employee e : c.getEmployees()) {
+        Company company = getUser().getCompany(mPurchase);
+            for (Employee e : company.getEmployees()) {
                 list.add(e.getName());
             }
-        }
         return list;
-    }
+        }
+
+
 
     private List<String> getCompanies() {
         List<String> list = new ArrayList<>();
