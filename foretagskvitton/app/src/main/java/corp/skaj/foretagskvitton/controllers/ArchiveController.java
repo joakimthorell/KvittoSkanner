@@ -8,6 +8,7 @@ import com.getbase.floatingactionbutton.FloatingActionsMenu;
 
 import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.model.Category;
+import corp.skaj.foretagskvitton.model.Comment;
 import corp.skaj.foretagskvitton.model.Company;
 import corp.skaj.foretagskvitton.model.IData;
 import corp.skaj.foretagskvitton.model.Purchase;
@@ -27,21 +28,13 @@ public class ArchiveController implements FABCallback {
         this.fragment = fragment;
     }
 
-    public void setListerOnSaveButton(FloatingActionButton saveButton){
-        saveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                updateReceiptData();
-            }
-        });
-    }
-
     public void updateReceiptData() {
         User user = dataHandler.readData(User.class.getName(), User.class);
         Purchase purchase = dataHandler.getPurchases(user).getPurchase(purchaseId);
         // price 
         purchase.getReceipt().setTotal(fragment.getPrice());
         // category 
+        System.out.println(fragment.getCategory().toUpperCase() + "HAHAHAHAH");
         purchase.getReceipt().getProducts().get(0).setCategory(Category.valueOf(fragment.getCategory().toUpperCase()));
         // tax 
         purchase.getReceipt().getProducts().get(0).setTax(fragment.getTax());
@@ -51,10 +44,14 @@ public class ArchiveController implements FABCallback {
         // payment method 
         purchase.setPurchaseType(selectCorrectPurchase());
         // company 
-        Company updatedCompany = new Company(fragment.getCompany());
+        Company updatedCompany = user.getCompany(fragment.getCompany());
         user.addCompany(updatedCompany);
+        //comments
+        purchase.getReceipt().getProducts().get(0).getComments().get(0).setComment(fragment.getComment());
+
         // saves all changes 
         dataHandler.writeData(User.class.getName(), user);
+
     }
 
     private Purchase.PurchaseType selectCorrectPurchase() {

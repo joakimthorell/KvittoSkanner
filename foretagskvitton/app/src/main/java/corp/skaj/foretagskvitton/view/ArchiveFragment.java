@@ -106,6 +106,8 @@ public class ArchiveFragment extends AbstractFragment {
         mTax.setText("Moms: " + String.valueOf(purchase.getReceipt().getProducts().get(0).getTax()) + " %");
 
         mPurchaseType.setText(String.valueOf(purchase.getPurchaseType().name()));
+
+        mComment.setText(String.valueOf(purchase.getReceipt().getProducts().get(0).getComments().get(0).getComment()));
     }
 
     private void setPriceTextView(View view, Purchase purchase) {
@@ -171,7 +173,7 @@ public class ArchiveFragment extends AbstractFragment {
 
     public double getTax() {
         String newTax = String.valueOf((mTax.getText()));
-        return Double.valueOf(newTax.substring(7, newTax.length() - 2));
+        return Double.valueOf(newTax.substring(6, newTax.length() - 2));
     }
 
     public String getCategory() {
