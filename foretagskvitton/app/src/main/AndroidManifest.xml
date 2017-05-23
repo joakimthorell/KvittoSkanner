@@ -30,7 +30,7 @@
         </provider>
 
         <activity android:name=".activities.InitWizardActivity" />
-        <activity android:name=".activities.AddReceiptActivity">
+        <activity android:name=".activities.AddReceiptActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
 
@@ -48,7 +48,9 @@
         </activity>
         <activity android:name=".activities.SupplierActivity" />
         <activity android:name=".activities.ArchiveActivity" />
-        <activity android:name=".activities.MainActivity">
+        <activity
+            android:name=".activities.MainActivity"
+            android:theme="@style/AppThemeMain">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -56,7 +58,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".activities.CompanyActivity" />
-        <activity android:name=".activities.IntroActivity"></activity>
+        <activity
+            android:name=".activities.IntroActivity"
+            android:theme="@style/AppThemeMain" />
 
     </application>
 

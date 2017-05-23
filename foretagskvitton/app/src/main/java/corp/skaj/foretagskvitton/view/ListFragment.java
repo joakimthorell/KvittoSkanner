@@ -60,7 +60,7 @@ public abstract class ListFragment extends Fragment {
             Toolbar toolbar = (Toolbar) view.findViewById(R.id.list_toolbar);
             AppCompatActivity activity = (AppCompatActivity) getActivity();
             activity.setSupportActionBar(toolbar);
-            activity.getSupportActionBar().setDisplayShowTitleEnabled(false);
+            activity.getSupportActionBar().setDisplayShowTitleEnabled(true);
 
 
             if (mObserver != null) {
