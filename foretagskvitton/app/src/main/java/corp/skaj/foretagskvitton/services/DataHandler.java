@@ -14,6 +14,8 @@ import corp.skaj.foretagskvitton.model.User;
 
 public class DataHandler extends Application implements IData {
 
+    private User mUser;
+
     @Override
     public <T> void writeData(String key, T writeT) {
         getEditor().putString(key, toJson(writeT)).apply();
@@ -48,12 +50,13 @@ public class DataHandler extends Application implements IData {
 
     @Override
     public void initDefaultUser() {
-        if (readData(User.class.getName(), User.class) == null) {
+        if (getUser() == null) {
             User user = new User("USER");
             Company company = new Company("SKAJ Corp.");
             company.addEmployee(new Employee(user.getName()));
             user.addCompany(company);
-            writeData(User.class.getName(), user);
+            mUser = user;
+            saveUser();
         }
     }
 
@@ -66,6 +69,23 @@ public class DataHandler extends Application implements IData {
             }
         }
         return purchases;
+    }
+
+    public User getUser() {
+        if (mUser == null) {
+            mUser = readData(User.class.getName(), User.class);
+        }
+        return mUser;
+    }
+
+    public boolean saveUser() {
+        if (mUser != null) {
+            System.out.println("Saving user...");
+            writeData(User.class.getName(), mUser);
+            System.out.println("User saved!");
+            return true;
+        }
+        return false;
     }
 
 }
