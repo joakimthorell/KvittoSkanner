@@ -27,10 +27,7 @@ public class ArchiveController {
             @Override
             public void onClick(View v) {
                 System.out.println("This works ");
-
-                //TODO Save edited data
-
-                //updateReceiptData();
+                updateReceiptData();
             }
         });
     }
@@ -57,6 +54,7 @@ public class ArchiveController {
     }
 
     private Purchase.PurchaseType selectCorrectPurchase() {
+        System.out.println(fragment.getPurchaseType());
         return fragment.getPurchaseType().equals("Företagskort") ? Purchase.PurchaseType.COMPANY : Purchase.PurchaseType.PRIVATE;
     }
 }

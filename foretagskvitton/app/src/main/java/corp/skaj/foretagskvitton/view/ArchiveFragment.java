@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +32,7 @@ public class ArchiveFragment extends Fragment {
     private TextView mTax;
     private TextView mDate;
     private TextView mComment;
+    private TextView mPurchaseType;
     private Spinner mSupplier;
     private Spinner mEmployees;
     private Spinner mCompany;
@@ -55,14 +58,17 @@ public class ArchiveFragment extends Fragment {
     private void setupFragment(View view, String purchaseId) {
         Purchase purchase = getCurrentPurchase(purchaseId);
 
-        mDate = (TextView) view.findViewById(R.id.archive_receipt_date);
+        mEmployees = (Spinner) view.findViewById(R.id.archive_receipt_employee);
         mCompany = (Spinner) view.findViewById(R.id.archive_receipt_company);
         mSupplier = (Spinner) view.findViewById(R.id.archive_receipt_supplier);
         mCategory = (Spinner) view.findViewById(R.id.archive_receipt_categories);
+
         mPrice = (TextView) view.findViewById(R.id.archive_receipt_price);
         mTax = (TextView) view.findViewById(R.id.archive_receipt_moms);
-        mEmployees = (Spinner) view.findViewById(R.id.archive_receipt_employee);
+        mDate = (TextView) view.findViewById(R.id.archive_receipt_date);
         mComment = (TextView) view.findViewById(R.id.archive_receipt_comment);
+        mPurchaseType = (TextView) view.findViewById(R.id.archive_receipt_purchaseType);
+
 
         //Category spinner
         ArrayAdapter<String> categoryAdapter = buildArrayAdapter(view, Category.getCategories());
@@ -87,6 +93,8 @@ public class ArchiveFragment extends Fragment {
         SimpleDateFormat dateRaw = new SimpleDateFormat("yyyy-MM-dd");
         String receiptDate = dateRaw.format(purchase.getReceipt().getDate().getTime());
         mDate.setText(receiptDate);
+
+        mPurchaseType.setText(purchase.getPurchaseType().name());
     }
 
     private ArrayAdapter<String> buildArrayAdapter(View view, List<String> list) {
@@ -194,10 +202,10 @@ public class ArchiveFragment extends Fragment {
     }
 
     public String getPurchaseType(){
-        return null;
+        return mPurchaseType.getText().toString();
     }
 
     public String getEmployee (){
-    return null;
+    return mEmployees.getSelectedItem().toString();
     }
 }
