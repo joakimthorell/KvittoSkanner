@@ -38,12 +38,9 @@ public class MainActivity extends AbstractActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
-
+        //getDataHandler().clearData(); // Clear all data
 
         // Create a default user if there is no user
-        //getDataHandler().clearData();
         getDataHandler().initDefaultUser();
 
         // Initiate main controller and bottom bar
@@ -52,13 +49,15 @@ public class MainActivity extends AbstractActivity
         mController.initBottomBar(bottomBar);
 
         mFragmentManger = getSupportFragmentManager();
-
         mFragmentFactory = new ListFragmentFactory(this,
                 AddReceiptActivity.class,
                 SupplierActivity.class,
                 CompanyActivity.class);
 
         buildArchiveFragment();
+
+        Intent intent = new Intent(this, IntroActivity.class);
+        startActivity(intent);
     }
 
     @Override
@@ -107,7 +106,6 @@ public class MainActivity extends AbstractActivity
 
     private void replaceFragment(Fragment fragment) {
         String backStateName = fragment.getClass().getName();
-
         mFragmentManger = getSupportFragmentManager();
         boolean fragmentPopped = mFragmentManger.popBackStackImmediate (backStateName, 0);
 
@@ -118,5 +116,4 @@ public class MainActivity extends AbstractActivity
             ft.commit();
         }
     }
-
 }

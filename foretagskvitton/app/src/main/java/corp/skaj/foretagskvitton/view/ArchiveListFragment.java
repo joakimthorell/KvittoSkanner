@@ -73,7 +73,6 @@ public class ArchiveListFragment extends ListFragment{
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.archive_toolbar, menu);
-
     }
 
     @Override

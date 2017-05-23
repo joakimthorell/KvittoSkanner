@@ -39,6 +39,7 @@ public class ArchiveAdapter extends BaseQuickAdapter<Purchase, BaseViewHolder> {
                 .setText(R.id.list_item_archive_total, String.valueOf(total))
                 .setText(R.id.list_item_archive_num_of_comments, String.valueOf(nComments))
                 .setImageDrawable(R.id.list_item_archive_circular_image, circleImage);
+
     }
 
     private User getUser() {

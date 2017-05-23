@@ -33,7 +33,6 @@ public class AddReceiptActivity extends AbstractActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.copy_image_layout);
-
         mImageAdress = "";
         String action = getIntent().getAction();
         onActionPerformed(action);
@@ -68,10 +67,7 @@ public class AddReceiptActivity extends AbstractActivity {
     // This method catches taken image by camera.
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
         // TODO här vill vi börja async task
-
-
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             if (mImageAdress.length() > 0) {
                 Uri URI = Uri.fromFile(new File(mImageAdress));
@@ -109,12 +105,9 @@ public class AddReceiptActivity extends AbstractActivity {
     }
 
     private void dispatchChoosePictureIntent() {
-
         Intent intent = new Intent(Intent.ACTION_PICK)
                 .setType("image/*");
-
         startActivityForResult(intent, REQUEST_IMAGE_CHOOSEN);
-
     }
 
     // This method arranges a folder where an image taken by camera is saved.
@@ -162,7 +155,6 @@ public class AddReceiptActivity extends AbstractActivity {
         //copyImage(newFile, bmp);
         CopyImageTask task = new CopyImageTask(newFile, bmp);
         task.execute();
-
         //Uri addressToNewFile = Uri.fromFile(newFile);
         //mImageAdress = "";
         //startWizard(addressToNewFile);
@@ -187,7 +179,6 @@ public class AddReceiptActivity extends AbstractActivity {
     }
 
     private class CopyImageTask extends AsyncTask<Void, Void, Void> {
-
         private File copyTo;
         private Bitmap copyFrom;
 
@@ -199,7 +190,6 @@ public class AddReceiptActivity extends AbstractActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-
             ProgressBar progressBar = (ProgressBar) findViewById(R.id.spin_kit);
             CubeGrid cubeGrid = new CubeGrid();
             progressBar.setIndeterminateDrawable(cubeGrid);
@@ -209,19 +199,15 @@ public class AddReceiptActivity extends AbstractActivity {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-
             Uri addressToNewFile = Uri.fromFile(copyTo);
             mImageAdress = "";
             startWizard(addressToNewFile);
-
         }
 
         @Override
         protected Void doInBackground(Void... params) {
             copyImage(copyTo, copyFrom);
-
             return null;
         }
     }
-
 }
