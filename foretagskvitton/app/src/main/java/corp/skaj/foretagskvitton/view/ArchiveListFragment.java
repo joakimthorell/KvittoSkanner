@@ -78,6 +78,12 @@ public class ArchiveListFragment extends ListFragment{
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.action_sort_date_newest_first:
+                mAdapter.sortListByDateNewstFirst();
+                return true;
+            case R.id.action_sort_date_oldest_first:
+                mAdapter.sortListByDateOldestFirst();
+                return true;
             case R.id.action_sort_price_down:
                 mAdapter.sortListByPriceDecending();
                 return true;
@@ -107,6 +113,9 @@ public class ArchiveListFragment extends ListFragment{
                 return true;
             case R.id.show_travel:
                 mAdapter.showTravels();
+                return true;
+            case R.id.show_food:
+                mAdapter.showFood();
                 return true;
             default:
                 return false;

@@ -32,6 +32,9 @@
     <string name="show_representation">Representation</string>
     <string name="show_travel">Resor</string>
     <string name="show_propellant">Bensin</string>
+    <string name="sort_by_date">Sortera på datum</string>
+    <string name="sort_by_date_descending">Sortera nyast först</string>
+    <string name="sort_by_date_accending">Sortera äldst först</string>
 
     <string name="show_all">Visa alla</string>
 
