@@ -6,6 +6,8 @@ import com.amulyakhare.textdrawable.TextDrawable;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 
+import java.util.Collections;
+
 import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.model.Category;
 import corp.skaj.foretagskvitton.model.IData;
@@ -37,5 +39,33 @@ public class ArchiveAdapter extends BaseQuickAdapter<Purchase, BaseViewHolder> {
                 .setText(R.id.list_item_archive_total, String.valueOf(total))
                 .setText(R.id.list_item_archive_num_of_comments, String.valueOf(nComments))
                 .setImageDrawable(R.id.list_item_archive_circular_image, circleImage);
+    }
+
+    private User getUser() {
+        return dataHandler.readData(User.class.getName(), User.class);
+    }
+
+    public void sortListByPriceAcceding() {
+        PurchaseList purchases = PurchaseList.convert(getData(), getUser());
+        purchases.sortByPrice();
+        setNewData(purchases);
+    }
+
+    public void sortListByPriceDecending() {
+        PurchaseList purchases = PurchaseList.convert(getData(), getUser());
+        purchases.sortByPrice();
+        Collections.reverse(purchases);
+        setNewData(purchases);
+    }
+
+    public void showAll() {
+        PurchaseList purchases = dataHandler.getPurchases(getUser());
+        setNewData(purchases);
+    }
+
+    public void showTransport() {
+        Category c = Category.TRANSPORT;
+        PurchaseList purchases = dataHandler.getPurchases(getUser()).getPurchases(c);
+        setNewData(purchases);
     }
 }

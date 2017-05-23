@@ -3,6 +3,7 @@ package corp.skaj.foretagskvitton.model;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 
 public class PurchaseList extends ArrayList<Purchase> {
     private User user;
@@ -44,6 +45,12 @@ public class PurchaseList extends ArrayList<Purchase> {
             }
         }
         return null;
+    }
+
+    public static PurchaseList convert(List<Purchase> list, User user) {
+        PurchaseList purchaseList = new PurchaseList(user);
+        purchaseList.addAll(list);
+        return purchaseList;
     }
 
     public void sortByDate() {

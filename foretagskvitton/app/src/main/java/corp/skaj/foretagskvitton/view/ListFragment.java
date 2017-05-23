@@ -3,9 +3,11 @@ package corp.skaj.foretagskvitton.view;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,13 +28,12 @@ public abstract class ListFragment extends Fragment{
     private Callback mObserver;
     private FloatingActionsMenu mButton;
 
-    // internal interface so not depending on anything else
-    public interface Callback {
-        void onListCreated(FloatingActionsMenu button);
+    protected ListFragment() {
     }
 
-
-    protected ListFragment() {
+    // Internal interface so not depending on anything else
+    public interface Callback {
+        void onListCreated(FloatingActionsMenu button);
     }
 
     protected ListFragment setListener(Callback observer) {
@@ -43,8 +44,8 @@ public abstract class ListFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_list, container, false);
-        return v;
+        setHasOptionsMenu(true);
+        return inflater.inflate(R.layout.fragment_list, container, false);
     }
 
     @Override
@@ -60,6 +61,12 @@ public abstract class ListFragment extends Fragment{
 
             DividerItemDecoration divider = new DividerItemDecoration(view.getContext(), DividerItemDecoration.VERTICAL);
             mRecyclerView.addItemDecoration(divider);
+
+            Toolbar toolbar = (Toolbar) view.findViewById(R.id.list_toolbar);
+            AppCompatActivity activity = (AppCompatActivity) getActivity();
+            activity.setSupportActionBar(toolbar);
+            activity.getSupportActionBar().setDisplayShowTitleEnabled(false);
+
 
             if (mObserver != null) {
                 System.out.println("ListFragment shouting to observer");

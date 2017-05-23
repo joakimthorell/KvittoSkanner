@@ -38,13 +38,9 @@ public class MainActivity extends AbstractActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        Toolbar toolbar = (Toolbar) findViewById(R.id.main_toolbar);
-
-
+        //getDataHandler().clearData(); // Clear all data
 
         // Create a default user if there is no user
-        //getDataHandler().clearData();
         getDataHandler().initDefaultUser();
 
         // Initiate main controller and bottom bar
@@ -53,9 +49,8 @@ public class MainActivity extends AbstractActivity
         mController.initBottomBar(bottomBar);
 
         mFragmentManger = getSupportFragmentManager();
-
         mFragmentFactory = new ListFragmentFactory(this,
-                ArchiveActivity.class,
+                AddReceiptActivity.class,
                 SupplierActivity.class,
                 CompanyActivity.class);
 
@@ -93,31 +88,6 @@ public class MainActivity extends AbstractActivity
         startActivity(intent);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        try {
-            getMenuInflater().inflate(R.menu.main_toolbar, menu);
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_sort:
-                // todo
-                return true;
-            case R.id.action_filter:
-                // todo
-                return true;
-            default:
-                return false;
-        }
-    }
-
     private User getUser() {
         return getDataHandler().readData(User.class.getName(), User.class);
     }
@@ -136,7 +106,6 @@ public class MainActivity extends AbstractActivity
 
     private void replaceFragment(Fragment fragment) {
         String backStateName = fragment.getClass().getName();
-
         mFragmentManger = getSupportFragmentManager();
         boolean fragmentPopped = mFragmentManger.popBackStackImmediate (backStateName, 0);
 
@@ -147,5 +116,4 @@ public class MainActivity extends AbstractActivity
             ft.commit();
         }
     }
-
 }
