@@ -64,7 +64,7 @@ public class ArchiveFragment extends Fragment {
         mTax = (TextView) view.findViewById(R.id.archive_receipt_moms);
         mDate = (TextView) view.findViewById(R.id.archive_receipt_date);
         mComment = (TextView) view.findViewById(R.id.archive_receipt_comment);
-        //mPurchaseType = (TextView) view.findViewById(R.id.archive_receipt_purchaseType);
+        mPurchaseType = (TextView) view.findViewById(R.id.archive_receipt_purchaseType);
 
         //Category spinner
         ArrayAdapter<String> categoryAdapter = buildArrayAdapter(view, Category.getCategories());
