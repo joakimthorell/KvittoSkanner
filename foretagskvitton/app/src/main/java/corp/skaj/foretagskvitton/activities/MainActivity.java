@@ -60,6 +60,9 @@ public class MainActivity extends AbstractActivity
                 CompanyActivity.class);
 
         buildArchiveFragment();
+
+        Intent intent = new Intent(this, IntroActivity.class);
+        startActivity(intent);
     }
 
     @Override
