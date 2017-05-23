@@ -64,9 +64,6 @@ public class ArchiveListFragment extends ListFragment{
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        TextView tv = (TextView) view.findViewById(R.id.list_toolbar_title);
-        tv.setText(getContext().getString(R.string.archive_title));
     }
 
     @Override

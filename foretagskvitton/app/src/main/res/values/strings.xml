@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ReceiptScanner</string>
+    <string name="app_name">KvittoSkanner</string>
     <string name="menu_archive">Arkiv</string>
     <string name="menu_business">Företag</string>
     <string name="camera">Kamera</string>
