@@ -125,6 +125,17 @@ public class ArchiveFragment extends AbstractFragment {
         return getDataHandler().getPurchases(getUser()).getPurchase(purchaseId);
     }
 
+    protected List<String> getEmployees() {
+        List<String> list = new ArrayList<>();
+        List<Company> companies = getUser().getCompanies();
+        for (Company c : companies) {
+            for (Employee e : c.getEmployees()) {
+                list.add(e.getName());
+            }
+        }
+        return list;
+    }
+
     private List<String> getCompanies() {
         List<String> list = new ArrayList<>();
         List<Company> companies = getUser().getCompanies();

@@ -1,11 +1,9 @@
 package corp.skaj.foretagskvitton.activities;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentManager;
 
 import corp.skaj.foretagskvitton.R;
-import corp.skaj.foretagskvitton.controllers.ArchiveController;
 import corp.skaj.foretagskvitton.view.ArchiveFragment;
 
 public class ArchiveActivity extends AbstractActivity {
