@@ -79,6 +79,7 @@ public class ArchiveFragment extends AbstractFragment {
 
         setDateTextView(view, purchase);
         setPriceTextView(view, purchase);
+
         mEmployees = (Spinner) view.findViewById(R.id.archive_receipt_employee);
         mCompany = (Spinner) view.findViewById(R.id.archive_receipt_company);
         mSupplier = (Spinner) view.findViewById(R.id.archive_receipt_supplier);
@@ -90,18 +91,28 @@ public class ArchiveFragment extends AbstractFragment {
         //Category spinner
         ArrayAdapter<String> categoryAdapter = buildArrayAdapter(view, Category.getCategories());
         setArrayAdapter(categoryAdapter, mCategory);
-
-        //Employee spinner
-        ArrayAdapter<String> employeeAdapter = buildArrayAdapter(view, getEmployees());
-        setArrayAdapter(employeeAdapter, mEmployees);
-
-        //Supplier spinner
-        ArrayAdapter<String> supplierAdapter = buildArrayAdapter(view, getSuppliers());
-        setArrayAdapter(supplierAdapter, mSupplier);
+        mCategory.setSelection(Category.getCategories().indexOf(
+                purchase.getReceipt().getProducts().get(0).getCategory()));
 
         //Company spinner
         ArrayAdapter<String> companyAdapter = buildArrayAdapter(view, getCompanies());
         setArrayAdapter(companyAdapter, mCompany);
+        Company c = getUser().getCompany(purchase);
+        mCompany.setSelection(getCompanies().indexOf(c));
+
+        //Employee spinner
+        ArrayAdapter<String> employeeAdapter = buildArrayAdapter(view, getEmployees());
+        setArrayAdapter(employeeAdapter, mEmployees);
+        System.out.println(mCompany.getSelectedItemPosition() + "ahahahahahhahaH");
+        Employee e = getUser().getCompanies().get(mCompany.getSelectedItemPosition()).getEmployee(purchase);
+        mEmployees.setSelection(getEmployees().indexOf(e));
+
+        //Supplier spinner
+        ArrayAdapter<String> supplierAdapter = buildArrayAdapter(view, getSuppliers());
+        setArrayAdapter(supplierAdapter, mSupplier);
+        mSupplier.setSelection(purchase.getSupplier() == null ? getSuppliers().size() - 1:
+                getSuppliers().indexOf(purchase.getSupplier()));
+
 
         mTax.setText("Moms: " + String.valueOf(purchase.getReceipt().getProducts().get(0).getTax()) + " %");
 
@@ -144,28 +155,6 @@ public class ArchiveFragment extends AbstractFragment {
        suppliersNames.add("Ingen grossist");
         return suppliersNames;
     }
-
-    private boolean isSupplierNull(Purchase purchase) {
-        return purchase.getSupplier() == null;
-    }
-
-    /*
-       // mDate TODO - Get calender pop-up for correct entries  
-        Calendar newCalendar = Calendar.getInstance();  
-        mDatePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener()
-        {  
-            @Override 
-            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) { 
-                Calendar newDate = Calendar.getInstance(); 
-                newDate.set(year, monthOfYear, dayOfMonth); 
-                String formattedDate = DatePage.dateFormatter.format(newDate.getTime());  
-                mDate.setText(formattedDate); 
-                mPage.getData().putString(DatePage.SIMPLE_DATA_KEY, formattedDate); 
-                mPage.notifyDataChanged(); 
-        }  
-
-        }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));  
-     */
 
     public double getPrice() {
             return Double.valueOf(String.valueOf(mPrice.getText()));
