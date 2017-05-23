@@ -24,7 +24,15 @@
     <string name="sort_up">Pris stigande</string>
     <string name="sort_down">Pris sjunkande</string>
     <string name="show_category">Visa kategori</string>
-    <string name="transport">Transport</string>
+    <string name="show_transport">Transport</string>
+    <string name="show_hotel">Hotell</string>
+    <string name="show_officeSupplies">Kontorsmaterial</string>
+    <string name="show_food">Mat</string>
+    <string name="show_postage">Porto</string>
+    <string name="show_representation">Representation</string>
+    <string name="show_travel">Resor</string>
+    <string name="show_propellant">Bensin</string>
+
     <string name="show_all">Visa alla</string>
 
     <!-- TODO: Remove or change this placeholder text -->
