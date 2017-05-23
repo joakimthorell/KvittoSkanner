@@ -13,12 +13,12 @@ public class CompanyActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_company);
-        FragmentManager fm = getSupportFragmentManager();
-        CompanyFragment cf = CompanyFragment.create();
         String companyName = getIntent().getStringExtra(MainActivity.COMPANY_KEY);
+        CompanyFragment cf = CompanyFragment.create(companyName);
+        FragmentManager fm = getSupportFragmentManager();
+        fm.beginTransaction().replace(R.id.company_fragment_container, cf).commit();
 
         //TODO CompanyController
 
-        
     }
 }

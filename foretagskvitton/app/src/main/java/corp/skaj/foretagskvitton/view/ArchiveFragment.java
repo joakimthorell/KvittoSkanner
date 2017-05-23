@@ -24,7 +24,7 @@ import corp.skaj.foretagskvitton.model.Purchase;
 import corp.skaj.foretagskvitton.model.Supplier;
 import corp.skaj.foretagskvitton.model.User;
 
-public class ArchiveFragment extends Fragment {
+public class ArchiveFragment extends AbstractFragment {
     private TextView mPrice;
     private TextView mTax;
     private TextView mDate;
@@ -70,15 +70,15 @@ public class ArchiveFragment extends Fragment {
         setArrayAdapter(categoryAdapter, mCategory);
 
         //Employee spinner
-        ArrayAdapter<String> employeeAdapter = buildArrayAdapter(view, empolyesAsList());
+        ArrayAdapter<String> employeeAdapter = buildArrayAdapter(view, getEmployees());
         setArrayAdapter(employeeAdapter, mEmployees);
 
         //Supplier spinner
-        ArrayAdapter<String> supplierAdapter = buildArrayAdapter(view, suppliersAsList(purchaseId));
+        ArrayAdapter<String> supplierAdapter = buildArrayAdapter(view, getSuppliers(purchaseId));
         setArrayAdapter(supplierAdapter, mSupplier);
 
         //Company spinner
-        ArrayAdapter<String> companyAdapter = buildArrayAdapter(view, companiesAsList());
+        ArrayAdapter<String> companyAdapter = buildArrayAdapter(view, getCompanies());
         setArrayAdapter(companyAdapter, mCompany);
 
         mTax.setText("Moms: " + String.valueOf(purchase.getReceipt().getProducts().get(0).getTax()) + " %");
@@ -98,39 +98,11 @@ public class ArchiveFragment extends Fragment {
         mDate.setText(receiptDate);
     }
 
-    private ArrayAdapter<String> buildArrayAdapter(View view, List<String> list) {
-        return new ArrayAdapter<>(view.getContext(), R.layout.support_simple_spinner_dropdown_item, list);
-    }
-
-    private void setArrayAdapter(ArrayAdapter<String> adapter, Spinner spinner) {
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-    }
-
     private Purchase getCurrentPurchase(String purchaseId) {
         return getDataHandler().getPurchases(getUser()).getPurchase(purchaseId);
     }
 
-    private User getUser() {
-        return getDataHandler().readData(User.class.getName(), User.class);
-    }
-
-    private IData getDataHandler() {
-        return (IData) getContext().getApplicationContext();
-    }
-
-    private List<String> empolyesAsList() {
-        List<String> list = new ArrayList<>();
-        List<Company> companies = getUser().getCompanies();
-        for (Company c : companies) {
-            for (Employee e : c.getEmployees()) {
-                list.add(e.getName());
-            }
-        }
-        return list;
-    }
-
-    private List<String> companiesAsList() {
+    private List<String> getCompanies() {
         List<String> list = new ArrayList<>();
         List<Company> companies = getUser().getCompanies();
         for (Company c : companies) {
@@ -139,7 +111,7 @@ public class ArchiveFragment extends Fragment {
         return list;
     }
 
-    private List<String> suppliersAsList(String purchaseId){
+    private List<String> getSuppliers(String purchaseId){
         List<String> list = new ArrayList<>();
         Purchase purchase = getCurrentPurchase(purchaseId);
         if (!isSupplierNull(purchase)) {
