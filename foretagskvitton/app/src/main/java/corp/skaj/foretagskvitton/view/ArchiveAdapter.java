@@ -58,14 +58,66 @@ public class ArchiveAdapter extends BaseQuickAdapter<Purchase, BaseViewHolder> {
         setNewData(purchases);
     }
 
+    public void sortListByCategoryAccending(){
+
+    }
+
+    public void sortListByDateDecending(){
+
+    }
+
+    public void sortListByDateAccending(){
+
+    }
+
     public void showAll() {
         PurchaseList purchases = dataHandler.getPurchases(getUser());
         setNewData(purchases);
     }
 
-    public void showTransport() {
-        Category c = Category.TRANSPORT;
+    public void set(Category c){
         PurchaseList purchases = dataHandler.getPurchases(getUser()).getPurchases(c);
         setNewData(purchases);
     }
+
+    public void showTransport() {
+        Category c = Category.TRANSPORT;
+        set(c);
+    }
+
+    public void showPropellant(){
+        Category c = Category.BENSIN;
+        set(c);
+    }
+
+    public void showHotell(){
+        Category c = Category.HOTELL;
+        set(c);
+    }
+
+    public void showOfficeSupplies(){
+        Category c = Category.KONTORSMATERIAL;
+        set(c);
+    }
+
+    public void showFood(){
+        Category c = Category.MAT;
+        set(c);
+    }
+
+    public void showPostage(){
+        Category c = Category.PORTO;
+        set(c);
+    }
+
+    public void showRepresentation(){
+        Category c = Category.REPRESENTATION;
+        set(c);
+    }
+
+    public void showTravels(){
+        Category c = Category.RESOR;
+        set(c);
+    }
+
 }
