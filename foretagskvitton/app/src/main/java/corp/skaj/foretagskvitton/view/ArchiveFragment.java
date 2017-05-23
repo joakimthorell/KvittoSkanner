@@ -66,7 +66,7 @@ public class ArchiveFragment extends AbstractFragment {
 
 
         FloatingActionsMenu button = (FloatingActionsMenu) view.findViewById(R.id.archive_receipt_savebutton);
-        //mListener.bindButton(button);
+        mListener.bindButton(button);
 
     }
 
@@ -96,7 +96,7 @@ public class ArchiveFragment extends AbstractFragment {
         setArrayAdapter(employeeAdapter, mEmployees);
 
         //Supplier spinner
-        ArrayAdapter<String> supplierAdapter = buildArrayAdapter(view, getSuppliers(purchaseId));
+        ArrayAdapter<String> supplierAdapter = buildArrayAdapter(view, getSuppliers());
         setArrayAdapter(supplierAdapter, mSupplier);
 
         //Company spinner
@@ -106,6 +106,8 @@ public class ArchiveFragment extends AbstractFragment {
         mTax.setText("Moms: " + String.valueOf(purchase.getReceipt().getProducts().get(0).getTax()) + " %");
 
         mPurchaseType.setText(String.valueOf(purchase.getPurchaseType().name()));
+
+        mComment.setText(String.valueOf(purchase.getReceipt().getProducts().get(0).getComments().get(0).getComment()));
     }
 
     private void setPriceTextView(View view, Purchase purchase) {
@@ -145,16 +147,13 @@ public class ArchiveFragment extends AbstractFragment {
         return list;
     }
 
-    private List<String> getSuppliers(String purchaseId){
-        List<String> list = new ArrayList<>();
-        Purchase purchase = getCurrentPurchase(purchaseId);
-        if (!isSupplierNull(purchase)) {
-            List<Supplier> suppliers = getUser().getSuppliers();
-            for (Supplier s : suppliers) {
-                list.add(s.getName());
-            }
-        }
-        return list;
+    private List<String> getSuppliers(){
+       List<String> suppliersNames = new ArrayList<>();
+       for(Supplier s : getUser().getSuppliers()){
+           suppliersNames.add(s.getName());
+       }
+       suppliersNames.add("Ingen grossist");
+        return suppliersNames;
     }
 
     private boolean isSupplierNull(Purchase purchase) {
@@ -185,7 +184,7 @@ public class ArchiveFragment extends AbstractFragment {
 
     public double getTax() {
         String newTax = String.valueOf((mTax.getText()));
-        return Double.valueOf(newTax.substring(7, newTax.length() - 2));
+        return Double.valueOf(newTax.substring(6, newTax.length() - 2));
     }
 
     public String getCategory() {
@@ -200,8 +199,9 @@ public class ArchiveFragment extends AbstractFragment {
         return mDate.getText().toString();
     }
 
-    public String getSupplier(String purchaseId) {
-        return !isSupplierNull(getCurrentPurchase(purchaseId)) ? mSupplier.getSelectedItem().toString() : null;
+    public String getSupplier() {
+        return mSupplier.getSelectedItem().toString().equals("Ingen grossist") ? null :
+                mSupplier.getSelectedItem().toString();
     }
 
     public String getComment() {
