@@ -112,16 +112,14 @@ public class MainController {
                 //What ever you want to do with the value
                 Editable supplierName = edittext.getText();
 
-                if(supplierName.toString().toString().length() < 1){
+                if(supplierName.toString().length() < 1){
                     return;
                 }
-
 
                 supplier.setName(supplierName.toString());
                 handler.writeData(User.class.getName(), user);
                 List<Supplier> suppliers = handler.readData(User.class.getName(), User.class).getSuppliers();
 
-                // ok solution? todo
                 AppCompatActivity activity = (AppCompatActivity) mContext;
                 SupplierListFragment fragment = (SupplierListFragment) activity.getSupportFragmentManager().findFragmentById(R.id.main_fragment_container);
                 fragment.getAdapter().setNewData(suppliers);
