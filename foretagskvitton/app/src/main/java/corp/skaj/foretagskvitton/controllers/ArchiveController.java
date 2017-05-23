@@ -63,7 +63,6 @@ public class ArchiveController implements FABCallback {
 */
         // saves all changes 
         dataHandler.writeData(User.class.getName(), user);
-
     }
 
     private Purchase.PurchaseType selectCorrectPurchase() {
@@ -78,7 +77,6 @@ public class ArchiveController implements FABCallback {
                 button.collapse();
                 Toast.makeText(fragment.getContext(), fragment.getContext().getString(R.string.archive_save), Toast.LENGTH_SHORT).show();
             }
-
             @Override
             public void onMenuCollapsed() {
 
