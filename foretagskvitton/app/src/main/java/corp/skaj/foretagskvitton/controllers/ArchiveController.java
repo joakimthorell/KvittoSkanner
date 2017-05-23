@@ -46,7 +46,7 @@ public class ArchiveController implements FABCallback {
         // tax 
         purchase.getReceipt().getProducts().get(0).setTax(fragment.getTax());
         // supplier
-        Supplier updatedSupplier = fragment.getSupplier;
+        Supplier updatedSupplier = user.getSupplier(fragment.getSupplier());
         purchase.setSupplier(updatedSupplier);
         // payment method 
         purchase.setPurchaseType(selectCorrectPurchase());

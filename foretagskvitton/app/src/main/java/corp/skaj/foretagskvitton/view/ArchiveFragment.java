@@ -96,7 +96,7 @@ public class ArchiveFragment extends AbstractFragment {
         setArrayAdapter(employeeAdapter, mEmployees);
 
         //Supplier spinner
-        ArrayAdapter<String> supplierAdapter = buildArrayAdapter(view, getSuppliers(purchaseId));
+        ArrayAdapter<String> supplierAdapter = buildArrayAdapter(view, getSuppliers());
         setArrayAdapter(supplierAdapter, mSupplier);
 
         //Company spinner
@@ -134,16 +134,13 @@ public class ArchiveFragment extends AbstractFragment {
         return list;
     }
 
-    private List<String> getSuppliers(String purchaseId){
-        List<String> list = new ArrayList<>();
-        Purchase purchase = getCurrentPurchase(purchaseId);
-        if (!isSupplierNull(purchase)) {
-            List<Supplier> suppliers = getUser().getSuppliers();
-            for (Supplier s : suppliers) {
-                list.add(s.getName());
-            }
-        }
-        return list;
+    private List<String> getSuppliers(){
+       List<String> suppliersNames = new ArrayList<>();
+       for(Supplier s : getUser().getSuppliers()){
+           suppliersNames.add(s.getName());
+       }
+       suppliersNames.add("Ingen grossist");
+        return suppliersNames;
     }
 
     private boolean isSupplierNull(Purchase purchase) {
@@ -189,8 +186,9 @@ public class ArchiveFragment extends AbstractFragment {
         return mDate.getText().toString();
     }
 
-    public String getSupplier(String purchaseId) {
-        return !isSupplierNull(getCurrentPurchase(purchaseId)) ? mSupplier.getSelectedItem().toString() : null;
+    public String getSupplier() {
+        return mSupplier.getSelectedItem().toString().equals("Ingen grossist") ? null :
+                mSupplier.getSelectedItem().toString();
     }
 
     public String getComment() {
