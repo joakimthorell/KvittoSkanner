@@ -49,6 +49,7 @@ public class SupplierFABController extends FABController {
         AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
 
         final EditText edittext = new EditText(getContext());
+        edittext.setSingleLine(true);
 
         alert.setMessage("Skriv grossist namn:");
         alert.setTitle("Skapa ny");
@@ -76,7 +77,7 @@ public class SupplierFABController extends FABController {
                 SupplierListFragment fragment = (SupplierListFragment) activity.getSupportFragmentManager().findFragmentById(R.id.main_fragment_container);
                 fragment.getAdapter().setNewData(suppliers);
 
-                Toast.makeText(getContext(), "Lagt till ny supplier " + supplier.getName(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Lagt till ny grossist " + supplier.getName(), Toast.LENGTH_SHORT).show();
             }
         });
 

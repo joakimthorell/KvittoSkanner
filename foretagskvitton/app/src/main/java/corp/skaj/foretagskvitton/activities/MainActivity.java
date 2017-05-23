@@ -44,7 +44,7 @@ public class MainActivity extends AbstractActivity
         getDataHandler().initDefaultUser();
 
         // Initiate main controller and bottom bar
-        mController = new MainController(this);
+        mController = new MainController(this, this);
         BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
         mController.initBottomBar(bottomBar);
 
