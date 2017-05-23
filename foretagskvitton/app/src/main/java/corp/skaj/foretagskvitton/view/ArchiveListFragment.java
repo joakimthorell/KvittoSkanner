@@ -106,7 +106,8 @@ public class ArchiveListFragment extends ListFragment{
                 mAdapter.showRepresentation();
                 return true;
             case R.id.show_travel:
-               // mAdapter.sho
+                mAdapter.showTravels();
+                return true;
             default:
                 return false;
         }

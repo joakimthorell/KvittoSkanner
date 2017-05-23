@@ -90,7 +90,7 @@ public class ArchiveFragment extends Fragment {
         String receiptDate = dateRaw.format(purchase.getReceipt().getDate().getTime());
         mDate.setText(receiptDate);
 
-        mPurchaseType.setText(purchase.getPurchaseType().name());
+        mPurchaseType.setText(String.valueOf(purchase.getPurchaseType().name()));
     }
 
     private ArrayAdapter<String> buildArrayAdapter(View view, List<String> list) {
