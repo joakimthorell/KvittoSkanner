@@ -111,7 +111,7 @@ public class ArchiveFragment extends AbstractFragment {
         //Supplier spinner
         ArrayAdapter<String> supplierAdapter = buildArrayAdapter(view, getSuppliers());
         setArrayAdapter(supplierAdapter, mSupplier);
-        mSupplier.setSelection(mPurchase.getSupplier() == null ? getSuppliers().size() - 1:
+        mSupplier.setSelection(mPurchase.getSupplier() == null ? getSuppliers().size() - 1 :
                 getSuppliers().indexOf(mPurchase.getSupplier()));
 
 
@@ -119,10 +119,10 @@ public class ArchiveFragment extends AbstractFragment {
 
         mPurchaseType.setText(String.valueOf(mPurchase.getPurchaseType().name()));
 
-        mComment.setText(String.valueOf(mPurchase.getReceipt().getProducts().get(0).getComments().get(0).getComment()));
+        mComment.setText(mPurchase.getComments().size() > 0 ? mPurchase.getComments().get(0).getComment() : null);
     }
 
-    public void categorySelectionUpdate(ArrayAdapter categoryAdapter){
+    public void categorySelectionUpdate(ArrayAdapter categoryAdapter) {
         String selected = mPurchase.getReceipt().getProducts().get(0).getCategory().name();
         int position = categoryAdapter.getPosition(selected);
         mCategory.setSelection(position);
@@ -133,9 +133,9 @@ public class ArchiveFragment extends AbstractFragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Company c = getUser().getCompany(mCompany.getAdapter().getItem(position).toString());
-                List <String> employeeNames = new ArrayList<String>();
+                List<String> employeeNames = new ArrayList<String>();
 
-                for(Employee e : c.getEmployees()){
+                for (Employee e : c.getEmployees()) {
                     employeeNames.add(e.getName());
                 }
 
@@ -153,7 +153,6 @@ public class ArchiveFragment extends AbstractFragment {
             }
         });
     }
-
 
 
     private void setPriceTextView(View view, Purchase purchase) {
@@ -176,12 +175,11 @@ public class ArchiveFragment extends AbstractFragment {
     protected List<String> getEmployees() {
         List<String> list = new ArrayList<>();
         Company company = getUser().getCompany(mPurchase);
-            for (Employee e : company.getEmployees()) {
-                list.add(e.getName());
-            }
-        return list;
+        for (Employee e : company.getEmployees()) {
+            list.add(e.getName());
         }
-
+        return list;
+    }
 
 
     private List<String> getCompanies() {
@@ -193,18 +191,18 @@ public class ArchiveFragment extends AbstractFragment {
         return list;
     }
 
-    private List<String> getSuppliers(){
-       List<String> suppliersNames = new ArrayList<>();
-       for(Supplier s : getUser().getSuppliers()){
-           suppliersNames.add(s.getName());
-       }
-       suppliersNames.add("Ingen grossist");
+    private List<String> getSuppliers() {
+        List<String> suppliersNames = new ArrayList<>();
+        for (Supplier s : getUser().getSuppliers()) {
+            suppliersNames.add(s.getName());
+        }
+        suppliersNames.add("Ingen grossist");
         return suppliersNames;
     }
 
     public double getPrice() {
-            return Double.valueOf(String.valueOf(mPrice.getText()));
-        }
+        return Double.valueOf(String.valueOf(mPrice.getText()));
+    }
 
     public double getTax() {
         String newTax = String.valueOf((mTax.getText()));
@@ -232,11 +230,11 @@ public class ArchiveFragment extends AbstractFragment {
         return String.valueOf(mComment.getText());
     }
 
-    public String getPurchaseType(){
+    public String getPurchaseType() {
         return mPurchaseType.getText().toString();
     }
 
-    public String getEmployee (){
-    return mEmployees.getSelectedItem().toString();
+    public String getEmployee() {
+        return mEmployees.getSelectedItem().toString();
     }
 }
