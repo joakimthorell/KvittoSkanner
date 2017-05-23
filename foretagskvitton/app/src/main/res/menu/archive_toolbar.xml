@@ -30,7 +30,29 @@
                 <menu>
                     <item
                         android:id="@+id/show_transport"
-                        android:title="@string/transport"/>
+                        android:title="@string/show_transport"/>
+                    <item
+                        android:id="@+id/show_propellants"
+                        android:title="@string/show_propellant" />
+                    <item
+                        android:id="@+id/show_hotel"
+                        android:title="@string/show_hotel" />
+                    <item
+                        android:id="@+id/show_officeSupplies"
+                        android:title="@string/show_officeSupplies" />
+                    <item
+                        android:id="@+id/show_food"
+                        android:title="@string/show_food" />
+                    <item
+                        android:id="@+id/show_postage"
+                        android:title="@string/show_postage" />
+                    <item
+                        android:id="@+id/show_representation"
+                        android:title="@string/show_representation" />
+                    <item
+                        android:id="@+id/show_travel"
+                        android:title="@string/show_travel" />
+
                 </menu>
             </item>
         </menu>

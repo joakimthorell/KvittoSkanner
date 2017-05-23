@@ -14,11 +14,6 @@ import corp.skaj.foretagskvitton.view.CompanyAdapter;
 import corp.skaj.foretagskvitton.view.SupplierAdapter;
 
 public class MainController {
-    public enum State {
-        COMPANY,
-        ARCHIVE,
-        SUPPLIER
-    }
 
     private IView mListener;
 

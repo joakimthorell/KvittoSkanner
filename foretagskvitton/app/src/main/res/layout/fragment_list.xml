@@ -27,6 +27,13 @@
 
     </android.support.v7.widget.Toolbar>
 
+    <ViewStub
+        android:id="@+id/cab_stub"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="8dp" />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="0dp"

@@ -90,6 +90,23 @@ public class ArchiveListFragment extends ListFragment{
             case R.id.show_transport:
                 mAdapter.showTransport();
                 return true;
+            case R.id.show_propellants:
+                mAdapter.showPropellant();
+                return true;
+            case R.id.show_hotel:
+                mAdapter.showHotell();
+                return true;
+            case R.id.show_officeSupplies:
+                mAdapter.showOfficeSupplies();
+                return true;
+            case R.id.show_postage:
+                mAdapter.showPostage();
+                return true;
+            case R.id.show_representation:
+                mAdapter.showRepresentation();
+                return true;
+            case R.id.show_travel:
+               // mAdapter.sho
             default:
                 return false;
         }
