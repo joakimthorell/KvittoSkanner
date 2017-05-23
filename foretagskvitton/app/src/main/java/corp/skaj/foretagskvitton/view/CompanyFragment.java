@@ -1,16 +1,19 @@
 package corp.skaj.foretagskvitton.view;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Spinner;
+import android.widget.TextView;
 
 import corp.skaj.foretagskvitton.R;
 
 public class CompanyFragment extends Fragment {
+    private Spinner employees;
+    private Spinner cards;
+    private TextView comment;
 
     public CompanyFragment() {
         // Required empty public constructor
@@ -31,7 +34,12 @@ public class CompanyFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+        View v = inflater.inflate(R.layout.fragment_company, container, false);
+        setupFragment(v);
         return inflater.inflate(R.layout.fragment_company, container, false);
+    }
+
+    private void setupFragment(View v) {
+
     }
 }

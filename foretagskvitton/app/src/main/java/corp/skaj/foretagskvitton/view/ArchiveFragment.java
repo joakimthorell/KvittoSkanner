@@ -55,16 +55,15 @@ public class ArchiveFragment extends Fragment {
     private void setupFragment(View view, String purchaseId) {
         Purchase purchase = getCurrentPurchase(purchaseId);
 
+        setDateTextView(view, purchase);
+        setPriceTextView(view, purchase);
         mEmployees = (Spinner) view.findViewById(R.id.archive_receipt_employee);
         mCompany = (Spinner) view.findViewById(R.id.archive_receipt_company);
         mSupplier = (Spinner) view.findViewById(R.id.archive_receipt_supplier);
         mCategory = (Spinner) view.findViewById(R.id.archive_receipt_categories);
-
-        mPrice = (TextView) view.findViewById(R.id.archive_receipt_price);
         mTax = (TextView) view.findViewById(R.id.archive_receipt_moms);
-        mDate = (TextView) view.findViewById(R.id.archive_receipt_date);
         mComment = (TextView) view.findViewById(R.id.archive_receipt_comment);
-        //mPurchaseType = (TextView) view.findViewById(R.id.archive_receipt_purchaseType);
+        mPurchaseType = (TextView) view.findViewById(R.id.archive_receipt_purchaseType);
 
         //Category spinner
         ArrayAdapter<String> categoryAdapter = buildArrayAdapter(view, Category.getCategories());
@@ -82,15 +81,21 @@ public class ArchiveFragment extends Fragment {
         ArrayAdapter<String> companyAdapter = buildArrayAdapter(view, companiesAsList());
         setArrayAdapter(companyAdapter, mCompany);
 
+        mTax.setText("Moms: " + String.valueOf(purchase.getReceipt().getProducts().get(0).getTax()) + " %");
+        mPurchaseType.setText(purchase.getPurchaseType().name());
+    }
+
+    private void setPriceTextView(View view, Purchase purchase) {
+        mPrice = (TextView) view.findViewById(R.id.archive_receipt_price);
         mPrice.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
         mPrice.setText(String.valueOf(purchase.getReceipt().getTotal()) + "0");
-        mTax.setText("Moms: " + String.valueOf(purchase.getReceipt().getProducts().get(0).getTax()) + " %");
+    }
 
+    private void setDateTextView(View view, Purchase purchase) {
+        mDate = (TextView) view.findViewById(R.id.archive_receipt_date);
         SimpleDateFormat dateRaw = new SimpleDateFormat("yyyy-MM-dd");
         String receiptDate = dateRaw.format(purchase.getReceipt().getDate().getTime());
         mDate.setText(receiptDate);
-
-        mPurchaseType.setText(purchase.getPurchaseType().name());
     }
 
     private ArrayAdapter<String> buildArrayAdapter(View view, List<String> list) {
