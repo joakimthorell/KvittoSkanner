@@ -18,9 +18,13 @@ public class ArchiveActivity extends AbstractActivity {
         FragmentManager fm = getSupportFragmentManager();
         ArchiveFragment af = ArchiveFragment.create();
         String purchaseId= getIntent().getStringExtra(MainActivity.ARCHIVE_KEY);
-        new ArchiveController(getDataHandler(), purchaseId, af)
-                .setListerOnSaveButton((FloatingActionButton) findViewById(R.id.archive_receipt_savebutton));
+
+        new ArchiveController(
+                getDataHandler()
+                , purchaseId
+                , af).setListerOnSaveButton((FloatingActionButton) findViewById(R.id.archive_receipt_savebutton));
         Bundle bundle = new Bundle();
+
         bundle.putString(ARCHIVE_BUNDLE, purchaseId);
         af.setArguments(bundle);
         fm.beginTransaction().replace(R.id.archive_fragment_container, af).commit();

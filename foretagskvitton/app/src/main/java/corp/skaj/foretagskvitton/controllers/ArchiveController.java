@@ -26,11 +26,7 @@ public class ArchiveController {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("This works ");
-
-                //TODO Save edited data
-
-                //updateReceiptData();
+                updateReceiptData();
             }
         });
     }
