@@ -28,13 +28,12 @@ public abstract class ListFragment extends Fragment{
     private Callback mObserver;
     private FloatingActionsMenu mButton;
 
-    // internal interface so not depending on anything else
-    public interface Callback {
-        void onListCreated(FloatingActionsMenu button);
+    protected ListFragment() {
     }
 
-
-    protected ListFragment() {
+    // Internal interface so not depending on anything else
+    public interface Callback {
+        void onListCreated(FloatingActionsMenu button);
     }
 
     protected ListFragment setListener(Callback observer) {

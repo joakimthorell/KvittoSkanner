@@ -62,6 +62,4 @@ public class CompanyListFragment extends ListFragment {
     protected BaseQuickAdapter getBaseAdapter() {
         return getAdapter();
     }
-
-
 }

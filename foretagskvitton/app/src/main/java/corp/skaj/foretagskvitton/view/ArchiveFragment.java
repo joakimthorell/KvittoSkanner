@@ -7,11 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -67,8 +64,7 @@ public class ArchiveFragment extends Fragment {
         mTax = (TextView) view.findViewById(R.id.archive_receipt_moms);
         mDate = (TextView) view.findViewById(R.id.archive_receipt_date);
         mComment = (TextView) view.findViewById(R.id.archive_receipt_comment);
-        mPurchaseType = (TextView) view.findViewById(R.id.archive_receipt_purchaseType);
-
+        //mPurchaseType = (TextView) view.findViewById(R.id.archive_receipt_purchaseType);
 
         //Category spinner
         ArrayAdapter<String> categoryAdapter = buildArrayAdapter(view, Category.getCategories());

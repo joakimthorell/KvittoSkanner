@@ -26,7 +26,6 @@ public class ArchiveController {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("This works ");
                 updateReceiptData();
             }
         });
@@ -54,7 +53,6 @@ public class ArchiveController {
     }
 
     private Purchase.PurchaseType selectCorrectPurchase() {
-        System.out.println(fragment.getPurchaseType());
         return fragment.getPurchaseType().equals("Företagskort") ? Purchase.PurchaseType.COMPANY : Purchase.PurchaseType.PRIVATE;
     }
 }
