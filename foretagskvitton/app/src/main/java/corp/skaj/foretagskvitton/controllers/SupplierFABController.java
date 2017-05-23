@@ -7,19 +7,14 @@ import com.getbase.floatingactionbutton.FloatingActionsMenu;
 
 import corp.skaj.foretagskvitton.view.ListFragment;
 
-/**
- * Created by annekeller on 2017-05-22.
- */
-
-public class SupplierFABController extends FABController
-    implements ListFragment.Callback {
+public class SupplierFABController extends FABController {
 
     public SupplierFABController(Context context, Class<?> nextActivity) {
         super(context, nextActivity);
     }
 
     @Override
-    public void onListCreated(FloatingActionsMenu button) {
+    public void bindButton(FloatingActionsMenu button) {
         bindFAB(button);
     }
 

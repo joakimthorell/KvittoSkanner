@@ -11,8 +11,7 @@ import com.getbase.floatingactionbutton.FloatingActionsMenu;
 import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.view.ListFragment;
 
-public class ArchiveFABController extends FABController
-    implements ListFragment.Callback {
+public class ArchiveFABController extends FABController {
 
     public static final String CAMERA_ACTION = "time_to_take_picture";
     public static final String GALLERY_ACTION = "collect_image_from_gallery";
@@ -34,7 +33,7 @@ public class ArchiveFABController extends FABController
     }
 
     @Override
-    public void onListCreated(FloatingActionsMenu button) {
+    public void bindButton(FloatingActionsMenu button) {
         bindFAB(button);
     }
 

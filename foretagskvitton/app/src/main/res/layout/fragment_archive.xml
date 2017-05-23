@@ -1,9 +1,10 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             xmlns:app="http://schemas.android.com/apk/res-auto"
-             tools:context="corp.skaj.foretagskvitton.view.ArchiveFragment">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
+    tools:context="corp.skaj.foretagskvitton.view.ArchiveFragment">
 
     <ImageView
         android:id="@+id/imageView8"
@@ -175,5 +176,26 @@
         app:layout_constraintVertical_bias="0.281"
         app:layout_constraintBottom_toTopOf="@+id/archive_receipt_comment"
         app:layout_constraintTop_toBottomOf="@+id/archive_receipt_moms" />
+
+    <com.getbase.floatingactionbutton.FloatingActionsMenu
+        android:id="@+id/archive_receipt_savebutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        fab:fab_addButtonColorNormal="@color/colorMenu"
+        fab:fab_addButtonSize="mini"
+        fab:fab_icon="@android:drawable/ic_menu_save"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.928"
+        app:layout_constraintLeft_toLeftOf="@+id/imageView8"
+        app:layout_constraintRight_toRightOf="@+id/imageView8"
+        app:layout_constraintTop_toTopOf="@+id/imageView8"
+        app:layout_constraintVertical_bias="0.984"
+        app:srcCompat="@android:drawable/ic_menu_save"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp" />
 
 </android.support.constraint.ConstraintLayout>

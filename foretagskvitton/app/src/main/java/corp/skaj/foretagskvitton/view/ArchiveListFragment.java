@@ -45,7 +45,7 @@ public class ArchiveListFragment extends ListFragment{
         return fragment;
     }
 
-    public static ArchiveListFragment create(ArchiveAdapter adapter, Callback listener) {
+    public static ArchiveListFragment create(ArchiveAdapter adapter, FABCallback listener) {
         ArchiveListFragment fragment = create(adapter);
         fragment.setListener(listener);
         return fragment;
