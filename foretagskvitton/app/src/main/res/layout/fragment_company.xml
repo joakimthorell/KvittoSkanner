@@ -1,0 +1,39 @@
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                             xmlns:tools="http://schemas.android.com/tools"
+                                             android:layout_width="match_parent"
+                                             android:layout_height="match_parent"
+                                             xmlns:app="http://schemas.android.com/apk/res-auto"
+                                             tools:context="corp.skaj.foretagskvitton.view.CompanyFragment">
+
+    <Spinner
+        android:id="@+id/company_fragment_employees_spinner"
+        android:layout_width="368dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:layout_editor_absoluteX="8dp"></Spinner>
+
+    <Spinner
+        android:id="@+id/company_fragment_cards_spinner"
+        android:layout_width="368dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/company_fragment_employees_spinner"
+        tools:layout_editor_absoluteX="8dp"></Spinner>
+
+    <TextView
+        android:id="@+id/company_fragment_comment"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="8dp"
+        android:maxLines="3"
+        android:lines="2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        />
+
+</android.support.constraint.ConstraintLayout>
