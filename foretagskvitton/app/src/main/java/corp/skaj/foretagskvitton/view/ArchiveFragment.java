@@ -94,11 +94,7 @@ public class ArchiveFragment extends AbstractFragment {
         //Category spinner
         ArrayAdapter<String> categoryAdapter = buildArrayAdapter(view, Category.getCategories());
         setArrayAdapter(categoryAdapter, mCategory);
-        /*
-       mCategory.setSelection(Category.getCategories().indexOf(mPurchase.getReceipt().
-               getProducts().get(0).getCategory()));
-               */
-                mCategory.setSelection(2);
+        categorySelectionUpdate(categoryAdapter);
 
         //Company spinner
         ArrayAdapter<String> companyAdapter = buildArrayAdapter(view, getCompanies());
@@ -124,6 +120,12 @@ public class ArchiveFragment extends AbstractFragment {
         mPurchaseType.setText(String.valueOf(mPurchase.getPurchaseType().name()));
 
         mComment.setText(String.valueOf(mPurchase.getReceipt().getProducts().get(0).getComments().get(0).getComment()));
+    }
+
+    public void categorySelectionUpdate(ArrayAdapter categoryAdapter){
+        String selected = mPurchase.getReceipt().getProducts().get(0).getCategory().name();
+        int position = categoryAdapter.getPosition(selected);
+        mCategory.setSelection(position);
     }
 
     public void onClick() {

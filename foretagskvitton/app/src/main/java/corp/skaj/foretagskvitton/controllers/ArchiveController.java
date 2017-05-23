@@ -41,8 +41,9 @@ public class ArchiveController implements FABCallback {
         // price 
         purchase.getReceipt().setTotal(fragment.getPrice());
         // category 
-        System.out.println(fragment.getCategory().toUpperCase() + "HAHAHAHAH");
+        System.out.println(fragment.getCategory().toUpperCase() + "- Should BE SAVED");
         purchase.getReceipt().getProducts().get(0).setCategory(Category.valueOf(fragment.getCategory().toUpperCase()));
+        System.out.println(purchase.getReceipt().getProducts().get(0).getCategory().name() + "- IS SAVED");
         // tax 
         purchase.getReceipt().getProducts().get(0).setTax(fragment.getTax());
         // supplier
