@@ -16,6 +16,7 @@ import com.getbase.floatingactionbutton.FloatingActionsMenu;
 
 import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.model.Category;
+import corp.skaj.foretagskvitton.model.User;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -60,8 +61,16 @@ public class ArchiveListFragment extends ListFragment{
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        User user = getUser();
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.archive_toolbar, menu);
+
+        //This is the way to access företag
+        for(int i = 0; i < user.getCompanies().size(); i++) {
+            menu.getItem(2).getSubMenu().getItem(2).getSubMenu().add(user.getCompanies().get(i).getName());
+        }
+        //for(int i = 0 < user.get)
+        menu.getItem(2).getSubMenu().getItem(3).getSubMenu().add("emil");
     }
 
     @Override
@@ -110,6 +119,10 @@ public class ArchiveListFragment extends ListFragment{
                 return false;
         }
     }
+
+    public void fillCompanyMenu(Menu menu){
+    }
+
     public ArchiveAdapter getAdapter() {
         return mAdapter;
     }
