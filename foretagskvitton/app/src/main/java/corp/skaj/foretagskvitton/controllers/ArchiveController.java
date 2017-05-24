@@ -10,6 +10,7 @@ import corp.skaj.foretagskvitton.activities.MainActivity;
 import corp.skaj.foretagskvitton.model.Category;
 import corp.skaj.foretagskvitton.model.Comment;
 import corp.skaj.foretagskvitton.model.Company;
+import corp.skaj.foretagskvitton.model.Employee;
 import corp.skaj.foretagskvitton.model.IData;
 import corp.skaj.foretagskvitton.model.Purchase;
 import corp.skaj.foretagskvitton.model.Supplier;
@@ -46,7 +47,7 @@ public class ArchiveController implements FABCallback {
         purchase.setPurchaseType(selectCorrectPurchase());
         // company 
         Company updatedCompany = user.getCompany(fragment.getCompany());
-        user.addCompany(updatedCompany);
+        //user.addCo mpany(updatedCompany);
         //comments
         if (purchase.getComments().size() < 1) {
             if (fragment.getComment().length() > 0) {
@@ -61,8 +62,18 @@ public class ArchiveController implements FABCallback {
         DateFormat newDate = new SimpleDateFormat("yyyy-mm-dd");
         fragment.getDate();
 */
-        // saves all changes 
+        Employee oldPurchaseOwner = user.getCompany(purchase).getEmployee(purchase);
+        Employee newPurchaseOwner = updatedCompany.getEmployee(fragment.getEmployee());
+
+        newPurchaseOwner.addPurchase(purchase);
+        oldPurchaseOwner.removePurchase(purchase);
+        user.getCompany(purchase).removeEmployee(oldPurchaseOwner);
+
         dataHandler.saveUser();
+    }
+
+    private void updateCompany(Company updatedCompany, User user, Purchase purchase){
+
     }
 
     private Purchase.PurchaseType selectCorrectPurchase() {
