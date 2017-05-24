@@ -104,12 +104,13 @@ public class MainController {
         edittext.setSingleLine(true);
         edittext.setText(supplier.getName());
 
-        alert.setMessage("Skriv grossist namn:");
-        alert.setTitle("Editera " + supplier.getName());
+
+        alert.setMessage(mContext.getString(R.string.main_controller_supplier_call));
+        alert.setTitle(mContext.getString(R.string.main_controller_edit) + supplier.getName());
 
         alert.setView(edittext);
 
-        alert.setPositiveButton("Spara", new DialogInterface.OnClickListener() {
+        alert.setPositiveButton(mContext.getString(R.string.main_controller_save), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 //What ever you want to do with the value
                 Editable supplierName = edittext.getText();
@@ -126,11 +127,11 @@ public class MainController {
                 SupplierListFragment fragment = (SupplierListFragment) activity.getSupportFragmentManager().findFragmentById(R.id.main_fragment_container);
                 fragment.getAdapter().setNewData(suppliers);
 
-                Toast.makeText(mContext, "Ändrat till " + supplier.getName(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, mContext.getString(R.string.main_controller_change_to)+ supplier.getName(), Toast.LENGTH_SHORT).show();
             }
         });
 
-        alert.setNegativeButton("Avbryt", new DialogInterface.OnClickListener() {
+        alert.setNegativeButton(mContext.getString(R.string.main_controller_cancel), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 // nothing to do here
             }

@@ -2,50 +2,34 @@ package corp.skaj.foretagskvitton.activities;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-
 import com.github.paolorotolo.appintro.AppIntro;
 import com.github.paolorotolo.appintro.AppIntroFragment;
-
 import corp.skaj.foretagskvitton.R;
 
 /**
  * Class takes care of the application intro
  */
-
 public class IntroActivity extends AppIntro {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        addSlide(AppIntroFragment.newInstance("Välkommen till KvittoSkanner!",
-                "Med denna applikation kan du på ett enkelt sätt kan bokföra dina kvitton med hjälp av endast några få klick",
+        addSlide(AppIntroFragment.newInstance(getString(R.string.intro_welcome), getString(R.string.intro_welcometext),
                 R.mipmap.ic_launcher_round, getColor(R.color.colorAccent)));
-        addSlide(AppIntroFragment.newInstance("Arkiv",
-                "Under arkiv kan du hantera alla dina kvitton. Du sortera dem efter pris och datum. " +
-                        "Du har möjlighet att lägga till ett nytt kvitto, redigera ett befintligt eller radera ett kvitto helt." ,
+        addSlide(AppIntroFragment.newInstance(getString(R.string.intro_archive), getString(R.string.intro_archivetext),
                 R.drawable.ic_image , getColor(R.color.colorPrimary)));
         //TODO add picture of archive front page here
-
-        addSlide(AppIntroFragment.newInstance("Företag",
-                "Under företag kan du hantera alla dina företag. Du kan lägga till ett nytt företag, redigera ett befintligt eller radera ett företag helt." +
-                        " Du måste alltid ha minst ett företag.",
+        addSlide(AppIntroFragment.newInstance(getString(R.string.intro_company), getString(R.string.intro_companytext),
                 R.drawable.ic_image, getColor(R.color.colorAccent)));
         //TODO add picture of company front page here
-
-        addSlide(AppIntroFragment.newInstance("Grossister",
-                "Under grossister kan du hantera alla dina grossister. Du kan lägga till en ny grossist, redigera en befintlig eller radera en grossist helt.",
+        addSlide(AppIntroFragment.newInstance(getString(R.string.intro_supplier), getString(R.string.intro_suppliertext),
                 R.drawable.ic_image, getColor(R.color.colorPrimary)));
         //TODO add picuture of supplier front page here
-
-        addSlide(AppIntroFragment.newInstance("Lägg till", "För att lägga till något nytt nyttjar du den runda lägg-till knappen som finns på samtliga tre sidor",
-                R.drawable.introduction_button, getColor(R.color.colorAccent)));
-        //TODO amend the picture of the button
-
-        addSlide(AppIntroFragment.newInstance("Lycka till med bokföringen!", "",
+        addSlide(AppIntroFragment.newInstance(getString(R.string.intro_add), getString(R.string.intro_addtext),
+                R.drawable.addbutton, getColor(R.color.colorAccent)));
+        addSlide(AppIntroFragment.newInstance(getString(R.string.intro_goodluck), getString(R.string.intro_goodlucktext),
                 R.mipmap.ic_launcher, getColor(R.color.colorPrimary)));
-
     }
-
     @Override
     public void onSkipPressed(android.support.v4.app.Fragment currentFragment) {
         super.onSkipPressed(currentFragment);

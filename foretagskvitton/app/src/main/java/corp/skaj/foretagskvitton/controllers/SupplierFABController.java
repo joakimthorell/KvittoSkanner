@@ -51,12 +51,12 @@ public class SupplierFABController extends FABController {
         final EditText edittext = new EditText(getContext());
         edittext.setSingleLine(true);
 
-        alert.setMessage("Skriv grossist namn:");
-        alert.setTitle("Skapa ny");
+        alert.setMessage(getContext().getString(R.string.main_controller_supplier_call));
+        alert.setTitle(getContext().getString(R.string.fab_controller_create_new));
 
         alert.setView(edittext);
 
-        alert.setPositiveButton("Lägg till", new DialogInterface.OnClickListener() {
+        alert.setPositiveButton((getContext().getString(R.string.intro_add)), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 //What ever you want to do with the value
                 Editable supplierName = edittext.getText();
@@ -76,11 +76,11 @@ public class SupplierFABController extends FABController {
                 SupplierListFragment fragment = (SupplierListFragment) activity.getSupportFragmentManager().findFragmentById(R.id.main_fragment_container);
                 fragment.getAdapter().setNewData(suppliers);
 
-                Toast.makeText(getContext(), "Lagt till ny grossist " + supplier.getName(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), getContext().getString(R.string.fab_controller_add_supplier) + supplier.getName(), Toast.LENGTH_SHORT).show();
             }
         });
 
-        alert.setNegativeButton("Avbryt", new DialogInterface.OnClickListener() {
+        alert.setNegativeButton(getContext().getString(R.string.main_controller_cancel), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 // nothing to do here
             }

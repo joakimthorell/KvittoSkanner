@@ -15,6 +15,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
 
 import corp.skaj.foretagskvitton.R;
+import corp.skaj.foretagskvitton.model.Category;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -82,34 +83,33 @@ public class ArchiveListFragment extends ListFragment{
                 mAdapter.showAll();
                 return true;
             case R.id.show_transport:
-                mAdapter.showTransport();
+                mAdapter.showCategory(Category.TRANSPORT);
                 return true;
             case R.id.show_propellants:
-                mAdapter.showPropellant();
+                mAdapter.showCategory(Category.BENSIN);
                 return true;
             case R.id.show_hotel:
-                mAdapter.showHotell();
+                mAdapter.showCategory(Category.HOTELL);
                 return true;
             case R.id.show_officeSupplies:
-                mAdapter.showOfficeSupplies();
+                mAdapter.showCategory(Category.KONTORSMATERIAL);
                 return true;
             case R.id.show_postage:
-                mAdapter.showPostage();
+                mAdapter.showCategory(Category.PORTO);
                 return true;
             case R.id.show_representation:
-                mAdapter.showRepresentation();
+                mAdapter.showCategory(Category.REPRESENTATION);
                 return true;
             case R.id.show_travel:
-                mAdapter.showTravels();
+                mAdapter.showCategory(Category.RESOR);
                 return true;
             case R.id.show_food:
-                mAdapter.showFood();
+                mAdapter.showCategory(Category.MAT);
                 return true;
             default:
                 return false;
         }
     }
-
     public ArchiveAdapter getAdapter() {
         return mAdapter;
     }
