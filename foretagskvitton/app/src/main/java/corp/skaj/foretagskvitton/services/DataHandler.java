@@ -50,13 +50,14 @@ public class DataHandler extends Application implements IData {
 
     @Override
     public void initDefaultUser() {
-        if (getUser() == null) {
+        if (readData(User.class.getName(), User.class) == null) {
             User user = new User("USER");
             Company company = new Company("SKAJ Corp.");
             company.addEmployee(new Employee(user.getName()));
             user.addCompany(company);
-            mUser = user;
-            saveUser();
+            //mUser = user;
+            //saveUser();
+            writeData(User.class.getName(), User.class);
         }
     }
 
@@ -70,6 +71,8 @@ public class DataHandler extends Application implements IData {
         }
         return purchases;
     }
+
+    /*
 
     public User getUser() {
         if (mUser == null) {
@@ -86,6 +89,6 @@ public class DataHandler extends Application implements IData {
             return true;
         }
         return false;
-    }
+    }*/
 
 }

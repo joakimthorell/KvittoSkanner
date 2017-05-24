@@ -13,7 +13,9 @@ public interface IData {
 
     PurchaseList getPurchases(User user);
 
+    /*
+
     User getUser();
 
-    void saveUser();
+    void saveUser();*/
 }
