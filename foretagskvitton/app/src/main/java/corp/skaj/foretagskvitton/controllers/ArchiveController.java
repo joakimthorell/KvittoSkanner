@@ -1,11 +1,14 @@
 package corp.skaj.foretagskvitton.controllers;
 
+import android.content.Intent;
 import android.widget.Toast;
 
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
 
 import corp.skaj.foretagskvitton.R;
+import corp.skaj.foretagskvitton.activities.MainActivity;
 import corp.skaj.foretagskvitton.model.Category;
+import corp.skaj.foretagskvitton.model.Comment;
 import corp.skaj.foretagskvitton.model.Company;
 import corp.skaj.foretagskvitton.model.IData;
 import corp.skaj.foretagskvitton.model.Purchase;
@@ -45,7 +48,14 @@ public class ArchiveController implements FABCallback {
         Company updatedCompany = user.getCompany(fragment.getCompany());
         user.addCompany(updatedCompany);
         //comments
-        purchase.getComments().get(0).setComment(fragment.getComment());
+        if (purchase.getComments().size() < 1) {
+            if (fragment.getComment().length() > 0) {
+                Comment c = new Comment(fragment.getComment());
+                purchase.addComment(c);
+            }
+        } else {
+            purchase.getComments().get(0).setComment(fragment.getComment());
+        }
         //date
         /*
         DateFormat newDate = new SimpleDateFormat("yyyy-mm-dd");
@@ -66,6 +76,8 @@ public class ArchiveController implements FABCallback {
                 updateReceiptData();
                 button.collapse();
                 Toast.makeText(fragment.getContext(), fragment.getContext().getString(R.string.archive_save), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(fragment.getContext(), MainActivity.class);
+                fragment.getContext().startActivity(intent);
             }
             @Override
             public void onMenuCollapsed() {
