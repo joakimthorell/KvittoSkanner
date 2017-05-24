@@ -152,12 +152,8 @@ public class AddReceiptActivity extends AbstractActivity {
             startWizard(null);
             return;
         }
-        //copyImage(newFile, bmp);
         CopyImageTask task = new CopyImageTask(newFile, bmp);
         task.execute();
-        //Uri addressToNewFile = Uri.fromFile(newFile);
-        //mImageAdress = "";
-        //startWizard(addressToNewFile);
     }
 
     private void copyImage(File dest, Bitmap bmp) {

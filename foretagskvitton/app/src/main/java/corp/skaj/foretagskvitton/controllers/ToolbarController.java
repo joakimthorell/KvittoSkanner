@@ -18,7 +18,7 @@ import corp.skaj.foretagskvitton.model.IData;
 import corp.skaj.foretagskvitton.model.User;
 
 public abstract class ToolbarController<T> implements MaterialCab.Callback {
-    private HashMap<Integer, View> selectedItems;
+    private SparseArray<View> selectedItems;
     private MaterialCab mc;
     private Context mContext;
     private BaseQuickAdapter<T, BaseViewHolder> mAdapter;
@@ -26,7 +26,7 @@ public abstract class ToolbarController<T> implements MaterialCab.Callback {
     protected ToolbarController(Context context, MaterialCab mc) {
         mContext = context;
         this.mc = mc;
-        selectedItems = new HashMap<>();
+        selectedItems = new SparseArray<>();
     }
 
     protected void setListener(BaseQuickAdapter<T, BaseViewHolder> adapter) {
@@ -49,7 +49,7 @@ public abstract class ToolbarController<T> implements MaterialCab.Callback {
     }
 
     private void toggleItem(View view, Integer position) {
-        if (selectedItems.containsKey(position)) {
+        if (selectedItems.indexOfKey(position) >= 0) {
             setBackgroundColor(view, true);
             selectedItems.remove(position);
         } else {
@@ -69,8 +69,9 @@ public abstract class ToolbarController<T> implements MaterialCab.Callback {
 
     @Override
     public boolean onCabFinished(MaterialCab cab) {
-        for (Integer i : selectedItems.keySet()) {
-            View view = selectedItems.get(i);
+        for (int i = 0; i < selectedItems.size(); i++) {
+            Integer key = selectedItems.indexOfKey(i);
+            View view = selectedItems.get(key);
             setBackgroundColor(view, true);
         }
         selectedItems.clear();
@@ -97,15 +98,15 @@ public abstract class ToolbarController<T> implements MaterialCab.Callback {
 
     protected void removeSelectedItems() {
         User user = getDataHandler().getUser();
-        for (Integer i : selectedItems.keySet()) {
-            System.out.println("Nycklen är :::: " + i);
-            System.out.println(mAdapter.getData().get(i));
-            T object = mAdapter.getData().get(i);
+        for (int i = selectedItems.size() - 1; i >= 0; i--) {
+            Integer key = selectedItems.keyAt(i);
+            T object = mAdapter.getData().get(key);
             removeItemFromUser(object, user);
-            mAdapter.remove(i);
-            selectedItems.remove(i);
+            setBackgroundColor(selectedItems.get(key), true);
+            mAdapter.remove(key);
         }
-        //mc.finish();
+        selectedItems.clear();
+        mc.finish();
         getDataHandler().saveUser();
     }
 
