@@ -30,6 +30,7 @@ import corp.skaj.foretagskvitton.model.Card;
 import corp.skaj.foretagskvitton.model.Category;
 import corp.skaj.foretagskvitton.model.Company;
 import corp.skaj.foretagskvitton.model.IObserver;
+import corp.skaj.foretagskvitton.model.Supplier;
 import corp.skaj.foretagskvitton.model.TextCollector;
 import corp.skaj.foretagskvitton.model.User;
 
@@ -47,26 +48,124 @@ public class WizardPageBuilder {
         int nCompanies = user.getCompanies().size();
         String date = TextCollector.getDate(strings);
         String card = TextCollector.getCard(strings);
-        Company foundCompany = getCompany(nCompanies, card, user);
-        String[] supplierNames = new String[user.getSuppliers().size()];
-        for (int i = 0; i < supplierNames.length; i++) {
-            supplierNames[i] = user.getSuppliers().get(i).getName();
-        }
+        Company company = findCompany(nCompanies, card, user);
+        String[] suppliers = getSuppliers(user.getSuppliers());
 
+        if (user.getCompanies().size() == 1 && suppliers.length == 0) {
+            return oneCompanyNoSupplierWizard(view, totalSum, company, date);
+        }
+        if (user.getCompanies().size() == 1) {
+            return oneCompanyWizard(view, totalSum, company, suppliers, date);
+        }
+        if (suppliers.length == 0) {
+            return noSupplierWizard(view, user, totalSum, company, date);
+        } else {
+            return new PageList(
+                    new SingleFixedChoicePage(view, WizardConstants.CARD)
+                            .setChoices(WizardConstants.PRIVATE, WizardConstants.COMPANY)
+                            .setValue(company == null ? null : WizardConstants.COMPANY)
+                            .setRequired(true),
+
+                    // När ett företag är i förväg markerat är det ibland inte en "boll" i radio-knappen. Bugg i WizardPager.
+                    new SingleFixedChoicePage(view, WizardConstants.COMPANY)
+                            .setChoices(getCompanyNames(user))
+                            .setValue(company == null ? null : company.getName())
+                            .setRequired(true),
+
+                    new SingleFixedChoicePage(view, WizardConstants.SUPPLIER)
+                            .setChoices(suppliers),
+
+                    new DatePage(view, WizardConstants.DATE)
+                            .setValue(date == null ? getCurrentDate() : date)
+                            .setRequired(true),
+
+                    new TotalSumPage(view, WizardConstants.TOTAL)
+                            .setValue(totalSum > 0 ? String.valueOf(totalSum) : null)
+                            .setRequired(true),
+
+                    new TotalSumPage(view, WizardConstants.VAT)
+                            .setRequired(true),
+
+                    new SingleFixedChoicePage(view, WizardConstants.CATEGORY)
+                            .setChoices(Category.getCategoriesArray())
+                            .setRequired(true),
+
+                    //TODO add a choice above which is "other" for custom choice of category
+                    new TextPage(view, WizardConstants.COMMENT)
+                            .setRequired(false));
+        }
+    }
+
+    private PageList oneCompanyNoSupplierWizard(ModelCallbacks view, double totalSum, Company company, String date) {
         return new PageList(
                 new SingleFixedChoicePage(view, WizardConstants.CARD)
-                        .setChoices("PRIVAT", "FÖRETAG")
-                        .setValue(foundCompany == null ? null : "FÖRETAG")
+                        .setChoices(WizardConstants.PRIVATE, WizardConstants.COMPANY)
+                        .setValue(company == null ? null : WizardConstants.COMPANY)
+                        .setRequired(true),
+
+                new DatePage(view, WizardConstants.DATE)
+                        .setValue(date == null ? getCurrentDate() : date)
+                        .setRequired(true),
+
+                new TotalSumPage(view, WizardConstants.TOTAL)
+                        .setValue(totalSum > 0 ? String.valueOf(totalSum) : null)
+                        .setRequired(true),
+
+                new TotalSumPage(view, WizardConstants.VAT)
+                        .setRequired(true),
+
+                new SingleFixedChoicePage(view, WizardConstants.CATEGORY)
+                        .setChoices(Category.getCategoriesArray())
+                        .setRequired(true),
+
+                //TODO add a choice above which is "other" for custom choice of category
+                new TextPage(view, WizardConstants.COMMENT)
+                        .setRequired(false));
+    }
+
+    private PageList oneCompanyWizard(ModelCallbacks view, double totalSum, Company company, String[] suppliers, String date) {
+        return new PageList(
+                new SingleFixedChoicePage(view, WizardConstants.CARD)
+                        .setChoices(WizardConstants.PRIVATE, WizardConstants.COMPANY)
+                        .setValue(company == null ? null : WizardConstants.COMPANY)
+                        .setRequired(true),
+
+                new SingleFixedChoicePage(view, WizardConstants.SUPPLIER)
+                        .setChoices(suppliers),
+
+                new DatePage(view, WizardConstants.DATE)
+                        .setValue(date == null ? getCurrentDate() : date)
+                        .setRequired(true),
+
+                new TotalSumPage(view, WizardConstants.TOTAL)
+                        .setValue(totalSum > 0 ? String.valueOf(totalSum) : null)
+                        .setRequired(true),
+
+                new TotalSumPage(view, WizardConstants.VAT)
+                        .setRequired(true),
+
+                new SingleFixedChoicePage(view, WizardConstants.CATEGORY)
+                        .setChoices(Category.getCategoriesArray())
+                        .setRequired(true),
+
+                //TODO add a choice above which is "other" for custom choice of category
+                new TextPage(view, WizardConstants.COMMENT)
+                        .setRequired(false));
+    }
+
+
+    private PageList noSupplierWizard(ModelCallbacks view, User user, double totalSum, Company company, String date) {
+        return new PageList(
+                new SingleFixedChoicePage(view, WizardConstants.CARD)
+                        .setChoices(WizardConstants.PRIVATE, WizardConstants.COMPANY)
+                        .setValue(company == null ? null : WizardConstants.COMPANY)
                         .setRequired(true),
 
                 // När ett företag är i förväg markerat är det ibland inte en "boll" i radio-knappen. Bugg i WizardPager.
                 new SingleFixedChoicePage(view, WizardConstants.COMPANY)
                         .setChoices(getCompanyNames(user))
-                        .setValue(foundCompany == null ? null : foundCompany.getName())
+                        .setValue(company == null ? null : company.getName())
                         .setRequired(true),
-
-                new SingleFixedChoicePage(view, WizardConstants.SUPPLIER)
-                        .setChoices(supplierNames),
 
                 new DatePage(view, WizardConstants.DATE)
                         .setValue(date == null ? getCurrentDate() : date)
@@ -106,7 +205,15 @@ public class WizardPageBuilder {
         }
     }
 
-    private Company getCompany(int nCompanies, String sCard, User user) {
+    private String[] getSuppliers(List<Supplier> suppliers) {
+        String[] supplierNames = new String[suppliers.size()];
+        for (int i = 0; i < supplierNames.length; i++) {
+            supplierNames[i] = suppliers.get(i).getName();
+        }
+        return supplierNames;
+    }
+
+    private Company findCompany(int nCompanies, String sCard, User user) {
         if (nCompanies > 1 && sCard != null) {
             Card card = getCard(sCard);
             return user.getCompany(card);
@@ -143,3 +250,4 @@ public class WizardPageBuilder {
         return pages;
     }
 }
+
