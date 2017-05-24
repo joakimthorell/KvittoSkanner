@@ -22,6 +22,7 @@ public class CompanyFragment extends AbstractFragment {
     private Spinner mEmployees;
     private Spinner mCards;
     private TextView mComment;
+    private TextView mCompanyName;
 
     public CompanyFragment() {
         // Required empty public constructor
@@ -52,9 +53,12 @@ public class CompanyFragment extends AbstractFragment {
     }
 
     private void setupFragment(View view, String companyName) {
-        mEmployees = (Spinner) view.findViewById(R.id.company_fragment_employees_spinner);
-        mCards = (Spinner) view.findViewById(R.id.company_fragment_cards_spinner);
-        mComment = (TextView) view.findViewById(R.id.company_fragment_comment);
+        mCompanyName = (TextView) view.findViewById(R.id.fragment_company_title);
+        mEmployees = (Spinner) view.findViewById(R.id.fragment_company_employees_spinner);
+        mCards = (Spinner) view.findViewById(R.id.fragment_company_cards_spinner);
+        mComment = (TextView) view.findViewById(R.id.fragment_company_comment);
+
+        mCompanyName.setText(companyName);
 
         ArrayAdapter<String> employeeAdapter = buildArrayAdapter(view, getEmployees(companyName));
         setArrayAdapter(employeeAdapter, mEmployees);
