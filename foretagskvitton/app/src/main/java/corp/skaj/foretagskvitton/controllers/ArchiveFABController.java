@@ -9,7 +9,6 @@ import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
 
 import corp.skaj.foretagskvitton.R;
-import corp.skaj.foretagskvitton.view.ListFragment;
 
 public class ArchiveFABController extends FABController {
 

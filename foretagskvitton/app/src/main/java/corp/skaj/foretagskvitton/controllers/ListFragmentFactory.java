@@ -1,15 +1,6 @@
 package corp.skaj.foretagskvitton.controllers;
 
 import android.content.Context;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-
-import com.afollestad.materialcab.MaterialCab;
-import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.BaseViewHolder;
 
 import java.util.List;
 
@@ -43,7 +34,7 @@ public class ListFragmentFactory {
 
     public ArchiveListFragment createArchiveList(PurchaseList purchases, IData dataHandler) {
         ArchiveAdapter aa = new ArchiveAdapter(R.layout.archive_list_item, purchases, dataHandler);
-        ArchiveToolbarController atc = new ArchiveToolbarController(aa, mContext);
+        ArchiveToolbarController atc = new ArchiveToolbarController(mContext, aa);
         atc.setListener(aa);
 
 

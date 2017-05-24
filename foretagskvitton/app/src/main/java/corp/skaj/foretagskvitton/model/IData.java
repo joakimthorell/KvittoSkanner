@@ -9,7 +9,11 @@ public interface IData {
 
     void clearData();
 
-    void initDefaultUser();
+    boolean initDefaultUser();
 
     PurchaseList getPurchases(User user);
+
+    User getUser();
+
+    boolean saveUser();
 }

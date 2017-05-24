@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+/**
+ * This class holds products, date and the total amount of a receipt which has been collected
+ */
 public class Receipt {
     private List<Product> products;
     private Calendar date;

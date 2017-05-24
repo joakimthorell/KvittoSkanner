@@ -1,21 +1,11 @@
 package corp.skaj.foretagskvitton.controllers;
 
-import android.support.design.widget.FloatingActionButton;
-import android.view.View;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-
 import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.model.Category;
-import corp.skaj.foretagskvitton.model.Comment;
 import corp.skaj.foretagskvitton.model.Company;
 import corp.skaj.foretagskvitton.model.IData;
 import corp.skaj.foretagskvitton.model.Purchase;
@@ -36,7 +26,7 @@ public class ArchiveController implements FABCallback {
     }
 
     public void updateReceiptData() {
-        User user = dataHandler.readData(User.class.getName(), User.class);
+        User user = dataHandler.getUser();
         Purchase purchase = dataHandler.getPurchases(user).getPurchase(purchaseId);
         // price 
         purchase.getReceipt().setTotal(fragment.getPrice());
@@ -62,7 +52,7 @@ public class ArchiveController implements FABCallback {
         fragment.getDate();
 */
         // saves all changes 
-        dataHandler.writeData(User.class.getName(), user);
+        dataHandler.saveUser();
     }
 
     private Purchase.PurchaseType selectCorrectPurchase() {

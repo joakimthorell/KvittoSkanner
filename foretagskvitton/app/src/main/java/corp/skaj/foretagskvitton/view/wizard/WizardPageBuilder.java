@@ -17,7 +17,6 @@
 package corp.skaj.foretagskvitton.view.wizard;
 
 import com.tech.freak.wizardpager.model.ModelCallbacks;
-import com.tech.freak.wizardpager.model.MultipleFixedChoicePage;
 import com.tech.freak.wizardpager.model.PageList;
 import com.tech.freak.wizardpager.model.SingleFixedChoicePage;
 import com.tech.freak.wizardpager.model.TextPage;
@@ -49,6 +48,10 @@ public class WizardPageBuilder {
         String date = TextCollector.getDate(strings);
         String card = TextCollector.getCard(strings);
         Company foundCompany = getCompany(nCompanies, card, user);
+        String[] supplierNames = new String[user.getSuppliers().size()];
+        for (int i = 0; i < supplierNames.length; i++) {
+            supplierNames[i] = user.getSuppliers().get(i).getName();
+        }
 
         return new PageList(
                 new SingleFixedChoicePage(view, WizardConstants.CARD)
@@ -62,9 +65,8 @@ public class WizardPageBuilder {
                         .setValue(foundCompany == null ? null : foundCompany.getName())
                         .setRequired(true),
 
-                new MultipleFixedChoicePage(view, WizardConstants.SUPPLIER)
-                        // TODO lista alla grossister
-                        .setChoices(),
+                new SingleFixedChoicePage(view, WizardConstants.SUPPLIER)
+                        .setChoices(supplierNames),
 
                 new DatePage(view, WizardConstants.DATE)
                         .setValue(date == null ? getCurrentDate() : date)
