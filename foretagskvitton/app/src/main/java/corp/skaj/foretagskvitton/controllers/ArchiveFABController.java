@@ -3,12 +3,25 @@ package corp.skaj.foretagskvitton.controllers;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
 
+import java.util.Calendar;
+import java.util.List;
+import java.util.Random;
+
 import corp.skaj.foretagskvitton.R;
+import corp.skaj.foretagskvitton.model.Category;
+import corp.skaj.foretagskvitton.model.IData;
+import corp.skaj.foretagskvitton.model.Product;
+import corp.skaj.foretagskvitton.model.Purchase;
+import corp.skaj.foretagskvitton.model.Receipt;
+import corp.skaj.foretagskvitton.model.User;
+import corp.skaj.foretagskvitton.view.ArchiveListFragment;
+import corp.skaj.foretagskvitton.view.SupplierListFragment;
 
 public class ArchiveFABController extends FABController {
 
@@ -63,5 +76,44 @@ public class ArchiveFABController extends FABController {
         });
         button.addButton(gallery);
 
+        FloatingActionButton demoButton = new FloatingActionButton(getContext());
+        demoButton.setTitle("DEMO");
+        demoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                IData hander = (IData) getContext().getApplicationContext();
+                createNewReceipt();
+                AppCompatActivity activity = (AppCompatActivity) getContext();
+                ArchiveListFragment fragment = (ArchiveListFragment) activity.getSupportFragmentManager().findFragmentById(R.id.main_fragment_container);
+                fragment.getAdapter().setNewData(hander.getPurchases(hander.getUser()));
+            }
+        });
+        button.addButton(demoButton);
+    }
+
+
+    private void createNewReceipt() {
+        IData handler = (IData) getContext().getApplicationContext();
+        Random rand = new Random();
+
+
+        double total = rand.nextInt(999) + 1;
+        Product p = new Product(Product.ALL_PRODUCTS, getRandomCategory(), total, 25);
+
+        Calendar c = Calendar.getInstance();
+        Receipt r = new Receipt(p, c, total, null);
+
+        Purchase pr = new Purchase(r, Purchase.PurchaseType.PRIVATE);
+
+        handler.getUser().getCompanies().get(0).getEmployees().get(0).addPurchase(pr);
+        handler.saveUser();
+
+    }
+
+    private Category getRandomCategory() {
+        List<String> list = Category.getCategories();
+        Random rand = new Random();
+        Category c = Category.valueOf(list.get(rand.nextInt(list.size())));
+        return c;
     }
 }

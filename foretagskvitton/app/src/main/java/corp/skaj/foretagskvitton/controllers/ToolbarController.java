@@ -11,12 +11,14 @@ import com.afollestad.materialcab.MaterialCab;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 
+import java.util.HashMap;
+
 import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.model.IData;
 import corp.skaj.foretagskvitton.model.User;
 
 public abstract class ToolbarController<T> implements MaterialCab.Callback {
-    private SparseArray<View> selectedItems;
+    private HashMap<Integer, View> selectedItems;
     private MaterialCab mc;
     private Context mContext;
     private BaseQuickAdapter<T, BaseViewHolder> mAdapter;
@@ -24,7 +26,7 @@ public abstract class ToolbarController<T> implements MaterialCab.Callback {
     protected ToolbarController(Context context, MaterialCab mc) {
         mContext = context;
         this.mc = mc;
-        selectedItems = new SparseArray<>();
+        selectedItems = new HashMap<>();
     }
 
     protected void setListener(BaseQuickAdapter<T, BaseViewHolder> adapter) {
@@ -47,15 +49,13 @@ public abstract class ToolbarController<T> implements MaterialCab.Callback {
     }
 
     private void toggleItem(View view, Integer position) {
-        if (selectedItems.indexOfKey(position) >= 0) {
+        if (selectedItems.containsKey(position)) {
             setBackgroundColor(view, true);
             selectedItems.remove(position);
-
         } else {
             selectedItems.put(position, view);
             setBackgroundColor(view, false);
         }
-        Toast.makeText(mContext, "Listans strl" + selectedItems.size(), Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -69,9 +69,8 @@ public abstract class ToolbarController<T> implements MaterialCab.Callback {
 
     @Override
     public boolean onCabFinished(MaterialCab cab) {
-        for (int i = 0; i < selectedItems.size(); i++) {
-            Integer key = selectedItems.keyAt(i);
-            View view = selectedItems.get(key);
+        for (Integer i : selectedItems.keySet()) {
+            View view = selectedItems.get(i);
             setBackgroundColor(view, true);
         }
         selectedItems.clear();
@@ -98,13 +97,15 @@ public abstract class ToolbarController<T> implements MaterialCab.Callback {
 
     protected void removeSelectedItems() {
         User user = getDataHandler().getUser();
-        for (int i = 0; i < selectedItems.size(); i++) {
-            Integer key = selectedItems.keyAt(i);
-            removeItemFromUser(mAdapter.getData().get(key), user);
-            mAdapter.remove(key);
+        for (Integer i : selectedItems.keySet()) {
+            System.out.println("Nycklen är :::: " + i);
+            System.out.println(mAdapter.getData().get(i));
+            T object = mAdapter.getData().get(i);
+            removeItemFromUser(object, user);
+            mAdapter.remove(i);
+            selectedItems.remove(i);
         }
-        selectedItems.clear();
-        mc.finish();
+        //mc.finish();
         getDataHandler().saveUser();
     }
 
