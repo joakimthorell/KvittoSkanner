@@ -2,11 +2,13 @@ package corp.skaj.foretagskvitton.activities;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-
 import com.github.paolorotolo.appintro.AppIntro;
 import com.github.paolorotolo.appintro.AppIntroFragment;
-
 import corp.skaj.foretagskvitton.R;
+
+/**
+ * Class takes care of the application intro
+ */
 
 public class IntroActivity extends AppIntro {
     @Override
@@ -20,15 +22,23 @@ public class IntroActivity extends AppIntro {
                 "Under arkiv kan du hantera alla dina kvitton. Du sortera dem efter pris och datum. " +
                         "Du har möjlighet att lägga till ett nytt kvitto, redigera ett befintligt eller radera ett kvitto helt." ,
                 R.drawable.ic_image , getColor(R.color.colorPrimary)));
+        //TODO add picture of archive front page here
+
         addSlide(AppIntroFragment.newInstance("Företag",
                 "Under företag kan du hantera alla dina företag. Du kan lägga till ett nytt företag, redigera ett befintligt eller radera ett företag helt." +
                         " Du måste alltid ha minst ett företag.",
                 R.drawable.ic_image, getColor(R.color.colorAccent)));
+        //TODO add picture of company front page here
+
         addSlide(AppIntroFragment.newInstance("Grossister",
                 "Under grossister kan du hantera alla dina grossister. Du kan lägga till en ny grossist, redigera en befintlig eller radera en grossist helt.",
                 R.drawable.ic_image, getColor(R.color.colorPrimary)));
+        //TODO add picuture of supplier front page here
+
         addSlide(AppIntroFragment.newInstance("Lägg till", "För att lägga till något nytt nyttjar du den runda lägg-till knappen som finns på samtliga tre sidor",
                 R.drawable.introduction_button, getColor(R.color.colorAccent)));
+        //TODO amend the picture of the button
+
         addSlide(AppIntroFragment.newInstance("Lycka till med bokföringen!", "",
                 R.mipmap.ic_launcher, getColor(R.color.colorPrimary)));
 
