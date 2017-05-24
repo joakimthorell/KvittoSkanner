@@ -70,7 +70,6 @@ public class ArchiveAdapter extends BaseQuickAdapter<Purchase, BaseViewHolder> {
         purchases.sortByDate();
         Collections.reverse(purchases);
         setNewData(purchases);
-
     }
 
     public void showAll() {

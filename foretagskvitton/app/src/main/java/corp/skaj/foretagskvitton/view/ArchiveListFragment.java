@@ -110,7 +110,6 @@ public class ArchiveListFragment extends ListFragment{
                 return false;
         }
     }
-
     public ArchiveAdapter getAdapter() {
         return mAdapter;
     }

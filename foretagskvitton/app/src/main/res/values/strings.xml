@@ -10,11 +10,13 @@
     <string name="cancel">Tillbaka</string>
     <string name="wizard_complete">Slutför</string>
     <string name="date_hint">Datum</string>
+    <string name="default_company">Default Company</string>
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="menu_supplier">Grossist</string>
     <string name="total">Total:</string>
-    <string name="currancy">Sek</string>
+    <string name="currency">Sek</string>
     <string name="copy_image_text">Kopierar bild...</string>
     <string name="gallery">Galleri</string>
     <string name="reading_image">Skannar kvitto...</string>
@@ -61,6 +63,7 @@
 
     <string name="no_image">Ingen bild</string>
     <string name="receipt_saved">Kvitto sparat</string>
+    <string name="default_supplier">Default Supplier</string>
 
 
 </resources>
