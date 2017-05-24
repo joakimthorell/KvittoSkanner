@@ -46,7 +46,7 @@
     <string name="action_remove">Ta bort</string>
     <string name="action_share">Dela</string>
     <string name="intro_welcome">Välkommen till KvittoSkanner!</string>
-    <string name="intro_welcometext">Med denna applikation kan du på ett enkelt sätt kan bokföra dina kvitton med hjälp av endast några få klick</string>
+    <string name="intro_welcometext">Med denna applikation kan du på ett enkelt sätt kan bokföra dina kvitton.</string>
     <string name="intro_archive">Arkiv</string>
     <string name="intro_archivetext">Under arkiv kan du hantera alla dina kvitton.
         Du sortera dem efter pris och datum. Du har möjlighet att lägga till ett nytt kvitto, redigera ett befintligt eller radera ett kvitto helt. </string>
@@ -64,6 +64,13 @@
     <string name="no_image">Ingen bild</string>
     <string name="receipt_saved">Kvitto sparat</string>
     <string name="default_supplier">Default Supplier</string>
+    <string name="main_controller_supplier_call">Skriv grossist namn: </string>
+    <string name="main_controller_edit">Redigera </string>
+    <string name="main_controller_save">spara </string>
+    <string name="main_controller_change_to">Ändrat till </string>
+    <string name="main_controller_cancel">Avbryt </string>
+    <string name="fab_controller_create_new">Skapa ny</string>
+    <string name="fab_controller_add_supplier">Lagt till ny grossist</string>
 
 
 </resources>

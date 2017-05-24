@@ -1,5 +1,6 @@
 package corp.skaj.foretagskvitton.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 
@@ -18,6 +19,8 @@ public class ArchiveActivity extends AbstractActivity {
         ArchiveFragment af = ArchiveFragment.create(purchaseId);
         ArchiveController controller = new ArchiveController(getDataHandler(), purchaseId, af);
         af.setListener(controller);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         fm.beginTransaction().replace(R.id.archive_fragment_container, af).commit();
     }

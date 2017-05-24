@@ -88,6 +88,10 @@ public class ArchiveFragment extends AbstractFragment {
         mComment = (TextView) view.findViewById(R.id.archive_receipt_comment);
         mPurchaseType = (TextView) view.findViewById(R.id.archive_receipt_purchaseType);
 
+        mTax.setSingleLine();
+        mComment.setSingleLine();
+        mPrice.setSingleLine();
+
         //Category spinner
         ArrayAdapter<String> categoryAdapter = buildArrayAdapter(view, Category.getCategories());
         setArrayAdapter(categoryAdapter, mCategory);
@@ -208,7 +212,7 @@ public class ArchiveFragment extends AbstractFragment {
 
     public double getTax() {
         String newTax = String.valueOf((mTax.getText()));
-        return Double.valueOf(newTax.substring(6, newTax.length() - 2));
+        return Double.valueOf(newTax);
     }
 
     public String getCategory() {

@@ -29,6 +29,7 @@ public class MainController {
 
     private IView mListener;
     private Context mContext;
+    private BottomBar mBottombar;
 
 
     public MainController(IView listener, Context context) {
@@ -57,7 +58,7 @@ public class MainController {
         });
     }
 
-    public void setSupplierAdapterListener(final SupplierAdapter sAdapter, final Class<?> nextActivity, final String key) {
+    public void setSupplierAdapterListener(final SupplierAdapter sAdapter, final String key) {
         sAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
@@ -68,6 +69,7 @@ public class MainController {
     }
 
     public void initBottomBar (final BottomBar bottomBar) {
+        mBottombar = bottomBar;
         bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelected(@IdRes int tabId) {
@@ -102,12 +104,13 @@ public class MainController {
         edittext.setSingleLine(true);
         edittext.setText(supplier.getName());
 
-        alert.setMessage("Skriv grossist namn:");
-        alert.setTitle("Editera " + supplier.getName());
+
+        alert.setMessage(mContext.getString(R.string.main_controller_supplier_call));
+        alert.setTitle(mContext.getString(R.string.main_controller_edit) + supplier.getName());
 
         alert.setView(edittext);
 
-        alert.setPositiveButton("Spara", new DialogInterface.OnClickListener() {
+        alert.setPositiveButton(mContext.getString(R.string.main_controller_save), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 //What ever you want to do with the value
                 Editable supplierName = edittext.getText();
@@ -124,16 +127,30 @@ public class MainController {
                 SupplierListFragment fragment = (SupplierListFragment) activity.getSupportFragmentManager().findFragmentById(R.id.main_fragment_container);
                 fragment.getAdapter().setNewData(suppliers);
 
-                Toast.makeText(mContext, "Ändrat till " + supplier.getName(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, mContext.getString(R.string.main_controller_change_to)+ supplier.getName(), Toast.LENGTH_SHORT).show();
             }
         });
 
-        alert.setNegativeButton("Avbryt", new DialogInterface.OnClickListener() {
+        alert.setNegativeButton(mContext.getString(R.string.main_controller_cancel), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 // nothing to do here
             }
         });
 
         alert.show();
+    }
+
+    public boolean setSelectedTab(int actionId) {
+        if (mBottombar == null) {
+            return false;
+        }
+        try {
+            mBottombar.setDefaultTab(actionId);
+            return true;
+        } catch (Exception e) {
+            System.out.println("Not able to set BottomBar default tab, need to be correct R.id");
+        }
+
+        return false;
     }
 }

@@ -35,9 +35,7 @@ public class ArchiveController implements FABCallback {
         // price 
         purchase.getReceipt().setTotal(fragment.getPrice());
         // category 
-        System.out.println(fragment.getCategory().toUpperCase() + "- Should BE SAVED");
         purchase.getReceipt().getProducts().get(0).setCategory(Category.valueOf(fragment.getCategory().toUpperCase()));
-        System.out.println(purchase.getReceipt().getProducts().get(0).getCategory().name() + "- IS SAVED");
         // tax 
         purchase.getReceipt().getProducts().get(0).setTax(fragment.getTax());
         // supplier
@@ -70,10 +68,6 @@ public class ArchiveController implements FABCallback {
         user.getCompany(purchase).removeEmployee(oldPurchaseOwner);
 
         dataHandler.saveUser();
-    }
-
-    private void updateCompany(Company updatedCompany, User user, Purchase purchase){
-
     }
 
     private Purchase.PurchaseType selectCorrectPurchase() {

@@ -19,16 +19,13 @@ import corp.skaj.foretagskvitton.view.SupplierListFragment;
 public class ListFragmentFactory {
     private Context mContext;
     private Class<?> mArchiveActivity;
-    private Class<?> mSupplierActivity;
     private Class<?> mCompanyActivity;
 
     public ListFragmentFactory(Context context,
                                Class<?> archiveActivity,
-                               Class<?> supplierActivity,
                                Class<?> companyActivity) {
         mContext = context;
         mArchiveActivity = archiveActivity;
-        mSupplierActivity = supplierActivity;
         mCompanyActivity = companyActivity;
     }
 
@@ -52,7 +49,7 @@ public class ListFragmentFactory {
 
     public SupplierListFragment createSupplierList(List<Supplier> suppliers) {
         SupplierAdapter sa = new SupplierAdapter(R.layout.archive_list_item, suppliers);
-        SupplierFABController fabController = new SupplierFABController(mContext, mSupplierActivity);
+        SupplierFABController fabController = new SupplierFABController(mContext);
         SupplierListFragment fragment = SupplierListFragment.create(sa, fabController);
         return fragment;
     }
