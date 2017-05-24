@@ -1,7 +1,10 @@
 package corp.skaj.foretagskvitton.model;
-
 import java.util.ArrayList;
 import java.util.List;
+
+/**
+ * Holds a company’s employees, cards and comments.
+ */
 
 public class Company {
     private String companyName;

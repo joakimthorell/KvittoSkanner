@@ -1,5 +1,8 @@
 package corp.skaj.foretagskvitton.model;
 
+/**
+ * Holds information about the card used for the purchase
+ */
 
 public class Card {
     private int card;
