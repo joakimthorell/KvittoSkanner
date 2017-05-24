@@ -55,7 +55,7 @@ public class ArchiveController implements FABCallback {
         Company updatedCompany = user.getCompany(fragment.getCompany());
         user.addCompany(updatedCompany);
         //comments
-        purchase.getReceipt().getProducts().get(0).getComments().get(0).setComment(fragment.getComment());
+        purchase.getComments().get(0).setComment(fragment.getComment());
         //date
         /*
         DateFormat newDate = new SimpleDateFormat("yyyy-mm-dd");

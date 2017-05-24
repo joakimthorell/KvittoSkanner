@@ -15,6 +15,22 @@ public class TextCollector {
     private TextCollector() {
     }
 
+    public String getVat(List<String> strings){
+        for(int i = 0; i < strings.size(); i++){
+            String currentString = strings.get(i);
+            if (currentString.equals("25.00%")){
+                return currentString;
+            }
+            if (currentString.equals("12.00%")){
+                return currentString;
+            }
+            if (currentString.equals("6.00%")){
+                return currentString;
+            }
+        }
+        return "0,00";
+    }
+
     //TODO Do this if there is time
     public static void getProducts(List<String> strings) {
     }
@@ -180,6 +196,7 @@ public class TextCollector {
         if (s.contains(VISA)) {
             return s.lastIndexOf(VISA);
         }
+
         if (s.contains(KORT)) {
             return s.lastIndexOf(KORT);
         }

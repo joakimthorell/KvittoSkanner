@@ -79,7 +79,7 @@ public class ArchiveFragment extends AbstractFragment {
 
     private void setupFragment(View view, String purchaseId) {
         mPurchase = getCurrentPurchase(purchaseId);
-
+        User user = getUser();
         setDateTextView(view, mPurchase);
         setPriceTextView(view, mPurchase);
 
@@ -94,19 +94,33 @@ public class ArchiveFragment extends AbstractFragment {
         //Category spinner
         ArrayAdapter<String> categoryAdapter = buildArrayAdapter(view, Category.getCategories());
         setArrayAdapter(categoryAdapter, mCategory);
-        categorySelectionUpdate(categoryAdapter);
+
+        String selectedCat = mPurchase.getReceipt().getProducts().get(0).getCategory().name();
+        int positionCat = categoryAdapter.getPosition(selectedCat);
+        mCategory.setSelection(positionCat);
 
         //Company spinner
         ArrayAdapter<String> companyAdapter = buildArrayAdapter(view, getCompanies());
         setArrayAdapter(companyAdapter, mCompany);
-        Company c = getUser().getCompany(mPurchase);
-        mCompany.setSelection(getCompanies().indexOf(c));
+
+        Company c = user.getCompany(mPurchase);
+
+        String selectedCom = user.getCompany(mPurchase).getName();
+        int positionCom = companyAdapter.getPosition(selectedCom);
+        mCompany.setSelection(positionCom);
 
         //Employee spinner
         ArrayAdapter<String> employeeAdapter = buildArrayAdapter(view, getEmployees());
         setArrayAdapter(employeeAdapter, mEmployees);
+        
         Employee e = c.getEmployee(mPurchase);
-        mEmployees.setSelection(getEmployees().indexOf(e));
+       // mEmployees.setSelection(getEmployees().indexOf(e));
+
+        // TODO - work under progress
+        System.out.println(e + " hahahahahaha");
+        //String selectedEmp = c.getEmployee(mPurchase).getName();
+       // int positionEmp = employeeAdapter.getPosition(selectedEmp);
+       // mEmployees.setSelection(positionEmp);
 
         //Supplier spinner
         ArrayAdapter<String> supplierAdapter = buildArrayAdapter(view, getSuppliers());
@@ -122,11 +136,6 @@ public class ArchiveFragment extends AbstractFragment {
         mComment.setText(mPurchase.getComments().size() > 0 ? mPurchase.getComments().get(0).getComment() : null);
     }
 
-    public void categorySelectionUpdate(ArrayAdapter categoryAdapter) {
-        String selected = mPurchase.getReceipt().getProducts().get(0).getCategory().name();
-        int position = categoryAdapter.getPosition(selected);
-        mCategory.setSelection(position);
-    }
 
     public void onClick() {
         mCompany.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
