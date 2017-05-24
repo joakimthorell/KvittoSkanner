@@ -3,6 +3,10 @@ package corp.skaj.foretagskvitton.model;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Holds information about the purchased item
+ */
+
 public class Product {
     public static final String ALL_PRODUCTS = "ALL_PRODUCTS";
     private List<Comment> comments;
