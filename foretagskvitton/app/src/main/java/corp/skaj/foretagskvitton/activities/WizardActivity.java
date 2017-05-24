@@ -22,6 +22,7 @@ import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -165,9 +166,24 @@ public class WizardActivity extends AbstractActivity implements
 
     @Override
     public void onBackPressed() {
-        getDataHandler().removeData(IData.COLLECTED_STRINGS_KEY);
-        getDataHandler().removeData(IData.IMAGE_URI_KEY);
+        goBack();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                return goBack();
+            default:
+                return false;
+        }
+    }
+
+    private boolean goBack() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
+        return true;
     }
+
+
 }
