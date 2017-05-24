@@ -46,8 +46,11 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="corp.skaj.foretagskvitton.activities.MainActivity" />
         </activity>
-        <activity android:name=".activities.SupplierActivity" />
-        <activity android:name=".activities.ArchiveActivity" />
+        <activity android:name=".activities.ArchiveActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="corp.skaj.foretagskvitton.activities.MainActivity" />
+        </activity>
         <activity
             android:name=".activities.MainActivity"
             android:theme="@style/AppThemeMain">
@@ -57,7 +60,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.CompanyActivity" />
+        <activity android:name=".activities.CompanyActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="corp.skaj.foretagskvitton.activities.MainActivity" />
+        </activity>
         <activity
             android:name=".activities.IntroActivity"
             android:theme="@style/AppThemeMain" />

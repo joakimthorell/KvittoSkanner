@@ -21,8 +21,8 @@ import corp.skaj.foretagskvitton.view.SupplierListFragment;
 public class SupplierFABController extends FABController {
     public static final String CREATE_NEW_ACTION = "create_new_action";
 
-    public SupplierFABController(Context context, Class<?> nextActivity) {
-        super(context, nextActivity);
+    public SupplierFABController(Context context) {
+        super(context, null);
     }
 
     @Override

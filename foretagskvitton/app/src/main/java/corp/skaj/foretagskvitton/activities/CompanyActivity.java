@@ -1,13 +1,16 @@
 package corp.skaj.foretagskvitton.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 
 import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.view.CompanyFragment;
 
 public class CompanyActivity extends AppCompatActivity {
+    public static final String FROM_COMPANY_ACTIVITY = "company_activity_back_pressed";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,5 +23,28 @@ public class CompanyActivity extends AppCompatActivity {
 
         //TODO CompanyController
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        goBack();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                goBack();
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    private boolean goBack() {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.setAction(FROM_COMPANY_ACTIVITY);
+        startActivity(intent);
+        return true;
     }
 }
