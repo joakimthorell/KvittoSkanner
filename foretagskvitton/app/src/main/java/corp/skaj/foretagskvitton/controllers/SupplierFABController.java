@@ -21,8 +21,8 @@ import corp.skaj.foretagskvitton.view.SupplierListFragment;
 public class SupplierFABController extends FABController {
     public static final String CREATE_NEW_ACTION = "create_new_action";
 
-    public SupplierFABController(Context context, Class<?> nextActivity) {
-        super(context, nextActivity);
+    public SupplierFABController(Context context) {
+        super(context, null);
     }
 
     @Override
@@ -76,7 +76,8 @@ public class SupplierFABController extends FABController {
                 SupplierListFragment fragment = (SupplierListFragment) activity.getSupportFragmentManager().findFragmentById(R.id.main_fragment_container);
                 fragment.getAdapter().setNewData(suppliers);
 
-                Toast.makeText(getContext(), getContext().getString(R.string.fab_controller_add_supplier) + supplier.getName(), Toast.LENGTH_SHORT).show();
+
+                Toast.makeText(getContext(), "Dina ändringar är sparade " + supplier.getName(), Toast.LENGTH_SHORT).show();
             }
         });
 

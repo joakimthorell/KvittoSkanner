@@ -38,11 +38,10 @@ public class MainActivity extends AbstractActivity
         //getDataHandler().clearData(); // Clear all data
 
         // Create a default user if there is no user
-
-        /*if (getDataHandler().initDefaultUser()) {
+        if (getDataHandler().initDefaultUser()) {
             Intent intent = new Intent(this, IntroActivity.class);
             startActivity(intent);
-        }*/
+        }
 
         // Initiate main controller and bottom bar
         mController = new MainController(this, this);
@@ -52,13 +51,19 @@ public class MainActivity extends AbstractActivity
         mFragmentManger = getSupportFragmentManager();
         mFragmentFactory = new ListFragmentFactory(this,
                 AddReceiptActivity.class,
-                SupplierActivity.class,
                 CompanyActivity.class);
 
-        buildArchiveFragment();
+        System.out.println(getIntent().getAction());
 
-        Intent intent = new Intent(this, IntroActivity.class);
-        startActivity(intent);
+        String action = getIntent().getAction();
+
+        if (CompanyActivity.FROM_COMPANY_ACTIVITY.equals(action)) {
+            if (mController.setSelectedTab(R.id.action_business)) {
+                return;
+            }
+        }
+
+        buildArchiveFragment();
 
     }
 
@@ -79,7 +84,7 @@ public class MainActivity extends AbstractActivity
     @Override
     public void buildSupplierFragment() {
         SupplierListFragment fragment = mFragmentFactory.createSupplierList(getSuppliers());
-        mController.setSupplierAdapterListener(fragment.getAdapter(), SupplierActivity.class, SUPPLIER_KEY);
+        mController.setSupplierAdapterListener(fragment.getAdapter(), SUPPLIER_KEY);
         replaceFragment(fragment);
     }
 
@@ -117,5 +122,12 @@ public class MainActivity extends AbstractActivity
             ft.addToBackStack(backStateName);
             ft.commit();
         }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        String arg = "compay";
+        outState.putString("Company_things", arg);
     }
 }

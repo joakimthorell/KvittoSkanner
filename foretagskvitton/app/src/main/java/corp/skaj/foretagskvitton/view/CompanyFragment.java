@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -23,6 +24,7 @@ public class CompanyFragment extends AbstractFragment {
     private Spinner mCards;
     private TextView mComment;
     private TextView mCompanyName;
+    private ICompany mCompanyListener;
 
     public CompanyFragment() {
         // Required empty public constructor
@@ -57,6 +59,14 @@ public class CompanyFragment extends AbstractFragment {
         mEmployees = (Spinner) view.findViewById(R.id.fragment_company_employees_spinner);
         mCards = (Spinner) view.findViewById(R.id.fragment_company_cards_spinner);
         mComment = (TextView) view.findViewById(R.id.fragment_company_comment);
+        Button mEditEmployee = (Button) view.findViewById(R.id.fragment_company_edit_employee_button);
+        Button mRemoveEmployee = (Button) view.findViewById(R.id.fragment_company_remove_employee_button);
+        Button mEditCard = (Button) view.findViewById(R.id.fragment_company_edit_card_button);
+        Button mRemoveCard = (Button) view.findViewById(R.id.fragment_company_remove_card_button);
+        mCompanyListener.setEditEmployeeListener(mEditEmployee);
+        mCompanyListener.setRemoveEmployeeListener(mRemoveEmployee);
+        mCompanyListener.setEditCardListener(mEditCard);
+        mCompanyListener.setRemoveCardListener(mRemoveCard);
 
         mCompanyName.setText(companyName);
 
@@ -69,9 +79,32 @@ public class CompanyFragment extends AbstractFragment {
         mComment.setText(getComment(companyName));
     }
 
+    public void setListener (ICompany listener) {
+        mCompanyListener = listener;
+    }
+
     private String getComment(String companyName) {
         List<Comment> comments = getUser().getCompany(companyName).getComments();
         return comments.size() == 0 ? "Ingen kommentar" : comments.get(0).getComment();
+    }
+
+    public void updateEmployeeSpinner (String companyName) {
+        ArrayAdapter<String> adapter = buildArrayAdapter(getView(), getEmployees(companyName));
+        setArrayAdapter(adapter, mEmployees);
+    }
+
+    public void updateCardSpinner (String companyName) {
+        ArrayAdapter<String> cardsAdapter = buildArrayAdapter(getView(), getCards(companyName));
+        setArrayAdapter(cardsAdapter, mCards);
+    }
+
+    public String getEmployeeItem () {
+        System.out.println("LETS DO THIS" + getCompanyName());
+        return mEmployees.getSelectedItem().toString();
+    }
+
+    public String getCardItem () {
+        return mCards.getSelectedItem().toString();
     }
 
     private List<String> getCards(String companyName) {
@@ -90,5 +123,9 @@ public class CompanyFragment extends AbstractFragment {
             list.add(e.getName());
         }
         return list;
+    }
+
+    public String getCompanyName () {
+        return mCompanyName.getText().toString();
     }
 }

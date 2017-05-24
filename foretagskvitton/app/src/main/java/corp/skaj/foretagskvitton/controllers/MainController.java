@@ -29,6 +29,7 @@ public class MainController {
 
     private IView mListener;
     private Context mContext;
+    private BottomBar mBottombar;
 
 
     public MainController(IView listener, Context context) {
@@ -57,7 +58,7 @@ public class MainController {
         });
     }
 
-    public void setSupplierAdapterListener(final SupplierAdapter sAdapter, final Class<?> nextActivity, final String key) {
+    public void setSupplierAdapterListener(final SupplierAdapter sAdapter, final String key) {
         sAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
@@ -68,6 +69,7 @@ public class MainController {
     }
 
     public void initBottomBar (final BottomBar bottomBar) {
+        mBottombar = bottomBar;
         bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelected(@IdRes int tabId) {
@@ -136,5 +138,19 @@ public class MainController {
         });
 
         alert.show();
+    }
+
+    public boolean setSelectedTab(int actionId) {
+        if (mBottombar == null) {
+            return false;
+        }
+        try {
+            mBottombar.setDefaultTab(actionId);
+            return true;
+        } catch (Exception e) {
+            System.out.println("Not able to set BottomBar default tab, need to be correct R.id");
+        }
+
+        return false;
     }
 }
