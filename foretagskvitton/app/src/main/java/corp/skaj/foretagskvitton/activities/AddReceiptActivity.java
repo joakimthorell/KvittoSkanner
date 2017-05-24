@@ -47,7 +47,7 @@ public class AddReceiptActivity extends AbstractActivity {
                 dispatchChoosePictureIntent();
                 break;
             case ArchiveFABController.NO_IMAGE_ACTION:
-                // TODO
+                startWizard(null);
                 break;
             case Intent.ACTION_SEND:
                 onActionSend();
@@ -152,12 +152,8 @@ public class AddReceiptActivity extends AbstractActivity {
             startWizard(null);
             return;
         }
-        //copyImage(newFile, bmp);
         CopyImageTask task = new CopyImageTask(newFile, bmp);
         task.execute();
-        //Uri addressToNewFile = Uri.fromFile(newFile);
-        //mImageAdress = "";
-        //startWizard(addressToNewFile);
     }
 
     private void copyImage(File dest, Bitmap bmp) {

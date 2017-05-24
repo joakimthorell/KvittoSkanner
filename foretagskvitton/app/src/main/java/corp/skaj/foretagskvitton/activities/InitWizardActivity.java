@@ -14,6 +14,8 @@ import java.io.IOException;
 import java.util.List;
 
 import corp.skaj.foretagskvitton.R;
+import corp.skaj.foretagskvitton.controllers.WizardController;
+import corp.skaj.foretagskvitton.model.IData;
 import corp.skaj.foretagskvitton.services.ReceiptScanner;
 
 public class InitWizardActivity extends AbstractActivity {
@@ -32,6 +34,7 @@ public class InitWizardActivity extends AbstractActivity {
         Uri URI = catchIntent(getIntent());
         if (URI == null) {
             startWizard();
+            return;
         }
         collectStrings(URI, this).start();
 
@@ -44,12 +47,12 @@ public class InitWizardActivity extends AbstractActivity {
                 try {
                     List<String> strings = ReceiptScanner.collectStringsFromURI(context, URI);
                     String uriAsString = URI.toString();
-                    String oldURI = getDataHandler().readData("mURI", String.class);
+                    String oldURI = getDataHandler().readData(IData.IMAGE_URI_KEY, String.class);
                     if (oldURI != null) {
                         removeOldFile(oldURI);
                     }
-                    getDataHandler().writeData("mURI", uriAsString);
-                    getDataHandler().writeData("mStrings", strings);
+                    getDataHandler().writeData(IData.IMAGE_URI_KEY, uriAsString);
+                    getDataHandler().writeData(IData.COLLECTED_STRINGS_KEY, strings);
                     endLoadingBar();
                 } catch (IOException io) {
                     System.out.println("TextCollector is not operational");

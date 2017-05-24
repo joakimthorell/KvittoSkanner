@@ -59,5 +59,8 @@
     <string name="intro_goodluck">Lycka till med bokföringen!</string>
     <string name="intro_goodlucktext">Vi hoppas att du spara många timmar med hjälp av vår app!</string>
 
+    <string name="no_image">Ingen bild</string>
+    <string name="receipt_saved">Kvitto sparat</string>
+
 
 </resources>
