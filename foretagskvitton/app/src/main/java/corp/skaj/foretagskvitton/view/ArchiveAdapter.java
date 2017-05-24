@@ -81,4 +81,5 @@ public class ArchiveAdapter extends BaseQuickAdapter<Purchase, BaseViewHolder> {
         PurchaseList purchases = dataHandler.getPurchases(getUser()).getPurchases(c);
         setNewData(purchases);
     }
+
 }

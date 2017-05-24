@@ -71,6 +71,20 @@
                     <item
                         android:id="@+id/show_travel"
                         android:title="@string/show_travel" />
+                </menu>
+            </item>
+            <item
+                android:id="@+id/show_companies"
+                android:title="@string/show_companies">
+                <menu>
+
+                </menu>
+            </item>
+
+            <item
+                android:id="@+id/show_employees"
+                android:title="@string/show_employees">
+                <menu>
 
                 </menu>
             </item>

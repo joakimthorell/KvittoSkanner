@@ -71,6 +71,8 @@
     <string name="main_controller_cancel">Avbryt </string>
     <string name="fab_controller_create_new">Skapa ny</string>
     <string name="fab_controller_add_supplier">Lagt till ny grossist</string>
+    <string name="show_companies">Visa företag</string>
+    <string name="show_employees">Visa anställda</string>
 
 
 </resources>

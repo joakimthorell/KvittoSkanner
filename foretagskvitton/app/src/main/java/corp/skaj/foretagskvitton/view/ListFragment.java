@@ -23,7 +23,7 @@ import corp.skaj.foretagskvitton.R;
  * {@link FloatingActionsMenu} that can either be used as a direct button
  * or add more buttons into it.
  */
-public abstract class ListFragment extends Fragment {
+public abstract class ListFragment extends AbstractFragment {
     private RecyclerView mRecyclerView;
     private FABCallback mObserver;
     private FloatingActionsMenu mButton;
