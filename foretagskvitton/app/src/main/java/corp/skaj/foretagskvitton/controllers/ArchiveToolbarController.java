@@ -11,8 +11,6 @@ import com.afollestad.materialcab.MaterialCab;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 
 import corp.skaj.foretagskvitton.R;
-import corp.skaj.foretagskvitton.model.Company;
-import corp.skaj.foretagskvitton.model.Employee;
 import corp.skaj.foretagskvitton.model.IData;
 import corp.skaj.foretagskvitton.model.Purchase;
 import corp.skaj.foretagskvitton.model.User;
@@ -81,7 +79,7 @@ public class ArchiveToolbarController implements MaterialCab.Callback {
     }
 
     /**
-     * If selected true, changes to white background.
+     * This method changes background of list item to white if selected is true.
      * @param view
      * @param selected
      */
@@ -102,15 +100,10 @@ public class ArchiveToolbarController implements MaterialCab.Callback {
         for (int i = 0; i < selectedItems.size(); i++) {
             Integer key = selectedItems.keyAt(i);
             Purchase purchase = mAdapter.getData().get(key);
-            Company company = user.getCompany(purchase);
-            Employee employee = company.getEmployee(purchase);
-            System.out.println("THIS IS EMPLYEE " + employee);
-            employee.removePurchase(purchase);
-            //user.getCompany(purchase).getEmployee(purchase).removePurchase(purchase);
+            user.getCompany(purchase).getEmployee(purchase).removePurchase(purchase);
             mAdapter.remove(key);
         }
         selectedItems.clear();
-        //mc.finish();
         getDataHandler().writeData(User.class.getName(), user);
     }
 }
