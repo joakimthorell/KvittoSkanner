@@ -76,7 +76,7 @@ public class SupplierFABController extends FABController {
                 SupplierListFragment fragment = (SupplierListFragment) activity.getSupportFragmentManager().findFragmentById(R.id.main_fragment_container);
                 fragment.getAdapter().setNewData(suppliers);
 
-                Toast.makeText(getContext(), "Lagt till ny grossist " + supplier.getName(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Dina ändringar är sparade " + supplier.getName(), Toast.LENGTH_SHORT).show();
             }
         });
 
