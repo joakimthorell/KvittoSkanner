@@ -23,6 +23,7 @@ import corp.skaj.foretagskvitton.model.Company;
 import corp.skaj.foretagskvitton.model.Employee;
 import corp.skaj.foretagskvitton.model.Purchase;
 import corp.skaj.foretagskvitton.model.Supplier;
+import corp.skaj.foretagskvitton.model.User;
 
 public class ArchiveFragment extends AbstractFragment {
     public static final String ARCHIVE_BUNDLE = "PURCHASE_ID";
@@ -110,13 +111,9 @@ public class ArchiveFragment extends AbstractFragment {
         setArrayAdapter(employeeAdapter, mEmployees);
         
         Employee e = c.getEmployee(mPurchase);
-       // mEmployees.setSelection(getEmployees().indexOf(e));
-
-        // TODO - work under progress
-        System.out.println(e + " hahahahahaha");
-        //String selectedEmp = c.getEmployee(mPurchase).getName();
-       // int positionEmp = employeeAdapter.getPosition(selectedEmp);
-       // mEmployees.setSelection(positionEmp);
+        String selectedEmp = e.getName();
+        int positionEmp = employeeAdapter.getPosition(selectedEmp);
+        mEmployees.setSelection(positionEmp);
 
         //Supplier spinner
         ArrayAdapter<String> supplierAdapter = buildArrayAdapter(view, getSuppliers());
@@ -154,7 +151,7 @@ public class ArchiveFragment extends AbstractFragment {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
+            //Empty on purpose
             }
         });
     }
