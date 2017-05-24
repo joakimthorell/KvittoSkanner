@@ -148,14 +148,18 @@ public class WizardController {
                 totalBundle.getString("_"));
 
         Purchase purchase = buildPurchase(
-                receipt, supplierBundle.getString("_"),
+                receipt,
+                supplierBundle == null ? null : supplierBundle.getString("_"),
                 payMethodBundle.getString("_"));
 
         if (commentBundle.getString("_") != null) {
             purchase.addComment(new Comment(commentBundle.getString("_")));
         }
         User user = mDataHandler.getUser();
-        Company company = user.getCompany(companyNameBundle.getString("_"));
+        Company company = companyNameBundle != null ?
+                user.getCompany(companyNameBundle.getString("_")) :
+                user.getCompanies().get(0); // if bundle is null there is only one company
+
         Employee employee = company.getEmployees().get(0);
         employee.addPurchase(purchase);
         saveUser(user);

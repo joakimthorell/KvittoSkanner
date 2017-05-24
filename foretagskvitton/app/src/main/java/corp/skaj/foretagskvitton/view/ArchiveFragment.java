@@ -1,5 +1,7 @@
 package corp.skaj.foretagskvitton.view;
 
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.InputType;
@@ -8,11 +10,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,10 +28,12 @@ import corp.skaj.foretagskvitton.model.Employee;
 import corp.skaj.foretagskvitton.model.Purchase;
 import corp.skaj.foretagskvitton.model.Supplier;
 import corp.skaj.foretagskvitton.model.User;
+import corp.skaj.foretagskvitton.services.ReceiptScanner;
 
 public class ArchiveFragment extends AbstractFragment {
     public static final String ARCHIVE_BUNDLE = "PURCHASE_ID";
-    private FABCallback mListener;
+    private FABCallback mFabListener;
+    private ArchiveListener mImageListener;
     private TextView mPrice;
     private TextView mTax;
     private TextView mDate;
@@ -38,6 +44,7 @@ public class ArchiveFragment extends AbstractFragment {
     private Spinner mCompany;
     private Spinner mCategory;
     private Purchase mPurchase;
+    private ImageView mMiniImage;
 
     public ArchiveFragment() {
         // Required empty public constructor
@@ -65,13 +72,17 @@ public class ArchiveFragment extends AbstractFragment {
 
 
         FloatingActionsMenu button = (FloatingActionsMenu) view.findViewById(R.id.archive_receipt_savebutton);
-        mListener.bindButton(button);
+        mFabListener.bindButton(button);
         onClick();
 
     }
 
-    public void setListener(FABCallback listener) {
-        mListener = listener;
+    public void setImageListener(ArchiveListener listener) {
+        mImageListener = listener;
+    }
+
+    public void setFabListener(FABCallback listener) {
+        mFabListener = listener;
     }
 
     private void setupFragment(View view, String purchaseId) {
@@ -87,6 +98,7 @@ public class ArchiveFragment extends AbstractFragment {
         mTax = (TextView) view.findViewById(R.id.archive_receipt_moms);
         mComment = (TextView) view.findViewById(R.id.archive_receipt_comment);
         mPurchaseType = (TextView) view.findViewById(R.id.archive_receipt_purchaseType);
+        mMiniImage = (ImageView) view.findViewById(R.id.miniature_image_receipt);
 
         mTax.setSingleLine();
         mComment.setSingleLine();
@@ -131,6 +143,20 @@ public class ArchiveFragment extends AbstractFragment {
         mPurchaseType.setText(String.valueOf(mPurchase.getPurchaseType().name()));
 
         mComment.setText(mPurchase.getComments().size() > 0 ? mPurchase.getComments().get(0).getComment() : null);
+
+        try {
+            Bitmap bmp = ReceiptScanner.createImageFromURI(getContext(), Uri.parse(mPurchase.getReceipt().getPictureAdress()));
+            mMiniImage.setImageBitmap(bmp);
+            mMiniImage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    System.out.println("test");
+                }
+            });
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            mMiniImage.setImageDrawable(getContext().getDrawable(R.drawable.comingsoon));
+        }
     }
 
 
