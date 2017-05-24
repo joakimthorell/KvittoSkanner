@@ -22,7 +22,7 @@ public class Product {
     public void addComment(Comment c) {
         comments.add(c);
     }
-    
+
     public void setName(String name) {
         this.name = name;
     }
