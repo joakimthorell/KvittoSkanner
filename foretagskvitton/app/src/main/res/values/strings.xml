@@ -43,5 +43,7 @@
     <string name="archive_save">Sparat</string>
     <string name="action_remove">Ta bort</string>
     <string name="action_share">Dela</string>
+    <string name="no_image">Ingen bild</string>
+    <string name="receipt_saved">Kvitto sparat</string>
 
 </resources>

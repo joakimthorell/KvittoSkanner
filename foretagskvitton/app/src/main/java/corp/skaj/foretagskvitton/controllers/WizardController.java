@@ -166,8 +166,8 @@ public class WizardController {
         mDataHandler.saveUser();
         System.out.println("User : " + user.getName() + " saved. COMPLETE!");
         System.out.println("Removing used items");
-        mDataHandler.removeData("mURI");
-        mDataHandler.removeData("mStrings");
+        mDataHandler.removeData(IData.IMAGE_URI_KEY);
+        mDataHandler.removeData(IData.COLLECTED_STRINGS_KEY);
         System.out.println("Removed data. COMPLETE!");
     }
 
@@ -188,7 +188,7 @@ public class WizardController {
         Calendar date = Calendar.getInstance();
         date.setTime(dateAsDate);
         double total = Double.parseDouble(totalAsString);
-        String URIAsString = mDataHandler.readData("mURI", String.class);
+        String URIAsString = mDataHandler.readData(IData.IMAGE_URI_KEY, String.class);
         return new Receipt(product, date, total, URIAsString);
     }
 
