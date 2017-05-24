@@ -1,12 +1,9 @@
 package corp.skaj.foretagskvitton.controllers;
 
 import android.content.Context;
-import android.view.View;
 import android.widget.Toast;
 
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
-
-import corp.skaj.foretagskvitton.view.ListFragment;
 
 public class CompanyFABController extends FABController {
 

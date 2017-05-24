@@ -1,6 +1,8 @@
 package corp.skaj.foretagskvitton.model;
 
-
+/**
+ * Holds information about users comments. Gets and sets a comment
+ */
 public class Comment  {
     private String comment;
 

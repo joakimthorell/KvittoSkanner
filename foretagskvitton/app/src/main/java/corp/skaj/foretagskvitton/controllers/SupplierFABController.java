@@ -66,11 +66,11 @@ public class SupplierFABController extends FABController {
                 }
 
                 IData handler = ((IData) getContext().getApplicationContext());
-                User user = handler.readData(User.class.getName(), User.class);
+                User user = handler.getUser();
                 Supplier supplier = new Supplier(supplierName.toString());
                 user.addSupplier(supplier);
-                handler.writeData(User.class.getName(), user);
-                List<Supplier> suppliers = handler.readData(User.class.getName(), User.class).getSuppliers();
+                handler.saveUser();
+                List<Supplier> suppliers = handler.getUser().getSuppliers();
 
                 AppCompatActivity activity = (AppCompatActivity) getContext();
                 SupplierListFragment fragment = (SupplierListFragment) activity.getSupportFragmentManager().findFragmentById(R.id.main_fragment_container);

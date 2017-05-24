@@ -41,5 +41,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="archive_save">Sparat</string>
+    <string name="action_remove">Ta bort</string>
+    <string name="action_share">Dela</string>
 
 </resources>

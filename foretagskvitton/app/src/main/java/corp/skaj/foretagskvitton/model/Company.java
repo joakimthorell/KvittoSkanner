@@ -1,8 +1,10 @@
 package corp.skaj.foretagskvitton.model;
-
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Holds a company’s employees, cards and comments.
+ */
 public class Company {
     private String companyName;
     private List<Employee> employees;
@@ -47,8 +49,10 @@ public class Company {
 
     public Employee getEmployee(Purchase purchase) {
         for (Employee employee : employees) {
-            if (employee.getPurchases().contains(purchase)) {
-                return employee;
+            for (Purchase p : employee.getPurchases()) {
+                if (p.getId().equals(purchase.getId())) {
+                    return employee;
+                }
             }
         }
         return null;

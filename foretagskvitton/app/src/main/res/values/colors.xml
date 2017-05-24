@@ -6,4 +6,5 @@
     <color name="colorMenu">#12769C</color>
     <color name="colorMenuItem">#7CBDD6</color>
     <color name="nextButtonGreen">#13c116</color>
+    <color name="itemBackgroundSelected">#939393</color>
 </resources>

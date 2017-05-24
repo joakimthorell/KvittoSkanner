@@ -93,7 +93,7 @@ public class MainController {
     public void showEditSupplierDialog(String data) {
 
         final IData handler = (IData) mContext.getApplicationContext();
-        final User user = handler.readData(User.class.getName(), User.class);
+        final User user = handler.getUser();
         final Supplier supplier = user.getSupplier(data);
 
         AlertDialog.Builder alert = new AlertDialog.Builder(mContext);
@@ -117,8 +117,8 @@ public class MainController {
                 }
 
                 supplier.setName(supplierName.toString());
-                handler.writeData(User.class.getName(), user);
-                List<Supplier> suppliers = handler.readData(User.class.getName(), User.class).getSuppliers();
+                handler.saveUser();
+                List<Supplier> suppliers = handler.getUser().getSuppliers();
 
                 AppCompatActivity activity = (AppCompatActivity) mContext;
                 SupplierListFragment fragment = (SupplierListFragment) activity.getSupportFragmentManager().findFragmentById(R.id.main_fragment_container);
