@@ -37,10 +37,12 @@ import java.util.List;
 import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.controllers.WizardController;
 import corp.skaj.foretagskvitton.controllers.WizardPageController;
+import corp.skaj.foretagskvitton.model.IData;
 import corp.skaj.foretagskvitton.model.IObserver;
 
 public class WizardActivity extends AbstractActivity implements
         PageFragmentCallbacks, ReviewFragment.Callbacks, ModelCallbacks, IObserver {
+
     private WizardController mWizardController;
     private AbstractWizardModel mWizardView;
     private WizardPageController mPagerAdapter;
@@ -156,15 +158,15 @@ public class WizardActivity extends AbstractActivity implements
     @Override
     public void onDataChange() {
         mWizardController.saveReceipts();
-        Toast.makeText(this, "Kvitto sparat", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, R.string.receipt_saved, Toast.LENGTH_LONG).show();
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 
     @Override
     public void onBackPressed() {
-        getDataHandler().removeData("mURI");
-        getDataHandler().removeData("mStrings");
+        getDataHandler().removeData(IData.COLLECTED_STRINGS_KEY);
+        getDataHandler().removeData(IData.IMAGE_URI_KEY);
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }

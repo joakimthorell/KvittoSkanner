@@ -39,10 +39,10 @@ public class MainActivity extends AbstractActivity
 
         // Create a default user if there is no user
 
-        if (getDataHandler().initDefaultUser()) {
+        /*if (getDataHandler().initDefaultUser()) {
             Intent intent = new Intent(this, IntroActivity.class);
             startActivity(intent);
-        }
+        }*/
 
         // Initiate main controller and bottom bar
         mController = new MainController(this, this);
@@ -56,6 +56,9 @@ public class MainActivity extends AbstractActivity
                 CompanyActivity.class);
 
         buildArchiveFragment();
+
+        Intent intent = new Intent(this, IntroActivity.class);
+        startActivity(intent);
 
     }
 

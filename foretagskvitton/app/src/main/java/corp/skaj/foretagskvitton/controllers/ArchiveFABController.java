@@ -76,6 +76,19 @@ public class ArchiveFABController extends FABController {
         });
         button.addButton(gallery);
 
+        FloatingActionButton noImage = new FloatingActionButton(getContext());
+        noImage.setTitle(getContext().getString(R.string.no_image));
+        noImage.setImageDrawable(mNoImageDraw);
+        noImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), getNextActivity());
+                intent.setAction(NO_IMAGE_ACTION);
+                getContext().startActivity(intent);
+            }
+        });
+        button.addButton(noImage);
+
         FloatingActionButton demoButton = new FloatingActionButton(getContext());
         demoButton.setTitle("DEMO");
         demoButton.setOnClickListener(new View.OnClickListener() {

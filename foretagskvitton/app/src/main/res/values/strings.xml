@@ -10,11 +10,13 @@
     <string name="cancel">Tillbaka</string>
     <string name="wizard_complete">Slutför</string>
     <string name="date_hint">Datum</string>
+    <string name="default_company">Default Company</string>
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="menu_supplier">Grossist</string>
     <string name="total">Total:</string>
-    <string name="currancy">Sek</string>
+    <string name="currency">Sek</string>
     <string name="copy_image_text">Kopierar bild...</string>
     <string name="gallery">Galleri</string>
     <string name="reading_image">Skannar kvitto...</string>
@@ -43,5 +45,25 @@
     <string name="archive_save">Sparat</string>
     <string name="action_remove">Ta bort</string>
     <string name="action_share">Dela</string>
+    <string name="intro_welcome">Välkommen till KvittoSkanner!</string>
+    <string name="intro_welcometext">Med denna applikation kan du på ett enkelt sätt kan bokföra dina kvitton med hjälp av endast några få klick</string>
+    <string name="intro_archive">Arkiv</string>
+    <string name="intro_archivetext">Under arkiv kan du hantera alla dina kvitton.
+        Du sortera dem efter pris och datum. Du har möjlighet att lägga till ett nytt kvitto, redigera ett befintligt eller radera ett kvitto helt. </string>
+    <string name="intro_company">Företag</string>
+    <string name="intro_companytext">Under företag kan du hantera alla dina företag. Du kan lägga till ett nytt företag,
+        redigera ett befintligt eller radera ett företag helt.
+        Du måste alltid ha minst ett företag.</string>
+    <string name="intro_supplier">Grossister</string>
+    <string name="intro_suppliertext">Under grossister kan du hantera alla dina grossister. Du kan lägga till en ny grossist, redigera en befintlig eller radera en grossist helt.</string>
+    <string name="intro_add">Lägg till</string>
+    <string name="intro_addtext">För att lägga till något nytt nyttjar du den runda lägg-till knappen som finns på samtliga tre sidor</string>
+    <string name="intro_goodluck">Lycka till med bokföringen!</string>
+    <string name="intro_goodlucktext">Vi hoppas att du spara många timmar med hjälp av vår app!</string>
+
+    <string name="no_image">Ingen bild</string>
+    <string name="receipt_saved">Kvitto sparat</string>
+    <string name="default_supplier">Default Supplier</string>
+
 
 </resources>

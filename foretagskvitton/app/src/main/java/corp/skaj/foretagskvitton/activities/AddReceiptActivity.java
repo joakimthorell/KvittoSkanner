@@ -47,7 +47,7 @@ public class AddReceiptActivity extends AbstractActivity {
                 dispatchChoosePictureIntent();
                 break;
             case ArchiveFABController.NO_IMAGE_ACTION:
-                // TODO
+                startWizard(null);
                 break;
             case Intent.ACTION_SEND:
                 onActionSend();
