@@ -41,7 +41,11 @@ public class MainActivity extends AbstractActivity
         //getDataHandler().clearData(); // Clear all data
 
         // Create a default user if there is no user
-        getDataHandler().initDefaultUser();
+
+        if (getDataHandler().initDefaultUser()) {
+            Intent intent = new Intent(this, IntroActivity.class);
+            startActivity(intent);
+        }
 
         // Initiate main controller and bottom bar
         mController = new MainController(this, this);
@@ -56,8 +60,6 @@ public class MainActivity extends AbstractActivity
 
         buildArchiveFragment();
 
-        Intent intent = new Intent(this, IntroActivity.class);
-        startActivity(intent);
     }
 
     @Override
@@ -89,7 +91,7 @@ public class MainActivity extends AbstractActivity
     }
 
     private User getUser() {
-        return getDataHandler().readData(User.class.getName(), User.class);
+        return getDataHandler().getUser();
     }
 
     private List<Company> getCompanies() {
@@ -97,7 +99,7 @@ public class MainActivity extends AbstractActivity
     }
 
     private List<Supplier> getSuppliers() {
-        return getDataHandler().readData(User.class.getName(), User.class).getSuppliers();
+        return getDataHandler().getUser().getSuppliers();
     }
 
     private PurchaseList getPurchases() {

@@ -43,7 +43,7 @@ public class ListFragmentFactory {
 
     public ArchiveListFragment createArchiveList(PurchaseList purchases, IData dataHandler) {
         ArchiveAdapter aa = new ArchiveAdapter(R.layout.archive_list_item, purchases, dataHandler);
-        ArchiveToolbarController atc = new ArchiveToolbarController(aa, mContext);
+        ArchiveToolbarController atc = new ArchiveToolbarController(mContext, aa);
         atc.setListener(aa);
 
 

@@ -36,7 +36,7 @@ public class ArchiveController implements FABCallback {
     }
 
     public void updateReceiptData() {
-        User user = dataHandler.readData(User.class.getName(), User.class);
+        User user = dataHandler.getUser();
         Purchase purchase = dataHandler.getPurchases(user).getPurchase(purchaseId);
         // price 
         purchase.getReceipt().setTotal(fragment.getPrice());
@@ -62,7 +62,7 @@ public class ArchiveController implements FABCallback {
         fragment.getDate();
 */
         // saves all changes 
-        dataHandler.writeData(User.class.getName(), user);
+        dataHandler.saveUser();
     }
 
     private Purchase.PurchaseType selectCorrectPurchase() {

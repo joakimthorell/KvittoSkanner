@@ -16,11 +16,27 @@ public class DataHandler extends Application implements IData {
 
     private User mUser;
 
+    /**
+     * This method is to write data to shared preferences.
+     * <h1>Dont use this to write user</h1> instead user saveUser()
+     * @param key
+     * @param writeT
+     * @param <T>
+     */
     @Override
     public <T> void writeData(String key, T writeT) {
         getEditor().putString(key, toJson(writeT)).apply();
     }
 
+    /**
+     * This method is to read data saved in shared preference.
+     * <h1>Dont use this to get user from other classes</h1> instead use getUser()
+     *
+     * @param key
+     * @param classOfT
+     * @param <T>
+     * @return
+     */
     @Override
     public <T> T readData(String key, Class<T> classOfT) {
         return new Gson().fromJson(getString(key), classOfT);
@@ -49,16 +65,17 @@ public class DataHandler extends Application implements IData {
     }
 
     @Override
-    public void initDefaultUser() {
-        if (readData(User.class.getName(), User.class) == null) {
+    public boolean initDefaultUser() {
+        if (getUser() == null) {
             User user = new User("USER");
             Company company = new Company("SKAJ Corp.");
             company.addEmployee(new Employee(user.getName()));
             user.addCompany(company);
-            //mUser = user;
-            //saveUser();
-            writeData(User.class.getName(), User.class);
+            mUser = user;
+            saveUser();
+            return true;
         }
+        return false;
     }
 
     @Override
@@ -71,8 +88,6 @@ public class DataHandler extends Application implements IData {
         }
         return purchases;
     }
-
-    /*
 
     public User getUser() {
         if (mUser == null) {
@@ -89,6 +104,6 @@ public class DataHandler extends Application implements IData {
             return true;
         }
         return false;
-    }*/
+    }
 
 }

@@ -154,7 +154,7 @@ public class WizardController {
         if (commentBundle.getString("_") != null) {
             purchase.addComment(new Comment(commentBundle.getString("_")));
         }
-        User user = mDataHandler.readData(User.class.getName(), User.class);
+        User user = mDataHandler.getUser();
         Company company = user.getCompany(companyNameBundle.getString("_"));
         Employee employee = company.getEmployees().get(0);
         employee.addPurchase(purchase);
@@ -163,7 +163,7 @@ public class WizardController {
 
     private void saveUser(User user) {
         System.out.println("Saving user " + user.getName());
-        mDataHandler.writeData(User.class.getName(), user);
+        mDataHandler.saveUser();
         System.out.println("User : " + user.getName() + " saved. COMPLETE!");
         System.out.println("Removing used items");
         mDataHandler.removeData("mURI");

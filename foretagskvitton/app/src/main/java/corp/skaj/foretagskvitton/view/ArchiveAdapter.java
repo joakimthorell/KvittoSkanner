@@ -25,7 +25,7 @@ public class ArchiveAdapter extends BaseQuickAdapter<Purchase, BaseViewHolder> {
 
     @Override
     protected void convert(BaseViewHolder helper, Purchase item) {
-        User user = dataHandler.readData(User.class.getName(), User.class);
+        User user = dataHandler.getUser();
         String companyName = user.getCompany(item).getName();
         Category category = item.getReceipt().getProducts().get(0).getCategory();
         int nComments = item.getComments().size();
@@ -43,7 +43,7 @@ public class ArchiveAdapter extends BaseQuickAdapter<Purchase, BaseViewHolder> {
     }
 
     private User getUser() {
-        return dataHandler.readData(User.class.getName(), User.class);
+        return dataHandler.getUser();
     }
 
     public void sortListByPriceAcceding() {

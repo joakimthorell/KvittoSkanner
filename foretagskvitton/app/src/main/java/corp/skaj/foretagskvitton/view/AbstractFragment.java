@@ -27,6 +27,6 @@ public class AbstractFragment extends Fragment {
     }
 
     protected User getUser() {
-        return getDataHandler().readData(User.class.getName(), User.class);
+        return getDataHandler().getUser();
     }
 }
