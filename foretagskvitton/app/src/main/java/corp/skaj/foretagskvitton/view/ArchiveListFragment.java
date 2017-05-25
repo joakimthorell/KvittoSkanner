@@ -28,22 +28,24 @@ import corp.skaj.foretagskvitton.model.User;
  * {@link FloatingActionsMenu} that can either be used as a direct button
  * or add more buttons into it.
  */
-public class ArchiveListFragment extends ListFragment{
+public class ArchiveListFragment extends ListFragment {
 
     private ArchiveAdapter mAdapter;
+    private IArchive mArchiveBinder;
 
     public ArchiveListFragment() {
         super();
     }
 
-    public static ArchiveListFragment create(ArchiveAdapter adapter) {
+    public static ArchiveListFragment create(ArchiveAdapter adapter, IArchive binder) {
         ArchiveListFragment fragment = new ArchiveListFragment();
         fragment.setAdapter(adapter);
+        fragment.setBinder(binder);
         return fragment;
     }
 
-    public static ArchiveListFragment create(ArchiveAdapter adapter, FABCallback listener) {
-        ArchiveListFragment fragment = create(adapter);
+    public static ArchiveListFragment create(ArchiveAdapter adapter, FABCallback listener, IArchive binder) {
+        ArchiveListFragment fragment = create(adapter, binder);
         fragment.setListener(listener);
         return fragment;
     }
@@ -52,15 +54,8 @@ public class ArchiveListFragment extends ListFragment{
         this.mAdapter = adapter;
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
-
-    }
-
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    private void setBinder(IArchive binder) {
+        mArchiveBinder = binder;
     }
 
     @Override
@@ -69,22 +64,24 @@ public class ArchiveListFragment extends ListFragment{
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.archive_toolbar, menu);
 
-        //Fills the toolbar dynamically with..
-
-        //Companies
-        Menu m = menu.getItem(2).getSubMenu();
-        List<Company> comps = user.getCompanies();
-        for (int i = 0; i < comps.size(); i++) {
-            m.getItem(2).getSubMenu().add(comps.get(i).getName());
-        }
-
-        //Employees
-        for (int i = 0; i < comps.size(); i++) {
-            for(int j = 0; j < comps.get(i).getEmployees().size(); j++) {
-                String empName = comps.get(j).getEmployees().get(j).getName();
-               m.getItem(3).getSubMenu().add(empName);
+        //Fills the toolbar dynamically with company & employee
+        Menu subMenu = menu.getItem(2).getSubMenu();
+        List<Company> companies = user.getCompanies();
+        for (Company c : companies) {
+            String companyName = c.getName();
+            mArchiveBinder.bindCompanyMenuItem(createCompanyItem(subMenu, companyName), getAdapter(), c);
+            for (Employee e : c.getEmployees()) {
+                mArchiveBinder.bindEmployeeMenuItem(createEmployeeItem(subMenu, e.getName()), getAdapter(), e);
             }
         }
+    }
+
+    private MenuItem createCompanyItem(Menu menu, String companyName) {
+        return menu.getItem(2).getSubMenu().add(companyName);
+    }
+
+    private MenuItem createEmployeeItem(Menu menu, String employeeName) {
+        return menu.getItem(3).getSubMenu().add(employeeName);
     }
 
     @Override

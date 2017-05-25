@@ -30,7 +30,7 @@ public class ListFragmentFactory {
         ArchiveToolbarController atc = new ArchiveToolbarController(context, aa);
         atc.setListener(aa);
         ArchiveFABController fabController = new ArchiveFABController(context, archiveActivity);
-        ArchiveListFragment fragment = ArchiveListFragment.create(aa, fabController);
+        ArchiveListFragment fragment = ArchiveListFragment.create(aa, fabController, atc);
         return fragment;
     }
 
