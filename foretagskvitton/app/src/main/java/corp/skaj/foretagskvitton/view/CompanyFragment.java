@@ -1,6 +1,7 @@
 package corp.skaj.foretagskvitton.view;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,11 +10,14 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.getbase.floatingactionbutton.FloatingActionsMenu;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import corp.skaj.foretagskvitton.R;
+import corp.skaj.foretagskvitton.controllers.FABController;
 import corp.skaj.foretagskvitton.model.Card;
 import corp.skaj.foretagskvitton.model.Comment;
 import corp.skaj.foretagskvitton.model.Company;
@@ -25,6 +29,7 @@ public class CompanyFragment extends AbstractFragment {
     private TextView mComment;
     private TextView mCompanyName;
     private ILinkCompanyListener mCompanyListener;
+    private FABController mFabController;
 
     public CompanyFragment() {
         // Required empty public constructor
@@ -51,7 +56,16 @@ public class CompanyFragment extends AbstractFragment {
         String companyName = getArguments().getString(COMPANY_BUNDLE);
         View v = inflater.inflate(R.layout.fragment_company, container, false);
         setupFragment(v, companyName);
+
         return v;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        FloatingActionsMenu button = (FloatingActionsMenu)view.findViewById(R.id.floating_action_button);
+        mFabController.bindButton(button);
     }
 
     private void setupFragment(View view, String companyName) {
@@ -100,6 +114,10 @@ public class CompanyFragment extends AbstractFragment {
 
     public void setListener(ILinkCompanyListener listener) {
         mCompanyListener = listener;
+    }
+
+    public void setFabController(FABController fabController) {
+        mFabController = fabController;
     }
 
     private String getComment(String companyName) {

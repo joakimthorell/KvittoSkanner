@@ -23,7 +23,7 @@ import corp.skaj.foretagskvitton.model.User;
 import corp.skaj.foretagskvitton.view.ArchiveListFragment;
 import corp.skaj.foretagskvitton.view.SupplierListFragment;
 
-public class ArchiveFABController extends FABController {
+public class ArchiveListFABController extends FABController {
 
     public static final String CAMERA_ACTION = "time_to_take_picture";
     public static final String GALLERY_ACTION = "collect_image_from_gallery";
@@ -33,8 +33,8 @@ public class ArchiveFABController extends FABController {
     private Drawable mGalleryDraw;
     private Drawable mNoImageDraw;
 
-    public ArchiveFABController(Context context,
-                                Class<?> nextActivity) {
+    public ArchiveListFABController(Context context,
+                                    Class<?> nextActivity) {
         super(context, nextActivity);
 
         mCameraDraw = context.getDrawable(R.drawable.ic_camera);

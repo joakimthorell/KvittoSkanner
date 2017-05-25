@@ -52,9 +52,12 @@ public abstract class ListFragment extends AbstractFragment {
             mRecyclerView.setHasFixedSize(true);
             mRecyclerView.setSaveEnabled(false);
             mRecyclerView.setAdapter(getBaseAdapter());
-            mButton = (FloatingActionsMenu) getActivity().findViewById(R.id.floating_action_button);
+            FloatingActionsMenu button = (FloatingActionsMenu) getActivity()
+                    .findViewById(R.id.floating_action_button);
 
-            DividerItemDecoration divider = new DividerItemDecoration(view.getContext(), DividerItemDecoration.VERTICAL);
+            DividerItemDecoration divider = new DividerItemDecoration(
+                    view.getContext(),
+                    DividerItemDecoration.VERTICAL);
             mRecyclerView.addItemDecoration(divider);
 
             Toolbar toolbar = (Toolbar) view.findViewById(R.id.list_toolbar);
@@ -64,13 +67,9 @@ public abstract class ListFragment extends AbstractFragment {
 
 
             if (mObserver != null) {
-                mObserver.bindButton(mButton);
+                mObserver.bindButton(button);
             }
         }
-    }
-
-    public FloatingActionsMenu getButton() {
-        return mButton;
     }
 
     protected abstract BaseQuickAdapter getBaseAdapter();

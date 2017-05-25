@@ -65,7 +65,7 @@ public class MainActivity extends AbstractActivity
 
     @Override
     public void buildCompanyFragment() {
-        CompanyListFragment fragment = ListFragmentFactory.createCompanyList(null, this, getCompanies());
+        CompanyListFragment fragment = ListFragmentFactory.createCompanyList(this, getCompanies());
         mController.setCompanyAdapterListener(fragment.getAdapter(), CompanyActivity.class, COMPANY_KEY);
         replaceFragment(fragment);
     }

@@ -8,9 +8,7 @@ public class Card {
     private int cardNum;
 
     public Card(int cardNum) {
-        if (isCard(cardNum)) {
-            this.cardNum = cardNum;
-        }
+        this.cardNum = cardNum;
     }
 
     public void setCard(int cardNum) {
@@ -20,7 +18,7 @@ public class Card {
     }
 
     private boolean isCard(int cardNum) {
-        return String.valueOf(cardNum).length() < 4 && String.valueOf(cardNum).length() > 0;
+        return String.valueOf(cardNum).length() == 4;
     }
 
     public int getCard() {

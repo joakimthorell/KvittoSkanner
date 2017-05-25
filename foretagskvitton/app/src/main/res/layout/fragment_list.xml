@@ -47,8 +47,6 @@
         fab:fab_addButtonPlusIconColor="@android:color/white"
         fab:fab_labelsPosition="right"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent">
-
-    </com.getbase.floatingactionbutton.FloatingActionsMenu>
+        app:layout_constraintRight_toRightOf="parent"/>
 
 </android.support.constraint.ConstraintLayout>

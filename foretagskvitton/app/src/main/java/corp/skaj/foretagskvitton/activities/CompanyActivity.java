@@ -6,6 +6,8 @@ import android.support.v4.app.FragmentManager;
 import android.view.MenuItem;
 import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.controllers.CompanyController;
+import corp.skaj.foretagskvitton.controllers.CompanyFABController;
+import corp.skaj.foretagskvitton.model.Company;
 import corp.skaj.foretagskvitton.view.CompanyFragment;
 
 
@@ -19,6 +21,9 @@ public class CompanyActivity extends AbstractActivity {
         String companyName = getIntent().getStringExtra(MainActivity.COMPANY_KEY);
         //Setting the controller for company fragment
         CompanyFragment cf = CompanyFragment.create(companyName);
+        Company selectedCompany = getDataHandler().getUser().getCompany(companyName);
+        CompanyFABController fabController = new CompanyFABController(this, selectedCompany, cf);
+        cf.setFabController(fabController);
         CompanyController companyController = new CompanyController(getDataHandler(), this, cf);
         cf.setListener(companyController);
         FragmentManager fm = getSupportFragmentManager();

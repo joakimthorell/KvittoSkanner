@@ -2,6 +2,7 @@ package corp.skaj.foretagskvitton.view;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.widget.EditText;
@@ -16,7 +17,7 @@ public class MultiDialog {
     }
 
     public interface Callback {
-        void dialogData(String newData, String oldData);
+        void dialogData(String newData, String oldData, Bundle extras);
     }
 
 
@@ -25,6 +26,7 @@ public class MultiDialog {
     private Type mTypeOfDialog;
     private String mTextToEdit;
     private String mExtraTitle;
+    private Bundle mExtras;
 
     public MultiDialog(Context context, Callback dialogCallback, Type typeOfDialog, String textToEdit, String extraTextInTitle) {
         mContext = context;
@@ -34,7 +36,23 @@ public class MultiDialog {
         mTextToEdit = textToEdit;
     }
 
+    public MultiDialog(Context context, Callback dialogCallback, Type typeOfDialog, String textToEdit, String extraTextInTitle, Bundle extras) {
+        mContext = context;
+        mCreater = dialogCallback;
+        mTypeOfDialog = typeOfDialog;
+        mExtraTitle = extraTextInTitle;
+        mTextToEdit = textToEdit;
+        mExtras = extras;
+    }
+
     public MultiDialog(Context context, Callback dialogCallback, Type typeOfDialog, String extraTextInTitle) {
+        mContext = context;
+        mCreater = dialogCallback;
+        mTypeOfDialog = typeOfDialog;
+        mExtraTitle = extraTextInTitle;
+    }
+
+    public MultiDialog(Context context, Callback dialogCallback, Type typeOfDialog, String extraTextInTitle, Bundle extras) {
         mContext = context;
         mCreater = dialogCallback;
         mTypeOfDialog = typeOfDialog;
@@ -72,7 +90,7 @@ public class MultiDialog {
             public void onClick(DialogInterface dialog, int whichButton) {
 
                 Editable returnedString = textField.getText();
-                mCreater.dialogData(returnedString.toString(), mTextToEdit);
+                mCreater.dialogData(returnedString.toString(), mTextToEdit, mExtras);
             }
         });
         alert.setNegativeButton(mContext.getString(R.string.main_controller_cancel), new DialogInterface.OnClickListener() {

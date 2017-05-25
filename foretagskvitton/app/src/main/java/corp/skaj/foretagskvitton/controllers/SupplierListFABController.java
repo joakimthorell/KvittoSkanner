@@ -1,6 +1,7 @@
 package corp.skaj.foretagskvitton.controllers;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
@@ -15,10 +16,10 @@ import corp.skaj.foretagskvitton.model.User;
 import corp.skaj.foretagskvitton.view.MultiDialog;
 import corp.skaj.foretagskvitton.view.SupplierListFragment;
 
-public class SupplierFABController extends FABController
+public class SupplierListFABController extends FABController
     implements MultiDialog.Callback {
 
-    public SupplierFABController(Context context) {
+    public SupplierListFABController(Context context) {
         super(context, null);
     }
 
@@ -51,7 +52,7 @@ public class SupplierFABController extends FABController
     }
 
     @Override
-    public void dialogData(String newData, String oldData) {
+    public void dialogData(String newData, String oldData, Bundle extras) {
         if (newData != null && newData.length() > 0) {
             Supplier s = new Supplier(newData);
             IData handler = ((IData) getContext().getApplicationContext());

@@ -30,8 +30,6 @@ import corp.skaj.foretagskvitton.services.ReceiptScanner;
 
 public class ReceiptFragment extends AbstractFragment {
     public static final String ARCHIVE_BUNDLE = "PURCHASE_ID";
-    private ILinkFABListener mLinkFAB;
-    private ILinkArchiveListener mLinkImage;
     private ILinkReceiptListener mLinkReceipt;
     private TextView mPrice;
     private TextView mTax;
@@ -74,14 +72,6 @@ public class ReceiptFragment extends AbstractFragment {
         mLinkReceipt.bindButton(button);
         mLinkReceipt.bindSpinner(mCompany, this, mEmployees);
 
-    }
-
-    public void setImageListener(ILinkArchiveListener listener) {
-        mLinkImage = listener;
-    }
-
-    public void setFabListener(ILinkFABListener listener) {
-        mLinkFAB = listener;
     }
 
     public void setBinder(ILinkReceiptListener binder) {

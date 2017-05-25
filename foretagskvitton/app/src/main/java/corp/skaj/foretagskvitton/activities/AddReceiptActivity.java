@@ -19,7 +19,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import corp.skaj.foretagskvitton.R;
-import corp.skaj.foretagskvitton.controllers.ArchiveFABController;
+import corp.skaj.foretagskvitton.controllers.ArchiveListFABController;
 import corp.skaj.foretagskvitton.services.ReceiptScanner;
 
 public class AddReceiptActivity extends AbstractActivity {
@@ -40,13 +40,13 @@ public class AddReceiptActivity extends AbstractActivity {
 
     private void onActionPerformed(String action) {
         switch (action) {
-            case ArchiveFABController.CAMERA_ACTION:
+            case ArchiveListFABController.CAMERA_ACTION:
                 dispatchOpenCamera();
                 break;
-            case ArchiveFABController.GALLERY_ACTION:
+            case ArchiveListFABController.GALLERY_ACTION:
                 dispatchChoosePictureIntent();
                 break;
-            case ArchiveFABController.NO_IMAGE_ACTION:
+            case ArchiveListFABController.NO_IMAGE_ACTION:
                 startWizard(null);
                 break;
             case Intent.ACTION_SEND:

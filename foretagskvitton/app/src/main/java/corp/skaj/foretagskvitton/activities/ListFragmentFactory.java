@@ -5,10 +5,10 @@ import android.content.Context;
 import java.util.List;
 
 import corp.skaj.foretagskvitton.R;
-import corp.skaj.foretagskvitton.controllers.ArchiveFABController;
+import corp.skaj.foretagskvitton.controllers.ArchiveListFABController;
 import corp.skaj.foretagskvitton.controllers.ArchiveToolbarController;
-import corp.skaj.foretagskvitton.controllers.CompanyFABController;
-import corp.skaj.foretagskvitton.controllers.SupplierFABController;
+import corp.skaj.foretagskvitton.controllers.CompanyListFABController;
+import corp.skaj.foretagskvitton.controllers.SupplierListFABController;
 import corp.skaj.foretagskvitton.model.Company;
 import corp.skaj.foretagskvitton.model.IData;
 import corp.skaj.foretagskvitton.model.PurchaseList;
@@ -29,21 +29,21 @@ public class ListFragmentFactory {
         ArchiveAdapter aa = new ArchiveAdapter(R.layout.archive_list_item, purchases, dataHandler);
         ArchiveToolbarController atc = new ArchiveToolbarController(context, aa);
         atc.setListener(aa);
-        ArchiveFABController fabController = new ArchiveFABController(context, archiveActivity);
+        ArchiveListFABController fabController = new ArchiveListFABController(context, archiveActivity);
         ArchiveListFragment fragment = ArchiveListFragment.create(aa, fabController, atc);
         return fragment;
     }
 
-    public static CompanyListFragment createCompanyList(Class<?> companyActivity, Context context, List<Company> companyList) {
+    public static CompanyListFragment createCompanyList(Context context, List<Company> companyList) {
         CompanyAdapter ca = new CompanyAdapter(R.layout.archive_list_item, companyList);
-        CompanyFABController fabController = new CompanyFABController(context, companyActivity);
+        CompanyListFABController fabController = new CompanyListFABController(context);
         CompanyListFragment fragment = CompanyListFragment.create(ca, fabController);
         return fragment;
     }
 
     public static SupplierListFragment createSupplierList(Context context, List<Supplier> suppliers) {
         SupplierAdapter sa = new SupplierAdapter(R.layout.archive_list_item, suppliers);
-        SupplierFABController fabController = new SupplierFABController(context);
+        SupplierListFABController fabController = new SupplierListFABController(context);
         SupplierListFragment fragment = SupplierListFragment.create(sa, fabController);
         return fragment;
     }
