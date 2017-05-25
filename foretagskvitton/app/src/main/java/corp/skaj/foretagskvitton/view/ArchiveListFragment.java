@@ -113,12 +113,6 @@ public class ArchiveListFragment extends ListFragment {
             case R.id.show_hotel:
                 mAdapter.showCategory(Category.HOTELL);
                 return true;
-            case R.id.show_officeSupplies:
-                mAdapter.showCategory(Category.KONTORSMATERIAL);
-                return true;
-            case R.id.show_postage:
-                mAdapter.showCategory(Category.PORTO);
-                return true;
             case R.id.show_representation:
                 mAdapter.showCategory(Category.REPRESENTATION);
                 return true;
@@ -129,7 +123,7 @@ public class ArchiveListFragment extends ListFragment {
                 mAdapter.showCategory(Category.MAT);
                 return true;
             case R.id.show_other:
-                mAdapter.showCategory(Category.OTHER);
+                mAdapter.showCategory(Category.ÖVRIGT);
                 return true;
 
 
