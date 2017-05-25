@@ -113,9 +113,6 @@ public class WizardController {
             mNextButton.setText(R.string.wizard_complete);
         } else if (position <= 0) {
             mPrevButton.setVisibility(View.GONE);
-
-            // TODO set next button as bigger if possible
-
         } else {
             mNextButton.setText(R.string.nextButtonText);
         }
@@ -134,8 +131,6 @@ public class WizardController {
         Bundle vatBundle = b.getBundle(WizardConstants.VAT);
         Bundle categoryBundle = b.getBundle(WizardConstants.CATEGORY);
         Bundle commentBundle = b.getBundle(WizardConstants.COMMENT);
-
-        // TODO need some kind of check for thing that is not required in wizard. There may be nullpointers
 
         Product product = buildProduct(
                 totalBundle.getString("_"),
@@ -177,7 +172,6 @@ public class WizardController {
 
     private Purchase buildPurchase(Receipt receipt, String supplierAsString, String purchaseType) {
         Purchase.PurchaseType typeOfPurchase = purchaseType.equals("Företag") ? Purchase.PurchaseType.COMPANY : Purchase.PurchaseType.PRIVATE;
-        // TODO fix supplier as we change to to be inside user instead
 
         return new Purchase(receipt, typeOfPurchase);
     }
