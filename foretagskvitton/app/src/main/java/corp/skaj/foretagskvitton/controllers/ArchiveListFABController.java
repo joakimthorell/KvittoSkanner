@@ -19,9 +19,7 @@ import corp.skaj.foretagskvitton.model.IData;
 import corp.skaj.foretagskvitton.model.Product;
 import corp.skaj.foretagskvitton.model.Purchase;
 import corp.skaj.foretagskvitton.model.Receipt;
-import corp.skaj.foretagskvitton.model.User;
 import corp.skaj.foretagskvitton.view.ArchiveListFragment;
-import corp.skaj.foretagskvitton.view.SupplierListFragment;
 
 public class ArchiveListFABController extends FABController {
 

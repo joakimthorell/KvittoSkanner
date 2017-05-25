@@ -1,14 +1,10 @@
 package corp.skaj.foretagskvitton.controllers;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;

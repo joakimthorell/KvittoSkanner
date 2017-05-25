@@ -17,7 +17,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import corp.skaj.foretagskvitton.R;
-import corp.skaj.foretagskvitton.controllers.FABController;
 import corp.skaj.foretagskvitton.model.Card;
 import corp.skaj.foretagskvitton.model.Comment;
 import corp.skaj.foretagskvitton.model.Company;
@@ -29,7 +28,7 @@ public class CompanyFragment extends AbstractFragment {
     private TextView mComment;
     private TextView mCompanyName;
     private ILinkCompanyListener mCompanyListener;
-    private FABController mFabController;
+    private ILinkFABListener mFabController;
 
     public CompanyFragment() {
         // Required empty public constructor
@@ -116,7 +115,7 @@ public class CompanyFragment extends AbstractFragment {
         mCompanyListener = listener;
     }
 
-    public void setFabController(FABController fabController) {
+    public void setFabController(ILinkFABListener fabController) {
         mFabController = fabController;
     }
 

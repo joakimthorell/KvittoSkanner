@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.view.MenuItem;
+
 import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.controllers.CompanyController;
 import corp.skaj.foretagskvitton.controllers.CompanyFABController;

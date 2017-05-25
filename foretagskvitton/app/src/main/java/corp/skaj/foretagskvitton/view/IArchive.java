@@ -4,7 +4,6 @@ import android.view.MenuItem;
 
 import corp.skaj.foretagskvitton.model.Company;
 import corp.skaj.foretagskvitton.model.Employee;
-import corp.skaj.foretagskvitton.model.User;
 
 public interface IArchive {
 

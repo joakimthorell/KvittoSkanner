@@ -2,8 +2,10 @@ package corp.skaj.foretagskvitton.activities;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+
 import com.github.paolorotolo.appintro.AppIntro;
 import com.github.paolorotolo.appintro.AppIntroFragment;
+
 import corp.skaj.foretagskvitton.R;
 
 /**

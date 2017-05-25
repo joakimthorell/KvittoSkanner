@@ -22,7 +22,6 @@ import com.tech.freak.wizardpager.model.SingleFixedChoicePage;
 import com.tech.freak.wizardpager.model.TextPage;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -30,8 +29,8 @@ import corp.skaj.foretagskvitton.model.Card;
 import corp.skaj.foretagskvitton.model.Category;
 import corp.skaj.foretagskvitton.model.Company;
 import corp.skaj.foretagskvitton.model.Supplier;
-import corp.skaj.foretagskvitton.services.textcollector.TextCollector;
 import corp.skaj.foretagskvitton.model.User;
+import corp.skaj.foretagskvitton.services.textcollector.TextCollector;
 
 public class WizardPageBuilder {
     private PageList mPages;

@@ -7,8 +7,6 @@ import android.view.ViewGroup;
 
 import com.tech.freak.wizardpager.ui.ReviewFragment;
 
-import corp.skaj.foretagskvitton.controllers.WizardController;
-
 public class WizardAdapter extends FragmentStatePagerAdapter {
     private WizardView mWizardView;
     private Fragment mPrimaryItem;

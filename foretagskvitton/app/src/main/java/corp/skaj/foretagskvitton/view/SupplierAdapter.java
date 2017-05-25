@@ -1,7 +1,5 @@
 package corp.skaj.foretagskvitton.view;
 
-import android.graphics.Color;
-
 import com.amulyakhare.textdrawable.TextDrawable;
 import com.amulyakhare.textdrawable.util.ColorGenerator;
 import com.chad.library.adapter.base.BaseQuickAdapter;

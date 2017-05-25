@@ -25,8 +25,8 @@ import corp.skaj.foretagskvitton.model.Purchase;
 import corp.skaj.foretagskvitton.model.Supplier;
 import corp.skaj.foretagskvitton.model.User;
 import corp.skaj.foretagskvitton.view.AbstractFragment;
-import corp.skaj.foretagskvitton.view.IReceipt;
 import corp.skaj.foretagskvitton.view.ILinkReceiptListener;
+import corp.skaj.foretagskvitton.view.IReceipt;
 import corp.skaj.foretagskvitton.view.ReceiptFragment;
 
 public class ReceiptController implements ILinkReceiptListener {

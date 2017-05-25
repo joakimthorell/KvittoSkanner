@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import corp.skaj.foretagskvitton.R;
 

@@ -5,13 +5,10 @@ import android.util.SparseArray;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.afollestad.materialcab.MaterialCab;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
-
-import java.util.HashMap;
 
 import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.model.IData;

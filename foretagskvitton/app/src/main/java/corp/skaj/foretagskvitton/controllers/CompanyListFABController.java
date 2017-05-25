@@ -3,10 +3,8 @@ package corp.skaj.foretagskvitton.controllers;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 import android.widget.Toast;
 
-import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
 
 import java.util.List;
@@ -15,10 +13,8 @@ import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.model.Company;
 import corp.skaj.foretagskvitton.model.Employee;
 import corp.skaj.foretagskvitton.model.IData;
-import corp.skaj.foretagskvitton.model.Supplier;
 import corp.skaj.foretagskvitton.view.CompanyListFragment;
 import corp.skaj.foretagskvitton.view.MultiDialog;
-import corp.skaj.foretagskvitton.view.SupplierListFragment;
 
 public class CompanyListFABController extends FABController
         implements MultiDialog.Callback {

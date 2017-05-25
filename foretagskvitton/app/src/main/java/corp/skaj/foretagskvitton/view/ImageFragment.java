@@ -1,7 +1,6 @@
 package corp.skaj.foretagskvitton.view;
 
 
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,10 +11,7 @@ import android.view.ViewGroup;
 
 import com.github.chrisbanes.photoview.PhotoView;
 
-import java.io.IOException;
-
 import corp.skaj.foretagskvitton.R;
-import corp.skaj.foretagskvitton.services.ReceiptScanner;
 
 /**
  * A simple {@link Fragment} subclass.
