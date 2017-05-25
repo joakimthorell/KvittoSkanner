@@ -37,16 +37,16 @@ import java.util.List;
 
 import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.controllers.WizardController;
-import corp.skaj.foretagskvitton.controllers.WizardPageController;
-import corp.skaj.foretagskvitton.model.IData;
+import corp.skaj.foretagskvitton.view.wizard.WizardAdapter;
 import corp.skaj.foretagskvitton.model.IObserver;
+import corp.skaj.foretagskvitton.view.wizard.WizardView;
 
 public class WizardActivity extends AbstractActivity implements
         PageFragmentCallbacks, ReviewFragment.Callbacks, ModelCallbacks, IObserver {
 
     private WizardController mWizardController;
-    private AbstractWizardModel mWizardView;
-    private WizardPageController mPagerAdapter;
+    private WizardView mWizardView;
+    private WizardAdapter mPagerAdapter;
     private StepPagerStrip mStepPagerStrip;
 
     @Override
@@ -59,13 +59,13 @@ public class WizardActivity extends AbstractActivity implements
         Button mPrevButton = (Button) findViewById(R.id.wizardBackButton);
         ViewPager mPager = (ViewPager) findViewById(R.id.pager);
         mStepPagerStrip = (StepPagerStrip) findViewById(R.id.wizard_strip);
-        mWizardController = new WizardController(this, mNextButton, mPrevButton, mPager);
-        this.mWizardView = mWizardController.getWizardView();
-        mPagerAdapter = new WizardPageController(getSupportFragmentManager(), mWizardController);
+        mWizardView = new WizardView(this);
+        mWizardController = new WizardController(this, mNextButton, mPrevButton, mPager, mPagerAdapter, mWizardView);
+        mPagerAdapter = new WizardAdapter(getSupportFragmentManager(), mWizardView);
         mPager.setAdapter(mPagerAdapter);
 
         // Set listeners
-        mWizardController.initNextButton(mNextButton, mPagerAdapter, getSupportFragmentManager());
+        mWizardController.initNextButton(mNextButton, getSupportFragmentManager());
         mWizardController.initPrevButton(mPrevButton);
         mWizardController.initViewPagerListener(mStepPagerStrip);
         mWizardView.registerListener(this);

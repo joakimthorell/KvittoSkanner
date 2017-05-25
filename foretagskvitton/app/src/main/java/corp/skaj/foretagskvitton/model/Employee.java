@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- * Holds the name, comments and purchases an employee has made
+ * Holds employee information: employee name, comments and purchases.
  */
 public class Employee {
     private String name;

@@ -15,6 +15,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class collects data from an image, allowing application to
+ * collect model relevant data from a picture of a receipt.
+ */
 public class ReceiptScanner {
 
     private ReceiptScanner() {

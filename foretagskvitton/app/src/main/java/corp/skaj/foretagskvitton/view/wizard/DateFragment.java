@@ -17,19 +17,27 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.tech.freak.wizardpager.model.Page;
 import com.tech.freak.wizardpager.ui.PageFragmentCallbacks;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Locale;
 
 import corp.skaj.foretagskvitton.R;
 
 public class DateFragment extends Fragment {
+    public static SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+
+    public static final String DATE_YEAR_KEY = "YEAR_KEY";
+    public static final String DATE_MONTH_KEY = "MONTH_KEY";
+    public static final String DATE_DAY_KEY = "DAY_KEY";
     private static final String ARG_KEY = "DATE_FRAGMENT_KEY";
     private DatePickerDialog mDatePickerDialog;
     private PageFragmentCallbacks mCallbacks;
     private EditText mDateView;
-    private DatePage mPage;
     private String mKey;
+    private IWizard mListener;
 
     public static DateFragment create(String key) {
         Bundle args = new Bundle();
@@ -46,16 +54,15 @@ public class DateFragment extends Fragment {
         super.onCreate(savedInstanceState);
         Bundle args = getArguments();
         mKey = args.getString(ARG_KEY);
-        mPage = (DatePage) mCallbacks.onGetPage(mKey);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_date, container, false);
-        ((TextView) rootView.findViewById(android.R.id.title)).setText(mPage.getTitle());
+        ((TextView) rootView.findViewById(android.R.id.title)).setText(getPage().getTitle());
         mDateView = ((EditText) rootView.findViewById(R.id.etDate));
-        mDateView.setText(mPage.getData().getString(DatePage.SIMPLE_DATA_KEY));
+        mDateView.setText(getPage().getData().getString(getPage().SIMPLE_DATA_KEY));
         return rootView;
     }
 
@@ -91,19 +98,19 @@ public class DateFragment extends Fragment {
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 Calendar newDate = Calendar.getInstance();
                 newDate.set(year, monthOfYear, dayOfMonth);
-                String formattedDate = DatePage.dateFormatter.format(newDate.getTime());
+                String formattedDate = dateFormatter.format(newDate.getTime());
                 mDateView.setText(formattedDate);
-                mPage.getData().putString(DatePage.SIMPLE_DATA_KEY, formattedDate);
-                mPage.notifyDataChanged();
+                getPage().getData().putString(getPage().SIMPLE_DATA_KEY, formattedDate);
+                getPage().notifyDataChanged();
             }
 
         }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
 
-        if (mPage.isDateFound()) {
+        if (mListener.isDateFound()) {
             mDatePickerDialog.getDatePicker().updateDate(
-                    mPage.getData().getInt(DatePage.DATE_YEAR_KEY),
-                    mPage.getData().getInt(DatePage.DATE_MONTH_KEY),
-                    mPage.getData().getInt(DatePage.DATE_DAY_KEY)
+                    getPage().getData().getInt(DATE_YEAR_KEY),
+                    getPage().getData().getInt(DATE_MONTH_KEY),
+                    getPage().getData().getInt(DATE_DAY_KEY)
             );
         }
     }
@@ -118,5 +125,13 @@ public class DateFragment extends Fragment {
                 imm.hideSoftInputFromWindow(getView().getWindowToken(), 0);
             }
         }
+    }
+
+    public void setListener(IWizard listener) {
+        mListener = listener;
+    }
+
+    private Page getPage() {
+        return mCallbacks.onGetPage(mKey);
     }
 }

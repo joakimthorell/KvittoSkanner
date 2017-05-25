@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The user of the application, holds its companies and suppliers
+ * The application user, holding it's companies and suppliers.
  */
 public class User {
     private List<Supplier> suppliers;

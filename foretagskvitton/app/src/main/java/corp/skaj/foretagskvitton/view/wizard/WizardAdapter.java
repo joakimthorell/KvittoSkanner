@@ -1,4 +1,4 @@
-package corp.skaj.foretagskvitton.controllers;
+package corp.skaj.foretagskvitton.view.wizard;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -7,22 +7,24 @@ import android.view.ViewGroup;
 
 import com.tech.freak.wizardpager.ui.ReviewFragment;
 
-public class WizardPageController extends FragmentStatePagerAdapter {
-    private WizardController wizardController;
+import corp.skaj.foretagskvitton.controllers.WizardController;
+
+public class WizardAdapter extends FragmentStatePagerAdapter {
+    private WizardView mWizardView;
     private Fragment mPrimaryItem;
     private int mCutOffPage;
 
-    public WizardPageController(FragmentManager fm, WizardController wc) {
+    public WizardAdapter(FragmentManager fm, WizardView wizardView) {
         super(fm);
-        wizardController = wc;
+        mWizardView = wizardView;
     }
 
     @Override
     public Fragment getItem(int i) {
-        if (i >= wizardController.getCurrentPageSequence().size()) {
+        if (i >= mWizardView.getCurrentPageSequence().size()) {
             return new ReviewFragment();
         }
-        return wizardController.getCurrentPageSequence().get(i).createFragment();
+        return mWizardView.getCurrentPageSequence().get(i).createFragment();
     }
 
     @Override
@@ -41,8 +43,8 @@ public class WizardPageController extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
-        return Math.min(mCutOffPage + 1, wizardController.getCurrentPageSequence() == null ? 1
-                : wizardController.getCurrentPageSequence().size() + 1);
+        return Math.min(mCutOffPage + 1, mWizardView.getCurrentPageSequence() == null ? 1
+                : mWizardView.getCurrentPageSequence().size() + 1);
     }
 
     public void setCutOffPage(int cutOffPage) {
