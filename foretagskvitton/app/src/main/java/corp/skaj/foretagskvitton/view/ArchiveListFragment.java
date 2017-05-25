@@ -19,7 +19,6 @@ import java.util.List;
 import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.model.Category;
 import corp.skaj.foretagskvitton.model.Company;
-import corp.skaj.foretagskvitton.model.Employee;
 import corp.skaj.foretagskvitton.model.User;
 
 /**
@@ -44,7 +43,7 @@ public class ArchiveListFragment extends ListFragment {
         return fragment;
     }
 
-    public static ArchiveListFragment create(ArchiveAdapter adapter, FABCallback listener, IArchive binder) {
+    public static ArchiveListFragment create(ArchiveAdapter adapter, ILinkFABListener listener, IArchive binder) {
         ArchiveListFragment fragment = create(adapter, binder);
         fragment.setListener(listener);
         return fragment;
@@ -127,7 +126,10 @@ public class ArchiveListFragment extends ListFragment {
             case R.id.show_food:
                 mAdapter.showCategory(Category.MAT);
                 return true;
-            case R.id.show_companies:
+            case R.id.show_other:
+                mAdapter.showCategory(Category.OTHER);
+                return true;
+
 
             default:
                 return false;

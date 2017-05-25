@@ -26,11 +26,10 @@ import corp.skaj.foretagskvitton.model.Supplier;
 import corp.skaj.foretagskvitton.model.User;
 import corp.skaj.foretagskvitton.view.AbstractFragment;
 import corp.skaj.foretagskvitton.view.IReceipt;
-import corp.skaj.foretagskvitton.view.ReceiptBinder;
+import corp.skaj.foretagskvitton.view.ILinkReceiptListener;
 import corp.skaj.foretagskvitton.view.ReceiptFragment;
-import corp.skaj.foretagskvitton.view.FABCallback;
 
-public class ReceiptController implements ReceiptBinder {
+public class ReceiptController implements ILinkReceiptListener {
     private ReceiptFragment fragment;
     private String purchaseId;
     private IData dataHandler;

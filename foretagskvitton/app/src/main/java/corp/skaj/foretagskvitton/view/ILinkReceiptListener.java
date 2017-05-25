@@ -4,7 +4,7 @@ import android.net.Uri;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
-public interface ReceiptBinder extends FABCallback {
+public interface ILinkReceiptListener extends ILinkFABListener {
 
     void bindImage(ImageView clickableImage, Uri uri);
 

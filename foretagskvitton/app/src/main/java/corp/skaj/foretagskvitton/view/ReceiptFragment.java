@@ -8,7 +8,6 @@ import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -31,7 +30,9 @@ import corp.skaj.foretagskvitton.services.ReceiptScanner;
 
 public class ReceiptFragment extends AbstractFragment {
     public static final String ARCHIVE_BUNDLE = "PURCHASE_ID";
-    private ReceiptBinder mReceiptBinder;
+    private ILinkFABListener mLinkFAB;
+    private ILinkArchiveListener mLinkImage;
+    private ILinkReceiptListener mLinkReceipt;
     private TextView mPrice;
     private TextView mTax;
     private TextView mDate;
@@ -70,13 +71,21 @@ public class ReceiptFragment extends AbstractFragment {
 
 
         FloatingActionsMenu button = (FloatingActionsMenu) view.findViewById(R.id.archive_receipt_savebutton);
-        mReceiptBinder.bindButton(button);
-        mReceiptBinder.bindSpinner(mCompany, this, mEmployees);
+        mLinkReceipt.bindButton(button);
+        mLinkReceipt.bindSpinner(mCompany, this, mEmployees);
 
     }
 
-    public void setBinder(ReceiptBinder binder) {
-        mReceiptBinder = binder;
+    public void setImageListener(ILinkArchiveListener listener) {
+        mLinkImage = listener;
+    }
+
+    public void setFabListener(ILinkFABListener listener) {
+        mLinkFAB = listener;
+    }
+
+    public void setBinder(ILinkReceiptListener binder) {
+        mLinkReceipt = binder;
     }
 
     private void setupFragment(View view, String purchaseId) {
@@ -141,7 +150,7 @@ public class ReceiptFragment extends AbstractFragment {
         try {
             Bitmap bmp = ReceiptScanner.createImageFromURI(getContext(), Uri.parse(mPurchase.getReceipt().getPictureAdress()));
             mMiniImage.setImageBitmap(bmp);
-            mReceiptBinder.bindImage(mMiniImage, Uri.parse(mPurchase.getReceipt().getPictureAdress()));
+            mLinkReceipt.bindImage(mMiniImage, Uri.parse(mPurchase.getReceipt().getPictureAdress()));
         } catch (Exception exception) {
             exception.printStackTrace();
             mMiniImage.setImageDrawable(getContext().getDrawable(R.drawable.comingsoon));

@@ -14,8 +14,7 @@ import corp.skaj.foretagskvitton.view.IReceipt;
 import corp.skaj.foretagskvitton.view.ReceiptFragment;
 import corp.skaj.foretagskvitton.view.ImageFragment;
 
-public class ReceiptActivity extends AbstractActivity
-    implements IReceipt {
+public class ReceiptActivity extends AbstractActivity implements IReceipt {
 
     private boolean isShowingImage;
     private String mPurchaseId;

@@ -53,9 +53,7 @@ public class SupplierFABController extends FABController {
 
         alert.setMessage(getContext().getString(R.string.main_controller_supplier_call));
         alert.setTitle(getContext().getString(R.string.fab_controller_create_new));
-
         alert.setView(edittext);
-
         alert.setPositiveButton((getContext().getString(R.string.intro_add)), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 //What ever you want to do with the value
@@ -64,7 +62,6 @@ public class SupplierFABController extends FABController {
                 if(supplierName.toString().length() < 1){
                     return;
                 }
-
                 IData handler = ((IData) getContext().getApplicationContext());
                 User user = handler.getUser();
                 Supplier supplier = new Supplier(supplierName.toString());
@@ -76,18 +73,14 @@ public class SupplierFABController extends FABController {
                 SupplierListFragment fragment = (SupplierListFragment) activity.getSupportFragmentManager().findFragmentById(R.id.main_fragment_container);
                 fragment.getAdapter().setNewData(suppliers);
 
-
                 Toast.makeText(getContext(), "Dina ändringar är sparade " + supplier.getName(), Toast.LENGTH_SHORT).show();
             }
         });
-
         alert.setNegativeButton(getContext().getString(R.string.main_controller_cancel), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 // nothing to do here
             }
         });
-
         alert.show();
-
     }
 }
