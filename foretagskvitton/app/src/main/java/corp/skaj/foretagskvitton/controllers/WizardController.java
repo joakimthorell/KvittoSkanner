@@ -19,11 +19,13 @@ import java.util.Date;
 import java.util.List;
 
 import corp.skaj.foretagskvitton.R;
+import corp.skaj.foretagskvitton.activities.MainActivity;
 import corp.skaj.foretagskvitton.model.Category;
 import corp.skaj.foretagskvitton.model.Comment;
 import corp.skaj.foretagskvitton.model.Company;
 import corp.skaj.foretagskvitton.model.Employee;
 import corp.skaj.foretagskvitton.model.IData;
+import corp.skaj.foretagskvitton.model.IObserver;
 import corp.skaj.foretagskvitton.model.Product;
 import corp.skaj.foretagskvitton.model.Purchase;
 import corp.skaj.foretagskvitton.model.Receipt;
@@ -78,7 +80,7 @@ public class WizardController {
         });
     }
 
-    public void initNextButton(Button mNextButton,
+    public void initNextButton(final IObserver observer, Button mNextButton,
                                final FragmentManager fragmentManager) {
         mNextButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,8 +88,9 @@ public class WizardController {
                 int size = mWizardView.getWizardView().getCurrentPageSequence().size();
                 if (mPager.getCurrentItem() == size) {
                     WizardFragment wls = new WizardFragment();
-                    wls.setModel(mWizardView.getWizardModel());
+                    wls.setObserver(observer);
                     wls.show(fragmentManager, "confirm_receipt_dialog");
+                    //observer.collectData();
                 } else {
                     if (mEditingAfterReview) {
                         mPager.setCurrentItem(mPagerAdapter.getCount() - 1);
@@ -209,13 +212,5 @@ public class WizardController {
 
     public void setCurrentItem(int i) {
         mPager.setCurrentItem(i);
-    }
-
-    public List<Page> getCurrentPageSequence() {
-        return mWizardView.getWizardView().getCurrentPageSequence();
-    }
-
-    public AbstractWizardModel getWizardView() {
-        return mWizardView.getWizardView();
     }
 }

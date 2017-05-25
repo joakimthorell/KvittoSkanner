@@ -65,7 +65,7 @@ public class WizardActivity extends AbstractActivity implements
         mPager.setAdapter(mPagerAdapter);
 
         // Set listeners
-        mWizardController.initNextButton(mNextButton, getSupportFragmentManager());
+        mWizardController.initNextButton(this, mNextButton, getSupportFragmentManager());
         mWizardController.initPrevButton(mPrevButton);
         mWizardController.initViewPagerListener(mStepPagerStrip);
         mWizardView.registerListener(this);
@@ -157,7 +157,7 @@ public class WizardActivity extends AbstractActivity implements
     }
 
     @Override
-    public void onDataChange() {
+    public void collectData() {
         mWizardController.saveReceipts();
         Toast.makeText(this, R.string.receipt_saved, Toast.LENGTH_LONG).show();
         Intent intent = new Intent(this, MainActivity.class);
