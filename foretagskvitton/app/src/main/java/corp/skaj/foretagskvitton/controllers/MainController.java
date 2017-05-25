@@ -22,10 +22,11 @@ import corp.skaj.foretagskvitton.model.Supplier;
 import corp.skaj.foretagskvitton.model.User;
 import corp.skaj.foretagskvitton.view.ArchiveAdapter;
 import corp.skaj.foretagskvitton.view.CompanyAdapter;
+import corp.skaj.foretagskvitton.view.MultiDialog;
 import corp.skaj.foretagskvitton.view.SupplierAdapter;
 import corp.skaj.foretagskvitton.view.SupplierListFragment;
 
-public class MainController {
+public class MainController implements MultiDialog.Callback {
 
     private IView mListener;
     private Context mContext;
@@ -93,51 +94,16 @@ public class MainController {
     }
 
     public void showEditSupplierDialog(String data) {
+        IData handler = getHandler();
+        User user = handler.getUser();
+        Supplier supplier = user.getSupplier(data);
 
-        final IData handler = (IData) mContext.getApplicationContext();
-        final User user = handler.getUser();
-        final Supplier supplier = user.getSupplier(data);
-
-        AlertDialog.Builder alert = new AlertDialog.Builder(mContext);
-
-        final EditText edittext = new EditText(mContext);
-        edittext.setSingleLine(true);
-        edittext.setText(supplier.getName());
-
-
-        alert.setMessage(mContext.getString(R.string.main_controller_supplier_call));
-        alert.setTitle(mContext.getString(R.string.main_controller_edit) + supplier.getName());
-
-        alert.setView(edittext);
-
-        alert.setPositiveButton(mContext.getString(R.string.main_controller_save), new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-                //What ever you want to do with the value
-                Editable supplierName = edittext.getText();
-
-                if(supplierName.toString().length() < 1){
-                    return;
-                }
-
-                supplier.setName(supplierName.toString());
-                handler.saveUser();
-                List<Supplier> suppliers = handler.getUser().getSuppliers();
-
-                AppCompatActivity activity = (AppCompatActivity) mContext;
-                SupplierListFragment fragment = (SupplierListFragment) activity.getSupportFragmentManager().findFragmentById(R.id.main_fragment_container);
-                fragment.getAdapter().setNewData(suppliers);
-
-                Toast.makeText(mContext, mContext.getString(R.string.main_controller_change_to)+ supplier.getName(), Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        alert.setNegativeButton(mContext.getString(R.string.main_controller_cancel), new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-                // nothing to do here
-            }
-        });
-
-        alert.show();
+        new MultiDialog(mContext,
+                this,
+                MultiDialog.Type.EDITOR,
+                supplier.getName(),
+                mContext.getString(R.string.text_supplier))
+        .newDialog().show();
     }
 
     public boolean setSelectedTab(int actionId) {
@@ -152,5 +118,28 @@ public class MainController {
         }
 
         return false;
+    }
+
+    @Override
+    public void dialogData(String newData, String oldData) {
+        if (newData != null && newData.length() > 0) {
+            IData handler = getHandler();
+            Supplier s = handler.getUser().getSupplier(oldData);
+            s.setName(newData);
+
+            handler.saveUser();
+            List<Supplier> suppliers = handler.getUser().getSuppliers();
+            AppCompatActivity activity = (AppCompatActivity) mContext;
+            SupplierListFragment fragment = (SupplierListFragment) activity.getSupportFragmentManager().findFragmentById(R.id.main_fragment_container);
+            fragment.getAdapter().setNewData(suppliers);
+
+            Toast.makeText(mContext, mContext.getString(R.string.main_controller_change_to) + " " + s.getName(), Toast.LENGTH_SHORT).show();
+            return;
+        }
+        Toast.makeText(mContext, mContext.getString(R.string.text_not_saved), Toast.LENGTH_SHORT).show();
+    }
+
+    private IData getHandler() {
+        return ((IData) mContext.getApplicationContext());
     }
 }
