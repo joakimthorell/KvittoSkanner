@@ -40,8 +40,6 @@ public class ArchiveListFABController extends FABController {
         mCameraDraw = context.getDrawable(R.drawable.ic_camera);
         mGalleryDraw = context.getDrawable(R.drawable.ic_image);
         mNoImageDraw = context.getDrawable(R.drawable.ic_close);
-
-
     }
 
     @Override
@@ -108,7 +106,6 @@ public class ArchiveListFABController extends FABController {
     private void createNewReceipt() {
         IData handler = (IData) getContext().getApplicationContext();
         Random rand = new Random();
-
 
         double total = rand.nextInt(999) + 1;
         Product p = new Product(Product.ALL_PRODUCTS, getRandomCategory(), total, 25);

@@ -67,10 +67,11 @@ public class ReceiptFragment extends AbstractFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
         FloatingActionsMenu button = (FloatingActionsMenu) view.findViewById(R.id.archive_receipt_savebutton);
+
         mLinkReceipt.bindButton(button);
         mLinkReceipt.bindSpinner(mCompany, this, mEmployees);
+
 
     }
 

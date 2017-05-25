@@ -26,15 +26,13 @@ import com.tech.freak.wizardpager.model.PageList;
 import java.util.List;
 
 import corp.skaj.foretagskvitton.model.IData;
-import corp.skaj.foretagskvitton.model.IObserver;
 import corp.skaj.foretagskvitton.model.User;
 
 public class WizardView extends AbstractWizardModel implements ModelCallbacks {
-    private WizardPageBuilder model;
+    private WizardPageBuilder mPageBuilder;
 
     public WizardView(Context context) {
         super(context);
-        model.addObserver((IObserver) context);
     }
 
     @Override
@@ -42,21 +40,15 @@ public class WizardView extends AbstractWizardModel implements ModelCallbacks {
         IData dataHandler = (IData)mContext.getApplicationContext();
         User user = dataHandler.getUser();
         List<String> strings = (List<String>) dataHandler.readData("mStrings", List.class);
-        model = new WizardPageBuilder(user, this, strings);
-        return model.getPages();
+        mPageBuilder = new WizardPageBuilder(user, this, strings);
+        return mPageBuilder.getPages();
     }
 
     public AbstractWizardModel getWizardView() {
         return this;
     }
 
-    public WizardPageBuilder getWizardModel() {
-        return model;
-    }
-
     public Bundle getWizardData() {
         return super.save();
     }
-
-
 }

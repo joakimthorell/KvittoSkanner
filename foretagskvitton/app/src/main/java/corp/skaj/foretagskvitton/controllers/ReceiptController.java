@@ -58,7 +58,6 @@ public class ReceiptController implements ILinkReceiptListener {
         purchase.setPurchaseType(selectCorrectPurchase());
         // company 
         Company updatedCompany = user.getCompany(fragment.getCompany());
-        //user.addCo mpany(updatedCompany);
         //comments
         if (purchase.getComments().size() < 1) {
             if (fragment.getComment().length() > 0) {
