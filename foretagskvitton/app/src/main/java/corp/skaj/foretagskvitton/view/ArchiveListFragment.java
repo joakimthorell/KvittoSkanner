@@ -19,6 +19,7 @@ import java.util.List;
 import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.model.Category;
 import corp.skaj.foretagskvitton.model.Company;
+import corp.skaj.foretagskvitton.model.Employee;
 import corp.skaj.foretagskvitton.model.User;
 
 /**
@@ -70,7 +71,8 @@ public class ArchiveListFragment extends ListFragment {
             String companyName = c.getName();
             mArchiveBinder.bindCompanyMenuItem(createCompanyItem(subMenu, companyName), getAdapter(), c);
             for (Employee e : c.getEmployees()) {
-                mArchiveBinder.bindEmployeeMenuItem(createEmployeeItem(subMenu, e.getName()), getAdapter(), e);
+                String employeeName = e.getName() + " - " + c.getName();
+                mArchiveBinder.bindEmployeeMenuItem(createEmployeeItem(subMenu, employeeName), getAdapter(), e);
             }
         }
     }
