@@ -73,12 +73,12 @@ public class ArchiveAdapter extends BaseQuickAdapter<Purchase, BaseViewHolder> {
     }
 
     public void showAll() {
-        PurchaseList purchases = dataHandler.getPurchases(getUser());
+        PurchaseList purchases = dataHandler.getPurchases();
         setNewData(purchases);
     }
 
     public void showCategory(Category c){
-        PurchaseList purchases = dataHandler.getPurchases(getUser()).getPurchases(c);
+        PurchaseList purchases = dataHandler.getPurchases().getPurchases(c);
         setNewData(purchases);
     }
 
