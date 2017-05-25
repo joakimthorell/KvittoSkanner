@@ -90,10 +90,12 @@ public class CompanyFragment extends AbstractFragment {
         Button mRemoveEmployee = (Button) view.findViewById(R.id.fragment_company_remove_employee_button);
         Button mEditCard = (Button) view.findViewById(R.id.fragment_company_edit_card_button);
         Button mRemoveCard = (Button) view.findViewById(R.id.fragment_company_remove_card_button);
+        Button mSaveComment = (Button) view.findViewById(R.id.fragment_company_save_company_comment);
         mCompanyListener.setEditEmployeeListener(mEditEmployee);
         mCompanyListener.setRemoveEmployeeListener(mRemoveEmployee);
         mCompanyListener.setEditCardListener(mEditCard);
         mCompanyListener.setRemoveCardListener(mRemoveCard);
+        mCompanyListener.setSaveCommentListener(mSaveComment);
     }
 
     public void setListener(ILinkCompanyListener listener) {
@@ -103,6 +105,10 @@ public class CompanyFragment extends AbstractFragment {
     private String getComment(String companyName) {
         List<Comment> comments = getUser().getCompany(companyName).getComments();
         return comments.size() == 0 ? "Ingen kommentar" : comments.get(0).getComment();
+    }
+
+    public String getCurrentComment(){
+        return mComment.getText() == null ? null : mComment.getText().toString();
     }
 
     public void updateEmployeeSpinner(String companyName) {

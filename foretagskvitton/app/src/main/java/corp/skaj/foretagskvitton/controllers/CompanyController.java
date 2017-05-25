@@ -13,8 +13,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.List;
+
 import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.model.Card;
+import corp.skaj.foretagskvitton.model.Comment;
 import corp.skaj.foretagskvitton.model.Company;
 import corp.skaj.foretagskvitton.model.Employee;
 import corp.skaj.foretagskvitton.model.IData;
@@ -60,7 +63,11 @@ public class CompanyController implements ILinkCompanyListener {
         editCardButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showAddNewDialog(mEditCard);
+                if (getCompany().getCards().size() > 0) {
+                    showAddNewDialog(mEditCard);
+                } else {
+                    Toast.makeText(mContext, R.string.create_new_card, Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -71,6 +78,15 @@ public class CompanyController implements ILinkCompanyListener {
             @Override
             public void onClick(View v) {
                 removeCard();
+            }
+        });
+    }
+
+    public void setSaveCommentListener (Button saveCommentButton) {
+        saveCommentButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                saveComment();
             }
         });
     }
@@ -123,7 +139,7 @@ public class CompanyController implements ILinkCompanyListener {
         } else {
             return;
         }
-        Toast.makeText(mContext, "Dina ändringar är sparade ", Toast.LENGTH_SHORT).show();
+        Toast.makeText(mContext, R.string.changes_saved, Toast.LENGTH_SHORT).show();
         mDataHandler.saveUser();
     }
 
@@ -143,6 +159,8 @@ public class CompanyController implements ILinkCompanyListener {
                 card.setCard(Integer.parseInt(newCardNumber));
                 mCompanyFragment.updateCardSpinner(companyName());
             }
+        } else {
+            Toast.makeText(mContext, R.string.invalid_input, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -172,6 +190,29 @@ public class CompanyController implements ILinkCompanyListener {
             Card card = getCompany().getCard(cardStringToInt(mCompanyFragment.getCardSpinnerItem()));
             getUser().getCompany(companyName()).removeCard(card);
         }
+    }
+
+    private void saveComment () {
+        String currentComment = mCompanyFragment.getCurrentComment();
+        if (currentComment != null) {
+            List<Comment> comments = getCompany().getComments();
+            if (comments.size() > 0) {
+                comments.get(0).setComment(currentComment);
+                mDataHandler.saveUser();
+                Toast.makeText(mContext, R.string.changes_saved, Toast.LENGTH_SHORT).show();
+            } else {
+                createNewComment(comments, currentComment);
+            }
+        } else {
+            Toast.makeText(mContext, R.string.invalid_input, Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    public void createNewComment (List<Comment> comments, String currentComment) {
+        comments.add(new Comment(currentComment));
+        mDataHandler.saveUser();
+        Toast.makeText(mContext, R.string.changes_saved, Toast.LENGTH_SHORT).show();
     }
 
     private Spannable buildCenteredToastText(int rString) {
