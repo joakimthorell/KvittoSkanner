@@ -90,7 +90,6 @@ public class WizardPageBuilder {
                             .setChoices(Category.getCategoriesArray())
                             .setRequired(true),
 
-                    //TODO add a choice above which is "other" for custom choice of category
                     new TextPage(view, WizardConstants.COMMENT)
                             .setRequired(false));
         }
@@ -118,7 +117,6 @@ public class WizardPageBuilder {
                         .setChoices(Category.getCategoriesArray())
                         .setRequired(true),
 
-                //TODO add a choice above which is "other" for custom choice of category
                 new TextPage(view, WizardConstants.COMMENT)
                         .setRequired(false));
     }
@@ -148,7 +146,6 @@ public class WizardPageBuilder {
                         .setChoices(Category.getCategoriesArray())
                         .setRequired(true),
 
-                //TODO add a choice above which is "other" for custom choice of category
                 new TextPage(view, WizardConstants.COMMENT)
                         .setRequired(false));
     }
@@ -182,7 +179,6 @@ public class WizardPageBuilder {
                         .setChoices(Category.getCategoriesArray())
                         .setRequired(true),
 
-                //TODO add a choice above which is "other" for custom choice of category
                 new TextPage(view, WizardConstants.COMMENT)
                         .setRequired(false));
     }

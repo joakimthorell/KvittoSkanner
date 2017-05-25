@@ -2,6 +2,7 @@ package corp.skaj.foretagskvitton.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Holds employee information: employee name, comments and purchases.
@@ -10,11 +11,13 @@ public class Employee {
     private String name;
     private List<Purchase> purchases;
     private List<Comment> comments;
+    private String id;
 
     public Employee(String nameOfEmployee) {
         name = nameOfEmployee;
         purchases = new ArrayList<>();
         comments = new ArrayList<>();
+        id = UUID.randomUUID().toString();
     }
 
     public Employee(Employee other) {
@@ -51,5 +54,9 @@ public class Employee {
 
     public List<Comment> getComments() {
         return comments;
+    }
+
+    public String getId() {
+        return id;
     }
 }
