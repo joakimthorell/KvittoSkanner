@@ -99,7 +99,6 @@ public class CompanyFragment extends AbstractFragment {
     }
 
     public String getEmployeeItem() {
-        System.out.println("LETS DO THIS" + getCompanyName());
         return mEmployees.getSelectedItem().toString();
     }
 
