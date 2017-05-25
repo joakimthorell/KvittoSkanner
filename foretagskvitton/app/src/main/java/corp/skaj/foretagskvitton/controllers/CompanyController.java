@@ -19,6 +19,7 @@ import java.util.List;
 
 import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.model.Card;
+import corp.skaj.foretagskvitton.model.Company;
 import corp.skaj.foretagskvitton.model.Employee;
 import corp.skaj.foretagskvitton.model.IData;
 import corp.skaj.foretagskvitton.model.Supplier;
@@ -27,10 +28,10 @@ import corp.skaj.foretagskvitton.view.CompanyFragment;
 import corp.skaj.foretagskvitton.view.ICompany;
 import corp.skaj.foretagskvitton.view.SupplierListFragment;
 
-public class CompanyController implements ICompany{
+public class CompanyController implements ICompany {
     private IData mDataHandler;
-    private final String mEditEmployee = "EMPLOYEE_KEY";
-    private final String mEditCard = "CARD_KEY";
+    private final String mEditEmployee = "EDIT_EMPLOYEE";
+    private final String mEditCard = "EDIT_CARD";
     private Context mContext;
     private CompanyFragment mCompanyFragment;
 
@@ -100,10 +101,10 @@ public class CompanyController implements ICompany{
                 //What ever you want to do with the value
                 Editable editedInfo = edittext.getText();
 
-                if(editedInfo.toString().length() < 1){
+                if (editedInfo.toString().length() < 1) {
                     return;
                 }
-                editInfo(editedInfo, KEY);
+                editChanges(editedInfo, KEY);
             }
         });
         alert.setNegativeButton("Avbryt", new DialogInterface.OnClickListener() {
@@ -114,7 +115,7 @@ public class CompanyController implements ICompany{
         alert.show();
     }
 
-    private void editInfo (Editable editedInfo, String KEY) {
+    private void editChanges(Editable editedInfo, String KEY) {
         if (KEY.equals(mEditEmployee)) {
             updateEmployee(editedInfo.toString());
         } else {
@@ -124,49 +125,60 @@ public class CompanyController implements ICompany{
         mDataHandler.saveUser();
     }
 
-    private void updateEmployee (String newEmployeeName) {
-        User user = getUser();
-        Employee employee = user.getCompany(mCompanyFragment.getCompanyName()).getEmployee(mCompanyFragment.getEmployeeItem());
+    private void updateEmployee(String newEmployeeName) {
+        Employee employee = getEmployee();
         employee.setName(newEmployeeName);
-        mCompanyFragment.updateEmployeeSpinner(mCompanyFragment.getCompanyName());
+        mCompanyFragment.updateEmployeeSpinner(companyName());
     }
 
-    private void updateCard (String newCardNumber) {
-        Card card = getUser().getCompany(mCompanyFragment.getCompanyName()).getCard(Integer.parseInt(mCompanyFragment.getCardItem()));
+    private void updateCard(String newCardNumber) {
+        Card card = getUser().getCompany(companyName()).getCard(Integer.parseInt(mCompanyFragment.getCardItem()));
         card.setCard(Integer.parseInt(newCardNumber));
-        mCompanyFragment.updateCardSpinner(mCompanyFragment.getCompanyName());
+        mCompanyFragment.updateCardSpinner(companyName());
     }
 
-    private void removeEmployee () {
+    private void removeEmployee() {
         Spannable centeredText = new SpannableString(mContext.getString(R.string.cant_delete_employee));
         getTextCentered(centeredText, mContext.getString(R.string.cant_delete_employee));
-        if (getUser().getCompany(mCompanyFragment.getCompanyName()).getEmployees().size() == 1) {
-            Toast.makeText(mContext, centeredText , Toast.LENGTH_SHORT).show();
-        } else {
-            Employee employee = getUser().getCompany(mCompanyFragment.getCompanyName()).getEmployee(mCompanyFragment.getEmployeeItem());
-            getUser().getCompany(mCompanyFragment.getCompanyName()).removeEmployee(employee);
-        }
-    }
-
-    private void removeCard () {
-        Spannable centeredText = new SpannableString(mContext.getString(R.string.cant_delete_card));
-        getTextCentered(centeredText,mContext.getString(R.string.cant_delete_card));
-        if ((getUser().getCompany(mCompanyFragment.getCompanyName()).getCards().size() <= 0)) {
+        if (getCompany().getEmployees().size() == 1) {
             Toast.makeText(mContext, centeredText, Toast.LENGTH_SHORT).show();
         } else {
-            Card card = getUser().getCompany(mCompanyFragment.getCompanyName()).getCard(Integer.parseInt(mCompanyFragment.getCardItem()));
-            getUser().getCompany(mCompanyFragment.getCompanyName()).removeCard(card);
+            Employee employee = getEmployee();
+            getCompany().removeEmployee(employee);
         }
     }
 
-    private User getUser () {
+    private void removeCard() {
+        Spannable centeredText = new SpannableString(mContext.getString(R.string.cant_delete_card));
+        getTextCentered(centeredText, mContext.getString(R.string.cant_delete_card));
+        if ((getCompany().getCards().size() <= 0)) {
+            Toast.makeText(mContext, centeredText, Toast.LENGTH_SHORT).show();
+        } else {
+            Card card = getCompany().getCard(Integer.parseInt(mCompanyFragment.getCardItem()));
+            getUser().getCompany(companyName()).removeCard(card);
+        }
+    }
+
+    private User getUser() {
         return mDataHandler.getUser();
     }
 
-    public void getTextCentered (Spannable centeredText, String text) {
+    public void getTextCentered(Spannable centeredText, String text) {
         centeredText.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER),
                 0, text.length() - 1,
                 Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+    }
+
+    private Company getCompany() {
+        return getUser().getCompany(companyName());
+    }
+
+    private Employee getEmployee() {
+        return getUser().getCompany(companyName()).getEmployee(mCompanyFragment.getEmployeeItem());
+    }
+
+    private String companyName() {
+        return mCompanyFragment.getCompanyName();
     }
 
 }

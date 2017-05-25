@@ -17,8 +17,8 @@ import corp.skaj.foretagskvitton.model.User;
 
 public class AbstractFragment extends Fragment {
 
-    protected ArrayAdapter<String> buildArrayAdapter(View view, List<String> list) {
-        return new ArrayAdapter<>(view.getContext(), R.layout.support_simple_spinner_dropdown_item, list);
+    protected ArrayAdapter<String> buildArrayAdapter(List<String> list) {
+        return new ArrayAdapter<>(getContext(), R.layout.support_simple_spinner_dropdown_item, list);
     }
 
     protected void setArrayAdapter(ArrayAdapter<String> adapter, Spinner spinner) {
