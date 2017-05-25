@@ -3,6 +3,7 @@ package corp.skaj.foretagskvitton.controllers;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.Button;
@@ -27,27 +28,29 @@ import corp.skaj.foretagskvitton.model.Product;
 import corp.skaj.foretagskvitton.model.Purchase;
 import corp.skaj.foretagskvitton.model.Receipt;
 import corp.skaj.foretagskvitton.model.User;
-import corp.skaj.foretagskvitton.view.wizard.ConfirmWizardFragment;
+import corp.skaj.foretagskvitton.view.wizard.WizardFragment;
 import corp.skaj.foretagskvitton.view.wizard.WizardConstants;
 import corp.skaj.foretagskvitton.view.wizard.WizardView;
 
 public class WizardController {
     private WizardView mWizardView;
     private ViewPager mPager;
+    private PagerAdapter mPagerAdapter;
     private Button mNextButton;
     private Button mPrevButton;
     private boolean mEditingAfterReview;
     private boolean mConsumePageSelectedEvent;
     private IData mDataHandler;
 
-    public WizardController(Context context, Button mNextButton, Button mPrevButton,
-                            ViewPager mPager) {
+    public WizardController(Context context, Button nextButton, Button prevButton,
+                            ViewPager viewpager, PagerAdapter pagerAdapter, WizardView wizardView) {
         mEditingAfterReview = false;
-        this.mNextButton = mNextButton;
-        this.mPrevButton = mPrevButton;
-        this.mPager = mPager;
+        mNextButton = nextButton;
+        mPrevButton = prevButton;
+        mPager = viewpager;
+        mPagerAdapter = pagerAdapter;
+        mWizardView = wizardView;
         mDataHandler = (IData) context.getApplicationContext();
-        mWizardView = new WizardView(context);
     }
 
     public void initViewPagerListener(final StepPagerStrip mStepPagerStrip) {
@@ -76,14 +79,13 @@ public class WizardController {
     }
 
     public void initNextButton(Button mNextButton,
-                               final WizardPageController mPagerAdapter,
                                final FragmentManager fragmentManager) {
         mNextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int size = mWizardView.getWizardView().getCurrentPageSequence().size();
                 if (mPager.getCurrentItem() == size) {
-                    ConfirmWizardFragment wls = new ConfirmWizardFragment();
+                    WizardFragment wls = new WizardFragment();
                     wls.setModel(mWizardView.getWizardModel());
                     wls.show(fragmentManager, "confirm_receipt_dialog");
                 } else {

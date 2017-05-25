@@ -1,5 +1,8 @@
 package corp.skaj.foretagskvitton.model;
 
+/**
+ * Interface class allowing user to save model data locally.
+ */
 public interface IData {
 
     String IMAGE_URI_KEY = "uri_for_image_in_wizard";

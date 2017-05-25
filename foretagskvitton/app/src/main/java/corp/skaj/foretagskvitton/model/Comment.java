@@ -1,7 +1,7 @@
 package corp.skaj.foretagskvitton.model;
 
 /**
- * Holds information about users comments. Gets and sets a comment
+ * Holds comments for documenting Product, Company, Purchase and Employee.
  */
 public class Comment  {
     private String comment;

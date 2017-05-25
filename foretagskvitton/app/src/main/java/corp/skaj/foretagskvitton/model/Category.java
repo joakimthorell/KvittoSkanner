@@ -5,7 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * String in Category is a color in hex
+ * This class holds categories options for purchase.
+ * Each category has a color in hex.
  */
 public enum Category {
     BENSIN("#E43F3F"), // red

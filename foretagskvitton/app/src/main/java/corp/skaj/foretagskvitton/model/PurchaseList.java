@@ -5,6 +5,10 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+/**
+ * List of all locally saved purchases, enabling sort and filter functions
+ * for listing purchases.
+ */
 public class PurchaseList extends ArrayList<Purchase> {
     private User user;
 
