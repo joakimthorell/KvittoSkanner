@@ -12,7 +12,6 @@ import java.util.List;
 
 import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.controllers.IView;
-import corp.skaj.foretagskvitton.controllers.ListFragmentFactory;
 import corp.skaj.foretagskvitton.controllers.MainController;
 import corp.skaj.foretagskvitton.model.Company;
 import corp.skaj.foretagskvitton.model.PurchaseList;
@@ -49,9 +48,6 @@ public class MainActivity extends AbstractActivity
         mController.initBottomBar(bottomBar);
 
         mFragmentManger = getSupportFragmentManager();
-        mFragmentFactory = new ListFragmentFactory(this,
-                AddReceiptActivity.class,
-                CompanyActivity.class);
 
         System.out.println(getIntent().getAction());
 
@@ -69,21 +65,21 @@ public class MainActivity extends AbstractActivity
 
     @Override
     public void buildCompanyFragment() {
-        CompanyListFragment fragment = mFragmentFactory.createCompanyList(getCompanies());
+        CompanyListFragment fragment = ListFragmentFactory.createCompanyList(null, this, getCompanies());
         mController.setCompanyAdapterListener(fragment.getAdapter(), CompanyActivity.class, COMPANY_KEY);
         replaceFragment(fragment);
     }
 
     @Override
     public void buildArchiveFragment() {
-        ArchiveListFragment fragment = mFragmentFactory.createArchiveList(getPurchases(), getDataHandler());
+        ArchiveListFragment fragment = ListFragmentFactory.createArchiveList(AddReceiptActivity.class, this, getPurchases(), getDataHandler());
         mController.setArchiveAdapterListener(fragment.getAdapter(), ArchiveActivity.class, ARCHIVE_KEY);
         replaceFragment(fragment);
     }
 
     @Override
     public void buildSupplierFragment() {
-        SupplierListFragment fragment = mFragmentFactory.createSupplierList(getSuppliers());
+        SupplierListFragment fragment = ListFragmentFactory.createSupplierList(this, getSuppliers());
         mController.setSupplierAdapterListener(fragment.getAdapter(), SUPPLIER_KEY);
         replaceFragment(fragment);
     }
