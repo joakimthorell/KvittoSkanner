@@ -68,7 +68,7 @@ public class ArchiveListFragment extends ListFragment{
         User user = getUser();
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.archive_toolbar, menu);
-        
+
         //Fills the toolbar dynamically with..
 
         //Companies
@@ -88,6 +88,7 @@ public class ArchiveListFragment extends ListFragment{
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        isCompany(item);
         switch (item.getItemId()) {
             case R.id.action_sort_date_newest_first:
                 mAdapter.sortListByDateNewstFirst();
@@ -128,12 +129,15 @@ public class ArchiveListFragment extends ListFragment{
             case R.id.show_food:
                 mAdapter.showCategory(Category.MAT);
                 return true;
+            case R.id.show_companies:
+
             default:
                 return false;
         }
     }
 
-    public void fillCompanyMenu(Menu menu){
+    public void isCompany(MenuItem item){
+        System.out.println(item + "HAAHHAHAHA");
     }
 
     public ArchiveAdapter getAdapter() {

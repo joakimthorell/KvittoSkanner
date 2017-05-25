@@ -16,7 +16,6 @@ import android.widget.TextView;
 
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
 
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +29,7 @@ import corp.skaj.foretagskvitton.model.Supplier;
 import corp.skaj.foretagskvitton.model.User;
 import corp.skaj.foretagskvitton.services.ReceiptScanner;
 
-public class ArchiveFragment extends AbstractFragment {
+public class ReceiptFragment extends AbstractFragment {
     public static final String ARCHIVE_BUNDLE = "PURCHASE_ID";
     private FABCallback mFabListener;
     private ArchiveListener mImageListener;
@@ -46,14 +45,14 @@ public class ArchiveFragment extends AbstractFragment {
     private Purchase mPurchase;
     private ImageView mMiniImage;
 
-    public ArchiveFragment() {
+    public ReceiptFragment() {
         // Required empty public constructor
     }
 
-    public static ArchiveFragment create(String purchaseID) {
+    public static ReceiptFragment create(String purchaseID) {
         Bundle b = new Bundle();
         b.putString(ARCHIVE_BUNDLE, purchaseID);
-        ArchiveFragment fragment = new ArchiveFragment();
+        ReceiptFragment fragment = new ReceiptFragment();
         fragment.setArguments(b);
         return fragment;
     }
@@ -138,7 +137,7 @@ public class ArchiveFragment extends AbstractFragment {
                 getSuppliers().indexOf(mPurchase.getSupplier()));
 
 
-        mTax.setText("Moms: " + String.valueOf(mPurchase.getReceipt().getProducts().get(0).getTax()) + " %");
+        mTax.setText(String.valueOf(mPurchase.getReceipt().getProducts().get(0).getTax()) + " %");
 
         mPurchaseType.setText(String.valueOf(mPurchase.getPurchaseType().name()));
 
@@ -226,7 +225,7 @@ public class ArchiveFragment extends AbstractFragment {
     }
 
     public double getTax() {
-        String newTax = String.valueOf((mTax.getText()));
+        String newTax = String.valueOf((mTax.getText())).substring(0, mTax.getText().length() - 2);
         return Double.valueOf(newTax);
     }
 

@@ -10,7 +10,7 @@ import android.view.MenuItem;
 
 import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.controllers.ArchiveController;
-import corp.skaj.foretagskvitton.view.ArchiveFragment;
+import corp.skaj.foretagskvitton.view.ReceiptFragment;
 import corp.skaj.foretagskvitton.view.ArchiveListener;
 import corp.skaj.foretagskvitton.view.ImageFragment;
 
@@ -18,7 +18,7 @@ public class ArchiveActivity extends AbstractActivity
     implements ArchiveListener {
 
     private boolean isShowingImage;
-    private ArchiveFragment mArchiveFragment;
+    private ReceiptFragment mArchiveFragment;
     private String mPurchaseId;
     private FragmentManager mFragmentManager;
 
@@ -35,8 +35,8 @@ public class ArchiveActivity extends AbstractActivity
         changeFragment(createArchiveFragment());
     }
 
-    private ArchiveFragment createArchiveFragment() {
-        ArchiveFragment af = ArchiveFragment.create(mPurchaseId);
+    private ReceiptFragment createArchiveFragment() {
+        ReceiptFragment af = ReceiptFragment.create(mPurchaseId);
         ArchiveController controller = new ArchiveController(getDataHandler(), mPurchaseId, af);
         af.setFabListener(controller);
         af.setImageListener(this);

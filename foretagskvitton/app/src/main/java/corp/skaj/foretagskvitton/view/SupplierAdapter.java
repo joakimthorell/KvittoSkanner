@@ -1,5 +1,9 @@
 package corp.skaj.foretagskvitton.view;
 
+import android.graphics.Color;
+
+import com.amulyakhare.textdrawable.TextDrawable;
+import com.amulyakhare.textdrawable.util.ColorGenerator;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 
@@ -16,6 +20,11 @@ public class SupplierAdapter extends BaseQuickAdapter<Supplier, BaseViewHolder> 
 
     @Override
     protected void convert(BaseViewHolder helper, Supplier supplier) {
-        helper.setText(R.id.list_item_archive_company_name, supplier.getName());
+        String fLetter = supplier.getName().substring(0, 2);
+        TextDrawable circleImage = TextDrawable.builder()
+                .buildRoundRect(fLetter, ColorGenerator.MATERIAL.getRandomColor(), 10);
+
+        helper.setText(R.id.list_item_archive_company_name, supplier.getName())
+        .setImageDrawable(R.id.list_item_archive_circular_image, circleImage);
     }
 }

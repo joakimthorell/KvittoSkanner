@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:fab="http://schemas.android.com/apk/res-auto"
-    tools:context="corp.skaj.foretagskvitton.view.ArchiveFragment">
+    tools:context="corp.skaj.foretagskvitton.view.ReceiptFragment">
 
     <ImageView
         android:id="@+id/imageView8"
