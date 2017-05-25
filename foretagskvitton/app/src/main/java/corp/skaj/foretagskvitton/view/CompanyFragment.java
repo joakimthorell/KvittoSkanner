@@ -10,13 +10,13 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.model.Card;
 import corp.skaj.foretagskvitton.model.Comment;
 import corp.skaj.foretagskvitton.model.Company;
-import corp.skaj.foretagskvitton.model.Employee;
 
 public class CompanyFragment extends AbstractFragment {
     private final static String COMPANY_BUNDLE = "COMPANY_ID";
@@ -24,7 +24,7 @@ public class CompanyFragment extends AbstractFragment {
     private Spinner mCards;
     private TextView mComment;
     private TextView mCompanyName;
-    private ICompany mCompanyListener;
+    private ILinkCompanyListener mCompanyListener;
 
     public CompanyFragment() {
         // Required empty public constructor
@@ -55,10 +55,37 @@ public class CompanyFragment extends AbstractFragment {
     }
 
     private void setupFragment(View view, String companyName) {
+        setWidgets(view);
+        setButtonListeners(view);
+        mCompanyName.setText(companyName);
+        mComment.setText(getComment(companyName));
+
+        ArrayAdapter<String> employeeAdapter = buildArrayAdapter(getEmployees(companyName, null));
+        setArrayAdapter(employeeAdapter, mEmployees);
+
+        setCardSpinner(companyName);
+
+    }
+
+    private void setCardSpinner(String companyName) {
+        List<String> cards = getCards(companyName);
+        ArrayAdapter<String> cardsAdapter;
+        if (cards.size() == 0) {
+            cardsAdapter = buildArrayAdapter(new ArrayList<String>(Arrays.asList("Ingen kort")));
+        } else {
+            cardsAdapter = buildArrayAdapter(getCards(companyName));
+        }
+        setArrayAdapter(cardsAdapter, mCards);
+    }
+
+    private void setWidgets(View view) {
         mCompanyName = (TextView) view.findViewById(R.id.fragment_company_title);
         mEmployees = (Spinner) view.findViewById(R.id.fragment_company_employees_spinner);
         mCards = (Spinner) view.findViewById(R.id.fragment_company_cards_spinner);
         mComment = (TextView) view.findViewById(R.id.fragment_company_comment);
+    }
+
+    private void setButtonListeners(View view) {
         Button mEditEmployee = (Button) view.findViewById(R.id.fragment_company_edit_employee_button);
         Button mRemoveEmployee = (Button) view.findViewById(R.id.fragment_company_remove_employee_button);
         Button mEditCard = (Button) view.findViewById(R.id.fragment_company_edit_card_button);
@@ -67,19 +94,9 @@ public class CompanyFragment extends AbstractFragment {
         mCompanyListener.setRemoveEmployeeListener(mRemoveEmployee);
         mCompanyListener.setEditCardListener(mEditCard);
         mCompanyListener.setRemoveCardListener(mRemoveCard);
-
-        mCompanyName.setText(companyName);
-
-        ArrayAdapter<String> employeeAdapter = buildArrayAdapter(getEmployees(companyName, null));
-        setArrayAdapter(employeeAdapter, mEmployees);
-
-        ArrayAdapter<String> cardsAdapter = buildArrayAdapter(getCards(companyName));
-        setArrayAdapter(cardsAdapter, mCards);
-
-        mComment.setText(getComment(companyName));
     }
 
-    public void setListener(ICompany listener) {
+    public void setListener(ILinkCompanyListener listener) {
         mCompanyListener = listener;
     }
 
@@ -98,12 +115,13 @@ public class CompanyFragment extends AbstractFragment {
         setArrayAdapter(cardsAdapter, mCards);
     }
 
-    public String getEmployeeItem() {
+    public String getEmployeeSpinnerItem() {
         return mEmployees.getSelectedItem().toString();
     }
 
-    public String getCardItem() {
-        return mCards.getSelectedItem().toString();
+    public String getCardSpinnerItem() {
+         Object selectedCardItem = mCards.getSelectedItem();
+        return selectedCardItem == null ? null : selectedCardItem.toString();
     }
 
     private List<String> getCards(String companyName) {

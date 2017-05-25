@@ -4,9 +4,9 @@ import android.content.Context;
 
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
 
-import corp.skaj.foretagskvitton.view.FABCallback;
+import corp.skaj.foretagskvitton.view.ILinkFABListener;
 
-public abstract class FABController implements FABCallback {
+public abstract class FABController implements ILinkFABListener {
 
     private Context mContext;
     private Class<?> mNextActivity;

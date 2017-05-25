@@ -19,7 +19,6 @@ import java.util.List;
 import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.model.Category;
 import corp.skaj.foretagskvitton.model.Company;
-import corp.skaj.foretagskvitton.model.Employee;
 import corp.skaj.foretagskvitton.model.User;
 
 /**
@@ -42,7 +41,7 @@ public class ArchiveListFragment extends ListFragment{
         return fragment;
     }
 
-    public static ArchiveListFragment create(ArchiveAdapter adapter, FABCallback listener) {
+    public static ArchiveListFragment create(ArchiveAdapter adapter, ILinkFABListener listener) {
         ArchiveListFragment fragment = create(adapter);
         fragment.setListener(listener);
         return fragment;
