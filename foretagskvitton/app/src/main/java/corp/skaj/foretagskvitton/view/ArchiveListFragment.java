@@ -14,8 +14,12 @@ import android.view.ViewGroup;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
 
+import java.util.List;
+
 import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.model.Category;
+import corp.skaj.foretagskvitton.model.Company;
+import corp.skaj.foretagskvitton.model.Employee;
 import corp.skaj.foretagskvitton.model.User;
 
 /**
@@ -64,13 +68,22 @@ public class ArchiveListFragment extends ListFragment{
         User user = getUser();
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.archive_toolbar, menu);
+        
+        //Fills the toolbar dynamically with..
 
-        //This is the way to access företag
-        for(int i = 0; i < user.getCompanies().size(); i++) {
-            menu.getItem(2).getSubMenu().getItem(2).getSubMenu().add(user.getCompanies().get(i).getName());
+        //Companies
+        Menu m = menu.getItem(2).getSubMenu();
+        List<Company> comps = user.getCompanies();
+        for (int i = 0; i < comps.size(); i++) {
+            m.getItem(2).getSubMenu().add(comps.get(i).getName());
         }
-        //for(int i = 0 < user.get)
-        menu.getItem(2).getSubMenu().getItem(3).getSubMenu().add("emil");
+
+        //Employees
+        for (int i = 0; i < comps.size(); i++) {
+            for(int j = 0; j < comps.get(i).getEmployees().size(); j++) {
+               m.getItem(3).getSubMenu().add(comps.get(j).getEmployees().get(j).getName());
+            }
+        }
     }
 
     @Override
