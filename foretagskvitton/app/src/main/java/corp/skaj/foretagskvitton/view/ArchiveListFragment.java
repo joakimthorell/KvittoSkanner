@@ -81,14 +81,15 @@ public class ArchiveListFragment extends ListFragment{
         //Employees
         for (int i = 0; i < comps.size(); i++) {
             for(int j = 0; j < comps.get(i).getEmployees().size(); j++) {
-               m.getItem(3).getSubMenu().add(comps.get(j).getEmployees().get(j).getName());
+                String empName = comps.get(j).getEmployees().get(j).getName();
+               m.getItem(3).getSubMenu().add(empName);
             }
         }
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        isCompany(item);
+
         switch (item.getItemId()) {
             case R.id.action_sort_date_newest_first:
                 mAdapter.sortListByDateNewstFirst();
@@ -134,10 +135,6 @@ public class ArchiveListFragment extends ListFragment{
             default:
                 return false;
         }
-    }
-
-    public void isCompany(MenuItem item){
-        System.out.println(item + "HAAHHAHAHA");
     }
 
     public ArchiveAdapter getAdapter() {

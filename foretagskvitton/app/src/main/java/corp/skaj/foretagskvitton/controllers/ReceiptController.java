@@ -18,12 +18,12 @@ import corp.skaj.foretagskvitton.model.User;
 import corp.skaj.foretagskvitton.view.ReceiptFragment;
 import corp.skaj.foretagskvitton.view.FABCallback;
 
-public class ArchiveController implements FABCallback {
+public class ReceiptController implements FABCallback {
     private ReceiptFragment fragment;
     private String purchaseId;
     private IData dataHandler;
 
-    public ArchiveController(IData dataHandler, String purId, ReceiptFragment fragment) {
+    public ReceiptController(IData dataHandler, String purId, ReceiptFragment fragment) {
         this.dataHandler = dataHandler;
         purchaseId = purId;
         this.fragment = fragment;

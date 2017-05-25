@@ -9,7 +9,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.MenuItem;
 
 import corp.skaj.foretagskvitton.R;
-import corp.skaj.foretagskvitton.controllers.ArchiveController;
+import corp.skaj.foretagskvitton.controllers.ReceiptController;
 import corp.skaj.foretagskvitton.view.ReceiptFragment;
 import corp.skaj.foretagskvitton.view.ArchiveListener;
 import corp.skaj.foretagskvitton.view.ImageFragment;
@@ -37,7 +37,7 @@ public class ArchiveActivity extends AbstractActivity
 
     private ReceiptFragment createArchiveFragment() {
         ReceiptFragment af = ReceiptFragment.create(mPurchaseId);
-        ArchiveController controller = new ArchiveController(getDataHandler(), mPurchaseId, af);
+        ReceiptController controller = new ReceiptController(getDataHandler(), mPurchaseId, af);
         af.setFabListener(controller);
         af.setImageListener(this);
         return af;
