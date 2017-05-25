@@ -25,13 +25,13 @@ import corp.skaj.foretagskvitton.R;
  */
 public abstract class ListFragment extends AbstractFragment {
     private RecyclerView mRecyclerView;
-    private FABCallback mObserver;
+    private ILinkFABListener mObserver;
     private FloatingActionsMenu mButton;
 
     protected ListFragment() {
     }
 
-    protected ListFragment setListener(FABCallback observer) {
+    protected ListFragment setListener(ILinkFABListener observer) {
         mObserver = observer;
         return this;
     }

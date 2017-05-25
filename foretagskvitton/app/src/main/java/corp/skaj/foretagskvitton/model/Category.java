@@ -5,17 +5,17 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * String in Category is a color in hex
+ * This class holds categories options for purchase.
+ * Each category has a color in hex.
  */
 public enum Category {
-    BENSIN("#E43F3F"), // red
-    HOTELL("#FFFF66"), // light yellow
-    KONTORSMATERIAL("#FFCCE5"), // pinkish
-    MAT("#99FF33"), // green
-    PORTO("#33FFFF"), // light blue
-    REPRESENTATION("#FFB266"), // orange/brown
-    RESOR("#FF66FF"), // purpleish
-    TRANSPORT("#6666FF"); // darker blue
+    BENSIN("#E45664"), // red
+    HOTELL("#FFE0AB"), // light yellow
+    MAT("#B7E5B7"), // green
+    REPRESENTATION("#C0D6E4"), // light blue
+    RESOR("#99D5CF"), // turqoise
+    TRANSPORT("#FFCCE5"), // baby pink
+    ÖVRIGT("#5B005B"); // purple
 
     private final String color;
 

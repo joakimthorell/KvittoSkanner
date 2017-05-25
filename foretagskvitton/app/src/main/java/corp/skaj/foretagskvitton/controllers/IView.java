@@ -4,7 +4,7 @@ public interface IView {
 
     void nextActivity(Class<?> c, String key, String data);
 
-    void buildArchiveFragment();
+    void buildArchiveListFragment();
 
     void buildCompanyFragment();
 

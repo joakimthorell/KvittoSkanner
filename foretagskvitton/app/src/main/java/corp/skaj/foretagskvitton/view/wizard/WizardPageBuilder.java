@@ -29,18 +29,15 @@ import java.util.List;
 import corp.skaj.foretagskvitton.model.Card;
 import corp.skaj.foretagskvitton.model.Category;
 import corp.skaj.foretagskvitton.model.Company;
-import corp.skaj.foretagskvitton.model.IObserver;
 import corp.skaj.foretagskvitton.model.Supplier;
-import corp.skaj.foretagskvitton.model.TextCollector;
+import corp.skaj.foretagskvitton.services.textcollector.TextCollector;
 import corp.skaj.foretagskvitton.model.User;
 
 public class WizardPageBuilder {
-    private List<IObserver> observers;
-    private PageList pages;
+    private PageList mPages;
 
     public WizardPageBuilder(User user, ModelCallbacks view, List<String> strings) {
-        pages = companyInfoNotFound(strings, user, view);
-        observers = new ArrayList<>();
+        mPages = companyInfoNotFound(strings, user, view);
     }
 
     private PageList companyInfoNotFound(List<String> strings, User user, ModelCallbacks view) {
@@ -90,7 +87,6 @@ public class WizardPageBuilder {
                             .setChoices(Category.getCategoriesArray())
                             .setRequired(true),
 
-                    //TODO add a choice above which is "other" for custom choice of category
                     new TextPage(view, WizardConstants.COMMENT)
                             .setRequired(false));
         }
@@ -118,7 +114,6 @@ public class WizardPageBuilder {
                         .setChoices(Category.getCategoriesArray())
                         .setRequired(true),
 
-                //TODO add a choice above which is "other" for custom choice of category
                 new TextPage(view, WizardConstants.COMMENT)
                         .setRequired(false));
     }
@@ -148,7 +143,6 @@ public class WizardPageBuilder {
                         .setChoices(Category.getCategoriesArray())
                         .setRequired(true),
 
-                //TODO add a choice above which is "other" for custom choice of category
                 new TextPage(view, WizardConstants.COMMENT)
                         .setRequired(false));
     }
@@ -182,27 +176,8 @@ public class WizardPageBuilder {
                         .setChoices(Category.getCategoriesArray())
                         .setRequired(true),
 
-                //TODO add a choice above which is "other" for custom choice of category
                 new TextPage(view, WizardConstants.COMMENT)
                         .setRequired(false));
-    }
-
-    public void addObserver(IObserver observer) {
-        observers.add(observer);
-    }
-
-    public void removeObserver(IObserver observer) {
-        observers.remove(observer);
-    }
-
-    public void collectData() {
-        notifyController();
-    }
-
-    private void notifyController() {
-        for (IObserver io : observers) {
-            io.onDataChange();
-        }
     }
 
     private String[] getSuppliers(List<Supplier> suppliers) {
@@ -247,7 +222,7 @@ public class WizardPageBuilder {
     }
 
     public PageList getPages() {
-        return pages;
+        return mPages;
     }
 }
 

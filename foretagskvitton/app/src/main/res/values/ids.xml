@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <item name="intro_archivetext" type="id" />
+    <item name="create_new_card" type="id">Var god lägg till nytt kort</item>
 </resources>

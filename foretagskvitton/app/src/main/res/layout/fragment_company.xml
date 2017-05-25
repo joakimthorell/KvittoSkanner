@@ -92,6 +92,15 @@
         android:layout_marginBottom="60dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"/>
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintHorizontal_bias="0.274" />
+
+    <Button
+        android:id="@+id/fragment_company_save_company_comment"
+        android:layout_width="101dp"
+        android:layout_height="60dp"
+        android:text="Spara"
+        app:layout_constraintBottom_toBottomOf="@id/fragment_company_comment"
+        app:layout_constraintLeft_toRightOf="@id/fragment_company_comment" />
 
 </android.support.constraint.ConstraintLayout>

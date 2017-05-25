@@ -3,6 +3,7 @@ package corp.skaj.foretagskvitton.controllers;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.Button;
@@ -18,36 +19,40 @@ import java.util.Date;
 import java.util.List;
 
 import corp.skaj.foretagskvitton.R;
+import corp.skaj.foretagskvitton.activities.MainActivity;
 import corp.skaj.foretagskvitton.model.Category;
 import corp.skaj.foretagskvitton.model.Comment;
 import corp.skaj.foretagskvitton.model.Company;
 import corp.skaj.foretagskvitton.model.Employee;
 import corp.skaj.foretagskvitton.model.IData;
+import corp.skaj.foretagskvitton.model.IObserver;
 import corp.skaj.foretagskvitton.model.Product;
 import corp.skaj.foretagskvitton.model.Purchase;
 import corp.skaj.foretagskvitton.model.Receipt;
 import corp.skaj.foretagskvitton.model.User;
-import corp.skaj.foretagskvitton.view.wizard.ConfirmWizardFragment;
+import corp.skaj.foretagskvitton.view.wizard.WizardFragment;
 import corp.skaj.foretagskvitton.view.wizard.WizardConstants;
 import corp.skaj.foretagskvitton.view.wizard.WizardView;
 
 public class WizardController {
     private WizardView mWizardView;
     private ViewPager mPager;
+    private PagerAdapter mPagerAdapter;
     private Button mNextButton;
     private Button mPrevButton;
     private boolean mEditingAfterReview;
     private boolean mConsumePageSelectedEvent;
     private IData mDataHandler;
 
-    public WizardController(Context context, Button mNextButton, Button mPrevButton,
-                            ViewPager mPager) {
+    public WizardController(Context context, Button nextButton, Button prevButton,
+                            ViewPager viewpager, PagerAdapter pagerAdapter, WizardView wizardView) {
         mEditingAfterReview = false;
-        this.mNextButton = mNextButton;
-        this.mPrevButton = mPrevButton;
-        this.mPager = mPager;
+        mNextButton = nextButton;
+        mPrevButton = prevButton;
+        mPager = viewpager;
+        mPagerAdapter = pagerAdapter;
+        mWizardView = wizardView;
         mDataHandler = (IData) context.getApplicationContext();
-        mWizardView = new WizardView(context);
     }
 
     public void initViewPagerListener(final StepPagerStrip mStepPagerStrip) {
@@ -75,17 +80,17 @@ public class WizardController {
         });
     }
 
-    public void initNextButton(Button mNextButton,
-                               final WizardPageController mPagerAdapter,
+    public void initNextButton(final IObserver observer, Button mNextButton,
                                final FragmentManager fragmentManager) {
         mNextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int size = mWizardView.getWizardView().getCurrentPageSequence().size();
                 if (mPager.getCurrentItem() == size) {
-                    ConfirmWizardFragment wls = new ConfirmWizardFragment();
-                    wls.setModel(mWizardView.getWizardModel());
+                    WizardFragment wls = new WizardFragment();
+                    wls.setObserver(observer);
                     wls.show(fragmentManager, "confirm_receipt_dialog");
+                    //observer.collectData();
                 } else {
                     if (mEditingAfterReview) {
                         mPager.setCurrentItem(mPagerAdapter.getCount() - 1);
@@ -113,9 +118,6 @@ public class WizardController {
             mNextButton.setText(R.string.wizard_complete);
         } else if (position <= 0) {
             mPrevButton.setVisibility(View.GONE);
-
-            // TODO set next button as bigger if possible
-
         } else {
             mNextButton.setText(R.string.nextButtonText);
         }
@@ -134,8 +136,6 @@ public class WizardController {
         Bundle vatBundle = b.getBundle(WizardConstants.VAT);
         Bundle categoryBundle = b.getBundle(WizardConstants.CATEGORY);
         Bundle commentBundle = b.getBundle(WizardConstants.COMMENT);
-
-        // TODO need some kind of check for thing that is not required in wizard. There may be nullpointers
 
         Product product = buildProduct(
                 totalBundle.getString("_"),
@@ -177,7 +177,6 @@ public class WizardController {
 
     private Purchase buildPurchase(Receipt receipt, String supplierAsString, String purchaseType) {
         Purchase.PurchaseType typeOfPurchase = purchaseType.equals("Företag") ? Purchase.PurchaseType.COMPANY : Purchase.PurchaseType.PRIVATE;
-        // TODO fix supplier as we change to to be inside user instead
 
         return new Purchase(receipt, typeOfPurchase);
     }
@@ -213,13 +212,5 @@ public class WizardController {
 
     public void setCurrentItem(int i) {
         mPager.setCurrentItem(i);
-    }
-
-    public List<Page> getCurrentPageSequence() {
-        return mWizardView.getWizardView().getCurrentPageSequence();
-    }
-
-    public AbstractWizardModel getWizardView() {
-        return mWizardView.getWizardView();
     }
 }

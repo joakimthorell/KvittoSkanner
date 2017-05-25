@@ -3,14 +3,12 @@ package corp.skaj.foretagskvitton.controllers;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.Layout;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.AlignmentSpan;
 import android.view.View;
-import android.view.animation.Interpolator;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -19,21 +17,20 @@ import java.util.List;
 
 import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.model.Card;
+import corp.skaj.foretagskvitton.model.Comment;
 import corp.skaj.foretagskvitton.model.Company;
 import corp.skaj.foretagskvitton.model.Employee;
 import corp.skaj.foretagskvitton.model.IData;
-import corp.skaj.foretagskvitton.model.Supplier;
 import corp.skaj.foretagskvitton.model.User;
 import corp.skaj.foretagskvitton.view.CompanyFragment;
-import corp.skaj.foretagskvitton.view.ICompany;
-import corp.skaj.foretagskvitton.view.SupplierListFragment;
+import corp.skaj.foretagskvitton.view.ILinkCompanyListener;
 
-public class CompanyController implements ICompany {
-    private IData mDataHandler;
+public class CompanyController implements ILinkCompanyListener {
     private final String mEditEmployee = "EDIT_EMPLOYEE";
     private final String mEditCard = "EDIT_CARD";
-    private Context mContext;
     private CompanyFragment mCompanyFragment;
+    private IData mDataHandler;
+    private Context mContext;
 
     public CompanyController(IData dataHandler, Context context, CompanyFragment companyFragment) {
         this.mDataHandler = dataHandler;
@@ -59,7 +56,6 @@ public class CompanyController implements ICompany {
                 removeEmployee();
             }
         });
-
     }
 
     @Override
@@ -67,10 +63,13 @@ public class CompanyController implements ICompany {
         editCardButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showAddNewDialog(mEditCard);
+                if (getCompany().getCards().size() > 0) {
+                    showAddNewDialog(mEditCard);
+                } else {
+                    Toast.makeText(mContext, R.string.create_new_card, Toast.LENGTH_SHORT).show();
+                }
             }
         });
-
     }
 
     @Override
@@ -81,7 +80,15 @@ public class CompanyController implements ICompany {
                 removeCard();
             }
         });
+    }
 
+    public void setSaveCommentListener (Button saveCommentButton) {
+        saveCommentButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                saveComment();
+            }
+        });
     }
 
     private void showAddNewDialog(final String KEY) {
@@ -90,9 +97,9 @@ public class CompanyController implements ICompany {
         edittext.setSingleLine(true);
 
         if (KEY.equals(mEditEmployee)) {
-            alert.setMessage("Skriv den anställdes namn:");
+            alert.setMessage("Skriv den anställdes namn: ");
         } else {
-            alert.setMessage("Skriv in kortnummer");
+            alert.setMessage("Skriv sista 4 siffrorna på företagskortet: ");
         }
         alert.setTitle("Editera");
         alert.setView(edittext);
@@ -101,10 +108,18 @@ public class CompanyController implements ICompany {
                 //What ever you want to do with the value
                 Editable editedInfo = edittext.getText();
 
-                if (editedInfo.toString().length() < 1) {
+                if (KEY.equals(mEditEmployee)) {
+                    if (!(editedInfo.toString().length() < 1
+                            || editedInfo.toString().matches("[a-zA-Z]+"))) {
+                        return;
+                    }
+                } else if (!(editedInfo.toString().length() < 5
+                        || editedInfo.toString().length() > 0
+                        || editedInfo.toString().matches("[0-9]+"))) {
                     return;
+                } else {
+                    editChanges(editedInfo, KEY);
                 }
-                editChanges(editedInfo, KEY);
             }
         });
         alert.setNegativeButton("Avbryt", new DialogInterface.OnClickListener() {
@@ -116,12 +131,15 @@ public class CompanyController implements ICompany {
     }
 
     private void editChanges(Editable editedInfo, String KEY) {
+        int oldCardNum = cardStringToInt(mCompanyFragment.getCardSpinnerItem());
         if (KEY.equals(mEditEmployee)) {
             updateEmployee(editedInfo.toString());
-        } else {
+        } else if (oldCardNum != -1) {
             updateCard(editedInfo.toString());
+        } else {
+            return;
         }
-        Toast.makeText(mContext, "Dina ändringar är sparade ", Toast.LENGTH_SHORT).show();
+        Toast.makeText(mContext, R.string.changes_saved, Toast.LENGTH_SHORT).show();
         mDataHandler.saveUser();
     }
 
@@ -132,14 +150,30 @@ public class CompanyController implements ICompany {
     }
 
     private void updateCard(String newCardNumber) {
-        Card card = getUser().getCompany(companyName()).getCard(Integer.parseInt(mCompanyFragment.getCardItem()));
-        card.setCard(Integer.parseInt(newCardNumber));
-        mCompanyFragment.updateCardSpinner(companyName());
+        Card card;
+        int oldCardNum = cardStringToInt(mCompanyFragment.getCardSpinnerItem());
+        if (oldCardNum != -1) {
+            card = getUser().getCompany(companyName()).getCard(cardStringToInt(mCompanyFragment.getCardSpinnerItem()));
+            int cardNum = cardStringToInt(newCardNumber);
+            if (cardNum != -1) {
+                card.setCard(Integer.parseInt(newCardNumber));
+                mCompanyFragment.updateCardSpinner(companyName());
+            }
+        } else {
+            Toast.makeText(mContext, R.string.invalid_input, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private int cardStringToInt(String cardNum) {
+        try {
+            return Integer.parseInt(cardNum);
+        } catch (NumberFormatException e) {
+            return -1;
+        }
     }
 
     private void removeEmployee() {
-        Spannable centeredText = new SpannableString(mContext.getString(R.string.cant_delete_employee));
-        getTextCentered(centeredText, mContext.getString(R.string.cant_delete_employee));
+        Spannable centeredText = buildCenteredToastText(R.string.cant_delete_employee);
         if (getCompany().getEmployees().size() == 1) {
             Toast.makeText(mContext, centeredText, Toast.LENGTH_SHORT).show();
         } else {
@@ -149,18 +183,42 @@ public class CompanyController implements ICompany {
     }
 
     private void removeCard() {
-        Spannable centeredText = new SpannableString(mContext.getString(R.string.cant_delete_card));
-        getTextCentered(centeredText, mContext.getString(R.string.cant_delete_card));
+        Spannable centeredText = buildCenteredToastText(R.string.cant_delete_card);
         if ((getCompany().getCards().size() <= 0)) {
             Toast.makeText(mContext, centeredText, Toast.LENGTH_SHORT).show();
         } else {
-            Card card = getCompany().getCard(Integer.parseInt(mCompanyFragment.getCardItem()));
+            Card card = getCompany().getCard(cardStringToInt(mCompanyFragment.getCardSpinnerItem()));
             getUser().getCompany(companyName()).removeCard(card);
         }
     }
 
-    private User getUser() {
-        return mDataHandler.getUser();
+    private void saveComment () {
+        String currentComment = mCompanyFragment.getCurrentComment();
+        if (currentComment != null) {
+            List<Comment> comments = getCompany().getComments();
+            if (comments.size() > 0) {
+                comments.get(0).setComment(currentComment);
+                mDataHandler.saveUser();
+                Toast.makeText(mContext, R.string.changes_saved, Toast.LENGTH_SHORT).show();
+            } else {
+                createNewComment(comments, currentComment);
+            }
+        } else {
+            Toast.makeText(mContext, R.string.invalid_input, Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    public void createNewComment (List<Comment> comments, String currentComment) {
+        comments.add(new Comment(currentComment));
+        mDataHandler.saveUser();
+        Toast.makeText(mContext, R.string.changes_saved, Toast.LENGTH_SHORT).show();
+    }
+
+    private Spannable buildCenteredToastText(int rString) {
+        Spannable centeredText = new SpannableString(mContext.getString(rString));
+        getTextCentered(centeredText, mContext.getString(rString));
+        return centeredText;
     }
 
     public void getTextCentered(Spannable centeredText, String text) {
@@ -174,11 +232,14 @@ public class CompanyController implements ICompany {
     }
 
     private Employee getEmployee() {
-        return getUser().getCompany(companyName()).getEmployee(mCompanyFragment.getEmployeeItem());
+        return getUser().getCompany(companyName()).getEmployee(mCompanyFragment.getEmployeeSpinnerItem());
     }
 
     private String companyName() {
         return mCompanyFragment.getCompanyName();
     }
 
+    private User getUser() {
+        return mDataHandler.getUser();
+    }
 }

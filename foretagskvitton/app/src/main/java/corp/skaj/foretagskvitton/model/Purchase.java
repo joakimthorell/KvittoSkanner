@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * Holds purchase information: type of purchase, possible supplier, comment
+ * and purchase id for identification.
+ */
 public class Purchase {
 
     public enum PurchaseType {
