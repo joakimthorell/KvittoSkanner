@@ -79,7 +79,7 @@ public class MainController {
                             mListener.buildCompanyFragment();
                             return;
                         case R.id.action_archive:
-                            mListener.buildArchiveFragment();
+                            mListener.buildArchiveListFragment();
                             return;
                         case R.id.action_supplier:
                             mListener.buildSupplierFragment();
