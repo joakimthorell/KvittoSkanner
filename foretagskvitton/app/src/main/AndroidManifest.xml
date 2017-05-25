@@ -46,7 +46,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="corp.skaj.foretagskvitton.activities.MainActivity" />
         </activity>
-        <activity android:name=".activities.ArchiveActivity">
+        <activity android:name=".activities.ReceiptActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="corp.skaj.foretagskvitton.activities.MainActivity" />

@@ -31,8 +31,7 @@ import corp.skaj.foretagskvitton.services.ReceiptScanner;
 
 public class ReceiptFragment extends AbstractFragment {
     public static final String ARCHIVE_BUNDLE = "PURCHASE_ID";
-    private FABCallback mFabListener;
-    private ArchiveListener mImageListener;
+    private ReceiptBinder mReceiptBinder;
     private TextView mPrice;
     private TextView mTax;
     private TextView mDate;
@@ -71,17 +70,13 @@ public class ReceiptFragment extends AbstractFragment {
 
 
         FloatingActionsMenu button = (FloatingActionsMenu) view.findViewById(R.id.archive_receipt_savebutton);
-        mFabListener.bindButton(button);
-        onClick();
+        mReceiptBinder.bindButton(button);
+        mReceiptBinder.bindSpinner(mCompany, this, mEmployees);
 
     }
 
-    public void setImageListener(ArchiveListener listener) {
-        mImageListener = listener;
-    }
-
-    public void setFabListener(FABCallback listener) {
-        mFabListener = listener;
+    public void setBinder(ReceiptBinder binder) {
+        mReceiptBinder = binder;
     }
 
     private void setupFragment(View view, String purchaseId) {
@@ -146,43 +141,11 @@ public class ReceiptFragment extends AbstractFragment {
         try {
             Bitmap bmp = ReceiptScanner.createImageFromURI(getContext(), Uri.parse(mPurchase.getReceipt().getPictureAdress()));
             mMiniImage.setImageBitmap(bmp);
-            mMiniImage.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mImageListener.setImagePressed(Uri.parse(mPurchase.getReceipt().getPictureAdress()));
-                }
-            });
+            mReceiptBinder.bindImage(mMiniImage, Uri.parse(mPurchase.getReceipt().getPictureAdress()));
         } catch (Exception exception) {
             exception.printStackTrace();
             mMiniImage.setImageDrawable(getContext().getDrawable(R.drawable.comingsoon));
         }
-    }
-
-
-    public void onClick() {
-        mCompany.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Company c = getUser().getCompany(mCompany.getAdapter().getItem(position).toString());
-                List<String> employeeNames = new ArrayList<String>();
-
-                for (Employee e : c.getEmployees()) {
-                    employeeNames.add(e.getName());
-                }
-
-                ArrayAdapter<String> employeeAdapter = buildArrayAdapter(employeeNames);
-                setArrayAdapter(employeeAdapter, mEmployees);
-
-                //If we want a standard user, fix code below
-                //Employee e = getUser().getCompanies().get(position).getEmployee(mPurchase);
-                //mEmployees.setSelection(getEmployees().indexOf(e));
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            //Empty on purpose
-            }
-        });
     }
 
     private void setPriceTextView(View view, Purchase purchase) {
