@@ -11,11 +11,11 @@ import android.view.MenuItem;
 import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.controllers.ArchiveController;
 import corp.skaj.foretagskvitton.view.ReceiptFragment;
-import corp.skaj.foretagskvitton.view.ArchiveListener;
+import corp.skaj.foretagskvitton.view.ILinkArchiveListener;
 import corp.skaj.foretagskvitton.view.ImageFragment;
 
 public class ArchiveActivity extends AbstractActivity
-    implements ArchiveListener {
+    implements ILinkArchiveListener {
 
     private boolean isShowingImage;
     private ReceiptFragment mArchiveFragment;

@@ -16,9 +16,9 @@ import corp.skaj.foretagskvitton.model.Purchase;
 import corp.skaj.foretagskvitton.model.Supplier;
 import corp.skaj.foretagskvitton.model.User;
 import corp.skaj.foretagskvitton.view.ReceiptFragment;
-import corp.skaj.foretagskvitton.view.FABCallback;
+import corp.skaj.foretagskvitton.view.ILinkFABListener;
 
-public class ArchiveController implements FABCallback {
+public class ArchiveController implements ILinkFABListener {
     private ReceiptFragment fragment;
     private String purchaseId;
     private IData dataHandler;

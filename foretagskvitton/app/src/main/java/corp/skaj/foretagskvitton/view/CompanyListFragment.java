@@ -35,7 +35,7 @@ public class CompanyListFragment extends ListFragment {
         mAdapter = adapter;
     }
 
-    public static CompanyListFragment create(CompanyAdapter adapter, FABCallback listener) {
+    public static CompanyListFragment create(CompanyAdapter adapter, ILinkFABListener listener) {
         CompanyListFragment fragment = create(adapter);
         fragment.setListener(listener);
         return fragment;

@@ -31,8 +31,8 @@ import corp.skaj.foretagskvitton.services.ReceiptScanner;
 
 public class ReceiptFragment extends AbstractFragment {
     public static final String ARCHIVE_BUNDLE = "PURCHASE_ID";
-    private FABCallback mFabListener;
-    private ArchiveListener mImageListener;
+    private ILinkFABListener mFabListener;
+    private ILinkArchiveListener mImageListener;
     private TextView mPrice;
     private TextView mTax;
     private TextView mDate;
@@ -76,11 +76,11 @@ public class ReceiptFragment extends AbstractFragment {
 
     }
 
-    public void setImageListener(ArchiveListener listener) {
+    public void setImageListener(ILinkArchiveListener listener) {
         mImageListener = listener;
     }
 
-    public void setFabListener(FABCallback listener) {
+    public void setFabListener(ILinkFABListener listener) {
         mFabListener = listener;
     }
 

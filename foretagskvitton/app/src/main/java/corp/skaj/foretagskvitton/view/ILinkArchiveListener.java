@@ -2,8 +2,6 @@ package corp.skaj.foretagskvitton.view;
 
 import android.net.Uri;
 
-public interface ArchiveListener {
-
+public interface ILinkArchiveListener {
     void setImagePressed(Uri address);
-
 }
