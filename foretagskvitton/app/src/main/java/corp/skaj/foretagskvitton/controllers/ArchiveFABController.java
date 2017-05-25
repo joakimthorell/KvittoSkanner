@@ -94,11 +94,11 @@ public class ArchiveFABController extends FABController {
         demoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                IData hander = (IData) getContext().getApplicationContext();
+                IData dataHandler = (IData) getContext().getApplicationContext();
                 createNewReceipt();
                 AppCompatActivity activity = (AppCompatActivity) getContext();
                 ArchiveListFragment fragment = (ArchiveListFragment) activity.getSupportFragmentManager().findFragmentById(R.id.main_fragment_container);
-                fragment.getAdapter().setNewData(hander.getPurchases(hander.getUser()));
+                fragment.getAdapter().setNewData(dataHandler.getPurchases());
             }
         });
         button.addButton(demoButton);

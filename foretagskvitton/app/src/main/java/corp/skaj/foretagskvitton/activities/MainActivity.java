@@ -108,7 +108,7 @@ public class MainActivity extends AbstractActivity
     }
 
     private PurchaseList getPurchases() {
-        return getDataHandler().getPurchases(getUser());
+        return getDataHandler().getPurchases();
     }
 
     private void replaceFragment(Fragment fragment) {

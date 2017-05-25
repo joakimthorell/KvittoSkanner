@@ -79,9 +79,9 @@ public class DataHandler extends Application implements IData {
     }
 
     @Override
-    public PurchaseList getPurchases(User user) {
-        PurchaseList purchases = new PurchaseList(user);
-        for (Company c : user.getCompanies()) {
+    public PurchaseList getPurchases() {
+        PurchaseList purchases = new PurchaseList(getUser());
+        for (Company c : getUser().getCompanies()) {
             for (Employee e : c.getEmployees()) {
                 purchases.addAll(e.getPurchases());
             }

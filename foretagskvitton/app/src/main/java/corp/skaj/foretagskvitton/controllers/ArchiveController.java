@@ -31,7 +31,7 @@ public class ArchiveController implements FABCallback {
 
     public void updateReceiptData() {
         User user = dataHandler.getUser();
-        Purchase purchase = dataHandler.getPurchases(user).getPurchase(purchaseId);
+        Purchase purchase = dataHandler.getPurchases().getPurchase(purchaseId);
         // price 
         purchase.getReceipt().setTotal(fragment.getPrice());
         // category 
