@@ -73,7 +73,7 @@ public class MainActivity extends AbstractActivity
     @Override
     public void buildArchiveFragment() {
         ArchiveListFragment fragment = ListFragmentFactory.createArchiveList(AddReceiptActivity.class, this, getPurchases(), getDataHandler());
-        mController.setArchiveAdapterListener(fragment.getAdapter(), ArchiveActivity.class, ARCHIVE_KEY);
+        mController.setArchiveAdapterListener(fragment.getAdapter(), ReceiptActivity.class, ARCHIVE_KEY);
         replaceFragment(fragment);
     }
 

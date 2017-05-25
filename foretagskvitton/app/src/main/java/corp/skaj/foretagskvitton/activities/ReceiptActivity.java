@@ -9,16 +9,14 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.MenuItem;
 
 import corp.skaj.foretagskvitton.R;
-import corp.skaj.foretagskvitton.controllers.ArchiveController;
+import corp.skaj.foretagskvitton.controllers.ReceiptController;
+import corp.skaj.foretagskvitton.view.IReceipt;
 import corp.skaj.foretagskvitton.view.ReceiptFragment;
-import corp.skaj.foretagskvitton.view.ILinkArchiveListener;
 import corp.skaj.foretagskvitton.view.ImageFragment;
 
-public class ArchiveActivity extends AbstractActivity
-    implements ILinkArchiveListener {
+public class ReceiptActivity extends AbstractActivity implements IReceipt {
 
     private boolean isShowingImage;
-    private ReceiptFragment mArchiveFragment;
     private String mPurchaseId;
     private FragmentManager mFragmentManager;
 
@@ -37,9 +35,8 @@ public class ArchiveActivity extends AbstractActivity
 
     private ReceiptFragment createArchiveFragment() {
         ReceiptFragment af = ReceiptFragment.create(mPurchaseId);
-        ArchiveController controller = new ArchiveController(getDataHandler(), mPurchaseId, af);
-        af.setFabListener(controller);
-        af.setImageListener(this);
+        ReceiptController controller = new ReceiptController(getDataHandler(), mPurchaseId, af, this);
+        af.setBinder(controller);
         return af;
     }
 

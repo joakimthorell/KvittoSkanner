@@ -1,9 +1,18 @@
 package corp.skaj.foretagskvitton.controllers;
 
 import android.content.Intent;
+import android.net.Uri;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.activities.MainActivity;
@@ -15,18 +24,22 @@ import corp.skaj.foretagskvitton.model.IData;
 import corp.skaj.foretagskvitton.model.Purchase;
 import corp.skaj.foretagskvitton.model.Supplier;
 import corp.skaj.foretagskvitton.model.User;
+import corp.skaj.foretagskvitton.view.AbstractFragment;
+import corp.skaj.foretagskvitton.view.IReceipt;
+import corp.skaj.foretagskvitton.view.ILinkReceiptListener;
 import corp.skaj.foretagskvitton.view.ReceiptFragment;
-import corp.skaj.foretagskvitton.view.ILinkFABListener;
 
-public class ArchiveController implements ILinkFABListener {
+public class ReceiptController implements ILinkReceiptListener {
     private ReceiptFragment fragment;
     private String purchaseId;
     private IData dataHandler;
+    private IReceipt mListener;
 
-    public ArchiveController(IData dataHandler, String purId, ReceiptFragment fragment) {
+    public ReceiptController(IData dataHandler, String purId, ReceiptFragment fragment, IReceipt listener) {
         this.dataHandler = dataHandler;
         purchaseId = purId;
         this.fragment = fragment;
+        mListener = listener;
     }
 
     public void updateReceiptData() {
@@ -74,6 +87,7 @@ public class ArchiveController implements ILinkFABListener {
         return fragment.getPurchaseType().equals("Företagskort") ? Purchase.PurchaseType.COMPANY : Purchase.PurchaseType.PRIVATE;
     }
 
+    @Override
     public void bindButton(final FloatingActionsMenu button) {
         button.setOnFloatingActionsMenuUpdateListener(new FloatingActionsMenu.OnFloatingActionsMenuUpdateListener() {
             @Override
@@ -87,6 +101,43 @@ public class ArchiveController implements ILinkFABListener {
             @Override
             public void onMenuCollapsed() {
 
+            }
+        });
+    }
+
+    @Override
+    public void bindImage(ImageView clickableImage, final Uri URI) {
+        clickableImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.setImagePressed(URI);
+            }
+        });
+    }
+
+    @Override
+    public void bindSpinner(final Spinner spinnerToBind, final AbstractFragment af, final Spinner changingSpinner) {
+        spinnerToBind.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Company c = dataHandler.getUser().getCompany(spinnerToBind.getAdapter().getItem(position).toString());
+                List<String> employeeNames = new ArrayList<String>();
+
+                for (Employee e : c.getEmployees()) {
+                    employeeNames.add(e.getName());
+                }
+
+                ArrayAdapter<String> employeeAdapter = af.buildArrayAdapter(employeeNames);
+                af.setArrayAdapter(employeeAdapter, changingSpinner);
+
+                //If we want a standard user, fix code below
+                //Employee e = getUser().getCompanies().get(position).getEmployee(mPurchase);
+                //mEmployees.setSelection(getEmployees().indexOf(e));
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                //Empty on purpose
             }
         });
     }
