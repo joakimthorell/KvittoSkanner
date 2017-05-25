@@ -133,13 +133,22 @@ public class CompanyController implements ICompany{
     }
 
     private void removeEmployee () {
-        Employee employee = getUser().getCompany(mCompanyFragment.getCompanyName()).getEmployee(mCompanyFragment.getEmployeeItem());
-        getUser().getCompany(mCompanyFragment.getCompanyName()).removeEmployee(employee);
+        if (getUser().getCompany(mCompanyFragment.getCompanyName()).getEmployees().size() == 1) {
+            Toast.makeText(mContext, "Hoppsan! Du kan inte radera företagets enda anställde. Inget har raderats", Toast.LENGTH_SHORT).show();
+        } else {
+            Employee employee = getUser().getCompany(mCompanyFragment.getCompanyName()).getEmployee(mCompanyFragment.getEmployeeItem());
+            getUser().getCompany(mCompanyFragment.getCompanyName()).removeEmployee(employee);
+        }
     }
 
     private void removeCard () {
-        Card card = getUser().getCompany(mCompanyFragment.getCompanyName()).getCard(Integer.parseInt(mCompanyFragment.getCardItem()));
-        getUser().getCompany(mCompanyFragment.getCompanyName()).removeCard(card);
+        if ((getUser().getCompany(mCompanyFragment.getCompanyName()).getCards().size() <= 0)) {
+            Toast.makeText(mContext, "Hoppsan! Du har inga sparade kort. Inget har raderats.", Toast.LENGTH_SHORT).show();
+        } else {
+            Card card = getUser().getCompany(mCompanyFragment.getCompanyName()).getCard(Integer.parseInt(mCompanyFragment.getCardItem()));
+            getUser().getCompany(mCompanyFragment.getCompanyName()).removeCard(card);
+        }
+
     }
 
     private User getUser () {
