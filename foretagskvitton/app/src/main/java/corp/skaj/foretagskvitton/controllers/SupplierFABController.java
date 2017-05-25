@@ -1,11 +1,7 @@
 package corp.skaj.foretagskvitton.controllers;
 
 import android.content.Context;
-import android.content.DialogInterface;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
@@ -16,10 +12,11 @@ import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.model.IData;
 import corp.skaj.foretagskvitton.model.Supplier;
 import corp.skaj.foretagskvitton.model.User;
+import corp.skaj.foretagskvitton.view.MultiDialog;
 import corp.skaj.foretagskvitton.view.SupplierListFragment;
 
-public class SupplierFABController extends FABController {
-    public static final String CREATE_NEW_ACTION = "create_new_action";
+public class SupplierFABController extends FABController
+    implements MultiDialog.Callback {
 
     public SupplierFABController(Context context) {
         super(context, null);
@@ -46,41 +43,30 @@ public class SupplierFABController extends FABController {
     }
 
     private void showAddNewDialog() {
-        AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
+        new MultiDialog(getContext(),
+                this,
+                MultiDialog.Type.CREATER,
+                getContext().getString(R.string.text_supplier))
+                .newDialog().show();
+    }
 
-        final EditText edittext = new EditText(getContext());
-        edittext.setSingleLine(true);
+    @Override
+    public void dialogData(String newData, String oldData) {
+        if (newData != null && newData.length() > 0) {
+            Supplier s = new Supplier(newData);
+            IData handler = ((IData) getContext().getApplicationContext());
+            User user = handler.getUser();
+            user.addSupplier(s);
+            handler.saveUser();
 
-        alert.setMessage(getContext().getString(R.string.main_controller_supplier_call));
-        alert.setTitle(getContext().getString(R.string.fab_controller_create_new));
-        alert.setView(edittext);
-        alert.setPositiveButton((getContext().getString(R.string.intro_add)), new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-                //What ever you want to do with the value
-                Editable supplierName = edittext.getText();
+            List<Supplier> suppliers = handler.getUser().getSuppliers();
+            AppCompatActivity activity = (AppCompatActivity) getContext();
+            SupplierListFragment fragment = (SupplierListFragment) activity.getSupportFragmentManager().findFragmentById(R.id.main_fragment_container);
+            fragment.getAdapter().setNewData(suppliers);
 
-                if(supplierName.toString().length() < 1){
-                    return;
-                }
-                IData handler = ((IData) getContext().getApplicationContext());
-                User user = handler.getUser();
-                Supplier supplier = new Supplier(supplierName.toString());
-                user.addSupplier(supplier);
-                handler.saveUser();
-                List<Supplier> suppliers = handler.getUser().getSuppliers();
-
-                AppCompatActivity activity = (AppCompatActivity) getContext();
-                SupplierListFragment fragment = (SupplierListFragment) activity.getSupportFragmentManager().findFragmentById(R.id.main_fragment_container);
-                fragment.getAdapter().setNewData(suppliers);
-
-                Toast.makeText(getContext(), "Dina ändringar är sparade " + supplier.getName(), Toast.LENGTH_SHORT).show();
-            }
-        });
-        alert.setNegativeButton(getContext().getString(R.string.main_controller_cancel), new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-                // nothing to do here
-            }
-        });
-        alert.show();
+            Toast.makeText(getContext(), (getContext().getString(R.string.text_created) + " " + newData), Toast.LENGTH_SHORT).show();
+            return;
+        }
+        Toast.makeText(getContext(), getContext().getString(R.string.text_not_saved), Toast.LENGTH_SHORT).show();
     }
 }

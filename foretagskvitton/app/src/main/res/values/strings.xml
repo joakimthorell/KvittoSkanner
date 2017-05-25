@@ -67,7 +67,7 @@
     <string name="no_image">Ingen bild</string>
     <string name="receipt_saved">Kvitto sparat</string>
     <string name="default_supplier">Default Supplier</string>
-    <string name="main_controller_supplier_call">Skriv grossist namn: </string>
+    <string name="main_controller_type_name">Skriv namn: </string>
     <string name="main_controller_edit">Redigera </string>
     <string name="main_controller_save">spara </string>
     <string name="main_controller_change_to">Ändrat till </string>
@@ -79,6 +79,13 @@
     <string name="changes_saved">Dina ändringar har sparats</string>
     <string name="invalid_input">Ogiltig inmatning</string>
     <string name="create_new_card">Var god lägg till kort</string>
+
+    <string name="text_supplier">Grossist</string>
+    <string name="text_company">Företag</string>
+    <string name="text_card">Kort</string>
+    <string name="text_employee">Anställd</string>
+    <string name="text_created">Skapat</string>
+    <string name="text_not_saved">Kunde inte spara</string>
 
 
 </resources>
