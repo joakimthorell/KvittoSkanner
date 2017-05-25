@@ -15,15 +15,15 @@ import corp.skaj.foretagskvitton.model.IData;
 import corp.skaj.foretagskvitton.model.Purchase;
 import corp.skaj.foretagskvitton.model.Supplier;
 import corp.skaj.foretagskvitton.model.User;
-import corp.skaj.foretagskvitton.view.ArchiveFragment;
+import corp.skaj.foretagskvitton.view.ReceiptFragment;
 import corp.skaj.foretagskvitton.view.FABCallback;
 
 public class ArchiveController implements FABCallback {
-    private ArchiveFragment fragment;
+    private ReceiptFragment fragment;
     private String purchaseId;
     private IData dataHandler;
 
-    public ArchiveController(IData dataHandler, String purId, ArchiveFragment fragment) {
+    public ArchiveController(IData dataHandler, String purId, ReceiptFragment fragment) {
         this.dataHandler = dataHandler;
         purchaseId = purId;
         this.fragment = fragment;
