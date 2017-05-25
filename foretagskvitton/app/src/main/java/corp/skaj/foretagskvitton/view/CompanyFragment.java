@@ -70,16 +70,16 @@ public class CompanyFragment extends AbstractFragment {
 
         mCompanyName.setText(companyName);
 
-        ArrayAdapter<String> employeeAdapter = buildArrayAdapter(getEmployees(companyName));
+        ArrayAdapter<String> employeeAdapter = buildArrayAdapter(view, getEmployees(companyName, null));
         setArrayAdapter(employeeAdapter, mEmployees);
 
-        ArrayAdapter<String> cardsAdapter = buildArrayAdapter(getCards(companyName));
+        ArrayAdapter<String> cardsAdapter = buildArrayAdapter(view, getCards(companyName));
         setArrayAdapter(cardsAdapter, mCards);
 
         mComment.setText(getComment(companyName));
     }
 
-    public void setListener (ICompany listener) {
+    public void setListener(ICompany listener) {
         mCompanyListener = listener;
     }
 
@@ -88,22 +88,22 @@ public class CompanyFragment extends AbstractFragment {
         return comments.size() == 0 ? "Ingen kommentar" : comments.get(0).getComment();
     }
 
-    public void updateEmployeeSpinner (String companyName) {
-        ArrayAdapter<String> adapter = buildArrayAdapter(getEmployees(companyName));
+    public void updateEmployeeSpinner(String companyName) {
+        ArrayAdapter<String> adapter = buildArrayAdapter(getView(), getEmployees(companyName, null));
         setArrayAdapter(adapter, mEmployees);
     }
 
-    public void updateCardSpinner (String companyName) {
-        ArrayAdapter<String> cardsAdapter = buildArrayAdapter(getCards(companyName));
+    public void updateCardSpinner(String companyName) {
+        ArrayAdapter<String> cardsAdapter = buildArrayAdapter(getView(), getCards(companyName));
         setArrayAdapter(cardsAdapter, mCards);
     }
 
-    public String getEmployeeItem () {
+    public String getEmployeeItem() {
         System.out.println("LETS DO THIS" + getCompanyName());
         return mEmployees.getSelectedItem().toString();
     }
 
-    public String getCardItem () {
+    public String getCardItem() {
         return mCards.getSelectedItem().toString();
     }
 
@@ -116,16 +116,7 @@ public class CompanyFragment extends AbstractFragment {
         return list;
     }
 
-    private List<String> getEmployees(String companyName) {
-        List<String> list = new ArrayList<>();
-        Company company = getUser().getCompany(companyName);
-        for (Employee e : company.getEmployees()) {
-            list.add(e.getName());
-        }
-        return list;
-    }
-
-    public String getCompanyName () {
+    public String getCompanyName() {
         return mCompanyName.getText().toString();
     }
 }
