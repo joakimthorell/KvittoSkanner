@@ -57,14 +57,8 @@
                         android:id="@+id/show_hotel"
                         android:title="@string/show_hotel" />
                     <item
-                        android:id="@+id/show_officeSupplies"
-                        android:title="@string/show_officeSupplies" />
-                    <item
                         android:id="@+id/show_food"
                         android:title="@string/show_food" />
-                    <item
-                        android:id="@+id/show_postage"
-                        android:title="@string/show_postage" />
                     <item
                         android:id="@+id/show_representation"
                         android:title="@string/show_representation" />
