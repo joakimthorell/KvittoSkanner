@@ -29,7 +29,7 @@ public abstract class ToolbarController<T> implements MaterialCab.Callback {
         selectedItems = new SparseArray<>();
     }
 
-    protected void setListener(BaseQuickAdapter<T, BaseViewHolder> adapter) {
+    public void setListener(BaseQuickAdapter<T, BaseViewHolder> adapter) {
         mAdapter = adapter;
         setListenerOnAdapter();
     }

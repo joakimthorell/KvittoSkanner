@@ -15,7 +15,7 @@ public interface IData {
 
     boolean initDefaultUser();
 
-    PurchaseList getPurchases(User user);
+    PurchaseList getPurchases();
 
     User getUser();
 
