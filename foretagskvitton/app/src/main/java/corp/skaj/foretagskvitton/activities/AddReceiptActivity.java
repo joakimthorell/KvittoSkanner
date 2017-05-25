@@ -67,7 +67,6 @@ public class AddReceiptActivity extends AbstractActivity {
     // This method catches taken image by camera.
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // TODO här vill vi börja async task
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             if (mImageAdress.length() > 0) {
                 Uri URI = Uri.fromFile(new File(mImageAdress));
@@ -117,7 +116,6 @@ public class AddReceiptActivity extends AbstractActivity {
             imageFile = createImageFile();
         } catch (IOException e) {
             System.out.println("Not able to create imageFile " + this.toString());
-            //TODO fix a popup here
         }
         Uri imageURI = FileProvider.getUriForFile(getApplicationContext()
                 , "corp.skaj.foretagskvitton.fileprovider"

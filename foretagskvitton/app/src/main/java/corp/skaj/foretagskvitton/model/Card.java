@@ -1,7 +1,8 @@
 package corp.skaj.foretagskvitton.model;
 
 /**
- * Holds information about the cardNum used for the purchase
+ * Holds last 4 digits of a business card, enabling identification
+ * of the company holding a specific card.
  */
 public class Card {
     private int cardNum;

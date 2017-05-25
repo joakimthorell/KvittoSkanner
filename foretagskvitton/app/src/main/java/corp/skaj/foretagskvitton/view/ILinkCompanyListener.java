@@ -7,4 +7,5 @@ public interface ILinkCompanyListener {
     void setRemoveEmployeeListener (Button button);
     void setEditCardListener (Button button);
     void setRemoveCardListener (Button button);
+    void setSaveCommentListener (Button button);
 }

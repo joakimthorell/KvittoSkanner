@@ -16,11 +16,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 
-public class DatePage extends TextPage {
-    public static SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
-    public static final String DATE_YEAR_KEY = "YEAR_KEY";
-    public static final String DATE_MONTH_KEY = "MONTH_KEY";
-    public static final String DATE_DAY_KEY = "DAY_KEY";
+public class DatePage extends TextPage implements IWizard {
     private boolean mDateFound;
 
     public DatePage(ModelCallbacks callbacks, String title) {
@@ -61,9 +57,9 @@ public class DatePage extends TextPage {
         int year = c.get(Calendar.YEAR);
         int month = c.get(Calendar.MONTH);
         int day = c.get(Calendar.DATE);
-        mData.putInt(DATE_YEAR_KEY, year);
-        mData.putInt(DATE_MONTH_KEY, month);
-        mData.putInt(DATE_DAY_KEY, day);
+        mData.putInt(DateFragment.DATE_YEAR_KEY, year);
+        mData.putInt(DateFragment.DATE_MONTH_KEY, month);
+        mData.putInt(DateFragment.DATE_DAY_KEY, day);
         mDateFound = true;
 
         return this;
@@ -71,9 +67,12 @@ public class DatePage extends TextPage {
 
     @Override
     public Fragment createFragment() {
-        return DateFragment.create(getKey());
+        DateFragment df = DateFragment.create(getKey());
+        df.setListener(this);
+        return df;
     }
 
+    @Override
     public boolean isDateFound() {
         return mDateFound;
     }

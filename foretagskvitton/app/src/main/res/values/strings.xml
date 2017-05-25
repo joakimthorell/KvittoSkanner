@@ -76,6 +76,9 @@
     <string name="fab_controller_add_supplier">Lagt till ny grossist</string>
     <string name="show_companies">Visa företag</string>
     <string name="show_employees">Visa anställda</string>
+    <string name="changes_saved">Dina ändringar har sparats</string>
+    <string name="invalid_input">Ogiltig inmatning</string>
+    <string name="create_new_card">Var god lägg till kort</string>
 
     <string name="text_supplier">Grossist</string>
     <string name="text_company">Företag</string>

@@ -1,7 +1,7 @@
 package corp.skaj.foretagskvitton.model;
 
 /**
- * This class holds information about the users supplier
+ * This class holds information about the users supplier: supplier name.
  */
 public class Supplier {
     private String name;
