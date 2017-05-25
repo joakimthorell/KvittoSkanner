@@ -69,11 +69,9 @@ public class ReceiptFragment extends AbstractFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
         FloatingActionsMenu button = (FloatingActionsMenu) view.findViewById(R.id.archive_receipt_savebutton);
         mFabListener.bindButton(button);
         onClick();
-
     }
 
     public void setImageListener(ArchiveListener listener) {
