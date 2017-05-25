@@ -27,8 +27,6 @@ import java.util.Locale;
 import corp.skaj.foretagskvitton.R;
 
 public class DateFragment extends Fragment {
-    public static SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
-
     public static final String DATE_YEAR_KEY = "YEAR_KEY";
     public static final String DATE_MONTH_KEY = "MONTH_KEY";
     public static final String DATE_DAY_KEY = "DAY_KEY";
@@ -96,6 +94,7 @@ public class DateFragment extends Fragment {
         mDatePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
                 Calendar newDate = Calendar.getInstance();
                 newDate.set(year, monthOfYear, dayOfMonth);
                 String formattedDate = dateFormatter.format(newDate.getTime());

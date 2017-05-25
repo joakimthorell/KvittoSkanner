@@ -3,10 +3,10 @@ package corp.skaj.foretagskvitton.services.textcollector;
 import java.util.List;
 
 class CardCollector extends AbstractCollector {
-    private final String MASTERCARD = "mastercard";
-    private final String VISA = "visa";
-    private final String KORTNUMMER = "kortnummer";
-    private final String KORT = "kort";
+    private static final String MASTERCARD = "mastercard";
+    private static final String VISA = "visa";
+    private static final String KORTNUMMER = "kortnummer";
+    private static final String KORT = "kort";
 
     public CardCollector() {
         //package private
@@ -58,11 +58,11 @@ class CardCollector extends AbstractCollector {
     }
 
     private String listToString(List<String> strings) {
-        String S = "";
+        StringBuilder sb = new StringBuilder();
         for (String s : strings) {
-            S += s;
+            sb.append(s);
         }
-        return S.replaceAll("\\s+", "");
+        return sb.toString().replaceAll("\\s+", "");
     }
 
     private String detachCard(String s) {

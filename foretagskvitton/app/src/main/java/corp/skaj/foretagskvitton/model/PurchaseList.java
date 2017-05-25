@@ -1,5 +1,6 @@
 package corp.skaj.foretagskvitton.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -10,7 +11,8 @@ import java.util.List;
  * for listing purchases.
  */
 public class PurchaseList extends ArrayList<Purchase> {
-    private User user;
+    private static final long serialVersionUID = -3456828208051593136L;
+    transient private User user;
 
     public PurchaseList(User user) {
         this.user = user;
@@ -34,7 +36,7 @@ public class PurchaseList extends ArrayList<Purchase> {
         PurchaseList purchases = new PurchaseList(user);
         for (Purchase p : this) {
             for (Product pr : p.getReceipt().getProducts()) {
-                if (pr.getCategory().equals(category)) {
+                if (pr.getCategory() == category) {
                     purchases.add(p);
                 }
             }
@@ -65,22 +67,17 @@ public class PurchaseList extends ArrayList<Purchase> {
         Collections.sort(this, new sortByPrice());
     }
 
-    private class sortByPrice implements Comparator<Purchase> {
+    private static class sortByPrice implements Comparator<Purchase>, Serializable {
 
         @Override
         public int compare(Purchase o1, Purchase o2) {
             double r1 = o1.getReceipt().getTotal();
             double r2 = o2.getReceipt().getTotal();
-            if (r1 > r2) {
-                return 1;
-            } else if (r1 == r2) {
-                return 0;
-            }
-            return -1;
+            return Double.compare(r1, r2);
         }
     }
 
-    private class sortByDate implements Comparator<Purchase> {
+    private static class sortByDate implements Comparator<Purchase>, Serializable {
 
         @Override
         public int compare(Purchase o1, Purchase o2) {

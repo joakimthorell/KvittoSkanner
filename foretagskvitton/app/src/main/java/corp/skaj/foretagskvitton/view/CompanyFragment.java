@@ -43,13 +43,6 @@ public class CompanyFragment extends AbstractFragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-        }
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         String companyName = getArguments().getString(COMPANY_BUNDLE);

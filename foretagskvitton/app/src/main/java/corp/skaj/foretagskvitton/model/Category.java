@@ -47,8 +47,4 @@ public enum Category {
         }
         return list;
     }
-
-    public boolean equals(Category category) {
-        return this.name().equals(category.name());
-    }
 }

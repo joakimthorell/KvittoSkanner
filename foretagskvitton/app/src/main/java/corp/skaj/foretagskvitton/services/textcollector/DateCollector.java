@@ -16,7 +16,7 @@ class DateCollector extends AbstractCollector {
         }
         for (int i = 0; i < strings.size(); i++) {
             String currentString = strings.get(i);
-            replaceLetters(currentString);
+            currentString = replaceLetters(currentString);
             if (currentString.length() < 4) {
                 continue;
             }

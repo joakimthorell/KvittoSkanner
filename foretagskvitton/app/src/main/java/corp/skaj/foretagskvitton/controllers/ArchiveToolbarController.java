@@ -3,6 +3,7 @@ package corp.skaj.foretagskvitton.controllers;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.afollestad.materialcab.MaterialCab;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -32,8 +33,12 @@ public class ArchiveToolbarController extends ToolbarController<Purchase>
         switch (item.getItemId()) {
             case R.id.action_remove:
                 removeSelectedItems();
+                return true;
+            case R.id.action_share:
+                return true;
+            default:
+                return false;
         }
-        return true;
     }
 
     @Override

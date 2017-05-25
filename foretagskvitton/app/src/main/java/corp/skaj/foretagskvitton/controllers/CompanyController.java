@@ -26,8 +26,8 @@ import corp.skaj.foretagskvitton.view.CompanyFragment;
 import corp.skaj.foretagskvitton.view.ILinkCompanyListener;
 
 public class CompanyController implements ILinkCompanyListener {
-    private final String mEditEmployee = "EDIT_EMPLOYEE";
-    private final String mEditCard = "EDIT_CARD";
+    private static final String mEditEmployee = "EDIT_EMPLOYEE";
+    private static final String mEditCard = "EDIT_CARD";
     private CompanyFragment mCompanyFragment;
     private IData mDataHandler;
     private Context mContext;

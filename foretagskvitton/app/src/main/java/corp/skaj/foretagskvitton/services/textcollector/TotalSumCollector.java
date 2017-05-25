@@ -28,7 +28,7 @@ class TotalSumCollector extends AbstractCollector {
         List<Double> doubles = new ArrayList<>();
         for (int i = 0; i < strings.size(); i++) {
             String s = strings.get(i).replace(",", ".");
-            replaceLetters(s);
+            s = replaceLetters(s);
             if (s.contains(".")) {
                 if (isDouble(s)) {
                     doubles.add(Double.parseDouble(s));
