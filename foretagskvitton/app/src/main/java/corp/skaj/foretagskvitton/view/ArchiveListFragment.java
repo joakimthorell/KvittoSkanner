@@ -130,7 +130,10 @@ public class ArchiveListFragment extends ListFragment{
             case R.id.show_food:
                 mAdapter.showCategory(Category.MAT);
                 return true;
-            case R.id.show_companies:
+            case R.id.show_other:
+                mAdapter.showCategory(Category.OTHER);
+                return true;
+
 
             default:
                 return false;
