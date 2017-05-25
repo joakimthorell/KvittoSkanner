@@ -104,7 +104,7 @@ public class ReceiptFragment extends AbstractFragment {
         mPrice.setSingleLine();
 
         //Category spinner
-        ArrayAdapter<String> categoryAdapter = buildArrayAdapter(view, Category.getCategories());
+        ArrayAdapter<String> categoryAdapter = buildArrayAdapter(Category.getCategories());
         setArrayAdapter(categoryAdapter, mCategory);
 
         String selectedCat = mPurchase.getReceipt().getProducts().get(0).getCategory().name();
@@ -112,7 +112,7 @@ public class ReceiptFragment extends AbstractFragment {
         mCategory.setSelection(positionCat);
 
         //Company spinner
-        ArrayAdapter<String> companyAdapter = buildArrayAdapter(view, getCompanies());
+        ArrayAdapter<String> companyAdapter = buildArrayAdapter(getCompanies());
         setArrayAdapter(companyAdapter, mCompany);
 
         Company c = user.getCompany(mPurchase);
@@ -122,7 +122,7 @@ public class ReceiptFragment extends AbstractFragment {
         mCompany.setSelection(positionCom);
 
         //Employee spinner
-        ArrayAdapter<String> employeeAdapter = buildArrayAdapter(view, getEmployees(null, mPurchase));
+        ArrayAdapter<String> employeeAdapter = buildArrayAdapter(getEmployees(null, mPurchase));
         setArrayAdapter(employeeAdapter, mEmployees);
         
         Employee e = c.getEmployee(mPurchase);
@@ -131,7 +131,7 @@ public class ReceiptFragment extends AbstractFragment {
         mEmployees.setSelection(positionEmp);
 
         //Supplier spinner
-        ArrayAdapter<String> supplierAdapter = buildArrayAdapter(view, getSuppliers());
+        ArrayAdapter<String> supplierAdapter = buildArrayAdapter(getSuppliers());
         setArrayAdapter(supplierAdapter, mSupplier);
         mSupplier.setSelection(mPurchase.getSupplier() == null ? getSuppliers().size() - 1 :
                 getSuppliers().indexOf(mPurchase.getSupplier()));
@@ -170,7 +170,7 @@ public class ReceiptFragment extends AbstractFragment {
                     employeeNames.add(e.getName());
                 }
 
-                ArrayAdapter<String> employeeAdapter = buildArrayAdapter(view, employeeNames);
+                ArrayAdapter<String> employeeAdapter = buildArrayAdapter(employeeNames);
                 setArrayAdapter(employeeAdapter, mEmployees);
 
                 //If we want a standard user, fix code below

@@ -21,7 +21,7 @@ public class CompanyFABController extends FABController {
             @Override
             public void onMenuExpanded() {
                 Toast.makeText(getContext(), "Should go to Create new company page", Toast.LENGTH_SHORT).show();
-                button.collapse(); // test to se if animation goes away, else remove this
+                button.collapse();
             }
 
             @Override

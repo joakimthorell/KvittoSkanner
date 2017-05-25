@@ -70,10 +70,10 @@ public class CompanyFragment extends AbstractFragment {
 
         mCompanyName.setText(companyName);
 
-        ArrayAdapter<String> employeeAdapter = buildArrayAdapter(view, getEmployees(companyName, null));
+        ArrayAdapter<String> employeeAdapter = buildArrayAdapter(getEmployees(companyName, null));
         setArrayAdapter(employeeAdapter, mEmployees);
 
-        ArrayAdapter<String> cardsAdapter = buildArrayAdapter(view, getCards(companyName));
+        ArrayAdapter<String> cardsAdapter = buildArrayAdapter(getCards(companyName));
         setArrayAdapter(cardsAdapter, mCards);
 
         mComment.setText(getComment(companyName));
@@ -89,12 +89,12 @@ public class CompanyFragment extends AbstractFragment {
     }
 
     public void updateEmployeeSpinner(String companyName) {
-        ArrayAdapter<String> adapter = buildArrayAdapter(getView(), getEmployees(companyName, null));
+        ArrayAdapter<String> adapter = buildArrayAdapter(getEmployees(companyName, null));
         setArrayAdapter(adapter, mEmployees);
     }
 
     public void updateCardSpinner(String companyName) {
-        ArrayAdapter<String> cardsAdapter = buildArrayAdapter(getView(), getCards(companyName));
+        ArrayAdapter<String> cardsAdapter = buildArrayAdapter(getCards(companyName));
         setArrayAdapter(cardsAdapter, mCards);
     }
 
