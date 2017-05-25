@@ -5,7 +5,12 @@ import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
+import android.text.Layout;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.AlignmentSpan;
 import android.view.View;
+import android.view.animation.Interpolator;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -133,8 +138,10 @@ public class CompanyController implements ICompany{
     }
 
     private void removeEmployee () {
+        Spannable centeredText = new SpannableString(mContext.getString(R.string.cant_delete_employee));
+        getTextCentered(centeredText, mContext.getString(R.string.cant_delete_employee));
         if (getUser().getCompany(mCompanyFragment.getCompanyName()).getEmployees().size() == 1) {
-            Toast.makeText(mContext, "Hoppsan! Du kan inte radera företagets enda anställde. Inget har raderats", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, centeredText , Toast.LENGTH_SHORT).show();
         } else {
             Employee employee = getUser().getCompany(mCompanyFragment.getCompanyName()).getEmployee(mCompanyFragment.getEmployeeItem());
             getUser().getCompany(mCompanyFragment.getCompanyName()).removeEmployee(employee);
@@ -142,19 +149,24 @@ public class CompanyController implements ICompany{
     }
 
     private void removeCard () {
+        Spannable centeredText = new SpannableString(mContext.getString(R.string.cant_delete_card));
+        getTextCentered(centeredText,mContext.getString(R.string.cant_delete_card));
         if ((getUser().getCompany(mCompanyFragment.getCompanyName()).getCards().size() <= 0)) {
-            Toast.makeText(mContext, "Hoppsan! Du har inga sparade kort. Inget har raderats.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, centeredText, Toast.LENGTH_SHORT).show();
         } else {
             Card card = getUser().getCompany(mCompanyFragment.getCompanyName()).getCard(Integer.parseInt(mCompanyFragment.getCardItem()));
             getUser().getCompany(mCompanyFragment.getCompanyName()).removeCard(card);
         }
-
     }
 
     private User getUser () {
         return mDataHandler.getUser();
     }
 
-
+    public void getTextCentered (Spannable centeredText, String text) {
+        centeredText.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER),
+                0, text.length() - 1,
+                Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+    }
 
 }
