@@ -27,8 +27,8 @@ public class CompanyFragment extends AbstractFragment {
     private Spinner mCards;
     private TextView mComment;
     private TextView mCompanyName;
-    private ILinkCompanyListener mCompanyListener;
-    private ILinkFABListener mFabController;
+    private ICompany mCompanyListener;
+    private IFAB mFabController;
 
     public CompanyFragment() {
         // Required empty public constructor
@@ -104,11 +104,11 @@ public class CompanyFragment extends AbstractFragment {
         mCompanyListener.setSaveCommentListener(mSaveComment);
     }
 
-    public void setListener(ILinkCompanyListener listener) {
+    public void setListener(ICompany listener) {
         mCompanyListener = listener;
     }
 
-    public void setFabController(ILinkFABListener fabController) {
+    public void setFabController(IFAB fabController) {
         mFabController = fabController;
     }
 

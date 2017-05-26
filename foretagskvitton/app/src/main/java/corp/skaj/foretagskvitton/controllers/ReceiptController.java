@@ -25,17 +25,17 @@ import corp.skaj.foretagskvitton.model.Purchase;
 import corp.skaj.foretagskvitton.model.Supplier;
 import corp.skaj.foretagskvitton.model.User;
 import corp.skaj.foretagskvitton.view.AbstractFragment;
-import corp.skaj.foretagskvitton.view.ILinkReceiptListener;
 import corp.skaj.foretagskvitton.view.IReceipt;
+import corp.skaj.foretagskvitton.view.IImage;
 import corp.skaj.foretagskvitton.view.ReceiptFragment;
 
-public class ReceiptController implements ILinkReceiptListener {
+public class ReceiptController implements IReceipt {
     private ReceiptFragment fragment;
     private String purchaseId;
     private IData dataHandler;
-    private IReceipt mListener;
+    private IImage mListener;
 
-    public ReceiptController(IData dataHandler, String purId, ReceiptFragment fragment, IReceipt listener) {
+    public ReceiptController(IData dataHandler, String purId, ReceiptFragment fragment, IImage listener) {
         this.dataHandler = dataHandler;
         purchaseId = purId;
         this.fragment = fragment;

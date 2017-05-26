@@ -19,7 +19,6 @@ public class MultiDialog {
         void dialogData(String newData, String oldData, Bundle extras);
     }
 
-
     private Context mContext;
     private Callback mCreater;
     private Type mTypeOfDialog;

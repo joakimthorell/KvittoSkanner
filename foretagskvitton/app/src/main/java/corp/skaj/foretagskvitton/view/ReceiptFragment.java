@@ -30,7 +30,7 @@ import corp.skaj.foretagskvitton.services.ReceiptScanner;
 
 public class ReceiptFragment extends AbstractFragment {
     public static final String ARCHIVE_BUNDLE = "PURCHASE_ID";
-    private ILinkReceiptListener mLinkReceipt;
+    private IReceipt mLinkReceipt;
     private TextView mPrice;
     private TextView mTax;
     private TextView mDate;
@@ -75,7 +75,7 @@ public class ReceiptFragment extends AbstractFragment {
 
     }
 
-    public void setBinder(ILinkReceiptListener binder) {
+    public void setBinder(IReceipt binder) {
         mLinkReceipt = binder;
     }
 

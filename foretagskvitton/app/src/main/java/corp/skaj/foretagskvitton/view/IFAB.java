@@ -2,6 +2,6 @@ package corp.skaj.foretagskvitton.view;
 
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
 
-public interface ILinkFABListener {
+public interface IFAB {
     void bindButton(FloatingActionsMenu button);
 }

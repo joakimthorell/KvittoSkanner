@@ -10,11 +10,11 @@ import android.view.MenuItem;
 
 import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.controllers.ReceiptController;
-import corp.skaj.foretagskvitton.view.IReceipt;
+import corp.skaj.foretagskvitton.view.IImage;
 import corp.skaj.foretagskvitton.view.ImageFragment;
 import corp.skaj.foretagskvitton.view.ReceiptFragment;
 
-public class ReceiptActivity extends AbstractActivity implements IReceipt {
+public class ReceiptActivity extends AbstractActivity implements IImage {
 
     private boolean isShowingImage;
     private String mPurchaseId;

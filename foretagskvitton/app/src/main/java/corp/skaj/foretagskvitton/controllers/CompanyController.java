@@ -23,9 +23,9 @@ import corp.skaj.foretagskvitton.model.Employee;
 import corp.skaj.foretagskvitton.model.IData;
 import corp.skaj.foretagskvitton.model.User;
 import corp.skaj.foretagskvitton.view.CompanyFragment;
-import corp.skaj.foretagskvitton.view.ILinkCompanyListener;
+import corp.skaj.foretagskvitton.view.ICompany;
 
-public class CompanyController implements ILinkCompanyListener {
+public class CompanyController implements ICompany {
     private static final String mEditEmployee = "EDIT_EMPLOYEE";
     private static final String mEditCard = "EDIT_CARD";
     private CompanyFragment mCompanyFragment;

@@ -39,7 +39,7 @@ public class ArchiveListFragment extends ListFragment {
         return fragment;
     }
 
-    public static ArchiveListFragment create(ArchiveAdapter adapter, ILinkFABListener listener, IArchive binder) {
+    public static ArchiveListFragment create(ArchiveAdapter adapter, IFAB listener, IArchive binder) {
         ArchiveListFragment fragment = create(adapter, binder);
         fragment.setListener(listener);
         return fragment;

@@ -25,12 +25,12 @@ import corp.skaj.foretagskvitton.R;
  */
 public abstract class ListFragment extends AbstractFragment {
     private RecyclerView mRecyclerView;
-    private ILinkFABListener mObserver;
+    private IFAB mObserver;
 
     protected ListFragment() {
     }
 
-    protected ListFragment setListener(ILinkFABListener observer) {
+    protected ListFragment setListener(IFAB observer) {
         mObserver = observer;
         return this;
     }
