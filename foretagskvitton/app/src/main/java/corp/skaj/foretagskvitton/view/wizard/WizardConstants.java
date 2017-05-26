@@ -9,6 +9,6 @@ public class WizardConstants {
     public static final String VAT = "MOMS";
     public static final String COMMENT = "KOMMENTAR";
     public static final String CATEGORY = "KATEGORI";
-    public static final String PRIVATE = "PRIVATE";
+    public static final String PRIVATE = "PRIVAT";
 
 }
