@@ -19,12 +19,15 @@ import corp.skaj.foretagskvitton.view.IArchive;
 public class ArchiveToolbarController extends ToolbarController<Purchase>
     implements IArchive {
 
-    public ArchiveToolbarController(Context context, BaseQuickAdapter adapter) {
+    private ArchiveAdapter mAdapter;
+
+    public ArchiveToolbarController(Context context, ArchiveAdapter adapter) {
         super(context,
                 new MaterialCab((AppCompatActivity) context, R.id.cab_stub)
                         .setBackgroundColorRes(R.color.colorPrimary)
                         .setMenu(R.menu.cab_menu));
 
+        mAdapter = adapter;
         setListener(adapter);
     }
 
@@ -49,22 +52,22 @@ public class ArchiveToolbarController extends ToolbarController<Purchase>
     }
 
     @Override
-    public void bindEmployeeMenuItem(MenuItem item, final ArchiveAdapter adapter, final Employee employee) {
+    public void bindEmployeeMenuItem(MenuItem item, final Employee employee) {
         item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                adapter.showEmployee(employee);
+                mAdapter.showEmployee(employee);
                 return true;
             }
         });
     }
 
     @Override
-    public void bindCompanyMenuItem(MenuItem item,final ArchiveAdapter adapter, final Company company) {
+    public void bindCompanyMenuItem(MenuItem item, final Company company) {
         item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                adapter.showCompany(company);
+                mAdapter.showCompany(company);
                 return true;
             }
         });

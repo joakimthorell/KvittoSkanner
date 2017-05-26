@@ -64,10 +64,10 @@ public class ArchiveListFragment extends ListFragment {
         List<Company> companies = user.getCompanies();
         for (Company c : companies) {
             String companyName = c.getName();
-            mArchiveBinder.bindCompanyMenuItem(createCompanyItem(subMenu, companyName), getAdapter(), c);
+            mArchiveBinder.bindCompanyMenuItem(createCompanyItem(subMenu, companyName), c);
             for (Employee e : c.getEmployees()) {
                 String employeeName = e.getName() + " - " + c.getName();
-                mArchiveBinder.bindEmployeeMenuItem(createEmployeeItem(subMenu, employeeName), getAdapter(), e);
+                mArchiveBinder.bindEmployeeMenuItem(createEmployeeItem(subMenu, employeeName), e);
             }
         }
     }

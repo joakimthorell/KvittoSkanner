@@ -12,9 +12,11 @@ import com.roughike.bottombar.BottomBar;
 import java.util.List;
 
 import corp.skaj.foretagskvitton.R;
+import corp.skaj.foretagskvitton.controllers.ArchiveListFABController;
 import corp.skaj.foretagskvitton.controllers.IActivity;
 import corp.skaj.foretagskvitton.controllers.MainController;
 import corp.skaj.foretagskvitton.model.Company;
+import corp.skaj.foretagskvitton.model.Purchase;
 import corp.skaj.foretagskvitton.model.PurchaseList;
 import corp.skaj.foretagskvitton.model.Supplier;
 import corp.skaj.foretagskvitton.model.User;
@@ -54,18 +56,12 @@ public class MainActivity extends AbstractActivity
 
         String action = getIntent().getAction();
 
-        if (CompanyActivity.FROM_COMPANY_ACTIVITY.equals(action)) {
-            if (mController.setSelectedTab(R.id.action_business)) {
-                return;
-            }
-        }
-
         buildArchiveListFragment();
     }
 
     @Override
     public void buildCompanyFragment() {
-        CompanyListFragment fragment = ListFragmentFactory.createCompanyList(this, getCompanies());
+        CompanyListFragment fragment = ListFragmentFactory.createCompanyList(this, getCompanies(), this);
         mController.setCompanyAdapterListener(fragment.getAdapter(), CompanyActivity.class, COMPANY_KEY);
         replaceFragment(fragment);
     }
@@ -82,11 +78,6 @@ public class MainActivity extends AbstractActivity
         SupplierListFragment fragment = ListFragmentFactory.createSupplierList(this, getSuppliers());
         mController.setSupplierAdapterListener(fragment.getAdapter(), SUPPLIER_KEY);
         replaceFragment(fragment);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // only coming back from CompanyActivity matters, else we should just show archiveList
     }
 
     @Override
@@ -115,7 +106,7 @@ public class MainActivity extends AbstractActivity
         mFragmentManger = getSupportFragmentManager();
         boolean fragmentPopped = mFragmentManger.popBackStackImmediate (backStateName, 0);
 
-        if (!fragmentPopped){ //fragment not in back stack, create it.
+        if (!fragmentPopped){ //fragment not in back stack, set it it.
             FragmentTransaction ft = mFragmentManger.beginTransaction();
             ft.replace(R.id.main_fragment_container, fragment);
             ft.addToBackStack(backStateName);
@@ -133,5 +124,10 @@ public class MainActivity extends AbstractActivity
         intent.setAction(action);
         intent.putExtra(key, data);
         startActivityForResult(intent, requestCode);
+    }
+
+    @Override
+    public void reloadUI(Fragment fragment) {
+
     }
 }

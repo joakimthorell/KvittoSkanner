@@ -7,6 +7,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 
 import java.util.Collections;
+import java.util.List;
 
 import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.model.Category;
@@ -28,7 +29,7 @@ public class ArchiveAdapter extends BaseQuickAdapter<Purchase, BaseViewHolder> {
     @Override
     protected void convert(BaseViewHolder helper, Purchase item) {
         User user = dataHandler.getUser();
-        String companyName = user.getCompany(item).getName();
+        String companyName = user.getCompany(item) == null ? null : user.getCompany(item).getName();
         Category category = item.getReceipt().getProducts().get(0).getCategory();
         int nComments = item.getComments().size();
         double total = item.getReceipt().getTotal();
