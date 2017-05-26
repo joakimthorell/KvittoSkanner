@@ -39,7 +39,7 @@ public class WizardView extends AbstractWizardModel implements ModelCallbacks {
     protected PageList onNewRootPageList() {
         IData dataHandler = (IData)mContext.getApplicationContext();
         User user = dataHandler.getUser();
-        List<String> strings = (List<String>) dataHandler.readData("mStrings", List.class);
+        List<String> strings = (List<String>) dataHandler.readData(IData.COLLECTED_STRINGS_KEY, List.class);
         mPageBuilder = new WizardPageBuilder(user, this, strings);
         return mPageBuilder.getPages();
     }
