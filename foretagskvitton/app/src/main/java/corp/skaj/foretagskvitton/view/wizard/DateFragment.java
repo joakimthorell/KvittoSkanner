@@ -68,7 +68,7 @@ public class DateFragment extends Fragment {
     public void onAttach(Context activity) {
         super.onAttach(activity);
         if (!(activity instanceof PageFragmentCallbacks)) {
-            throw new ClassCastException("Activity must implement PageFragmentCallbacks");
+            throw new ClassCastException(getContext().getString(R.string.class_cast_excep));
         }
         mCallbacks = (PageFragmentCallbacks) activity;
     }

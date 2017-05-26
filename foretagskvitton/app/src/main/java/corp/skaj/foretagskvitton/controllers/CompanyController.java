@@ -97,13 +97,13 @@ public class CompanyController implements ICompany {
         edittext.setSingleLine(true);
 
         if (KEY.equals(mEditEmployee)) {
-            alert.setMessage("Skriv den anställdes namn: ");
+            alert.setMessage(R.string.employee_name);
         } else {
-            alert.setMessage("Skriv sista 4 siffrorna på företagskortet: ");
+            alert.setMessage(R.string.card_number);
         }
-        alert.setTitle("Editera");
+        alert.setTitle(R.string.edit);
         alert.setView(edittext);
-        alert.setPositiveButton("Lägg till", new DialogInterface.OnClickListener() {
+        alert.setPositiveButton(R.string.intro_add, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 //What ever you want to do with the value
                 Editable editedInfo = edittext.getText();
@@ -122,7 +122,7 @@ public class CompanyController implements ICompany {
                 }
             }
         });
-        alert.setNegativeButton("Avbryt", new DialogInterface.OnClickListener() {
+        alert.setNegativeButton(R.string.exit, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 // nothing to do here
             }

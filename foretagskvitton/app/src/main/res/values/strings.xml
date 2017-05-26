@@ -44,7 +44,6 @@
     <string name="show_all">Visa alla</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="archive_save">Sparat</string>
     <string name="action_remove">Ta bort</string>
     <string name="action_share">Dela</string>
@@ -52,7 +51,7 @@
     <string name="intro_welcometext">Med denna applikation kan du på ett enkelt sätt kan bokföra dina kvitton.</string>
     <string name="intro_archive">Arkiv</string>
     <string name="intro_archivetext">Under arkiv kan du hantera alla dina kvitton.
-        Du sortera dem efter pris och datum. Du har möjlighet att lägga till ett nytt kvitto, redigera ett befintligt eller radera ett kvitto helt. </string>
+        Du kan sortera dem efter pris och datum. Du har möjlighet att lägga till ett nytt kvitto, redigera ett befintligt eller radera ett kvitto helt. </string>
     <string name="intro_company">Företag</string>
     <string name="intro_companytext">Under företag kan du hantera alla dina företag. Du kan lägga till ett nytt företag,
         redigera ett befintligt eller radera ett företag helt.
@@ -69,7 +68,7 @@
     <string name="default_supplier">Default Supplier</string>
     <string name="main_controller_type_name">Skriv namn: </string>
     <string name="main_controller_edit">Redigera </string>
-    <string name="main_controller_save">spara </string>
+    <string name="main_controller_save">Spara </string>
     <string name="main_controller_change_to">Ändrat till </string>
     <string name="main_controller_cancel">Avbryt </string>
     <string name="fab_controller_create_new">Skapa ny</string>
@@ -86,6 +85,13 @@
     <string name="text_employee">Anställd</string>
     <string name="text_created">Skapat</string>
     <string name="text_not_saved">Kunde inte spara</string>
+    <string name="employee_name">Skriv den anställdes namn:</string>
+    <string name="card_number">Skriv sista 4 siffrorna på företagskortet:</string>
+    <string name="edit">Editera</string>
+    <string name="exit">Avbryt</string>
+    <string name="class_cast_excep">Activity must implement PageFragmentCallbacks</string>
+    <string name="no_supplier">Ingen grossist</string>
+    <string name="no_card">Inget kort</string>
 
 
 </resources>

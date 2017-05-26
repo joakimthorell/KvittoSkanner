@@ -77,7 +77,7 @@ public class CompanyFragment extends AbstractFragment {
         List<String> cards = getCards(companyName);
         ArrayAdapter<String> cardsAdapter;
         if (cards.size() == 0) {
-            cardsAdapter = buildArrayAdapter(new ArrayList<String>(Arrays.asList("Ingen kort")));
+            cardsAdapter = buildArrayAdapter(new ArrayList<String>(Arrays.asList(getContext().getString(R.string.no_card))));
         } else {
             cardsAdapter = buildArrayAdapter(getCards(companyName));
         }

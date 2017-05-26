@@ -1,5 +1,6 @@
 package corp.skaj.foretagskvitton.view;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -180,7 +181,7 @@ public class ReceiptFragment extends AbstractFragment {
         for (Supplier s : getUser().getSuppliers()) {
             suppliersNames.add(s.getName());
         }
-        suppliersNames.add("Ingen grossist");
+        suppliersNames.add(getContext().getString(R.string.no_supplier));
         return suppliersNames;
     }
 
@@ -206,7 +207,7 @@ public class ReceiptFragment extends AbstractFragment {
     }
 
     public String getSupplier() {
-        return mSupplier.getSelectedItem().toString().equals("Ingen grossist") ? null :
+        return mSupplier.getSelectedItem().toString().equals(R.string.no_supplier) ? null :
                 mSupplier.getSelectedItem().toString();
     }
 
