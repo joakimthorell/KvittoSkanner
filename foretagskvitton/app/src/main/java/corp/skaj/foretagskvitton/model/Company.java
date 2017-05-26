@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Holds company information: company name, employees, cards and comments.
+ * This class holds information about the company.
  */
 public class Company {
     private String companyName;

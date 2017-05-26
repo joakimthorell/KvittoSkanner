@@ -20,16 +20,16 @@ import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.controllers.ArchiveListFABController;
 import corp.skaj.foretagskvitton.model.IData;
 import corp.skaj.foretagskvitton.services.FileHandler;
-import corp.skaj.foretagskvitton.services.IWizard;
+import corp.skaj.foretagskvitton.services.IFileHandler;
 import corp.skaj.foretagskvitton.services.ReceiptScanner;
-import corp.skaj.foretagskvitton.services.textcollector.TextCollector;
 
-public class AddReceiptActivity extends AbstractActivity implements IWizard {
+public class AddReceiptActivity extends AbstractActivity implements IFileHandler {
     private static final int REQUEST_IMAGE_CAPTURE = 31415;
     private static final int REQUEST_IMAGE_CHOOSEN = 1313;
     private static final int REQUEST_WIZARD = 1337;
-    private String mImageAdress;
+
     private FileHandler mFileHandler;
+    private String mImageAdress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +50,7 @@ public class AddReceiptActivity extends AbstractActivity implements IWizard {
                 dispatchChoosePictureIntent();
                 break;
             case ArchiveListFABController.NO_IMAGE_ACTION:
-                startWizard(null);
+                onReadResult(null);
                 break;
             case Intent.ACTION_SEND:
                 onActionSend();
@@ -63,7 +63,7 @@ public class AddReceiptActivity extends AbstractActivity implements IWizard {
     private void onActionSend() {
         if (getIntent().getType().startsWith("image/")) {
             Uri uri = getIntent().getParcelableExtra(Intent.EXTRA_STREAM);
-            mFileHandler.readGallerImage(uri);
+            mFileHandler.readGalleryImage(uri);
         }
     }
 
@@ -74,11 +74,11 @@ public class AddReceiptActivity extends AbstractActivity implements IWizard {
             if (mImageAdress.length() > 0) {
                 Uri URI = Uri.fromFile(new File(mImageAdress));
                 mImageAdress = "";
-                startWizard(URI);
+                onReadResult(URI);
             }
         } else if (requestCode == REQUEST_IMAGE_CHOOSEN && resultCode == RESULT_OK) {
             Uri uri = data.getData();
-            mFileHandler.readGallerImage(uri);
+            mFileHandler.readGalleryImage(uri);
         } else if (requestCode == REQUEST_WIZARD) {
             setResult(RESULT_OK);
             finish(); // result does not matter from wizard at this point
@@ -90,7 +90,7 @@ public class AddReceiptActivity extends AbstractActivity implements IWizard {
 
     // This method starts wizard guide for adding new receipt by taking an image with camera.
     @Override
-    public void startWizard(Uri URI) {
+    public void onReadResult(Uri URI) {
         ProgressBar progressBar = (ProgressBar) findViewById(R.id.spin_kit);
         FadingCircle circle = new FadingCircle();
         progressBar.setIndeterminateDrawable(circle);

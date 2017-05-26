@@ -13,12 +13,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class FileHandler {
-    private IWizard mWizard;
+    private IFileHandler mFileHandler;
     private Context mContext;
     private String mImageAddress;
 
-    public FileHandler(IWizard fileHandler, Context context) {
-        mWizard = fileHandler;
+    public FileHandler(IFileHandler wizard, Context context) {
+        mFileHandler = wizard;
         mContext = context;
     }
 
@@ -41,7 +41,7 @@ public class FileHandler {
         // Create image file
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = "JPEG_" + timeStamp + "_";
-        File storageDir = mWizard.getExternalFileDir();
+        File storageDir = mFileHandler.getExternalFileDir();
         File image = File.createTempFile(
                 imageFileName,  /* prefix */
                 ".jpg",         /* suffix */
@@ -49,19 +49,19 @@ public class FileHandler {
         );
         // Save a file: path for use with ACTION_VIEW intents
         mImageAddress = image.getAbsolutePath();
-        mWizard.updateImageAddress(mImageAddress);
+        mFileHandler.updateImageAddress(mImageAddress);
         return image;
     }
 
-    public void readGallerImage(Uri addressToGallery) {
+    public void readGalleryImage(Uri addressToGallery) {
         setupImageFolder();
         File newFile = new File(mImageAddress);
         Bitmap bmp;
         try {
-            bmp = ReceiptScanner.createImageFromURI(mContext, addressToGallery);
+            bmp = ImageBuilder.createImageFromURI(mContext, addressToGallery);
         } catch (IOException ioe) {
             ioe.printStackTrace();
-            mWizard.startWizard(null);
+            mFileHandler.onReadResult(null);
             return;
         }
         CopyImageTask task = new CopyImageTask(newFile, bmp);
@@ -107,15 +107,15 @@ public class FileHandler {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            mWizard.initProgressBar();
+            mFileHandler.initProgressBar();
         }
 
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
             Uri addressToNewFile = Uri.fromFile(copyTo);
-            mWizard.updateImageAddress("");
-            mWizard.startWizard(addressToNewFile);
+            mFileHandler.updateImageAddress("");
+            mFileHandler.onReadResult(addressToNewFile);
         }
 
         @Override

@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- * Holds purchase information: type of purchase, possible supplier, comment
- * and purchase id for identification.
+ * This class holds information of the type of purchase, possible supplier,
+ * comments and purchase id for identification.
  */
 public class Purchase {
 

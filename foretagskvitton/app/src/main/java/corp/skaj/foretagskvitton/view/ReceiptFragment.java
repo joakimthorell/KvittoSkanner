@@ -26,6 +26,7 @@ import corp.skaj.foretagskvitton.model.Employee;
 import corp.skaj.foretagskvitton.model.Purchase;
 import corp.skaj.foretagskvitton.model.Supplier;
 import corp.skaj.foretagskvitton.model.User;
+import corp.skaj.foretagskvitton.services.ImageBuilder;
 import corp.skaj.foretagskvitton.services.ReceiptScanner;
 
 public class ReceiptFragment extends AbstractFragment {
@@ -132,14 +133,14 @@ public class ReceiptFragment extends AbstractFragment {
                 getSuppliers().indexOf(mPurchase.getSupplier().getName()));
 
 
-        mTax.setText(String.valueOf(mPurchase.getReceipt().getProducts().get(0).getTax()) + " %");
+        mTax.setText(String.valueOf(mPurchase.getReceipt().getProducts().get(0).getVat()) + " %");
 
         mPurchaseType.setText(String.valueOf(mPurchase.getPurchaseType().name()));
 
         mComment.setText(mPurchase.getComments().size() > 0 ? mPurchase.getComments().get(0).getComment() : null);
 
         try {
-            Bitmap bmp = ReceiptScanner.createImageFromURI(getContext(), Uri.parse(mPurchase.getReceipt().getPictureAdress()));
+            Bitmap bmp = ImageBuilder.createImageFromURI(getContext(), Uri.parse(mPurchase.getReceipt().getPictureAdress()));
             mMiniImage.setImageBitmap(bmp);
             mLinkReceipt.bindImage(mMiniImage, Uri.parse(mPurchase.getReceipt().getPictureAdress()));
         } catch (Exception exception) {
