@@ -4,21 +4,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Holds information about the purchased item
+ * This class holds information about the purchased item.
  */
 public class Product {
-    public static final String ALL_PRODUCTS = "ALL_PRODUCTS";
+    public static final String ALL_PRODUCTS = "all_products";// Registers a single product for a Receipt.
     private List<Comment> comments;
     private Category category;
     private String name;
     private double price;
-    private double tax;
+    private double vat;
 
-    public Product(String name, Category category, double price, double tax) {
+    public Product(String name, Category category, double price, double vat) {
         this.name = name;
         this.category = category;
         this.price = price;
-        this.tax = tax;
+        this.vat = vat;
         comments = new ArrayList<>();
     }
 
@@ -38,8 +38,8 @@ public class Product {
         this.price = price;
     }
 
-    public void setTax(double tax) {
-        this.tax = tax;
+    public void setTax(double vat) {
+        this.vat = vat;
     }
 
     public String getName() {
@@ -54,8 +54,8 @@ public class Product {
         return price;
     }
 
-    public double getTax() {
-        return tax;
+    public double getVat() {
+        return vat;
     }
 
     public List<Comment> getComments() {

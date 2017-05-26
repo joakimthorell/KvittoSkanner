@@ -62,7 +62,7 @@ public class AddReceiptActivity extends AbstractActivity implements IWizard {
     private void onActionSend() {
         if (getIntent().getType().startsWith("image/")) {
             Uri uri = getIntent().getParcelableExtra(Intent.EXTRA_STREAM);
-            mFileHandler.readGallerImage(uri);
+            mFileHandler.readGalleryImage(uri);
         }
     }
 
@@ -78,7 +78,7 @@ public class AddReceiptActivity extends AbstractActivity implements IWizard {
             }
         } else if (requestCode == REQUEST_IMAGE_CHOOSEN && resultCode == RESULT_OK) {
             Uri uri = data.getData();
-            mFileHandler.readGallerImage(uri);
+            mFileHandler.readGalleryImage(uri);
             return;
         } else {
             System.out.println("No picture was found");

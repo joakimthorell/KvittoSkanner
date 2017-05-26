@@ -5,7 +5,7 @@ import java.util.Calendar;
 import java.util.List;
 
 /**
- * This class holds products, date and the total amount of a receipt which has been collected
+ * This class holds all products, date and total sum of a purchase and an image of the receipt.
  */
 public class Receipt {
     private List<Product> products;

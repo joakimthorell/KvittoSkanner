@@ -25,7 +25,7 @@ public class ReceiptScanner {
     }
 
     public static List<String> collectStringsFromURI(Context context, Uri uri) throws IOException {
-        Bitmap bmp = createImageFromURI(context, uri);
+        Bitmap bmp = ImageBuilder.createImageFromURI(context, uri);
         SparseArray<TextBlock> textBlocks = getTextBlocksFromImage(context, bmp);
         if (textBlocks == null) {
             // This will only happend if no text found in image
@@ -33,14 +33,6 @@ public class ReceiptScanner {
             return null;
         }
         return buildListOfStrings(textBlocks);
-    }
-
-    public static Bitmap createImageFromURI(Context context, Uri uri) throws IOException {
-        if (uri == null) {
-            throw new NullPointerException("URI is null");
-        }
-        Bitmap bmp = MediaStore.Images.Media.getBitmap(context.getContentResolver(), uri);
-        return bmp;
     }
 
     private static SparseArray<TextBlock> getTextBlocksFromImage(Context context, Bitmap bmp) {

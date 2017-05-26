@@ -53,12 +53,12 @@ public class FileHandler {
         return image;
     }
 
-    public void readGallerImage(Uri addressToGallery) {
+    public void readGalleryImage(Uri addressToGallery) {
         setupImageFolder();
         File newFile = new File(mImageAddress);
         Bitmap bmp;
         try {
-            bmp = ReceiptScanner.createImageFromURI(mContext, addressToGallery);
+            bmp = ImageBuilder.createImageFromURI(mContext, addressToGallery);
         } catch (IOException ioe) {
             ioe.printStackTrace();
             mWizard.startWizard(null);
