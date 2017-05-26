@@ -94,9 +94,8 @@ public class ReceiptController implements IReceipt {
                 updateReceiptData();
                 button.collapse();
                 Toast.makeText(fragment.getContext(), fragment.getContext().getString(R.string.archive_save), Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(fragment.getContext(), MainActivity.class);
-                fragment.getContext().startActivity(intent);
             }
+
             @Override
             public void onMenuCollapsed() {
 

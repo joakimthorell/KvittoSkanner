@@ -1,12 +1,18 @@
 package corp.skaj.foretagskvitton.controllers;
 
-public interface IActivity {
+import android.support.v7.app.AppCompatActivity;
 
-    void nextActivity(Class<?> c, String key, String data);
+public interface IActivity {
 
     void buildArchiveListFragment();
 
     void buildCompanyFragment();
 
     void buildSupplierFragment();
+
+    void startNewActivityForResult(Class<?> nextActivity,
+                                   int requestCode,
+                                   String action,
+                                   String data,
+                                   String key);
 }

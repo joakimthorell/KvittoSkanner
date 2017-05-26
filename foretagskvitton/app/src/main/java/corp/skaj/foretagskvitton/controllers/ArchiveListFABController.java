@@ -20,8 +20,11 @@ import corp.skaj.foretagskvitton.model.Product;
 import corp.skaj.foretagskvitton.model.Purchase;
 import corp.skaj.foretagskvitton.model.Receipt;
 import corp.skaj.foretagskvitton.view.ArchiveListFragment;
+import corp.skaj.foretagskvitton.view.IArchive;
 
 public class ArchiveListFABController extends FABController {
+
+    public static final int REQUEST_WIZARD = 9873;
 
     public static final String CAMERA_ACTION = "time_to_take_picture";
     public static final String GALLERY_ACTION = "collect_image_from_gallery";
@@ -31,9 +34,13 @@ public class ArchiveListFABController extends FABController {
     private Drawable mGalleryDraw;
     private Drawable mNoImageDraw;
 
+    private IActivity mActivity;
+
     public ArchiveListFABController(Context context,
-                                    Class<?> nextActivity) {
+                                    Class<?> nextActivity,
+                                    IActivity activity) {
         super(context, nextActivity);
+        mActivity = activity;
 
         mCameraDraw = context.getDrawable(R.drawable.ic_camera);
         mGalleryDraw = context.getDrawable(R.drawable.ic_image);
@@ -52,9 +59,7 @@ public class ArchiveListFABController extends FABController {
         camera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), getNextActivity());
-                intent.setAction(CAMERA_ACTION);
-                getContext().startActivity(intent);
+                startNewActivity(CAMERA_ACTION);
             }
         });
         button.addButton(camera);
@@ -65,9 +70,7 @@ public class ArchiveListFABController extends FABController {
         gallery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), getNextActivity());
-                intent.setAction(GALLERY_ACTION);
-                getContext().startActivity(intent);
+                startNewActivity(GALLERY_ACTION);
             }
         });
         button.addButton(gallery);
@@ -78,9 +81,7 @@ public class ArchiveListFABController extends FABController {
         noImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), getNextActivity());
-                intent.setAction(NO_IMAGE_ACTION);
-                getContext().startActivity(intent);
+                startNewActivity(NO_IMAGE_ACTION);
             }
         });
         button.addButton(noImage);
@@ -99,7 +100,6 @@ public class ArchiveListFABController extends FABController {
         });
         button.addButton(demoButton);
     }
-
 
     private void createNewReceipt() {
         IData handler = (IData) getContext().getApplicationContext();
@@ -123,5 +123,9 @@ public class ArchiveListFABController extends FABController {
         Random rand = new Random();
         Category c = Category.valueOf(list.get(rand.nextInt(list.size())));
         return c;
+    }
+
+    private void startNewActivity(String action) {
+        mActivity.startNewActivityForResult(getNextActivity(), REQUEST_WIZARD, action, null, null);
     }
 }

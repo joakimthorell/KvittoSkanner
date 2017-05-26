@@ -82,8 +82,7 @@ public class ReceiptActivity extends AbstractActivity implements IImage {
             changeFragment(createArchiveFragment());
             return true;
         }
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+        finish();
         return true;
     }
 }

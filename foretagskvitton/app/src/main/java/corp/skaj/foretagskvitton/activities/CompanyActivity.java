@@ -49,9 +49,7 @@ public class CompanyActivity extends AbstractActivity {
     }
 
     private boolean goBack() {
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.setAction(FROM_COMPANY_ACTIVITY);
-        startActivity(intent);
+        finish();
         return true;
     }
 }

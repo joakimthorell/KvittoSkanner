@@ -27,6 +27,7 @@ import corp.skaj.foretagskvitton.services.textcollector.TextCollector;
 public class AddReceiptActivity extends AbstractActivity implements IWizard {
     private static final int REQUEST_IMAGE_CAPTURE = 31415;
     private static final int REQUEST_IMAGE_CHOOSEN = 1313;
+    private static final int REQUEST_WIZARD = 1337;
     private String mImageAdress;
     private FileHandler mFileHandler;
 
@@ -74,14 +75,16 @@ public class AddReceiptActivity extends AbstractActivity implements IWizard {
                 Uri URI = Uri.fromFile(new File(mImageAdress));
                 mImageAdress = "";
                 startWizard(URI);
-                return;
             }
         } else if (requestCode == REQUEST_IMAGE_CHOOSEN && resultCode == RESULT_OK) {
             Uri uri = data.getData();
             mFileHandler.readGallerImage(uri);
-            return;
+        } else if (requestCode == REQUEST_WIZARD) {
+            setResult(RESULT_OK);
+            finish(); // result does not matter from wizard at this point
         } else {
-            System.out.println("No picture was found");
+            setResult(RESULT_CANCELED);
+            finish();
         }
     }
 
@@ -104,7 +107,7 @@ public class AddReceiptActivity extends AbstractActivity implements IWizard {
 
     private void startWizardActivity() {
         Intent intent = new Intent(this, WizardActivity.class);
-        startActivity(intent);
+        startActivityForResult(intent, REQUEST_WIZARD);
     }
 
     private Thread collectStrings(final Uri URI, final Context context) {

@@ -169,8 +169,8 @@ public class WizardActivity extends AbstractActivity implements
     public void collectData() {
         mWizardController.saveReceipts();
         Toast.makeText(this, R.string.receipt_saved, Toast.LENGTH_LONG).show();
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+        setResult(RESULT_OK);
+        finish();
     }
 
     @Override
@@ -189,8 +189,8 @@ public class WizardActivity extends AbstractActivity implements
     }
 
     private boolean goBack() {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+        setResult(RESULT_CANCELED);
+        finish();
         return true;
     }
 

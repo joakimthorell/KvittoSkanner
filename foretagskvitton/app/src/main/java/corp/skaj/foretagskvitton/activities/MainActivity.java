@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 
 import com.roughike.bottombar.BottomBar;
 
@@ -26,6 +27,7 @@ public class MainActivity extends AbstractActivity
     public static final String COMPANY_KEY = "COMPANY_KEY";
     public static final String ARCHIVE_KEY = "ARCHIVE_KEY";
     public static final String SUPPLIER_KEY = "SUPPLIER_KEY";
+
     private MainController mController;
     private FragmentManager mFragmentManger;
 
@@ -83,10 +85,13 @@ public class MainActivity extends AbstractActivity
     }
 
     @Override
-    public void nextActivity(Class<?> c, String key, String data) {
-        Intent intent = new Intent(this, c);
-        intent.putExtra(key, data);
-        startActivity(intent);
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // only coming back from CompanyActivity matters, else we should just show archiveList
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
     }
 
     private User getUser() {
@@ -116,5 +121,17 @@ public class MainActivity extends AbstractActivity
             ft.addToBackStack(backStateName);
             ft.commit();
         }
+    }
+
+    @Override
+    public void startNewActivityForResult(Class<?> activity,
+                                          int requestCode,
+                                          String action,
+                                          String data,
+                                          String key) {
+        Intent intent = new Intent(this, activity);
+        intent.setAction(action);
+        intent.putExtra(key, data);
+        startActivityForResult(intent, requestCode);
     }
 }

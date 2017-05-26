@@ -24,6 +24,8 @@ import corp.skaj.foretagskvitton.view.SupplierAdapter;
 import corp.skaj.foretagskvitton.view.SupplierListFragment;
 
 public class MainController implements MultiDialog.Callback {
+    public static final int REQUEST_COMPANY = 9341;
+    public static final int REQUEST_RECEIPT = 1234;
 
     private IActivity mListener;
     private Context mContext;
@@ -41,7 +43,7 @@ public class MainController implements MultiDialog.Callback {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 String data = sAdapter.getData().get(position).getId();
-                mListener.nextActivity(nextActivity, key, data);
+                mListener.startNewActivityForResult(nextActivity, REQUEST_RECEIPT, null, data, key);
             }
         });
     }
@@ -51,7 +53,7 @@ public class MainController implements MultiDialog.Callback {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 String data = sAdapter.getData().get(position).getName();
-                mListener.nextActivity(nextActivity, key, data);
+                mListener.startNewActivityForResult(nextActivity, REQUEST_COMPANY, null, data, key);
             }
         });
     }
