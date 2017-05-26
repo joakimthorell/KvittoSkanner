@@ -49,6 +49,7 @@ public class CompanyFABController extends FABController
                         MultiDialog.Type.CREATER,
                         getContext().getString(R.string.text_employee))
                         .newDialog().show();
+                button.collapse();
             }
         });
         button.addButton(newEmployee);
@@ -66,6 +67,7 @@ public class CompanyFABController extends FABController
                         MultiDialog.Type.CREATER,
                         getContext().getString(R.string.text_card))
                         .newDialog().show();
+                button.collapse();
             }
         });
         button.addButton(newCard);
@@ -81,7 +83,7 @@ public class CompanyFABController extends FABController
                     if (createCard(newData)) {
                         handler.saveUser();
                         Toast.makeText(getContext(), getContext().getString(R.string.text_created), Toast.LENGTH_SHORT).show();
-                        mFragment.updateCardSpinner(mCompany.getName());
+                        mFragment.updateCardSpinner();
                         return;
                     }
                 }
@@ -93,7 +95,7 @@ public class CompanyFABController extends FABController
                     mCompany.addEmployee(newEmployee);
                     handler.saveUser();
                     Toast.makeText(getContext(), getContext().getString(R.string.text_created), Toast.LENGTH_SHORT).show();
-                    mFragment.updateEmployeeSpinner(mCompany.getName());
+                    mFragment.updateEmployeeSpinner();
                     return;
                 }
                 Toast.makeText(getContext(), getContext().getString(R.string.text_not_saved), Toast.LENGTH_SHORT).show();

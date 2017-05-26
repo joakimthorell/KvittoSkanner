@@ -59,4 +59,15 @@ public class Employee {
     public String getId() {
         return id;
     }
+
+    public static boolean isNameStandard(String name) {
+        if (name == null) {
+            return false;
+        }
+        String nameTrimmed = name.replace(" ", "");
+        if (nameTrimmed.matches("[a-zA-ZåäöÅÄÖ]+")) {
+            return true;
+        }
+        return false;
+    }
 }

@@ -121,18 +121,20 @@ public class CompanyFragment extends AbstractFragment {
         return mComment.getText() == null ? null : mComment.getText().toString();
     }
 
-    public void updateEmployeeSpinner(String companyName) {
-        ArrayAdapter<String> adapter = buildArrayAdapter(getEmployees(companyName, null));
+    public void updateEmployeeSpinner() {
+        ArrayAdapter<String> adapter = buildArrayAdapter(getEmployees(getCompanyName(), null));
         setArrayAdapter(adapter, mEmployees);
     }
 
-    public void updateCardSpinner(String companyName) {
-        ArrayAdapter<String> cardsAdapter = buildArrayAdapter(getCards(companyName));
+    public void updateCardSpinner() {
+        ArrayAdapter<String> cardsAdapter = buildArrayAdapter(getCards(getCompanyName()));
         setArrayAdapter(cardsAdapter, mCards);
     }
 
     public String getEmployeeSpinnerItem() {
-        return mEmployees.getSelectedItem().toString();
+        String name = mEmployees.getSelectedItem().toString();
+        System.out.println(name);
+        return name;
     }
 
     public String getCardSpinnerItem() {

@@ -50,7 +50,7 @@ public class ArchiveListFABController extends FABController {
         bindFAB(button);
     }
 
-    private void bindFAB(FloatingActionsMenu button) {
+    private void bindFAB(final FloatingActionsMenu button) {
         FloatingActionButton camera = new FloatingActionButton(getContext());
         camera.setTitle(getContext().getString(R.string.camera));
         camera.setImageDrawable(mCameraDraw);
@@ -58,6 +58,7 @@ public class ArchiveListFABController extends FABController {
             @Override
             public void onClick(View v) {
                 startNewActivity(CAMERA_ACTION);
+                button.collapse();
             }
         });
         button.addButton(camera);
@@ -69,6 +70,7 @@ public class ArchiveListFABController extends FABController {
             @Override
             public void onClick(View v) {
                 startNewActivity(GALLERY_ACTION);
+                button.collapse();
             }
         });
         button.addButton(gallery);
@@ -80,6 +82,7 @@ public class ArchiveListFABController extends FABController {
             @Override
             public void onClick(View v) {
                 startNewActivity(NO_IMAGE_ACTION);
+                button.collapse();
             }
         });
         button.addButton(noImage);

@@ -50,8 +50,6 @@ public class MainActivity extends AbstractActivity
 
         mFragmentManger = getSupportFragmentManager();
 
-        System.out.println(getIntent().getAction());
-
         buildArchiveListFragment();
     }
 

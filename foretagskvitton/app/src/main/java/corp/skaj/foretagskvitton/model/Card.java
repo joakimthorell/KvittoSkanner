@@ -11,10 +11,12 @@ public class Card {
         this.cardNum = cardNum;
     }
 
-    public void setCard(int cardNum) {
+    public boolean setCard(int cardNum) {
         if (isCard(cardNum)) {
             this.cardNum = cardNum;
+            return true;
         }
+        return false;
     }
 
     private boolean isCard(int cardNum) {
@@ -24,4 +26,5 @@ public class Card {
     public int getCard() {
         return cardNum;
     }
+
 }

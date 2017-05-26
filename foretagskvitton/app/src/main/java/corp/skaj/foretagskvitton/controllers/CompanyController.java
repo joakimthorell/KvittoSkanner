@@ -2,6 +2,7 @@ package corp.skaj.foretagskvitton.controllers;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.Layout;
@@ -13,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.text.ParseException;
 import java.util.List;
 
 import corp.skaj.foretagskvitton.R;
@@ -24,10 +26,11 @@ import corp.skaj.foretagskvitton.model.IData;
 import corp.skaj.foretagskvitton.model.User;
 import corp.skaj.foretagskvitton.view.CompanyFragment;
 import corp.skaj.foretagskvitton.view.ICompany;
+import corp.skaj.foretagskvitton.view.MultiDialog;
 
-public class CompanyController implements ICompany {
+public class CompanyController implements ICompany, MultiDialog.Callback {
     private static final String mEditEmployee = "EDIT_EMPLOYEE";
-    private static final String mEditCard = "EDIT_CARD";
+    private static final String BUNDLE_KEY = "internal_bundle_key";
     private CompanyFragment mCompanyFragment;
     private IData mDataHandler;
     private Context mContext;
@@ -43,7 +46,17 @@ public class CompanyController implements ICompany {
         editEmployeeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showAddNewDialog(mEditEmployee);
+                Bundle b = new Bundle();
+                b.putString(BUNDLE_KEY, mEditEmployee);
+                Employee e = getEmployee();
+                new MultiDialog(mContext,
+                        CompanyController.this,
+                        MultiDialog.Type.EDITOR,
+                        e.getName(),
+                        "anställd",
+                        b)
+                .newDialog()
+                .show();
             }
         });
     }
@@ -64,7 +77,14 @@ public class CompanyController implements ICompany {
             @Override
             public void onClick(View v) {
                 if (getCompany().getCards().size() > 0) {
-                    showAddNewDialog(mEditCard);
+                    String selectedCard = mCompanyFragment.getCardSpinnerItem();
+                    new MultiDialog(mContext,
+                            CompanyController.this,
+                            MultiDialog.Type.EDITOR,
+                            selectedCard,
+                            mContext.getString(R.string.text_card))
+                    .newDialog()
+                    .show();
                 } else {
                     Toast.makeText(mContext, R.string.create_new_card, Toast.LENGTH_SHORT).show();
                 }
@@ -89,79 +109,6 @@ public class CompanyController implements ICompany {
                 saveComment();
             }
         });
-    }
-
-    private void showAddNewDialog(final String KEY) {
-        AlertDialog.Builder alert = new AlertDialog.Builder(mContext);
-        final EditText edittext = new EditText(mContext);
-        edittext.setSingleLine(true);
-
-        if (KEY.equals(mEditEmployee)) {
-            alert.setMessage(R.string.employee_name);
-        } else {
-            alert.setMessage(R.string.card_number);
-        }
-        alert.setTitle(R.string.edit);
-        alert.setView(edittext);
-        alert.setPositiveButton(R.string.intro_add, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-                //What ever you want to do with the value
-                Editable editedInfo = edittext.getText();
-
-                if (KEY.equals(mEditEmployee)) {
-                    if (!(editedInfo.toString().length() < 1
-                            || editedInfo.toString().matches("[a-zA-Z]+"))) {
-                        return;
-                    }
-                } else if (!(editedInfo.toString().length() < 5
-                        || editedInfo.toString().length() > 0
-                        || editedInfo.toString().matches("[0-9]+"))) {
-                    return;
-                } else {
-                    editChanges(editedInfo, KEY);
-                }
-            }
-        });
-        alert.setNegativeButton(R.string.exit, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-                // nothing to do here
-            }
-        });
-        alert.show();
-    }
-
-    private void editChanges(Editable editedInfo, String KEY) {
-        int oldCardNum = cardStringToInt(mCompanyFragment.getCardSpinnerItem());
-        if (KEY.equals(mEditEmployee)) {
-            updateEmployee(editedInfo.toString());
-        } else if (oldCardNum != -1) {
-            updateCard(editedInfo.toString());
-        } else {
-            return;
-        }
-        Toast.makeText(mContext, R.string.changes_saved, Toast.LENGTH_SHORT).show();
-        mDataHandler.saveUser();
-    }
-
-    private void updateEmployee(String newEmployeeName) {
-        Employee employee = getEmployee();
-        employee.setName(newEmployeeName);
-        mCompanyFragment.updateEmployeeSpinner(companyName());
-    }
-
-    private void updateCard(String newCardNumber) {
-        Card card;
-        int oldCardNum = cardStringToInt(mCompanyFragment.getCardSpinnerItem());
-        if (oldCardNum != -1) {
-            card = getUser().getCompany(companyName()).getCard(cardStringToInt(mCompanyFragment.getCardSpinnerItem()));
-            int cardNum = cardStringToInt(newCardNumber);
-            if (cardNum != -1) {
-                card.setCard(Integer.parseInt(newCardNumber));
-                mCompanyFragment.updateCardSpinner(companyName());
-            }
-        } else {
-            Toast.makeText(mContext, R.string.invalid_input, Toast.LENGTH_SHORT).show();
-        }
     }
 
     private int cardStringToInt(String cardNum) {
@@ -242,4 +189,72 @@ public class CompanyController implements ICompany {
     private User getUser() {
         return mDataHandler.getUser();
     }
+
+    @Override
+    public void dialogData(String newData, String oldData, Bundle extras) {
+        // Checking if any data is ok first
+        if (newData == null || (newData != null && newData.length() < 1)) {
+            Toast.makeText(mContext, mContext.getString(R.string.text_not_saved), Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (extras != null) { // if not null, edit employee
+            editUser(extras, newData, oldData);
+        } else { // edit card
+            editCard(newData, oldData);
+        }
+
+    }
+
+    private boolean setNewEmployeeName(Employee toEdit, String newName) {
+        if (Employee.isNameStandard(newName)) {
+            toEdit.setName(newName);
+            return true;
+        }
+        return false;
+    }
+
+    private void saveUser() {
+        mDataHandler.saveUser();
+    }
+
+    private void editUser(Bundle extras, String newName, String oldName) {
+        String request = extras.getString(BUNDLE_KEY);
+        if (request != null && request == mEditEmployee) {
+            Employee e = getCompany().getEmployee(oldName);
+            if (setNewEmployeeName(e, newName)) {
+                Toast.makeText(mContext, mContext.getString(R.string.changes_saved), Toast.LENGTH_SHORT).show();
+                saveUser();
+                mCompanyFragment.updateEmployeeSpinner();
+            } else {
+                Toast.makeText(mContext, mContext.getString(R.string.text_not_saved), Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    private void editCard(String newCardNum, String oldCardNum) {
+        if (newCardNum.matches("[0-9]+") && newCardNum.length() == 4) {
+            Company c = getCompany();
+            Card cardToEdit = c.getCard(Integer.parseInt(oldCardNum)); // should always work
+            if (setNewCardNum(newCardNum, cardToEdit)) {
+                saveUser();
+                mCompanyFragment.updateCardSpinner();
+                Toast.makeText(mContext, mContext.getString(R.string.changes_saved), Toast.LENGTH_SHORT).show();
+                return;
+            }
+        }
+        Toast.makeText(mContext, mContext.getString(R.string.text_not_saved), Toast.LENGTH_SHORT).show();
+    }
+
+    private boolean setNewCardNum(String newCardNum, Card toEdit) {
+        int num;
+        try {
+            num = Integer.parseInt(newCardNum);
+        } catch (NumberFormatException nfe) {
+            nfe.printStackTrace();
+            return false;
+        }
+        return toEdit.setCard(num);
+    }
+
+    // TODO more work to be done in here
 }
