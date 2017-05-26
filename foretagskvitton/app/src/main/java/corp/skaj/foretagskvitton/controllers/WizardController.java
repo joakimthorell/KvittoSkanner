@@ -21,7 +21,7 @@ import corp.skaj.foretagskvitton.model.Comment;
 import corp.skaj.foretagskvitton.model.Company;
 import corp.skaj.foretagskvitton.model.Employee;
 import corp.skaj.foretagskvitton.model.IData;
-import corp.skaj.foretagskvitton.view.wizard.INotify;
+import corp.skaj.foretagskvitton.view.wizard.IWizard;
 import corp.skaj.foretagskvitton.model.Product;
 import corp.skaj.foretagskvitton.model.Purchase;
 import corp.skaj.foretagskvitton.model.Receipt;
@@ -76,7 +76,7 @@ public class WizardController {
         });
     }
 
-    public void initNextButton(final INotify observer, Button mNextButton,
+    public void initNextButton(final IWizard notifier, Button mNextButton,
                                final FragmentManager fragmentManager) {
         mNextButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,7 +84,7 @@ public class WizardController {
                 int size = mWizardView.getWizardView().getCurrentPageSequence().size();
                 if (mPager.getCurrentItem() == size) {
                     WizardFragment wls = new WizardFragment();
-                    wls.setObserver(observer);
+                    wls.setObserver(notifier);
                     wls.show(fragmentManager, "confirm_receipt_dialog");
                 } else {
                     if (mEditingAfterReview) {
