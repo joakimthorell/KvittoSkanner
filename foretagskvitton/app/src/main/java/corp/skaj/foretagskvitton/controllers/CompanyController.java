@@ -126,6 +126,9 @@ public class CompanyController implements ICompany, MultiDialog.Callback {
         } else {
             Employee employee = getEmployee();
             getCompany().removeEmployee(employee);
+            mCompanyFragment.updateEmployeeSpinner();
+            saveUser();
+            Toast.makeText(mContext, mContext.getString(R.string.employee_removed), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -136,6 +139,9 @@ public class CompanyController implements ICompany, MultiDialog.Callback {
         } else {
             Card card = getCompany().getCard(cardStringToInt(mCompanyFragment.getCardSpinnerItem()));
             getUser().getCompany(companyName()).removeCard(card);
+            mCompanyFragment.updateCardSpinner();
+            saveUser();
+            Toast.makeText(mContext, mContext.getString(R.string.card_removed), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -255,6 +261,5 @@ public class CompanyController implements ICompany, MultiDialog.Callback {
         }
         return toEdit.setCard(num);
     }
-
-    // TODO more work to be done in here
+    
 }

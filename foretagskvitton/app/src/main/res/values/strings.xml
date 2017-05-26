@@ -92,6 +92,8 @@
     <string name="exit">Avbryt</string>
     <string name="no_supplier">Ingen grossist</string>
     <string name="no_card">Inget kort</string>
+    <string name="card_removed">Kort borttaget</string>
+    <string name="employee_removed">Anställd borttagen</string>
 
 
 </resources>
