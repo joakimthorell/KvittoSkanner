@@ -205,8 +205,10 @@ public class ReceiptFragment extends AbstractFragment {
     }
 
     public String getSupplier() {
-        return mSupplier.getSelectedItem().toString().equals(R.string.no_supplier) ? null :
-                mSupplier.getSelectedItem().toString();
+        String standard = getString(R.string.no_supplier);
+        String selectedItem = mSupplier.getSelectedItem().toString();
+        return standard.equals(selectedItem) ? null :
+                selectedItem;
     }
 
     public String getComment() {

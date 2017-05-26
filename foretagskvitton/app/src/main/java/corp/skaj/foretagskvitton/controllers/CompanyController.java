@@ -55,8 +55,8 @@ public class CompanyController implements ICompany, MultiDialog.Callback {
                         e.getName(),
                         "anställd",
                         b)
-                .newDialog()
-                .show();
+                        .newDialog()
+                        .show();
             }
         });
     }
@@ -83,8 +83,8 @@ public class CompanyController implements ICompany, MultiDialog.Callback {
                             MultiDialog.Type.EDITOR,
                             selectedCard,
                             mContext.getString(R.string.text_card))
-                    .newDialog()
-                    .show();
+                            .newDialog()
+                            .show();
                 } else {
                     Toast.makeText(mContext, R.string.create_new_card, Toast.LENGTH_SHORT).show();
                 }
@@ -102,7 +102,7 @@ public class CompanyController implements ICompany, MultiDialog.Callback {
         });
     }
 
-    public void setSaveCommentListener (Button saveCommentButton) {
+    public void setSaveCommentListener(Button saveCommentButton) {
         saveCommentButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -145,7 +145,7 @@ public class CompanyController implements ICompany, MultiDialog.Callback {
         }
     }
 
-    private void saveComment () {
+    private void saveComment() {
         String currentComment = mCompanyFragment.getCurrentComment();
         if (currentComment != null) {
             List<Comment> comments = getCompany().getComments();
@@ -162,7 +162,7 @@ public class CompanyController implements ICompany, MultiDialog.Callback {
 
     }
 
-    public void createNewComment (List<Comment> comments, String currentComment) {
+    public void createNewComment(List<Comment> comments, String currentComment) {
         comments.add(new Comment(currentComment));
         mDataHandler.saveUser();
         Toast.makeText(mContext, R.string.changes_saved, Toast.LENGTH_SHORT).show();
@@ -199,10 +199,11 @@ public class CompanyController implements ICompany, MultiDialog.Callback {
     @Override
     public void dialogData(String newData, String oldData, Bundle extras) {
         // Checking if any data is ok first
-        if (newData == null || (newData != null && newData.length() < 1)) {
+        if (newData == null || newData.length() < 1) {
             Toast.makeText(mContext, mContext.getString(R.string.text_not_saved), Toast.LENGTH_SHORT).show();
             return;
         }
+
         if (extras != null) { // if not null, edit employee
             editUser(extras, newData, oldData);
         } else { // edit card
@@ -261,5 +262,5 @@ public class CompanyController implements ICompany, MultiDialog.Callback {
         }
         return toEdit.setCard(num);
     }
-    
+
 }
