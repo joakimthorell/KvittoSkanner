@@ -10,7 +10,7 @@ import android.support.v4.app.DialogFragment;
 import corp.skaj.foretagskvitton.R;
 
 public class WizardFragment extends DialogFragment {
-    private INotify mNotifer;
+    private IWizard mWizard;
 
     @NonNull
     @Override
@@ -20,8 +20,8 @@ public class WizardFragment extends DialogFragment {
                 .setPositiveButton(R.string.last_step_approve_button, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        if (mNotifer != null) {
-                            mNotifer.collectData();
+                        if (mWizard != null) {
+                            mWizard.collectData();
                         }
                     }
                 })
@@ -29,7 +29,7 @@ public class WizardFragment extends DialogFragment {
                 .create();
     }
 
-    public void setObserver(INotify model) {
-        mNotifer = model;
+    public void setObserver(IWizard model) {
+        mWizard = model;
     }
 }

@@ -37,12 +37,12 @@ import java.util.List;
 
 import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.controllers.WizardController;
-import corp.skaj.foretagskvitton.view.wizard.INotify;
+import corp.skaj.foretagskvitton.view.wizard.IWizard;
 import corp.skaj.foretagskvitton.view.wizard.WizardAdapter;
 import corp.skaj.foretagskvitton.view.wizard.WizardView;
 
 public class WizardActivity extends AbstractActivity implements
-        PageFragmentCallbacks, ReviewFragment.Callbacks, ModelCallbacks, INotify {
+        PageFragmentCallbacks, ReviewFragment.Callbacks, ModelCallbacks, IWizard {
 
     private WizardController mWizardController;
     private WizardView mWizardView;
