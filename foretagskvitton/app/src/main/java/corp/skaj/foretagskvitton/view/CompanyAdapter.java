@@ -10,6 +10,7 @@ import java.util.List;
 
 import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.model.Company;
+import corp.skaj.foretagskvitton.model.Employee;
 
 public class CompanyAdapter extends BaseQuickAdapter<Company, BaseViewHolder> {
 
@@ -24,10 +25,19 @@ public class CompanyAdapter extends BaseQuickAdapter<Company, BaseViewHolder> {
         TextDrawable image = TextDrawable.builder()
                 .buildRect(item.getName().substring(0, 1), ColorGenerator.MATERIAL.getRandomColor());
 
-        helper.setText(R.id.list_item_archive_company_name, item.getName())
-                .setImageDrawable(R.id.list_item_archive_circular_image, image);
+        helper.setText(R.id.list_item_company_company_name, item.getName())
+                .setImageDrawable(R.id.list_item_company_circular_image, image)
+        .setText(R.id.list_item_company_num_of_purchases, String.valueOf(numOfPurchases(item)));
 
 
+    }
+
+    private int numOfPurchases(Company company) {
+        int i = 0;
+        for (Employee e : company.getEmployees()) {
+            i += e.getPurchases().size();
+        }
+        return i;
     }
 
 }

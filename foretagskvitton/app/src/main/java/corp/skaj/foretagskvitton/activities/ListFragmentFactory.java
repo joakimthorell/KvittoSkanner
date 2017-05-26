@@ -37,14 +37,14 @@ public class ListFragmentFactory {
     }
 
     public static CompanyListFragment createCompanyList(Context context, List<Company> companyList) {
-        CompanyAdapter ca = new CompanyAdapter(R.layout.archive_list_item, companyList);
+        CompanyAdapter ca = new CompanyAdapter(R.layout.company_list_item, companyList);
         CompanyListFABController fabController = new CompanyListFABController(context);
         CompanyListFragment fragment = CompanyListFragment.create(ca, fabController);
         return fragment;
     }
 
     public static SupplierListFragment createSupplierList(Context context, List<Supplier> suppliers) {
-        SupplierAdapter sa = new SupplierAdapter(R.layout.archive_list_item, suppliers);
+        SupplierAdapter sa = new SupplierAdapter(R.layout.supplier_list_item, suppliers);
         SupplierListFABController fabController = new SupplierListFABController(context);
         SupplierListFragment fragment = SupplierListFragment.create(sa, fabController);
         return fragment;
