@@ -15,17 +15,12 @@ import corp.skaj.foretagskvitton.view.CompanyListFragment;
 
 public class CompanyToolbarController extends ToolbarController<Company> {
 
-    private IActivity mListener;
-    private CompanyListFragment mFragment;
-
-    public CompanyToolbarController(Context context, CompanyAdapter adapter, IActivity listener, CompanyListFragment fragment) {
+    public CompanyToolbarController(Context context, CompanyAdapter adapter) {
         super(context,
                 new MaterialCab((AppCompatActivity)context, R.id.cab_stub)
         .setBackgroundColorRes(R.color.colorPrimary)
         .setMenu(R.menu.remove_menu));
 
-        mFragment = fragment;
-        mListener = listener;
         setListener(adapter);
     }
 
@@ -35,7 +30,6 @@ public class CompanyToolbarController extends ToolbarController<Company> {
             case R.id.action_remove:
                 if (anyCompanyLeft()) {
                     removeSelectedItems();
-                    mListener.reloadUI(mFragment);
                     return true;
                 }
                 Toast.makeText(getContext(), getContext().getString(R.string.specific_cant_remove_company), Toast.LENGTH_SHORT).show();

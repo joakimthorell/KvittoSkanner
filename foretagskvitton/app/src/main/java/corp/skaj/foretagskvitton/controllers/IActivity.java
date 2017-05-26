@@ -16,6 +16,4 @@ public interface IActivity {
                                    String data,
                                    String key);
 
-    void reloadUI(Fragment fragment);
-
 }

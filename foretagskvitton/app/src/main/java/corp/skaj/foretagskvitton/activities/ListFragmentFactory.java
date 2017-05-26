@@ -36,11 +36,11 @@ public class ListFragmentFactory {
         return fragment;
     }
 
-    public static CompanyListFragment createCompanyList(Context context, List<Company> companyList, IActivity listener) {
+    public static CompanyListFragment createCompanyList(Context context, List<Company> companyList) {
         CompanyAdapter ca = new CompanyAdapter(R.layout.company_list_item, companyList);
         CompanyListFABController fabController = new CompanyListFABController(context);
         CompanyListFragment fragment = CompanyListFragment.create(ca, fabController);
-        new CompanyToolbarController(context, ca, listener, fragment);
+        new CompanyToolbarController(context, ca);
         return fragment;
     }
 

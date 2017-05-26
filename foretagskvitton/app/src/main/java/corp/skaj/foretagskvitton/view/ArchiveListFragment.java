@@ -15,6 +15,7 @@ import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.model.Category;
 import corp.skaj.foretagskvitton.model.Company;
 import corp.skaj.foretagskvitton.model.Employee;
+import corp.skaj.foretagskvitton.model.PurchaseList;
 import corp.skaj.foretagskvitton.model.User;
 
 /**
@@ -129,6 +130,13 @@ public class ArchiveListFragment extends ListFragment {
 
     public ArchiveAdapter getAdapter() {
         return mAdapter;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        PurchaseList list = getDataHandler().getPurchases();
+        getAdapter().setNewData(list);
     }
 
     protected BaseQuickAdapter getBaseAdapter() {

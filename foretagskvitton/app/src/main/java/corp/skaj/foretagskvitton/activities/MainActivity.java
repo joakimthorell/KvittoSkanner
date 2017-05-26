@@ -14,6 +14,7 @@ import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.controllers.IActivity;
 import corp.skaj.foretagskvitton.controllers.MainController;
 import corp.skaj.foretagskvitton.model.Company;
+import corp.skaj.foretagskvitton.model.Purchase;
 import corp.skaj.foretagskvitton.model.PurchaseList;
 import corp.skaj.foretagskvitton.model.Supplier;
 import corp.skaj.foretagskvitton.model.User;
@@ -56,7 +57,7 @@ public class MainActivity extends AbstractActivity
 
     @Override
     public void buildCompanyFragment() {
-        CompanyListFragment fragment = ListFragmentFactory.createCompanyList(this, getCompanies(), this);
+        CompanyListFragment fragment = ListFragmentFactory.createCompanyList(this, getCompanies());
         mController.setCompanyAdapterListener(fragment.getAdapter(), CompanyActivity.class, COMPANY_KEY);
         replaceFragment(fragment);
     }
@@ -101,7 +102,7 @@ public class MainActivity extends AbstractActivity
         mFragmentManger = getSupportFragmentManager();
         boolean fragmentPopped = mFragmentManger.popBackStackImmediate (backStateName, 0);
 
-        if (!fragmentPopped){ //fragment not in back stack, set it it.
+        if (!fragmentPopped) { //fragment not in back stack, set it it.
             FragmentTransaction ft = mFragmentManger.beginTransaction();
             ft.replace(R.id.main_fragment_container, fragment);
             ft.addToBackStack(backStateName);
@@ -121,8 +122,4 @@ public class MainActivity extends AbstractActivity
         startActivityForResult(intent, requestCode);
     }
 
-    @Override
-    public void reloadUI(Fragment fragment) {
-
-    }
 }
