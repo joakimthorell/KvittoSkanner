@@ -4,9 +4,9 @@ import android.net.Uri;
 
 import java.io.File;
 
-public interface IWizard {
+public interface IFileHandler {
     void updateImageAddress(String newAddress);
-    void startWizard(Uri addressToNewFile);
+    void onReadResult(Uri addressToNewFile);
     void initProgressBar();
     File getExternalFileDir();
 }
