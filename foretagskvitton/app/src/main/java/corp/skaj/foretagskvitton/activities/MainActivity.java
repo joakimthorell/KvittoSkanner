@@ -28,7 +28,6 @@ public class MainActivity extends AbstractActivity
     public static final String SUPPLIER_KEY = "SUPPLIER_KEY";
     private MainController mController;
     private FragmentManager mFragmentManger;
-    private ListFragmentFactory mFragmentFactory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,12 +116,5 @@ public class MainActivity extends AbstractActivity
             ft.addToBackStack(backStateName);
             ft.commit();
         }
-    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        String arg = "compay";
-        outState.putString("Company_things", arg);
     }
 }

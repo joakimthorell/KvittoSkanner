@@ -26,7 +26,6 @@ import corp.skaj.foretagskvitton.R;
 public abstract class ListFragment extends AbstractFragment {
     private RecyclerView mRecyclerView;
     private ILinkFABListener mObserver;
-    private FloatingActionsMenu mButton;
 
     protected ListFragment() {
     }

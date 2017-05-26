@@ -129,7 +129,7 @@ public class ReceiptFragment extends AbstractFragment {
         ArrayAdapter<String> supplierAdapter = buildArrayAdapter(getSuppliers());
         setArrayAdapter(supplierAdapter, mSupplier);
         mSupplier.setSelection(mPurchase.getSupplier() == null ? getSuppliers().size() - 1 :
-                getSuppliers().indexOf(mPurchase.getSupplier()));
+                getSuppliers().indexOf(mPurchase.getSupplier().getName()));
 
 
         mTax.setText(String.valueOf(mPurchase.getReceipt().getProducts().get(0).getTax()) + " %");
