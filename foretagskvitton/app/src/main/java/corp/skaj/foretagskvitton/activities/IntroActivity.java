@@ -19,18 +19,17 @@ public class IntroActivity extends AppIntro {
         addSlide(AppIntroFragment.newInstance(getString(R.string.intro_welcome), getString(R.string.intro_welcometext),
                 R.mipmap.ic_launcher_round, getColor(R.color.colorAccent)));
         addSlide(AppIntroFragment.newInstance(getString(R.string.intro_archive), getString(R.string.intro_archivetext),
-                R.drawable.ic_image , getColor(R.color.colorPrimary)));
-        //TODO add picture of archive front page here
+                R.drawable.archive , getColor(R.color.colorAccent)));
         addSlide(AppIntroFragment.newInstance(getString(R.string.intro_company), getString(R.string.intro_companytext),
-                R.drawable.ic_image, getColor(R.color.colorAccent)));
-        //TODO add picture of company front page here
+                R.drawable.company
+                , getColor(R.color.colorAccent)));
         addSlide(AppIntroFragment.newInstance(getString(R.string.intro_supplier), getString(R.string.intro_suppliertext),
-                R.drawable.ic_image, getColor(R.color.colorPrimary)));
-        //TODO add picuture of supplier front page here
+                R.drawable.supplier
+                , getColor(R.color.colorAccent)));
         addSlide(AppIntroFragment.newInstance(getString(R.string.intro_add), getString(R.string.intro_addtext),
                 R.drawable.addbutton, getColor(R.color.colorAccent)));
         addSlide(AppIntroFragment.newInstance(getString(R.string.intro_goodluck), getString(R.string.intro_goodlucktext),
-                R.mipmap.ic_launcher, getColor(R.color.colorPrimary)));
+                R.mipmap.ic_launcher, getColor(R.color.colorAccent)));
     }
     @Override
     public void onSkipPressed(android.support.v4.app.Fragment currentFragment) {

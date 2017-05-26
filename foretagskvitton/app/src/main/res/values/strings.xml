@@ -54,12 +54,12 @@
         Du kan sortera dem efter pris och datum. Du har möjlighet att lägga till ett nytt kvitto, redigera ett befintligt eller radera ett kvitto helt. </string>
     <string name="intro_company">Företag</string>
     <string name="intro_companytext">Under företag kan du hantera alla dina företag. Du kan lägga till ett nytt företag,
-        redigera ett befintligt eller radera ett företag helt.
+        redigera ett befintligt eller radera ett företag helt. Du har även möjlighet att se hur många kvitton som finns lagrade i företaget.
         Du måste alltid ha minst ett företag.</string>
     <string name="intro_supplier">Grossister</string>
     <string name="intro_suppliertext">Under grossister kan du hantera alla dina grossister. Du kan lägga till en ny grossist, redigera en befintlig eller radera en grossist helt.</string>
     <string name="intro_add">Lägg till</string>
-    <string name="intro_addtext">För att lägga till något nytt nyttjar du den runda lägg-till knappen som finns på samtliga tre sidor</string>
+    <string name="intro_addtext">För att lägga till något nytt nyttjar du den runda lägg-till knappen som finns på samtliga tre sidor.</string>
     <string name="intro_goodluck">Lycka till med bokföringen!</string>
     <string name="intro_goodlucktext">Vi hoppas att du spara många timmar med hjälp av vår app!</string>
 

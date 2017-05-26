@@ -35,7 +35,7 @@ public class MainActivity extends AbstractActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //getDataHandler().clearData(); // Clear all data
+        getDataHandler().clearData(); // Clear all data
 
         // Create a default user if there is no user
         if (getDataHandler().initDefaultUser()) {
