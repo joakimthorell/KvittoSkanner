@@ -11,7 +11,8 @@ public class TextCollector {
     }
 
     public static double getTotalSum(List<String> strings) {
-        return new TotalSumCollector().getTotalSum(strings);
+        TotalSumCollector tsc = new TotalSumCollector();
+        return tsc.getTotalSum(strings);
     }
 
     public static void getProducts(List<String> strings) {
@@ -23,10 +24,12 @@ public class TextCollector {
     }
 
     public static String getCard(List<String> strings) {
-        return new CardCollector().getCard(strings);
+        CardCollector cc = new CardCollector();
+        return cc.getCard(strings);
     }
 
     public static String getDate(List<String> strings) {
-        return new DateCollector().getDate(strings);
+        DateCollector dc = new DateCollector();
+        return dc.getDate(strings);
     }
 }

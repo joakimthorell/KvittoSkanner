@@ -6,7 +6,7 @@ import java.util.List;
 
 class TotalSumCollector extends AbstractCollector {
 
-    public TotalSumCollector() {
+    TotalSumCollector() {
         //package private
     }
 

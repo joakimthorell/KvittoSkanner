@@ -1,8 +1,8 @@
 package corp.skaj.foretagskvitton.services.textcollector;
 
-public abstract class AbstractCollector {
+abstract class AbstractCollector {
 
-    public AbstractCollector() {
+    AbstractCollector() {
     }
 
     protected static String replaceLetters(String s) {

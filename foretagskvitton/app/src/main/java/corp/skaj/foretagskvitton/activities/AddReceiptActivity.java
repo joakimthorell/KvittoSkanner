@@ -22,10 +22,9 @@ import corp.skaj.foretagskvitton.model.IData;
 import corp.skaj.foretagskvitton.services.FileHandler;
 import corp.skaj.foretagskvitton.services.IWizard;
 import corp.skaj.foretagskvitton.services.ReceiptScanner;
+import corp.skaj.foretagskvitton.services.textcollector.TextCollector;
 
 public class AddReceiptActivity extends AbstractActivity implements IWizard {
-    public static final String BUILD_NEW_RECEIPT = "corp.skaj.foretagskvitton.BUILD_RECEIPT";
-    public static final String KEY_FOR_IMAGE = "corp.skaj.foretagskvitton.KEY_FOR_IMAGE";
     private static final int REQUEST_IMAGE_CAPTURE = 31415;
     private static final int REQUEST_IMAGE_CHOOSEN = 1313;
     private String mImageAdress;
@@ -101,13 +100,6 @@ public class AddReceiptActivity extends AbstractActivity implements IWizard {
             return;
         }
         collectStrings(URI, this).start();
-        /*
-        Intent intent = new Intent(this, InitWizardActivity.class);
-        intent.putExtra(KEY_FOR_IMAGE, URI);
-        intent.setAction(BUILD_NEW_RECEIPT);
-        startActivity(intent);
-        */
-
     }
 
     private void startWizardActivity() {
@@ -141,7 +133,6 @@ public class AddReceiptActivity extends AbstractActivity implements IWizard {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                System.out.println("I AM HERE NOW ");
                 startWizardActivity();
             }
         });

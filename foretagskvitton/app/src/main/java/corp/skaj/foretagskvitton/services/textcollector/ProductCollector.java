@@ -4,7 +4,7 @@ import java.util.List;
 
 class ProductCollector extends AbstractCollector {
 
-    public ProductCollector() {
+    ProductCollector() {
         //package private
     }
 

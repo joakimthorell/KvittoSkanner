@@ -4,7 +4,7 @@ import java.util.List;
 
 class VatCollector extends AbstractCollector {
 
-    public VatCollector() {
+    VatCollector() {
         //package private
     }
 

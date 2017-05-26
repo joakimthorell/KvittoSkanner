@@ -8,7 +8,7 @@ class CardCollector extends AbstractCollector {
     private static final String KORTNUMMER = "kortnummer";
     private static final String KORT = "kort";
 
-    public CardCollector() {
+    CardCollector() {
         //package private
     }
 

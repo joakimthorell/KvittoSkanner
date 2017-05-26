@@ -6,7 +6,7 @@ import java.util.List;
 
 class DateCollector extends AbstractCollector {
 
-    public DateCollector() {
+    DateCollector() {
         //package private
     }
 
