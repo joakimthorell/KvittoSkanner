@@ -146,7 +146,6 @@ public class WizardPageBuilder {
                         .setRequired(false));
     }
 
-
     private PageList noSupplierWizard(ModelCallbacks view, User user, double totalSum, Company company, String date) {
         return new PageList(
                 new SingleFixedChoicePage(view, WizardConstants.CARD)
@@ -224,4 +223,3 @@ public class WizardPageBuilder {
         return mPages;
     }
 }
-

@@ -37,12 +37,12 @@ import java.util.List;
 
 import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.controllers.WizardController;
-import corp.skaj.foretagskvitton.model.IObserver;
+import corp.skaj.foretagskvitton.view.wizard.INotify;
 import corp.skaj.foretagskvitton.view.wizard.WizardAdapter;
 import corp.skaj.foretagskvitton.view.wizard.WizardView;
 
 public class WizardActivity extends AbstractActivity implements
-        PageFragmentCallbacks, ReviewFragment.Callbacks, ModelCallbacks, IObserver {
+        PageFragmentCallbacks, ReviewFragment.Callbacks, ModelCallbacks, INotify {
 
     private WizardController mWizardController;
     private WizardView mWizardView;
@@ -54,32 +54,41 @@ public class WizardActivity extends AbstractActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wizard);
 
-        // Set instances
-        Button mNextButton = (Button) findViewById(R.id.wizardNextButton);
-        Button mPrevButton = (Button) findViewById(R.id.wizardBackButton);
+        Button nextButton = (Button) findViewById(R.id.wizardNextButton);
+        Button prevButton = (Button) findViewById(R.id.wizardBackButton);
         ViewPager mPager = (ViewPager) findViewById(R.id.pager);
         mStepPagerStrip = (StepPagerStrip) findViewById(R.id.wizard_strip);
+
         mWizardView = new WizardView(this);
-        mWizardController = new WizardController(this, mNextButton, mPrevButton, mPager, mPagerAdapter, mWizardView);
+        mWizardController = new WizardController(this, nextButton, prevButton, mPager, mPagerAdapter, mWizardView);
         mPagerAdapter = new WizardAdapter(getSupportFragmentManager(), mWizardView);
         mPager.setAdapter(mPagerAdapter);
 
-        // Set listeners
-        mWizardController.initNextButton(this, mNextButton, getSupportFragmentManager());
-        mWizardController.initPrevButton(mPrevButton);
-        mWizardController.initViewPagerListener(mStepPagerStrip);
-        mWizardView.registerListener(this);
-
-        // Set actionbar to custom toolbar.
-        Toolbar toolbar = (Toolbar) findViewById(R.id.wizard_action_bar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setHomeAsUpIndicator(R.drawable.ic_close);
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        setListeners(nextButton, prevButton);
+        setToolbar();
+        setActionBar();
 
         onPageTreeChanged();
         mWizardController.refreshBottomBar();
+    }
+
+    private void setListeners(Button nextButton, Button prevButton) {
+        mWizardController.initNextButton(this, nextButton, getSupportFragmentManager());
+        mWizardController.initPrevButton(prevButton);
+        mWizardController.initViewPagerListener(mStepPagerStrip);
+        mWizardView.registerListener(this);
+    }
+
+    private void setToolbar() {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.wizard_action_bar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+    }
+
+    private void setActionBar() {
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setHomeAsUpIndicator(R.drawable.ic_close);
+        actionBar.setDisplayHomeAsUpEnabled(true);
     }
 
     @Override

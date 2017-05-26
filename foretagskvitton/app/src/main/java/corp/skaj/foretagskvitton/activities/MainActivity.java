@@ -11,7 +11,7 @@ import com.roughike.bottombar.BottomBar;
 import java.util.List;
 
 import corp.skaj.foretagskvitton.R;
-import corp.skaj.foretagskvitton.controllers.IView;
+import corp.skaj.foretagskvitton.controllers.IActivity;
 import corp.skaj.foretagskvitton.controllers.MainController;
 import corp.skaj.foretagskvitton.model.Company;
 import corp.skaj.foretagskvitton.model.PurchaseList;
@@ -22,7 +22,7 @@ import corp.skaj.foretagskvitton.view.CompanyListFragment;
 import corp.skaj.foretagskvitton.view.SupplierListFragment;
 
 public class MainActivity extends AbstractActivity
-        implements IView {
+        implements IActivity {
     public static final String COMPANY_KEY = "COMPANY_KEY";
     public static final String ARCHIVE_KEY = "ARCHIVE_KEY";
     public static final String SUPPLIER_KEY = "SUPPLIER_KEY";

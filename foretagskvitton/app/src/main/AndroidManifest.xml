@@ -29,7 +29,6 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".activities.InitWizardActivity" />
         <activity android:name=".activities.AddReceiptActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />

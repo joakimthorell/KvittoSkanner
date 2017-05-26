@@ -15,7 +15,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-public class DatePage extends TextPage implements IWizard {
+public class DatePage extends TextPage implements IDate {
     private boolean mDateFound;
 
     public DatePage(ModelCallbacks callbacks, String title) {

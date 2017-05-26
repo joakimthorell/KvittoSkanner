@@ -1,6 +1,6 @@
 package corp.skaj.foretagskvitton.controllers;
 
-public interface IView {
+public interface IActivity {
 
     void nextActivity(Class<?> c, String key, String data);
 

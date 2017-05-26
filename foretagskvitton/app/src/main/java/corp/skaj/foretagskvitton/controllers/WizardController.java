@@ -21,7 +21,7 @@ import corp.skaj.foretagskvitton.model.Comment;
 import corp.skaj.foretagskvitton.model.Company;
 import corp.skaj.foretagskvitton.model.Employee;
 import corp.skaj.foretagskvitton.model.IData;
-import corp.skaj.foretagskvitton.model.IObserver;
+import corp.skaj.foretagskvitton.view.wizard.INotify;
 import corp.skaj.foretagskvitton.model.Product;
 import corp.skaj.foretagskvitton.model.Purchase;
 import corp.skaj.foretagskvitton.model.Receipt;
@@ -76,7 +76,7 @@ public class WizardController {
         });
     }
 
-    public void initNextButton(final IObserver observer, Button mNextButton,
+    public void initNextButton(final INotify observer, Button mNextButton,
                                final FragmentManager fragmentManager) {
         mNextButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,7 +86,6 @@ public class WizardController {
                     WizardFragment wls = new WizardFragment();
                     wls.setObserver(observer);
                     wls.show(fragmentManager, "confirm_receipt_dialog");
-                    //observer.collectData();
                 } else {
                     if (mEditingAfterReview) {
                         mPager.setCurrentItem(mPagerAdapter.getCount() - 1);
@@ -120,9 +119,10 @@ public class WizardController {
     }
 
     /**
-     * Key for bundle is "_". This is hardcoded from the WizardPager package
+     * Key for bundle is "_". This is hardcoded from the WizardPager package.
      */
     public void saveReceipts() {
+        String key = "_";
         Bundle b = mWizardView.getWizardData();
         Bundle companyNameBundle = b.getBundle(WizardConstants.COMPANY);
         Bundle payMethodBundle = b.getBundle(WizardConstants.CARD);
@@ -134,68 +134,78 @@ public class WizardController {
         Bundle commentBundle = b.getBundle(WizardConstants.COMMENT);
 
         Product product = buildProduct(
-                totalBundle.getString("_"),
-                vatBundle.getString("_"),
-                categoryBundle.getString("_"));
+                totalBundle.getString(key),
+                vatBundle.getString(key),
+                categoryBundle.getString(key));
 
         Receipt receipt = buildReceipt(
                 product,
-                dateBundle.getString("_"),
-                totalBundle.getString("_"));
+                dateBundle.getString(key),
+                totalBundle.getString(key));
 
         Purchase purchase = buildPurchase(
                 receipt,
-                supplierBundle == null ? null : supplierBundle.getString("_"),
-                payMethodBundle.getString("_"));
+                supplierBundle == null ? null : supplierBundle.getString(key),
+                payMethodBundle.getString(key));
 
-        if (commentBundle.getString("_") != null) {
-            purchase.addComment(new Comment(commentBundle.getString("_")));
-        }
-        User user = mDataHandler.getUser();
-        Company company = companyNameBundle != null ?
-                user.getCompany(companyNameBundle.getString("_")) :
-                user.getCompanies().get(0); // if bundle is null there is only one company
-
-        Employee employee = company.getEmployees().get(0);
-        employee.addPurchase(purchase);
-        saveUser(user);
+        Company company = getCompany(companyNameBundle, key);
+        addPurchase(company, purchase);
+        addComment(commentBundle, purchase, key);
+        mDataHandler.saveUser();
+        resetSavedData();
     }
 
-    private void saveUser(User user) {
-        System.out.println("Saving user " + user.getName());
-        mDataHandler.saveUser();
-        System.out.println("User : " + user.getName() + " saved. COMPLETE!");
-        System.out.println("Removing used items");
+    private Company getCompany(Bundle companyNameBundle, String key) {
+        User user = mDataHandler.getUser();
+        return companyNameBundle != null ?
+                user.getCompany(companyNameBundle.getString(key)) :
+                user.getCompanies().get(0); // if bundle is null there is only one company
+    }
+
+    private void addComment(Bundle commentBundle, Purchase purchase, String key) {
+        if (commentBundle.getString(key) != null) {
+            purchase.addComment(new Comment(commentBundle.getString(key)));
+        }
+    }
+
+    private void addPurchase(Company company, Purchase purchase) {
+        Employee employee = company.getEmployees().get(0);
+        employee.addPurchase(purchase);
+    }
+
+    private void resetSavedData() {
         mDataHandler.removeData(IData.IMAGE_URI_KEY);
         mDataHandler.removeData(IData.COLLECTED_STRINGS_KEY);
-        System.out.println("Removed data. COMPLETE!");
     }
 
     private Purchase buildPurchase(Receipt receipt, String supplierAsString, String purchaseType) {
-        Purchase.PurchaseType typeOfPurchase = purchaseType.equals("Företag") ? Purchase.PurchaseType.COMPANY : Purchase.PurchaseType.PRIVATE;
-
+        Purchase.PurchaseType typeOfPurchase = purchaseType.equals("Företag")
+                ? Purchase.PurchaseType.COMPANY : Purchase.PurchaseType.PRIVATE;
         return new Purchase(receipt, typeOfPurchase);
     }
 
-    private Receipt buildReceipt(Product product, String dateAsString, String totalAsString) {
-        Date dateAsDate = null;
-        try {
-            dateAsDate = new SimpleDateFormat("yyyy-MM-dd").parse(dateAsString);
-        } catch (ParseException pe) {
-            dateAsDate = new Date();
-        }
-        Calendar date = Calendar.getInstance();
-        date.setTime(dateAsDate);
-        double total = Double.parseDouble(totalAsString);
-        String URIAsString = mDataHandler.readData(IData.IMAGE_URI_KEY, String.class);
-        return new Receipt(product, date, total, URIAsString);
+    private Receipt buildReceipt(Product product, String dateString, String totalString) {
+        Date date = getDate(dateString);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        double total = Double.parseDouble(totalString);
+        String URIString = mDataHandler.readData(IData.IMAGE_URI_KEY, String.class);
+        return new Receipt(product, calendar, total, URIString);
     }
 
-    private Product buildProduct(String priceAsString, String taxAsString, String categoryAsString) {
+    private Date getDate(String dateString) {
+        try {
+            return new SimpleDateFormat("yyyy-MM-dd").parse(dateString);
+        } catch (ParseException pe) {
+            return new Date();
+        }
+    }
+
+    private Product buildProduct(String priceAsString, String vatString, String categoryAsString) {
         double totalPrice = Double.parseDouble(priceAsString);
-        double taxAsDouble = Double.parseDouble(taxAsString);
-        Category categoryAsCategory = Category.valueOf(categoryAsString.toUpperCase());
-        return new Product(Product.ALL_PRODUCTS, categoryAsCategory, totalPrice, taxAsDouble);
+        double vatDouble = Double.parseDouble(vatString);
+        Category category = Category.valueOf(categoryAsString.toUpperCase());
+        return new Product(Product.ALL_PRODUCTS, category, totalPrice, vatDouble);
     }
 
     public void updateConsumePageSelectedEvent(boolean state) {

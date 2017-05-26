@@ -1,5 +1,5 @@
 package corp.skaj.foretagskvitton.view.wizard;
 
-public interface IWizard {
+public interface IDate {
     boolean isDateFound();
 }

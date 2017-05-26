@@ -25,12 +25,12 @@ import corp.skaj.foretagskvitton.view.SupplierListFragment;
 
 public class MainController implements MultiDialog.Callback {
 
-    private IView mListener;
+    private IActivity mListener;
     private Context mContext;
     private BottomBar mBottombar;
 
 
-    public MainController(IView listener, Context context) {
+    public MainController(IActivity listener, Context context) {
         mListener = listener;
         mContext = context;
 

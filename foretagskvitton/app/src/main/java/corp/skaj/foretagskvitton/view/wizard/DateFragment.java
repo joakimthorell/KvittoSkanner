@@ -37,7 +37,7 @@ public class DateFragment extends Fragment {
     private PageFragmentCallbacks mCallbacks;
     private EditText mDateView;
     private String mKey;
-    private IWizard mListener;
+    private IDate mListener;
 
     public static DateFragment create(String key) {
         Bundle args = new Bundle();
@@ -127,7 +127,7 @@ public class DateFragment extends Fragment {
         }
     }
 
-    public void setListener(IWizard listener) {
+    public void setListener(IDate listener) {
         mListener = listener;
     }
 

@@ -9,5 +9,4 @@ public interface ILinkReceiptListener extends ILinkFABListener {
     void bindImage(ImageView clickableImage, Uri uri);
 
     void bindSpinner(final Spinner spinnerToBind, final AbstractFragment fragment, final Spinner spinnerToChange);
-
 }
