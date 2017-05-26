@@ -6,7 +6,6 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.afollestad.materialcab.MaterialCab;
-import com.chad.library.adapter.base.BaseQuickAdapter;
 
 import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.model.Company;

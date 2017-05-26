@@ -27,7 +27,6 @@ import corp.skaj.foretagskvitton.model.Purchase;
 import corp.skaj.foretagskvitton.model.Supplier;
 import corp.skaj.foretagskvitton.model.User;
 import corp.skaj.foretagskvitton.services.ImageBuilder;
-import corp.skaj.foretagskvitton.services.ReceiptScanner;
 
 public class ReceiptFragment extends AbstractFragment {
     public static final String ARCHIVE_BUNDLE = "PURCHASE_ID";
@@ -180,7 +179,7 @@ public class ReceiptFragment extends AbstractFragment {
         for (Supplier s : getUser().getSuppliers()) {
             suppliersNames.add(s.getName());
         }
-        suppliersNames.add("Ingen grossist");
+        suppliersNames.add(getContext().getString(R.string.no_supplier));
         return suppliersNames;
     }
 
@@ -206,7 +205,7 @@ public class ReceiptFragment extends AbstractFragment {
     }
 
     public String getSupplier() {
-        return mSupplier.getSelectedItem().toString().equals("Ingen grossist") ? null :
+        return mSupplier.getSelectedItem().toString().equals(R.string.no_supplier) ? null :
                 mSupplier.getSelectedItem().toString();
     }
 

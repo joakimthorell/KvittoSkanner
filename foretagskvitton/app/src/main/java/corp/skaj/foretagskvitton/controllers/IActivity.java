@@ -1,7 +1,6 @@
 package corp.skaj.foretagskvitton.controllers;
 
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 
 public interface IActivity {
 

@@ -1,6 +1,5 @@
 package corp.skaj.foretagskvitton.controllers;
 
-import android.content.Intent;
 import android.net.Uri;
 import android.view.View;
 import android.widget.AdapterView;
@@ -15,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import corp.skaj.foretagskvitton.R;
-import corp.skaj.foretagskvitton.activities.MainActivity;
 import corp.skaj.foretagskvitton.model.Category;
 import corp.skaj.foretagskvitton.model.Comment;
 import corp.skaj.foretagskvitton.model.Company;
@@ -25,8 +23,8 @@ import corp.skaj.foretagskvitton.model.Purchase;
 import corp.skaj.foretagskvitton.model.Supplier;
 import corp.skaj.foretagskvitton.model.User;
 import corp.skaj.foretagskvitton.view.AbstractFragment;
-import corp.skaj.foretagskvitton.view.IReceipt;
 import corp.skaj.foretagskvitton.view.IImage;
+import corp.skaj.foretagskvitton.view.IReceipt;
 import corp.skaj.foretagskvitton.view.ReceiptFragment;
 
 public class ReceiptController implements IReceipt {

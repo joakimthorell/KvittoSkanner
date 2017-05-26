@@ -20,7 +20,6 @@ import corp.skaj.foretagskvitton.view.ArchiveAdapter;
 import corp.skaj.foretagskvitton.view.ArchiveListFragment;
 import corp.skaj.foretagskvitton.view.CompanyAdapter;
 import corp.skaj.foretagskvitton.view.CompanyListFragment;
-import corp.skaj.foretagskvitton.view.IArchive;
 import corp.skaj.foretagskvitton.view.SupplierAdapter;
 import corp.skaj.foretagskvitton.view.SupplierListFragment;
 

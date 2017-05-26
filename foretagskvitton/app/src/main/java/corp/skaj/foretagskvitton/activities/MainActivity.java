@@ -5,18 +5,15 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 
 import com.roughike.bottombar.BottomBar;
 
 import java.util.List;
 
 import corp.skaj.foretagskvitton.R;
-import corp.skaj.foretagskvitton.controllers.ArchiveListFABController;
 import corp.skaj.foretagskvitton.controllers.IActivity;
 import corp.skaj.foretagskvitton.controllers.MainController;
 import corp.skaj.foretagskvitton.model.Company;
-import corp.skaj.foretagskvitton.model.Purchase;
 import corp.skaj.foretagskvitton.model.PurchaseList;
 import corp.skaj.foretagskvitton.model.Supplier;
 import corp.skaj.foretagskvitton.model.User;
@@ -53,8 +50,6 @@ public class MainActivity extends AbstractActivity
         mFragmentManger = getSupportFragmentManager();
 
         System.out.println(getIntent().getAction());
-
-        String action = getIntent().getAction();
 
         buildArchiveListFragment();
     }
