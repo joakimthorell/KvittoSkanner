@@ -66,8 +66,8 @@ public abstract class ToolbarController<T> implements MaterialCab.Callback {
 
     @Override
     public boolean onCabFinished(MaterialCab cab) {
-        for (int i = 0; i < selectedItems.size(); i++) {
-            Integer key = selectedItems.indexOfKey(i);
+        for (int i = selectedItems.size() - 1; i >= 0; i--) {
+            Integer key = selectedItems.keyAt(i);
             View view = selectedItems.get(key);
             setBackgroundColor(view, true);
         }
@@ -89,7 +89,7 @@ public abstract class ToolbarController<T> implements MaterialCab.Callback {
         view.setBackgroundColor(mContext.getResources().getColor(R.color.itemBackgroundSelected, null));
     }
 
-    private IData getDataHandler() {
+    protected IData getDataHandler() {
         return ((IData) mContext.getApplicationContext());
     }
 
@@ -98,13 +98,21 @@ public abstract class ToolbarController<T> implements MaterialCab.Callback {
         for (int i = selectedItems.size() - 1; i >= 0; i--) {
             Integer key = selectedItems.keyAt(i);
             T object = mAdapter.getData().get(key);
-            removeItemFromUser(object, user);
             setBackgroundColor(selectedItems.get(key), true);
             mAdapter.remove(key);
+            removeItemFromUser(object, user);
         }
         selectedItems.clear();
         mc.finish();
         getDataHandler().saveUser();
+    }
+
+    protected int getSizeSelectedItems() {
+        return selectedItems.size();
+    }
+
+    protected Context getContext() {
+        return mContext;
     }
 
     protected abstract void removeItemFromUser(T object, User user);

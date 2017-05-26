@@ -26,8 +26,9 @@ public class CompanyAdapter extends BaseQuickAdapter<Company, BaseViewHolder> {
                 .buildRect(item.getName().substring(0, 1), ColorGenerator.MATERIAL.getRandomColor());
 
         helper.setText(R.id.list_item_company_company_name, item.getName())
+                .setText(R.id.list_item_company_num_of_purchases, String.valueOf(numOfPurchases(item)))
                 .setImageDrawable(R.id.list_item_company_circular_image, image)
-        .setText(R.id.list_item_company_num_of_purchases, String.valueOf(numOfPurchases(item)));
+                .addOnClickListener(R.id.list_item_company_circular_image);
 
 
     }

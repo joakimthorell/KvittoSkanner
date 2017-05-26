@@ -189,7 +189,11 @@ public class WizardPageBuilder {
     private Company findCompany(int nCompanies, String sCard, User user) {
         if (nCompanies > 1 && sCard != null) {
             Card card = getCard(sCard);
-            return user.getCompany(card);
+            Company c = user.getCompany(card);
+            if (c == null) {
+                return null;
+            }
+            return c;
 
         } else if (nCompanies == 1) {
             return user.getCompanies().get(0);

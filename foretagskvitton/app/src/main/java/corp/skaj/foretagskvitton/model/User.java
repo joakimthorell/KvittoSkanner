@@ -52,13 +52,14 @@ public class User {
 
     public Company getCompany(Card card) {
         for (Company company : companies) {
-            Card c = company.getCard(card.getCard());
-            if (c.getCard() == card.getCard()) {
-                return company;
-            }
+            for (Card c : company.getCards())
+                if (c.getCard() == card.getCard()) {
+                    return company;
+                }
         }
         return null;
     }
+
 
     public Company getCompany(Purchase purchase) {
         for (Company company : companies) {

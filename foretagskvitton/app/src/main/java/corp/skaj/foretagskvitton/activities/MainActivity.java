@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 
 import com.roughike.bottombar.BottomBar;
 
@@ -52,20 +51,12 @@ public class MainActivity extends AbstractActivity
 
         System.out.println(getIntent().getAction());
 
-        String action = getIntent().getAction();
-
-        if (CompanyActivity.FROM_COMPANY_ACTIVITY.equals(action)) {
-            if (mController.setSelectedTab(R.id.action_business)) {
-                return;
-            }
-        }
-
         buildArchiveListFragment();
     }
 
     @Override
     public void buildCompanyFragment() {
-        CompanyListFragment fragment = ListFragmentFactory.createCompanyList(this, getCompanies());
+        CompanyListFragment fragment = ListFragmentFactory.createCompanyList(this, getCompanies(), this);
         mController.setCompanyAdapterListener(fragment.getAdapter(), CompanyActivity.class, COMPANY_KEY);
         replaceFragment(fragment);
     }
@@ -82,11 +73,6 @@ public class MainActivity extends AbstractActivity
         SupplierListFragment fragment = ListFragmentFactory.createSupplierList(this, getSuppliers());
         mController.setSupplierAdapterListener(fragment.getAdapter(), SUPPLIER_KEY);
         replaceFragment(fragment);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // only coming back from CompanyActivity matters, else we should just show archiveList
     }
 
     @Override
@@ -115,7 +101,7 @@ public class MainActivity extends AbstractActivity
         mFragmentManger = getSupportFragmentManager();
         boolean fragmentPopped = mFragmentManger.popBackStackImmediate (backStateName, 0);
 
-        if (!fragmentPopped){ //fragment not in back stack, create it.
+        if (!fragmentPopped){ //fragment not in back stack, set it it.
             FragmentTransaction ft = mFragmentManger.beginTransaction();
             ft.replace(R.id.main_fragment_container, fragment);
             ft.addToBackStack(backStateName);
@@ -133,5 +119,10 @@ public class MainActivity extends AbstractActivity
         intent.setAction(action);
         intent.putExtra(key, data);
         startActivityForResult(intent, requestCode);
+    }
+
+    @Override
+    public void reloadUI(Fragment fragment) {
+
     }
 }

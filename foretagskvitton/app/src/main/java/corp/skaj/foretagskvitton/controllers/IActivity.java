@@ -1,6 +1,6 @@
 package corp.skaj.foretagskvitton.controllers;
 
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.Fragment;
 
 public interface IActivity {
 
@@ -15,4 +15,7 @@ public interface IActivity {
                                    String action,
                                    String data,
                                    String key);
+
+    void reloadUI(Fragment fragment);
+
 }

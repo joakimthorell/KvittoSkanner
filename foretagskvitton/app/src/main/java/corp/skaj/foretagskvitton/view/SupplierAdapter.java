@@ -23,6 +23,7 @@ public class SupplierAdapter extends BaseQuickAdapter<Supplier, BaseViewHolder> 
                 .buildRoundRect(fLetter, ColorGenerator.MATERIAL.getRandomColor(), 10);
 
         helper.setText(R.id.list_item_supplier_company_name, supplier.getName())
-        .setImageDrawable(R.id.list_item_supplier_circular_image, circleImage);
+        .setImageDrawable(R.id.list_item_supplier_circular_image, circleImage)
+        .addOnClickListener(R.id.list_item_supplier_circular_image);
     }
 }

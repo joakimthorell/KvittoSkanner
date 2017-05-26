@@ -1,7 +1,6 @@
 package corp.skaj.foretagskvitton.controllers;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -20,7 +19,6 @@ import corp.skaj.foretagskvitton.model.Product;
 import corp.skaj.foretagskvitton.model.Purchase;
 import corp.skaj.foretagskvitton.model.Receipt;
 import corp.skaj.foretagskvitton.view.ArchiveListFragment;
-import corp.skaj.foretagskvitton.view.IArchive;
 
 public class ArchiveListFABController extends FABController {
 

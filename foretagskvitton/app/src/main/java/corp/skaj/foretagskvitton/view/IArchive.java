@@ -7,7 +7,7 @@ import corp.skaj.foretagskvitton.model.Employee;
 
 public interface IArchive {
 
-    void bindEmployeeMenuItem(MenuItem item, final ArchiveAdapter adapter, final Employee employee);
+    void bindEmployeeMenuItem(MenuItem item, final Employee employee);
 
-    void bindCompanyMenuItem(MenuItem item, final ArchiveAdapter adapter, final Company company);
+    void bindCompanyMenuItem(MenuItem item, final Company company);
 }

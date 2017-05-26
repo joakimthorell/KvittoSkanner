@@ -85,11 +85,11 @@
     <string name="text_employee">Anställd</string>
     <string name="text_created">Skapat</string>
     <string name="text_not_saved">Kunde inte spara</string>
+    <string name="specific_cant_remove_company">Du kan inte radera alla företag, ett måste alltid finnas kvar</string>
     <string name="employee_name">Skriv den anställdes namn:</string>
     <string name="card_number">Skriv sista 4 siffrorna på företagskortet:</string>
     <string name="edit">Editera</string>
     <string name="exit">Avbryt</string>
-    <string name="class_cast_excep">Activity must implement PageFragmentCallbacks</string>
     <string name="no_supplier">Ingen grossist</string>
     <string name="no_card">Inget kort</string>
 
