@@ -8,7 +8,7 @@ import com.google.gson.Gson;
 
 import corp.skaj.foretagskvitton.model.Company;
 import corp.skaj.foretagskvitton.model.Employee;
-import corp.skaj.foretagskvitton.model.IData;
+import corp.skaj.foretagskvitton.model.IDataHandler;
 import corp.skaj.foretagskvitton.model.PurchaseList;
 import corp.skaj.foretagskvitton.model.User;
 
@@ -16,7 +16,7 @@ import corp.skaj.foretagskvitton.model.User;
  * FileHandler class, allowing data to be saved locally.
  * Holds an instance of user, allowing model data to be saved.
  */
-public class DataHandler extends Application implements IData {
+public class DataHandler extends Application implements IDataHandler {
 
     private User mUser;
 

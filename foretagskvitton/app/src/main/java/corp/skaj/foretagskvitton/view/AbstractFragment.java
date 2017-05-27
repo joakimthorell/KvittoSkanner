@@ -10,7 +10,7 @@ import java.util.List;
 import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.model.Company;
 import corp.skaj.foretagskvitton.model.Employee;
-import corp.skaj.foretagskvitton.model.IData;
+import corp.skaj.foretagskvitton.model.IDataHandler;
 import corp.skaj.foretagskvitton.model.Purchase;
 import corp.skaj.foretagskvitton.model.User;
 
@@ -41,8 +41,8 @@ public class AbstractFragment extends Fragment {
         return getUser().getCompany(purchase);
     }
 
-    protected IData getDataHandler() {
-        return (IData) getContext().getApplicationContext();
+    protected IDataHandler getDataHandler() {
+        return (IDataHandler) getContext().getApplicationContext();
     }
 
     protected User getUser() {

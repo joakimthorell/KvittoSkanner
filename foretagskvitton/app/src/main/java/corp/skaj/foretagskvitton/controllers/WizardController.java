@@ -20,7 +20,7 @@ import corp.skaj.foretagskvitton.model.Category;
 import corp.skaj.foretagskvitton.model.Comment;
 import corp.skaj.foretagskvitton.model.Company;
 import corp.skaj.foretagskvitton.model.Employee;
-import corp.skaj.foretagskvitton.model.IData;
+import corp.skaj.foretagskvitton.model.IDataHandler;
 import corp.skaj.foretagskvitton.model.Product;
 import corp.skaj.foretagskvitton.model.Purchase;
 import corp.skaj.foretagskvitton.model.Receipt;
@@ -38,7 +38,7 @@ public class WizardController {
     private Button mPrevButton;
     private boolean mEditingAfterReview;
     private boolean mConsumePageSelectedEvent;
-    private IData mDataHandler;
+    private IDataHandler mDataHandler;
 
     public WizardController(Context context, Button nextButton, Button prevButton,
                             ViewPager viewpager, PagerAdapter pagerAdapter, WizardView wizardView) {
@@ -48,7 +48,7 @@ public class WizardController {
         mPager = viewpager;
         mPagerAdapter = pagerAdapter;
         mWizardView = wizardView;
-        mDataHandler = (IData) context.getApplicationContext();
+        mDataHandler = (IDataHandler) context.getApplicationContext();
     }
 
     public void initViewPagerListener(final StepPagerStrip mStepPagerStrip) {
@@ -174,8 +174,8 @@ public class WizardController {
     }
 
     private void resetSavedData() {
-        mDataHandler.removeData(IData.IMAGE_URI_KEY);
-        mDataHandler.removeData(IData.COLLECTED_STRINGS_KEY);
+        mDataHandler.removeData(IDataHandler.IMAGE_URI_KEY);
+        mDataHandler.removeData(IDataHandler.COLLECTED_STRINGS_KEY);
     }
 
     private Purchase buildPurchase(Receipt receipt, String supplierAsString, String purchaseType) {
@@ -189,7 +189,7 @@ public class WizardController {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
         double total = Double.parseDouble(totalString);
-        String URIString = mDataHandler.readData(IData.IMAGE_URI_KEY, String.class);
+        String URIString = mDataHandler.readData(IDataHandler.IMAGE_URI_KEY, String.class);
         return new Receipt(product, calendar, total, URIString);
     }
 

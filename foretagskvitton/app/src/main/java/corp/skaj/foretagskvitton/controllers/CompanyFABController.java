@@ -12,11 +12,11 @@ import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.model.Card;
 import corp.skaj.foretagskvitton.model.Company;
 import corp.skaj.foretagskvitton.model.Employee;
-import corp.skaj.foretagskvitton.model.IData;
+import corp.skaj.foretagskvitton.model.IDataHandler;
 import corp.skaj.foretagskvitton.view.CompanyFragment;
 import corp.skaj.foretagskvitton.view.MultiDialog;
 
-public class CompanyFABController extends FABController
+public class CompanyFABController extends AbstractFABController
         implements MultiDialog.Callback {
 
     private boolean mCreateCard;
@@ -76,7 +76,7 @@ public class CompanyFABController extends FABController
     @Override
     public void dialogData(String newData, String oldData, Bundle extras) {
         if (newData != null && newData.length() > 0) {
-            IData handler = ((IData) getContext().getApplicationContext());
+            IDataHandler handler = ((IDataHandler) getContext().getApplicationContext());
             if (mCreateCard) {
                 mCreateCard = false;
                 if (isCard(newData)) {

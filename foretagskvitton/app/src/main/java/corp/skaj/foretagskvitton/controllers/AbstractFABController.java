@@ -6,12 +6,12 @@ import com.getbase.floatingactionbutton.FloatingActionsMenu;
 
 import corp.skaj.foretagskvitton.view.IFAB;
 
-public abstract class FABController implements IFAB {
+public abstract class AbstractFABController implements IFAB {
 
     private Context mContext;
     private Class<?> mNextActivity;
 
-    protected FABController(Context context, Class<?> nextActivity) {
+    protected AbstractFABController(Context context, Class<?> nextActivity) {
         mContext = context;
         mNextActivity = nextActivity;
     }

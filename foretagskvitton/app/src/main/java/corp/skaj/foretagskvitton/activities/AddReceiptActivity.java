@@ -18,7 +18,7 @@ import java.util.List;
 
 import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.controllers.ArchiveListFABController;
-import corp.skaj.foretagskvitton.model.IData;
+import corp.skaj.foretagskvitton.model.IDataHandler;
 import corp.skaj.foretagskvitton.services.FileHandler;
 import corp.skaj.foretagskvitton.services.IFileHandler;
 import corp.skaj.foretagskvitton.services.ReceiptScanner;
@@ -117,12 +117,12 @@ public class AddReceiptActivity extends AbstractActivity implements IFileHandler
                 try {
                     List<String> strings = ReceiptScanner.collectStringsFromURI(context, URI);
                     String uriAsString = URI.toString();
-                    String oldURI = getDataHandler().readData(IData.IMAGE_URI_KEY, String.class);
+                    String oldURI = getDataHandler().readData(IDataHandler.IMAGE_URI_KEY, String.class);
                     if (oldURI != null) {
                         mFileHandler.removeOldFile(oldURI);
                     }
-                    getDataHandler().writeData(IData.IMAGE_URI_KEY, uriAsString);
-                    getDataHandler().writeData(IData.COLLECTED_STRINGS_KEY, strings);
+                    getDataHandler().writeData(IDataHandler.IMAGE_URI_KEY, uriAsString);
+                    getDataHandler().writeData(IDataHandler.COLLECTED_STRINGS_KEY, strings);
                     endLoadingBar();
                 } catch (IOException io) {
                     System.out.println("TextCollector is not operational");

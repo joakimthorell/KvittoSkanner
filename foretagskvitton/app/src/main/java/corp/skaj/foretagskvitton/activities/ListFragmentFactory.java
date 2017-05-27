@@ -13,7 +13,7 @@ import corp.skaj.foretagskvitton.controllers.IActivity;
 import corp.skaj.foretagskvitton.controllers.SupplierListFABController;
 import corp.skaj.foretagskvitton.controllers.SupplierToolbarController;
 import corp.skaj.foretagskvitton.model.Company;
-import corp.skaj.foretagskvitton.model.IData;
+import corp.skaj.foretagskvitton.model.IDataHandler;
 import corp.skaj.foretagskvitton.model.PurchaseList;
 import corp.skaj.foretagskvitton.model.Supplier;
 import corp.skaj.foretagskvitton.view.ArchiveAdapter;
@@ -28,7 +28,7 @@ public class ListFragmentFactory {
     private ListFragmentFactory() {
     }
 
-    public static ArchiveListFragment createArchiveList(Class<?> archiveActivity, Context context, PurchaseList purchases, IData dataHandler) {
+    public static ArchiveListFragment createArchiveList(Class<?> archiveActivity, Context context, PurchaseList purchases, IDataHandler dataHandler) {
         ArchiveAdapter aa = new ArchiveAdapter(R.layout.archive_list_item, purchases, dataHandler);
         ArchiveToolbarController atc = new ArchiveToolbarController(context, aa);
         ArchiveListFABController fabController = new ArchiveListFABController(context, archiveActivity, (IActivity) context);

@@ -11,9 +11,8 @@ import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.model.Company;
 import corp.skaj.foretagskvitton.model.User;
 import corp.skaj.foretagskvitton.view.CompanyAdapter;
-import corp.skaj.foretagskvitton.view.CompanyListFragment;
 
-public class CompanyToolbarController extends ToolbarController<Company> {
+public class CompanyToolbarController extends AbstractToolbarController<Company> {
 
     public CompanyToolbarController(Context context, CompanyAdapter adapter) {
         super(context,

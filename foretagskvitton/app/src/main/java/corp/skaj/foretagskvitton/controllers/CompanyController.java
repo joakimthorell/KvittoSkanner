@@ -1,20 +1,15 @@
 package corp.skaj.foretagskvitton.controllers;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
-import android.text.Editable;
 import android.text.Layout;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.AlignmentSpan;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
-import java.text.ParseException;
 import java.util.List;
 
 import corp.skaj.foretagskvitton.R;
@@ -22,7 +17,7 @@ import corp.skaj.foretagskvitton.model.Card;
 import corp.skaj.foretagskvitton.model.Comment;
 import corp.skaj.foretagskvitton.model.Company;
 import corp.skaj.foretagskvitton.model.Employee;
-import corp.skaj.foretagskvitton.model.IData;
+import corp.skaj.foretagskvitton.model.IDataHandler;
 import corp.skaj.foretagskvitton.model.User;
 import corp.skaj.foretagskvitton.view.CompanyFragment;
 import corp.skaj.foretagskvitton.view.ICompany;
@@ -32,10 +27,10 @@ public class CompanyController implements ICompany, MultiDialog.Callback {
     private static final String mEditEmployee = "EDIT_EMPLOYEE";
     private static final String BUNDLE_KEY = "internal_bundle_key";
     private CompanyFragment mCompanyFragment;
-    private IData mDataHandler;
+    private IDataHandler mDataHandler;
     private Context mContext;
 
-    public CompanyController(IData dataHandler, Context context, CompanyFragment companyFragment) {
+    public CompanyController(IDataHandler dataHandler, Context context, CompanyFragment companyFragment) {
         this.mDataHandler = dataHandler;
         this.mContext = context;
         this.mCompanyFragment = companyFragment;

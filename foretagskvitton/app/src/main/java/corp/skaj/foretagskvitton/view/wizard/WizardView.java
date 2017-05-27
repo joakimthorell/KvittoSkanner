@@ -25,7 +25,7 @@ import com.tech.freak.wizardpager.model.PageList;
 
 import java.util.List;
 
-import corp.skaj.foretagskvitton.model.IData;
+import corp.skaj.foretagskvitton.model.IDataHandler;
 import corp.skaj.foretagskvitton.model.User;
 
 public class WizardView extends AbstractWizardModel implements ModelCallbacks {
@@ -37,9 +37,9 @@ public class WizardView extends AbstractWizardModel implements ModelCallbacks {
 
     @Override
     protected PageList onNewRootPageList() {
-        IData dataHandler = (IData)mContext.getApplicationContext();
+        IDataHandler dataHandler = (IDataHandler)mContext.getApplicationContext();
         User user = dataHandler.getUser();
-        List<String> strings = (List<String>) dataHandler.readData(IData.COLLECTED_STRINGS_KEY, List.class);
+        List<String> strings = (List<String>) dataHandler.readData(IDataHandler.COLLECTED_STRINGS_KEY, List.class);
         mPageBuilder = new WizardPageBuilder(user, this, strings);
         return mPageBuilder.getPages();
     }

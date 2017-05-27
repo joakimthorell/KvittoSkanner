@@ -18,7 +18,7 @@ import corp.skaj.foretagskvitton.model.Category;
 import corp.skaj.foretagskvitton.model.Comment;
 import corp.skaj.foretagskvitton.model.Company;
 import corp.skaj.foretagskvitton.model.Employee;
-import corp.skaj.foretagskvitton.model.IData;
+import corp.skaj.foretagskvitton.model.IDataHandler;
 import corp.skaj.foretagskvitton.model.Purchase;
 import corp.skaj.foretagskvitton.model.Supplier;
 import corp.skaj.foretagskvitton.model.User;
@@ -30,10 +30,10 @@ import corp.skaj.foretagskvitton.view.ReceiptFragment;
 public class ReceiptController implements IReceipt {
     private ReceiptFragment fragment;
     private String purchaseId;
-    private IData dataHandler;
+    private IDataHandler dataHandler;
     private IImage mListener;
 
-    public ReceiptController(IData dataHandler, String purId, ReceiptFragment fragment, IImage listener) {
+    public ReceiptController(IDataHandler dataHandler, String purId, ReceiptFragment fragment, IImage listener) {
         this.dataHandler = dataHandler;
         purchaseId = purId;
         this.fragment = fragment;

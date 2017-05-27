@@ -14,7 +14,7 @@ import corp.skaj.foretagskvitton.model.User;
 import corp.skaj.foretagskvitton.view.ArchiveAdapter;
 import corp.skaj.foretagskvitton.view.IArchive;
 
-public class ArchiveToolbarController extends ToolbarController<Purchase>
+public class ArchiveToolbarController extends AbstractToolbarController<Purchase>
     implements IArchive {
 
     private ArchiveAdapter mAdapter;

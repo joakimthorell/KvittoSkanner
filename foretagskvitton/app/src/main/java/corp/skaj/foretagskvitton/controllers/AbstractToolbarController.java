@@ -11,16 +11,16 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 
 import corp.skaj.foretagskvitton.R;
-import corp.skaj.foretagskvitton.model.IData;
+import corp.skaj.foretagskvitton.model.IDataHandler;
 import corp.skaj.foretagskvitton.model.User;
 
-public abstract class ToolbarController<T> implements MaterialCab.Callback {
+public abstract class AbstractToolbarController<T> implements MaterialCab.Callback {
     private SparseArray<View> selectedItems;
     private MaterialCab mc;
     private Context mContext;
     private BaseQuickAdapter<T, BaseViewHolder> mAdapter;
 
-    protected ToolbarController(Context context, MaterialCab mc) {
+    protected AbstractToolbarController(Context context, MaterialCab mc) {
         mContext = context;
         this.mc = mc;
         selectedItems = new SparseArray<>();
@@ -37,7 +37,7 @@ public abstract class ToolbarController<T> implements MaterialCab.Callback {
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
                 toggleItem(((View) view.getParent()), position);
                 if (selectedItems.size() > 0) {
-                    mc.start(ToolbarController.this);
+                    mc.start(AbstractToolbarController.this);
                 } else {
                     mc.finish();
                 }
@@ -89,8 +89,8 @@ public abstract class ToolbarController<T> implements MaterialCab.Callback {
         view.setBackgroundColor(mContext.getResources().getColor(R.color.itemBackgroundSelected, null));
     }
 
-    protected IData getDataHandler() {
-        return ((IData) mContext.getApplicationContext());
+    protected IDataHandler getDataHandler() {
+        return ((IDataHandler) mContext.getApplicationContext());
     }
 
     protected void removeSelectedItems() {

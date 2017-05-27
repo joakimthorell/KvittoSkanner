@@ -2,11 +2,11 @@ package corp.skaj.foretagskvitton.activities;
 
 import android.support.v7.app.AppCompatActivity;
 
-import corp.skaj.foretagskvitton.model.IData;
+import corp.skaj.foretagskvitton.model.IDataHandler;
 
 public abstract class AbstractActivity extends AppCompatActivity {
 
-    protected IData getDataHandler() {
-        return (IData) getApplicationContext();
+    protected IDataHandler getDataHandler() {
+        return (IDataHandler) getApplicationContext();
     }
 }

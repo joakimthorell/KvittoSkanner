@@ -14,7 +14,7 @@ import com.roughike.bottombar.OnTabSelectListener;
 import java.util.List;
 
 import corp.skaj.foretagskvitton.R;
-import corp.skaj.foretagskvitton.model.IData;
+import corp.skaj.foretagskvitton.model.IDataHandler;
 import corp.skaj.foretagskvitton.model.Supplier;
 import corp.skaj.foretagskvitton.model.User;
 import corp.skaj.foretagskvitton.view.ArchiveAdapter;
@@ -93,7 +93,7 @@ public class MainController implements MultiDialog.Callback {
     }
 
     public void showEditSupplierDialog(String data) {
-        IData handler = getHandler();
+        IDataHandler handler = getHandler();
         User user = handler.getUser();
         Supplier supplier = user.getSupplier(data);
 
@@ -122,7 +122,7 @@ public class MainController implements MultiDialog.Callback {
     @Override
     public void dialogData(String newData, String oldData, Bundle extras) {
         if (newData != null && newData.length() > 0) {
-            IData handler = getHandler();
+            IDataHandler handler = getHandler();
             Supplier s = handler.getUser().getSupplier(oldData);
             s.setName(newData);
 
@@ -138,7 +138,7 @@ public class MainController implements MultiDialog.Callback {
         Toast.makeText(mContext, mContext.getString(R.string.text_not_saved), Toast.LENGTH_SHORT).show();
     }
 
-    private IData getHandler() {
-        return ((IData) mContext.getApplicationContext());
+    private IDataHandler getHandler() {
+        return ((IDataHandler) mContext.getApplicationContext());
     }
 }

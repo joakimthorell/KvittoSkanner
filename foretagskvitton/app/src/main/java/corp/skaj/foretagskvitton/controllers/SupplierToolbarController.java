@@ -11,7 +11,7 @@ import corp.skaj.foretagskvitton.model.Supplier;
 import corp.skaj.foretagskvitton.model.User;
 import corp.skaj.foretagskvitton.view.SupplierAdapter;
 
-public class SupplierToolbarController extends ToolbarController<Supplier> {
+public class SupplierToolbarController extends AbstractToolbarController<Supplier> {
 
     public SupplierToolbarController(Context context, SupplierAdapter adapter) {
         super(context,

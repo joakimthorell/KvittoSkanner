@@ -12,11 +12,11 @@ import java.util.List;
 import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.model.Company;
 import corp.skaj.foretagskvitton.model.Employee;
-import corp.skaj.foretagskvitton.model.IData;
+import corp.skaj.foretagskvitton.model.IDataHandler;
 import corp.skaj.foretagskvitton.view.CompanyListFragment;
 import corp.skaj.foretagskvitton.view.MultiDialog;
 
-public class CompanyListFABController extends FABController
+public class CompanyListFABController extends AbstractFABController
         implements MultiDialog.Callback {
 
     public CompanyListFABController(Context context) {
@@ -54,7 +54,7 @@ public class CompanyListFABController extends FABController
     @Override
     public void dialogData(String newData, String oldData, Bundle extras) {
         if (newData != null && newData.length() > 0) {
-            IData handler = ((IData) getContext().getApplicationContext());
+            IDataHandler handler = ((IDataHandler) getContext().getApplicationContext());
             Company c = new Company(newData);
             Employee e = new Employee(handler.getUser().getName());
             c.addEmployee(e);
@@ -70,7 +70,7 @@ public class CompanyListFABController extends FABController
         Toast.makeText(getContext(), getContext().getString(R.string.text_not_saved), Toast.LENGTH_SHORT).show();
     }
 
-    private void updateCompanyList(IData handler) {
+    private void updateCompanyList(IDataHandler handler) {
         List<Company> companies = handler.getUser().getCompanies();
         AppCompatActivity activity = (AppCompatActivity) getContext();
         CompanyListFragment fragment = (CompanyListFragment) activity.getSupportFragmentManager().findFragmentById(R.id.main_fragment_container);

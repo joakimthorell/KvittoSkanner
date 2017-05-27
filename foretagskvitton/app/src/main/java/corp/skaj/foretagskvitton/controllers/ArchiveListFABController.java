@@ -14,13 +14,13 @@ import java.util.Random;
 
 import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.model.Category;
-import corp.skaj.foretagskvitton.model.IData;
+import corp.skaj.foretagskvitton.model.IDataHandler;
 import corp.skaj.foretagskvitton.model.Product;
 import corp.skaj.foretagskvitton.model.Purchase;
 import corp.skaj.foretagskvitton.model.Receipt;
 import corp.skaj.foretagskvitton.view.ArchiveListFragment;
 
-public class ArchiveListFABController extends FABController {
+public class ArchiveListFABController extends AbstractFABController {
 
     public static final int REQUEST_WIZARD = 9873;
 
@@ -92,7 +92,7 @@ public class ArchiveListFABController extends FABController {
         demoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                IData dataHandler = (IData) getContext().getApplicationContext();
+                IDataHandler dataHandler = (IDataHandler) getContext().getApplicationContext();
                 createNewReceipt();
                 AppCompatActivity activity = (AppCompatActivity) getContext();
                 ArchiveListFragment fragment = (ArchiveListFragment) activity.getSupportFragmentManager().findFragmentById(R.id.main_fragment_container);
@@ -103,7 +103,7 @@ public class ArchiveListFABController extends FABController {
     }
 
     private void createNewReceipt() {
-        IData handler = (IData) getContext().getApplicationContext();
+        IDataHandler handler = (IDataHandler) getContext().getApplicationContext();
         Random rand = new Random();
 
         double total = rand.nextInt(999) + 1;

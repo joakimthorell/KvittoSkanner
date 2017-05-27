@@ -12,15 +12,15 @@ import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.model.Category;
 import corp.skaj.foretagskvitton.model.Company;
 import corp.skaj.foretagskvitton.model.Employee;
-import corp.skaj.foretagskvitton.model.IData;
+import corp.skaj.foretagskvitton.model.IDataHandler;
 import corp.skaj.foretagskvitton.model.Purchase;
 import corp.skaj.foretagskvitton.model.PurchaseList;
 import corp.skaj.foretagskvitton.model.User;
 
 public class ArchiveAdapter extends BaseQuickAdapter<Purchase, BaseViewHolder> {
-    private IData dataHandler;
+    private IDataHandler dataHandler;
 
-    public ArchiveAdapter(int layoutId, PurchaseList purchases, IData dataHandler) {
+    public ArchiveAdapter(int layoutId, PurchaseList purchases, IDataHandler dataHandler) {
         super(layoutId, purchases);
         this.dataHandler = dataHandler;
     }

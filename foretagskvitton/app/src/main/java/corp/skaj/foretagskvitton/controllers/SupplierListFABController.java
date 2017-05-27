@@ -10,13 +10,13 @@ import com.getbase.floatingactionbutton.FloatingActionsMenu;
 import java.util.List;
 
 import corp.skaj.foretagskvitton.R;
-import corp.skaj.foretagskvitton.model.IData;
+import corp.skaj.foretagskvitton.model.IDataHandler;
 import corp.skaj.foretagskvitton.model.Supplier;
 import corp.skaj.foretagskvitton.model.User;
 import corp.skaj.foretagskvitton.view.MultiDialog;
 import corp.skaj.foretagskvitton.view.SupplierListFragment;
 
-public class SupplierListFABController extends FABController
+public class SupplierListFABController extends AbstractFABController
     implements MultiDialog.Callback {
 
     public SupplierListFABController(Context context) {
@@ -55,7 +55,7 @@ public class SupplierListFABController extends FABController
     public void dialogData(String newData, String oldData, Bundle extras) {
         if (newData != null && newData.length() > 0) {
             Supplier s = new Supplier(newData);
-            IData handler = ((IData) getContext().getApplicationContext());
+            IDataHandler handler = ((IDataHandler) getContext().getApplicationContext());
             User user = handler.getUser();
             user.addSupplier(s);
             handler.saveUser();
