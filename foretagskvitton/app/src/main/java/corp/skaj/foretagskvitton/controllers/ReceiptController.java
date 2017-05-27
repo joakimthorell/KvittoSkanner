@@ -47,8 +47,8 @@ public class ReceiptController implements IReceipt {
         purchase.getReceipt().setTotal(fragment.getPrice());
         // category 
         purchase.getReceipt().getProducts().get(0).setCategory(Category.valueOf(fragment.getCategory().toUpperCase()));
-        // tax 
-        purchase.getReceipt().getProducts().get(0).setTax(fragment.getTax());
+        // vat 
+        purchase.getReceipt().getProducts().get(0).setTax(fragment.getVat());
         // supplier
         Supplier updatedSupplier = user.getSupplier(fragment.getSupplier());
         purchase.setSupplier(updatedSupplier);
@@ -57,19 +57,8 @@ public class ReceiptController implements IReceipt {
         // company 
         Company updatedCompany = user.getCompany(fragment.getCompany());
         //comments
-        if (purchase.getComments().size() < 1) {
-            if (fragment.getComment().length() > 0) {
-                Comment c = new Comment(fragment.getComment());
-                purchase.addComment(c);
-            }
-        } else {
-            purchase.getComments().get(0).setComment(fragment.getComment());
-        }
-        //date
-        /*
-        DateFormat newDate = new SimpleDateFormat("yyyy-mm-dd");
-        fragment.getDate();
-*/
+        updateComment(purchase);
+
         Employee oldPurchaseOwner = user.getCompany(purchase).getEmployee(purchase);
         Employee newPurchaseOwner = updatedCompany.getEmployee(fragment.getEmployee());
 
@@ -78,6 +67,17 @@ public class ReceiptController implements IReceipt {
         user.getCompany(purchase).removeEmployee(oldPurchaseOwner);
 
         dataHandler.saveUser();
+    }
+
+    private void updateComment(Purchase purchase) {
+        if (purchase.getComments().size() < 1) {
+            if (fragment.getComment().length() > 0) {
+                Comment c = new Comment(fragment.getComment());
+                purchase.addComment(c);
+            }
+        } else {
+            purchase.getComments().get(0).setComment(fragment.getComment());
+        }
     }
 
     private Purchase.PurchaseType selectCorrectPurchase() {
@@ -122,13 +122,8 @@ public class ReceiptController implements IReceipt {
                 for (Employee e : c.getEmployees()) {
                     employeeNames.add(e.getName());
                 }
-
                 ArrayAdapter<String> employeeAdapter = af.buildArrayAdapter(employeeNames);
                 af.setArrayAdapter(employeeAdapter, changingSpinner);
-
-                //If we want a standard user, fix code below
-                //Employee e = getUser().getCompanies().get(position).getEmployee(mPurchase);
-                //mEmployees.setSelection(getEmployees().indexOf(e));
             }
 
             @Override

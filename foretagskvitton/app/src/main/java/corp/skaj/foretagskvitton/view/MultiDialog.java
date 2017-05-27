@@ -10,6 +10,7 @@ import android.widget.EditText;
 import corp.skaj.foretagskvitton.R;
 
 public class MultiDialog {
+
     public enum Type {
         CREATER,
         EDITOR

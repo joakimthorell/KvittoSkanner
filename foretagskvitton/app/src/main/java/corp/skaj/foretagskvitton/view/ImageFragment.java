@@ -19,7 +19,6 @@ import corp.skaj.foretagskvitton.R;
 public class ImageFragment extends Fragment {
     private static final String BUNDLE_KEY = "key_to_bundle";
 
-
     public ImageFragment() {
         // Required empty public constructor
     }

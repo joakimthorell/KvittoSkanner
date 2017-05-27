@@ -22,7 +22,7 @@ import corp.skaj.foretagskvitton.model.Comment;
 import corp.skaj.foretagskvitton.model.Company;
 
 public class CompanyFragment extends AbstractFragment {
-    private final static String COMPANY_BUNDLE = "COMPANY_ID";
+    private final static String COMPANY_BUNDLE = "company_id";
     private Spinner mEmployees;
     private Spinner mCards;
     private TextView mComment;

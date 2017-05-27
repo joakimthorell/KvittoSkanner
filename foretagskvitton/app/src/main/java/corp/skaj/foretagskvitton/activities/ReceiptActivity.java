@@ -14,10 +14,9 @@ import corp.skaj.foretagskvitton.view.ImageFragment;
 import corp.skaj.foretagskvitton.view.ReceiptFragment;
 
 public class ReceiptActivity extends AbstractActivity implements IImage {
-
+    private FragmentManager mFragmentManager;
     private boolean isShowingImage;
     private String mPurchaseId;
-    private FragmentManager mFragmentManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

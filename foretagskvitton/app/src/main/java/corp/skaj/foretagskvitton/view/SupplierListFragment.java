@@ -18,7 +18,6 @@ import com.getbase.floatingactionbutton.FloatingActionsMenu;
  * or add more buttons into it.
  */
 public class SupplierListFragment extends ListFragment {
-
     private SupplierAdapter mAdapter;
 
     public SupplierListFragment() {
@@ -55,6 +54,7 @@ public class SupplierListFragment extends ListFragment {
         return mAdapter;
     }
 
+    @Override
     protected BaseQuickAdapter getBaseAdapter() {
         return getAdapter();
     }

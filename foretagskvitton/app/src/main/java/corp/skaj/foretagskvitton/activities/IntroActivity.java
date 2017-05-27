@@ -8,14 +8,11 @@ import com.github.paolorotolo.appintro.AppIntroFragment;
 
 import corp.skaj.foretagskvitton.R;
 
-/**
- * Class takes care of the application intro
- */
 public class IntroActivity extends AppIntro {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         addSlide(AppIntroFragment.newInstance(getString(R.string.intro_welcome), getString(R.string.intro_welcometext),
                 R.mipmap.ic_launcher_round, getColor(R.color.colorAccent)));
         addSlide(AppIntroFragment.newInstance(getString(R.string.intro_archive), getString(R.string.intro_archivetext),

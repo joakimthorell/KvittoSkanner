@@ -23,10 +23,10 @@ import corp.skaj.foretagskvitton.view.SupplierListFragment;
 
 public class MainActivity extends AbstractActivity
         implements IActivity {
+
     public static final String COMPANY_KEY = "COMPANY_KEY";
     public static final String ARCHIVE_KEY = "ARCHIVE_KEY";
     public static final String SUPPLIER_KEY = "SUPPLIER_KEY";
-
     private MainController mController;
     private FragmentManager mFragmentManger;
 
@@ -118,5 +118,4 @@ public class MainActivity extends AbstractActivity
         intent.putExtra(key, data);
         startActivityForResult(intent, requestCode);
     }
-
 }

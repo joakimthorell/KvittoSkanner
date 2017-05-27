@@ -12,7 +12,6 @@ import corp.skaj.foretagskvitton.view.CompanyFragment;
 
 
 public class CompanyActivity extends AbstractActivity {
-    public static final String FROM_COMPANY_ACTIVITY = "company_activity_back_pressed";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

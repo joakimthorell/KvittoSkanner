@@ -138,6 +138,7 @@ public class ArchiveListFragment extends ListFragment {
         getAdapter().setNewData(list);
     }
 
+    @Override
     protected BaseQuickAdapter getBaseAdapter() {
         return getAdapter();
     }

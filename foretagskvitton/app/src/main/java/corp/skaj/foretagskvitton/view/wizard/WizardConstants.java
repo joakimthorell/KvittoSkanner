@@ -10,5 +10,4 @@ public class WizardConstants {
     public static final String COMMENT = "KOMMENTAR";
     public static final String CATEGORY = "KATEGORI";
     public static final String PRIVATE = "PRIVAT";
-
 }

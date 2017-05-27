@@ -13,5 +13,4 @@ public interface IActivity {
                                    String action,
                                    String data,
                                    String key);
-
 }

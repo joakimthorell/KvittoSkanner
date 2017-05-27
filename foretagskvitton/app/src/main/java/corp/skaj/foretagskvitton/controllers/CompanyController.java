@@ -24,7 +24,7 @@ import corp.skaj.foretagskvitton.view.ICompany;
 import corp.skaj.foretagskvitton.view.MultiDialog;
 
 public class CompanyController implements ICompany, MultiDialog.Callback {
-    private static final String mEditEmployee = "EDIT_EMPLOYEE";
+    private static final String mEditEmployee = "edit_employee";
     private static final String BUNDLE_KEY = "internal_bundle_key";
     private CompanyFragment mCompanyFragment;
     private IDataHandler mDataHandler;

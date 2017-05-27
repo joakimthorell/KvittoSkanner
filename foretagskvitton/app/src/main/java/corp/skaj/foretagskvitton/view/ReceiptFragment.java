@@ -193,7 +193,7 @@ public class ReceiptFragment extends AbstractFragment {
         return Double.valueOf(String.valueOf(mPrice.getText()));
     }
 
-    public double getTax() {
+    public double getVat() {
         String newTax = String.valueOf((mVat.getText())).substring(0, mVat.getText().length() - 2);
         return Double.valueOf(newTax);
     }

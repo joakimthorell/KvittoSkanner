@@ -27,7 +27,6 @@ public class AddReceiptActivity extends AbstractActivity implements IFileHandler
     private static final int REQUEST_IMAGE_CAPTURE = 31415;
     private static final int REQUEST_IMAGE_CHOOSEN = 1313;
     private static final int REQUEST_WIZARD = 1337;
-
     private FileHandler mFileHandler;
     private String mImageAdress;
 

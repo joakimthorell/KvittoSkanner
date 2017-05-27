@@ -26,5 +26,4 @@ public class Card {
     public int getCard() {
         return cardNum;
     }
-
 }

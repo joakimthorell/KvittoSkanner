@@ -192,6 +192,4 @@ public class WizardActivity extends AbstractActivity implements
         finish();
         return true;
     }
-
-
 }

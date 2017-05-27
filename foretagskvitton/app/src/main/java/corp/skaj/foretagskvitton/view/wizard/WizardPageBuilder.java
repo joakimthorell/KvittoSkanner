@@ -56,39 +56,43 @@ public class WizardPageBuilder {
         if (suppliers.length == 0) {
             return noSupplierWizard(view, user, totalSum, company, date);
         } else {
-            return new PageList(
-                    new SingleFixedChoicePage(view, WizardConstants.CARD)
-                            .setChoices(WizardConstants.PRIVATE, WizardConstants.COMPANY)
-                            .setValue(company == null ? null : WizardConstants.COMPANY)
-                            .setRequired(true),
-
-                    // När ett företag är i förväg markerat är det ibland inte en "boll" i radio-knappen. Bugg i WizardPager.
-                    new SingleFixedChoicePage(view, WizardConstants.COMPANY)
-                            .setChoices(getCompanyNames(user))
-                            .setValue(company == null ? null : company.getName())
-                            .setRequired(true),
-
-                    new SingleFixedChoicePage(view, WizardConstants.SUPPLIER)
-                            .setChoices(suppliers),
-
-                    new DatePage(view, WizardConstants.DATE)
-                            .setValue(date == null ? getCurrentDate() : date)
-                            .setRequired(true),
-
-                    new TotalSumPage(view, WizardConstants.TOTAL)
-                            .setValue(totalSum > 0 ? String.valueOf(totalSum) : null)
-                            .setRequired(true),
-
-                    new TotalSumPage(view, WizardConstants.VAT)
-                            .setRequired(true),
-
-                    new SingleFixedChoicePage(view, WizardConstants.CATEGORY)
-                            .setChoices(Category.getCategoriesArray())
-                            .setRequired(true),
-
-                    new TextPage(view, WizardConstants.COMMENT)
-                            .setRequired(false));
+            return defaultWizard(view, totalSum, company, suppliers, date, user);
         }
+    }
+
+    private PageList defaultWizard(ModelCallbacks view, double totalSum, Company company, String[] suppliers, String date, User user) {
+        return new PageList(
+                new SingleFixedChoicePage(view, WizardConstants.CARD)
+                        .setChoices(WizardConstants.PRIVATE, WizardConstants.COMPANY)
+                        .setValue(company == null ? null : WizardConstants.COMPANY)
+                        .setRequired(true),
+
+                // När ett företag är i förväg markerat är det ibland inte en "boll" i radio-knappen. Bugg i WizardPager.
+                new SingleFixedChoicePage(view, WizardConstants.COMPANY)
+                        .setChoices(getCompanyNames(user))
+                        .setValue(company == null ? null : company.getName())
+                        .setRequired(true),
+
+                new SingleFixedChoicePage(view, WizardConstants.SUPPLIER)
+                        .setChoices(suppliers),
+
+                new DatePage(view, WizardConstants.DATE)
+                        .setValue(date == null ? getCurrentDate() : date)
+                        .setRequired(true),
+
+                new TotalSumPage(view, WizardConstants.TOTAL)
+                        .setValue(totalSum > 0 ? String.valueOf(totalSum) : null)
+                        .setRequired(true),
+
+                new TotalSumPage(view, WizardConstants.VAT)
+                        .setRequired(true),
+
+                new SingleFixedChoicePage(view, WizardConstants.CATEGORY)
+                        .setChoices(Category.getCategoriesArray())
+                        .setRequired(true),
+
+                new TextPage(view, WizardConstants.COMMENT)
+                        .setRequired(false));
     }
 
     private PageList oneCompanyNoSupplierWizard(ModelCallbacks view, double totalSum, Company company, String date) {
@@ -205,7 +209,7 @@ public class WizardPageBuilder {
         try {
             return new Card(Integer.parseInt(sCard));
         } catch (Exception e) {
-            System.out.println("sCard was no int " + this.toString());
+            System.out.println("card was no int " + this.toString());
         }
         return null;
     }

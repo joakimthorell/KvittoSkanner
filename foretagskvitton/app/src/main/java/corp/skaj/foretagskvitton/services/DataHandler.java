@@ -35,7 +35,6 @@ public class DataHandler extends Application implements IDataHandler {
     /**
      * This method is to read data saved in shared preference.
      * <h1>Dont use this to get user from other classes</h1> instead use getUser()
-     *
      * @param key
      * @param classOfT
      * @param <T>
@@ -71,7 +70,7 @@ public class DataHandler extends Application implements IDataHandler {
     @Override
     public boolean initDefaultUser() {
         if (getUser() == null) {
-            User user = new User("USER");
+            User user = new User("Batman");
             Company company = new Company("SKAJ Corp.");
             company.addEmployee(new Employee(user.getName()));
             user.addCompany(company);
@@ -104,10 +103,9 @@ public class DataHandler extends Application implements IDataHandler {
         if (mUser != null) {
             System.out.println("Saving user...");
             writeData(User.class.getName(), mUser);
-            System.out.println("User saved!");
+            System.out.println("User saved");
             return true;
         }
         return false;
     }
-
 }
