@@ -35,7 +35,7 @@ public class TextCollectorTest {
 
     @Test
     public void testTax() {
-        double tax = receipt.getProducts().get(0).getTax();
+        double tax = receipt.getProducts().get(0).getVat();
 
         Assert.assertEquals(25.0, tax);
     }
