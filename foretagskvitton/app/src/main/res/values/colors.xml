@@ -6,5 +6,9 @@
     <color name="colorMenu">#12769C</color>
     <color name="colorMenuItem">#7CBDD6</color>
     <color name="nextButtonGreen">#13c116</color>
-    <color name="itemBackgroundSelected">#939393</color>
+    <color name="itemBackgroundSelected">#dce2e4</color>
+    <color name="receiptSpinnerColor1">#0593c2</color>
+    <color name="receiptSpinnerColor2">#0593c2</color>
+    <color name="receiptSpinnerColor3">#0593c2</color>
+    <color name="receiptSpinnerColor4">#0593c2</color>
 </resources>

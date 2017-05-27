@@ -14,23 +14,22 @@ import corp.skaj.foretagskvitton.model.Employee;
 
 public class CompanyAdapter extends BaseQuickAdapter<Company, BaseViewHolder> {
 
-
     public CompanyAdapter(int layoutResId, List<Company> companies) {
         super(layoutResId, companies);
     }
 
     @Override
     protected void convert(BaseViewHolder helper, Company item) {
-
         TextDrawable image = TextDrawable.builder()
-                .buildRect(item.getName().substring(0, 1), ColorGenerator.MATERIAL.getRandomColor());
+                .beginConfig()
+                .toUpperCase()
+                .endConfig()
+                .buildRoundRect(item.getName().substring(0, 1), ColorGenerator.MATERIAL.getRandomColor(), 10);
 
         helper.setText(R.id.list_item_company_company_name, item.getName())
                 .setText(R.id.list_item_company_num_of_purchases, String.valueOf(numOfPurchases(item)))
                 .setImageDrawable(R.id.list_item_company_circular_image, image)
                 .addOnClickListener(R.id.list_item_company_circular_image);
-
-
     }
 
     private int numOfPurchases(Company company) {
@@ -40,5 +39,4 @@ public class CompanyAdapter extends BaseQuickAdapter<Company, BaseViewHolder> {
         }
         return i;
     }
-
 }

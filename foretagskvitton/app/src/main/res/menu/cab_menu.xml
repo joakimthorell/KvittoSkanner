@@ -5,13 +5,13 @@
     <item
         android:title="@string/action_share"
         android:id="@+id/action_share"
-        android:icon="@android:drawable/ic_menu_share"
+        android:icon="@drawable/ic_action_share"
         app:showAsAction="ifRoom"/>
 
     <item
         android:title="@string/action_remove"
         android:id="@+id/action_remove"
-        android:icon="@android:drawable/ic_menu_delete"
+        android:icon="@drawable/ic_action_delete"
         app:showAsAction="ifRoom"/>
 
 </menu>

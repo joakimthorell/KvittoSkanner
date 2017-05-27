@@ -90,7 +90,7 @@
     <string name="card_number">Skriv sista 4 siffrorna på företagskortet:</string>
     <string name="edit">Editera</string>
     <string name="exit">Avbryt</string>
-    <string name="no_supplier">Ingen grossist</string>
+    <string name="no_supplier">INGEN GROSSIST</string>
     <string name="no_card">Inget kort</string>
     <string name="card_removed">Kort borttaget</string>
     <string name="employee_removed">Anställd borttagen</string>

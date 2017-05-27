@@ -53,7 +53,7 @@ public class ReceiptController implements IReceipt {
         Supplier updatedSupplier = user.getSupplier(fragment.getSupplier());
         purchase.setSupplier(updatedSupplier);
         // payment method 
-        purchase.setPurchaseType(selectCorrectPurchase());
+        //purchase.setPurchaseType(selectCorrectPurchase());
         // company 
         Company updatedCompany = user.getCompany(fragment.getCompany());
         //comments

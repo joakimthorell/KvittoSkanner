@@ -1,6 +1,7 @@
 package corp.skaj.foretagskvitton.view;
 
 import android.graphics.Color;
+import android.graphics.Typeface;
 
 import com.amulyakhare.textdrawable.TextDrawable;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -35,7 +36,10 @@ public class ArchiveAdapter extends BaseQuickAdapter<Purchase, BaseViewHolder> {
 
         String fLetterCat = category.name().substring(0, 1);
         TextDrawable circleImage = TextDrawable.builder()
-                .buildRound(fLetterCat, Color.parseColor(category.getColor()));
+                .beginConfig()
+                .toUpperCase()
+                .endConfig()
+                .buildRoundRect(fLetterCat, Color.parseColor(category.getColor()), 10);
 
         helper.setText(R.id.list_item_archive_company_name, companyName)
                 .setText(R.id.list_item_archive_total, String.valueOf(total))
@@ -93,5 +97,4 @@ public class ArchiveAdapter extends BaseQuickAdapter<Purchase, BaseViewHolder> {
         PurchaseList purchases = dataHandler.getPurchases().getPurchases(e);
         setNewData(purchases);
     }
-
 }

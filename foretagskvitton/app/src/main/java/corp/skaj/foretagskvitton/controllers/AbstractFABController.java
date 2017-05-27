@@ -7,7 +7,6 @@ import com.getbase.floatingactionbutton.FloatingActionsMenu;
 import corp.skaj.foretagskvitton.view.IFAB;
 
 public abstract class AbstractFABController implements IFAB {
-
     private Context mContext;
     private Class<?> mNextActivity;
 

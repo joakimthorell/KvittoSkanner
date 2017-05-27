@@ -25,7 +25,6 @@ import corp.skaj.foretagskvitton.model.User;
  * or add more buttons into it.
  */
 public class ArchiveListFragment extends ListFragment {
-
     private ArchiveAdapter mAdapter;
     private IArchive mArchiveBinder;
 

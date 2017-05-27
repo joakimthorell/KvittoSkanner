@@ -20,6 +20,9 @@ public class SupplierAdapter extends BaseQuickAdapter<Supplier, BaseViewHolder> 
     protected void convert(BaseViewHolder helper, Supplier supplier) {
         String fLetter = supplier.getName().substring(0, 2);
         TextDrawable circleImage = TextDrawable.builder()
+                .beginConfig()
+                .toUpperCase()
+                .endConfig()
                 .buildRoundRect(fLetter, ColorGenerator.MATERIAL.getRandomColor(), 10);
 
         helper.setText(R.id.list_item_supplier_company_name, supplier.getName())

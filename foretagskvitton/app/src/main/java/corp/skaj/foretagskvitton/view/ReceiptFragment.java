@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.InputType;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,7 +33,7 @@ public class ReceiptFragment extends AbstractFragment {
     public static final String ARCHIVE_BUNDLE = "PURCHASE_ID";
     private IReceipt mLinkReceipt;
     private TextView mPrice;
-    private TextView mTax;
+    private TextView mVat;
     private TextView mDate;
     private TextView mComment;
     private TextView mPurchaseType;
@@ -58,7 +59,7 @@ public class ReceiptFragment extends AbstractFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         String purchaseId = getArguments().getString(ARCHIVE_BUNDLE);
-        View view = inflater.inflate(R.layout.fragment_archive, container, false);
+        View view = inflater.inflate(R.layout.fragment_receipt, container, false);
         setupFragment(view, purchaseId);
         return view;
     }
@@ -89,12 +90,12 @@ public class ReceiptFragment extends AbstractFragment {
         mCompany = (Spinner) view.findViewById(R.id.archive_receipt_company);
         mSupplier = (Spinner) view.findViewById(R.id.archive_receipt_supplier);
         mCategory = (Spinner) view.findViewById(R.id.archive_receipt_categories);
-        mTax = (TextView) view.findViewById(R.id.archive_receipt_moms);
+        mVat = (TextView) view.findViewById(R.id.archive_receipt_moms);
         mComment = (TextView) view.findViewById(R.id.archive_receipt_comment);
-        mPurchaseType = (TextView) view.findViewById(R.id.archive_receipt_purchaseType);
+        //mPurchaseType = (TextView) view.findViewById(R.id.archive_receipt_purchaseType);
         mMiniImage = (ImageView) view.findViewById(R.id.miniature_image_receipt);
 
-        mTax.setSingleLine();
+        mVat.setSingleLine();
         mComment.setSingleLine();
         mPrice.setSingleLine();
 
@@ -115,6 +116,8 @@ public class ReceiptFragment extends AbstractFragment {
         String selectedCom = user.getCompany(mPurchase).getName();
         int positionCom = companyAdapter.getPosition(selectedCom);
         mCompany.setSelection(positionCom);
+        mCompany.setGravity(View.FOCUS_RIGHT);
+        mCompany.setTextAlignment(View.TEXT_ALIGNMENT_GRAVITY);
 
         //Employee spinner
         ArrayAdapter<String> employeeAdapter = buildArrayAdapter(getEmployees(null, mPurchase));
@@ -132,11 +135,15 @@ public class ReceiptFragment extends AbstractFragment {
                 getSuppliers().indexOf(mPurchase.getSupplier().getName()));
 
 
-        mTax.setText(String.valueOf(mPurchase.getReceipt().getProducts().get(0).getVat()) + " %");
+        mVat.setText(String.valueOf(mPurchase
+                .getReceipt()
+                .getProducts()
+                .get(0).getVat())
+                .toUpperCase() + " %");
 
-        mPurchaseType.setText(String.valueOf(mPurchase.getPurchaseType().name()));
+        //mPurchaseType.setText(String.valueOf(mPurchase.getPurchaseType().name()));
 
-        mComment.setText(mPurchase.getComments().size() > 0 ? mPurchase.getComments().get(0).getComment() : null);
+        mComment.setText(mPurchase.getComments().size() > 0 ? mPurchase.getComments().get(0).getComment() : "Ingen kommentar");
 
         try {
             Bitmap bmp = ImageBuilder.createImageFromURI(getContext(), Uri.parse(mPurchase.getReceipt().getPictureAdress()));
@@ -144,7 +151,7 @@ public class ReceiptFragment extends AbstractFragment {
             mLinkReceipt.bindImage(mMiniImage, Uri.parse(mPurchase.getReceipt().getPictureAdress()));
         } catch (Exception exception) {
             exception.printStackTrace();
-            mMiniImage.setImageDrawable(getContext().getDrawable(R.drawable.comingsoon));
+            mMiniImage.setImageDrawable(getContext().getDrawable(R.drawable.no_image_mod));
         }
     }
 
@@ -188,7 +195,7 @@ public class ReceiptFragment extends AbstractFragment {
     }
 
     public double getTax() {
-        String newTax = String.valueOf((mTax.getText())).substring(0, mTax.getText().length() - 2);
+        String newTax = String.valueOf((mVat.getText())).substring(0, mVat.getText().length() - 2);
         return Double.valueOf(newTax);
     }
 

@@ -116,6 +116,4 @@ public abstract class AbstractToolbarController<T> implements MaterialCab.Callba
     }
 
     protected abstract void removeItemFromUser(T object, User user);
-
-
 }
