@@ -14,7 +14,6 @@ import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.controllers.IActivity;
 import corp.skaj.foretagskvitton.controllers.MainController;
 import corp.skaj.foretagskvitton.model.Company;
-import corp.skaj.foretagskvitton.model.Purchase;
 import corp.skaj.foretagskvitton.model.PurchaseList;
 import corp.skaj.foretagskvitton.model.Supplier;
 import corp.skaj.foretagskvitton.model.User;

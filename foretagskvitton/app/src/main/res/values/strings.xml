@@ -25,15 +25,12 @@
     <string name="reading_image">Skannar kvitto...</string>
     <string name="sort">Sortera</string>
     <string name="filter">Filtrera</string>
-    <string name="archive_title">Arkiv</string>
     <string name="sort_up">Pris stigande</string>
     <string name="sort_down">Pris sjunkande</string>
     <string name="show_category">Visa kategori</string>
     <string name="show_transport">Transport</string>
     <string name="show_hotel">Hotell</string>
-    <string name="show_officeSupplies">Kontorsmaterial</string>
     <string name="show_food">Mat</string>
-    <string name="show_postage">Porto</string>
     <string name="show_representation">Representation</string>
     <string name="show_travel">Resor</string>
     <string name="show_propellant">Bensin</string>
@@ -72,7 +69,6 @@
     <string name="main_controller_change_to">Ändrat till </string>
     <string name="main_controller_cancel">Avbryt </string>
     <string name="fab_controller_create_new">Skapa ny</string>
-    <string name="fab_controller_add_supplier">Lagt till ny grossist</string>
     <string name="show_companies">Visa företag</string>
     <string name="show_employees">Visa anställda</string>
     <string name="changes_saved">Dina ändringar har sparats</string>
@@ -86,10 +82,6 @@
     <string name="text_created">Skapat</string>
     <string name="text_not_saved">Kunde inte spara</string>
     <string name="specific_cant_remove_company">Du kan inte radera alla företag, ett måste alltid finnas kvar</string>
-    <string name="employee_name">Skriv den anställdes namn:</string>
-    <string name="card_number">Skriv sista 4 siffrorna på företagskortet:</string>
-    <string name="edit">Editera</string>
-    <string name="exit">Avbryt</string>
     <string name="no_supplier">INGEN GROSSIST</string>
     <string name="no_card">Inget kort</string>
     <string name="card_removed">Kort borttaget</string>

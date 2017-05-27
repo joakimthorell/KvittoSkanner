@@ -1,7 +1,6 @@
 package corp.skaj.foretagskvitton.view;
 
 import android.graphics.Color;
-import android.graphics.Typeface;
 
 import com.amulyakhare.textdrawable.TextDrawable;
 import com.chad.library.adapter.base.BaseQuickAdapter;
