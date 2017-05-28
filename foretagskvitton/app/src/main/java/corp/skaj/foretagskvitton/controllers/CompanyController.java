@@ -1,13 +1,17 @@
 package corp.skaj.foretagskvitton.controllers;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Layout;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.AlignmentSpan;
+import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
@@ -48,7 +52,7 @@ public class CompanyController implements ICompany, MultiDialog.Callback {
                         CompanyController.this,
                         MultiDialog.Type.EDITOR,
                         e.getName(),
-                        "anställd",
+                        mContext.getString(R.string.employee_at_company),
                         b)
                         .newDialog()
                         .show();
@@ -97,10 +101,10 @@ public class CompanyController implements ICompany, MultiDialog.Callback {
         });
     }
 
-    public void setSaveCommentListener(Button saveCommentButton) {
-        saveCommentButton.setOnClickListener(new View.OnClickListener() {
+    public void setSaveCommentListener(TextView textView) {
+        textView.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
             @Override
-            public void onClick(View v) {
+            public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
                 saveComment();
             }
         });
@@ -147,14 +151,12 @@ public class CompanyController implements ICompany, MultiDialog.Callback {
             if (comments.size() > 0) {
                 comments.get(0).setComment(currentComment);
                 mDataHandler.saveUser();
-                Toast.makeText(mContext, R.string.changes_saved, Toast.LENGTH_SHORT).show();
             } else {
                 createNewComment(comments, currentComment);
             }
         } else {
             Toast.makeText(mContext, R.string.invalid_input, Toast.LENGTH_SHORT).show();
         }
-
     }
 
     public void createNewComment(List<Comment> comments, String currentComment) {

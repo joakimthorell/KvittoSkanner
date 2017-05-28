@@ -11,8 +11,8 @@
     <string name="wizard_complete">Slutför</string>
     <string name="date_hint">Datum</string>
     <string name="default_company">Default Company</string>
-    <string name="cant_delete_employee">"Hoppsan! Du kan inte radera företagets enda anställde. Inget har raderats"</string>
-    <string name="cant_delete_card">"Hoppsan! Du har inga sparade kort. Inget har raderats."</string>
+    <string name="cant_delete_employee">"Otilåtet"</string>
+    <string name="cant_delete_card">"Inga sparade kort"</string>
 
 
 
@@ -86,6 +86,7 @@
     <string name="no_card">Inget kort</string>
     <string name="card_removed">Kort borttaget</string>
     <string name="employee_removed">Anställd borttagen</string>
+    <string name="employee_at_company">anställd</string>
 
 
 </resources>

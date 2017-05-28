@@ -95,7 +95,7 @@ public class ReceiptFragment extends AbstractFragment {
         mMiniImage = (ImageView) view.findViewById(R.id.miniature_image_receipt);
 
         mVat.setSingleLine();
-        mComment.setSingleLine();
+        mComment.setMaxLines(2);
         mPrice.setSingleLine();
 
         //Category spinner

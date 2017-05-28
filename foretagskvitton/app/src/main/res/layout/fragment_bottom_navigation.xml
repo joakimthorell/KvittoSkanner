@@ -5,7 +5,6 @@
     android:background="@android:color/white"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-
     <com.roughike.bottombar.BottomBar
         android:id="@+id/bottomBar"
         android:layout_width="0dp"

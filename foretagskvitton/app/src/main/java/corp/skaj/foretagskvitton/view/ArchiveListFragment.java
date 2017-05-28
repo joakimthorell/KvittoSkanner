@@ -82,7 +82,6 @@ public class ArchiveListFragment extends ListFragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
         switch (item.getItemId()) {
             case R.id.action_sort_date_newest_first:
                 mAdapter.sortListByDateNewstFirst();
@@ -120,8 +119,6 @@ public class ArchiveListFragment extends ListFragment {
             case R.id.show_other:
                 mAdapter.showCategory(Category.ÖVRIGT);
                 return true;
-
-
             default:
                 return false;
         }

@@ -14,7 +14,7 @@ public enum Category {
     REPRESENTATION("#C0D6E4"), // light blue
     RESOR("#99D5CF"), // turqoise
     TRANSPORT("#FFCCE5"), // baby pink
-    ÖVRIGT("#5B005B"); // purple
+    ÖVRIGT("#7562d7"); // purple
 
     private final String color;
 
