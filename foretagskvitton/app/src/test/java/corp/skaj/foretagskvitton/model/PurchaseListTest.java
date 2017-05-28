@@ -12,8 +12,8 @@ import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;
 
 public class PurchaseListTest {
-    PurchaseList purchases;
-    User user;
+    private PurchaseList purchases;
+    private User user;
 
     @Before
     public void setup() {

@@ -17,7 +17,6 @@ import corp.skaj.foretagskvitton.model.User;
  * Holds an instance of user, allowing model data to be saved.
  */
 public class DataHandler extends Application implements IDataHandler {
-
     private User mUser;
 
     /**
@@ -60,7 +59,7 @@ public class DataHandler extends Application implements IDataHandler {
     @Override
     public void clearData() {
         getEditor().clear().apply();
-    } // probobly temporary for testing purpose
+    }
 
     @Override
     public void removeData(String key) {
@@ -92,6 +91,7 @@ public class DataHandler extends Application implements IDataHandler {
         return purchases;
     }
 
+    @Override
     public User getUser() {
         if (mUser == null) {
             mUser = readData(User.class.getName(), User.class);
@@ -99,6 +99,7 @@ public class DataHandler extends Application implements IDataHandler {
         return mUser;
     }
 
+    @Override
     public boolean saveUser() {
         if (mUser != null) {
             System.out.println("Saving user...");

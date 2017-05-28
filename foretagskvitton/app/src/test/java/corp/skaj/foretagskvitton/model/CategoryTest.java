@@ -7,7 +7,7 @@ import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
 
 public class CategoryTest {
-    Category category;
+    private Category category;
 
     @Before
     public void setup() {

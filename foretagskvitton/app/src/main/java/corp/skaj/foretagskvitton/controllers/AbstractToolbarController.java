@@ -1,14 +1,12 @@
 package corp.skaj.foretagskvitton.controllers;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.util.SparseArray;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
 import com.afollestad.materialcab.MaterialCab;
-import com.amulyakhare.textdrawable.TextDrawable;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 

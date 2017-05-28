@@ -8,7 +8,7 @@ import static org.junit.Assert.assertTrue;
 
 public class CardTest {
     private int cardNum;
-    Card card;
+    private Card card;
 
     @Before
     public void setup () {

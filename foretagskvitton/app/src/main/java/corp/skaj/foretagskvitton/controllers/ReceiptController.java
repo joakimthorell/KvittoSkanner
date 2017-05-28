@@ -3,7 +3,6 @@ package corp.skaj.foretagskvitton.controllers;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.net.Uri;
-import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;

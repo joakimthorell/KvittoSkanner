@@ -29,7 +29,7 @@
         app:layout_constraintRight_toLeftOf="@+id/list_item_company_receipt_image"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.538"
-        android:layout_marginStart="80dp"/>
+        android:layout_marginStart="50dp"/>
 
     <ImageView
         android:id="@+id/list_item_company_receipt_image"
