@@ -1,17 +1,28 @@
 package corp.skaj.foretagskvitton.controllers;
 
+import android.app.DatePickerDialog;
+import android.content.Context;
 import android.net.Uri;
+import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Locale;
 
 import corp.skaj.foretagskvitton.R;
 import corp.skaj.foretagskvitton.model.Category;
@@ -32,6 +43,7 @@ public class ReceiptController implements IReceipt {
     private String purchaseId;
     private IDataHandler dataHandler;
     private IImage mListener;
+    private DatePickerDialog mDateDialog;
 
     public ReceiptController(IDataHandler dataHandler, String purId, ReceiptFragment fragment, IImage listener) {
         this.dataHandler = dataHandler;
@@ -64,7 +76,6 @@ public class ReceiptController implements IReceipt {
 
         newPurchaseOwner.addPurchase(purchase);
         oldPurchaseOwner.removePurchase(purchase);
-        user.getCompany(purchase).removeEmployee(oldPurchaseOwner);
 
         dataHandler.saveUser();
     }
@@ -132,4 +143,46 @@ public class ReceiptController implements IReceipt {
             }
         });
     }
+
+    @Override
+    public void bindDate(TextView textView, Context context) {
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDateDialog.show();
+            }
+        });
+        String oldDate = String.valueOf(textView.getText());
+        createDatePicker(oldDate, context, textView);
+    }
+
+    private void createDatePicker(String dateAsString, Context context, final TextView textView) {
+        Calendar date = getCalendarFromString(dateAsString);
+        mDateDialog = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+                Calendar newDate = Calendar.getInstance();
+                newDate.set(year, month, dayOfMonth);
+                String formattedDate = dateFormatter.format(newDate.getTime());
+                textView.setText(formattedDate);
+            }
+        }, date.get(Calendar.YEAR), date.get(Calendar.MONTH), date.get(Calendar.DATE));
+    }
+
+    private Calendar getCalendarFromString(String dateAsString) {
+        Date date;
+        try {
+            date = new SimpleDateFormat("yyyy-MM-dd").parse(dateAsString);
+        } catch (ParseException pe) {
+            pe.printStackTrace();
+            return null;
+        }
+
+        Calendar c = new GregorianCalendar();
+        c.setTime(date);
+
+        return c;
+    }
+
 }

@@ -165,6 +165,8 @@ public class ReceiptFragment extends AbstractFragment {
         SimpleDateFormat dateRaw = new SimpleDateFormat("yyyy-MM-dd");
         String receiptDate = dateRaw.format(purchase.getReceipt().getDate().getTime());
         mDate.setText(receiptDate);
+        mLinkReceipt.bindDate(mDate, getContext());
+        mDate.setShowSoftInputOnFocus(false);
     }
 
     private Purchase getCurrentPurchase(String purchaseId) {
@@ -222,6 +224,9 @@ public class ReceiptFragment extends AbstractFragment {
     }
 
     public String getPurchaseType() {
+        if (mPurchaseType == null) {
+            return null;
+        }
         return mPurchaseType.getText().toString();
     }
 
