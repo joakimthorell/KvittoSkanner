@@ -3,8 +3,8 @@
 ## Project Description
 This application is created by four first-year students at the Software Engineering program at Chalmers University of Technology as our first object oriented project.
 
-We’ve developed an Android-application to easily take care of business expenses. You simply take a picture, go through a wizard and within a few clicks you will have archived your receipt. 
-Users may manage receipts, add new receipts, edit already existing receipts and delete receipts. There is also a sort function to sort receipts by date and total price and the option to filter by category, company or employee.
+We have developed an Android-application to easily take care of business expenses. You simply take a picture, go through a wizard and within a few clicks you will have archived your receipt. 
+Users may manage receipts, add new receipts, edit already existing receipts and delete receipts. There is a sort function to sort receipts by date and total price and also the option to filter by category, company or employee.
 You can have several companies and manage them in the same way as your receipts: add new, edit and delete.
 On top of this you can add suppliers for your company. This comes in handy if you repeatedly buy certain items at the same place. 
 
@@ -22,14 +22,14 @@ An app intro will guide users through the important steps for the first use, ena
 Further, more detailed and techincal documentation can be read in the RAD and SDD documents, found in DOCs folder. Meeting protocols was a part of the course and can be found in MEETINGs folder.
 
 ## Built with
-Android Studios - IDE for Android applications
+Android Studios - IDE for Android applications <br>
 Gradle - Dependency Management
  
 ## Authors
-Kevin Brunström
-Anne Keller
-Joakim Mattsson
-Sanjin Slavnic
+Kevin Brunström <br>
+Anne Keller <br>
+Joakim Mattsson <br>
+Sanjin Slavnic <br>
  
 See list of all contributors here https://github.com/mattssonj/SKAJ-Corp/graphs/contributors
 
