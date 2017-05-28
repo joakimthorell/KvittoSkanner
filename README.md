@@ -12,9 +12,11 @@ You can have several companies and manage them in the same way as your receipts.
 On top of this you can add suppliers for your company, handy if you repeatedly buy certain items at the same place. 
 
 Our documentation such as RAD and SDD is found in DOCs folder, meeting protocols is to be found in MEETINGs folder.
- 
-![Archive GUI](https://github.com/mattssonj/SKAJ-Corp/foretagskvitton/app/src/main/res/drawable/archive.png) 
- 
+
+<img src="https://cloud.githubusercontent.com/assets/24295005/26526884/752e4a30-4388-11e7-9423-aa0adbda06af.png" width="100">
+<img src="https://cloud.githubusercontent.com/assets/24295005/26526887/7ae0400a-4388-11e7-81fe-3cc0efd4d2ae.png" width="100">
+<img src="https://cloud.githubusercontent.com/assets/24295005/26526888/7cb38e00-4388-11e7-92f5-e07104804317.png" width="100">
+
 ## Built with
 Android Studios - IDE for Android applications
 Gradle - Dependency Management
