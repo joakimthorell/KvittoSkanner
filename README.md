@@ -21,14 +21,14 @@ When using the application for the first time, an intro will take the user throu
 Our documentation such as RAD and SDD is found in DOCs folder, meeting protocols is to be found in MEETINGs folder.
 
 ## Built with
-Android Studios - IDE for Android applications
+Android Studios - IDE for Android applications <br />
 Gradle - Dependency Management
  
 ## Authors
-Kevin Brunström
-Anne Keller
-Joakim Mattsson
-Sanjin Slavnic
+Kevin Brunström <br />
+Anne Keller <br />
+Joakim Mattsson <br />
+Sanjin Slavnic <br />
  
 See list of all contributors here https://github.com/mattssonj/SKAJ-Corp/graphs/contributors
 
