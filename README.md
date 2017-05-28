@@ -9,7 +9,7 @@ On top of this you can add suppliers for your company, handy if you repeatedly b
 
 Below is pictures of the GUI. The pictures show the three mainpages of the application where you can take care of all the tasks described above. 
 
-<img src="https://cloud.githubusercontent.com/assets/24295005/26526884/752e4a30-4388-11e7-9423-aa0adbda06af.png" width="100"> <img src="https://cloud.githubusercontent.com/assets/24295005/26526887/7ae0400a-4388-11e7-81fe-3cc0efd4d2ae.png" width="100">   <img src="https://cloud.githubusercontent.com/assets/24295005/26526888/7cb38e00-4388-11e7-92f5-e07104804317.png" width="100">
+<img src="https://cloud.githubusercontent.com/assets/24295005/26526884/752e4a30-4388-11e7-9423-aa0adbda06af.png" width="200"> <img src="https://cloud.githubusercontent.com/assets/24295005/26526887/7ae0400a-4388-11e7-81fe-3cc0efd4d2ae.png" width="200">   <img src="https://cloud.githubusercontent.com/assets/24295005/26526888/7cb38e00-4388-11e7-92f5-e07104804317.png" width="200">
 
 To add a new company, receipt or supplier the user should press the action button shown below, this button can be found on all the three main pages. If more than one option is possible, the action button will convert into an action menu.
 
