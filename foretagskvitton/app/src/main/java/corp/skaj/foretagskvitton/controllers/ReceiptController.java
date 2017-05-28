@@ -72,6 +72,11 @@ public class ReceiptController implements IReceipt {
         //comments
         updateComment(purchase);
 
+        // date
+        String date = fragment.getDate();
+        Calendar toBeSaved = getCalendarFromString(date);
+        purchase.getReceipt().setDate(toBeSaved);
+
         Employee oldPurchaseOwner = user.getCompany(purchase).getEmployee(purchase);
         Employee newPurchaseOwner = updatedCompany.getEmployee(fragment.getEmployee());
 
