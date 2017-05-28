@@ -63,7 +63,27 @@ public class EmployeeTest {
 
     @Test
     public void testAddName (){
+        employee.setName("pelle");
 
+        assertEquals("pelle", employee.getName());
+    }
+
+    @Test
+    public void testIsNameStandardCorrect() {
+        String name = "Användare K. Användarsson";
+
+        boolean isIt = Employee.isNameStandard(name);
+
+        assertEquals(true, isIt);
+    }
+
+    @Test
+    public void testisNameStandardFail() {
+        String name = "Håkan den 1 i etten";
+
+        boolean isIt = Employee.isNameStandard(name);
+
+        assertEquals(false, isIt);
     }
 
 }

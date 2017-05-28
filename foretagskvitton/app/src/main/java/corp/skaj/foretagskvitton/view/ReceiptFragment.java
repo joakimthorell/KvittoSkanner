@@ -95,6 +95,7 @@ public class ReceiptFragment extends AbstractFragment {
         mMiniImage = (ImageView) view.findViewById(R.id.miniature_image_receipt);
 
         mVat.setSingleLine();
+        mVat.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
         mComment.setMaxLines(2);
         mPrice.setSingleLine();
 
@@ -169,6 +170,10 @@ public class ReceiptFragment extends AbstractFragment {
         mDate.setShowSoftInputOnFocus(false);
     }
 
+    public void setVatView(double input) {
+        mVat.setText(input + " %");
+    }
+
     private Purchase getCurrentPurchase(String purchaseId) {
         return getDataHandler().getPurchases().getPurchase(purchaseId);
     }
@@ -196,8 +201,9 @@ public class ReceiptFragment extends AbstractFragment {
     }
 
     public double getVat() {
-        String newTax = String.valueOf((mVat.getText())).substring(0, mVat.getText().length() - 2);
-        return Double.valueOf(newTax);
+        String inputData = mVat.getText().toString().replace("%", "");
+        inputData = inputData.replace(" ", "");
+        return Double.valueOf(inputData);
     }
 
     public String getCategory() {
@@ -223,7 +229,7 @@ public class ReceiptFragment extends AbstractFragment {
         return String.valueOf(mComment.getText());
     }
 
-    public String getPurchaseType() {
+    public String getPurchaseType() { // might want to use later on
         if (mPurchaseType == null) {
             return null;
         }

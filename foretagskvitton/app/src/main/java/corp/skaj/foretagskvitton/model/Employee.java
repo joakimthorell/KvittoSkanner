@@ -65,7 +65,7 @@ public class Employee {
             return false;
         }
         String nameTrimmed = name.replace(" ", "");
-        if (nameTrimmed.matches("[a-zA-ZåäöÅÄÖ]+")) {
+        if (nameTrimmed.matches("[a-zA-Z,. åäöÅÄÖ]+")) {
             return true;
         }
         return false;

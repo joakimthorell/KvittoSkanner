@@ -90,7 +90,7 @@ public class CompanyFABController extends AbstractFABController
                 Toast.makeText(getContext(), getContext().getString(R.string.text_not_saved), Toast.LENGTH_SHORT).show();
                 return;
             } else {
-                if (isLetters(newData)) {
+                if (isEmployee(newData)) {
                     Employee newEmployee = new Employee(newData);
                     mCompany.addEmployee(newEmployee);
                     handler.saveUser();
@@ -103,13 +103,11 @@ public class CompanyFABController extends AbstractFABController
         }
     }
 
-
     private boolean createCard(String data) {
         int cardNum = Integer.parseInt(data);
         if (!hasCard(cardNum)) {
             Card newCard = new Card(cardNum);
             mCompany.addCard(newCard);
-            System.out.println("PRINTING THE NEW CARD NUMMER HERE" + newCard.getCard());
 
             return true;
         }
@@ -130,7 +128,7 @@ public class CompanyFABController extends AbstractFABController
         return false;
     }
 
-    private boolean isLetters(String data) {
-        return data.matches("[a-zA-Z]+");
+    private boolean isEmployee(String data) {
+        return Employee.isNameStandard(data);
     }
 }

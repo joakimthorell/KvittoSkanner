@@ -60,7 +60,9 @@ public class ReceiptController implements IReceipt {
         // category 
         purchase.getReceipt().getProducts().get(0).setCategory(Category.valueOf(fragment.getCategory().toUpperCase()));
         // vat 
-        purchase.getReceipt().getProducts().get(0).setTax(fragment.getVat());
+        double vat = fragment.getVat();
+        purchase.getReceipt().getProducts().get(0).setTax(vat);
+        fragment.setVatView(vat);
         // supplier
         Supplier updatedSupplier = user.getSupplier(fragment.getSupplier());
         purchase.setSupplier(updatedSupplier);
