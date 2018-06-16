@@ -31,5 +31,5 @@ Anne Keller <br>
 Joakim Mattsson <br>
 Sanjin Slavnic <br>
  
-See list of all contributors here https://github.com/mattssonj/SKAJ-Corp/graphs/contributors
+See list of all contributors [here](https://github.com/mattssonj/KvittoSkanner/graphs/contributors)
 
